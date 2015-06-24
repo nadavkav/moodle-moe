@@ -1,0 +1,1282 @@
+/* Special font support
+*/
+/*
+[[setting:import_blockheaderfont]]
+[[setting:import_contentfont]]*/
+
+#newmessageoverlay {
+    background-color: #FCF7C7;
+    border: 3px solid black;
+    padding: 20px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 5px;
+}
+
+#helppopupbox {
+    background-color: #EDDAFA;
+    border: 3px solid #848484;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+/* Nicer Notice / Confirm html dialog */
+.dir-rtl div#notice.box.generalbox {text-align: center;background-color: #fbffbc;padding: 10px;width:90%}
+
+/* MDL-30839 - form validation and error recovery  */
+.mform .fdescription.required {
+    padding: 7px;
+    background-color: #FFF0F0;
+    text-align: center;
+    border-radius: 5px;
+    width: 40%;
+    margin: 15px auto;
+}
+
+.box.errorbox,
+#notice.generalbox {
+    background-color: #FFFFC5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 1.4em;
+    padding: 1em;
+    text-align: center;
+    width: 70%;
+    margin: 1px auto;
+}
+.dir-rtl .continuebutton {text-align: center;}
+
+/*Fix discussions odd and even background color */
+#page-mod-forum-view .forumheaderlist tr.discussion .r0 {background-color: #eeeeee;}
+#page-mod-forum-view .forumheaderlist tr.discussion .r1 {background-color: #eeeba8;}
+
+/* fix too big bottom round corners in info boxes */
+.generalbox, .generalboxcontent, .informationbox, .informationboxcontent {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+/* fix padding in "MY page" under each course "due to" activities */
+.path-my .coursebox .overview {
+    margin-bottom: 10px;
+    padding: 15px 20px;
+}
+
+.userenrolment .col_role .role {
+    border:2px solid #d3d3d3;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.sectionbody, p {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.course-content ul.moonstone li.section .left { border-radius:3px;}
+
+.section-modchooser-link {padding: 10px;}
+
+/* Highlight form non valid "error" fields (http://tracker.moodle.org/browse/MDL-30839) */
+.error input[type=text] {background-color: yellow;}
+
+/*.block .content,*/
+#page-mod-forum-discuss .select,
+select[name="instance"],
+select,
+select[name="category"]
+{
+    background: white url([[pix:theme|button_bg]]);
+    display: inline-block;
+    color: #333;
+    font-weight: 800;
+    text-shadow: 0 1px 0 white;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    /*font-size: 13px;*/
+    padding: 4px 7px 4px;
+}
+
+/*.block .content {width:95%;}*/
+
+.backup-restore .backup-section input[type="submit"],
+.continuebutton input[type="submit"],
+.path-mod-questionnaire input[type="submit"],
+#page-mod-label-mod #id_submitbutton2,
+#newentryform input[type="submit"],
+.close-button input[type="button"],
+input[name="submitbutton"],
+input.form-submit
+{
+    box-shadow: 0 2px 4px #aaa;
+    border:1px solid #fff;
+    box-sizing: content-box;
+    margin-right:4px;
+    margin-left:4px;
+}
+
+img.activityicon {height: 24px;}
+
+.block .header {
+    background-color: [[setting:color2]];
+}
+
+.block_calendar_month .header, .block_quickmail .header, .block_calendar_upcoming .header, .block_news_items .header,
+.block_comments .header, .block_online_users .header, .block_notifications .header, .block_social_activities .header,
+.block_quickmail .header, .block_gmail .header, .block_participants .header, .block_messages .header, .block_mnet_hosts .header
+{background-color: [[setting:blockbgcolor_communication]];}
+.block_calendar_month , .block_quickmail , .block_calendar_upcoming , .block_news_items,
+.block_comments, .block_online_users, .block_notifications, .block_social_activities,
+.block_quickmail, .block_gmail, .block_participants, .block_messages, .block_mnet_hosts
+{border-color: [[setting:blockbgcolor_communication]];}
+
+.block_navigation .header, .block_quickcourselist .header, .block_online_users .header, .block_participants .header, .block_search_forums .header,
+.block_menu_site_and_course .header, .block_site_main_menu .header, .block_section_links .header, .block_tags .header, .block_course_list .header,
+.block_blog_menu .header, .block_blog_tags .header, .block_quickfindlist .header, .block_tag_flickr .header, .block_tag_youtube .header,
+.block_forum_aggregator .header, .block_quickstructure .header, .block_massaction .header
+{background-color: [[setting:blockbgcolor_navigation]];}
+.block_navigation , .block_quickcourselist , .block_online_users, .block_participants, .block_search_forums
+.block_menu_site_and_course, .block_site_main_menu, .block_section_links, .block_tags, .block_course_list,
+.block_blog_menu, .block_blog_tags, .block_quickfindlist, .block_tag_flickr, .block_tag_youtube, .block_forum_aggregator,
+.block_quickstructure, .block_massaction
+{border-color: [[setting:blockbgcolor_navigation]];}
+
+.block_html .header, .block_feedback .header, .block_glossary_random .header, .block_search_forums .header, .block_course_appointments .header,
+.block_activity_modules .header, .block_news_items .header, .block_elluminate .header, .block_recent_activity .header, .block_rss_client .header,
+.block_course_summary .header, .block_course_overview .header, .block_blog_recent .header, .block_calendar_upcoming .header, .block_dataform_view .header,
+.block_calendar_month .header, .block_gismo .header, .block_configurable_reports .header, .block_ajax_marking .header
+{background-color: [[setting:blockbgcolor_information]];}
+.block_html ,  .block_feedback , .block_glossary_random, .block_course_appointments, .block_activity_modules, .block_news_items,
+.block_elluminate, .block_recent_activity, .block_rss_client, .block_course_summary, .block_course_overview, .block_blog_recent,
+.block_calendar_upcoming, .block_dataform_view, .block_calendar_month, .block_gismo, .block_configurable_reports, .block_ajax_marking
+{border-color: [[setting:blockbgcolor_information]];}
+
+.block_settings .header, .block_progress .header, .block_selfcompletion .header, .block_private_files .header,
+.block_viewizer .header, .block_selfcompletion .header, .block_quiz_results .header, .block_login .header, .block_myprofile .header,
+.block_exaport .header, .block_completionstatus .header, .block_activity_track .header, .block_checklist .header, .block_admin_bookmarks .header,
+.block_mentees .header, .block_sharing_cart .header
+{background-color: [[setting:blockbgcolor_personal]];}
+.block_settings , .block_progress , .block_selfcompletion , .block_private_files, .block_viewizer, .block_selfcompletion,
+.block_quiz_results, .block_login, .block_myprofile, .block_exaport, .block_completionstatus, .block_activity_track,
+.block_checklist, .block_admin_bookmarks, .block_mentees, .block_sharing_cart
+{border-color: [[setting:blockbgcolor_personal]];}
+
+/* nadavkav todo: sort it out
+undecided: community,admin_presets,gaccess,gdata
+*/
+
+.tcsection #set-settings {
+    border: 1px outset gray;
+    padding: 4px;
+    background-color: #FFFFBD;
+    text-align: center;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.editing .summary {border-radius: 6px;}
+
+ /* After post submit in form and after saving some Admin settings
+ */
+.redirectmessage {
+    text-align: center;
+    margin-top: 6em;
+}
+/* Fit grade category management into one page
+*/
+#gradetreeform div {height: 600px;}
+.path-grade-edit-tree .gradetreebox {width: 98%;overflow: auto;}
+
+/* Fix: Add scroll bar to Activity Chooser (should be removed after Major Moodle version upgrade. fixed in upstream [MDL-35837] )
+*/
+.dir-rtl.jsenabled .choosercontainer #chooseform .alloptions {max-width: 20.3em;}
+.dir-rtl.jsenabled .choosercontainer #chooseform .instruction,
+.dir-rtl.jsenabled .choosercontainer #chooseform .typesummary {right: 20.5em;}
+.dir-rtl.jsenabled .choosercontainer #chooseform .option label {padding: 0;}
+
+
+/* Moonstone: absolute position Activity Chooser on the Topic's title
+*/
+.moonstone .section-modchooser {
+    position: absolute;
+    top:9px;
+    right:70px;
+    width:200px;
+}
+.dir-rtl .moonstone .section-modchooser {
+    right:auto;
+    left:60px;
+}
+.moonstone #section-0 .section-modchooser-link a {
+    color:#fff !important;
+}
+.dir-rtl .choosercontainer #chooseform .subtype {
+    padding-right:  2.6em;
+}
+/* Round corners on blocks , for fun!
+*/
+.block {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* Convert links in tabtree of each Module to "buttons"
+*/
+a.ouw_editpage:hover,
+#ouwiki_indexlinks li:hover,
+.tabtree li:hover {
+    /*background-color: beige;*/
+    background: beige url([[pix:theme|button_bg]]);
+}
+/*.ouw_editpage,*/
+#ouwiki_indexlinks li,
+.tabtree li {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* OUWIKI's page heading is too high
+*/
+.ouw_topheading { margin: 0px;}
+#ouwiki_indexlinks a {border: 0px;}
+
+.path-grade-report-grader.dir-rtl .left_scroller {float:right;}
+.path-grade-report-grader.dir-rtl .left_scroller tr.r0 {height: 0px;}
+.path-grade-report-grader.dir-rtl .left_scroller tr.r0 td.c0 {height: 0px;}
+/*.path-grade-report-grader.dir-rtl div.left_scroller td*/
+.path-grade-report-grader.dir-rtl .left_scroller tr.r1 {height: 3.6em;}
+.path-grade-report-grader.dir-rtl table#fixed_column th.user {text-align: right;}
+
+/* front page RTL fixes that should be discarded when Moodle 2.4 is used
+*/
+
+.dir-rtl .course_category_tree .category .courses .course_link {margin: 0px;}
+.dir-rtl .course_category_tree .category .course_info {padding-right: 15px;}
+.dir-rtl .categorylist {text-align: right;}
+.dir-rtl .categorylist .indentation {padding-right: 20px;}
+
+/* Remove round corners border from inner table on calendar block
+*/
+.block .minicalendar { border: none;}
+
+/* OUBlog RTL UI fixes
+*/
+a.portfolio-add-link,
+.oublog-post-links a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+a:hover.portfolio-add-link,
+.oublog-post-links a:hover {
+    /*background-color: beige;*/
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+#page-mod-oublog-view.dir-rtl #middle-column.has-left-column,
+#page-mod-oublog-viewpost.dir-rtl #middle-column.has-left-column,
+#page-mod-oublog-allposts.dir-rtl #middle-column.has-left-column {
+    margin-left: 1em;
+}
+
+/* Convert mod/Assign submission link to "button"
+*/
+#page-mod-assign-view .submissionlinks a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+#page-mod-assign-view .submissionlinks a:hover {
+    /*background-color: beige;*/
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+/* Squeeze Assignment Submissions table's columns into one page
+*/
+.flexible th {
+    white-space: normal;
+}
+
+/* minor UI fix to align tabs in block Ajax marking, when in Avalon theme.
+*/
+#block_ajax_marking .yui3-widget.yui3-tabview {width: 102%;}
+
+.dir-rtl .mform fieldset legend {
+    font-size: 1.2em;
+    padding: 5px;
+    background-color: beige;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    margin-right: 0.5em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+}
+.dir-rtl .mform fieldset {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: ghostwhite;
+}
+
+/*
+input[type="text"],input[type="password"] {font-size: 1.3em;}
+input[type="text"]:focus {background-color: #fafad2;}
+*/
+
+/* Error messages in Debug mode (as far as i know) should always be left aligned
+*/
+.notifytiny {text-align: left;direction: ltr;}
+
+/* Uploading bulk users into Moodle from CSV
+   result report should be scrollable
+*/
+#page-admin-tool-uploaduser-index #page-content .region-content {overflow: auto;}
+
+/* Debugging: performance info site info
+*/
+.performanceinfo.pageinfo,
+.performanceinfo.siteinfo {
+    position: absolute;
+    top: 136px;
+    width: 800px;
+    left: 7px;
+    background-color: beige;
+    padding: 6px;
+    border: 2px solid;
+    direction: ltr;
+    text-align: left;
+}
+
+/*  Format chooser for text editor (course settings)
+    #menusummary_editorformat .menusummary_editorformat
+    And Date chooser .fdate_selector
+*/
+.dir-rtl .felement.feditor select {margin-right: 0px;}
+.dir-rtl .mform .fitem .felement {margin-right: 15%;margin-left: auto;}
+
+/* Site's front page (index page) should have 16x16 activity and resource Icons
+*/
+#page-site-index.dir-rtl img.activityicon {height: 16px;}
+
+/* fix OUBlog search button
+*/
+#ousearch_searchbutton {padding-left: 60px !important; padding-top: 5px !important; height: 28px;}
+.path-mod-forumng #ousearch_searchbutton {background-image: none;padding-top: 10px !important;height: auto;}
+
+/* beautify mod/Forum discussion list page
+*/
+.forumheaderlist .header {background-color:beige;}
+.forumheaderlist tr.discussion.r0 {background-color: whiteSmoke;}
+.forumheaderlist tr.discussion.r1 {background-color: white;}
+
+/* ,mod/Data(base)
+    widen table form on template editing page
+*/
+#tempform .boxwidthwide {width: 100%;}
+
+/* Quiz - fix "no scroll bars" on grading table page
+*/
+.pagelayout-report .no-overflow {overflow: auto;}
+
+/* make availabilityinfo read more clearly
+*/
+.availabilityinfo strong {display: block;}
+
+/* Question preview
+*/
+/*
+#page-question-preview.dir-rtl .notifytiny {text-align: left; direction: ltr;}
+*/
+/* What to do ? */
+#page-question-preview.dir-rtl .notifytiny {direction: rtl; text-align: right;}
+
+/* Course - report - grader
+*/
+
+#page-grade-report-grader-index.dir-rtl.side-post-only #page-content #region-main {margin-left: 100px;}
+#page-grade-report-grader-index .grade_type_text .smallicon {display: block;}
+#page-grade-report-grader-index.dir-rtl #page-content #region-main-wrap { width: 45%;}
+
+/*.dir-rtl table#user-grades th, .path-grade-report-grader.dir-rtl div.gradeparent,*/
+/*.path-grade-report-grader.dir-rtl .ie6 form, .dir-rtl table#user-grades td.ajax {white-space: normal;}*/
+/*.path-grade-report-grader.dir-rtl .left_scroller tr.heading {height: 5.8em;}*/
+/*.path-grade-report-grader div.left_scroller th.user a {padding-left: 5px;}*/
+
+/* Block - login
+*/
+.block_login .loginform .c1.fld label {display: block;}
+.block_login .loginform .c1.fld input {width: 9em;}
+.block_login .loginform input#login_username {background-image:url("../blocks/login/username.png");background-repeat: no-repeat;}
+.block_login .loginform input#login_password {background-image:url("../blocks/login/password.png");background-repeat: no-repeat;}
+
+/* Convert User's IM notification overlay Yes/No links to "button"
+*/
+#newmessageoverlay a#notificationyes,
+#newmessageoverlay a#notificationno {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+#newmessageoverlay a#notificationyes:hover,
+#newmessageoverlay a#notificationno:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+#newmessagelinks {padding-top: 15px;}
+
+/* Course Category table - right align category tree layout in table
+*/
+#page-admin-course-index.dir-rtl .editcourse td[align=left] {text-align:right;}
+#page-admin-course-index.dir-rtl .editcourse td[align=right] {text-align:left;}
+
+/* Fix mod/Folder resource icons layout in RTL mode
+*/
+.dir-rtl .filemanager .fp-treeview .fp-folder.fp-hascontextmenu .fp-contextmenu,
+.dir-rtl .filemanager .fp-tableview .fp-folder.fp-hascontextmenu .fp-contextmenu {right: 1px; margin-left: -20px;}
+.dir-rtl .file-picker .ygtvln, .dir-rtl .filemanager .ygtvln  {background: url('[[pix:moodle|y/ln_rtl]]') 0px 0px no-repeat;width:17px;height:22px;}
+
+/* Convert configurable_reports manage reports links to "button"
+*/
+.block_configurable_reports #managereports a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.block_configurable_reports #managereports a:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+/* Course categories page - search courses - fix color
+*/
+#coursesearchnavbar {color: white; font-size: 1.3em;}
+
+/* todo: ask desmond and emil about this
+#page-course-category .coursebox .info .name {margin: 0;}
+#page-course-category .coursebox .info {margin: 0;}
+#page-course-category .box h3 {border-top-left-radius: 0px;}
+#page-course-category .buttons {text-align: center;}
+#page-course-category .courseboxes {background-color: #f5f5f5;}
+*/
+
+/* Enrol users (course) page
+*/
+#page-enrol-users th {background-color: beige;} /* ask email about table colors */
+#page-enrol-users tr.r0 {background-color: #f5f5f5;}
+#page-enrol-users .userenrolment .col_role .role {float: right;}
+
+/* Questions
+*/
+.answer label {margin-right: 5px;}
+
+/* Header title above centered tables - align to center
+*/
+#page-group-index h3.main,
+#page-admin-roles-check h2.main,
+#page-enrol-instances h2.main {text-align: center;}
+
+/* Publish courses
+*/
+.box.generalbox {padding: 5px;}
+
+/* Quiz
+*/
+#page-mod-quiz-view .box.quizattempt {border: none;}
+
+/* edit grades for categories and items - short view (minor height fix)
+*/
+#page-grade-edit-tree-index #gradetreeform div {height: 100%;}
+#page-grade-edit-tree-index tr.r0 {background-color: #f5f5f5;}
+
+/* // todo: more space above elements inside Form conditional activity setting
+*/
+#fgroup_id_conditioncompletiongroup_0 {margin-top: 10px;}
+
+/* emphasize problem notification messages
+*/
+.notifyproblem .notifysuccess {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.red, .notifyproblem {
+    color: #600;
+    background-color: #f5f5f5;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
+    border: 2px solid red;
+}
+.notifyproblem {
+    border: 2px solid rgb(255, 213, 124);
+}
+
+/* emphasize success notification messages
+*/
+.notifysuccess {
+    color: #600;
+    background-color: #f5f5f5;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
+    border: 2px solid green;}
+
+/* Make baig tables (grades on gracebook, quiz grades and assign(ment) submittions grades, wider (100%)
+*/
+
+#page-mod-quiz-report table#attempts {width: 100%;}
+/* Fix Layout */
+#page-mod-quiz-report table#attempts .header {text-align: center;}
+#page-mod-quiz-report .generaltable.titlesleft {margin: auto;}
+#page-mod-quiz-report .generaltable.titlesleft tr.r0 {background-color: #f5f5f5;}
+#page-mod-quiz-report .generaltable.titlesleft tr.r0 {background-color: white;}
+#page-mod-quiz-report table.titlesleft td.c0 {text-align: right !important;}
+#page-mod-quiz-report table.titlesleft td.c1 {direction: ltr;}
+.toggleincludeauto a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.toggleincludeauto a:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+/* fix icons sizes */
+.course-content .section .activity img.activityicon,
+.choosercontainer #chooseform .option span.modicon img.icon,
+.choosercontainer #chooseform .nonoption span.modicon img.icon {height: 16px; width: 16px;}
+
+/* Messages */
+.dir-rtl .message .messagearea .messagerecent {text-align: right;}
+
+/* blocks */
+.block ul.unlist {border: none;}
+
+/* center error message on redirect page, in debug mode
+*/
+.pagelayout-redirect #content p {text-align: center;}
+
+/* toggle completion (minor ui fix. align checkbox element with hover selection)
+*/
+.path-course-view li.activity span.autocompletion img,
+.path-course-view li.activity form.togglecompletion input {top:-.1em;}
+
+/* Display section "up/down" arrows, in course edit mode (section header)
+*/
+#page-course-view-moonstone.editing .section.main .right.side { width: 100px;}
+#changenumsections a {padding: 5px;}
+
+/* Block header show/hide icons
+.block .header .block_action img {margin-top: 3px;}
+*/
+
+/* User profile page (minor fixes)
+*/
+.userprofile .messagebox {text-align: center;}
+#page-my-index .box.lesson.overview,
+#page-my-index .box.welcome_message,
+#page-my-index .box.welcome_area {border: none;}
+
+.userprofile .messagebox a,
+.userprofile .fullprofilelink a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.userprofile .messagebox a:hover,
+.userprofile .fullprofilelink a:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+/* mod/assign - user submittion page
+*/
+.usersummary .usersummarysection,
+.cell .plugincontentsummary {padding: 5px;}
+
+/* categories page (moodle 24 fixes)
+#page-course-category .coursebox .info {width: 40%;}
+#page-course-category .coursebox { margin-bottom: 15px;}
+#page-course-category ul.unlist li .coursebox h3 a {font-size: 18px;}
+*/
+
+/* Popup dialogs's header text - fix alignment in rtl mode
+*/
+.dir-rtl.yui-skin-sam .yui-panel .hd {text-align: right;}
+.dir-rtl .other-user-manager-panel .oump-header .oump-panel-close { left: 1em;right:auto;}
+.dir-rtl .other-user-manager-panel .oump-search-results .oump-user {text-align: right;}
+.dir-rtl .other-user-manager-panel .oump-search-results .oump-user .count {float: right;}
+
+/* Forms - (minor) fix padding of labels
+*/
+.dir-rtl .mform .fitem fieldset.fgroup label,
+.dir-rtl .mform .fradio label,
+.dir-rtl .mform .fcheckbox label,
+.dir-rtl .mform fieldset.fdate_selector label {
+    padding-right: 5px; padding-left:0;
+}
+
+/* http://www.google.com/fonts/earlyaccess , Noto Sans Hebrew (Hebrew)
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanshebrew.css);
+.block .header h2 {font-family: 'Noto Sans Hebrew', serif !important;}
+*/
+
+/* Fixed width for user's new message, popup overlay (window)
+*/
+#newmessagetext {width: 300px;}
+
+/* fix missing (SVG label) activity names in Chrome, course completion report page
+ *
+ * note to self: might need to set this selector for Chrome only browser, ask Desmond
+ */
+#page-report-completion-index .dir-rtl .flexible th {direction: ltr;}
+.dir-rtl #completion-progress th svg text {direction:ltr;}
+
+/* right align table headers - User completion status report
+*/
+#page-blocks-completionstatus-details.dir-rtl .logtable th {text-align: right;}
+
+/* question type ddwtos - minor fix
+*/
+.dir-rtl .que.ddwtos .draghome, .dir-rtl .que.ddwtos .drag, .dir-rtl .que.ddwtos .group1 {padding-right: 3px;}
+
+.path-grade-report-grader .left_scroller {
+    bottom: -42px;
+    position: relative;
+}
+/* OU ForumNG - beautifications
+*/
+/*page-mod-forumng-discuss .breadcrumb ul { margin-top: -16px;} REMOVED BECAUSE OF MOOD-100 */
+.path-mod-forumng .navbutton label {color:white;}
+#page-mod-forumng-view .generaltable, #page-mod-forumng-feature-deletedposts-list .generaltable {border: 1px solid gainsboro;}
+#page-mod-forumng-view .generaltable th, #page-mod-forumng-feature-deletedposts-list .generaltable th {background-color: beige}
+#page-mod-forumng-view.dir-rtl .generaltable th,
+#page-mod-forumng-feature-deletedposts-list.dir-rtl .generaltable th {text-align: right;}
+
+ul.forumng-commands li a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 3px;
+    padding: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+ul.forumng-commands li a:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+.forumng-selectoutro > input[type=submit] {background-color: #B2FCCD;}
+.forumng-selectoutro > input[type=submit][disabled]{ background-color: darkgray;}
+
+/* Special font support
+*/
+/*  at the top of this file [[setting : import_blockheaderfont]]
+.block .header h2 { font-family: [[setting:blockheaderfont]];}*/
+
+/*  at the top of this file [[setting : import_contentfont]]
+.content {font-family: [[setting:contentfont]];}*/
+
+/* Avalon - backoffice url directionality (always ltr)
+*/
+#admin-logocollege input[type=text],
+#admin-logocollegertl input[type=text],
+#admin-logocollegefooter input[type=text],
+#admin-logocollegefooterrtl input[type=text],
+#admin-topbanner input[type=text],
+#admin-topbannerrtl input[type=text],
+#admin-topbannerfar input[type=text],
+#admin-topbannerfarrtl input[type=text]
+{direction: ltr;}
+
+/*  Mod/Data
+*/
+#page-mod-data-templates textarea {direction: ltr;text-align: left;}
+#page-mod-data-view td {border-width: 1px;}
+
+/* Fix Activity names in RTL mode - Course Completion report (from Teacher's POV)
+*/
+#page-report-completion-index.dir-rtl #completion-progress th {direction:ltr;}
+#page-report-completion-index .export-actions {margin: 1em auto;list-style-type: none;}
+#page-report-completion-index .initialbar {text-align: center;}
+
+/* remove redundant margin after table(s) in course main page, content region
+*/
+.path-course-view .region-content table {margin-bottom:0px;}
+
+/* Add horizontal and vertical scroll bars to Course completion report,
+    when displaying a lot of activities and a lot of users
+*/
+#page-report-completion-index table#completion-progress {
+    display: block;
+    overflow: auto;
+    height: 500px;
+}
+
+/* Remove black border line from main menu
+*/
+#custommenu .yui3-menu-horizontal.javascript-disabled .yui3-menu-content,
+#custommenu .yui3-menu-horizontal.javascript-disabled .yui3-menu-content .ul {
+    border: none;
+}
+
+/* Center "OK" button on error message dialogs
+*/
+.box.errorbox + .continuebutton {text-align: center;}
+
+/* Enrol an "other" user into course (right align UI elements in dialog)
+*/
+.dir-rtl .other-user-manager-panel .oump-search-results .oump-user .oump-user-details {
+    margin-left:0;
+    margin-right: 25px;
+    border-left:none;
+    border-right: 1px solid #bbb;
+}
+
+/* Enrol a user into course (right align UI elements in dialog)
+*/
+.dir-rtl .user-enroller-panel .uep-search-results .user .count,
+.dir-rtl .user-enroller-panel .uep-search-results .user .picture {float:right;}
+
+/* Display: performanceinfo siteinfo pageinfo validators purgecaches (at the bottom of the page, if enabled)
+*/
+body.debugdisplay #page {height: auto;}
+.performanceinfo.siteinfo, .performanceinfo.pageinfo {
+    position: static;
+    margin: 10px auto;
+    width: 400px;
+    text-align: center;
+}
+.performanceinfo.siteinfo span:after { content:"\A"; white-space:pre; }
+
+.validators, .purgecaches {
+    display: block !important;
+    position: static;
+    margin: 10px auto;
+    direction: ltr;
+    background-color: beige;
+    padding: 5px;
+    border: 2px solid;
+    width: 200px;
+    text-align: center;
+}
+
+/* Remove redundant "looking glass" (search) icon/image from ou* activities
+*/
+#ousearch_searchbutton {background-image: none;}
+
+.ouw_byheading a {
+    background: white url([[pix:theme|button_bg]]);
+    border: 1px outset gray;
+    margin: 2px;
+    padding: 1px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.ouw_byheading a:hover {
+    background: beige url([[pix:theme|button_bg]]);
+}
+
+/* Fix tab "buttons" overlaying/hiding content on mod/Glossary main page
+*/
+body#page-mod-glossary-view .entrybox {margin-top: 15px;}
+body#page-mod-glossary-view .entrybox {border-width: 1px;}
+body#page-mod-glossary-view .glossarycontrol {margin: 13px 3px;}
+
+/* Fix unclear expand/contract icons on student's online assignment submission content grading page.
+   (Moodle uses t/switch_plus and t/switch_minus from block's header, which are not useful here)
+
+#page-mod-assign-view .plugincontentsummary .expandsummaryicon { content:url([[pix:moodle|i/open]])}
+#page-mod-assign-view .expandsummaryicon { content:url([[pix:moodle|i/closed]])}
+
+*/
+/*#page-mod-assign-view .plugincontentsummary .expandsummaryicon { content:url([[pix:moodle|t/switch]]) }*/
+
+/* Fix table cell alignment on Admin setting pages in RTL mode
+*/
+.path-admin .admintable .leftalign {text-align:right;}
+
+/* Usability: Slim navigation block tree layout, for longer readable item/node text labels
+*/
+.dir-rtl .block_navigation .block_tree .type_activity > p.tree_item.branch.hasicon.active_tree_node,
+.dir-rtl .block_navigation .block_tree .tree_item {
+    padding-right: 14px;
+    padding-left: 3px;
+}
+/* Usability: Slim settings block tree layout, for longer readable item/node text labels
+*/
+.dir-rtl .block_settings .block_tree li ul {
+    padding-right: 10px;
+}
+
+.dir-rtl .block_navigation .block_tree li.depth_2 ul {
+    padding-right: 8px;
+}
+
+/* Fix - breadcrumbs navigation is hidden in pages with layout "base"
+*/
+html[dir=rtl] .content-only .breadcrumb {margin-top: -17px;}
+
+/* Above + Except mod/lti, course/format/grid pages MOOD-275 (with no sideblocks)
+*/
+html[dir=rtl] #page-mod-lti-view.content-only .breadcrumb,
+html[dir=rtl] #page-course-format-grid-editimage.content-only .breadcrumb {margin-top: 0px;}
+
+/* Fix - quickmail - compose email buttons
+*/
+.emailtable input[type=button] {width:150px !important;}
+
+/* Right align user's messaging page
+*/
+.dir-rtl .message .contactselector {float: right;}
+.dir-rtl .message .messagearea .messagerecent .singlemessage .messagedate,
+.dir-rtl .message .messagearea {float: left;}
+.dir-rtl .message .messagearea .themessage {
+    display: block;
+    background-color: ghostwhite;
+    padding: 5px;
+    border: 1px dashed rgb(226, 226, 226);
+}
+
+/* Usability - highlight selected News forum subscription mode
+*/
+#settingsnav .tree_item.leaf.activesetting {
+    font-weight: bold;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+/* OUBlog - fix RTL alignments.
+*/
+.dir-rtl .oublog-post .oublog-post-attachments {float: left;}
+.dir-rtl .oublog-userpic {float: right;}
+.dir-rtl #oublogbuttons .participationbutton {float: left;}
+
+#page-mod-oublog-view.dir-rtl #page-content #region-main-wrap { width: 46%;}
+#page-mod-oublog-view.dir-rtl #page-content #region-pre {width: 300px;}
+
+/* Usability - gray out disabled SELECT form elements if they are set to "disabled"
+*/
+select[disabled=disabled] {
+    color: rgb(192, 185, 185);
+}
+
+/* Fix - admin search page
+*/
+#page-course-search #page-content {overflow: inherit;}
+
+/* Usability (minor) widen space between TAB rows (which include buttons/links)
+*/
+.tabtree ul {margin: 10px;}
+
+/* Fix (Usability) Workshop main page, in RTL mode.
+*/
+.path-mod-workshop.dir-rtl .submission-summary .title,
+.path-mod-workshop.dir-rtl .submission-summary .userdate,
+.path-mod-workshop.dir-rtl .submission-summary .grade-status {margin: 0px 40px 0px 0px;}
+.path-mod-workshop.dir-rtl .submission-summary .author .picture {right: 0px;left:auto;}
+.path-mod-workshop.dir-rtl .submission-summary .author {margin-right: 1ex;}
+
+/* Usability - MOOD-253 - assign/submission report - wider "status" column + cell borders
+*/
+#page-mod-assign-view .gradingtable .header.c3 {width: 100px;}
+#page-mod-assign-view .gradingtable .cell {border: 1px solid rgb(224, 224, 224);}
+#page-mod-assign-view .gradingtable thead {background-color: whitesmoke;}
+#page-mod-assign-view .gradingtable > .no-overflow {height: 600px;}
+
+/* Cosmetics - nerrow file manager element
+*/
+.filemanager {width:80%;}
+
+/* UI (Cosmetics) Minor fix - remove box within box border
+*/
+.box .box {border:none;}
+
+/* UI (Cosmetics) Show bullets and numbers in text areas, when in RTL.
+*/
+.dir-rtl .course-content .section ol,
+.dir-rtl .course-content .section ul,
+.dir-rtl .course-content .section dl {
+    margin-right: 2em;
+}
+
+/* Workshop - UI - Usability - show stages table in full size.
+*/
+.path-mod-workshop .userplan {width: 100%;}
+
+/* Cosmetics - Disable mouseover highlight on frontpage
+*/
+.sitetopic .section .activity:hover {background-color:transparent;}
+
+/* Usability - widen quiz report table to 100% to allow visibility of long labels
+*/
+#page-mod-quiz-report .generaltable.titlesleft {width: 100%;}
+
+/* Usability - Add underline to user's links
+*/
+#intro a,
+.TabbedPanelsContent a,
+#page-mod-page-view #region-main a,
+.path-course-view .section .summary a,
+.forumpost .posting a,
+.course-content .label a {text-decoration: underline;}
+
+/* ISSUE/178 - Add cell borders if rules=all added to the table by the user
+*/
+table[rules=all] td {border: 1px solid;}
+
+/* Cosmetics - Assignment rubrics grading cells - delete rubric
+*/
+.dir-rtl .gradingform_rubric.editor .criterion .levels .level .delete {bottom: -18px;}
+
+/* Cosmetics - widen and left align formula entry fields
+*/
+#page-question-type-calculatedsimple input[name*="answer"],
+#page-question-type-calculated input[name*="answer"] {width:333px;direction: ltr;}
+
+/* Usability (Question Bank) - split question title & text into two lines
+    and widen the field's visible content
+*/
+#categoryquestions .questiontext {width:100%; max-width:100%;display: block;}
+
+/* Usability - Display Advanced grading report in one browser page, no need to scroll to see horizontal toolbar.
+*/
+.path-grade-edit-tree .gradetreebox {height: 600px;}
+
+/* Usability + Cosmetics - narrow level2 colspan of grade category table cell. (chrome bug)
+*/
+.gradetreebox tr .cell.level2 {width:0;}
+
+
+/* Backup wizard - take II
+*/
+.dir-rtl.path-backup .mform .grouped_settings.activity_level .include_setting label {
+    float: right;
+}
+.dir-rtl.path-backup.dir-rtl .mform fieldset div div {text-align: right;}
+
+.path-backup.dir-rtl .mform .grouped_settings.section_level .include_setting.section_level > div {
+    background-color: #f5f5dc;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+}
+
+.path-backup.dir-rtl .mform .grouped_settings.section_level .include_setting.section_level .fitem .fitemtitle {
+    width: 77%;
+    float: left;
+}
+.path-backup.dir-rtl .mform .grouped_settings.section_level .include_setting.section_level .fitem .felement{
+    float: right;
+    width: 20px;
+    margin: 0;
+}
+
+.path-backup.dir-rtl .mform .grouped_settings .fitem .fitemtitle {
+    float: left;
+    width: 88% !important;
+}
+.path-backup.dir-rtl .mform .grouped_settings .fitem .felement {margin-right: -10px;}
+
+/* New Feature - Usability - Make reading web page resource much easier (using CSS3 columns)
+   Was disabled.
+*/
+/*
+#page-mod-page-view .region-content .generalbox {
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+    column-count: 3;
+    column-gap: 20px;
+}
+*/
+
+/* Usability - split submission statuses notifications in assignment grading table
+*/
+td.submissionstatus, div.submissionstatus, a.submissionstatus:link,
+td.submissionstatussubmitted, div.submissionstatussubmitted, a.submissionstatussubmitted:link,
+td.submissiongraded, div.submissiongraded {
+    margin-top: 5px;
+    padding: 3px;
+    border: 1px solid gray;
+}
+
+/* Cosmetics - Right align questionnaire question numbers, in RTL mode
+*/
+
+.dir-rtl.path-mod-questionnaire .qn-content {margin-right:55px; margin-left: 0;}
+.dir-rtl.path-mod-questionnaire .qn-info,
+.dir-rtl.path-mod-questionnaire .qn-legend {float: right;}
+.dir-rtl.path-mod-questionnaire .floatprinticon {float: left;}
+.dir-rtl.path-mod-questionnaire .qn-question {margin-right:40px;margin-left:0;}
+/*.dir-rtl#page-mod-questionnaire-report .generaltable .cell.c1 {direction:ltr;text-align:left;}*/
+
+/* Major - Display TapTopics (course format) TABs on IE browsers (MOOD-400)
+*/
+.format-tabtopics #maincontainer {display:block !important;}
+
+/* Usability - Add scroll-bars to Grader report and condense columns for maximum data visibility
+   This is a fix for both modes: normal users and activities display and also fixed student column
+*/
+.path-grade-report-grader .yui3-menu.useractionmenu {
+    height: 20px;
+}
+
+.path-grade-report-grader .left_scroller {
+    bottom: -46px;
+    right: -15px;
+}
+
+.path-grade-report-grader .gradeparent {
+    height: 600px;
+}
+.path-grade-report-grader .yui3-menu.useractionmenu .yui3-skin-sam .yui3-menu ul,
+.path-grade-report-grader .yui3-menu.useractionmenu .yui3-skin-sam .yui3-menu ul ul {
+    margin-top: 3px;
+    padding-top: 3px;
+}
+.path-grade-report-grader .profilepicture + a {
+    padding-top: 7px !important;
+    display: inherit;
+}
+
+.path-grade-report-grader th.user img.userpicture {
+    border: none;
+    width: 2em;
+    height: 2em;
+}
+
+.gradeparent .gradestable th.catlevel1,
+.gradeparent .gradestable th.catlevel1 a,
+.gradeparent .gradestable th.catlevel2,
+.gradeparent .gradestable th.catlevel2 a,
+.gradeparent .gradestable th.categoryitem.cell,
+.gradeparent .gradestable th.categoryitem.cell a,
+.gradeparent .gradestable th.courseitem.cell,
+.gradeparent .gradestable th.courseitem.cell a {
+    white-space: normal;
+    word-break: break-word;
+    padding: 3px 5px;
+}
+.path-grade-report-grader .flexible th a {white-space: normal;}
+.path-grade-report-grader .flexible th {white-space: normal;}
+
+/* Cosmetics - narrow admin search input box (to fit in block)
+*/
+#adminsearchquery {width: 10em;}
+
+/* Cosmetics - center "buttons" (links) in RTL mode
+*/
+.submissionlinks {text-align: center;}
+
+/* Cosmetics - categories page - display categories as "cloud".
+*/
+#page-course-category .category_subcategories tr {float:left;}
+.dir-rtl#page-course-category .category_subcategories tr td a {
+    border-left: 2px solid [[setting:color2]];
+    padding-left: 6px;
+}
+.dir-rtl#page-course-category .category_subcategories tr {float:right;}
+.dir-rtl#page-course-category .category_subcategories tr td a {
+    border-right: 2px solid [[setting:color2]];
+    padding-right: 6px;
+}
+
+/* Usability (MOOD-411) MyMobile theme - fix ability to fill user attendance in Mobile
+*/
+html#mymobile .path-mod-attforblock .attbtn {display:block;}
+html#mymobile .path-mod-attforblock .attwidth {width: 100%;}
+html#mymobile .path-mod-attforblock.dir-rtl .ui-checkbox input, .ui-radio input {left: 5px;}
+html#mymobile .path-mod-attforblock.dir-rtl .takecontrols {width: 100%;}
+
+/* Usability - correct student grades directionality display in RTL mode.
+*/
+#page-grade-report-user-index.dir-rtl table.user-grade td.itemcenter {direction: ltr;}
+
+/* Usability - Display "Course is not available" message at the top of the course page, for hidden courses.
+*/
+#coursevisibility {
+    text-align: center;
+    padding: 10px;
+    color: red;
+    background-color: gainsboro;
+}
+
+/* Cosmetics - mod/forumng - fix overlapping content - Right align posts content in RTL mode
+*/
+.dir-rtl .forumng-postmain {
+    margin-right: 35px;
+    padding-right: 0.5em;
+}
+/* mod/forumng - Display "flag" icon on the left, in RTL mode. */
+.dir-rtl .forumng-info .forumng-flag {
+    left: -0.5em;
+}
+.dir-rtl div.forumng-flag {
+    padding-left: 0.5em;
+}
+/* mod/forumng - Fix grade (stars) position on post bottom action bar */
+ul.forumng-commands li {
+    margin: 0;
+}
+
+/* Cosmetics - Backup wizard NEXT button highlight
+*/
+.path-backup .mform .fgroup .proceedbutton {
+    float: right;
+    margin-right: 1%;
+    margin-top: 3px;
+    border-bottom-color: rgb(108, 253, 95);
+    border-bottom-width: 6px;
+    border-bottom-style: groove;
+}
+
+/* Usability - Display hidden bullets
+*/
+/* todo: needs to be more specifc (until then, disabled)
+.region-content .generalbox li,
+.region-content .generalbox ol li {
+    margin-left:20px;
+}
+.dir-rtl .region-content .generalbox li,
+.dir-rtl .region-content .generalbox ol li {
+    margin-left:auto;
+    margin-right:20px;
+}
+*/
+
+/* MOOD-437 - Hide course index
+    re-opened and re-enabled by Ruthy solomon
+*/
+/*
+#page-course-index #page-content .region-content {display: none;}
+*/
+
+/* Fix module chooser dialogue display
+*/
+.path-course-view .moodle-dialogue-base .moodle-dialogue,
+.chooserdialogue-course-modchooser {top:10px !important;}
+
+/* MOOD-463 - center page content in RTL mode.
+*/
+html[dir=rtl] #page-content {
+    float: none;
+}
+
+/* ATTO toolbar icon "editor"
+*/
+#id_s_editor_atto_toolbar {direction: ltr;text-align: left;}
+
+/* THEME extra custom HTML
+*/
+#id_s__custommenuitems,
+#id_s__additionalhtmlhead,
+#id_s__additionalhtmltopofbody,
+#id_s__additionalhtmlfooter {direction: ltr;text-align: left;}
+
+/* mod/quiz - question multi choice, fix bullets in rtl
+*/
+.dir-rtl .que.oumultiresponse .answer div.r0 input,
+.dir-rtl .que.oumultiresponse .answer div.r1 input {margin: 0 30px;}
+
+/* mod/data - fix add new data template form alignment in RTL mode
+*/
+.dir-rtl.path-mod-data .defaulttemplate {text-align: right;}
+
+/* Fix mod/game - left align games in RTL mode.
+*/
+#page-mod-game-view.dir-rtl .region-content {
+    direction: ltr;
+    text-align: left;
+}
+#page-mod-game-view.dir-rtl #responseform {
+    direction: rtl;
+    text-align: right;
+}
+
+/* fix topcoll - moonstone topic headers in LTR and RTL mode for Moodle 2.7
+    todo: Desmond, please fix this inside the right CSS file. This not the proper place for it :-(
+    todo:         and remove the ugly !important I most shamelessly added
+*/
+ .course-content ul.ctopics li.section.main .content,
+ .course-content ul.ctopics li.tcsection .content {
+     margin: 0 50px 0 0 !important;
+ }
+.editing .course-content ul.ctopics li.section.main .content,
+.editing .course-content ul.ctopics li.tcsection .content {
+    margin: 0 75px 0 0 !important;
+}
+.editing .course-content ul.ctopics li.section .content .toggle a h3,
+.editing .course-content ul.ctopics li.section .content.sectionhidden {
+    text-align: left;
+}
+.editing .ctopics.moonstones .section.main .section-modchooser {
+    width: 220px;
+}
+
+.dir-rtl .course-content ul.ctopics li.section.main .content,
+.dir-rtl .course-content ul.ctopics li.tcsection .content {
+    margin: 0 28px 0px 22px !important;
+}
+.dir-rtl.editing .course-content ul.ctopics li.section.main .content,
+.dir-rtl.editing .course-content ul.ctopics li.tcsection .content {
+    margin: 0 40px 0px 35px !important;
+}
+.dir-rtl.editing .course-content ul.ctopics li.section .content .toggle a h3,
+.dir-rtl.editing .course-content ul.ctopics li.section .content.sectionhidden {
+    text-align:right;
+}
+
+/* Fix course format calendar
+*/
+.course-content table.days tbody .summary { margin-top: 0; }

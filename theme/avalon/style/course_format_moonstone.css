@@ -1,0 +1,269 @@
+#page-course-view-moonstone .section.main.current {border: 2px solid rgb(236, 236, 19);}
+.course-content .current {background-color: whitesmoke;}
+
+#page-course-view-moonstone .section.main,
+#page-course-view-moonstone #section-0
+{
+    position: relative;
+    margin-bottom: 10px;
+    border: 1px solid [[setting:color1]];
+    border-radius: 7px;
+}
+
+#page-course-view-moonstone #section-0
+{
+    box-shadow: 0 2px 2px 2px #dedede;
+}
+
+#page-course-view-moonstone #section-0 h3.sectionname
+{
+    background-color: [[setting:color1]];
+    margin:0;
+    padding:4px;
+    height:24px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    text-align: left;
+    padding-left:10px;
+    color: #fff;
+    font-size:18px;
+    font-weight: normal;
+}
+
+#page-course-view-moonstone #section-0 .section-modchooser-text
+{
+    color: #fff;
+}
+
+#page-course-view-moonstone #section-0  .section-modchooser
+{
+    right:0;
+}
+
+#page-course-view-moonstone #section-0 .side
+{
+    display:none;
+}
+
+#page-course-view-moonstone .section.main .right.side
+{
+    display:none;
+}
+
+#page-course-view-moonstone.editing .section.main .right.side
+{
+    display:block;
+    position:absolute;
+    width:80px;
+    top:6px;
+    right:30px;
+}
+
+#page-course-view-moonstone.editing .section.main .right.side a
+{
+    float:right;
+    margin:2px;
+}
+
+#page-course-view-moonstone.editing .section.main .section-modchooser
+{
+    position:absolute;
+    width:188px;
+    top:8px;
+    right:100px;
+    text-align: left;
+}
+
+#page-course-view-moonstone.editing .section.main .right.side br
+{
+    display:none;
+}
+
+#page-course-view-moonstone .section.main .left.side
+{
+    position:absolute;
+    display: block;
+    left:4px;
+    top: 4px;
+    width:24px;
+    height:19px;
+    margin:0;
+    padding:0;
+    padding-top:5px;
+    font-size:14px;
+    background: [[setting:color1]];
+    color:#fff;
+    font-weight: bold;
+    cursor: default;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* GRAY = #AAA color for Hidden course sections
+*/
+#page-course-view-moonstone .section.main.hidden,
+#page-course-view-moonstone .section.main.hidden .left.side,
+#page-course-view-moonstone .section.main.hidden .content .summary,
+#page-course-view-moonstone .course-content ul.ctopics li.section.main.hidden .content .toggle a {color:#AAA;}
+
+#page-course-view-moonstone .section.main.orphaned .left.side
+{
+    display: none;
+}
+
+#page-course-view-moonstone.editing .section.main.hidden{
+    display: block;
+}
+
+#page-course-view-moonstone .section.main .left.side .section-handle
+{
+    display: none;
+}
+
+#page-course-view-moonstone #section-0 .content,
+#page-course-view-moonstone .section.main .content,
+#page-course-view-moonstone .section.main .content .sectionbody
+{
+    margin:0;
+    padding:0;
+}
+
+#page-course-view-moonstone  .section.main .content .summary,
+#page-course-view-moonstone  .section.main .content .section
+{
+    margin:0;
+    min-height:130px;
+    padding:10px;
+}
+
+#page-course-view-moonstone .section.main .content .summary
+{
+    float:left;
+    width: 35%;
+}
+
+#page-course-view-moonstone .section.main .content .section
+{
+    float:right;
+    width:54%;
+    background:[[setting:color4]];
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#page-course-view-moonstone  .section.main#section-0 .content .summary,
+#page-course-view-moonstone  .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+}
+
+#page-course-view-moonstone  .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+    border-radius: 0 0 5px 5px;
+}
+
+#page-course-view-moonstone  .section.main .content .summary ol,
+#page-course-view-moonstone  .section.main .content .section ol
+{
+    padding-left:20px;
+}
+
+#page-course-view-moonstone #section-0 .section .activity:hover
+{
+    background:none;
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.tcsection {
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.tcsection .side{
+    display: none;
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.section .content .toggle {
+    background-color: none;
+    border-radius: 7px;
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.section .content .toggle a {
+    background-color: [[setting:color2]];
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:theme|format_moonstone/arrow_down]]);
+    background-position: 99% 9px;
+    margin:0;
+    padding:0;
+    height:28px;
+    padding-top:4px;
+    border-radius: 7px;
+    text-align: left;
+    padding-left: 30px;
+    color: [[setting:color22]];
+    font-size: 14px;
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.section .content .toggle a.toggle_closed {
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:theme|format_moonstone/arrow_up]]);
+}
+
+#page-course-view-moonstone .course-content ul.ctopics li.section .content .toggle a.toggle_open {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Fix hidden "Add new activity/resource" link on section-0 title
+*/
+#page-course-view-topcoll #section-0 .section-modchooser-text{
+    background-color: [[setting:color1]];
+    color:#ffffff;
+    padding: 4px 10px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+/* Fix minor vertical alignment of action icons on topic's titles when editing
+*/
+#page-course-view-topcoll.editing .section.main .right.side .tceditsection {margin-top: 3px;}
+#page-course-view-topcoll.editing .section.main .right.side .editing_showhide {margin-top: 5px;}
+
+/* Usability - When in Course edit mode, Highlight (gray) sections that are Orphaned & Hidden from students
+*/
+.editing .course-content .orphaned.hidden {background-color: rgb(235, 235, 235);}
+
+#page-course-view-moonstone .section.main.hidden {width:100%}
+#page-course-view-moonstone .section.main.hidden .left.side {display:none;}
+
+/* New stuff */
+#page-course-view-moonstone .path-mod-choice .horizontal,
+#page-course-view-moonstone .path-mod-choice .vertical {
+    margin: 0;
+}
+
+#page-course-view-moonstone .path-mod-choice .choices .option input {
+    margin: 4px;
+    margin-top: 2px;
+}
+
+/* Temporary changes
+ TODO: Desmond
+ */
+#page-course-view-moonstone h3.sectionname
+{
+    height:24px;
+    overflow:hidden;
+}
+
+#page-course-view-moonstone h3.sectionname br
+{
+    display:none;
+}
+

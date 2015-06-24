@@ -1,0 +1,81 @@
+#page
+{
+    height: 100%;
+    min-width:1000px;
+    background:url([[avalon_pix:theme|top_banner_one_pixel]]) repeat-x;
+}
+/* Theme Setting "top banner one pixel" overwrite default "top banner one pixel" */
+[[setting:topbanneronepixel]]
+
+#page-top
+{
+    min-height:100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -215px;
+    background:url([[avalon_pix:theme|top_banner_default]]) no-repeat 0 0;
+}
+body.smalllogo #page-top
+{
+    background-image:url([[avalon_pix:theme|top_banner_default_small]]);
+}
+/* Theme Setting top banner overwrite default top banner */
+[[setting:topbanner]]
+
+#page-header {
+    float:none;
+    width:auto;
+    height:297px;
+    position:relative;
+    background:url([[avalon_pix:theme|top_banner_far_default]]) no-repeat 100% 0;
+}
+/* Theme Setting top banner far overwrite default top banner far*/
+[[setting:topbannerfar]]
+
+
+#page-middle
+{
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:230px;
+}
+
+#page-content
+{
+    float:none;
+    min-width:960px;
+    max-width:1220px;
+    margin:auto;
+    border-radius:7px;
+    background-color:#fff;
+}
+
+#page-content .skiplinks
+{
+    display: none;
+}
+
+#page-footer
+{
+    float:none;
+    clear:both;
+    height:203px;
+    padding-top:12px;
+    background:url([[avalon_pix:theme|footer_one_pixel]]) repeat-x;
+    overflow:hidden;
+}
+
+body.clpsd #page-footer
+{
+    height:103px;
+}
+
+body.clpsd #page-top
+{
+    margin-bottom: -115px;
+}
+
+body.clpsd #page-middle
+{
+    padding-bottom:130px;
+}

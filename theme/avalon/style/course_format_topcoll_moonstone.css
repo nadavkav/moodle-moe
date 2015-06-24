@@ -1,0 +1,622 @@
+/*
+    TOPCOLL - fixes
+*/
+
+/* Display orphaned topics as grayed out */
+.editing .course-content ul.ctopics.topics .orphaned.hidden {
+    background-color: rgb(235, 235, 235);
+    border: 1px dashed rgb(207, 207, 207);
+}
+
+/* Display hidden topics as disabled/grayed out */
+.ctopics.topics .section.main.hidden {width:100%; background: whitesmoke;}
+.ctopics.topics .section.main.hidden .left.side {display:none;}
+
+
+/* Remove redundant "edit" icon
+*/
+.ctopics.topics .tceditsection {
+    display: none;
+}
+
+/* Fix section's header div
+*/
+.course-content ul.ctopics.topics li.section .content .toggle {
+    width: 110%;
+    margin-right: -40px;
+}
+.editing .course-content ul.ctopics.topics li.section .content .toggle {
+    width: 111%;
+}
+
+.ctopics.topics .editing_highlight {
+    top: -8px;
+    position: relative;
+    right: 18px;
+}
+
+.ctopics.topics .editing_showhide {
+    position: relative;
+    top: -27px;
+}
+
+.course-content .current {
+    background-color: transparent;
+    border: 1px solid yellow;
+    border-radius: 0.7em;
+}
+body.jsenabled .course-content ul.ctopics.topics li.section .content .toggle-arrow a.toggle_closed,
+body.jsenabled .course-content ul.ctopics.topics li.section .content .toggle-arrow a.toggle_open {
+    background-image: none;
+}
+
+.editing .ctopics.topics .summary {min-height: 15px;}
+
+.course-content ul.ctopics.topics li.section .right span.cps_centre {display: none;}
+
+/*
+    MOONSTONE .ctopics.moonstones
+*/
+.ctopics.moonstones .section.main.current {border: 2px solid rgb(236, 236, 19);}
+/*.course-content .current {background-color: whitesmoke;}*/        /* todo: remove?*/
+
+.ctopics.moonstones .section.main,
+.ctopics.moonstones #section-0
+{
+    position: relative;
+    margin-bottom: 10px;
+    border: 1px solid [[setting:color1]];
+    border-radius: 7px;
+}
+
+.ctopics.moonstones #section-0
+{
+    box-shadow: 0 2px 2px 2px #dedede;
+}
+
+.ctopics.moonstones #section-0 h3.sectionname
+{
+    background-color: [[setting:color1]];
+    margin:0;
+    padding:0;
+    height:24px;
+    padding-top:8px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    text-align: left;
+    padding-left:10px;
+    color: #fff;
+    font-size:18px;
+    font-weight: normal;
+}
+
+.ctopics.moonstones #section-0 .section-modchooser
+{
+    right:0;
+}
+
+.ctopics.moonstones #section-0 .side
+{
+    display:none;
+}
+
+.ctopics.moonstones .section.main .right.side
+{
+    display:none;
+}
+
+.editing .ctopics.moonstones .section.main .right.side
+{
+    display:block;
+    position:absolute;
+    width:140px;
+    top:6px;
+    right:30px;
+}
+
+.editing .ctopics.moonstones .section.main .right.side a
+{
+    float:right;
+    margin:2px;
+}
+
+.editing .ctopics.moonstones .section.main .section-modchooser
+{
+    position:absolute;
+    width:191px;
+    top:8px;
+    right:100px;
+    text-align: left;
+}
+
+.editing .ctopics.moonstones .section.main .right.side br
+{
+    display:none;
+}
+
+.ctopics.moonstones .section.main .left.side
+{
+    position:absolute;
+    display: block;
+    left:4px;
+    top: 4px;
+    width:24px;
+    height:19px;
+    margin:0;
+    padding:0;
+    padding-top:5px;
+    font-size:14px;
+    background: [[setting:color1]];
+    color:#fff;
+    font-weight: bold;
+    cursor: default;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* GRAY = #AAA color for Hidden course sections
+*/
+.ctopics.moonstones .section.main.hidden,
+.ctopics.moonstones .section.main.hidden .left.side,
+.ctopics.moonstones .section.main.hidden .content .summary,
+.course-content ul.ctopics.moonstones li.section.main.hidden .content .toggle a {color:#AAA;}
+
+.ctopics.moonstones .section.main.orphaned .left.side
+{
+    display: none;
+}
+
+.editing .ctopics.moonstones .section.main.hidden{
+    display: block;
+}
+
+.ctopics.moonstones .section.main .left.side .section-handle
+{
+    display: none;
+}
+
+.ctopics.moonstones #section-0 .content,
+.ctopics.moonstones .section.main .content,
+.ctopics.moonstones .section.main .content .sectionbody
+{
+    margin:0;
+    padding:0;
+}
+
+.ctopics.moonstones .section.main .content .summary,
+.ctopics.moonstones .section.main .content .section
+{
+    margin:0;
+    min-height:130px;
+    padding:10px;
+}
+
+.ctopics.moonstonet .section.main .content .summary,
+.ctopics.moonstonet .section.main .content .section
+{
+    margin:0;
+    min-height:20px;
+    padding:0;
+}
+
+.ctopics.moonstones .section.main .content .summary
+{
+    float:left;
+    width: 35%;
+}
+
+.ctopics.moonstonet .section.main .content .summary
+{
+    float:none;
+    width: 100%;
+}
+
+.ctopics.moonstones .section.main .content .section
+{
+    float:right;
+    width:55%;
+    background:[[setting:color4]];
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.ctopics.moonstonet .section.main .content .section
+{
+    width:95%;
+}
+.ctopics.moonstones .section.main#section-0 .content .summary,
+.ctopics.moonstones .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+}
+
+.ctopics.moonstones .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+    border-radius: 0 0 5px 5px;
+}
+
+.ctopics.moonstones .section.main .content .summary ol,
+.ctopics.moonstones .section.main .content .section ol
+{
+    padding-left:20px;
+}
+
+.ctopics.moonstones #section-0 .section .activity:hover
+{
+    background:none;
+}
+
+.course-content ul.ctopics.moonstones li.tcsection {
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+.course-content ul.ctopics.moonstones li.tcsection .side{
+    display: none;
+}
+
+.course-content ul.ctopics.moonstones li.section .content .toggle {
+    background-color: none;
+    border-radius: 7px;
+}
+
+.course-content ul.ctopics.moonstones li.section .content .toggle a {
+    background-color: [[setting:color2]];
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:moodle|t/switch_plus]]);
+    background-position: 99% 9px;
+    margin:0;
+    padding:0;
+    height:28px;
+    padding-top:4px;
+    border-radius: 7px;
+    text-align: left;
+    padding-left: 30px;
+    color: [[setting:color22]];
+    font-size: 14px;
+}
+
+.course-content ul.ctopics.moonstones li.section .content .toggle a.toggle_closed {
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:moodle|t/switch_minus]]);
+}
+
+.course-content ul.ctopics.moonstones li.section .content .toggle a.toggle_open {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Fix hidden "Add new activity/resource" link on section-0 title
+*/
+.ctopics.moonstones #section-0 .section-modchooser-text{
+    background-color: [[setting:color1]];
+    color:#ffffff;
+    padding: 4px 10px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+/* Fix minor vertical alignment of action icons on topic's titles when editing
+*/
+.editing .ctopics.moonstones .section.main .right.side .tceditsection {margin-top: 3px;}
+.editing .ctopics.moonstones .section.main .right.side .editing_showhide {margin-top: 5px;}
+
+/* Usability - When in Course edit mode, Highlight (gray) sections that are Orphaned & Hidden from students
+*/
+.editing .course-content ul.ctopics.moonstones .orphaned.hidden {background-color: rgb(235, 235, 235);}
+
+.ctopics.moonstones .section.main.hidden {width:100%}
+.ctopics.moonstones .section.main.hidden .left.side {display:none;}
+
+/* Fix section's header div
+*/
+.course-content ul.ctopics.moonstones li.section .content .toggle {
+    width: 107%;
+    margin-right: -28px;
+}
+.editing .course-content ul.ctopics.moonstones li.section .content .toggle {
+    width: 111%;
+    margin-right: -40px;
+}
+
+/* Fix - make room for add activity and resource button/link (in edit mode, only)
+*/
+.editing .ctopics.moonstones .section.main#section-0 .content .summary,
+.editing .ctopics.moonstones .section.main#section-0 .content .section {
+    margin-top: 25px;
+}
+
+/*
+    MOONSTONE .ctopics.moonstonet
+*/
+.ctopics.moonstonet .section.main.current {border: 2px solid rgb(236, 236, 19);}
+/*.course-content .current {background-color: whitesmoke;}*/        /* todo: remove?*/
+
+.ctopics.moonstonet .section.main,
+.ctopics.moonstonet #section-0
+{
+    position: relative;
+    margin-bottom: 10px;
+    border: 1px solid [[setting:color1]];
+    border-radius: 7px;
+}
+
+.ctopics.moonstonet #section-0
+{
+    box-shadow: 0 2px 2px 2px #dedede;
+}
+
+.ctopics.moonstonet #section-0 h3.sectionname
+{
+    background-color: [[setting:color1]];
+    margin:0;
+    padding:0;
+    height:24px;
+    padding-top:8px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    text-align: left;
+    padding-left:10px;
+    color: #fff;
+    font-size:18px;
+    font-weight: normal;
+}
+
+.ctopics.moonstonet #section-0 .section-modchooser
+{
+    right:0;
+}
+
+.ctopics.moonstonet #section-0 .side
+{
+    display:none;
+}
+
+.ctopics.moonstonet .section.main .right.side
+{
+    display:none;
+}
+
+.editing .ctopics.moonstonet .section.main .right.side
+{
+    display:block;
+    position:absolute;
+    width:80px;
+    top:6px;
+    right:30px;
+}
+
+.editing .ctopics.moonstonet .section.main .right.side a
+{
+    float:right;
+    margin:2px;
+}
+
+.editing .ctopics.moonstonet .section.main .section-modchooser
+{
+    position:absolute;
+    width:191px;
+    top:8px;
+    right:100px;
+    text-align: left;
+}
+
+.editing .ctopics.moonstonet .section.main .right.side br
+{
+    display:none;
+}
+
+.ctopics.moonstonet .section.main .left.side
+{
+    position:absolute;
+    display: block;
+    left:4px;
+    top: 4px;
+    width:24px;
+    height:19px;
+    margin:0;
+    padding:0;
+    padding-top:5px;
+    font-size:14px;
+    background: [[setting:color1]];
+    color:#fff;
+    font-weight: bold;
+    cursor: default;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* GRAY = #AAA color for Hidden course sections
+*/
+.ctopics.moonstonet .section.main.hidden,
+.ctopics.moonstonet .section.main.hidden .left.side,
+.ctopics.moonstonet .section.main.hidden .content .summary,
+.course-content ul.ctopics.moonstonet li.section.main.hidden .content .toggle a {color:#AAA;}
+
+.ctopics.moonstonet .section.main.orphaned .left.side
+{
+    display: none;
+}
+
+.editing .ctopics.moonstonet .section.main.hidden{
+    display: block;
+}
+
+.ctopics.moonstonet .section.main .left.side .section-handle
+{
+    display: none;
+}
+
+.ctopics.moonstonet #section-0 .content,
+.ctopics.moonstonet .section.main .content,
+.ctopics.moonstonet .section.main .content .sectionbody
+{
+    margin:0;
+    padding:0;
+}
+
+.ctopics.moonstonet .section.main .content .summary,
+.ctopics.moonstonet .section.main .content .section
+{
+    margin:0;
+    min-height:130px;
+    padding:10px;
+}
+
+.ctopics.moonstonet .section.main .content .summary,
+.ctopics.moonstonet .section.main .content .section
+{
+    margin:0;
+    min-height:20px;
+    padding:0;
+}
+
+.ctopics.moonstonet .section.main .content .summary
+{
+    float:left;
+    width: 35%;
+}
+
+.ctopics.moonstonet .section.main .content .summary
+{
+    float:none;
+    width: 100%;
+}
+
+.ctopics.moonstonet .section.main .content .section
+{
+    float:right;
+    width:55%;
+    background:[[setting:color4]];
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.ctopics.moonstonet .section.main .content .section
+{
+    width:95%;
+}
+.ctopics.moonstonet .section.main#section-0 .content .summary,
+.ctopics.moonstonet .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+}
+
+.ctopics.moonstonet .section.main#section-0 .content .section
+{
+    min-height:0;
+    float:none;
+    width:auto;
+    border-radius: 0 0 5px 5px;
+}
+
+.ctopics.moonstonet .section.main .content .summary ol,
+.ctopics.moonstonet .section.main .content .section ol
+{
+    padding-left:20px;
+}
+
+.ctopics.moonstonet #section-0 .section .activity:hover
+{
+    background:none;
+}
+
+.course-content ul.ctopics.moonstonet li.tcsection {
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+.course-content ul.ctopics.moonstonet li.tcsection .side{
+    display: none;
+}
+
+.course-content ul.ctopics.moonstonet li.section .content .toggle {
+    background-color: none;
+    border-radius: 7px;
+}
+
+.course-content ul.ctopics.moonstonet li.section .content .toggle a {
+    background-color: [[setting:color2]];
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:moodle|t/switch_plus]]);
+    background-position: 99% 9px;
+    margin:0;
+    padding:0;
+    height:28px;
+    padding-top:4px;
+    border-radius: 7px;
+    text-align: left;
+    padding-left: 30px;
+    color: [[setting:color22]];
+    font-size: 14px;
+}
+
+.course-content ul.ctopics.moonstonet li.section .content .toggle a.toggle_closed {
+    /* TODO: Check if override will do the trick instead of the following */
+    background-image: url([[pix:moodle|t/switch_minus]]);
+}
+
+.course-content ul.ctopics.moonstonet li.section .content .toggle a.toggle_open {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Fix hidden "Add new activity/resource" link on section-0 title
+*/
+.ctopics.moonstonet #section-0 .section-modchooser-text{
+    background-color: [[setting:color1]];
+    color:#ffffff;
+    padding: 4px 10px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+/* Fix minor vertical alignment of action icons on topic's titles when editing
+*/
+.editing .ctopics.moonstonet .section.main .right.side .tceditsection {margin-top: 3px;}
+.editing .ctopics.moonstonet .section.main .right.side .editing_showhide {margin-top: 5px;}
+
+/* Usability - When in Course edit mode, Highlight (gray) sections that are Orphaned & Hidden from students
+*/
+.editing .course-content ul.ctopics.moonstonet .orphaned.hidden {background-color: rgb(235, 235, 235);}
+
+.ctopics.moonstonet .section.main.hidden {width:100%}
+.ctopics.moonstonet .section.main.hidden .left.side {display:none;}
+
+/* Fix section's header div
+*/
+.course-content ul.ctopics.moonstonet li.section .content .toggle {
+    width: 107%;
+    margin-right: -28px;
+
+}
+.editing .course-content ul.ctopics.moonstonet li.section .content .toggle {
+    width: 111%;
+    margin-right: -40px;
+}
+
+/* Fix - make room for add activity and resource button/link (in edit mode, only)
+*/
+.editing .ctopics.moonstonet .section.main#section-0 .content .summary,
+.editing .ctopics.moonstonet .section.main#section-0 .content .section {
+    margin-top: 25px;
+}
+
+body.jsenabled .course-content ul.ctopics li.section .content .toggle-arrow a.toggle_closed {
+    background-image: url([[pix:theme|format_moonstone/arrow_down]]);
+}
+
+body.jsenabled .course-content ul.ctopics li.section .content .toggle-arrow a.toggle_open {
+    background-image: url([[pix:theme|format_moonstone/arrow_up]]);
+}

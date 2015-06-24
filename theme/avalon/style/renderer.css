@@ -1,0 +1,31 @@
+/* Renderer - user menu
+*/
+.yui3-menu.useractionmenu {
+    width: 40px;
+    position: relative;
+}
+.yui3-menu.useractionmenu .yui3-menu-content {border: none;padding: 0;}
+.yui3-skin-sam .yui3-menu .yui3-menu.yui3-loading .yui3-menu-content {
+    display: none;
+}
+.dir-rtl.yui3-skin-sam .yui3-menu.yui3-menu.useractionmenu .yui3-menu .yui3-menu-content {
+    font-size: 100%;
+    right: 110px;
+    position: relative;
+}
+.dir-rtl.yui3-skin-sam .yui3-menu-label,
+.dir-rtl.yui3-skin-sam .yui3-menu .yui3-menu .yui3-menu-label,
+.dir-rtl.yui3-skin-sam .yui3-menuitem-content,
+.dir-rtl.yui3-skin-sam .yui3-menu .yui3-menu .yui3-menuitem-content {text-align: right;}
+
+/* Renderer - Special mark / Highlight the teacher's picture
+*/
+.userpicture.defaultuserpic.teacher {
+    border: 2px outset mediumvioletred;
+}
+
+/* Cosmetics - fix user picture block width.
+*/
+#page-user-profile .yui3-menu.useractionmenu {width: 1px;}
+#page-user-profile .profilepicture {width:100px;}
+

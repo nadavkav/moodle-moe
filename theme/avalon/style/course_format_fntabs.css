@@ -1,0 +1,448 @@
+body.format-fntabs .course-content td
+{
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+body.format-fntabs .number-select
+{
+    padding: 0;
+}
+
+body.format-fntabs .fnsectionouter,
+body.format-fntabs .courseedit-format,
+body.format-fntabs .courseedit-fn-main,
+body.format-fntabs .headergeneral,
+body.format-fntabs .fnmarkedfilearea,
+body.format-fntabs .fntopicsoutlineside,
+body.format-fntabs .fnweeklynavdisabledselected,
+body.format-fntabs .fnweeklynavdisabledselected1,
+body.format-fntabs .fntopicsoutlinesidehighlight,
+body.format-fntabs .courseedit-fn-format,
+body.format-fntabs .courseedit-fn-sidebar,
+body.format-fntabs .markingcontainer td.generalbox3,
+body.format-fntabs .fnweeklynavselected,
+body.format-fntabs .fnweeklynavnorm,
+body.format-fntabs .fnweeklynavnorm a:active,
+body.format-fntabs .fnweeklynavdisabled,
+body.format-fntabs .fntopicsoutlinesidehidden
+{
+    background-color:transparent !important;
+}
+
+body.format-fntabs .fntopicsoutlinecontent,
+body.format-fntabs .fntopicsoutlinecontenthighlight,
+body.format-fntabs .courseedit-fn-section,
+body.format-fntabs .fnmarkingblock thead,
+body.format-fntabs .fnmarkingblock tbody td,
+body.format-fntabs .fncoursegroup
+{
+    border-color:transparent !important;
+}
+
+body.format-fntabs .fnweeklynavnorm,
+body.format-fntabs .fnweeklynavselected
+{
+    border:none !important;
+}
+
+body.format-fntabs .fnweeklynav
+{
+    border-spacing: 0 !important;
+}
+
+body.format-fntabs .fnweeklynav .fnweeklynavdisabled,
+body.format-fntabs .fnweeklynav .fnweeklynav .tooltip
+{
+    color:#000 !important;
+}
+
+body.format-fntabs .fnweeklynav .fnweeklynavnorm.tab-lessthan5 a,
+body.format-fntabs .fnweeklynav .fnweeklynavnorm.tab-lessthan5 a:active,
+body.format-fntabs .fnweeklynav .fnweeklynavselected.tab-lessthan5,
+body.format-fntabs .fnweeklynav .fnweeklynavdisabled.tab-lessthan5 a,
+body.format-fntabs .fnweeklynav .fnweeklynavdisabled.tab-lessthan5 a:active,
+body.format-fntabs .fnweeklynav .fnweeklynavdisabledselected.tab-lessthan5
+{
+    height: 26px;
+    padding-top: 10px;
+    background-color: [[setting:color9]] !important;
+    color: #000 !important;
+    font-size: 19px !important;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+body.format-fntabs .fnweeklynav .fnweeklynavdisabled.tab-lessthan5 a,
+body.format-fntabs .fnweeklynav .fnweeklynavdisabled.tab-lessthan5 a:active
+{
+    display: block;
+    background-color: #efefef !important;
+}
+
+body.format-fntabs .fnweeklynav tr:first-child > .fnweeklynavselected.tab-lessthan5,
+body.format-fntabs .fnweeklynav tr:first-child > .fnweeklynavdisabledselected.tab-lessthan5
+{
+    background-color: [[setting:color8]] !important;
+    color: #fff !important;
+    font-weight:normal;
+    height: 28px;
+    padding-top: 8px;
+}
+
+body.format-fntabs .fnweeklynav tr:first-child > .fnweeklynavdisabledselected.tab-lessthan5,
+body.format-fntabs .fnweeklynav tr:first-child > .fnweeklynavdisabledselected.tab-lessthan5 span
+{
+    background-color: #aeaeae !important;
+    color: #fff !important;
+}
+
+body.format-fntabs .fnweeklynav tr:nth-child(2) > .fnweeklynavselected,
+body.format-fntabs .fnweeklynav tr:nth-child(2) > .fnweeklynavdisabledselected
+{
+    background: [[setting:color8]] !important;
+    height:8px;
+}
+
+body.format-fntabs .fnweeklynav tr:nth-child(2) > .fnweeklynavdisabledselected
+{
+    background: #aeaeae !important;
+}
+
+body.format-fntabs .fnweeklynav #fn_tab_next,
+body.format-fntabs .fnweeklynav #fn_tab_previous,
+body.format-fntabs .fnweeklynav .tab-heading
+{
+    vertical-align:bottom;
+}
+
+body.format-fntabs .fnweeklynav .tab-heading strong
+{
+    font-weight:normal !important;
+    font-size:18px;
+    color:[[setting:color22]];
+}
+
+body.format-fntabs .fnweeklynav #fn_tab_next a,
+body.format-fntabs .fnweeklynav #fn_tab_next a:active,
+body.format-fntabs .fnweeklynav #fn_tab_next a:visited,
+body.format-fntabs .fnweeklynav #fn_tab_previous a,
+body.format-fntabs .fnweeklynav #fn_tab_previous a:active,
+body.format-fntabs .fnweeklynav #fn_tab_previous a:visited
+{
+    display: inline-block;
+    height:30px;
+    width:30px;
+    border-radius: 8px;
+    background-image:url([[pix:theme|msgarrow]]);
+    background-repeat: no-repeat;
+    background-color: [[setting:color6]];
+    background-position: 11px 10px;
+    color: transparent;
+    overflow:hidden;
+}
+
+body.format-fntabs .fnweeklynav #fn_tab_next a:hover
+{
+    background-image:url([[pix:theme|menuarrow_sel]]);
+}
+
+body.format-fntabs .fnweeklynav #fn_tab_previous a,
+body.format-fntabs .fnweeklynav #fn_tab_previous a:active,
+body.format-fntabs .fnweeklynav #fn_tab_previous a:visited
+{
+    background-image:url([[pix:theme|msgarrow_rtl]]);
+    background-position: 8px 10px;
+}
+
+body.format-fntabs .fnweeklynav #fn_tab_previous a:hover
+{
+    background-image:url([[pix:theme|menuarrow_sel_rtl]]);
+}
+
+body.format-fntabs ul.weeks
+{
+    text-align: center;
+}
+
+body.format-fntabs ul.weeks table.topicsoutline
+{
+    display: inline-table;
+}
+
+body.format-fntabs ul.weeks h2
+{
+    margin:0;
+    margin-bottom:13px;
+    border:0;
+    padding:0;
+    text-align: left;
+    font-weight:normal;
+    font-size:22px;
+    color:[[setting:color22]];
+    background: none;
+}
+
+body.format-fntabs .topicsoutline,
+body.format-fntabs .fnweeklynavselected .content-section .topicsoutline td,
+body.format-fntabs .fnweeklynavdisabledselected1 .content-section .topicsoutline td
+{
+    border:1px solid [[setting:color3]];
+    border-radius: 8px;
+    display:inline-block;
+    width:100%;
+}
+
+body.format-fntabs .topicsoutline
+{
+    margin-bottom:12px  !important;
+}
+
+body.format-fntabs .fnweeklynavselected .content-section .topicsoutline td,
+body.format-fntabs .fnweeklynavdisabledselected1 .content-section .topicsoutline td
+{
+   margin-top: -1px;
+}
+
+body.format-fntabs .fnweeklynavselected .content-section .topicsoutline,
+body.format-fntabs .fnweeklynavdisabledselected1 .content-section .topicsoutline
+{
+    display:table;
+}
+
+body.format-fntabs .topicsoutline .fntopicsoutlinecontent.fntopicsoutlineinner
+{
+    border-radius: 8px;
+    padding:0 !important;
+}
+
+body.format-fntabs .topicsoutline:first-of-type
+{
+    border:none;
+    margin-bottom:0 !important;
+}
+
+body.format-fntabs tr:first-of-type td.fntopicsoutlinesidehighlight,
+body.format-fntabs tr:first-of-type td.fntopicsoutlineside,
+body.format-fntabs tr:first-of-type .fntopicsoutlinesidehidden
+{
+    background: [[setting:color2]] !important;
+    color: [[setting:color22]];
+    padding:6px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size:18px;
+    border-bottom:1px solid [[setting:color3]];
+}
+
+body.format-fntabs tr:first-of-type .fntopicsoutlinesidehidden
+{
+    background: #f2f2f2 !important;
+    color: #aeaeae;
+    border-bottom:1px solid #dadada;
+}
+
+body.format-fntabs .fntopicsoutlinesidehighlight,
+body.format-fntabs .fntopicsoutlineside,
+body.format-fntabs .fntopicsoutlinesidehidden
+{
+    width:0;
+    overflow: hidden;
+}
+
+body.format-fntabs .topicsoutline .summary
+{
+    float:left !important;
+    width:35% !important;
+    padding:10px;
+}
+
+body.format-fntabs .topicsoutline .section-boxs
+{
+    float:right !important;
+    width:60% !important;
+    background:[[setting:color4]] !important;
+    border-bottom-right-radius: 8px;
+}
+
+body.format-fntabs .fnweeklynavselected .content-section .topicsoutline .section-boxs,
+body.format-fntabs .fnweeklynavdisabledselected1 .content-section .topicsoutline .section-boxs
+{
+    border-top-right-radius: 8px;
+}
+
+body.format-fntabs .topicsoutline tr:nth-child(3),
+body.format-fntabs .topicsoutline tr:nth-child(4)
+{
+    display:none;
+}
+
+body.format-fntabs .topicsoutline tr:nth-child(2) .fntopicsoutlinesidehighlight:first-of-type,
+body.format-fntabs .topicsoutline tr:nth-child(2) .fntopicsoutlinesidehidden:first-of-type
+{
+    background: #ed0000 !important;
+    width:10px;
+    border-bottom-left-radius: 8px;
+}
+
+body.format-fntabs .topicsoutline tr:nth-child(2) .fntopicsoutlinesidehidden:first-of-type
+{
+    background: #dadada !important;
+}
+
+body.format-fntabs .topicsoutline .fntopicsoutlinesidehighlight
+{
+    color: #ed0000 !important;
+}
+
+body.format-fntabs.ie .topicsoutline .fntopicsoutlinecontenthighlight:nth-child(2),
+body.format-fntabs.ie .topicsoutline .fntopicsoutlinecontenthidden:nth-child(2)
+{
+    border-left: 7px solid #ed0000 !important;
+    border-radius: 0 !important;
+}
+
+body.format-fntabs.ie .topicsoutline .fntopicsoutlinecontenthidden:nth-child(2)
+{
+    border-left: 7px solid #dadada !important;
+}
+
+body.format-fntabs .topicsoutline .fntopicsoutlinecontenthighlight.fntopicsoutlinecontent:first-of-type table td,
+body.format-fntabs .topicsoutline .fntopicsoutlinecontenthidden.fntopicsoutlinecontent:first-of-type table td
+{
+    box-sizing: border-box;
+    border-radius: 8px !important;
+    border-color: #ed0000 !important;
+    border-left: 8px solid #ed0000 !important;
+}
+
+body.format-fntabs .topicsoutline .fntopicsoutlinecontenthidden.fntopicsoutlinecontent:first-of-type table td
+{
+    border-color: #c4c4c4 !important;
+    border-left: 8px solid #dadada !important;
+}
+
+body.format-fntabs .topicsoutline .section_add_menus
+{
+    clear:both;
+    padding:4px;
+}
+
+/* RTL Overrides */
+body.format-fntabs.dir-rtl .fnweeklynav .tab-heading
+{
+    font-size: 18px;
+    line-height: 16px;
+}
+
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_next a,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_next a:active,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_next a:visited,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a:active,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a:visited
+{
+    background-image:url([[pix:theme|msgarrow_rtl]]);
+    background-position: 8px 10px;
+}
+
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_next a:hover
+{
+    background-image:url([[pix:theme|menuarrow_sel_rtl]]);
+}
+
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a:active,
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a:visited
+{
+    background-image:url([[pix:theme|msgarrow]]);
+    background-position: 11px 10px;
+    margin-left:2px;
+}
+
+body.format-fntabs.dir-rtl .fnweeklynav #fn_tab_previous a:hover
+{
+    background-image:url([[pix:theme|menuarrow_sel]]);
+}
+
+body.format-fntabs.dir-rtl ul.weeks h2
+{
+    text-align: right;
+    font-size:24px;
+}
+
+body.format-fntabs.dir-rtl tr:first-of-type td.fntopicsoutlinesidehighlight,
+body.format-fntabs.dir-rtl tr:first-of-type td.fntopicsoutlineside,
+body.format-fntabs.dir-rtl tr:first-of-type .fntopicsoutlinesidehidden
+{
+    font-size:19px;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .summary
+{
+    float:right !important;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .section-boxs
+{
+    float:left !important;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 8px;
+}
+
+body.format-fntabs.dir-rtl .fnweeklynavselected .content-section .topicsoutline .section-boxs,
+body.format-fntabs.dir-rtl .fnweeklynavdisabledselected1 .content-section .topicsoutline .section-boxs
+{
+    border-top-right-radius: 0;
+    border-top-left-radius: 8px;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline tr:nth-child(2) .fntopicsoutlinesidehighlight:first-of-type,
+body.format-fntabs.dir-rtl .topicsoutline tr:nth-child(2) .fntopicsoutlinesidehidden:first-of-type
+{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 8px;
+}
+
+body.format-fntabs.ie.dir-rtl .topicsoutline .fntopicsoutlinecontenthighlight:nth-child(2),
+body.format-fntabs.ie.dir-rtl .topicsoutline .fntopicsoutlinecontenthidden:nth-child(2)
+{
+    border-left: none !important;
+    border-right: 7px solid #ed0000 !important;
+}
+
+body.format-fntabs.ie.dir-rtl .topicsoutline .fntopicsoutlinecontenthidden:nth-child(2)
+{
+    border-left: none !important;
+    border-right: 7px solid #dadada !important;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .fntopicsoutlinecontenthighlight.fntopicsoutlinecontent:first-of-type table td,
+body.format-fntabs.dir-rtl .topicsoutline .fntopicsoutlinecontenthidden.fntopicsoutlinecontent:first-of-type table td
+{
+    border-left: 1px !important;
+    border-right: 8px solid #ed0000 !important;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .fntopicsoutlinecontenthidden.fntopicsoutlinecontent:first-of-type table td
+{
+    border-right: 8px solid #dadada !important;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .fntopicsoutlinecontenthighlight .section-boxs
+{
+    border-left: 1px solid #ed0000 !important;
+}
+
+body.format-fntabs.dir-rtl .topicsoutline .fntopicsoutlinecontenthidden .section-boxs
+{
+    border-left: 1px solid #c4c4c4 !important;
+}
+
+#page-course-view-fntabs li.activity span.autocompletion,
+#page-course-view-fntabs li.activity form.togglecompletion {left: -10px;}
+
+.dir-rtl .fnweeklynav .tooltip span {margin-right: -999em; margin-left: auto;}
+.dir-rtl .fnweeklynav .tooltip-right span {display:none;}
+.dir-rtl .fnweeklynav .tooltip-right:hover span {display:block;}

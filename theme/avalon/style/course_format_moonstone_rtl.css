@@ -1,0 +1,68 @@
+.dir-rtl#page-course-view-moonstone .section.main .content .summary
+{
+    float:right;
+}
+
+.dir-rtl#page-course-view-moonstone #section-0 h3.sectionname
+{
+    text-align: right;
+    padding-left: auto;
+    padding-right: 10px;
+    font-size:19px;
+}
+
+.dir-rtl#page-course-view-moonstone #section-0  .section-modchooser
+{
+    right: auto;
+    left: 0;
+}
+
+.dir-rtl#page-course-view-moonstone .section.main .content .section
+{
+    float:left;
+    border-bottom-right-radius:0;
+    border-top-right-radius:0;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.dir-rtl#page-course-view-moonstone  .section.main .content .summary ol,
+.dir-rtl#page-course-view-moonstone  .section.main .content .section ol
+{
+    padding-left:0;
+    padding-right:20px;
+}
+
+.dir-rtl#page-course-view-moonstone .section.main .left.side
+{
+    left:auto;
+    right:4px;
+}
+
+.dir-rtl#page-course-view-moonstone .course-content ul.ctopics li.section .content .toggle a {
+    /* TODO: Check if override will do the trick instead of the following */
+    background-position: 9px 9px;
+    padding-left: 0;
+    padding-right: 30px;
+    text-align: right;
+    font-size: 15px;
+}
+
+.dir-rtl#page-course-view-moonstone.editing .section.main .right.side
+{
+    right:auto;
+    left:30px;
+}
+
+.dir-rtl#page-course-view-moonstone.editing .section.main .right.side a
+{
+    float:left;
+}
+
+.dir-rtl#page-course-view-moonstone.editing .section.main .section-modchooser
+{
+    right:auto;
+    left:100px;
+    text-align: right;
+}
+

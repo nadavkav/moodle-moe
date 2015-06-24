@@ -1,0 +1,43 @@
+#page-header .headermain,
+#page-header .langmenu,
+#page-header .userpicture,
+#page-header .teachername,
+#page-footer .logininfo,
+#page-footer .userpicture,
+#page-footer .bottomnear .mofet,
+#page-footer .bottomnear .moodle
+{
+    display: none !important;
+}
+
+.dir-rtl .navbutton
+{
+    margin-left: 24px;
+}
+
+.dir-rtl #page-header .logininfo
+{
+    position: absolute;
+    top:223px;
+    left: 20px;
+    float: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width:auto;
+}
+
+.dir-rtl #page-header .logininfo
+{
+    visibility:collapse;
+}
+
+.dir-rtl #page-header .logininfo a:nth-child(2)
+{
+    visibility:visible;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration: underline;
+    color:#001e40;
+}
+

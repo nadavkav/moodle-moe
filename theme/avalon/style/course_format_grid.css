@@ -1,0 +1,14 @@
+/* Grid course format RTL and Cell alignments on various screen sizes ("responsive")
+*/
+#page-course-view-grid .course-content #iconContainer {width: 710px;}
+@media screen and (max-width: 1140px){
+    #page-course-view-grid .course-content #iconContainer {width: 500px;}
+}
+
+/* Fix - "New activity" image was hiding "edit image" link
+*/
+.course-content ul.icons img.new_activity {margin-top: 80px;}
+
+/* Usability and Cosmetics - Center and narrow overlay section window
+*/
+#gridshadebox_content {width: 54% !important; left: 23% !important;}

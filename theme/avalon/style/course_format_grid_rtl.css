@@ -1,0 +1,3 @@
+/* Grid course format RTL and Cell alignments on various screen sizes ("responsive")
+*/
+#page-course-view-grid.dir-rtl .course-content ul.icons li {float: right;}

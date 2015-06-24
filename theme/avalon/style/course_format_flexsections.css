@@ -1,0 +1,39 @@
+/* Make course format more clear to the Teacher who is editing the levels and sub levels in edit mode
+*/
+body.format-flexsections.editing .flexsections.flexsections-level-2 {
+    background-color: beige;
+}
+body.format-flexsections .flexsections.flexsections-level-2 {
+    margin-left: 1em
+}
+
+body.format-flexsections.dir-rtl .flexsections.flexsections-level-2 {
+    margin-right: 1em;
+    margin-left: auto;
+}
+
+body.format-flexsections.editing .flexsections.flexsections-level-3 {
+    background-color: antiquewhite;
+}
+body.format-flexsections .flexsections.flexsections-level-3 {
+    margin-left: 1em
+}
+
+body.format-flexsections.dir-rtl .flexsections.flexsections-level-3 {
+    margin-left: auto;
+    margin-right: 1em;
+}
+
+/* Minor UI fixes
+*/
+body.format-flexsections.dir-rtl .course-content ul.flexsections li.section,
+body.format-flexsections.dir-rtl .course-content ul.flexsections li.movehere {
+    margin: 0;
+}
+
+body.format-flexsections.editing .content .summary {
+    padding: 5px
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}

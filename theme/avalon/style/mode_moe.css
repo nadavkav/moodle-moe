@@ -1,0 +1,244 @@
+#page
+{
+    background-image:url([[pix:theme|moe/top_banner_one_pixel]]);
+}
+/* Theme Setting "top banner one pixel" overwrite default "top banner one pixel" */
+[[setting:topbanneronepixel]]
+
+.collegenotice
+{
+    color:[[setting:color22]];
+}
+
+#custommenu .yui3-menu a,
+#custommenu .yui3-menu-horizontal > div > ul > li > a.yui3-menuitem-content,
+#custommenu .yui3-menu-horizontal > div > ul > li > a.yui3-menu-label
+{
+    color:[[setting:color22]];
+    text-shadow: none;
+}
+
+#custommenu .yui3-menu li:hover .custom_menu_submenu li a
+{
+    color:[[setting:color22]];
+}
+
+#custommenu .yui3-menu li:hover .custom_menu_submenu li:hover > a
+{
+    color:[[setting:color22]];
+}
+
+#page-footer .logininfo
+{
+    background:none;
+}
+
+#page-footer .collegename
+{
+    color:[[setting:color22]];
+}
+
+#page-header .headermain {
+    margin: 60px 170px 0 0;
+    width: 27%;
+}
+
+#page-header .userpicture {
+    left:460px;
+    top:10px;
+}
+
+#page-header .logininfo {
+    position: absolute;
+    top:12px;
+    left:500px;
+    padding:0;
+    margin:0;
+    width:240px;
+    height:30px;
+}
+
+#page-header .langmenu {
+    margin:0;
+    padding:0;
+    position: absolute;
+    top:112px;
+    right:7%;
+    z-index:201;
+    font-size:12px;
+}
+
+#page-header .collegelogo {
+    top:22px;
+    left:30px;
+    width:110px;
+    height:110px;
+}
+
+#page-header .services {
+    width:240px;
+    top:10px;
+    right:15px;
+}
+
+#page-header .services a {
+    width: 34px;
+    height: 34px;
+    margin-left:0;
+    background-image: url([[pix:theme|moe/sprite]]);
+}
+
+#page-header .services a.search {
+    background-position: -34px 0;
+}
+
+#page-header .services a.about
+{
+    background-position:-68px 0;
+}
+
+#page-header .services a.rss
+{
+    background-position:-102px 0;
+}
+
+#page-header .services a.help
+{
+    background-position:-136px 0;
+}
+
+#page-header .services a.email
+{
+    background-position:-170px 0;
+}
+
+#page-header .services a.support
+{
+    background-position:-204px 0;
+}
+
+/* RTL */
+
+body.dir-rtl #page-header .headermain {
+    margin: 60px 0 0 180px;
+    width:33%;
+}
+
+body.dir-rtl #page-header .userpicture {
+    left:auto;
+    right:460px;
+}
+
+body.dir-rtl #page-header .logininfo {
+    left:auto;
+    right:500px;
+    margin-right:0;
+    padding-right:0;
+    padding-top:0;
+}
+
+body.dir-rtl #page-header .langmenu {
+    right:auto;
+    left:7%;
+    font-size:13px;
+}
+
+body.dir-rtl #page-header .collegelogo {
+    left:auto;
+    right:28px;
+}
+
+body.dir-rtl #page-header .services {
+    right:auto;
+    left: 15px;
+}
+
+body.dir-rtl #page-header .services a {
+    margin-right:0;
+}
+
+body.dir-rtl #page-header .headermain {
+    margin: 60px 0 0 180px;
+    width:33%;
+}
+
+/* Theme overrides */
+.userprofile,
+table.text td.props,
+#page-login-index .loginpanel .loginform,
+#page-course-view-moonstone .section.main .content .section
+{
+    background-color:#fff;/* [[setting:color4]] */
+}
+
+.collegenotice .content,
+.smallboxes a.box
+{
+    background-color:#d2e6ed;/* [[setting:color6]] */
+}
+
+.smallboxes a.box
+{
+    border-color:#d2e6ed;/* [[setting:color6]] */
+}
+
+#custommenu .yui3-menu li:hover a,
+#custommenu .yui3-menu li:hover .custom_menu_submenu li:hover > a
+{
+    background-color:#e0f8fc;/* [[setting:color8]] */
+}
+
+#custommenu .yui3-menu .custom_menu_submenu
+{
+    border-color:#e0f8fc;/* [[setting:color8]] */
+}
+
+a:hover,
+#page-footer .logininfo a,
+#page-header .logininfo a,
+.navbar .breadcrumb a:hover,
+.important,
+.userprofile h2,
+.courses .list .title:hover,
+.courses .paging a:hover,
+.opm .transid > span:nth-child(1),
+.opm .cost > span:nth-child(1)
+{
+    color:#4b4d46;/* color 13 */
+}
+
+#page-footer .collegelinks .section a:hover
+{
+    color:#fdb913;
+}
+
+.collegenotice .heading,
+.dir-rtl .collegenotice .heading
+{
+    background-color:#4b4d46;/* color 13 */
+}
+
+#custommenu .yui3-menu li:hover a
+{
+    border-bottom-color:#4b4d46;/* color 13 */
+}
+
+html,
+.opm .cost, .opm .transid,
+.path-mod-assignment .feedback .files
+{
+    background-color: #fff /* color 16 */;
+}
+
+.collegenotice a,
+.collegenotice a:visited
+{
+    color:#ff4200;/* [[setting:color20]] */
+}
+
+a:visited,
+#region-main .region-content a:visited
+{
+    color:#508a9a;/* [[setting:color21]] */
+}
+
