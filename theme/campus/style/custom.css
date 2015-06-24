@@ -1,0 +1,10 @@
+/* Campus Custom CSS
+-------------------------*/
+
+.dir-rtl .breadcrumb-nav {
+    float: right;
+}
+
+/* Custom CSS Settings
+-------------------------*/
+[[setting:customcss]]

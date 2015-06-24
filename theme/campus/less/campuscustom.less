@@ -1,0 +1,1465 @@
+// Campus custom.
+
+// Theme background.
+body {
+    background-color: @themeBackground;
+}
+
+#region-main {
+    background-color: @themeContent;
+    #campusCarousel.carousel {
+        background-color: darken(@themeContent, 20%);
+    }
+}
+
+// Page.
+.container-fluid {
+    max-width: @pageWidthMaximum;
+}
+
+// Anti gravity.
+.antiGravity {
+    background-color: rgba(red(@bodyBackgroundAlt), green(@bodyBackgroundAlt), blue(@bodyBackgroundAlt), 0.6);
+    border-color: @bodyBackgroundAlt;
+    border-radius: 1em;
+    border-style: solid;
+    border-width: 1px;
+    bottom: 60px;
+    color: @navbarText;
+    display: none;
+    font-size: 32px;
+    line-height: 1;
+    padding: 10px 10px 6px 10px; 
+    position: fixed;
+    right: 20px;
+    text-align: center; 
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        border-radius: 1em;
+        color: darken(@navbarText, 10%);
+    }
+    i.fa {
+        padding-bottom: 2px;
+    }
+}
+
+// Goto bottom.
+@media (max-width: 979px) {
+    .navbar .nav {
+        &.cpusermenu li:first-child {
+            position: absolute;
+            right: 0;
+            z-index: 1;
+        }
+    }
+}
+
+// Local login.
+body.hidelocallogin .loginbox .loginsub { // See core_renderer::body_attributes().
+    display: none;
+}
+
+// Login buttons.
+.logininfo .btn {
+    margin-left: 5px;
+}
+
+// Blocks.
+.block {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: @blockBackgroundColour;
+    //background-color: rgba(red(@blockBackgroundColour), green(@blockBackgroundColour), blue(@blockBackgroundColour), 0.7);
+    .header {
+        background-color: @blockHeadingBackgroundColour;
+        padding-top: 4px; // Hardcoded in bootstrapbase/less/moodle/blocks.less.  Half here because of padding-bottom so looks good.
+        padding-bottom: 4px;
+        border-top-left-radius: @borderRadiusLarge; // Our changes to .block in 'bootstrapchanges.less'.
+        border-top-right-radius: @borderRadiusLarge;
+        .block_action {
+            padding: 2px 15px;
+        }
+    }
+    &.hidden .header {
+        border-bottom-left-radius: @borderRadiusLarge;
+        border-bottom-right-radius: @borderRadiusLarge;
+    }
+    border-style: @blockBorderStyle;
+    border-color: @blockBorderColour;
+    border-width: 0;
+    .header {
+        border-width: @blockHeadingBorderTopWidth @blockHeadingBorderRightWidth @blockHeadingBorderBottomWidth @blockHeadingBorderLeftWidth; // top right bottom left.
+        border-style: inherit;
+        border-color: inherit;
+    }
+    &.hidden .header {
+        border-width: @blockHeadingBorderTopWidth @blockHeadingBorderRightWidth @blockHeadingBorderTopWidth @blockHeadingBorderLeftWidth; // top right bottom left.
+    }
+    .content {
+        border-width: @blockContentBorderTopWidth @blockContentBorderRightWidth @blockContentBorderBottomWidth @blockContentBorderLeftWidth; // top right bottom left.
+        border-style: inherit;
+        border-color: inherit;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    &.block_login .content {
+        max-width: none;
+    }
+}
+
+.editing .block.invisible {
+    background-color: rgba(red(@blockBackgroundColour), green(@blockBackgroundColour), blue(@blockBackgroundColour), 0.4);
+}
+
+.block_course_overview .content {
+    margin: 0;
+}
+
+// Frontpage.
+.frontpageheader.absolutelayout {
+    position: relative;
+    max-width: @pageWidthMaximum;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        height: 100%;
+        max-height: inherit;
+        max-width: @pageWidthMaximum;
+        margin: auto;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .logotitle {
+        width: @frontpageAbsolutePaddingBottom;
+        padding-bottom: @frontpageAbsolutePaddingBottom;
+        max-height: inherit;
+        position: relative;
+        float: @frontpageLogoPosition;  // Change from flexlayout.
+        height: 0;
+        margin-top: -@frontpageAbsolutePaddingBottom;  // Change from flexlayout.
+        a {
+            max-height: inherit;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            img {
+                height: 100%;
+                max-height: inherit;
+            }
+        }
+    }
+    .backgroundcontainer {
+        max-height: inherit;
+        position: relative;
+        width: 100%;  // Change from flexlayout.
+        padding-bottom: @frontpageAbsolutePaddingBottom;
+        float: left;
+        height: 0;
+        margin: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            max-height: inherit;
+        }
+    }
+    .sitename {
+        position: absolute;
+        top: 10px;
+        left: @frontpageSitenamePositionLeft;
+        right: @frontpageSitenamePositionRight;
+        z-index: 1;
+    }
+}
+@media (max-width: 767px) {
+    .frontpageheader.absolutelayout {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+@media (max-width: 540px) {
+    .frontpageheader.absolutelayout {
+        .sitename {
+            h1 {
+                font-size: 24px;
+                line-height: 24px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.frontpageheader.flexlayout {
+    position: relative;
+    height: @frontpageHeaderHeightDefault;
+    max-width: @pageWidthMaximum;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        height: 100%;
+        max-height: inherit;
+        max-width: @pageWidthMaximum;
+        margin: auto;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .logotitle {
+        width: @frontpageLogoWidth;
+        padding-bottom: @frontpageFlexPaddingBottom;
+        max-height: inherit;
+        position: relative;
+        float: left;
+        height: 0;
+        margin: 0;
+        a {
+            max-height: inherit;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            img {
+                width: 100%;
+                height: 100%;
+                max-height: inherit;
+            }
+        }
+    }
+    .backgroundcontainer {
+        max-height: inherit;
+        position: relative;
+        width: @frontpageBackgroundWidth;
+        padding-bottom: @frontpageFlexPaddingBottom;
+        float: left;
+        height: 0;
+        margin: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            max-height: inherit;
+        }
+    }
+    .sitename {
+        position: absolute;
+        top: 10px;
+        left: @frontpageSitenamePositionLeft;
+        right: @frontpageSitenamePositionRight;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .frontpageheader.flexlayout {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 540px) {
+    .frontpageheader.flexlayout {
+        .sitename {
+            h1 {
+                font-size: 24px;
+                line-height: 24px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.fpresponsiveheaderlogo(@frontpageMixinLogoWidth;
+    @frontpageAbsoluteMixinPaddingBottom;
+    @frontpageFlexMixinPaddingBottom;
+    @frontpageMixinBackgroundWidth) {
+    // Only called if responsive images exist, so hide them here when showing desktop versions.
+    .frontpageheader.absolutelayout, .frontpageheader.flexlayout {
+        .logotitle {
+            .campuslogodesktop {
+                display: block;
+            }
+            .campuslogosmalldevice {
+                display: none;
+            }
+        }
+        .backgroundcontainer {
+            .campusdesktop {
+                display: block;
+            }
+            .campussmalldevice {
+                display: none;
+            }
+        }
+    }
+    @media (max-width: @navbarCollapseWidth) {
+        .frontpageheader.absolutelayout {
+            height: auto;
+            .logotitle {
+                width: @frontpageAbsoluteMixinPaddingBottom;
+                padding-bottom: @frontpageAbsoluteMixinPaddingBottom;
+                margin-top: -@frontpageAbsoluteMixinPaddingBottom;
+                .campuslogodesktop {
+                    display: none;
+                }
+                .campuslogosmalldevice {
+                    display: block;
+                }
+            }
+            .backgroundcontainer {
+                padding-bottom: @frontpageAbsoluteMixinPaddingBottom;
+                .campusdesktop {
+                    display: none;
+                }
+                .campussmalldevice {
+                    display: block;
+                }
+            }
+        }
+        .frontpageheader.flexlayout {
+            height: auto;
+            .logotitle {
+                width: @frontpageMixinLogoWidth;
+                padding-bottom: @frontpageFlexMixinPaddingBottom;
+                .campuslogodesktop {
+                    display: none;
+                }
+                .campuslogosmalldevice {
+                    display: block;
+                }
+            }
+            .backgroundcontainer {
+                width: @frontpageMixinBackgroundWidth;
+                padding-bottom: @frontpageFlexMixinPaddingBottom;
+                .campusdesktop {
+                    display: none;
+                }
+                .campussmalldevice {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Navbar.
+.navbar {
+    clear: both;
+    max-width: @pageWidthMaximum;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    img.userpicture {
+        vertical-align: top;
+        width: auto;
+        height: auto;
+        max-width: 20px;
+        max-height: 20px;
+    }
+
+    .navbar-inner {
+        padding-left: 10px;
+        padding-right: 10px;
+        .usermenu {
+            .dropdown {
+                img.userpicture {
+                    vertical-align: top;
+                    width: auto;
+                    height: auto;
+                    max-width: 20px;
+                    max-height: 20px;
+                    border-radius: 4px;
+                    margin-right: 2px;
+                }
+                > a.dropdown-toggle {
+                    padding: ((@navbarHeight - @baseLineHeight) / 2) 0px ((@navbarHeight - @baseLineHeight) / 2) 30px;
+                    .fa {
+                        padding-left: 5px;
+                    }
+                    img {
+                        margin-left: 5px;
+                    }
+                }
+                .dropdown-submenu.preferences {
+                    a.dropdown-toggle {
+                        padding: 3px 25px 3px 3px;
+                    }
+                }
+                ul.dropdown-menu {
+                    margin: 0px;
+                    i {
+                        margin-right: 5px;
+                        width: 15px;
+                    }
+                    hr.sep {
+                        margin: 0px;
+                        height: 0px;
+                        border: none;
+                    }
+                }
+            }
+        }
+        .usermenu {
+            .dropdown {
+                img.userpicture {
+                    border: 1px solid @navbarBackground;
+                }
+                ul.dropdown-menu {
+                    border: 1px solid @bodyBackgroundAlt;
+                    hr.sep {
+                        border-bottom: 1px dotted @bodyBackgroundAlt;
+                    }
+                }
+            }
+        }
+        .logininfo {
+            padding: 2px 20px 2px 8px;
+        }
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    &.affix {
+        top: 0;
+        left: 0;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: none;
+        z-index: 200;
+    }
+}
+
+.frontpageheader.flexlayout.fancynavbar, .coursecategoryheader.flexlayout.fancynavbar {
+    .backgroundcontainer .navbar.affix {
+        top: 0;
+        left: 0;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: none;
+        z-index: 200;
+        position: fixed;
+        bottom: auto;
+    }
+}
+
+@media (max-width: @navbarCollapseWidth) {
+    .navbar {
+        .navbar-inner {
+            padding-left: 0;
+            padding-right: 0;
+            .btn-navbar {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    }
+    .backgroundcontainer.left .navbar .navbar-inner .brand {
+        float: right;
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+// Slideshow.
+#campusCarousel.carousel {
+    padding-bottom: 10px;
+    .carousel-inner {
+        > .item {
+            .carousel-image-container {
+                text-align: center;
+                width: 90%;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            .carousel-image {
+                width: auto;
+                margin: 0 auto;
+                margin-top: 8px;
+                height: auto;
+                max-height: 300px;
+                vertical-align: middle; // See: http://www.vanseodesign.com/css/vertical-centering/.
+                max-width: 100%;
+            }
+            &.side-caption {
+                div.the-side-caption {
+                    padding-left: 7%;
+                }
+            }
+            &.side-caption .carousel-image {
+                box-shadow: 0px 0px 8px #222;
+                padding: 8px;
+                background-color: #fff;
+                margin-left: -8px;
+            }
+        }
+        a,
+        a:hover,
+            a:active {
+            text-decoration: none;
+            height: 100%;
+        }
+        // Caption for text below images.
+        .carousel-caption {
+            border-radius: @baseBorderRadius + 2;
+            .carousel-caption-inner {
+                margin: 0 auto;
+            }
+            h4, p {
+                padding: 0px 20px;
+            }
+            p {
+                line-height: 1;
+            }
+        }
+        &.centred {
+            .carousel-caption {
+                text-align: center;
+            }
+        }
+    }
+    // Left/right controls for nav.
+    .carousel-control {
+        display: none; // Shown when carousel hovered on, see below.
+        background: none;
+        border: 0px;
+        font-size: 30px;
+        &:hover,
+            &:focus {
+            background: none;
+            border: 0px;
+        }
+    }
+    &:hover .carousel-control{
+        display: block;
+    }
+    .carousel-indicators {
+        border-radius: @baseBorderRadius;
+        padding-right: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        background-color: #fff;
+        background-color: rgba(255, 255, 255, .50);
+        right: 5px;
+    }
+
+    // Responsive.
+    // @screen-xs-min.
+    @media(min-width: 480px) {
+        .carousel-control {
+            font-size: 36px;
+            height: 36px;
+            width: 36px;
+        }
+    }
+    @media (max-width: 767px) {
+        .carousel-inner {
+            > .item {
+                height: 200px;
+                .carousel-image-container {
+                    line-height: 200px; // See: http://www.vanseodesign.com/css/vertical-centering/.
+                }
+                .carousel-image {
+                    max-height: 165px;
+                }
+                .carousel-caption {
+                    position: absolute;
+                    h4 {
+                        font-size: 1.2em;
+                    }
+                }
+            }
+        }
+    }
+
+    // @screen-sm-min.
+    @media(min-width: 768px) {
+        .carousel-inner {
+            > .item {
+                height: 260px;
+                .carousel-image-container {
+                    line-height: 260px;
+                }
+                .carousel-image {
+                    max-height: 225px;
+                }
+            }
+        }
+        .carousel-control {
+            font-size: 40px;
+            height: 40px;
+            width: 40px;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+        .carousel-inner {
+            > .item {
+                .carousel-caption {
+                    h4 {
+                        font-size: 1.2em;
+                    }
+                }
+            }
+        }
+    }
+
+    // @screen-md-min.
+    @media(min-width: 992px) {
+        .carousel-inner {
+            > .item {
+                height: 328px;
+                .carousel-image-container {
+                    line-height: 328px;
+                }
+                .carousel-image {
+                    max-height: 293px;
+                }
+            }
+        }
+        .carousel-control {
+            font-size: 50px;
+            height: 50px;
+            width: 50px;
+        }
+    }
+
+    // @screen-lg-min.
+    @media(min-width: 1200px) {
+        .carousel-inner {
+            > .item {
+                height: 368px;
+                .carousel-image-container {
+                    line-height: 368px;
+                }
+                .carousel-image {
+                    max-height: 333px;
+                }
+            }
+        }
+        .carousel-control {
+            font-size: 60px;
+            height: 60px;
+            width: 60px;
+        }
+    }
+}
+
+// Slider settings.
+#campusCarousel.carousel {
+  .carousel-inner {
+    // Caption for text below images.
+    .carousel-caption {
+      background-color: rgba(red(@carouselColour), green(@carouselColour), blue(@carouselColour), 0.75); // Same as theme colour.
+      .carousel-caption-inner {
+        max-width: @pageWidthMaximum;
+      }
+      h4, p {
+        color: @carouselTextColour;
+      }
+    }
+  }
+  // Left/right controls for nav.
+  .carousel-control {
+    color: @slideButtonColour;
+    &:hover,
+    &:focus {
+      color: @slideButtonHoverColour;
+    }
+  }
+
+  // Carousel indicator pips.
+  .carousel-indicators {
+    box-shadow: 0px 0px 8px @carouselColour;
+    li {
+      background-color: @carouselColour;
+    }
+    .active {
+      background-color: lighten(@carouselActiveColour, 5%);  // Same as theme colour.
+    }
+  }
+}
+
+// Course category header.
+.coursecategoryheader.absolutelayout {
+    position: relative;
+    height: @courseCategoryHeaderHeightDefault;
+    max-width: @pageWidthMaximum;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        height: 100%;
+        max-height: inherit;
+        max-width: @pageWidthMaximum;
+        margin: auto;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .logotitle {
+        width: @courseCategoryLogoWidthDefault;
+        padding-bottom: @courseCategoryPaddingBottomDefault;
+        max-height: inherit;
+        position: relative;
+        float: @courseCategoryLogoPosition;  // Change from flexlayout.
+        height: 0;
+        margin-top: -@courseCategoryPaddingBottomDefault;  // Change from flexlayout.
+        a {
+            max-height: inherit;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            img {
+                height: 100%;
+                max-height: inherit;
+            }
+        }
+    }
+    .backgroundcontainer {
+        max-height: inherit;
+        position: relative;
+        width: 100%;  // Change from flexlayout.
+        padding-bottom: @courseCategoryPaddingBottomDefault;
+        float: left;
+        height: 0;
+        margin: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            max-height: inherit;
+        }
+    }
+    .sitename {
+        position: absolute;
+        top: 10px;
+        left: @courseCategorySitenamePositionLeftDefault;
+        right: @courseCategorySitenamePositionRightDefault;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .coursecategoryheader.absolutelayout {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 540px) {
+    .coursecategoryheader.absolutelayout {
+        .sitename {
+            h1 {
+                font-size: 24px;
+                line-height: 24px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.coursecategoryheader.flexlayout {
+    position: relative;
+    height: @courseCategoryHeaderHeightDefault;
+    max-width: @pageWidthMaximum;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        height: 100%;
+        max-height: inherit;
+        max-width: @pageWidthMaximum;
+        margin: auto;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .logotitle {
+        width: @courseCategoryLogoWidthDefault;
+        padding-bottom: @courseCategoryPaddingBottomDefault;
+        max-height: inherit;
+        position: relative;
+        float: left;
+        height: 0;
+        margin: 0;
+        a {
+            max-height: inherit;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            img {
+                width: 100%;
+                height: 100%;
+                max-height: inherit;
+            }
+        }
+    }
+    .backgroundcontainer {
+        max-height: inherit;
+        position: relative;
+        width: @courseCategoryBackgroundWidthDefault;
+        padding-bottom: @courseCategoryPaddingBottomDefault;
+        float: left;
+        height: 0;
+        margin: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            max-height: inherit;
+        }
+    }
+    .sitename {
+        position: absolute;
+        top: 10px;
+        left: @courseCategorySitenamePositionLeftDefault;
+        right: @courseCategorySitenamePositionRightDefault;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .coursecategoryheader.flexlayout {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 540px) {
+    .coursecategoryheader.flexlayout {
+        .sitename {
+            h1 {
+                font-size: 24px;
+                line-height: 24px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+// Course category header parametric mixins.
+.ccheaderlogo(@courseCategoryKey;
+    @courseCategoryMixinLogoWidth;
+    @courseCategoryMixinAbsolutePaddingBottom;
+    @courseCategoryMixinFlexPaddingBottom;
+    @courseCategoryMixinBackgroundWidth) {
+    .coursecategoryheader.absolutelayout.category@{courseCategoryKey} {
+        height: auto;
+        .logotitle {
+            width: @courseCategoryMixinAbsolutePaddingBottom;
+            padding-bottom: @courseCategoryMixinAbsolutePaddingBottom;
+            margin-top: -@courseCategoryMixinAbsolutePaddingBottom;  // Change from flexlayout.
+        }
+        .backgroundcontainer {
+            // No width change - a change from flexlayout.
+            padding-bottom: @courseCategoryMixinAbsolutePaddingBottom;
+        }
+    }
+    .coursecategoryheader.flexlayout.category@{courseCategoryKey} {
+        height: auto;
+        .logotitle {
+            width: @courseCategoryMixinLogoWidth;
+            padding-bottom: @courseCategoryMixinFlexPaddingBottom;
+        }
+        .backgroundcontainer {
+            width: @courseCategoryMixinBackgroundWidth;
+            padding-bottom: @courseCategoryMixinFlexPaddingBottom;
+        }
+    }
+}
+
+.ccheaderlogoposition(@courseCategoryKey;
+          @courseCategoryMixinLogoPosition;
+          @courseCategoryMixinSitenamePositionLeft;
+          @courseCategoryMixinSitenamePositionRight) {
+    .coursecategoryheader.absolutelayout.category@{courseCategoryKey}, .coursecategoryheader.flexlayout.category@{courseCategoryKey} {
+        .sitename {
+            left: @courseCategoryMixinSitenamePositionLeft;
+            right: @courseCategoryMixinSitenamePositionRight;
+        }
+    }
+    .coursecategoryheader.absolutelayout.category@{courseCategoryKey} {
+        .logotitle {
+            float: @courseCategoryMixinLogoPosition;  // Change from flexlayout.
+        }
+    }
+}
+
+.ccheaderbackgroundcolour(@courseCategoryKey;
+          @courseCategoryMixinBackgroundColour) {
+    .coursecategoryheader.category@{courseCategoryKey} {
+        background-color: @courseCategoryMixinBackgroundColour;
+        background-clip: content-box;
+    }
+    body.hideheader {
+        .coursecategoryheader.category@{courseCategoryKey} {
+            background-color: transparent;
+        }
+    }
+}
+
+.ccresponsiveheaderlogo(@courseCategoryKey;
+    @courseCategoryMixinLogoWidth;
+    @courseCategoryMixinAbsolutePaddingBottom;
+    @courseCategoryMixinFlexPaddingBottom;
+    @courseCategoryMixinBackgroundWidth) {
+    // Only called if responsive images exist, so hide them here when showing desktop versions.
+    .coursecategoryheader.absolutelayout.category@{courseCategoryKey}, .coursecategoryheader.flexlayout.category@{courseCategoryKey} {
+        .logotitle {
+            .campuslogodesktop {
+                display: block;
+            }
+            .campuslogosmalldevice {
+                display: none;
+            }
+        }
+        .backgroundcontainer {
+            .campusdesktop {
+                display: block;
+            }
+            .campussmalldevice {
+                display: none;
+            }
+        }
+    }
+    @media (max-width: @navbarCollapseWidth) {
+        .coursecategoryheader.absolutelayout.category@{courseCategoryKey} {
+            height: auto;
+            .logotitle {
+                width: @courseCategoryMixinAbsolutePaddingBottom;
+                padding-bottom: @courseCategoryMixinAbsolutePaddingBottom;
+                margin-top: -@courseCategoryMixinAbsolutePaddingBottom;  // Change from flexlayout.
+                .campuslogodesktop {
+                    display: none;
+                }
+                .campuslogosmalldevice {
+                    display: block;
+                }
+            }
+            .backgroundcontainer {
+                padding-bottom: @courseCategoryMixinAbsolutePaddingBottom;
+                .campusdesktop {
+                    display: none;
+                }
+                .campussmalldevice {
+                    display: block;
+                }
+            }
+        }
+        .coursecategoryheader.flexlayout.category@{courseCategoryKey} {
+            height: auto;
+            .logotitle {
+                width: @courseCategoryMixinLogoWidth;
+                padding-bottom: @courseCategoryMixinFlexPaddingBottom;
+                .campuslogodesktop {
+                    display: none;
+                }
+                .campuslogosmalldevice {
+                    display: block;
+                }
+            }
+            .backgroundcontainer {
+                width: @courseCategoryMixinBackgroundWidth;
+                padding-bottom: @courseCategoryMixinFlexPaddingBottom;
+                .campusdesktop {
+                    display: none;
+                }
+                .campussmalldevice {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Sitename styling.
+.sitename {
+    h1 {
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 6px rgba(255,255,255,0.05);
+        text-shadow: rgba(245,245,255,0.6) 0 0px 0px, rgba(0,0,30,0.3) 0px 0.04em 0.02em;
+    }
+    a {
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+    }
+}
+
+// Fancy navbar.
+.frontpageheader.flexlayout.fancynavbar, .coursecategoryheader.flexlayout.fancynavbar {
+    .backgroundcontainer {
+        .navbar {
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+            .navbar-inner {
+                border-width: 0;
+                #gradient > .vertical(rgba(red(@navbarBackgroundHighlight), green(@navbarBackgroundHighlight), blue(@navbarBackgroundHighlight), 0.75), rgba(red(@navbarBackground), green(@navbarBackground), blue(@navbarBackground), 0.75));
+           }
+        }
+        &.left .navbar .navbar-inner .btn-navbar.active {
+            float: left;
+        }
+    }
+}
+
+@media (max-width: @navbarCollapseWidth) {
+    .frontpageheader.flexlayout.fancynavbar, .coursecategoryheader.flexlayout.fancynavbar {
+        .backgroundcontainer .navbar {
+            bottom: auto;
+        }
+        .sitename {
+            //top: auto;
+            bottom: 0px;
+        }
+    }
+}
+
+@media (max-width: @navbarCollapseWidth) {
+    .frontpageheader.flexlayout, .coursecategoryheader.flexlayout {
+        &.fancynavbar .backgroundcontainer .navbar {
+            display: inline-table;
+            width: auto;
+            .nav-collapse.collapse {
+                display: none;
+            }
+            .nav-collapse.collapse.active {
+                display: block;
+            }
+            .navbar-inner {
+                background-image: none;
+                background-color: transparent;
+                .box-shadow(none);
+                .nav-collapse.active {
+                    #gradient > .vertical(rgba(red(@navbarBackgroundHighlight), green(@navbarBackgroundHighlight), blue(@navbarBackgroundHighlight), 0.75), rgba(red(@navbarBackground), green(@navbarBackground), blue(@navbarBackground), 0.75));
+                    .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+                }
+            }
+        }
+        &.fancynavbar .backgroundcontainer.left .navbar {
+            left: 0;
+            right: auto;
+        }
+        &.fancynavbar .backgroundcontainer.right .navbar {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
+// Navbar.
+.navbar .nav.pull-right {
+    margin: 0;
+    .usermenu {
+        margin: 0 10px 0 0;
+    }
+}
+
+// No fancy navbar on < @navbarCollapseWidth.
+.headertogglemenuhidenofancy(@screenWidth) {
+    @media (min-width: @navbarCollapseDesktopWidth) and (max-width: @screenWidth) {
+        body.hideheader {
+            > header.iamfancy {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width: @navbarCollapseWidth) {
+    #page-header header.iamfancy {
+        display: none;
+    }
+    body.hideheader > header.iamfancy {
+        display: block;
+    }
+}
+@media (min-width: @navbarCollapseDesktopWidth) {
+    body {
+        > header.iamfancy {
+            display: none;
+        }
+    }
+}
+
+// Navbar brand.
+.navbar .brand {
+    // Vertically center the text given @navbarHeight.
+    padding: 0 5px 0 5px;
+    margin: ((@navbarHeight - @baseLineHeight) / 2) 0px ((@navbarHeight - @baseLineHeight) / 2);
+    max-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: @navbarPageHeadingMax;
+}
+
+// Responsive.
+@media (max-width: 767px) {
+    aside.block-region {
+        margin-top: 20px;
+    }
+}
+
+// Header toggle.
+.navbar .nav.headertogglemenu {
+    margin: 0;
+    > li > a {
+        padding: 0;
+        i {
+            margin: ((@navbarHeight - @baseLineHeight) / 2) 0px ((@navbarHeight - @baseLineHeight) / 2);
+            font-size: 20px;
+        }
+    }
+}
+
+.headertogglesetup(@screenWidth) {
+    @media (min-width: @screenWidth) {
+        body.hideheader {
+            .frontpageheader.flexlayout, .coursecategoryheader.flexlayout {
+                .backgroundcontainer {
+                    width: 100%;
+                    padding-bottom: 0;
+                }
+            }
+            .frontpageheader.absolutelayout, .coursecategoryheader.absolutelayout {
+                .backgroundcontainer {
+                    padding-bottom: 0;
+                }
+            }
+            .frontpageheader.flexlayout.fancynavbar, .coursecategoryheader.flexlayout.fancynavbar {
+                .backgroundcontainer {
+                    .navbar.campusnavbar {
+                        position: static;
+                    }
+                }
+            }
+            .fancynavbar .campusnavbar {
+                &.affix-top {
+                    position: absolute;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+                &.affix {
+                    position: fixed;
+                }
+            }
+            #page-header.fancynavbar {
+                padding-bottom: 30px;
+            }
+            #page-header.fancynavbar, .campusnavbar {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .navbar,
+            .navbar .navbar-inner .container-fluid,
+            #page, 
+            .frontpageheader.absolutelayout,
+            .frontpageheader.flexlayout,
+            .frontpageheader.flexlayout .container,
+            .coursecategoryheader.absolutelayout,
+            .coursecategoryheader.flexlayout,
+            .coursecategoryheader.flexlayout .container {
+                max-width: 100%;
+            }
+            #region-main, #region-bs-main-and-pre, #region-bs-main-and-post, aside.block-region {
+                width: 100%;
+            }
+            aside.block-region {
+                margin-top: 20px;
+                margin-left: 0px;
+            }
+        }
+    }
+}
+
+.headertogglemenuhide(@screenWidth) {
+    @media (max-width: @screenWidth) {
+        .navbar .nav.headertogglemenu {
+            display: none;
+        }
+        body.hideheader {
+            .logotitle, .campusdesktop, .sitename {
+                display: block !important; // Override jQuery!
+            }
+        }
+    }
+}
+
+// Footer.
+#page-footer {
+    padding: 1em 0 0 0;
+    .helplink, .logininfo, {
+        display: inline;
+    }
+    .helplink {
+        float: left;
+    }
+    .logininfo {
+        float: right;
+        .loggedintext {
+            margin-right: 10px;
+        }
+        div {
+            display: inline;
+        }
+    }
+    .helplink, .performanceinfo {
+        margin: 0;
+    }
+}
+
+// Remove text shadow from navbar, block headings and buttons - task 390.
+.navbar .nav > li > a, .block .header .title h2, .block h3.main, .btn, .breadcrumb > li {
+    text-shadow: none;
+}
+
+// Forum.
+.path-mod-forum .indent {
+    margin-left: 15px;
+}
+
+.path-mod-forum table.forumheaderlist {
+    border: 0px solid transparent;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+
+    color: darken(@navbarText, 15%);
+    a {
+        color: @navbarText;
+    }
+    tr:nth-child(odd) > td a {
+        color: darken(@navbarText, 15%);
+    }
+
+    thead, tbody {
+        box-shadow: 1px 2px 3px @grayLightish;
+    }
+    thead {
+        background-color: @tableBackgroundAccentOdd;
+        text-transform: uppercase;
+    }
+    th {
+        padding: 5px 4px;
+    }
+    .forumblank {
+        height: 8px;
+    }
+    tbody {
+        tr {
+            border: 0px solid transparent;
+        }
+    }
+    td {
+        padding: 5px 4px;
+    }
+}
+
+.forumpost {
+    background-color: transparent;
+    border: 0px solid transparent;
+    box-shadow: none;
+    .row {
+        &.header {
+            margin-bottom: 8px;
+            height: 43px;
+            background-color: @tableBackgroundAccentOdd;
+            border: 1px solid @grayLightish;
+
+            color: darken(@navbarText, 15%);
+            a {
+                color: inherit;
+            }
+
+        }
+        .topic, &.maincontent, &.header {
+            padding: 5px 4px;
+        }
+        &.header, &.maincontent {
+            //box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.23);
+            box-shadow: 1px 2px 3px @grayLightish;
+            width: auto;
+        }
+        &.side {
+            padding-top: 10px;
+        }
+    }
+}
+
+// Social icons.
+#page-footer {
+    ul.socialnetworks {
+        display: inline-block;
+        margin-left: 0px;
+        border-radius: @baseBorderRadius;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+        padding: 4px;
+        background-color: rgba(red(@bodyBackgroundAlt), green(@bodyBackgroundAlt), blue(@bodyBackgroundAlt), 0.2);
+        border-color: @bodyBackgroundAlt;
+        li {
+            display: inline;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+        a {
+            color: #1F4D87;
+            &:hover {
+                background-color: transparent;
+                color: #2B6EBF;
+            }
+        }
+    }
+}
+
+/* Specific icon colours.... */
+#page-footer .socialnetworks a {
+    .fa-dropbox {
+        color: #007EE5;
+    }
+    .fa-facebook-square {
+        color: #4862A3;
+    }
+    .fa-github {
+        color: #000;
+    }
+    .fa-google-plus-square {
+        color: #DD4B39;
+    }
+    .fa-linkedin-square {
+        color: #007ABB;
+    }
+    .fa-pinterest-square {
+        color: #D73532;
+    }
+    .fa-skype {
+        color: #01AEF2;
+    }
+    .fa-tumblr-square {
+        color: #3B5876;
+    }
+    .fa-twitter-square {
+        color: #55acee;
+    }
+    .fa-vimeo-square {
+        color: #20B9EB;
+    }
+    .fa-vk {
+        color: #44678D;
+    }
+    .fa-youtube-square {
+        color: #E12C27;
+    }
+    &:hover {
+        .fa-dropbox {
+            color: #0090FF;
+        }
+        .fa-facebook-square {
+            color: #668BE2;
+        }
+        .fa-github {
+            color: #707070;
+        }
+        .fa-google-plus-square {
+            color: #FF5542;
+        }
+        .fa-linkedin-square {
+            color: #0097E2;
+        }
+        .fa-pinterest-square {
+            color: #EF3C39;
+        }
+        .fa-skype {
+            color: #02BBFF;
+        }
+        .fa-tumblr-square {
+            color: #547EA8;
+        }
+        .fa-twitter-square {
+            color: #5BBBFF;
+        }
+        .fa-vimeo-square {
+            color: #23CFFF;
+        }
+        .fa-vk {
+            color: #5E8EC1;
+        }
+        .fa-youtube-square {
+            color: #FF2D2D;
+        }
+    }
+}
+
+// Attempt to solve overflowing table issue: https://moodle.org/mod/forum/discuss.php?d=279883 - related to: https://moodle.org/mod/forum/discuss.php?d=274915 - which might be too - code comes from: https://github.com/gjb2048/moodle-theme_shoehorn/issues/5
+table {
+    th, td {
+        padding-left: 20px;
+        word-break: break-word;  // TODO: Need to see if this is right for Campus.
+        word-wrap: break-word;
+    }
+    th:first-of-type, td:first-of-type {
+        padding-left: 0px;
+    }
+}
+
+table.flexible, .generaltable {
+    //max-width: 100%; // Add in when move to BS3.
+}
+
+fieldset {
+    min-width: 0;
+}
+
+// TODO: Remove if update to Bootstrap Version 3.
+// Only display content to screen readers
+//
+// See: http://a11yproject.com/posts/how-to-hide-content/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
