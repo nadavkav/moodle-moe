@@ -1,0 +1,209 @@
+body.dir-rtl{font-family: arial;}
+.dir-rtl  th{
+	text-align: right;
+}
+.user-grade tbody th{
+	text-align: right;
+}
+img.icon{
+	margin-right: 0;
+	margin-left: 6px;
+}
+.dir-rtl p{font-family: arial;}
+.dir-rtl h1, .dir-rtl h2, .dir-rtl h3, .dir-rtl h4, .dir-rtl h5, .dir-rtl h6{font-family: arial;}
+.dir-rtl .breadcrumb > li {font-family: arial;}
+.dir-rtl #page-footer {font-family: arial !important;}
+.dir-rtl #page-footer .logininfo {font-family: arial;}
+.dir-rtl #page-footer .helplink a{font-family: arial;}
+.dir-rtl .block{font-family: arial;}
+.dir-rtl .btn, .dir-rtl #id_submitbutton, .dir-rtl #id_cancel, input[type="password"]+input[type="submit"], button, input.form-submit, input[type="button"], input[type="submit"], input[type="reset"], button.disabled, .dir-rtl input.form-submit.disabled, .dir-rtl input[type="button"].disabled, .dir-rtl input[type="submit"].disabled, .dir-rtl input[type="reset"].disabled, .dir-rtl button[disabled], .dir-rtl input.form-submit[disabled], .dir-rtl input[type="button"][disabled], .dir-rtl input[type="submit"][disabled], .dir-rtl input[type="reset"][disabled], .dir-rtl fieldset[disabled] button, .dir-rtl fieldset[disabled] input.form-submit, .dir-rtl fieldset[disabled] input[type="button"], .dir-rtl fieldset[disabled] input[type="submit"], .dir-rtl fieldset[disabled] input[type="reset"], .dir-rtl button.disabled:hover, .dir-rtl input.form-submit.disabled:hover, .dir-rtl input[type="button"].disabled:hover, .dir-rtl input[type="submit"].disabled:hover, .dir-rtl input[type="reset"].disabled:hover, .dir-rtl button[disabled]:hover, .dir-rtl input.form-submit[disabled]:hover, .dir-rtl input[type="button"][disabled]:hover, .dir-rtl input[type="submit"][disabled]:hover, .dir-rtl input[type="reset"][disabled]:hover, .dir-rtl fieldset[disabled] button:hover, .dir-rtl fieldset[disabled] input.form-submit:hover, .dir-rtl fieldset[disabled] input[type="button"]:hover, .dir-rtl fieldset[disabled] input[type="submit"]:hover, .dir-rtl fieldset[disabled] input[type="reset"]:hover, .dir-rtl button.disabled:focus, .dir-rtl input.form-submit.disabled:focus, .dir-rtl input[type="button"].disabled:focus, .dir-rtl input[type="submit"].disabled:focus, .dir-rtl input[type="reset"].disabled:focus, .dir-rtl button[disabled]:focus, .dir-rtl input.form-submit[disabled]:focus, .dir-rtl input[type="button"][disabled]:focus, .dir-rtl input[type="submit"][disabled]:focus, .dir-rtl input[type="reset"][disabled]:focus, .dir-rtl fieldset[disabled] button:focus, .dir-rtl fieldset[disabled] input.form-submit:focus, .dir-rtl fieldset[disabled] input[type="button"]:focus, .dir-rtl fieldset[disabled] input[type="submit"]:focus, .dir-rtl fieldset[disabled] input[type="reset"]:focus, .dir-rtl button.disabled:active, .dir-rtl input.form-submit.disabled:active, .dir-rtl input[type="button"].disabled:active, .dir-rtl input[type="submit"].disabled:active, .dir-rtl input[type="reset"].disabled:active, .dir-rtl button[disabled]:active, .dir-rtl input.form-submit[disabled]:active, .dir-rtl input[type="button"][disabled]:active, .dir-rtl input[type="submit"][disabled]:active, .dir-rtl input[type="reset"][disabled]:active, .dir-rtl fieldset[disabled] button:active, .dir-rtl fieldset[disabled] input.form-submit:active, .dir-rtl fieldset[disabled] input[type="button"]:active, .dir-rtl fieldset[disabled] input[type="submit"]:active, .dir-rtl fieldset[disabled] input[type="reset"]:active, .dir-rtl button.disabled.active, .dir-rtl input.form-submit.disabled.active, .dir-rtl input[type="button"].disabled.active, .dir-rtl input[type="submit"].disabled.active, .dir-rtl input[type="reset"].disabled.active, .dir-rtl button[disabled].active, .dir-rtl input.form-submit[disabled].active, .dir-rtl input[type="button"][disabled].active, .dir-rtl input[type="submit"][disabled].active, .dir-rtl input[type="reset"][disabled].active, .dir-rtl fieldset[disabled] button.active, .dir-rtl fieldset[disabled] input.form-submit.active, .dir-rtl fieldset[disabled] input[type="button"].active, .dir-rtl fieldset[disabled] input[type="submit"].active, .dir-rtl fieldset[disabled] input[type="reset"].active {font-family: arial;}
+.dir-rtl .alert{font-family: arial;}
+.dir-rtl #region-main,
+.dir-rtl #page-marketing {font-family: arial;}
+.dir-rtl .path-course.pagelayout-coursecategory #region-main .courseboxes>ul>li {font-family: arial;}
+.dir-rtl .single-section h3.sectionname {font-family: arial;}
+.dir-rtl .coursebox .info h3 {font-family: arial;}
+.dir-rtl #newmessageoverlay a {font-family: arial;}
+.dir-rtl .frontpage-course-list-enrolled .paging-morelink a {font-family: arial;}
+.dir-rtl .mform .iconhelp {
+	margin-left: -16px;
+	margin-right: 4px;
+}
+.dir-rtl .fp-pathbar .fp-path-folder {
+	background-image: url('/meital/moodle/theme/image.php/elegance/theme/1401964157/fp/path_folder_rtl');
+	background-position: right;
+	margin-left: 0px;
+	margin-right: 4px;
+}
+.dir-rtl .fp-pathbar .fp-path-folder-name {
+margin-left: 0px;
+margin-right: 32px;
+}
+
+.dir-rtl .moodle-actionmenu[data-enhanced].show .menu{text-align: right;}
+.dir-rtl .moodle-actionmenu[data-enhanced].show .menu .iconsmall {
+margin: 4px -10px 4px 4px;
+}
+.dir-rtl .navbar .navbar-nav>.dropdown>a .caret {
+	margin-left: 0; margin-right: 5px;
+}
+
+.dir-rtl .mform fieldset.collapsible legend a.fheader {
+padding: 0 20px 0 5px;
+margin-left: 0px;
+background-image: url(/meital/moodle/theme/image.php/elegance/core/1401966396/t/expanded);
+background-position: right;
+}
+
+.dir-rtl .collapsible-actions .collapseexpand {
+padding-left: 0;
+padding-right: 20px;
+background-image: url(/meital/moodle/theme/image.php/elegance/core/1401967377/t/collapsed_rtl);
+background-position: right;
+background-repeat: no-repeat;
+}
+
+.dir-rtl .collapsible-actions .collapse-all {
+background-image: url(/meital/moodle/theme/image.php/elegance/core/1401967377/t/expanded);
+}
+
+#userselector_options p {
+	text-align: right;
+}
+
+input[name="searchwikicontent"]+input[type="submit"], select+input[type="submit"], input[type="text"]+input[type="button"], input[type="password"]+input[type="submit"], input[type="text"]+button, input[type="text"]+input[type="submit"] {
+	margin: 0 5px 1px 0;
+}
+
+.dir-rtl .mform fieldset.collapsed legend a.fheader {
+	background-image: url(/meital/moodle/theme/image.php/elegance/core/1401966396/t/collapsed_rtl);
+}
+
+.dir-rtl .block .content .userpicture {
+	margin-right: 0px;
+	margin-left: 6px;
+}
+.dir-rtl .userlist table#participants td, .dir-rtl .userlist table#participants th {
+text-align: right;
+}
+.userprofile .userprofilebox {
+margin-left: 0px;
+margin-right: 0px;
+}
+.dir-rtl  .mdl-left{
+	text-align: right;
+}
+.banner {direction: ltr;}
+.dir-rtl .navbar .fa {padding-left: 5px; padding-right: 0;}
+.dir-rtl .block .header .title h2:before {margin-left: 0.3em; margin-right: 0;}
+.dir-rtl .collapsed .tree_item.branch:before {content: "" !important;}
+
+.dir-rtl .breadcrumb-button {float: left;}
+
+/* FOOTER */
+.dir-rtl .homelink a, .dir-rtl .sitelink a {float: right; margin-left: 15px;}
+.dir-rtl #page-footer .copy {float: right;}
+.dir-rtl #page-footer .helplink a {float: right;}
+.dir-rtl #page-footer .helplink {margin-top: 20px;margin-left: auto;margin-right: auto;width: 200px;}
+.dir-rtl #page-footer .footnote {float: right;text-align: right;}
+
+/* LOGIN */
+.dir-rtl .signuppanel ol {margin-right: 40px; margin-left: 0;}
+.dir-rtl .loginpanel form .inputarea div input[type="password"] {margin-right:15px;}
+.dir-rtl .guestform { margin-top: 100px; margin-right: auto; margin-left: auto; width: 150px;}
+
+/* MY */
+.dir-rtl #allcourses {float: left;margin-left: -1px;margin-top: -4px;}
+.dir-rtl .mycourseboxes .view {float:right;}
+.dir-rtl .view-mycourse { margin: 0 0 30px 30px;}
+.dir-rtl .breadcrumb-nav{ float: right;}
+.dir-rtl .block .header .block_action{ float: left;}
+.dir-rtl .navbar-toggle{ float: left;}
+
+@media (min-width: 768px) {
+	/* .dir-rtl .navbar-header {
+		float: right;
+	}
+	.navbar-right {
+		float: left !important;
+	}
+	.navbar-right .dropdown-menu {
+		left: 0;
+		right: auto;
+	} */
+}
+
+.dir-rtl .input-group .form-control:first-child, .dir-rtl .input-group-addon:first-child, .dir-rtl .input-group-btn:first-child>.btn, .dir-rtl .input-group-btn:first-child>.btn-group>.btn, .dir-rtl .input-group-btn:first-child>.dropdown-toggle, .dir-rtl .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .dir-rtl .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+	border-radius: 0 4px 4px 0;
+}
+
+.dir-rtl .input-group .form-control:last-child, .dir-rtl .input-group-addon:last-child, .dir-rtl .input-group-btn:last-child>.btn, .dir-rtl .input-group-btn:last-child>.btn-group>.btn, .dir-rtl .input-group-btn:last-child>.dropdown-toggle, .dir-rtl .input-group-btn:first-child>.btn:not(:first-child), .dir-rtl .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+	border-radius: 4px 0 0 4px;
+}
+
+@media (min-width: 1200px)
+{
+	.dir-rtl .mform .fcontainer .fitem .fitemtitle, .mform fieldset .fitem .fitemtitle,.mform .fcontainer .fitem .felement, .mform fieldset .fitem .felement {
+		float: right;
+	}
+	.dir-rtl .mform .fitemtitle, .form-label {
+		float: right;
+		text-align: left;
+	}
+	.form-item .form-label{
+		float: left;
+		text-align: right;
+	}
+}
+@media (min-width: 992px)
+{
+	.dir-rtl .mform .fcontainer .fitem .fitemtitle, .mform fieldset .fitem .fitemtitle,.mform .fcontainer .fitem .felement, .mform fieldset .fitem .felement {
+		float: right;
+	}
+	.dir-rtl .mform .fitemtitle, .form-label {
+		text-align: left;
+	}
+	.dir-rtl .box.message .contactselector form#usergroupform fieldset label {
+		float: right;
+	}
+	.dir-rtl .box.message .mdl-align {
+		text-align: right;
+	}
+	.dir-rtl .box.message .contactselector form#usergroupform fieldset select {
+		float: right;
+	}
+	.dir-rtl .form-item .form-label{
+		float: right;
+		text-align: right;
+	}
+	.dir-rtl .form-item .form-description {
+		margin-right: 33.33333333%;
+		margin-left: 0;
+		float: right;
+		text-align: right;
+	}
+}
+.dir-rtl .box.message .contactselector form#usergroupform fieldset select{
+	float: right;
+}
+
+.dir-rtl .form-item .form-label{
+	float: right;
+	text-align: left;
+}
+
+#moodle-navbar a[title="שפת ממשק"] + .dropdown-menu li:first-child a{unicode-bidi: bidi-override; direction: ltr;}
+
+.dir-rtl .block_messages.hidden .message_count{right: -5px; left: auto;}
+.dir-rtl button,
+.dir-rtl input.form-submit,
+.dir-rtl input[type="button"],
+.dir-rtl input[type="submit"],
+.dir-rtl input[type="reset"] {
+  margin: 0 5px 3px 0;
+}
+
+.dir-rtl #moodle-navbar a[title="שפת ממשק"] + .dropdown-menu li:first-child a {
+	unicode-bidi: normal;
+	direction: ltr;
+}
