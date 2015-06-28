@@ -1280,3 +1280,31 @@ html[dir=rtl] #page-content {
 /* Fix course format calendar
 */
 .course-content table.days tbody .summary { margin-top: 0; }
+
+/* Make form labels more spacious 
+*/
+.dir-rtl .mform fieldset div .fitemtitle {margin:10px;}
+.dir-rtl .mform .fitem .felement {margin-right: 18%;}
+
+/*   Course format - onetopic
+ */
+.format-onetopic li.onerow.here.selected {background-color: beige;}
+.format-onetopic .tabtree .tabrow0 ul, .tabtree .tabrow0 div {border-top:0;}
+.format-onetopic .tabtree .tabrow0 {
+  margin-bottom: 0;
+  border-bottom: 3px;
+  border-style: inset;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+.format-onetopic .onetopic .tab_content {padding: 4px;}
+
+/*   Course format - grid
+ */
+.editing #gridshadebox_content { width: 97% !important; }
+
+/*  User profile page (minor ui fixes)
+ */
+.dir-rtl .userprofile dl dt {width: 155px;}
+.dir-rtl .userprofile dl dd {margin-right: 166px;}
