@@ -1,0 +1,7 @@
+Registering sniffs in moodle standard... DONE (45 sniffs registered)
+Creating file list... DONE (5 files in queue)
+Processing access.php [84 tokens in 36 lines]... DONE in < 1 second (0 errors, 0 warnings)
+Processing repository_openclipart.php [129 tokens in 37 lines]... DONE in < 1 second (0 errors, 0 warnings)
+Processing lib.php [1247 tokens in 199 lines]... DONE in < 1 second (0 errors, 0 warnings)
+Processing openclipart.php [1754 tokens in 198 lines]... DONE in 1 second (0 errors, 0 warnings)
+Processing version.php [71 tokens in 31 lines]... DONE in < 1 second (0 errors, 0 warnings)
