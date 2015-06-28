@@ -100,7 +100,7 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
         return $content;
     }
 
-    public function user_menu() {
+    public function user_menu($user = NULL, $withlinks = NULL) {
         global $CFG;
         $usermenu = new custom_menu('', current_language());
         return $this->render_user_menu($usermenu);
@@ -350,7 +350,7 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
         $messagecontent = new stdClass();
 
         if ($message->notification) {
-            $messagecontent->text = get_string('unreadnewnotification', 'message');
+            $messagecontent->text = get_string('unreadmessages', 'message');
         } else {
             if ($message->fullmessageformat == FORMAT_HTML) {
                 $message->smallmessage = html_to_text($message->smallmessage);
