@@ -1308,3 +1308,15 @@ html[dir=rtl] #page-content {
  */
 .dir-rtl .userprofile dl dt {width: 155px;}
 .dir-rtl .userprofile dl dd {margin-right: 166px;}
+
+/* Fix TABs style coming from theme/base/style/tabs.css
+*/
+.tabtree .tabrow0 .here a {
+    background-color: #FBFFC5;
+}
+.tabtree .tabrow0 li a {
+    background: #f7f7f7;
+    padding: 5px 10px;
+    border:none;
+    margin:0;
+}
