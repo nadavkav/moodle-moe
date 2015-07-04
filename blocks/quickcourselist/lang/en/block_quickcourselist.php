@@ -39,3 +39,4 @@ $string['splittermsdescription'] = 'When enabled, terms seperated by spaces will
 $string['restrictcontext'] = 'Restrict results by category';
 $string['restrictcontextdescription'] = 'When enabled, only courses under the current category will be returned from searches on category pages.';
 $string['quickcourselist:addinstance'] = 'Add quick course list block'; 
+$string['quickcourselist:myaddinstance'] = 'Add quick course list block to MY page';
