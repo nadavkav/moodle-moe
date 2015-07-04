@@ -1320,3 +1320,11 @@ html[dir=rtl] #page-content {
     border:none;
     margin:0;
 }
+
+/*	Fix login button position (RTL mode).
+ */
+.dir-rtl#page-login-index #loginbtn {
+    position: absolute;
+    left: 110px;
+    bottom: 140px;
+}
