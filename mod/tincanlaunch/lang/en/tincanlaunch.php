@@ -105,3 +105,4 @@ $string['eventactivitylaunched'] = 'Activity launched';
 $string['eventactivitycompleted'] = 'Activity completed';
 
 $string['tincanlaunch:addinstance'] = 'Add a new tincan (xAPI) activity to a course';
+$string['tincanlaunch:view'] = 'Can view tincanlaunch activity';
