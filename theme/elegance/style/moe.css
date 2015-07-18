@@ -11,3 +11,8 @@
 }
 
 .dir-rtl .moodleSkin .mceToolbar a span.mceIcon img {padding:0;}
+
+.dir-rtl #toggle-all .content .sectionbody h4, 
+.dir-rtl #toggle-all .content .sectionbody h4 a {
+  padding-left: 35px;
+}
