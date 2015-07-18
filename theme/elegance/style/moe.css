@@ -1,3 +1,5 @@
+/* Course format onetopic
+*/
 .nav-tabs.nav-justified>li {
   display: table;
   width: 16%;
@@ -6,16 +8,30 @@
 
 .dir-rtl .course-content .single-section .section-navigation .mdl-left {float: right;}
 
+/* Question Bank overlay window
+*/
 .dir-rtl .questionbankwindow table#categoryquestions {
     display: inline-table;
 }
 
+/* HTML Editor - TineMCE toolbar icons
+*/
 .dir-rtl .moodleSkin .mceToolbar a span.mceIcon img {padding:0;}
 
+/* Course format topcoll
+*/
 .dir-rtl #toggle-all .content .sectionbody h4, 
 .dir-rtl #toggle-all .content .sectionbody h4 a {
   padding-left: 35px;
 }
 
+/* Login page.
+*/
 .loginpanel form .inputarea {padding-top: 3px;}
 .loginpanel form .inputarea div {margin-left: 55px;}
+
+/* Grade book page
+*/
+.path-grade-report-grader .gradeparent {
+    overflow: auto;
+}
