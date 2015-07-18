@@ -1320,6 +1320,12 @@ html[dir=rtl] #page-content {
     border:none;
     margin:0;
 }
+.tabtree ul {margin:2px;}
+.tabtree .tabrow0 {margin:2px;}
+.tabtree {
+  /*margin-bottom: 1px;*/
+  border-bottom: 2px solid rgb(184, 184, 184);
+}
 
 /*	Fix login button position (RTL mode).
  */
