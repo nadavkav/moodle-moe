@@ -83,6 +83,14 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
+<header id="siteheader" class="clearfix">
+    <div id="moe-header">
+        <a class="moe-il-logo" href="<?php echo $CFG->wwwroot;?>"><?php //echo $logo; ?></a>
+        <span class="moe-instance-name"><?php echo $OUTPUT->page_title(); ?></span>
+        <span class="moe-logo"></span>
+    </div>
+</header>
+
 <nav role="navigation" class="navbar <?php echo $navbartype; ?>">
     <div class="<?php echo $container; ?>">
     <div class="navbar-header">

@@ -35,3 +35,44 @@
 .path-grade-report-grader .gradeparent {
     overflow: auto;
 }
+
+/* Block - for fun :-)
+*/
+.block {
+    -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* Frontpage MOE new header
+*/
+#moe-header {
+    background-color: white;
+}
+.moe-il-logo {
+    background: url([[pix:theme|header_right]]);
+    height: 72px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 230px;
+}
+.moe-logo {
+    background: url([[pix:theme|header_left]]);
+    height: 72px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 230px;
+    float: left;
+}
+.moe-instance-name {
+    font-size: 1.5em;
+    position: absolute;
+    top: 40px;
+    right: 345px;
+    font-weight: bold;
+    color: cornflowerblue;
+}
+
+.navbar-inverse {
+    background-color: #a6b4c4;
+}
