@@ -16,3 +16,6 @@
 .dir-rtl #toggle-all .content .sectionbody h4 a {
   padding-left: 35px;
 }
+
+.loginpanel form .inputarea {padding-top: 3px;}
+.loginpanel form .inputarea div {margin-left: 55px;}
