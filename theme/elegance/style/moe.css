@@ -1,0 +1,13 @@
+.nav-tabs.nav-justified>li {
+  display: table;
+  width: 16%;
+  float: right;
+}
+
+.dir-rtl .course-content .single-section .section-navigation .mdl-left {float: right;}
+
+.dir-rtl .questionbankwindow table#categoryquestions {
+    display: inline-table;
+}
+
+.dir-rtl .moodleSkin .mceToolbar a span.mceIcon img {padding:0;}

@@ -85,6 +85,7 @@ if ('ltr' === get_string('thisdirection', 'langconfig')) {
 } else {
     $THEME->sheets = array('tinymce-rtl', 'font-awesome', 'google-fonts', $categorysheet, $loginsheet, 'nprogress', 'elegance', 'mobile', 'elegance-rtl');
 }
+$THEME->sheets[] = 'moe';
 
 $THEME->layouts = array(
     // Most backwards compatible layout without the blocks - this is the layout used by default.
