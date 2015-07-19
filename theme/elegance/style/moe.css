@@ -25,11 +25,25 @@
   padding-left: 35px;
 }
 
-/* Login page.
+/* Special Login page.
 */
 .loginpanel form .inputarea {padding-top: 3px;}
 .loginpanel form .inputarea div {margin-left: 55px;}
 
+/* Login page.
+*/
+.dir-rtl .loginbox h2,
+.dir-rtl .loginbox .subcontent ,
+.dir-rtl .loginbox .loginform .form-label,
+.dir-rtl .loginbox .rememberpass,
+.dir-rtl .loginbox .forgetpass {
+    text-align: right;
+}
+@media (min-width: 992px) {
+    .loginbox.onecolumn {
+        width: 44.333333%;
+    }
+}
 /* Grade book page
 */
 .path-grade-report-grader .gradeparent {
