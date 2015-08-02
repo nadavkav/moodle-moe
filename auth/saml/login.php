@@ -99,11 +99,17 @@ echo '</center>';
               echo '</div>';
           }
         ?>
+          <?php
+          $frmusername = '';
+          if (!empty($frm->username)) {
+              $frmusername = $frm->username;
+          }
+          ?>
         <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> >
           <div class="loginform">
             <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
             <div class="form-input">
-              <input type="text" name="username" id="username" size="15" value="<?php p($frm->username) ?>" />
+              <input type="text" name="username" id="username" size="15" value="<?php p($frmusername) ?>" />
             </div>
             <div class="clearer"><!-- --></div>
             <div class="form-label"><label for="password"><?php print_string("password") ?></label></div>
@@ -115,7 +121,7 @@ echo '</center>';
             <div class="clearer"><!-- --></div>
               <?php if (isset($CFG->rememberusername) and $CFG->rememberusername == 2) { ?>
               <div class="rememberpass">
-                  <input type="checkbox" name="rememberusername" id="rememberusername" value="1" <?php if ($frm->username) {echo 'checked="checked"';} ?> />
+                  <input type="checkbox" name="rememberusername" id="rememberusername" value="1" <?php if ($frmusername) {echo 'checked="checked"';} ?> />
                   <label for="rememberusername"><?php print_string('rememberusername', 'admin') ?></label>
               </div>
               <?php } ?>
