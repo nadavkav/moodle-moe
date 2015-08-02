@@ -219,3 +219,9 @@ div#fullscreenfloat.fullscreen:hover,
 .pagelayout-incourse.fullscreenmode .container-fluid {
     max-width: 100%;
 }
+
+/*	Elegance hacks
+ */
+.fullscreenmode #page,
+.fullscreenmode #region-main {width:100%;}
+
