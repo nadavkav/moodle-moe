@@ -379,10 +379,13 @@ function avalon_pix_process($css, $subtheme) {
             $replaced[$match[0]] = true;
             $imagename = $match[2];
             $component = rtrim($match[1], '|');
-            $imageurl = $OUTPUT->avalon_pix_url($imagename, $component, $subtheme)->out(false);
-            // we do not need full url because the image.php is always in the same dir
-            $imageurl = preg_replace('|^http.?://[^/]+|', '', $imageurl);
-            $css = str_replace($match[0], $imageurl, $css);
+            if (!empty($imagename) and !empty($component) and !empty($subtheme)) {
+                $imageurl = $OUTPUT->avalon_pix_url($imagename, $component, $subtheme);
+                if ($imageurl) $imageurl->out(false);
+                // we do not need full url because the image.php is always in the same dir
+                $imageurl = preg_replace('|^http.?://[^/]+|', '', $imageurl);
+                $css = str_replace($match[0], $imageurl, $css);
+            }
         }
     }
 
@@ -435,5 +438,3 @@ RESET_COLORS;
 
     return $js_str;
 }
-
-

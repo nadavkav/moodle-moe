@@ -286,7 +286,7 @@ class theme_avalon_core_renderer extends core_renderer {
      * @param $subtheme
      * @return moodle_url
      */
-    function avalon_pix_url($imagename, $component, $subtheme) {
+    protected function avalon_pix_url($imagename, $component, $subtheme) {
         global $OUTPUT;
         return $OUTPUT->pix_url($subtheme.'/'.$imagename, $component);
 
