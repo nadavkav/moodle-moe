@@ -321,10 +321,10 @@ M.format_grid.shadebox.initialize_shadebox = function() {
        below the grid icons and into the shade box. */
     var content = document.getElementById('gridshadebox_content');
     content.style.position = 'absolute';
-    content.style.width = '90%';
+    content.style.width = '72%';
     content.style.top = '' + top + 'px';
-    content.style.left = '5%';
-    content.style.zIndex = '1';
+    content.style.left = '15%';
+    content.style.zIndex = '11';
 };
 
 /**
