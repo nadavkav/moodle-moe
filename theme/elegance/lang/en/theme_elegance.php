@@ -365,3 +365,13 @@ $string['socialnetworksicondescriptiontumblr'] = 'Find us on Tumblr';
 $string['socialnetworksicondescriptioninstagram'] = 'Find us on Instagram';
 $string['socialnetworksicondescriptionvk'] = 'Like us on VK';
 $string['socialnetworksicondescriptionskype'] = 'Call us on Skype';
+
+/* MOE footer LOGOs */
+$string['moe_login'] = 'Login';
+$string['moe_home'] = 'Home';
+$string['moe_moe'] = 'MOE';
+$string['moe_youtube'] = 'Youtube';
+$string['moe_facebook'] = 'Facebook';
+$string['moe_twitter'] = 'Twitter';
+
+$string['copyright'] = 'Copyright';

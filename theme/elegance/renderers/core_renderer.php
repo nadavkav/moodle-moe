@@ -372,6 +372,20 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
         return $messagecontent;
     }
 
+    /**
+     *  This appends the subtheme component to the imagename and returns the result of $OUTPUT->pix_url
+     * @param $imagename
+     * @param $component
+     * @param $subtheme
+     * @return moodle_url
+     */
+    /// todo: ugly hack, remove it after we remove theme/avalon from this server. // nadavkav@gmail.com
+    public function avalon_pix_url($imagename, $component, $subtheme) {
+        global $OUTPUT;
+        return $OUTPUT->pix_url($subtheme.'/'.$imagename, $component);
+
+    }
+
     protected function render_pix_icon(pix_icon $icon) {
         if ($this->page->theme->settings->fonticons === '1'
             && $icon->attributes["alt"] === ''

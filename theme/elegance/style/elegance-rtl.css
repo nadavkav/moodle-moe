@@ -30,7 +30,7 @@ img.icon{
 	margin-right: 4px;
 }
 .dir-rtl .fp-pathbar .fp-path-folder {
-	background-image: url('/meital/moodle/theme/image.php/elegance/theme/1401964157/fp/path_folder_rtl');
+	background-image: url([[pix:theme|fp/path_folder_rtl]]);
 	background-position: right;
 	margin-left: 0px;
 	margin-right: 4px;
@@ -51,20 +51,20 @@ margin: 4px -10px 4px 4px;
 .dir-rtl .mform fieldset.collapsible legend a.fheader {
 padding: 0 20px 0 5px;
 margin-left: 0px;
-background-image: url(/meital/moodle/theme/image.php/elegance/core/1401966396/t/expanded);
+background-image: url([[pix:theme|t/expanded]]);
 background-position: right;
 }
 
 .dir-rtl .collapsible-actions .collapseexpand {
 padding-left: 0;
 padding-right: 20px;
-background-image: url(/meital/moodle/theme/image.php/elegance/core/1401967377/t/collapsed_rtl);
+background-image: url([[pix:theme|t/collapsed_rtl]]);
 background-position: right;
 background-repeat: no-repeat;
 }
 
 .dir-rtl .collapsible-actions .collapse-all {
-background-image: url(/meital/moodle/theme/image.php/elegance/core/1401967377/t/expanded);
+background-image: url([[pix:theme|t/expanded]]);
 }
 
 #userselector_options p {
@@ -76,7 +76,7 @@ input[name="searchwikicontent"]+input[type="submit"], select+input[type="submit"
 }
 
 .dir-rtl .mform fieldset.collapsed legend a.fheader {
-	background-image: url(/meital/moodle/theme/image.php/elegance/core/1401966396/t/collapsed_rtl);
+	background-image: url([[pix:theme|t/collapsed_rtl]]);
 }
 
 .dir-rtl .block .content .userpicture {

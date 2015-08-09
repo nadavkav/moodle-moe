@@ -868,6 +868,7 @@ border-bottom-color: #888;
 
 /* @group Footer */
 
+/* MOE- nadavkav // remove style
 #page-footer {
 	border-top: 10px solid #acacae !important;
 	background: #d8d8db;
@@ -876,6 +877,7 @@ border-bottom-color: #888;
 	font-family: "Roboto" !important;
 	font-size: .9em;
 }
+*/
 
 .homelink a,
 .sitelink a {

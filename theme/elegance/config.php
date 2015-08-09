@@ -187,8 +187,9 @@ $THEME->layouts = array(
     // The pagelayout used for reports.
     'report' => array(
         'file' => 'default.php',
-        'regions' => array('side-post'),
-        'defaultregion' => 'side-post',
+        'regions' => array(),
+        //'regions' => array('side-post'),
+        //'defaultregion' => 'side-post',
     ),
     // The pagelayout used for safebrowser and securewindow.
     'secure' => array(

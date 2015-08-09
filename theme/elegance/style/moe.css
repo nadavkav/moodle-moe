@@ -39,9 +39,12 @@
 .dir-rtl .loginbox .forgetpass {
     text-align: right;
 }
-@media (min-width: 992px) {
+
+.loginbox form#login {padding: 10px;}
+
+@media (min-width: 768px) {
     .loginbox.onecolumn {
-        width: 44.333333%;
+        width: 80%;
     }
 }
 /* Grade book page
@@ -56,7 +59,10 @@
     -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
     -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
     box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    border: 2px solid #dddddd;
 }
+.block .header .title h2 {font-size: 20px;}
+
 
 /* Frontpage MOE new header
 */
@@ -79,14 +85,165 @@
     float: left;
 }
 .moe-instance-name {
-    font-size: 1.5em;
+    font-size: 22px;
     position: absolute;
     top: 40px;
     right: 345px;
     font-weight: bold;
     color: cornflowerblue;
+    font-family: 'Alef', sans-serif;
 }
 
 .navbar-inverse {
     background-color: #a6b4c4;
+}
+
+/* Forum - subscribed/unsubscribed icons
+*/
+.path-mod-forum .discussionsubscription>a>img {width:32px;}
+
+/* SAML - login page
+*/
+#page-auth-saml-login #region-main {width:100%;}
+
+/* Page layout REPORT (no blocks & fullscreen width)
+*/
+.pagelayout-report #region-main {width:100%;}
+
+/* Navbar
+*/
+.navbar .container {width:100%;}
+.nav>li {
+    border-right: 2px solid white;
+    font-family: 'Alef', sans-serif;
+    font-size: 17px;
+}
+.navbar-inverse .navbar-brand {color: black;}
+.navbar-default .navbar-nav>li>a, .navbar-inverse .navbar-nav>li>a {
+    padding: 5px;
+    margin: 5px;
+}
+.navbar {min-height: 40px;}
+.navbar-brand {height: 40px;padding: 10px 15px;}
+
+.breadcrumb-button {margin-top: 7px;}
+.breadcrumb-nav {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+.dir-rtl .breadcrumb>li {font-family: 'Alef', sans-serif;font-size: 15px;}
+.breadcrumb,
+#moodleheader {background: none;background-color: #ebebeb;}
+
+/* ATTO
+*/
+.dir-rtl #id_s_editor_atto_toolbar {direction: ltr; text-align: left;}
+
+/* Course format - topcoll
+*/
+/* fix highlighted section */
+.ctopics.moonstones .section.main.current {
+    margin: 0 !important;
+    padding: 5px 0 0 0 !Important;
+}
+/* Course format - onetopic
+*/
+.onetopic li.active {
+    background-color: #6d8ba7;
+}
+.course-content ul.topics {
+    border: 1px solid #6d8ba7;
+}
+.course-content ul.topics li.section {
+    padding-bottom: 0;
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+.course-content .single-section .section-navigation {font-family: 'Alef', sans-serif;font-size: 14px;}
+
+/* Course format - socialwall
+*/
+.format-socialwall.dir-rtl #postform .fitem div.fitemtitle {text-align: right;}
+.format-socialwall.dir-rtl .tl-leftcol, .format-socialwall.dir-rtl .tl-author {float: right;}
+
+/* Blocks - block_html
+*/
+.block_html .no-overflow {margin-bottom: 0;}
+
+/* Module action menu - fix
+*/
+.moodle-actionmenu[data-enhanced].show .menu a:focus {background-color: white;color: #333;}
+
+/* MOE Footer icons
+*/
+#moe-footer ul {list-style-type: none;}
+#moe-footer li {
+    width: 80px;
+    float: right;
+}
+#moe-footer div {
+    margin: 0 auto;
+    width: 50%;
+}
+.dir-rtl #page-footer .logininfo {text-align: left;}
+
+#page-footer .helplink {display: none;}
+#page-footer .homelink {display: none;}
+#footernote {
+    border-top: 1px solid #C1C1C1;
+}
+
+/* Background image - pattern
+*/
+#main {background-repeat: repeat;background-size: initial;}
+
+/* Course categories
+*/
+.category[data-depth="1"][aria-expanded="true"] .info {background-color: #c8d5e2;}
+.category[data-depth="2"][aria-expanded="true"] .info {background-color: #d2deea;}
+.category[data-depth="3"][aria-expanded="true"] .info {background-color: #e0e8f0;}
+.coursebox .moreinfo {
+    padding: 0px 10px;
+    display: inline-block;
+}
+.coursebox .info {float: left;width: 100%;}
+.coursebox .info .enrolmenticons {margin-top: 0;}
+.coursename {float: right;}
+
+.btn,
+#id_submitbutton,
+#id_cancel,
+input[type="password"]+input[type="submit"],
+button,
+input.form-submit,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button.disabled, input.form-submit.disabled, input[type="button"].disabled,
+input[type="submit"].disabled, input[type="reset"].disabled, button[disabled],
+input.form-submit[disabled], input[type="button"][disabled], input[type="submit"][disabled],
+input[type="reset"][disabled], fieldset[disabled] button, fieldset[disabled] input.form-submit,
+fieldset[disabled] input[type="button"], fieldset[disabled] input[type="submit"], fieldset[disabled]
+input[type="reset"], button.disabled:hover, input.form-submit.disabled:hover, input[type="button"].disabled:hover,
+input[type="submit"].disabled:hover, input[type="reset"].disabled:hover, button[disabled]:hover, input.form-submit[disabled]:hover,
+input[type="button"][disabled]:hover, input[type="submit"][disabled]:hover, input[type="reset"][disabled]:hover,
+fieldset[disabled] button:hover, fieldset[disabled] input.form-submit:hover, fieldset[disabled] input[type="button"]:hover,
+fieldset[disabled] input[type="submit"]:hover, fieldset[disabled] input[type="reset"]:hover, button.disabled:focus,
+input.form-submit.disabled:focus, input[type="button"].disabled:focus, input[type="submit"].disabled:focus,
+input[type="reset"].disabled:focus, button[disabled]:focus, input.form-submit[disabled]:focus,
+input[type="button"][disabled]:focus, input[type="submit"][disabled]:focus, input[type="reset"][disabled]:focus,
+fieldset[disabled] button:focus, fieldset[disabled] input.form-submit:focus, fieldset[disabled] input[type="button"]:focus,
+fieldset[disabled] input[type="submit"]:focus, fieldset[disabled] input[type="reset"]:focus, button.disabled:active,
+input.form-submit.disabled:active, input[type="button"].disabled:active, input[type="submit"].disabled:active,
+input[type="reset"].disabled:active, button[disabled]:active, input.form-submit[disabled]:active,
+input[type="button"][disabled]:active, input[type="submit"][disabled]:active, input[type="reset"][disabled]:active,
+fieldset[disabled] button:active, fieldset[disabled] input.form-submit:active, fieldset[disabled]
+input[type="button"]:active, fieldset[disabled] input[type="submit"]:active, fieldset[disabled] input[type="reset"]:active,
+button.disabled.active, input.form-submit.disabled.active, input[type="button"].disabled.active, input[type="submit"].disabled.active,
+input[type="reset"].disabled.active, button[disabled].active, input.form-submit[disabled].active, input[type="button"][disabled].active,
+input[type="submit"][disabled].active, input[type="reset"][disabled].active, fieldset[disabled] button.active, fieldset[disabled]
+input.form-submit.active, fieldset[disabled] input[type="button"].active, fieldset[disabled] input[type="submit"].active,
+fieldset[disabled] input[type="reset"].active {
+    background-color: #6d86a8;
+    color: #FFF;
 }

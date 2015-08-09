@@ -55,12 +55,59 @@ $hassocialnetworks = ($hasfacebook || $hastwitter || $hasgoogleplus || $hasflick
 	</div>
 
 	<div class="row">
+		<div id="moe-footer">
+			<div>
+				<ul>
+					<li>
+						<a href="https://twitter.com">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/twitter_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_twitter','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+					<li>
+						<a href="https://facebook.com">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/facebook_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_facebook','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+					<li>
+						<a href="https://youtube.com">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/youtube_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_youtube','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+					<li>
+						<a href="/index.php">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/hachinuch_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_moe','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+					<li>
+						<a href="/index.php">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/homepage_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_home','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+					<li>
+						<a href="/login/index.php">
+							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/connection_icon.png"><br>
+							<?php echo '<span>'.get_string('moe_login','theme_elegance').'</span>'; ?>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="footernote" class="row">
 		<div class="col-lg-6">
       <?php echo $OUTPUT->home_link(); ?>
 
 			<?php
 			if ($hascopyright) {
-				echo '<p class="copy">&copy; Copyright '.date("Y").' by '.$hascopyright.'</p>';
+				echo '<p class="copy">&copy; '.date("Y").' '.get_string('copyright', 'theme_elegance').' '.$hascopyright.'</p>';
    			} ?>
 
    			<?php if ($hasfootnote) {
