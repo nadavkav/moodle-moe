@@ -9,8 +9,8 @@
  */
 
 //General blockyness
-$string['pluginname'] = 'חיפוש';
-$string['pagetitle'] = 'חיפוש';
+$string['pluginname'] = 'חיפוש פעילויות ומשאבים';
+$string['pagetitle'] = 'חיפוש פעילויות ומשאבים';
 $string['search'] = 'חיפוש';
 
 //Placeholder text for the search box when shown in a block on a page
