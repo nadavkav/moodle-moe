@@ -59,25 +59,25 @@ $hassocialnetworks = ($hasfacebook || $hastwitter || $hasgoogleplus || $hasflick
 			<div>
 				<ul>
 					<li>
-						<a href="https://twitter.com">
+						<a target="_new" href="https://twitter.com/edu_il">
 							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/twitter_icon.png"><br>
 							<?php echo '<span>'.get_string('moe_twitter','theme_elegance').'</span>'; ?>
 						</a>
 					</li>
 					<li>
-						<a href="https://facebook.com">
+						<a target="_new" href="https://www.facebook.com/edu.gov.il">
 							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/facebook_icon.png"><br>
 							<?php echo '<span>'.get_string('moe_facebook','theme_elegance').'</span>'; ?>
 						</a>
 					</li>
 					<li>
-						<a href="https://youtube.com">
+						<a target="_new" href="https://www.youtube.com/user/educationil">
 							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/youtube_icon.png"><br>
 							<?php echo '<span>'.get_string('moe_youtube','theme_elegance').'</span>'; ?>
 						</a>
 					</li>
 					<li>
-						<a href="/index.php">
+						<a target="_new" href="http://ecat.education.gov.il/">
 							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/hachinuch_icon.png"><br>
 							<?php echo '<span>'.get_string('moe_moe','theme_elegance').'</span>'; ?>
 						</a>

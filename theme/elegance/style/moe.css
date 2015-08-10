@@ -47,6 +47,15 @@
         width: 80%;
     }
 }
+
+@media (min-width: 768px) {
+    #page-auth-saml-login .loginbox.onecolumn {
+        width: 50%;
+        right: 25%;
+    }
+}
+
+
 /* Grade book page
 */
 .path-grade-report-grader .gradeparent {
@@ -246,4 +255,10 @@ input.form-submit.active, fieldset[disabled] input[type="button"].active, fields
 fieldset[disabled] input[type="reset"].active {
     background-color: #6d86a8;
     color: #FFF;
+}
+
+/* Marketing blocks - front page - "more about us"
+*/
+.dir-rtl div#sp-position1 {
+    float: left;
 }
