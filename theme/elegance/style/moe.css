@@ -155,6 +155,11 @@
     margin: 0 !important;
     padding: 5px 0 0 0 !Important;
 }
+.course-content .topics .current,
+.course-content .weeks .current {
+    margin: 0;
+    padding: 0;
+}
 /* Course format - onetopic
 */
 .onetopic li.active {
