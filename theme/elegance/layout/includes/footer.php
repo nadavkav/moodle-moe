@@ -77,7 +77,7 @@ $hassocialnetworks = ($hasfacebook || $hastwitter || $hasgoogleplus || $hasflick
 						</a>
 					</li>
 					<li>
-						<a target="_new" href="http://ecat.education.gov.il/">
+						<a target="_new" href="http://edu.gov.il/owlheb/Pages/default.aspx">
 							<img src="<?php echo $CFG->wwwroot; ?>/theme/elegance/pix/moe/hachinuch_icon.png"><br>
 							<?php echo '<span>'.get_string('moe_moe','theme_elegance').'</span>'; ?>
 						</a>
