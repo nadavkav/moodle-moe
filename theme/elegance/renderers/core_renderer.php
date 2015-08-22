@@ -291,6 +291,7 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
         return $content.'</ul>';
     }
 
+    /*
     protected function process_user_messages() {
 
         $messagelist = array();
@@ -311,6 +312,7 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
 
         return $messagelist;
     }
+    */
 
     protected function get_user_messages() {
         global $USER, $DB;
@@ -350,7 +352,7 @@ class theme_elegance_core_renderer extends theme_bootstrap_core_renderer {
         $messagecontent = new stdClass();
 
         if ($message->notification) {
-            $messagecontent->text = get_string('unreadmessages', 'message');
+            $messagecontent->text = core_text::substr(html_to_text($message->smallmessage), 0, 15).'...'; //get_string('unreadmessages', 'message', $messages['newmessages']);
         } else {
             if ($message->fullmessageformat == FORMAT_HTML) {
                 $message->smallmessage = html_to_text($message->smallmessage);
