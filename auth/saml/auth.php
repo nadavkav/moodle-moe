@@ -143,6 +143,11 @@ class auth_plugin_saml extends auth_plugin_base {
 	        require_logout();
 	        redirect($GLOBALS['CFG']->wwwroot.'/auth/saml/index.php?logout=1');
 	    }
+
+	    if (isset($this->config->logout_redirect_url) && !empty($this->config->logout_redirect_url)){
+		require_logout();
+		redirect($this->config->logout_redirect_url);
+	    }
     }
 
     /**
@@ -376,6 +381,9 @@ class auth_plugin_saml extends auth_plugin_base {
 	    if (!isset ($config->externalrolemappingsql)) { 
 	        $config->externalrolemappingsql = ''; 
 	    }
+	    if (!isset($config->logout_redirect_url)){
+		$config->logout_redirect_url = '';
+	    }
 
         // Save saml settings in a file        
     	$saml_param_encoded = json_encode($saml_param);
@@ -398,6 +406,7 @@ class auth_plugin_saml extends auth_plugin_base {
 	    set_config('samlhookfile',        $config->samlhookfile,	'auth/saml');
 	    set_config('moodlecoursefieldid',   $config->moodlecoursefieldid,   'auth/saml');
 	    set_config('ignoreinactivecourses', $config->ignoreinactivecourses, 'auth/saml');
+	    set_config('logout_redirect_url', trim($config->logout_redirect_url), 'auth/saml');
 
 	    if($config->supportcourses == 'external') {
 	        set_config('externalcoursemappingdsn',  $config->externalcoursemappingdsn,	'auth/saml');

@@ -118,3 +118,5 @@ $string['pluginname'] = 'SAML Authentication';
 $string['pluginnotenabled'] = 'Plugin not enabled!';
 $string['syncfromnotenabled'] = 'No external plugin selected. SAML cannot synchronize users on its own.';
 $string['unknownplugin'] = 'SAML does not know how to invoke the sync_users method of the specified plugin: ';
+$string['auth_logout_redirect_url_key'] = 'Logout redirect URL';
+$string['auth_logout_redirect_url'] = 'Redirect to a user defined url when an SAML user logs out';

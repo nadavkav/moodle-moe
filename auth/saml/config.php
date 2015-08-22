@@ -217,7 +217,18 @@ if (isset($err) && !empty($err)) {
     </td>
     <td><?php print_string("auth_saml_logfile_description", "auth_saml"); ?></td>
 </tr>
-
+<tr valign="top">
+    <td align="right">
+	<label for="logout_redirect_url"><?php print_string('auth_logout_redirect_url_key', 'auth_ldap') ?></label>
+    </td>
+    <td>
+	<input name="logout_redirect_url" id="logout_redirect_url" type="text" size="30" value="<?php echo $config->logout_redirect_url?>" />
+	<?php if (isset($err['auth_logout_redirect_url'])) { echo $OUTPUT->error_text($err['auth_logout_redirect_url']); } ?>
+    </td>
+    <td>
+	<?php print_string('auth_logout_redirect_url', 'auth_saml') ?>
+    </td>
+</tr>
 <tr valign="top">
     <td class="right"><?php print_string("auth_saml_samlhookfile", "auth_saml"); ?>:</td>
     <td>
