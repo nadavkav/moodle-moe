@@ -44,7 +44,13 @@
 
 @media (min-width: 768px) {
     .loginbox.onecolumn {
-        width: 80%;
+        width: 66%;
+    }
+}
+@media (min-width: 992px) {
+    .loginbox.onecolumn {
+        right: 33.33333333%;
+        width: 42%;
     }
 }
 
@@ -55,6 +61,10 @@
     }
 }
 
+.dir-rtl input[type="submit"] {
+    margin: 0 auto;
+    right: 30%;
+}
 
 /* Grade book page
 */
@@ -267,3 +277,22 @@ fieldset[disabled] input[type="reset"].active {
 .dir-rtl div#sp-position1 {
     float: left;
 }
+
+/* Mod GAME
+*/
+.gamebox {
+    height: 0.38in;
+    width: .38in;
+    font-size: .18in;
+}
+
+/* Main menu RTL fix
+*/
+.dir-rtl .dropdown-submenu>a:after {
+    float: left;
+    border-width: 5px 5px 5px 0;
+}
+
+/* Must be LTR (When in RTL mode)
+*/
+#page-admin-phpinfo .phpinfo {direction: ltr;}
