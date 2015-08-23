@@ -43,12 +43,12 @@
 .loginbox form#login {padding: 10px;}
 
 @media (min-width: 768px) {
-    .loginbox.onecolumn {
+    #page-login-index .loginbox.onecolumn {
         width: 66%;
     }
 }
 @media (min-width: 992px) {
-    .loginbox.onecolumn {
+    #page-login-index .loginbox.onecolumn {
         right: 33.33333333%;
         width: 42%;
     }
@@ -60,8 +60,9 @@
         right: 25%;
     }
 }
+#page-login-index.dir-rtl .guestform {margin: 0;}
 
-.dir-rtl input[type="submit"] {
+#page-login-index.dir-rtl input[type="submit"] {
     margin: 0 auto;
     right: 30%;
 }
