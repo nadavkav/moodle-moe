@@ -118,6 +118,8 @@
     background-color: #a6b4c4;
 }
 
+.dir-rtl #hidden-blocks h4 {text-align: left;}
+
 /* Forum - subscribed/unsubscribed icons
 */
 .path-mod-forum .discussionsubscription>a>img {width:32px;}
@@ -282,9 +284,9 @@ fieldset[disabled] input[type="reset"].active {
 /* Mod GAME
 */
 .gamebox {
-    height: 0.38in;
-    width: .38in;
-    font-size: .18in;
+    height: 0.38in !important;
+    width: .38in !important;
+    font-size: .18in !important;
 }
 
 /* Main menu RTL fix
@@ -297,3 +299,11 @@ fieldset[disabled] input[type="reset"].active {
 /* Must be LTR (When in RTL mode)
 */
 #page-admin-phpinfo .phpinfo {direction: ltr;}
+
+/* Fix display of main content in pages with no blocks and layout BASE
+*/
+@media (min-width: 992px) {
+    .pagelayout-base .col-md-9 {
+        width: 100%;
+    }
+}
