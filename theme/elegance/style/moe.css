@@ -226,9 +226,15 @@
 
 /* Course categories
 */
+/* disabled by miky and set back to #e0e8f0
 .category[data-depth="1"][aria-expanded="true"] .info {background-color: #c8d5e2;}
 .category[data-depth="2"][aria-expanded="true"] .info {background-color: #d2deea;}
 .category[data-depth="3"][aria-expanded="true"] .info {background-color: #e0e8f0;}
+*/
+.category[data-depth="1"][aria-expanded="true"] .info {background-color: #e0e8f0;}
+.category[data-depth="2"][aria-expanded="true"] .info {background-color: #e0e8f0;}
+.category[data-depth="3"][aria-expanded="true"] .info {background-color: #e0e8f0;}
+
 .coursebox .moreinfo {
     padding: 0px 10px;
     display: inline-block;
@@ -298,6 +304,7 @@ fieldset[disabled] input[type="reset"].active {
 
 /* Must be LTR (When in RTL mode)
 */
+.form-textarea textarea,
 #page-admin-phpinfo .phpinfo {direction: ltr;}
 
 /* Fix display of main content in pages with no blocks and layout BASE
@@ -306,4 +313,16 @@ fieldset[disabled] input[type="reset"].active {
     .pagelayout-base .col-md-9 {
         width: 100%;
     }
+}
+
+/* Beautify glossary post
+*/
+.path-mod-glossary .glossarypost {
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: aliceblue;
+}
+.path-mod-glossary .concept {
+    background-color: #EEEEEE;
+    padding: 3px;
 }
