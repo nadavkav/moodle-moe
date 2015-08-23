@@ -326,3 +326,9 @@ fieldset[disabled] input[type="reset"].active {
     background-color: #EEEEEE;
     padding: 3px;
 }
+
+/* Alerts
+*/
+.alert {
+    text-align: center;
+}
