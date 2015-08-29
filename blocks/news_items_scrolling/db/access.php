@@ -15,16 +15,37 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * News items block caps.
  *
- * @package    block
- * @subpackage news_items_scrolling
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @package    block_news_items_scrolling
+ * @copyright  Mark Nelson <markn@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015082700;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012061700;        // Requires this Moodle version
-$plugin->component = 'block_news_items_scrolling'; // Full name of the plugin (used for diagnostics)
+$capabilities = array(
+
+    'block/news_items_scrolling:myaddinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'user' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/my:manageblocks'
+    ),
+
+    'block/news_items_scrolling:addinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+);
