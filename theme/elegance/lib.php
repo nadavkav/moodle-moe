@@ -29,8 +29,15 @@ function theme_elegance_get_nav_links($course, $sections, $sectionno) {
   // FIXME: This is really evil and should by using the navigation API.
   $courseformat = course_get_format($course);
   $course = $courseformat->get_course();
-  $previousarrow= '<i class="nav_icon fa fa-chevron-circle-left"></i>';
-  $nextarrow= '<i class="nav_icon fa fa-chevron-circle-right"></i>';
+    if (right_to_left()) {
+        $left = 'right';
+        $right = 'left';
+    } else {
+        $left = 'left';
+        $right = 'right';
+    }
+  $previousarrow= '<i class="nav_icon fa fa-chevron-circle-'.$left.'"></i>';
+  $nextarrow= '<i class="nav_icon fa fa-chevron-circle-'.$right.'"></i>';
   $canviewhidden = has_capability('moodle/course:viewhiddensections', context_course::instance($course->id))
     or !$course->hiddensections;
 

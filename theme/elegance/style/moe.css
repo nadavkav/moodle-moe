@@ -332,3 +332,14 @@ fieldset[disabled] input[type="reset"].active {
 .alert {
     text-align: center;
 }
+
+/* Course format - single topic view - footer navigation
+*/
+.dir-rtl #previous_section {float: right;}
+.dir-rtl #next_section {text-align: left;  float: left;}
+.dir-rtl #previous_section .nav_icon {float: right;}
+.dir-rtl #next_section .nav_icon {float:left;}
+
+/* Admin tool - bulk user upload - make wide CSV file preview table scroll
+*/
+#page-admin-tool-uploaduser-index .flexible-wrap {overflow: auto;}

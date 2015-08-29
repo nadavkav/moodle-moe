@@ -36,3 +36,7 @@ $string['moe_facebook'] = 'פייסבוק';
 $string['moe_twitter'] = 'טוויטר';
 
 $string['copyright'] = 'זכויות יוצרים';
+
+$string['backtotop'] = 'בחזרה לתחילת העמוד';
+$string['nextsection'] = 'יחידת הוראה הבאה';
+$string['previoussection'] = 'יחידת הוראה קודמת';
