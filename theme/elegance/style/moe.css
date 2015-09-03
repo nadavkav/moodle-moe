@@ -148,6 +148,10 @@
 .navbar {min-height: 40px;}
 .navbar-brand {height: 40px;padding: 10px 15px;}
 
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+
 .breadcrumb-button {margin-top: 7px;}
 .breadcrumb-nav {
     margin-top: 14px;
