@@ -188,6 +188,8 @@ ol.checklist li .itemteachername {
     box-shadow: 2px 2px 3px #ccc;
     border-radius: 5px;
 }
+.dir-rtl .checklist_progress_outer {float:right;}
+.dir-rtl .checklist_progress_heading {float:right !important;}
 
 .checklist_progress_inner {
     background-color: #229b15;
