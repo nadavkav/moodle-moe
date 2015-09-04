@@ -10,6 +10,8 @@
 # See gitignore(5) man page for more details
 #
 /config.php
+/config.php.moe
+/config.php.local
 /lib/editor/tinymce/extra/tools/temp/
 *~
 *.swp
@@ -36,3 +38,6 @@ composer.lock
 # lib/yuilib/version/module/module-coverage.js
 /lib/yuilib/*/*/*-coverage.js
 atlassian-ide-plugin.xml
+/git_sub_plugins_status
+/opcache-monitor.php
+/saml
