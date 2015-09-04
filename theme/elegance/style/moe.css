@@ -114,10 +114,6 @@
     font-family: 'Alef', sans-serif;
 }
 
-.navbar-inverse {
-    background-color: #a6b4c4;
-}
-
 .dir-rtl #hidden-blocks h4 {text-align: left;}
 
 /* Forum - subscribed/unsubscribed icons
@@ -134,11 +130,15 @@
 
 /* Navbar
 */
+.navbar-inverse {
+    background-color: #a6b4c4;
+}
+
 .navbar .container {width:100%;}
 .nav>li {
     border-right: 2px solid white;
     font-family: 'Alef', sans-serif;
-    font-size: 17px;
+    font-size: 18px;
 }
 .navbar-inverse .navbar-brand {color: black;}
 .navbar-default .navbar-nav>li>a, .navbar-inverse .navbar-nav>li>a {
@@ -148,8 +148,22 @@
 .navbar {min-height: 40px;}
 .navbar-brand {height: 40px;padding: 10px 15px;}
 
-.navbar-default .navbar-brand {
-    color: #FFF;
+.navbar-default {background-color: #a6b3c4;}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    border-top: 5px solid #6b7a8b;
+    margin-top: 0;
+    border-bottom: none;
+    margin-bottom: 5px;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {background:#a6b3c4;}
+.navbar-default .navbar-nav > li > a {color:black;}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {color:black;}
+
+#quicklink .btn {
+    color: black;
 }
 
 .breadcrumb-button {margin-top: 7px;}
