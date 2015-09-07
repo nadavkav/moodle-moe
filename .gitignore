@@ -40,4 +40,6 @@ composer.lock
 atlassian-ide-plugin.xml
 /git_sub_plugins_status
 /opcache-monitor.php
+# Following saml folders and files holdes unique configurations for: pisga, madatech, moodleidm, ...
 /saml
+/auth/saml/saml_config.php
