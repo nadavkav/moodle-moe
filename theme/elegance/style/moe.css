@@ -50,7 +50,7 @@
 @media (min-width: 992px) {
     #page-login-index .loginbox.onecolumn {
         right: 33.33333333%;
-        width: 42%;
+        width: 50%;
     }
 }
 
@@ -65,6 +65,9 @@
 #page-login-index.dir-rtl input[type="submit"] {
     margin: 0 auto;
     right: 30%;
+}
+#page-login-index.dir-rtl .guestform input[type="submit"] {
+    right: 50%;
 }
 
 /* Grade book page
