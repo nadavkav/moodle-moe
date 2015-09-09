@@ -361,3 +361,16 @@ fieldset[disabled] input[type="reset"].active {
 /* Admin tool - bulk user upload - make wide CSV file preview table scroll
 */
 #page-admin-tool-uploaduser-index .flexible-wrap {overflow: auto;}
+
+/* Fix focus and hover background color of activity's action menu in course edit mode.
+*/
+.moodle-actionmenu[data-enhanced].show .menu a:focus {
+    color: #666;
+    background-color: transparent;
+    text-decoration: none;
+}
+.moodle-actionmenu[data-enhanced].show .menu a:hover {
+    color: #ffffff;
+    background-color: #337ab7;
+    text-decoration: none;
+}
