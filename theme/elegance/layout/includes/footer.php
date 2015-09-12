@@ -229,3 +229,8 @@ $hassocialnetworks = ($hasfacebook || $hastwitter || $hasgoogleplus || $hasflick
 	</div>
 
 </div>
+<?php
+        // Display which web server is serving the user.
+        //$whatwebami = optional_param('whatwebami', '', PARAM_ALPHA);
+        if (!empty($_GET['whatwebami'])) echo "Page saerved by = ".$_SERVER['SERVER_ADDR'];
+?>
