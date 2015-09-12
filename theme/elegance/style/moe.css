@@ -377,3 +377,23 @@ fieldset[disabled] input[type="reset"].active {
     background-color: #337ab7;
     text-decoration: none;
 }
+
+/* SAML settings, in RTL mode.
+*/
+.dir-rtl#page-admin-auth-saml input[type="text"]{
+    direction: ltr;
+    text-align: left;
+}
+
+/* Fix Form INPUT text length */
+@media (min-width: 992px) {
+    .form-item .form-setting > input[type="text"],
+    .mform .fcontainer .fitem .felement > input[type="text"],
+    .form-item .form-setting > input[type="password"],
+    .mform .fcontainer .fitem .felement>input[type="password"] {
+        min-width: 444px;
+    }
+}
+
+/* SAML settings form should always be LTR aligned */
+#page-admin-auth-saml.dir-rtl #authmenu {direction: ltr;}
