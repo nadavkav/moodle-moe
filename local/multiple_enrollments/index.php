@@ -55,7 +55,7 @@
     $errors = array();
     $title = get_string('multiple_enrollments_title','local_multiple_enrollments');
     $PAGE->set_pagelayout('admin');
-    $PAGE->set_url(new moodle_url('/local/multiple_enrollments/assign_multiple_course.php'));
+    $PAGE->set_url(new moodle_url('/local/multiple_enrollments/index.php'));
     $PAGE->set_title($title);
     $PAGE->requires->js('/local/multiple_enrollments/js/initajax.js');	//2nd arguement is required to include the JS in header instead of footer
 	echo $OUTPUT->header();

@@ -24,4 +24,7 @@ $string['enrolduration'] = 'Enrolment duration:';
 $string['multiple_enrollments_course'] = 'Assign';
 $string['munenrol_course'] = 'Unassign';
 $string['select_multiple_options'] = 'Note: Press Ctrl key to select multiple options';
-?>
+$string['rolestoassign'] = 'Roles to assign';
+$string['chooserole'] = 'Choose role';
+
+
