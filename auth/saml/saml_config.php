@@ -1,1 +1,0 @@
-{"samllib":"\/var\/www\/html\/madatech-moodle\/saml\/lib","sp_source":"madatech-sp","dosinglelogout":true}
