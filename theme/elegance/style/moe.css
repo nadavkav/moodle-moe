@@ -107,6 +107,8 @@
     width: 230px;
     float: left;
 }
+.dir-rtl .moe-logo {float: right;}
+
 .moe-instance-name {
     font-size: 22px;
     position: absolute;
