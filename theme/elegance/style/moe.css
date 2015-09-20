@@ -92,13 +92,15 @@
 #moe-header {
     background-color: white;
 }
-.moe-il-logo {
+.dir-rtl .moe-il-logo {
     background: url([[pix:theme|header_right]]);
     height: 72px;
     display: inline-block;
     background-repeat: no-repeat;
     width: 290px;
 }
+.dir-ltr .moe-il-logo {float: right;}
+
 .moe-logo {
     background: url([[pix:theme|header_left]]);
     height: 72px;
@@ -107,7 +109,6 @@
     width: 230px;
     float: left;
 }
-.dir-rtl .moe-il-logo {float: right;}
 .dir-rtl header#siteheader {
     background-color: white;
 }
