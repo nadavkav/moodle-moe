@@ -89,10 +89,10 @@
 
 /* Frontpage MOE new header
 */
-#moe-header {
+#moe-header, header#siteheader {
     background-color: white;
 }
-.dir-rtl .moe-il-logo {
+.moe-il-logo {
     background: url([[pix:theme|header_right]]);
     height: 72px;
     display: inline-block;
@@ -108,9 +108,6 @@
     background-repeat: no-repeat;
     width: 230px;
     float: left;
-}
-.dir-rtl header#siteheader {
-    background-color: white;
 }
 
 .moe-instance-name {
