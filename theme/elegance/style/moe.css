@@ -107,7 +107,10 @@
     width: 230px;
     float: left;
 }
-.dir-rtl .moe-logo {float: right;}
+.dir-rtl .moe-il-logo {float: right;}
+.dir-rtl header#siteheader {
+    background-color: white;
+}
 
 .moe-instance-name {
     font-size: 22px;
