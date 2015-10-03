@@ -102,19 +102,10 @@ echo $OUTPUT->doctype() ?>
         <nav class="breadcrumb-nav" role="navigation" aria-label="breadcrumb"><?php echo $OUTPUT->navbar(); ?></nav>
         <div class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></div>
     </div>
-
-    <div id="course-header">
-        <?php echo $OUTPUT->course_header(); ?>
-    </div>
 </header>
 
 <section id="main" class="clearfix">
     <div id="page" class="<?php echo $container; ?>">
-        <header id="page-header" class="clearfix">
-            <div id="course-header">
-                <?php echo $OUTPUT->course_header(); ?>
-            </div>
-        </header>
         <div id="page-content" class="row">
             <div id="region-main" class="<?php echo $regions['content']; ?>">
 			    <div id="heading"><?php echo $OUTPUT->page_heading(); ?></div>
@@ -123,12 +114,11 @@ echo $OUTPUT->doctype() ?>
         			echo $OUTPUT->main_content();
         			echo $OUTPUT->course_content_footer();
         			?>
-                </div>
+            </div>
                 <?php
                 if ($knownregionpost) {
                     echo $OUTPUT->blocks('side-post', $regions['post']);
                 }?>
-            </div>
         </div>
     </div>
 </section>
