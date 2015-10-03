@@ -16,7 +16,7 @@
 
 /* HTML Editor - TineMCE toolbar icons
 */
-.dir-rtl .moodleSkin .mceToolbar a span.mceIcon img {padding:0;}
+.dir-rtl .moodleSkin .mceToolbar a span.mceIcon img {padding:0 !important;}
 
 /* Course format topcoll
 */
@@ -401,3 +401,11 @@ fieldset[disabled] input[type="reset"].active {
 
 /* SAML settings form should always be LTR aligned */
 #page-admin-auth-saml.dir-rtl #authmenu {direction: ltr;}
+
+/* Block accessability
+*/
+#accessibility_controls #block_accessibility_launchtoolbar {background-color: #6d86a8 !important;}
+
+/* Fix "add admin" form button
+*/
+#addadmisform #main {background: none;color:black;}
