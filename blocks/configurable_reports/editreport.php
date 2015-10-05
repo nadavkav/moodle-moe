@@ -223,7 +223,7 @@
 		}
 		else{
 			//add_to_log($report->courseid, 'configurable_reports', 'edit', '/block/configurable_reports/editreport.php?id='.$id, $report->name);
-            \block_configurable_reports\event\report_edited::create_from_report($report, $context)->trigger();
+            \block_configurable_reports\event\report_edited::create_from_report($report, context_course::instance($course->id))->trigger();
 			$reportclass = new $reportclassname($data->id);
 			$data->type = $report->type;
 			if(! $DB->update_record('block_configurable_reports',$data)){
