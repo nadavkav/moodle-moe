@@ -409,3 +409,9 @@ fieldset[disabled] input[type="reset"].active {
 /* Fix "add admin" form button
 */
 #addadmisform #main {background: none;color:black;}
+
+/* Course format - OneTopic - Add pointer cursor to tab labels.
+*/
+.format-onetopic .onetopic .nav-tabs>li>a:hover {
+    cursor: pointer;
+}
