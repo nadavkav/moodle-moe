@@ -197,6 +197,12 @@
     margin: 0 !important;
     padding: 0 !important;
 }
+
+.ctopics.moonstones #section-0 .section-modchooser-text {
+    background-color: #E2E2F2;
+    color: #337ab7;
+}
+
 /* Course format - onetopic
 */
 .onetopic li.active {
@@ -415,6 +421,11 @@ fieldset[disabled] input[type="reset"].active {
 .format-onetopic .onetopic .nav-tabs>li>a:hover {
     cursor: pointer;
 }
+
+/* fix course format topics - single page for each section - footer navigation */
+#page-course-view-topics #section_footer {margin-top: 0;}
+
+/* Ticket17 - Fix custom menu in RTL (Avi Levi) */
 .dir-rtl .dropdown-menu>li>a {
     padding: 3px 8px 3px 20px;
 }
