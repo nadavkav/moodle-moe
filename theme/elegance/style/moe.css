@@ -415,3 +415,6 @@ fieldset[disabled] input[type="reset"].active {
 .format-onetopic .onetopic .nav-tabs>li>a:hover {
     cursor: pointer;
 }
+
+/* fix course format topics - single page for each section - footer navigation */
+#page-course-view-topics #section_footer {margin-top: 0;}
