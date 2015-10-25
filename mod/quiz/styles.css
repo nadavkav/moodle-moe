@@ -221,10 +221,6 @@ body.jsenabled .questionflagcheckbox {
 }
 
 /** mod quiz mod **/
-#page-mod-quiz-mod #id_reviewoptionshdr .fitem {
-    width: 23%;
-    margin-left: 10px;
-}
 #page-mod-quiz-mod #id_reviewoptionshdr fieldset.fgroup {
     width: 100%;
     text-align: left;
@@ -232,8 +228,9 @@ body.jsenabled .questionflagcheckbox {
 }
 #page-mod-quiz-mod #id_reviewoptionshdr .fitem {
     float: left;
-    width: 23%;
+    width: 30%;
     clear: none;
+	margin-left: 10px;
 }
 #page-mod-quiz-mod.dir-rtl #id_reviewoptionshdr .fitem {
     float: right;
