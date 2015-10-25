@@ -1045,11 +1045,9 @@ body.jsenabled #toggle-all {
     border-bottom-left-radius: 0;
 }
 
-/* Fix hidden "Add new activity/resource" link on section-0 title
-*/
+
 .ctopics.moonstones #section-0 .section-modchooser-text{
     background-color: [[setting:color1]];
-    color:#ffffff;
     padding: 4px 10px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
