@@ -418,3 +418,8 @@ fieldset[disabled] input[type="reset"].active {
 
 /* fix course format topics - single page for each section - footer navigation */
 #page-course-view-topics #section_footer {margin-top: 0;}
+
+/* Ticket17 - Fix custom menu in RTL (Avi Levi) */
+.dir-rtl .dropdown-menu>li>a {
+    padding: 3px 8px 3px 20px;
+}
