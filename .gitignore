@@ -43,3 +43,5 @@ atlassian-ide-plugin.xml
 # Following saml folders and files holdes unique configurations for: pisga, madatech, moodleidm, ...
 /saml
 /auth/saml/saml_config.php
+/Scripts/
+/.dbeaver-data-sources.xml
