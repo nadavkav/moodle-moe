@@ -415,3 +415,6 @@ fieldset[disabled] input[type="reset"].active {
 .format-onetopic .onetopic .nav-tabs>li>a:hover {
     cursor: pointer;
 }
+.dir-rtl .dropdown-menu>li>a {
+    padding: 3px 8px 3px 20px;
+}
