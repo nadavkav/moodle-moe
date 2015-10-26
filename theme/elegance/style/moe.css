@@ -429,3 +429,21 @@ fieldset[disabled] input[type="reset"].active {
 .dir-rtl .dropdown-menu>li>a {
     padding: 3px 8px 3px 20px;
 }
+
+/* Back to course "button", in each module page.
+*/
+#backtocourse_top,
+#backtocourse_bot
+{
+    width:21%;
+    /*float:left;*/
+    border:0;
+    padding: 5px 30px;
+    text-shadow: none;
+    cursor:pointer;
+    background:#6d86a8;
+    border-radius:5px;
+    color:#fff;
+    text-align: center;
+    margin: 0 20px 10px 0;
+}
