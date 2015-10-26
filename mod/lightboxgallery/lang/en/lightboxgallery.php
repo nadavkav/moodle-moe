@@ -144,3 +144,5 @@ $string['tagsrelated'] = 'Related tags';
 $string['thumbnailoffset'] = 'Offset';
 $string['zipextracted'] = 'Zip file extracted: {$a}';
 $string['zipnonewfiles'] = 'No new images were found - make sure images are in the root directory of the archive';
+$string['advanced'] = 'Advanced';
+

@@ -52,7 +52,7 @@ class mod_lightboxgallery_mod_form extends moodleform_mod {
 
         // Advanced options.
 
-        $mform->addElement('header', 'galleryoptions', get_string('advanced'));
+        $mform->addElement('header', 'galleryoptions', get_string('advanced', 'lightboxgallery'));
 
         $mform->addElement('select', 'perpage', get_string('imagesperpage', 'lightboxgallery'), $this->get_perpage_options());
         $mform->setType('perpage', PARAM_INTEGER);
