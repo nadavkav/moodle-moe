@@ -378,3 +378,4 @@ $string['moe_facebook'] = 'Facebook';
 $string['moe_twitter'] = 'Twitter';
 
 $string['copyright'] = 'Copyright';
+$string['backtocourse'] = 'Back to course';

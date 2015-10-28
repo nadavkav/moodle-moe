@@ -32,6 +32,9 @@ $haslogo = (empty($PAGE->theme->settings->logo)) ? false : $PAGE->theme->setting
 $invert = (!empty($PAGE->theme->settings->invert)) ? true : $PAGE->theme->settings->invert;
 $fluid = (!empty($PAGE->layout_options['fluid']));
 $mobileblocksabovemain = (isset($PAGE->theme->settings->mobileblocksabovemain) && $PAGE->theme->settings->mobileblocksabovemain) ? true : false;
+// Back to course - list of pages to display the button in.
+$showbacktocourse = array('page-group-index', 'page-enrol-users', 'page-admin-roles-check', 'page-question-edit',
+    'page-grade-edit-tree-index', 'page-enrol-instances');
 
 if ($haslogo) {
     $logo = '<div id="logo"></div>';
@@ -132,6 +135,10 @@ echo $OUTPUT->doctype() ?>
     
             <?php
             if (!$mobileblocksabovemain && $knownregionpost) {
+                // Display back to course button, above blocks.
+                if ( $PAGE->context->get_level_name() == get_string('activitymodule') || in_array($PAGE->bodyid,$showbacktocourse) ) {
+                    echo "<a id='backtocourse_top' class='btn' href='$CFG->wwwroot/course/view.php?id=$COURSE->id'>".get_string('backtocourse','theme_elegance')."</a>";
+                }
                 echo $OUTPUT->blocks('side-post', $regions['post']);
             }?>
         </div>

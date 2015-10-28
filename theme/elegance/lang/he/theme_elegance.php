@@ -40,3 +40,4 @@ $string['copyright'] = 'זכויות יוצרים';
 $string['backtotop'] = 'בחזרה לתחילת העמוד';
 $string['nextsection'] = 'יחידת הוראה הבאה';
 $string['previoussection'] = 'יחידת הוראה קודמת';
+$string['backtocourse'] = 'בחזרה למרחב הלימוד';
