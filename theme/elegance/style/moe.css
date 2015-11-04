@@ -447,3 +447,9 @@ fieldset[disabled] input[type="reset"].active {
     text-align: center;
     margin: 0 20px 10px 0;
 }
+
+/* Ticket 18 - Fix the report pagination buttons
+*/
+#reporttable_paginate span {
+    display: inline-block;
+}
