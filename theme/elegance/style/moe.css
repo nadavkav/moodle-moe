@@ -99,7 +99,18 @@
     background-repeat: no-repeat;
     width: 290px;
 }
+
+html[lang="en"] .moe-il-logo {
+	background: url([[pix:theme|en_header_right]]);
+	height: 84px;
+}
+
 .dir-ltr .moe-il-logo {float: right;}
+
+html[lang="en"] .moe-logo {
+	background: url([[pix:theme|owl_logo_02]]);
+	width: 301px;
+}
 
 .moe-logo {
     background: url([[pix:theme|header_left]]);
