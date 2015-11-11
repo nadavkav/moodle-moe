@@ -1147,9 +1147,29 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
     line-height: 2em;
 }
 
+.dir-rtl.jsenabled .choosercontainer #chooseform .instruction,
+.dir-rtl.jsenabled .choosercontainer #chooseform .typesummary {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 20.3em;
+  margin: 0;
+  padding: 1.6em;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  line-height: 2em;
+}
+
 /* Selected option settings */
 .jsenabled .choosercontainer #chooseform .instruction,
 .choosercontainer #chooseform .selected .typesummary {
+    display: block;
+}
+.dir-rtl.jsenabled .choosercontainer #chooseform .instruction,
+.dir-rtl.choosercontainer #chooseform .selected .typesummary {
     display: block;
 }
 .choosercontainer #chooseform .selected {

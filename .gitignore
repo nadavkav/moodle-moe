@@ -45,3 +45,4 @@ atlassian-ide-plugin.xml
 /auth/saml/saml_config.php
 /Scripts/
 /.dbeaver-data-sources.xml
+/node_modules/

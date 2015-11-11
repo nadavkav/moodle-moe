@@ -46,23 +46,7 @@ $THEME->plugins_exclude_sheets = array(
         'customlang'
     ),
 );
-if ('ltr' === get_string('thisdirection', 'langconfig')) {
-    $THEME->parents_exclude_sheets = array(
-        'bootstrap'=>array( 
-            'custom',
-            'moodle-rtl',
-            'forms-rtl',
-            'yui2-rtl'
-        )
-    );
-} else {
-    $THEME->parents_exclude_sheets = array(
-        'bootstrap'=>array( 
-            'custom',
-            'moodle'
-        )
-    );
-}
+
 
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
@@ -85,6 +69,7 @@ if ('ltr' === get_string('thisdirection', 'langconfig')) {
 } else {
     $THEME->sheets = array('tinymce-rtl', 'font-awesome', 'google-fonts', $categorysheet, $loginsheet, 'nprogress', 'elegance', 'mobile', 'elegance-rtl');
 }
+
 $THEME->sheets[] = 'moe';
 
 $THEME->layouts = array(
