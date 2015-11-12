@@ -42,6 +42,9 @@ define('SAML_INTERNAL', 1);
             }
         }
 
+        // Enable HTTPS returnto url from IDM into Moodle
+        //$as->requireAuth(array('ReturnTo'=>'https://pisga.lms.education.gov.il/auth/saml/index.php'));
+        // todo: disable the following line (nadavkav)
         $as->requireAuth();
         $valid_saml_session = $as->isAuthenticated();
         $saml_attributes = $as->getAttributes();
@@ -74,6 +77,10 @@ define('SAML_INTERNAL', 1);
 
     global $CFG, $USER, $SAML_COURSE_INFO, $SESSION, $err, $DB, $PAGE;
 
+    //HTTPS is required in this page when $CFG->loginhttps enabled
+    //$PAGE->https_required();
+    //$PAGE->set_url("$CFG->httpswwwroot/auth/saml/index.php");
+    // todo: disable the following line (nadavkav)
     $PAGE->set_url('/auth/saml/index.php');
     $PAGE->set_context(CONTEXT_SYSTEM::instance());
 
