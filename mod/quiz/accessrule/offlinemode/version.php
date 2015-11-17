@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2015102600;
-$plugin->requires  = 2015041700;
+$plugin->requires  = 2014110400; //2015041700;
 $plugin->cron      = 0;
 $plugin->component = 'quizaccess_offlinemode';
 $plugin->maturity  = MATURITY_STABLE;
