@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+
+#wrapper > #page-header {
+	background-image: url([[pix:theme|bg/header_bg]]);
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.dir-rtl .navbar #search{
+	margin-left: 0px;
+}
+
+.block .social_icons a.social{
+	background-color: #483a51;
+}
+
+#lemidaDigit {
+	padding-right: 6em;
+}
+
+.usermenu .login {
+	color: #ffffff;
+}
+
+.coursebox > .info > .coursename a:before, .coursebox > .info > .name a:before {
+    float: right;
+	margin-right: 0em;
+	margin-left: 0.5em;
+}
+
+div.coursebox .content > ul.teachers {
+	padding-right: 21px
+}
+
+#frontpage-course-list  h2 {
+    background-image: url([[pix:theme|bg/learning-spaces]]);
+    background-repeat : no-repeat;
+    background-size: 100% 100%;
+    border : 1px solid #ad9dad;
+    height: 1.7em;
+    line-height: 1.7em;
+    font-size: 3em;
+    color : #086d65;    
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 5px 5px 3px gray;
+    padding-right : 0.5em;
+}
+
+#frontpage-course-list h2:after {
+    content : url([[pix:theme|icons/HatFlower]]);
+    position: relative;
+    top : 13px;
+    margin-right : 0.3em;
+}
+
+#frontpage-course-list .courses .coursebox {
+    border : 1px solid #6fb6b0;
+}
+
+#frontpage-course-list .paging-morelink {
+    background-image: url([[pix:theme|bg/learning-spaces-all]]);
+    background-repeat : no-repeat;
+    background-size: 100% 100%; 
+}
+
+.coursebox.clearfix.odd {
+    background: #dff8f4;
+}
+
+.coursebox.clearfix.even {
+    background: #fdf3dc;
+}

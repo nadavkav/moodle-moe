@@ -61,7 +61,15 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                     </a>
                 </div>
             <?php } ?>      	
-            
+                <div class="span4 hidden-phone">
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
+              		
+                </div>
+                <div id="lemidaDigit" class="hidden-phone">
+                	<?php 
+					   echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->pix_url('header_name', 'theme_lambda'), 'class'=>'sitename', 'alt'=>''));
+					?>
+                </div>            
             <div class="login-header">
             <div class="profileblock">
             
@@ -75,26 +83,6 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 		$wwwroot = $CFG->wwwroot;
 	} else {
 		$wwwroot = str_replace("http://", "https://", $CFG->wwwroot);
-	}
-
-		if (!isloggedin() or isguestuser()) { ?>
-		<form class="navbar-form pull-right" method="post" action="<?php echo $wwwroot; ?>/login/index.php?authldap_skipntlmsso=1">
-		<div id="block-login">
-		<label id="user"><i class="fa fa-user"></i></label>	
-		<input id="inputName" class="span2" type="text" name="username" placeholder="<?php echo $username; ?>" style="margin-bottom:10px;">
-		<label id="pass"><i class="fa fa-key"></i></label>        
-		<input id="inputPassword" class="span2" type="password" name="password" id="password" placeholder="<?php echo get_string('password'); ?>">        
-		<input type="submit" id="submit" name="submit" value=""/>
-		</div>
-		</form>
-        
-	<?php } else { 
-
- 		echo '<div id="loggedin-user">';		
-		echo $OUTPUT->user_menu();
-		echo $OUTPUT->user_picture($USER, array('size' => 80, 'class' => 'welcome_userpicture'));		
-		echo '</div>';
-
 	}?>
 
 	</div>
@@ -119,6 +107,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                 <div class="nav-divider-right"></div>
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
+                    <li><?php echo $OUTPUT->user_menu()?></li>
                 </ul>
                 
                 <form id="search" action="<?php echo $CFG->wwwroot;?>/course/search.php" method="GET">
