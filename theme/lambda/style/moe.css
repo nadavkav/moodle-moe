@@ -41,7 +41,7 @@ div.coursebox .content > ul.teachers {
     line-height: 1.7em;
     font-size: 3em;
     color : #086d65;    
-    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 5px 5px 3px gray;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
     padding-right : 0.5em;
 }
 
@@ -53,7 +53,7 @@ div.coursebox .content > ul.teachers {
 }
 
 #frontpage-course-list .courses .coursebox {
-    border : 1px solid #6fb6b0;
+    border : 1px solid #ad9dad;
 }
 
 #frontpage-course-list .paging-morelink {
@@ -68,4 +68,20 @@ div.coursebox .content > ul.teachers {
 
 .coursebox.clearfix.even {
     background: #fdf3dc;
+}
+
+div.course_category_tree .category > .info {
+    border: 1px solid #bbc0c6;
+    background-color: #d8cfe3;
+}
+
+div.course_category_tree .coursebox {
+    border: 1px solid #bbc0c6;
+}
+div.course_category_tree .coursebox.odd {
+    background-color: #ecf8c8;
+}
+
+div.course_category_tree .coursebox.even {
+    background-color: #e4ead3;
 }
