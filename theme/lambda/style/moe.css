@@ -5,7 +5,9 @@
     background-repeat: no-repeat;
     background-size: cover; 
 }
-
+.dir-rtl .accesshide {
+	left:0;
+}
 .dir-rtl .navbar #search{
 	margin-left: 0px;
 }
@@ -110,9 +112,19 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 	background-color: #d8eaf5;
 	border: 1px solid #7fafcd;
 }
-
-.course-content ul.ctopics li.section:nth-child(odd) .content .toggle{
-	
+.course-content ul.ctopics #toggle-1{
+	background-image: url([[pix:theme|bg/Koteret_BG]]);
+    color: #583d5f;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+}
+.course-content ul.ctopics #toggle-1 .section-title{
+	   font-size: 2em;
+}
+.course-content ul.ctopics #toggle-1 .section-title:after {
+	content: url([[pix:theme|icons/Icon_koteret]]);
+}
+.course-content ul.ctopics li.section .content .toggle{
+    border:1px solid #c4d2d0;
 }
 
 .course-content ul.ctopics li.section:nth-child(odd) .content .toggle, .course-content ul.ctopics li.section:nth-child(odd) .content.sectionhidden{
@@ -153,10 +165,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 .dir-rtl .ctopics .section.main .content .section
 {
     float:left;
-    border-bottom-right-radius:0;
-    border-top-right-radius:0;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
 }
 
 .dir-rtl .ctopics .section.main .content .summary ol,
@@ -170,9 +178,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 {
     left:auto;
     right:4px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a {
@@ -209,7 +214,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 {
     float:right;
 }
-.dir-rtl .ctopics:first-of-type .section.main .content .summary
+.dir-rtl .course-content > .ctopics .section.main .content .summary
 {
     float: none;
 }
@@ -231,10 +236,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 .dir-rtl .ctopics .section.main .content .section
 {
     float:left;
-    border-bottom-right-radius:0;
-    border-top-right-radius:0;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
 }
 
 .dir-rtl .ctopics .section.main .content .summary ol,
@@ -248,9 +249,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 {
     left:auto;
     right:4px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a {
