@@ -57,9 +57,14 @@ div.coursebox .content > ul.teachers {
 }
 
 #frontpage-course-list .paging-morelink {
-    background-image: url([[pix:theme|bg/learning-spaces-all]]);
+    background-image: url([[pix:theme|left_arrow]]),url([[pix:theme|bg/learning-spaces-all]]);
     background-repeat : no-repeat;
-    background-size: 100% 100%; 
+    background-size: contain,cover;
+	background-position: 5% 0% ,0% 0%;
+	width: 20%;
+	font-size: 2em;
+    color: #583d5f;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
 }
 
 .coursebox.clearfix.odd {
@@ -84,4 +89,24 @@ div.course_category_tree .coursebox.odd {
 
 div.course_category_tree .coursebox.even {
     background-color: #e4ead3;
+}
+
+.usermenu .moodle-actionmenu .toggle-display{
+	color: #fff;
+}
+
+.prom-button {
+	font-size: 2em;
+	color: #583d5f;
+	background-image: url([[pix:theme|bg/Batey_sefer_lens]]), url([[pix:theme|bg/Batey_sefer_BG]]);
+	background-position: 5% 0% ,0% 0%;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+	background-repeat: no-repeat;
+	background-size: contain,cover;
+	padding: 10px 20px;
+}
+
+body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
+	background-color: #d8eaf5;
+	border: 1px solid #7fafcd;
 }
