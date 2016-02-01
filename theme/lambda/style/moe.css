@@ -123,6 +123,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     background-color: #dff8f4;
 }
 
+.ctopics .section.main .content .section{
+	width: 55%;
+}
+
 .dir-rtl .ctopics.moonstones .section.main .content .summary
 {
     float:right;
