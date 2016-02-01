@@ -127,16 +127,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 	width: 55%;
 }
 
-.dir-rtl .ctopics.moonstones .section.main .content .summary
+.dir-rtl .ctopics .section.main .content .summary
 {
     float:right;
 }
-.dir-rtl .ctopics.moonstonet .section.main .content .summary
+.dir-rtl .ctopics .section.main .content .summary
 {
     float: none;
 }
 
-.dir-rtl .ctopics.moonstones #section-0 h3.sectionname
+.dir-rtl .ctopics #section-0 h3.sectionname
 {
     text-align: right;
     padding-left: auto;
@@ -144,13 +144,13 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     font-size:19px;
 }
 
-.dir-rtl .ctopics.moonstones #section-0  .section-modchooser
+.dir-rtl .ctopics #section-0  .section-modchooser
 {
     right: auto;
     left: 0;
 }
 
-.dir-rtl .ctopics.moonstones .section.main .content .section
+.dir-rtl .ctopics .section.main .content .section
 {
     float:left;
     border-bottom-right-radius:0;
@@ -159,14 +159,14 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     border-top-left-radius: 5px;
 }
 
-.dir-rtl .ctopics.moonstones .section.main .content .summary ol,
-.dir-rtl .ctopics.moonstones .section.main .content .section ol
+.dir-rtl .ctopics .section.main .content .summary ol,
+.dir-rtl .ctopics .section.main .content .section ol
 {
     padding-left:0;
     padding-right:20px;
 }
 
-.dir-rtl .ctopics.moonstones .section.main .left.side
+.dir-rtl .ctopics .section.main .left.side
 {
     left:auto;
     right:4px;
@@ -175,7 +175,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     border-radius: 5px;
 }
 
-.dir-rtl .course-content ul.ctopics.moonstones li.section .content .toggle a {
+.dir-rtl .course-content ul.ctopics li.section .content .toggle a {
     /* TODO: Check if override will do the trick instead of the following */
     background-position: 9px 9px;
     padding-left: 0;
@@ -184,18 +184,18 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     font-size: 15px;
 }
 
-.dir-rtl.editing .ctopics.moonstones .section.main .right.side
+.dir-rtl.editing .ctopics.section.main .right.side
 {
     right:auto;
     left:30px;
 }
 
-.dir-rtl.editing .ctopics.moonstones .section.main .right.side a
+.dir-rtl.editing .ctopics .section.main .right.side a
 {
     float:left;
 }
 
-.dir-rtl.editing .ctopics.moonstones .section.main .section-modchooser
+.dir-rtl.editing .ctopics.section.main .section-modchooser
 {
     right:auto;
     left:100px;
