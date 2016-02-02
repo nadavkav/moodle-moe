@@ -98,14 +98,19 @@ div.course_category_tree .coursebox.even {
 }
 
 .prom-button {
+	width: 6em;
 	font-size: 2em;
 	color: #583d5f;
-	background-image: url([[pix:theme|bg/Batey_sefer_lens]]), url([[pix:theme|bg/Batey_sefer_BG]]);
-	background-position: 5% 0% ,0% 0%;
+	background-image: url([[pix:theme|icons/Yad]]), url([[pix:theme|bg/BG]]);
+	background-position: 5% 47% ,100% 0%;
+	background-color: #92ddd8;
+	border:1px solid #99a3a2;
 	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
-	background-repeat: no-repeat;
-	background-size: contain,cover;
+	background-repeat: no-repeat, no-repeat;
+	background-size: 28%,contain;
 	padding: 10px 20px;
+	margin: auto;
+	box-shadow: black 0px 2px 4px;
 }
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
@@ -283,4 +288,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 
 .course-content ul li.section.main {
 	background-image: none;
+}
+
+@media screen and (max-width:26em) {
+	#frontpage-course-list h2{
+	   font-size:2em;
+	}
+	#frontpage-course-list h2:after{
+	   content: none;
+	}
+	#frontpage-course-list .paging-morelink{
+	   width: 97%;
+	}
 }
