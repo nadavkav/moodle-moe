@@ -148,7 +148,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 {
     float:right;
 }
-.dir-rtl .ctopics .section.main .content .summary
+.dir-rtl .ctopics #section-0 .content .summary
 {
     float: none;
 }
@@ -219,7 +219,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 {
     float:right;
 }
-.dir-rtl .course-content > .ctopics .section.main .content .summary
+.dir-rtl .course-content  .ctopics #section-0 .content .summary
 {
     float: none;
 }
