@@ -290,6 +290,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 	background-image: none;
 }
 
+.dir-rtl #page-footer ul.menubar, #greyboxright ul.menubar {
+    float: left;
+}
+
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;

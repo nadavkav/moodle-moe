@@ -27,7 +27,7 @@ $THEME->name = 'lambda';
 
 $THEME->doctype = 'html5';
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('slider', 'font-awesome.min', 'style', 'typographie','moe');
+$THEME->sheets = array('slider', 'font-awesome.min', 'style', 'typographie', 'moe');
 $THEME->editor_sheets = array();
 $THEME->supportscssoptimisation = false;
 $THEME->enable_dock = true;
