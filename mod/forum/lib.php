@@ -763,12 +763,6 @@ function forum_cron() {
                     'Auto-Submitted: auto-generated',
                 );
 
-                if ($post->parent) {
-                    // This post is a reply, so add headers for threading (see MDL-22551).
-                    $userfrom->customheaders[] = 'In-Reply-To: ' . forum_get_email_message_id($post->parent, $userto->id, $hostname);
-                    $userfrom->customheaders[] = 'References: '  . forum_get_email_message_id($post->parent, $userto->id, $hostname);
-                }
-
                 $shortname = format_string($course->shortname, true, array('context' => context_course::instance($course->id)));
 
                 // Generate a reply-to address from using the Inbound Message handler.
@@ -795,17 +789,50 @@ function forum_cron() {
                         $canreply
                     );
 
+                $userfrom->customheaders[] = sprintf('List-Unsubscribe: <%s>',
+                    $data->get_unsubscribediscussionlink());
+
                 if (!isset($userto->viewfullnames[$forum->id])) {
                     $data->viewfullnames = has_capability('moodle/site:viewfullnames', $modcontext, $userto->id);
                 } else {
                     $data->viewfullnames = $userto->viewfullnames[$forum->id];
                 }
 
+                // Not all of these variables are used in the default language
+                // string but are made available to support custom subjects.
                 $a = new stdClass();
-                $a->courseshortname = $data->get_coursename();
-                $a->forumname = $cleanforumname;
                 $a->subject = $data->get_subject();
+                $a->forumname = $cleanforumname;
+                $a->sitefullname = format_string($site->fullname);
+                $a->siteshortname = format_string($site->shortname);
+                $a->courseidnumber = $data->get_courseidnumber();
+                $a->coursefullname = $data->get_coursefullname();
+                $a->courseshortname = $data->get_coursename();
                 $postsubject = html_to_text(get_string('postmailsubject', 'forum', $a), 0);
+
+                $rootid = forum_get_email_message_id($discussion->firstpost, $userto->id, $hostname);
+
+                if ($post->parent) {
+                    // This post is a reply, so add reply header (RFC 2822).
+                    $parentid = forum_get_email_message_id($post->parent, $userto->id, $hostname);
+                    $userfrom->customheaders[] = "In-Reply-To: $parentid";
+
+                    // If the post is deeply nested we also reference the parent message id and
+                    // the root message id (if different) to aid threading when parts of the email
+                    // conversation have been deleted (RFC1036).
+                    if ($post->parent != $discussion->firstpost) {
+                        $userfrom->customheaders[] = "References: $rootid $parentid";
+                    } else {
+                        $userfrom->customheaders[] = "References: $parentid";
+                    }
+                }
+
+                // MS Outlook / Office uses poorly documented and non standard headers, including
+                // Thread-Topic which overrides the Subject and shouldn't contain Re: or Fwd: etc.
+                $a->subject = $discussion->name;
+                $postsubject = html_to_text(get_string('postmailsubject', 'forum', $a), 0);
+                $userfrom->customheaders[] = "Thread-Topic: $postsubject";
+                $userfrom->customheaders[] = "Thread-Index: " . substr($rootid, 1, 28);
 
                 // Send the post now!
                 mtrace('Sending ', '');
@@ -1004,13 +1031,8 @@ function forum_cron() {
                 $posttext = get_string('digestmailheader', 'forum', $headerdata)."\n\n";
                 $headerdata->userprefs = '<a target="_blank" href="'.$headerdata->userprefs.'">'.get_string('digestmailprefs', 'forum').'</a>';
 
-                $posthtml = "<head>";
-/*                foreach ($CFG->stylesheets as $stylesheet) {
-                    //TODO: MDL-21120
-                    $posthtml .= '<link rel="stylesheet" type="text/css" href="'.$stylesheet.'" />'."\n";
-                }*/
-                $posthtml .= "</head>\n<body id=\"email\">\n";
-                $posthtml .= '<p>'.get_string('digestmailheader', 'forum', $headerdata).'</p><br /><hr size="1" noshade="noshade" />';
+                $posthtml = '<p>'.get_string('digestmailheader', 'forum', $headerdata).'</p>'
+                    . '<br /><hr size="1" noshade="noshade" />';
 
                 foreach ($thesediscussions as $discussionid) {
 
@@ -1157,7 +1179,6 @@ function forum_cron() {
                     $posthtml .= "\n<div class='mdl-right'><font size=\"1\">" . implode('&nbsp;', $footerlinks) . '</font></div>';
                     $posthtml .= '<hr size="1" noshade="noshade" /></p>';
                 }
-                $posthtml .= '</body>';
 
                 if (empty($userto->mailformat) || $userto->mailformat != 1) {
                     // This user DOESN'T want to receive HTML
@@ -3189,6 +3210,11 @@ function forum_print_post($post, $discussion, $forum, &$cm, $course, $ownpost=fa
 
     // Prepare an array of commands
     $commands = array();
+
+    // Add a permalink.
+    $permalink = new moodle_url($discussionlink);
+    $permalink->set_anchor('p' . $post->id);
+    $commands[] = array('url' => $permalink, 'text' => get_string('permalink', 'forum'));
 
     // SPECIAL CASE: The front page can display a news item post to non-logged in users.
     // Don't display the mark read / unread controls in this case.

@@ -553,6 +553,38 @@ class moodle_url {
      * @return string Resulting URL
      */
     public function out($escaped = true, array $overrideparams = null) {
+
+        global $CFG;
+
+        if (!is_bool($escaped)) {
+            debugging('Escape parameter must be of type boolean, '.gettype($escaped).' given instead.');
+        }
+
+        $url = $this;
+
+        // Allow url's to be rewritten by a plugin.
+        if (isset($CFG->urlrewriteclass) && !isset($CFG->upgraderunning)) {
+            $class = $CFG->urlrewriteclass;
+            $pluginurl = $class::url_rewrite($url);
+            if ($pluginurl instanceof moodle_url) {
+                $url = $pluginurl;
+            }
+        }
+
+        return $url->raw_out($escaped, $overrideparams);
+
+    }
+
+    /**
+     * Output url without any rewrites
+     *
+     * This is identical in signature and use to out() but doesn't call the rewrite handler.
+     *
+     * @param bool $escaped Use &amp; as params separator instead of plain &
+     * @param array $overrideparams params to add to the output url, these override existing ones with the same name.
+     * @return string Resulting URL
+     */
+    public function raw_out($escaped = true, array $overrideparams = null) {
         if (!is_bool($escaped)) {
             debugging('Escape parameter must be of type boolean, '.gettype($escaped).' given instead.');
         }
@@ -1880,6 +1912,27 @@ function html_to_text($html, $width = 75, $dolinks = true) {
     $result = $h2t->getText();
 
     return $result;
+}
+
+/**
+ * Converts content introduced in an editor to plain text.
+ *
+ * @param string $content The text as entered by the user
+ * @param int $contentformat The text format: FORMAT_MOODLE, FORMAT_HTML, FORMAT_PLAIN or FORMAT_MARKDOWN
+ * @return string Plain text.
+ */
+function content_to_text($content, $contentformat) {
+
+    switch ($contentformat) {
+        case FORMAT_PLAIN:
+            return $content;
+        case FORMAT_MARKDOWN:
+            $html = markdown_to_html($content);
+            return html_to_text($html, 75, false);
+        default:
+            // FORMAT_HTML and FORMAT_MOODLE.
+            return html_to_text($content, 75, false);
+    }
 }
 
 /**
