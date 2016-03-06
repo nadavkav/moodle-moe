@@ -1067,7 +1067,17 @@ $functions = array(
         'description' => 'Generic service to update title',
         'type'        => 'write',
         'loginrequired' => true,
-        'ajax'        => true
+        'ajax'        => true,
+    ),
+
+    'core_fetch_notifications' => array(
+        'classname'   => 'core_external',
+        'methodname'  => 'fetch_notifications',
+        'classpath'   => 'lib/external/externallib.php',
+        'description' => 'Return a list of notifications for the current session',
+        'type'        => 'read',
+        'loginrequired' => false,
+        'ajax'        => true,
     ),
 
     // === Calendar related functions ===
@@ -1265,6 +1275,7 @@ $services = array(
             'core_user_get_users_by_field',
             'core_user_add_user_private_files',
             'mod_assign_view_grading_table',
+            'mod_assign_view_submission_status',
             'mod_scorm_view_scorm',
             'mod_scorm_get_scorm_scoes',
             'mod_scorm_get_scorm_user_data',
@@ -1299,10 +1310,13 @@ $services = array(
             'mod_lti_view_lti',
             'mod_imscp_view_imscp',
             'mod_imscp_get_imscps_by_courses',
+            'mod_quiz_get_quizzes_by_courses',
+            'mod_quiz_view_quiz',
             'mod_glossary_get_glossaries_by_courses',
             'mod_wiki_get_wikis_by_courses',
             'mod_wiki_view_wiki',
             'mod_wiki_view_page',
+            'mod_wiki_get_subwikis',
             'mod_glossary_view_glossary',
             'mod_glossary_view_entry',
             'mod_glossary_get_entries_by_letter',
