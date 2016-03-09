@@ -125,9 +125,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 .course-content ul.ctopics #toggle-1 .section-title{
 	   font-size: 2em;
 }
-.course-content ul.ctopics #toggle-1 .section-title:after {
-	content: url([[pix:theme|icons/Icon_koteret]]);
-}
+
 .course-content ul.ctopics li.section .content .toggle{
     border:1px solid #c4d2d0;
 }
