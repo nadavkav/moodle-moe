@@ -44,6 +44,7 @@ $string['choosereadme'] = '
 
 /* Settings - General */
 $string['settings_general'] = 'General';
+$string['lemidadigit'] = 'Digital Learning';
 $string['logo'] = 'Logo';
 $string['logodesc'] = 'Please upload your custom logo here. If you upload a logo it will appear in the header.';
 $string['logo_res'] = 'Standard logo dimension';

@@ -65,10 +65,12 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
               		
                 </div>
-                <div id="lemidaDigit" class="hidden-phone">
+                <div id="lemidaDigit" class="hidden-phone span6">
+                	<span>
                 	<?php 
-					   echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->pix_url('header_name', 'theme_lambda'), 'class'=>'sitename', 'alt'=>''));
+					   echo get_string('lemidadigit','theme_lambda');
 					?>
+					</span>
                 </div>            
             <div class="login-header">
             <div class="profileblock">
