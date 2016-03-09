@@ -43,7 +43,7 @@ div.coursebox .content > ul.teachers {
     line-height: 1.7em;
     font-size: 3em;
     color : #086d65;
-    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
     padding-right : 0.5em;
 }
 
@@ -66,7 +66,7 @@ div.coursebox .content > ul.teachers {
 	width: 20%;
 	font-size: 2em;
     color: #583d5f;
-	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
 }
 
 .coursebox.clearfix.odd {
@@ -105,7 +105,7 @@ div.course_category_tree .coursebox.even {
 	background-position: 5% 47% ,100% 0%;
 	background-color: #92ddd8;
 	border:1px solid #99a3a2;
-	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
 	background-repeat: no-repeat, no-repeat;
 	background-size: 28%,contain;
 	padding: 10px 20px;
@@ -120,7 +120,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 .course-content ul.ctopics #toggle-1{
 	background-image: url([[pix:theme|bg/Koteret_BG]]);
     color: #583d5f;
-	text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white, 4px 4px 6px #a0a0a0;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
 }
 .course-content ul.ctopics #toggle-1 .section-title{
 	   font-size: 2em;
