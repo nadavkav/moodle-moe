@@ -299,6 +299,48 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     float: left;
 }
 
+.dir-rtl ul {
+	margin-right: 0px;
+}
+
+.nav-tabs {
+    background: none;
+    border-top: none;
+    border-left: none;
+	border-right: none;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.format-onetopic .tab_content {
+    background-color: #dddcd3;
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+	border-width:1px;
+	border-style: solid;
+	border-color: #958d9e;
+}
+
+.nav-tabs > li.active .tab_content{
+	background-color: #e1cff5;
+}
+
+.nav-tabs > li.active {
+border-top: none;
+}
+
+.format-onetopic .course-content ul li.section.main{
+	background-color: #f0efe4;
+	border-top: 1em solid #baacc9;
+}
+
+.nav-tabs {
+	background-color: rgba(0,0,0,0);
+}
+
+.nav-tabs>li {
+	margin: 0 0.5em;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
