@@ -299,6 +299,15 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
     float: left;
 }
 
+.que .formulation {
+	background-color: #f1efe3;
+	border-color: #c6bed3;
+}
+
+.que .info {
+	background-color: #fcf4e7;
+    border-color: #bfbcb5;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
