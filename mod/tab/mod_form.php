@@ -98,6 +98,7 @@ class mod_tab_mod_form extends moodleform_mod
         $repeatarray[] = $mform->createElement('text', 'tabname', get_string('tabname', 'tab'), array('size' => '65'));
         $repeatarray[] = $mform->createElement('editor', 'content', get_string('tabcontent', 'tab'), null, $editoroptions);
         $repeatarray[] = $mform->createElement('url', 'externalurl', get_string('externalurl', 'tab'), array('size' => '60'), array('usefilepicker' => true));
+        $repeatarray[] = $mform->createElement('checkbox', 'processmoodle', '', get_string('processmoodle', 'tab'));
         $repeatarray[] = $mform->createElement('hidden', 'revision', 1);
         $repeatarray[] = $mform->createElement('select', 'tabcontentorder', get_string('order', 'tab'), $taborderarray);
         $repeatarray[] = $mform->createElement('hidden', 'optionid', 0);
