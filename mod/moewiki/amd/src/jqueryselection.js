@@ -66,8 +66,8 @@
         try {
             if (selectio = win.getSelection()) {
                 /* except IE */
-                res.start = selectio.selectionStart;
-                res.end = selectio.selectionEnd;
+                res.start = selectio.baseOffset;
+                res.end = selectio.extentOffset;
                 res.text = element.textContent.slice(res.start, res.end);
             } else if (doc.selection) {
                 /* for IE */
@@ -218,11 +218,11 @@
          */
         insertBefore: function(element, text, caret) {
             var tmp = _getCaretInfo(element),
-                orig = element.value,
+                orig = $(element).html(),
                 pos = $(element).scrollTop(),
                 range = {start: tmp.start + text.length, end: tmp.end + text.length};
 
-            element.value = orig.substr(0, tmp.start) + text + orig.substr(tmp.start);
+            $(element).html(orig.substr(0, tmp.start) + text + orig.substr(tmp.start));
 
             $(element).scrollTop(pos);
             this.setPos(element, range, caret);
