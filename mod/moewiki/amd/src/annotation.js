@@ -6,12 +6,21 @@
  * @module mod_moewiki/annotation
  */
 
-define([ 'mod_moewiki/jqueryselection' ], function() {
+define([ 'jquery' ], function($) {
 	var annotation = {
 		merkannotaion : function() {
+			var selection;
 			$('.moewiki_content').mousedown(function() {
 				$('.moewiki_content').mouseup(function() {
-					$('.moewiki_content p').selection();
+					try {
+			            if (selection = window.getSelection()) {
+			            	if(selection.type != 'Range'){
+			            		return ;
+			            	}
+			            }
+			        } catch (e) {
+			            /* give up */
+			        }
 				});
 			});
 
