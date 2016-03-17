@@ -887,3 +887,12 @@ a.moewiki_noshow:link,a.moewiki_noshow:visited {
 .ouw-comparebutton-wrapper {
     text-align: right;
 }
+
+#page-mod-moewiki-view #testmodal {
+	display: none;
+	position: absolute;
+	top: 568px;
+}
+#page-mod-moewiki-view #annotationFrom{
+	
+}
