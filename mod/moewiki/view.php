@@ -110,6 +110,7 @@ $jsmodule = array('name'     => 'mod_moewiki_view',
                  );
 $PAGE->requires->js_init_call('M.mod_moewiki_view.init', array(), true, $jsmodule);
 $PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion');
-
+echo '<div id="testmodal"><i class="fa fa-sticky-note"></i></div>';
+echo '<div id="annotationFrom"><form><textarea></textarea></form></div>';
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);
