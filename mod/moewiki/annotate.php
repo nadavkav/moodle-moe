@@ -350,7 +350,7 @@ $jsmodule = array('name'     => 'mod_moewiki_annotate',
                   'strings'  => $stringlist
                  );
 $PAGE->requires->js_init_call('M.mod_moewiki_annotate.init', array(), true, $jsmodule);
-
+echo '<div id="testmodal">hello</div>';
 // close <div id="#moewiki_belowtabs_annotate">
 print '</div>';
 // Footer
