@@ -54,6 +54,7 @@ defined('MOODLE_INTERNAL') || die;
 use moodle\mod\lti as lti;
 
 require_once($CFG->dirroot.'/mod/lti/OAuth.php');
+require_once($CFG->libdir.'/weblib.php');
 
 define('LTI_URL_DOMAIN_REGEX', '/(?:https?:\/\/)?(?:www\.)?([^\/]+)(?:\/|$)/i');
 
@@ -501,8 +502,9 @@ function lti_build_standard_request($instance, $orgid, $islti2) {
     if (!empty($CFG->mod_lti_institution_name)) {
         $requestparams['tool_consumer_instance_name'] = $CFG->mod_lti_institution_name;
     } else {
-        $requestparams['tool_consumer_instance_name'] = get_site()->fullname;
+        $requestparams['tool_consumer_instance_name'] = get_site()->shortname;
     }
+    $requestparams['tool_consumer_instance_description'] = get_site()->fullname;
 
     return $requestparams;
 }
