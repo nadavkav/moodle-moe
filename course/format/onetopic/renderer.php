@@ -534,6 +534,7 @@ class format_onetopic_renderer extends format_section_renderer_base {
             }
 
             print_collapsible_region_end();
+            $PAGE->requires->js_call_amd('format_onetopic/onetopic', 'init');
         }
     }
 
