@@ -18,32 +18,33 @@
  * Parent theme: Bootstrapbase by Bas Brands
  * Built on: Essential by Julian Ridden
  *
- * @package   theme_lambda
+ * @package   theme_moe
  * @copyright 2014 redPIthemes
  *
  */
 
 /* Core */
-$string['configtitle'] = 'lambda';
-$string['pluginname'] = 'lambda';
+$string['configtitle'] = 'moe';
+$string['pluginname'] = 'moe';
 $string['choosereadme'] = '
 <div class="clearfix">
 <div style="margin-bottom:20px;">
-<p style="text-align:center;"><img class="img-polaroid" src="lambda/pix/screenshot.jpg" /></p>
+<p style="text-align:center;"><img class="img-polaroid" src="moe/pix/screenshot.jpg" /></p>
 </div>
 <hr />
 <div class="prom-box prom-box-default shadow2" style="margin-bottom:20px;">
-<h2>Theme Lambda - Responsive Theme for Moodle</h2>
+<h2>Theme moe - Responsive Theme for Moodle</h2>
 </div>
 <h4>Theme Summary</h4>
 <div style="color: #888; text-transform: uppercase; margin-bottom:20px;">
 <p>Compatibility: Moodle 2.5/2.6/2.7/2.8/2.9/3.0<br />Theme Version: 1.44<br />Parent theme: Bootstrapbase by Bas Brands<br />Built on: Essential by Julian Ridden</p>
 </div>
 <hr />
-<p style="text-align:center;"><img class="img-polaroid" src="lambda/pix/redPIthemes.jpg" /></p>';
+<p style="text-align:center;"><img class="img-polaroid" src="moe/pix/redPIthemes.jpg" /></p>';
 
 /* Settings - General */
 $string['settings_general'] = 'General';
+$string['lemidadigit'] = 'Digital Learning';
 $string['logo'] = 'Logo';
 $string['logodesc'] = 'Please upload your custom logo here. If you upload a logo it will appear in the header.';
 $string['logo_res'] = 'Standard logo dimension';
