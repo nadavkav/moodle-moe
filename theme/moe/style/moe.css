@@ -350,8 +350,9 @@ border-top: none;
 }
 
 .que .formulation {
-	background-color: #f1efe3;
+	background-color: #f9f8f0;
 	border-color: #c6bed3;
+	border-radius: 0px;
 }
 
 .que .info {
