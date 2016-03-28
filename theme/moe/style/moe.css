@@ -291,7 +291,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a h3,
 .dir-rtl .course-content ul.ctopics li.section .content.sectionhidden {text-align: right;}
-
+.dir-rtl .ctopics #section-0 .content .section{
+	float:none;
+}
 .course-content ul li.section.main {
 	background-image: none;
 }
@@ -351,6 +353,15 @@ border-top: none;
 .que .info {
 	background-color: #fcf4e7;
     border-color: #bfbcb5;
+}
+
+#section-0 img.iconlarge {
+	height: auto;
+}
+
+#section-0 a[href*='forum'] {
+	color: #5c4b67;
+	font-size: 1.5em;
 }
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
