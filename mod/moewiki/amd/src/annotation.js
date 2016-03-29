@@ -6,7 +6,7 @@
  * @module mod_moewiki/annotation
  */
 
-define([ 'jquery', 'core/yui' ], function($, Y) {
+define([ 'jquery', 'core/yui', 'core/ajax'], function($, Y, ajax) {
 	var annotation = {
 	    confirmDialogue : null,
 	    displayDialogue: function(e) {
@@ -14,6 +14,14 @@ define([ 'jquery', 'core/yui' ], function($, Y) {
                 e.halt();
             }
             annotation.confirmDialogue.show();
+            var promises = ajax.call([
+                       {methodname: 'marktext', args:{component:'mod_moewiki', stringid: 'pluginname'}}
+                       ]);
+            promises[0].done(function(response) {
+                console.log('mod_wiki/pluginname is' + response);
+            }).fail(function(ex) {
+                // do something with the exception
+            });
         },
 		merkannotaion : function(strings) {
 			var selection;
@@ -34,8 +42,9 @@ define([ 'jquery', 'core/yui' ], function($, Y) {
 			            if (selection = window.getSelection()) {
 			            	if(selection.type != 'Range'){
 			            		annotation.hide_annotaion(Y.one('#testmodal'));
+			            	} else {
+			            		annotation.show_annotaion(Y.one('#testmodal'));
 			            	}
-			            	annotation.show_annotaion(Y.one('#testmodal'));
 			            }
 			        } catch (e) {
 			            /* give up */
