@@ -376,6 +376,51 @@ border-top: none;
 	color: #5c4b67;
 	font-size: 1.5em;
 }
+
+.path-mod-forum #page div[role='main'] >h2 span{
+	background-image: url([[pix:theme|bg/headerBG]]);
+	padding: 0 1em;
+	background-repeat: no-repeat;
+	border: 1px solid #af9dbb;
+	background-size: cover;
+	color: #5c4b67;
+}
+
+.path-mod-forum #page div[role='main'] >h3.discussionname span{
+	background-color: #3e7781;
+	padding: 0 1em;
+	color: #ffffff;
+	border-bottom: 0.5em solid #5cb5bf;
+}
+
+.path-mod-forum .discussioncontrols{
+	background-color: #c2e8e6;
+}
+
+#page-mod-forum-discuss .discussioncontrols{
+	padding: 0.33em 0;
+	margin: 0;
+}
+
+.discussioncontrol input[type='submit'] {
+	border:1px solid #a794b2;
+	background-color: #ebdcf7;
+	color: #5e4d66 !important;
+}
+
+#page-mod-forum-discuss.dir-rtl .discussioncontrols .discussioncontrol {
+	float: right;
+}
+
+.forumpost {
+	background-color: #e0f6f5;
+	border: none;
+	border-bottom: 49px solid #c2e8e6;
+}
+
+.forumpost .row {
+	background-color: rgba(0,0,0,0);
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
@@ -385,5 +430,11 @@ border-top: none;
 	}
 	#frontpage-course-list .paging-morelink{
 	   width: 97%;
+	}
+}
+
+@media (min-width: 980px) {
+	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
+	   content: none;
 	}
 }
