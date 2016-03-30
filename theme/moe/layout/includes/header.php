@@ -53,7 +53,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
                 </div>
             <?php } else { ?>
-                <div class="span2 logo-header">
+                <div class="span3 logo-header">
                 	<a class="logo" href="<?php echo $CFG->wwwroot; ?>" title="<?php print_string('home'); ?>">
                     <?php 
 					echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->setting_file_url('logo', 'logo'), 'class'=>'logo', 'alt'=>'logo'));
@@ -61,7 +61,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                     </a>
                 </div>
             <?php } ?>      	
-                <div class="span4 hidden-phone">
+                <div class="span3 hidden-phone">
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
               		
                 </div>
