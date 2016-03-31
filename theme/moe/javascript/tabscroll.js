@@ -25,6 +25,10 @@ $(function () {
 			
 			right = right + 3 + $(this).outerWidth();
 		});
+		if(right > $(".format-onetopic .nav-tabs").width()){
+			$('#tabmoveleft').css('display','block');
+			$('#tabmoveright').css('display','block');
+		}
 		$(".format-onetopic .nav-tabs").prepend('<li style="background-color: #FF0000; width: ' + right + 'px;  visibility: hidden;" >asdf</li>');
 		$(".format-onetopic .nav-tabs").addClass('dragscroll');
 		
