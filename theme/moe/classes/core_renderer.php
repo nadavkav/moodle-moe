@@ -123,6 +123,7 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
      */
     protected function render_tabtree(tabtree $tabtree)
     {
+        $data = new stdClass();
         if (empty($tabtree->subtree)) {
             return '';
         }
@@ -133,27 +134,10 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
                 $secondrow = $this->tabtree($tab->subtree);
             }
         }
-        $navbar = '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse-tabs">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </a>';
-         
+        $data->firstrow = $firstrow;
+        $data->secondrow = $secondrow;
         
-        $text = html_writer::tag('ul', $firstrow);
-        $text = $navbar . html_writer::tag('div', $text, array(
-            'class' => 'nav-collapse-tabs collapse'
-        ));
-        $text = html_writer::tag('div', $text, array('id' => 'tablist','class' => 'navbar clearfix'));
-        
-        $tabs = html_writer::tag('div','',array('id' => 'tabmoveright')).
-            html_writer::tag('ul', $firstrow, array(
-            'class' => 'nav nav-tabs'
-        )) . html_writer::tag('div','',array('id' => 'tabmoveleft')) .$secondrow;
-        $text .= html_writer::tag('div', $tabs, array(
-            'class' => 'tabs-container clearfix'
-        ));
-        return $text;
+        return $this->render_from_template('format_onetopic/tabtree', $data);
     }
 }
 
