@@ -449,6 +449,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	height: 45px;
 	float: right;
 	cursor: pointer;
+	display: none;
 }
 
 #tabmoveleft {
@@ -459,6 +460,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	height: 45px;
 	cursor: pointer;
 	float: left;
+	display: none;
 }
 
 #tabs-container {
@@ -466,8 +468,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	width: 100%;
 }
 
-.format-onetopic ul.nav.nav-tabs {
+ul.nav.nav-tabs {
 	white-space: nowrap;
+	float: left;
+}
+
+.dir-rtl ul.nav.nav-tabs {
 	float: right;
 }
 .format-onetopic #tablist.navbar .btn-navbar {
