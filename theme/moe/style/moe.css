@@ -476,9 +476,6 @@ ul.nav.nav-tabs {
 .dir-rtl ul.nav.nav-tabs {
 	float: right;
 }
-.format-onetopic #tablist.navbar .btn-navbar {
-	display: block;
-}
 
 .nav-collapse-tabs.collapse {
 	display: inline-flex;
