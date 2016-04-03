@@ -433,6 +433,75 @@ border-top: none;
 	}
 }
 
+.ouw_subwiki .individualselector label, .ouw_subwiki span {
+	background-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
+    padding: 0.3em;
+    background-repeat: no-repeat;
+    border: 1px solid #af9dbb;
+    background-size: cover;
+    color: #5c4b67;
+	font-size: 2em;
+}
+
+.ouw_subwiki a {
+	font-size: 2em;
+}
+.path-mod-ouwiki ul {
+    list-style-position: inside;
+}
+.ouw_subwiki .individualselector select {
+	color: #7a5b9a;
+	background-color: #f0eee4;
+	border-color: #878080;
+}
+.path-mod-ouwiki  .nav-tabs > li {
+	margin: 1em 0.2em 0 0.2em;
+	color: #565b5a;
+	border-bottom: 4px solid #c99fee;
+}
+
+.path-mod-ouwiki  .nav-tabs > li.active{
+	background-color: #7c5e97;
+	border-bottom: 4px solid #462965;
+}
+
+.path-mod-ouwiki .nav-tabs > .active > a, .nav-tabs > .active > a:hover,
+.path-mod-ouwiki .nav-tabs > .active > a:focus {
+	background-color: rgba(0,0,0,0);
+	color: #ffffff;
+}
+.path-mod-ouwiki .ouw_belowmainhead {
+	background-color: #d4f6e9;
+	border: 1px solid #af9fbc;
+}
+
+.ouw_byheading a {
+	border: 1px solid #cdccc6;
+	padding: 0.3em;
+	color: #86798d;
+	background-color: #faf7fc;
+}
+
+#ouwiki_indexlinks a{
+	border: 1px solid #b4b68e;
+	background-color: #ebecd8;
+	color: #5e4d66;
+	padding: 0.3em;
+}
+#ouwiki_belowtabs {
+	background-color: #efe2f9;
+}
+
+.ouw_topheading {
+	margin-top: 0em;
+	border-top: none;
+	background-color: rgba(0,0,0,0);
+}
+
+#ouwiki_addnew input[type='submit'], #ouwiki_belowtabs input[type='submit'] {
+	color: #5e4d66 !important;
+	background-color: #f0eee4;
+}
 @media (min-width: 980px) {
 	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
 	   content: none;
