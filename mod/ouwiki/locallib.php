@@ -656,7 +656,7 @@ function ouwiki_display_subwiki_selector($subwiki, $ouwiki, $cm, $context, $cour
             $out .= groups_print_activity_menu($cm, $urlroot, true, true);
         }
     } else {
-        $out .= get_string('wikifor', 'ouwiki') . $wikifor;
+        $out .='<span>' . get_string('wikifor', 'ouwiki') ."</span> $wikifor";
     }
     $out .= '</div>';
 
