@@ -421,6 +421,28 @@ border-top: none;
 .forumpost .row {
 	background-color: rgba(0,0,0,0);
 }
+
+.format-topics .course-content ul.topics{
+	border: 1px solid #c8bdd4;
+	background-image: url([[pix:theme_moe|bg/Koteret_BG]]);
+	background-repeat: repeat-y;
+}
+
+.format-topics .course-content ul.topics li {
+	background-color: #ffffff;
+}
+
+.format-topics  .course-content ul li.section.main {
+	padding: 0px 0 !important; */
+}
+
+.format-topics .course-content ul.topics li.section .content{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.format-topics .course-content ul.topics li.section .summary {
+	margin-right: 1em;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
