@@ -441,6 +441,12 @@ border-top: none;
 .format-grid #gridiconcontainer {
 	background-color: #e0f6f5;
 }
+
+#gridshadebox_content {
+	border-color: #6d4979;
+	border-width: 3px;
+	background-color: #ceefef;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
