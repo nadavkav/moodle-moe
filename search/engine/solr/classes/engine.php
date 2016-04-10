@@ -117,7 +117,7 @@ class engine extends \core_search\engine {
             throw new \core_search\engine_exception('engineserverstatus', 'search');
         }
 
-        $query = new \SolrQuery();
+        $query = new \SolrDisMaxQuery();
         $maxrows = \core_search\manager::MAX_RESULTS;
         if ($this->file_indexing_enabled()) {
             // When using file indexing and grouping, we are going to collapse results, so we want extra results.
@@ -198,6 +198,7 @@ class engine extends \core_search\engine {
 
     /**
      * Prepares a new query by setting the query, start offset and rows to return.
+     *
      * @param SolrQuery $query
      * @param object    $q Containing query and filters.
      * @param null|int  $maxresults The number of results to limit. manager::MAX_RESULTS if not set.
@@ -226,13 +227,23 @@ class engine extends \core_search\engine {
     /**
      * Sets fields to be returned in the result.
      *
-     * @param SolrQuery $query object.
+     * @param SolrDisMaxQuery|SolrQuery $query object.
      */
     public function add_fields($query) {
         $documentclass = $this->get_document_classname();
-        $fields = array_keys($documentclass::get_default_fields_definition());
-        foreach ($fields as $field) {
-            $query->addField($field);
+        $fields = $documentclass::get_default_fields_definition();
+
+        $dismax = false;
+        if ($query instanceof \SolrDisMaxQuery) {
+            $dismax = true;
+        }
+
+        foreach ($fields as $key => $field) {
+            $query->addField($key);
+            if ($dismax && !empty($field['mainquery'])) {
+                // Add fields the main query should be run against.
+                $query->addQueryField($key);
+            }
         }
     }
 
@@ -607,7 +618,7 @@ class engine extends \core_search\engine {
                         if ($indexedfile->solr_filecontenthash != $files[$fileid]->get_contenthash()) {
                             continue;
                         }
-                        if ($indexedfile->solr_fileindexedcontent == document::INDEXED_FILE_FALSE &&
+                        if ($indexedfile->solr_fileindexstatus == document::INDEXED_FILE_FALSE &&
                                 $this->file_is_indexable($files[$fileid])) {
                             // This means that the last time we indexed this file, filtering blocked it.
                             // Current settings say it is indexable, so we will allow it to be indexed.
@@ -671,7 +682,7 @@ class engine extends \core_search\engine {
         $query->addField('title');
         $query->addField('solr_fileid');
         $query->addField('solr_filecontenthash');
-        $query->addField('solr_fileindexedcontent');
+        $query->addField('solr_fileindexstatus');
 
         $query->addFilterQuery('{!cache=false}solr_filegroupingid:(' . $document->get('id') . ')');
         $query->addFilterQuery('type:' . \core_search\manager::TYPE_FILE);
@@ -718,7 +729,7 @@ class engine extends \core_search\engine {
             $result->title = $doc->title;
             $result->solr_fileid = $doc->solr_fileid;
             $result->solr_filecontenthash = $doc->solr_filecontenthash;
-            $result->solr_fileindexedcontent = $doc->solr_fileindexedcontent;
+            $result->solr_fileindexstatus = $doc->solr_fileindexstatus;
             $out[] = $result;
         }
 
@@ -741,7 +752,7 @@ class engine extends \core_search\engine {
 
         if (!$this->file_is_indexable($storedfile)) {
             // For files that we don't consider indexable, we will still place a reference in the search engine.
-            $filedoc['solr_fileindexedcontent'] = document::INDEXED_FILE_FALSE;
+            $filedoc['solr_fileindexstatus'] = document::INDEXED_FILE_FALSE;
             $this->add_solr_document($filedoc);
             return;
         }
@@ -752,6 +763,11 @@ class engine extends \core_search\engine {
 
         // This will prevent solr from automatically making fields for every tika output.
         $url->param('uprefix', 'ignored_');
+
+        // Control how content is captured. This will keep our file content clean of non-important metadata.
+        $url->param('captureAttr', 'true');
+        // Move the content to a field for indexing.
+        $url->param('fmap.content', 'solr_filecontent');
 
         // These are common fields that matches the standard *_point dynamic field and causes an error.
         $url->param('fmap.media_white_point', 'ignored_mwp');
@@ -822,7 +838,7 @@ class engine extends \core_search\engine {
         }
 
         // If we get here, the document was not indexed due to an error. So we will index just the base info without the file.
-        $filedoc['solr_fileindexedcontent'] = document::INDEXED_FILE_ERROR;
+        $filedoc['solr_fileindexstatus'] = document::INDEXED_FILE_ERROR;
         $this->add_solr_document($filedoc);
     }
 

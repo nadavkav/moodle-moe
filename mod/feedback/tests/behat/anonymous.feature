@@ -50,12 +50,6 @@ Feature: Anonymous feedback
     And I press "Continue"
 
   Scenario: Complete anonymous feedback on the front page as an authenticated user
-    And I log in as "admin"
-    And I set the following system permissions of "Authenticated user" role:
-      | capability | permission |
-      | mod/feedback:view | Allow |
-      | mod/feedback:complete | Allow |
-    And I log out
     And I log in as "user1"
     And I am on site homepage
     When I follow "Site feedback"
@@ -74,8 +68,6 @@ Feature: Anonymous feedback
     And I log in as "admin"
     And I set the following system permissions of "Authenticated user on frontpage" role:
       | capability                   | permission |
-      | mod/feedback:view            | Allow      |
-      | mod/feedback:complete        | Allow      |
       | mod/feedback:viewanalysepage | Allow      |
     And I log out
     And I log in as "user1"
@@ -114,8 +106,6 @@ Feature: Anonymous feedback
     And I follow "Show responses"
     And I should not see "Username"
     And I should see "Anonymous entries (2)"
-    And I press "Show responses"
-    And I should not see "Username"
     And I click on "Show response" "link" in the "Response number: 1" "table_row"
     And I should not see "Username"
     And I should see "Response number: 1 (Anonymous)"
@@ -178,7 +168,6 @@ Feature: Anonymous feedback
     And I follow "Site feedback"
     And I follow "Show responses"
     And I should see "Anonymous entries (2)"
-    And I press "Show responses"
     And I click on "Show response" "link" in the "Response number: 1" "table_row"
     And I should see "Response number: 1 (Anonymous)"
     And I log out
@@ -237,9 +226,20 @@ Feature: Anonymous feedback
     And I follow "Show responses"
     And I should not see "Username"
     And I should see "Anonymous entries (2)"
-    And I press "Show responses"
-    And I should not see "Username"
     And I click on "Show response" "link" in the "Response number: 1" "table_row"
     And I should not see "Username"
     And I should see "Response number: 1 (Anonymous)"
+    And I should not see "Prev"
+    And I follow "Next"
+    And I should see "Response number: 2 (Anonymous)"
+    And I should see "Prev"
+    And I should not see "Next"
+    And I follow "Back"
+    # Delete anonymous response
+    And I click on "Delete entry" "link" in the "Response number: 1" "table_row"
+    And I should see "Are you sure you want to delete this entry?"
+    And I press "Continue"
+    And I should see "Anonymous entries (1)"
+    And I should not see "Response number: 1"
+    And I should see "Response number: 2"
     And I log out
