@@ -346,7 +346,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
    cursor: pointer;
 }
 
-.course-content ul.topics li#section-0 {
+.format-onetopic .course-content ul.topics li#section-0 {
    padding-top: 10px !important;
 }
 
