@@ -422,10 +422,14 @@ border-top: none;
 	background-color: rgba(0,0,0,0);
 }
 
+.format-topics #section-0 {
+	margin-top: 5px;
+}
 .format-topics .course-content ul.topics{
 	border: 1px solid #c8bdd4;
-	background-image: url([[pix:theme_moe|bg/Koteret_BG]]);
+	background-image: url([[pix:theme_moe|bg/Bg_divider]]);
 	background-repeat: repeat-y;
+	background-size: contain;
 }
 
 .format-topics .course-content ul.topics li {
