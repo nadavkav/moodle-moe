@@ -425,6 +425,11 @@ border-top: none;
 .format-topics #section-0 {
 	margin-top: 5px;
 }
+
+.format-topics .content h3.sectionname {
+    border: none;	
+}
+
 .format-topics .course-content ul.topics{
 	border: 1px solid #c8bdd4;
 	background-image: url([[pix:theme_moe|bg/Bg_divider]]);
