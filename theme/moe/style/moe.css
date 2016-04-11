@@ -350,7 +350,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
    padding-top: 10px !important;
 }
 
-.nav-tabs {
+.format-onetopic .course-content .nav-tabs {
 	background-color: rgba(0, 0, 0, 0);
 	overflow: hidden;
 	height:45px;
