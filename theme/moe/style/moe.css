@@ -538,7 +538,7 @@ border-top: none;
 	background-color: #fcf3e6;
 }
 .path-mod-assign #region-main div[role="main"] > h2 > span {
-	background-image: url([[pix:theme|bg/header_bg]]);
+	background-image: url([[pix:theme|bg/headerBG]]);
 	padding: 0.2em;
 	background-repeat: no-repeat;
 	border: 1px solid #af9dbb;
