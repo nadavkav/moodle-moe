@@ -421,6 +421,88 @@ border-top: none;
 .forumpost .row {
 	background-color: rgba(0,0,0,0);
 }
+
+.path-mod-assign #region-main div[role="main"] > h2 > span {
+	background-image: url([[pix:theme|bg/header_bg]]);
+	padding: 0.2em;
+	background-repeat: no-repeat;
+	border: 1px solid #af9dbb;
+	border-bottom: 0px;
+	background-size: cover;
+	color: #000000;
+	font-size: 0.8em;
+}
+
+.path-mod-assign #region-main div[role="main"] > h2 {
+	margin-bottom: -1px;
+}
+
+.path-mod-assign #region-main div[role="main"] #intro, .path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	background-color: #f0eee4;
+	border: 1px solid #af9dbb;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 10px;
+}
+
+.path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	border-bottom: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary, .path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"]  .gradingtable {
+	background-color: #f0eee4;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-left:  1px solid #af9dbb;
+	border-right:  1px solid #af9dbb;
+	padding: 10px;
+}
+
+.path-mod-assign #region-main div[role="main"]  .gradingtable {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingbatchoperationsform, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
+	background-color: #f0eee4;
+	margin: 0px;
+	border-left:  1px solid #af9dbb;
+	border-right:  1px solid #af9dbb;
+	padding: 10px;
+}
+
+.path-mod-assign .gradingtable tr.unselectedrow td {
+	background-color: #f0eee4;
+}
+
+.path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
+	border-bottom:  1px solid #af9dbb;
+}
+
+.path-mod-assign #region-main div[role="main"] .generaltable tbody>tr:nth-child(odd)>td {
+	background-color: #e8e6de;
+}
+
+.path-mod-assign td.submissionnotgraded {
+	background-color: #d4d4ce;
+}
+
+.path-mod-assign #region-main div[role="main"] input[type="submit"] {
+	background-color: #00716e;
+}
+
+.path-mod-assign #region-main div[role="main"] a:link {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] a:visited {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary > h3, .path-mod-assign #region-main div[role="main"] .submissionstatustable > h3 {
+	margin-top: 0;
+}
+
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
