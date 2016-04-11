@@ -377,13 +377,13 @@ border-top: none;
 	font-size: 1.5em;
 }
 
-.path-mod-forum #page div[role='main'] >h2 span{
-	background-image: url([[pix:theme|bg/headerBG]]);
-	padding: 0 1em;
-	background-repeat: no-repeat;
-	border: 1px solid #af9dbb;
-	background-size: cover;
-	color: #5c4b67;
+.path-mod-forum #page div[role='main'] >h2 span {
+	color: #444;
+	font-size: 0.7em;
+}
+.path-mod-forum #page div[role='main'] >h2 span::before {
+	content: url([[pix:theme|icons/forum]]);
+	margin-left: 5px;
 }
 
 .path-mod-forum #page div[role='main'] >h3.discussionname span, .path-mod-forum #page div[role='main'] >.box.generalbox {
