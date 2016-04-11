@@ -483,10 +483,11 @@ border-top: none;
 }
 
 #ouwiki_indexlinks a{
-	border: 1px solid #b4b68e;
+	border: 2px solid #b4b68e;
 	background-color: #ebecd8;
-	color: #5e4d66;
-	padding: 0.3em;
+	color: rgba(94, 77, 102, 0.73);
+	padding: 0.7em;
+	font-weight: 600;
 }
 #ouwiki_belowtabs {
 	background-color: #efe2f9;
@@ -498,10 +499,41 @@ border-top: none;
 	background-color: rgba(0,0,0,0);
 }
 
+.ouw_topheading h2 {
+ 	display: none; 
+}
+
+.path-mod-ouwiki .nav-tabs > li > a {
+	background-color: #dddbd2;
+	border-radius: 0px;
+}
+
+
+#page-mod-ouwiki-view .ouw_recentchanges {
+	color: #000000;
+}
+
+#page-mod-ouwiki-view .ouw_recentchanges span {
+	color: #000000 !important;
+}
+
+#page-mod-ouwiki-view .ouw_recentchanges a:link {
+	color: #000000;
+}
+
+#page-mod-ouwiki-view .ouw_recentchanges a:visited {
+	color: #000000;
+}
+
 #ouwiki_addnew input[type='submit'], #ouwiki_belowtabs input[type='submit'] {
 	color: #5e4d66 !important;
 	background-color: #f0eee4;
 }
+
+.ouwiki-annotation-tag {
+	padding: 0 !important;
+}
+
 @media (min-width: 980px) {
 	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
 	   content: none;
