@@ -583,12 +583,6 @@ border-top: none;
 	background-color: #faf7fc;
 }
 
-#ouwiki_indexlinks a{
-	border: 1px solid #b4b68e;
-	background-color: #ebecd8;
-	color: #5e4d66;
-	padding: 0.3em;
-}
 #ouwiki_belowtabs {
 	background-color: #efe2f9;
 }
