@@ -4,7 +4,7 @@
 
 $(function () {
 	//run only on tab mode
-	if($(".nav-tabs").length) {
+	if($(".format-onetopic.path-course-view .nav-tabs").length) {
 		var right = 0;
 		var btnswidth;
 		var direction = 0;
