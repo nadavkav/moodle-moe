@@ -842,7 +842,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border-top: 1em solid #baacc9;
 }
 
-.nav-tabs {
+.format-onetopic .course-content .nav-tabs {
 	background-color: rgba(0, 0, 0, 0);
 }
 
