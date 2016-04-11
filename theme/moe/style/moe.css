@@ -440,27 +440,21 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .forumpost .row {
 	background-color: rgba(0, 0, 0, 0);
 }
-
-#tabmoveright {
-	background-image: url([[pix:theme|tabrightarrow]]);
-	background-repeat: no-repeat;
-	background-size: cover;
-	width: 45px;
-	height: 45px;
-	float: right;
+#tabmoveright, #tabmoveleft {
+	font-size: 4em;
+    width: 45px;
+    height: 45px;
 	cursor: pointer;
-	display: none;
+    display: none;
+    background-color: #99dde3;
+    color: #009ca8;
+}
+#tabmoveright {
+	float: right;
 }
 
 #tabmoveleft {
-	background-image: url([[pix:theme|tableftarrow]]);
-	background-repeat: no-repeat;
-	background-size: cover;
-	width: 45px;
-	height: 45px;
-	cursor: pointer;
 	float: left;
-	display: none;
 }
 
 #tabs-container {
