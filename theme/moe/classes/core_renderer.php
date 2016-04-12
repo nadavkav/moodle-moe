@@ -100,6 +100,19 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer {
         $text = html_writer::tag('span', $text);
         return html_writer::tag('h' . $level, $text, array('id' => $id, 'class' => renderer_base::prepare_classes($classes)));
     }
+    
+    /**
+     * Outputs a box.
+     *
+     * @param string $contents The contents of the box
+     * @param string $classes A space-separated list of CSS classes
+     * @param string $id An optional ID
+     * @param array $attributes An array of other attributes to give the box.
+     * @return string the HTML to output.
+     */
+    public function box($contents, $classes = 'generalbox', $id = null, $attributes = array()) {
+        return $this->box_start($classes, $id, $attributes) . $contents . $this->box_end();
+    }
 }
 
 class theme_moe_format_topics_renderer extends format_topics_renderer {

@@ -215,7 +215,6 @@
             break;
 
         default:
-            echo '<br />';
             if (!empty($showall)) {
                 forum_print_latest_discussions($course, $forum, 0, 'header', '', -1, -1, -1, 0, $cm);
             } else {

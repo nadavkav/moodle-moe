@@ -5320,7 +5320,8 @@ function forum_print_latest_discussions($course, $forum, $maxdiscussions = -1, $
             $canstart = enrol_selfenrol_available($course->id);
         }
     }
-
+    echo "<div class=\"moeforumcontainer\">";
+    
     if ($canstart) {
         echo '<div class="singlebutton forumaddnew">';
         echo "<form id=\"newdiscussionform\" method=\"get\" action=\"$CFG->wwwroot/mod/forum/post.php\">";
@@ -5536,6 +5537,8 @@ function forum_print_latest_discussions($course, $forum, $maxdiscussions = -1, $
     if ($page != -1) { ///Show the paging bar
         echo $OUTPUT->paging_bar($numdiscussions, $page, $perpage, "view.php?f=$forum->id");
     }
+    
+    echo "</div>";
 }
 
 
