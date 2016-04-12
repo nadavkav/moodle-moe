@@ -505,6 +505,38 @@ border-top: none;
 .forumpost .row {
 	background-color: rgba(0,0,0,0);
 }
+
+.format-grid .course-content ul li.section.main{
+	padding-top: 0px !important;
+}
+
+.gtopics-0 .summary ,.format-grid .course-content ul.gtopics-0 #section-0{
+	background-color: #f0efe4;
+}
+
+.format-grid .course-content ul.gtopics-0 #section-0 {
+    border-left: 1px solid #c8bcd2;
+    border-right: 1px solid #c8bcd2;	
+}
+.format-grid .course-content ul.gtopics-0 {
+	margin-bottom: 0px;
+}
+.format-grid #section-0 .content > h3.sectionname {
+	margin-bottom: 0px;
+}
+.format-grid .course-content ul.gridicons li .image_holder {
+	border-color: #90bfbc;
+}
+.format-grid #gridiconcontainer {
+	background-color: #fcf3e6;
+	border: 1px solid #c6bdb7;
+}
+
+#gridshadebox_content {
+	border-color: #6d4979;
+	border-width: 3px;
+	background-color: #fcf3e6;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
