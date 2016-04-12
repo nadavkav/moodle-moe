@@ -32,6 +32,10 @@
 	color: #ffffff;
 }
 
+.usermenu .login a{
+	color: #a2eff4;
+}
+
 .coursebox > .info > .coursename a:before, .coursebox > .info > .name a:before {
     float: right;
 	margin-right: 0em;
