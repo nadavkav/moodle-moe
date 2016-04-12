@@ -572,8 +572,12 @@ border-top: none;
 	color: #ffffff;
 }
 .path-mod-ouwiki .ouw_belowmainhead {
-	background-color: #d4f6e9;
+	background-color: #bfead6;
 	border: 1px solid #af9fbc;
+}
+
+.ouw_heading.ouw_heading3 {
+	background-color: #a2e0c7;
 }
 
 .ouw_byheading a {
