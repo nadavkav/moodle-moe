@@ -597,6 +597,10 @@ border-top: none;
 	color: #5e4d66 !important;
 	background-color: #f0eee4;
 }
+
+#page-mod-ouwiki-view .ouw_intro {
+	margin-top: 0px;
+}
 @media (min-width: 980px) {
 	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
 	   content: none;
