@@ -43,7 +43,7 @@ define([ 'jquery', 'core/yui', 'core/ajax'], function($, Y, ajax) {
 			            	if(selection.type != 'Range'){
 			            		annotation.hide_annotaion(Y.one('#testmodal'));
 			            	} else {
-			            		annotation.show_annotaion(Y.one('#testmodal'));
+			            		annotation.show_annotaion(Y.one('#testmodal'),selection);
 			            	}
 			            }
 			        } catch (e) {
@@ -56,8 +56,10 @@ define([ 'jquery', 'core/yui', 'core/ajax'], function($, Y, ajax) {
 		hide_annotaion: function(element){
 			element.setStyles({display: 'none'});
 		},
-		show_annotaion: function(element){
-			element.setStyles({display: 'block'});
+		show_annotaion: function(element, selection){
+			element.setStyles({
+				display: 'block',
+				top: selection.baseNode.parentElement.offsetTop});
 		},
 		displayDialogue: function(e) {
             if (e) {
