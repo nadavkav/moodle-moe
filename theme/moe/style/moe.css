@@ -1043,7 +1043,45 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background-color: #fcf3e6;
 	border: 1px solid #c6bdb7;
 }
+.path-mod-quiz #region-main div[role='main']>h2 {
+	margin-bottom: 0px;
+	line-height: 39px;
+}
+.path-mod-quiz #region-main div[role='main']>h2 span {
+	background-image: url([[pix:theme|bg/headerBG]]);
+	color: #5d4a6a;
+	border: 1px solid #ac9dbe;
+	border-bottom: 0px;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
 
+.path-mod-quiz #intro.generalbox{
+	margin-top: 0px;
+	border: 1px solid #ac9dbe;
+	background-color: #f1efe3;
+	border-bottom: 0px;
+}
+
+.path-mod-quiz .quizinfo {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+	border-top: 0px;
+}
+
+#page-mod-quiz-view div[role='main']>h3 ,#page-mod-quiz-view table.quizattemptsummary {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+    border-top: 0px;
+	border-bottom: 0px;
+	margin: 0px;
+}
+
+#page-mod-quiz-view .box.quizattempt {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+    border-top: 0px;
+}
 #gridshadebox_content {
 	border-color: #6d4979;
 	border-width: 3px;
