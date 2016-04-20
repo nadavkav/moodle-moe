@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body.pagelayout-embedded{
+	position: static;
+}
+
 #wrapper > #page-header {
 	background-image: url([[pix:theme|bg/header_bg]]);
     background-repeat: no-repeat;
