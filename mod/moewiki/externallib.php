@@ -31,6 +31,48 @@ require_once("$CFG->libdir/externallib.php");
 
 class mod_moewiki_external extends external_api {
     
+    public static function create_parameters() {
+        return new external_function_parameters(array(
+            new external_single_structure(array(
+                'ranges' => new external_single_structure(array(
+                    'start'       => new external_value(PARAM_TEXT, "The annotaion start element"),
+                    'end'         => new external_value(PARAM_TEXT, "The annotation end element"),
+                    'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
+                    'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
+                )),
+                'quote' => new external_value(PARAM_TEXT),
+                'links' => new external_multiple_structure(new external_single_structure(array(
+                    'type' => new external_value(PARAM_SAFEPATH),
+                    'rel'  => new external_value(PARAM_ALPHAEXT),
+                    'href' => new external_value(PARAM_URL),
+                )), "annotauion links", false),
+                'permissions' => new external_single_structure(array(
+                    'read' => new external_single_structure(array(
+                        'group' => new external_value(PARAM_ALPHAEXT)
+                    )),
+                    'delete' => new external_single_structure(array(
+                        'group' => new external_value(PARAM_ALPHAEXT)
+                    )),
+                    'admin' => new external_single_structure(array(
+                        'group' => new external_value(PARAM_ALPHAEXT)
+                    )),
+                    'update' => new external_single_structure(array(
+                        'group' => new external_value(PARAM_ALPHAEXT)
+                    )),
+                ), "annotaion permissino", false),
+                'text' => new external_value(PARAM_TEXT)
+            )),
+        ));
+    }
+    
+    public static function create($annotation) {
+        
+    }
+    
+    public static function create_returns() {
+        return new
+    }
+    
     public static function search_parameters() {
         return new external_function_parameters(array(
             'wikiid' => new external_value(PARAM_INT, "The wiki ID")            
