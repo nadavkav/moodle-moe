@@ -163,6 +163,7 @@ $THEME->layouts = array(
     ),
 );
 
+$THEME->javascripts = array('dragscroll', 'tabscroll');
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
 $THEME->csspostprocess = 'theme_moe_process_css';

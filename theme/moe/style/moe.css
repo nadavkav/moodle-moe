@@ -1,28 +1,31 @@
 @CHARSET "UTF-8";
 
-#wrapper > #page-header {
+#wrapper>#page-header {
 	background-image: url([[pix:theme|bg/header_bg]]);
-    background-repeat: no-repeat;
-    background-size: cover; 
+	background-repeat: no-repeat;
+	background-size: cover;
 }
+
 .dir-rtl .accesshide {
-	left:0;
+	left: 0;
 }
-.dir-rtl .navbar #search{
+
+.dir-rtl .navbar #search {
 	margin-left: 0px;
 }
 
-.block .social_icons a.social{
+.block .social_icons a.social {
 	background-color: #483a51;
 }
 
-#lemidaDigit{
+#lemidaDigit {
 	text-align: right;
 }
 
-#lemidaDigit span{
-	padding-right:  2em;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
+#lemidaDigit span {
+	padding-right: 2em;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
 	font-size: 3em;
 	text-align: right;
 	line-height: 2em;
@@ -31,6 +34,7 @@
 .usermenu .login {
 	color: #ffffff;
 }
+
 
 .usermenu .login a{
 	color: #a2eff4;
@@ -42,70 +46,74 @@
 	margin-left: 0.5em;
 }
 
-div.coursebox .content > ul.teachers {
+div.coursebox .content>ul.teachers {
 	padding-right: 21px
 }
 
 #frontpage-course-list  h2 {
-    background-image: url([[pix:theme|bg/learning-spaces]]);
-    background-repeat : no-repeat;
-    background-size: 100% 100%;
-    border : 1px solid #ad9dad;
-    height: 1.7em;
-    line-height: 1.7em;
-    font-size: 3em;
-    color : #086d65;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
-    padding-right : 0.5em;
+	background-image: url([[pix:theme|bg/learning-spaces]]);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	border: 1px solid #ad9dad;
+	height: 1.7em;
+	line-height: 1.7em;
+	font-size: 3em;
+	color: #086d65;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
+	padding-right: 0.5em;
 }
 
 #frontpage-course-list h2:after {
-    content : url([[pix:theme|icons/HatFlower]]);
-    position: relative;
-    top : 13px;
-    margin-right : 0.3em;
+	content: url([[pix:theme|icons/HatFlower]]);
+	position: relative;
+	top: 13px;
+	margin-right: 0.3em;
 }
 
 #frontpage-course-list .courses .coursebox {
-    border : 1px solid #ad9dad;
+	border: 1px solid #ad9dad;
 }
 
 #frontpage-course-list .paging-morelink {
-    background-image: url([[pix:theme|left_arrow]]),url([[pix:theme|bg/learning-spaces-all]]);
-    background-repeat : no-repeat;
-    background-size: contain,cover;
-	background-position: 5% 0% ,0% 0%;
+	background-image: url([[pix:theme|left_arrow]]),
+		url([[pix:theme|bg/learning-spaces-all]]);
+	background-repeat: no-repeat;
+	background-size: contain, cover;
+	background-position: 5% 0%, 0% 0%;
 	width: 20%;
 	font-size: 2em;
-    color: #583d5f;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
+	color: #583d5f;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
 }
 
 .coursebox.clearfix.odd {
-    background: #dff8f4;
+	background: #dff8f4;
 }
 
 .coursebox.clearfix.even {
-    background: #fdf3dc;
+	background: #fdf3dc;
 }
 
-div.course_category_tree .category > .info {
-    border: 1px solid #bbc0c6;
-    background-color: #d8cfe3;
+div.course_category_tree .category>.info {
+	border: 1px solid #bbc0c6;
+	background-color: #d8cfe3;
 }
 
 div.course_category_tree .coursebox {
-    border: 1px solid #bbc0c6;
+	border: 1px solid #bbc0c6;
 }
+
 div.course_category_tree .coursebox.odd {
-    background-color: #ecf8c8;
+	background-color: #ecf8c8;
 }
 
 div.course_category_tree .coursebox.even {
-    background-color: #e4ead3;
+	background-color: #e4ead3;
 }
 
-.usermenu .moodle-actionmenu .toggle-display{
+.usermenu .moodle-actionmenu .toggle-display {
 	color: #fff;
 }
 
@@ -114,196 +122,191 @@ div.course_category_tree .coursebox.even {
 	font-size: 2em;
 	color: #583d5f;
 	background-image: url([[pix:theme|icons/Yad]]), url([[pix:theme|bg/BG]]);
-	background-position: 5% 47% ,100% 0%;
+	background-position: 5% 47%, 100% 0%;
 	background-color: #92ddd8;
-	border:1px solid #99a3a2;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
+	border: 1px solid #99a3a2;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
 	background-repeat: no-repeat, no-repeat;
-	background-size: 28%,contain;
+	background-size: 28%, contain;
 	padding: 10px 20px;
 	margin: auto;
 	box-shadow: black 0px 2px 4px;
 }
 
-body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
+body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
+	{
 	background-color: #d8eaf5;
 	border: 1px solid #7fafcd;
 }
-.course-content ul.ctopics #toggle-1{
+
+.course-content ul.ctopics #toggle-1 {
 	background-image: url([[pix:theme|bg/Koteret_BG]]);
-    color: #583d5f;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
-}
-.course-content ul.ctopics #toggle-1 .section-title{
-	   font-size: 2em;
+	color: #583d5f;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
 }
 
-.course-content ul.ctopics li.section .content .toggle{
-    border:1px solid #c4d2d0;
+.course-content ul.ctopics #toggle-1 .section-title {
+	font-size: 2em;
 }
 
-.course-content ul.ctopics li.section:nth-child(odd) .content .toggle, .course-content ul.ctopics li.section:nth-child(odd) .content.sectionhidden{
-    background-color: #e9f0b5;
+.course-content ul.ctopics li.section .content .toggle {
+	border: 1px solid #c4d2d0;
 }
 
-.course-content ul.ctopics li.section:nth-child(even) .content .toggle, .course-content ul.ctopics li.section:nth-child(even) .content.sectionhidden{
-    background-color: #dff8f4;
+.course-content ul.ctopics li.section:nth-child(odd) .content .toggle,
+	.course-content ul.ctopics li.section:nth-child(odd) .content.sectionhidden
+	{
+	background-color: #e9f0b5;
 }
 
-.ctopics .section.main .content .section{
+.course-content ul.ctopics li.section:nth-child(even) .content .toggle,
+	.course-content ul.ctopics li.section:nth-child(even) .content.sectionhidden
+	{
+	background-color: #dff8f4;
+}
+
+.ctopics .section.main .content .section {
 	width: 55%;
 }
 
-.dir-rtl .ctopics .section.main .content .summary
-{
-    float:right;
-}
-.dir-rtl .ctopics #section-0 .content .summary
-{
-    float: none;
+.dir-rtl .ctopics .section.main .content .summary {
+	float: right;
 }
 
-.dir-rtl .ctopics #section-0 h3.sectionname
-{
-    text-align: right;
-    padding-left: auto;
-    padding-right: 10px;
-    font-size:19px;
+.dir-rtl .ctopics #section-0 .content .summary {
+	float: none;
 }
 
-.dir-rtl .ctopics #section-0  .section-modchooser
-{
-    right: auto;
-    left: 0;
+.dir-rtl .ctopics #section-0 h3.sectionname {
+	text-align: right;
+	padding-left: auto;
+	padding-right: 10px;
+	font-size: 19px;
 }
 
-.dir-rtl .ctopics .section.main .content .section
-{
-    float:left;
+.dir-rtl .ctopics #section-0  .section-modchooser {
+	right: auto;
+	left: 0;
 }
 
-.dir-rtl .ctopics .section.main .content .summary ol,
-.dir-rtl .ctopics .section.main .content .section ol
-{
-    padding-left:0;
-    padding-right:20px;
+.dir-rtl .ctopics .section.main .content .section {
+	float: left;
 }
 
-.dir-rtl .ctopics .section.main .left.side
-{
-    left:auto;
-    right:4px;
+.dir-rtl .ctopics .section.main .content .summary ol, .dir-rtl .ctopics .section.main .content .section ol
+	{
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+.dir-rtl .ctopics .section.main .left.side {
+	left: auto;
+	right: 4px;
 }
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a {
-    /* TODO: Check if override will do the trick instead of the following */
-    background-position: 9px 9px;
-    padding-left: 0;
-    padding-right: 30px;
-    text-align: right;
-    font-size: 15px;
+	/* TODO: Check if override will do the trick instead of the following */
+	background-position: 9px 9px;
+	padding-left: 0;
+	padding-right: 30px;
+	text-align: right;
+	font-size: 15px;
 }
 
-.dir-rtl.editing .ctopics.section.main .right.side
-{
-    right:auto;
-    left:30px;
+.dir-rtl.editing .ctopics.section.main .right.side {
+	right: auto;
+	left: 30px;
 }
 
-.dir-rtl.editing .ctopics .section.main .right.side a
-{
-    float:left;
+.dir-rtl.editing .ctopics .section.main .right.side a {
+	float: left;
 }
 
-.dir-rtl.editing .ctopics.section.main .section-modchooser
-{
-    right:auto;
-    left:100px;
-    text-align: right;
+.dir-rtl.editing .ctopics.section.main .section-modchooser {
+	right: auto;
+	left: 100px;
+	text-align: right;
 }
 
 /*
     MOONSTONE .ctopics.moonstonet
 */
-.dir-rtl .ctopics .section.main .content .summary
-{
-    float:right;
-}
-.dir-rtl .course-content  .ctopics #section-0 .content .summary
-{
-    float: none;
+.dir-rtl .ctopics .section.main .content .summary {
+	float: right;
 }
 
-.dir-rtl .ctopics #section-0 h3.sectionname
-{
-    text-align: right;
-    padding-left: auto;
-    padding-right: 10px;
-    font-size:19px;
+.dir-rtl .course-content  .ctopics #section-0 .content .summary {
+	float: none;
 }
 
-.dir-rtl .ctopics #section-0  .section-modchooser
-{
-    right: auto;
-    left: 0;
+.dir-rtl .ctopics #section-0 h3.sectionname {
+	text-align: right;
+	padding-left: auto;
+	padding-right: 10px;
+	font-size: 19px;
 }
 
-.dir-rtl .ctopics .section.main .content .section
-{
-    float:left;
+.dir-rtl .ctopics #section-0  .section-modchooser {
+	right: auto;
+	left: 0;
 }
 
-.dir-rtl .ctopics .section.main .content .summary ol,
-.dir-rtl .ctopics .section.main .content .section ol
-{
-    padding-left:0;
-    padding-right:20px;
+.dir-rtl .ctopics .section.main .content .section {
+	float: left;
 }
 
-.dir-rtl .ctopics .section.main .left.side
-{
-    left:auto;
-    right:4px;
+.dir-rtl .ctopics .section.main .content .summary ol, .dir-rtl .ctopics .section.main .content .section ol
+	{
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+.dir-rtl .ctopics .section.main .left.side {
+	left: auto;
+	right: 4px;
 }
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a {
-    /* TODO: Check if override will do the trick instead of the following */
-    background-position: 9px 9px;
-    padding-left: 0;
-    padding-right: 30px;
-    text-align: right;
-    font-size: 15px;
+	/* TODO: Check if override will do the trick instead of the following */
+	background-position: 9px 9px;
+	padding-left: 0;
+	padding-right: 30px;
+	text-align: right;
+	font-size: 15px;
 }
 
-.dir-rtl.editing .ctopics .section.main .right.side
-{
-    right:auto;
-    left:30px;
+.dir-rtl.editing .ctopics .section.main .right.side {
+	right: auto;
+	left: 30px;
 }
 
-.dir-rtl.editing .ctopics .section.main .right.side a
-{
-    float:left;
+.dir-rtl.editing .ctopics .section.main .right.side a {
+	float: left;
 }
 
-.dir-rtl.editing .ctopics .section.main .section-modchooser
-{
-    right:auto;
-    left:100px;
-    text-align: right;
+.dir-rtl.editing .ctopics .section.main .section-modchooser {
+	right: auto;
+	left: 100px;
+	text-align: right;
 }
 
 .dir-rtl .course-content ul.ctopics li.section .content .toggle a h3,
-.dir-rtl .course-content ul.ctopics li.section .content.sectionhidden {text-align: right;}
-.dir-rtl .ctopics #section-0 .content .section{
-	float:none;
+	.dir-rtl .course-content ul.ctopics li.section .content.sectionhidden {
+	text-align: right;
 }
+
+.dir-rtl .ctopics #section-0 .content .section {
+	float: none;
+}
+
 .course-content ul li.section.main {
 	background-image: none;
 }
 
 .dir-rtl #page-footer ul.menubar, #greyboxright ul.menubar {
-    float: left;
+	float: left;
 }
 
 .dir-rtl ul {
@@ -311,38 +314,53 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary {
 }
 
 .nav-tabs {
-    background: none;
-    border-top: none;
-    border-left: none;
+	background: none;
+	border-top: none;
+	border-left: none;
 	border-right: none;
-    border-bottom: none;
-    margin-bottom: 0;
+	border-bottom: none;
+	margin-bottom: 0;
 }
 
 .format-onetopic .tab_content {
-    background-color: #dddcd3;
-    border-top-right-radius: 0.5em;
-    border-top-left-radius: 0.5em;
-	border-width:1px;
-	border-style: solid;
-	border-color: #958d9e;
+	background-color: #dddcd3;
 }
 
-.nav-tabs > li.active .tab_content{
-	background-color: #e1cff5;
+.nav-tabs>li.active .tab_content {
+	background-color: #7a5b9a;
+	color: #FFF;
+	border-bottom-color: #421f66;
 }
 
-.nav-tabs > li.active {
-border-top: none;
+.nav-tabs>li.active {
+	border-top: none;
 }
 
-.format-onetopic .course-content ul li.section.main{
-	background-color: #f0efe4;
-	border-top: 1em solid #baacc9;
+.format-onetopic .course-content ul li.section.main {
+	background-color: #eee2fa;
+}
+
+.format-onetopic .nav-tabs li {
+   margin: 0;
+   
+}
+
+.format-onetopic .nav-tabs li div {
+   height:24px;
+   border-bottom: 5px solid #c79cf1;
+   cursor: pointer;
+}
+
+.format-onetopic .course-content ul.topics li#section-0 {
+   padding-top: 10px !important;
 }
 
 .nav-tabs {
-	background-color: rgba(0,0,0,0);
+	background-color: rgba(0, 0, 0, 0);
+	overflow: hidden;
+	height:45px;
+	white-space: nowrap;
+	position: relative;
 }
 
 .nav-tabs>li {
@@ -356,18 +374,20 @@ border-top: none;
 
 .que .info {
 	background-color: #fcf4e7;
-    border-color: #bfbcb5;
+	border-color: #bfbcb5;
 }
 
-.path-mod-page div[role=main]{
-   background-color: #f1efe3;
-   border-color: #c5b9cf;
-   border-style: solid;
-   border-width: 1px;
-   padding: 0 1em;
+.path-mod-page div[role=main] {
+	background-color: #f1efe3;
+	border-color: #c5b9cf;
+	border-style: solid;
+	border-width: 1px;
+	padding: 0 1em;
 }
+
 .path-mod-page div[role=main]>h2 {
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px 4px 6px #a0a0a0;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
+		4px 6px #a0a0a0;
 	color: #675376;
 	text-align: center;
 }
@@ -380,6 +400,7 @@ border-top: none;
 	color: #5c4b67;
 	font-size: 1.5em;
 }
+
 
 .path-mod-forum #page div[role='main'] >h2 span {
 	color: #444;
@@ -477,17 +498,17 @@ border-top: none;
 }
 
 
-.path-mod-forum .discussioncontrols{
+.path-mod-forum .discussioncontrols {
 	background-color: #c2e8e6;
 }
 
-#page-mod-forum-discuss .discussioncontrols{
+#page-mod-forum-discuss .discussioncontrols {
 	padding: 0.33em 0;
 	margin: 0;
 }
 
 .discussioncontrol input[type='submit'] {
-	border:1px solid #a794b2;
+	border: 1px solid #a794b2;
 	background-color: #ebdcf7;
 	color: #5e4d66 !important;
 }
@@ -503,7 +524,7 @@ border-top: none;
 }
 
 .forumpost .row {
-	background-color: rgba(0,0,0,0);
+	background-color: rgba(0, 0, 0, 0);
 }
 
 .format-grid .course-content ul li.section.main{
@@ -549,9 +570,65 @@ border-top: none;
 	}
 }
 
-@media (min-width: 980px) {
-	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
-	   content: none;
+#tabmoveright, #tabmoveleft {
+	font-size: 4em;
+    width: 45px;
+    height: 45px;
+	cursor: pointer;
+    display: none;
+    background-color: #99dde3;
+    color: #009ca8;
+}
+#tabmoveright {
+	float: right;
+}
+
+#tabmoveleft {
+	float: left;
+}
+
+#tabs-container {
+	height: 45px;
+	width: 100%;
+}
+
+ul.nav.nav-tabs {
+	white-space: nowrap;
+	float: left;
+}
+
+.dir-rtl ul.nav.nav-tabs {
+	float: right;
+}
+
+.nav-collapse-tabs.collapse {
+	display: inline-flex;
+	float: right;
+}
+
+.dir-rtl .nav-collapse-tabs.collapse {
+	float: left;
+}
+@media screen and (max-width:26em) {
+	#frontpage-course-list h2 {
+		font-size: 2em;
+	}
+	#frontpage-course-list h2:after {
+		content: none;
+	}
+	#frontpage-course-list .paging-morelink {
+		width: 97%;
+	}
+	.dir-rtl .nav-collapse-tabs.collapse, .nav-collapse-tabs.collapse {
+        float: none;
+		display: block;
+    }
+}
+
+@media ( min-width : 980px) {
+	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before
+		{
+		content: none;
 	}
 }
 
