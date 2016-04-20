@@ -579,6 +579,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     background-color: #99dde3;
     color: #009ca8;
 }
+
+#tabmoveright i, #tabmoveleft i {
+	display: inline-block;
+	line-height: 45px;
+	width:45px;
+	height: 45px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
 #tabmoveright {
 	float: right;
 }
