@@ -305,7 +305,7 @@ margin-right:20px;
 .format-socialwall .tl-authorname {
     font-weight: bold;
     font-size: 14px;
-}
+	}
 
 .format-socialwall .tl-locked, .tl-postcomment, .tl-sticky, .tl-edited-wrapper {
     float:right;
