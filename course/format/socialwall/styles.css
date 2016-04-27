@@ -140,8 +140,9 @@
 }
 
 .format-socialwall .tl-text {
-    margin-left: 40px;
-    padding: 0 5px;
+	padding-top:5px;    
+	margin-left: 40px;
+    /*padding: 0 5px;*/
   /*  border-left: 2px solid #efefef;*/
 }
 
@@ -242,8 +243,8 @@ margin-right:30px;
 .tl-actionlink
 
 {
-	margin:5px;
 	font-size:14px;
+	padding:5px;
 	
 }
 
@@ -305,6 +306,10 @@ margin-right:20px;
 .format-socialwall .tl-authorname {
     font-weight: bold;
     font-size: 14px;
+padding-top:10px;
+    /*padding: 10px;
+	 margin:10px;*/
+
 	}
 
 .format-socialwall .tl-locked, .tl-postcomment, .tl-sticky, .tl-edited-wrapper {
@@ -348,7 +353,7 @@ margin-right:20px;
 
 .format-socialwall .tl-showall {
     text-align: center;
-	padding-bottom:10px;
+	padding-bottom:5px;
  /*   border-top: 1px solid #efefef;
     border-bottom: 1px solid #efefef;*/
 }
