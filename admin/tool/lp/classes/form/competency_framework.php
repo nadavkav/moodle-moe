@@ -54,17 +54,20 @@ class competency_framework extends persistent {
 
         $mform->addElement('header', 'generalhdr', get_string('general'));
 
-        $mform->addElement('text', 'shortname',
-                           get_string('shortname', 'tool_lp'));
+        // Name.
+        $mform->addElement('text', 'shortname', get_string('shortname', 'tool_lp'), 'maxlength="100"');
         $mform->setType('shortname', PARAM_TEXT);
         $mform->addRule('shortname', null, 'required', null, 'client');
+        $mform->addRule('shortname', get_string('maximumchars', '', 100), 'maxlength', 100, 'client');
+        // Description.
         $mform->addElement('editor', 'description',
                            get_string('description', 'tool_lp'), array('rows' => 4));
         $mform->setType('description', PARAM_RAW);
-        $mform->addElement('text', 'idnumber',
-                           get_string('idnumber', 'tool_lp'));
+        // ID number.
+        $mform->addElement('text', 'idnumber', get_string('idnumber', 'tool_lp'), 'maxlength="100"');
         $mform->setType('idnumber', PARAM_TEXT);
         $mform->addRule('idnumber', null, 'required', null, 'client');
+        $mform->addRule('idnumber', get_string('maximumchars', '', 100), 'maxlength', 100, 'client');
 
         $scales = get_scales_menu();
         $scaleid = $mform->addElement('select', 'scaleid', get_string('scale', 'tool_lp'), $scales);
@@ -97,7 +100,8 @@ class competency_framework extends persistent {
         $mform->addElement('header', 'taxonomyhdr', get_string('taxonomies', 'tool_lp'));
         $taxonomies = \core_competency\competency_framework::get_taxonomies_list();
         $taxdefaults = array();
-        for ($i = 1; $i <= \core_competency\competency_framework::get_taxonomies_max_level(); $i++) {
+        $taxcount = max($framework ? $framework->get_depth() : 4, 4);
+        for ($i = 1; $i <= $taxcount; $i++) {
             $mform->addElement('select', "taxonomies[$i]", get_string('levela', 'tool_lp', $i), $taxonomies);
             $taxdefaults[$i] = \core_competency\competency_framework::TAXONOMY_COMPETENCY;
         }
