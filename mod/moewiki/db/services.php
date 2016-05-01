@@ -10,7 +10,7 @@ $functions = array(
         'ajax'        => true
     ), 
     'moe_wiki_create' => array(
-        'classname'   => 'mod_moweiki_external',
+        'classname'   => 'mod_moewiki_external',
         'methodname'  => 'create',
         'classpath'   => 'mod/moewiki/externallib.php',
         'description' => 'Save anotaion to the DB',
