@@ -38,6 +38,7 @@
     margin-right: 100px;
 }
 
+
 .format-socialwall #postform #fgroup_id_group_1 {
     margin-top:30px;
     float:right;
@@ -79,7 +80,7 @@
 
 .format-socialwall .tl-comment-replywrapper .tl-actionlink {
     text-align: right;
-  /*  border-top : 1px solid #cccccc;*/
+  border-top : 1px solid #cccccc;
 }
 
 .format-socialwall .tl-posts .section li.activity {
@@ -96,39 +97,16 @@
     margin: 30px 0;
 }
 
-.format-socialwall .tl-leftcol ,.tl-author  {
-    float:right;
-    width:40px;
-	margin-top:15px;
-	
-	margin-right:40px;
-/*	padding-right:100px;*/
-}
 
 
 
 .format-socialwall .tl-leftcol ,.tl-author {
-    float:right;
+    float:left;
     width:40px;
 	
 }
 
-.tl-comment .tl-author {
-    float:right;
- 
-	margin-top:15px;
-	margin-right:100px;
-	padding-left:10px;
 
-}
-
-.tl-post .tl-leftcol .tl-author    /* :first-of-type  .tl-author*/ {
-
-	float:right;
-	padding-right:0px;
-	margin-right:0px;
-	margin-top:35px;
-}
 
 
 
@@ -137,169 +115,18 @@
 
 .format-socialwall .tl-author {
     margin-bottom: 10px;
+	
 }
 
 .format-socialwall .tl-text {
 	padding-top:5px;    
 	margin-left: 40px;
-    /*padding: 0 5px;*/
-  /*  border-left: 2px solid #efefef;*/
+    border-left: 2px solid #efefef;
 }
 
-
-
-/*post colors*/
-
-.tl-posts .tl-post:nth-child(odd)
-{
-	background-color: #e0f4ee;
+.formal-socialwall .tl-comments .tl-text{
+	border:none;
 }
-.tl-posts .tl-post:nth-child(even)
-{
-	background-color: #c3e7dd;
-}
-
-
-
-.tl-posttext .text_to_html
-	{
-	margin-top:20px;
-	 border-radius: 10px;
-	border:  solid 2px #cbc9d4;
-				
-		box-shadow: -5px 0px 5px 0 rgba( 178, 178, 178, .4 );
-position: relative;
-		
-		
-display: inline-block;
-min-height: 50px;
-padding:6px 6px 6px 12px;
-margin-bottom:10px;
-background-color: #f2ebf8;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-margin-right:30px;
-}
-
-
-
-.tl-posttext .text_to_html:after, .tl-posttext .text_to_html:before {
-	left: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-.tl-posttext .text_to_html:after, .tl-posttext .text_to_html:before {
-	left: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-.tl-posttext .text_to_html:after {
-	border-color: rgba(242, 235, 248, 0);
-	border-left-color: #f2ebf8;
-	border-width: 15px;
-	margin-top: -15px;
-		
-	
-	
-}
-.tl-posttext .text_to_html:before {
-	border-color: rgba(203, 201, 212, 0);
-	border-left-color: #cbc9d4;
-	border-width: 19px;
-	margin-top: -19px;
-	
-		
-}
-
-
-
-
-.tl-post-actionarea 
-{
-		border:  solid 1px #b0b2b0;
-	display:inline-block;
-	margin: 10px;
-	
-}
-
-.tl-post-actionarea .tl-counts
-{
-	font-size:12px;
-	padding:5px;
-	margin:5px;
-	
-}
-.tl-actionlink
-
-{
-	font-size:14px;
-	padding:5px;
-	
-}
-
-/* Comments */
-
-
-
-
-
-.tl-posts  .tl-comment .tl-text {
-	position: relative;
-	
-	display: inline-block;
-	box-shadow: -5px 0px 5px 0 rgba( 178, 178, 178, .4 );
-display: inline-block;
-min-height: 30px;
-padding:4px 4px 4px 12px;
-margin-bottom:10px;
-background-color: #d2f3ea;
-	 border-radius: 10px;
-	border: solid 2px #9bc6bb;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-margin-right:20px;
-	
-}
-
-
-.tl-posts  .tl-comment .tl-text:after, .tl-posts  .tl-comment .tl-text:before {
-	left: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-.tl-posts  .tl-comment .tl-text:after {
-	border-color: rgba(210, 243, 234, 0);
-	border-left-color: #d2f3ea;
-	border-width: 15px;
-	margin-top: -15px;
-	
-}
-.tl-posts  .tl-comment .tl-text:before {
-	border-color: rgba(155, 198, 187, 0);
-	border-left-color: #9bc6bb;
-	border-width: 19px;
-	margin-top: -19px;
-	
-}
-
-
 
 
 
@@ -307,8 +134,7 @@ margin-right:20px;
     font-weight: bold;
     font-size: 14px;
 padding-top:10px;
-    /*padding: 10px;
-	 margin:10px;*/
+   
 
 	}
 
@@ -354,8 +180,8 @@ padding-top:10px;
 .format-socialwall .tl-showall {
     text-align: center;
 	padding-bottom:5px;
- /*   border-top: 1px solid #efefef;
-    border-bottom: 1px solid #efefef;*/
+   border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
 }
 
 .format-socialwall .tl-action-icons {
@@ -417,7 +243,6 @@ padding-top:10px;
     display:none;
 }
 
-.format-socialwall .tl-commentform .mform .fitem .felement.ftextarea {
     margin-left: 0;
 }
 
