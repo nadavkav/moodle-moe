@@ -2380,8 +2380,8 @@ function moewiki_get_annotations($pageversion) {
 
     $userfields = user_picture::fields('u', null, 'userid');
 
-    $rs = $DB->get_records_sql("SELECT a.id, a.pageid, a.userid, a.timemodified,
-                                    a.content, $userfields
+    $rs = $DB->get_records_sql("SELECT a.id, a.pageid, a.userid, a.updated,
+                                    a.text, $userfields
                                 FROM {moewiki_annotations} a
                                 INNER JOIN {user} u ON a.userid = u.id
                                     WHERE a.pageid = ?
@@ -2403,7 +2403,7 @@ function moewiki_get_annotations($pageversion) {
                 $annotation->position = '';
                 $annotation->annotationtag = '';
             }
-            $annotation->content = $annotation->content;
+            $annotation->content = $annotation->text;
         }
     }
 

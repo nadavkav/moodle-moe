@@ -33,20 +33,21 @@ class mod_moewiki_external extends external_api {
     
     public static function create_parameters() {
         return new external_function_parameters(array(
-            new external_single_structure(array(
-                'ranges' => new external_single_structure(array(
-                    'start'       => new external_value(PARAM_TEXT, "The annotaion start element"),
-                    'end'         => new external_value(PARAM_TEXT, "The annotation end element"),
-                    'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
-                    'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
-                )),
+                'ranges' => new external_multiple_structure(
+                    new external_single_structure(array(
+                        'start'       => new external_value(PARAM_TEXT, "The annotaion start element"),
+                        'end'         => new external_value(PARAM_TEXT, "The annotation end element"),
+                        'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
+                        'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
+                    ))
+                ),
                 'quote' => new external_value(PARAM_TEXT),
-                'links' => new external_multiple_structure(new external_single_structure(array(
+/*                 'links' => new external_multiple_structure(new external_single_structure(array(
                     'type' => new external_value(PARAM_SAFEPATH),
                     'rel'  => new external_value(PARAM_ALPHAEXT),
                     'href' => new external_value(PARAM_URL),
-                )), "annotauion links", false),
-                'permissions' => new external_single_structure(array(
+                )), "annotauion links", false), */
+                /* 'permissions' => new external_single_structure(array(
                     'read' => new external_single_structure(array(
                         'group' => new external_value(PARAM_ALPHAEXT)
                     )),
@@ -59,18 +60,52 @@ class mod_moewiki_external extends external_api {
                     'update' => new external_single_structure(array(
                         'group' => new external_value(PARAM_ALPHAEXT)
                     )),
-                ), "annotaion permissino", false),
-                'text' => new external_value(PARAM_TEXT)
-            )),
+                ), "annotaion permissino", false), */
+                'text' => new external_value(PARAM_TEXT),
         ));
     }
     
-    public static function create($annotation) {
+    public static function create($ranges, $quote, $text) {
+        global $DB,$USER;
         
+        $annotation = new stdClass();
+        $annotation->pageid = 1;
+        $annotation->userid = $USER->id;
+        $annotation->created = time();
+        $annotation->quote = $quote;
+        $annotation->text = $text;
+        $annotation->updated = $annotation->created;
+        $annotation->id = $DB->insert_record('moewiki_annotations', $annotation);
+        
+        foreach ($ranges as $range) {
+            $rangeobj = new stdClass();
+            $rangeobj->start = $range['start'];
+            $rangeobj->end = $range['end'];
+            $rangeobj->startoffset = $range['startOffset'];
+            $rangeobj->endoffset = $range['endOffset'];
+            $rangeobj->annotaionid = $annotationid;
+            $DB->insert_record('mowiki_annotations_ranges', $rangeobj);
+        }
+        $annotation->ranges = $ranges;
+        return $annotation;
     }
     
     public static function create_returns() {
-        return new
+        return new external_single_structure(array(
+            'created' => new external_value(PARAM_TEXT),
+            'quote'   => new external_value(PARAM_TEXT),
+            'text'    => new external_value(PARAM_TEXT),
+            'updated' => new external_value(PARAM_TEXT),
+            'ranges'  => new external_multiple_structure(
+                new external_single_structure(array(
+                        'start'       => new external_value(PARAM_TEXT, "The annotaion start element"),
+                        'end'         => new external_value(PARAM_TEXT, "The annotation end element"),
+                        'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
+                        'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
+                    ))
+            ),
+            'userid' => new external_value(PARAM_INT),
+        ));
     }
     
     public static function search_parameters() {
