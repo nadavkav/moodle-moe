@@ -27,8 +27,10 @@
 	text-align: right;
 	line-height: 2em;
 }
-
-.usermenu .login {
+.usermenu .moodle-actionmenu .toggle-display:hover{
+    color: #a2eff4;
+}
+.usermenu .login,.usermenu .login a:hover, .usermenu .login a:focus {
 	color: #ffffff;
 }
 
