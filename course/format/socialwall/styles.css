@@ -122,7 +122,7 @@
 }
 
 .format-socialwall .tl-text {
-	padding-top:5px;    
+	padding: 0 5px;   
 	margin-left: 40px;
     border-left: 2px solid #efefef;
 }
