@@ -148,7 +148,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="mowiki_annotations_ranges" PREVIOUS="moewiki_annotations" COMMENT="ranges for the annaotaions remarks">
+    <TABLE NAME="moewiki_annotations_ranges" PREVIOUS="moewiki_annotations" COMMENT="ranges for the annaotaions remarks">
         <FIELDS>
             <FIELD SEQUENCE="true" TYPE="int" LENGTH="10" NOTNULL="true" NAME="id"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotaionid"/>
