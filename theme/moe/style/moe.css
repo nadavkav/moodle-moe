@@ -56,6 +56,24 @@
 	padding-left:0px;
 	margin-top:0px;
 }
+.format-socialwall .tl-locked, .tl-postcomment, .tl-sticky, .tl-edited-wrapper {
+    float:right;
+    margin-left: 5px;
+	margin-top:0px;
+	margin-bottom:0px!important;
+	padding-bottom:0px!important;
+}
+
+
+.format-socialwall .tl-edited-wrapper {
+    background: #ff974a;
+    color: white;
+    font-size: 10px;
+    line-height: 10px;
+    padding: 3px;
+    border-radius: 3px;
+	
+}
 
 
 .format-socialwall .tl-timeago, .tl-counts {
@@ -90,8 +108,8 @@
 
 .tl-action-icons ~ .tl-posttext 
 {
-	
 	margin-right:1.875em!important;
+	
 	
 }
 .format-socialwall .tl-post {
@@ -116,8 +134,8 @@ margin-right: 0px;
 
 .tl-smallicon
 {
-margin-right: 0px;
-	padding-right:0px;
+margin-right: 0px!important;
+	padding-right:0px!important;
 }
 
 
@@ -141,12 +159,6 @@ margin-right: 0px;
 
 
 
-
-.format-socialwall .tl-locked, .tl-postcomment, .tl-sticky, .tl-edited-wrapper {
-    float:right;
-    margin-left: 5px;
-	margin-top:0px;
-}
 
 
   	
@@ -322,6 +334,7 @@ margin-right: 0px;
 	-moz-border-radius: 10px;
 	margin-right:1.875em!important;
 	-moz-margin-right:1.875em!important;
+    
 }
 
 
