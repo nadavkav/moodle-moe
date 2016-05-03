@@ -487,7 +487,7 @@ WHERE
         upgrade_mod_savepoint(true, 2014031100, 'moewiki');
     }
 
-    if ($oldversion < 2016050100) {
+    if ($oldversion < 2016050301) {
         $table = new xmldb_table('moewiki_annotations');
         $dbman->add_field($table, new xmldb_field('created', XMLDB_TYPE_INTEGER, '10', null, true, false, time()));
         $dbman->add_field($table, new xmldb_field('quote', XMLDB_TYPE_TEXT, null, null, false, false));
@@ -497,12 +497,12 @@ WHERE
         $dbman->add_field($table, new xmldb_field('updated', XMLDB_TYPE_INTEGER, '10', null, true, false, time()));
         
         
-        $table =  new xmldb_table('mowiki_annotations_ranges');
+        $table =  new xmldb_table('moewiki_annotations_ranges');
         if (!$dbman->table_exists($table)) {
-            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/mod/moewiki/db/install.xml', 'mowiki_annotations_ranges');
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/mod/moewiki/db/install.xml', 'moewiki_annotations_ranges');
         }
         
-        upgrade_mod_savepoint(true, 2016050100, 'moewiki');
+        upgrade_mod_savepoint(true, 2016050301, 'moewiki');
     }
     // Must always return true from these functions
     return true;
