@@ -537,6 +537,36 @@ border-top: none;
 	border-width: 3px;
 	background-color: #fcf3e6;
 }
+.format-topics #section-0 {
+	margin-top: 5px;
+}
+
+.format-topics .content h3.sectionname {
+    border: none;	
+}
+
+.format-topics .course-content ul.topics{
+	border: 1px solid #c8bdd4;
+	background-image: url([[pix:theme_moe|bg/Bg_divider]]);
+	background-repeat: repeat-y;
+	background-size: contain;
+}
+
+.format-topics .course-content ul.topics li {
+	background-color: #ffffff;
+}
+
+.format-topics  .course-content ul li.section.main {
+	padding: 0px 0 !important; */
+}
+
+.format-topics .course-content ul.topics li.section .content{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.format-topics .course-content ul.topics li.section .summary {
+	margin-right: 1em;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
