@@ -13,19 +13,14 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 			app.include(annotator.ui.main, {
 			    element: document.querySelector('.moewiki_content')
 			});
+			app.include(annotator.identity.simple);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
-			     app.annotations.load(params);
+			     var promise = app.annotations.store.query(params);
+			     promise.then(function(data){
+			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);
+			     });
 			});
-			/*var promises = ajax.call([
-			    { methodname: 'moe_wiki_search', args: { wikiid: 186} }
-			]);
-			promises[0].done(function(response) {
-			       console.log('mod_moewiki/pluginname is' + response);
-			   }).fail(function(ex) {
-			       // do something with the exception
-				   console.log('mod_moewiki/pluginname is' + ex);
-			   });*/
 		},
 		moodlestorage: function (options) {
 			// This gets overridden on app start
@@ -42,8 +37,14 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 		    };
 
 		    var storage = {
-					create : function(annotaion) {
-						return this.ajaxcall('create', annotaion);
+					create : function(annotation) {
+						if(typeof annotation === 'undefined' || annotation === null){
+							annotation = {};
+						}
+						var reg = /id=[0-9]+/;
+						annotation.page = reg.exec(window.location.search);
+						annotation.page = annotation.page[0].substring(3);
+						return this.ajaxcall('create', annotation);
 					},
 					query : function(wikiid){
 						return this.search(wikiid);
@@ -56,7 +57,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 						var data = {};
 						data.methodname = 'moe_wiki_'+action;
 						data.args = obj;
-						return ajax.call([data]);
+						return ajax.call([data])[0];
 					}
 				};
 
