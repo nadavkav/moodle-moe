@@ -52,6 +52,9 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 					search: function(wikiid){
 						return this.ajaxcall('search', {'wikiid': wikiid});
 					},
+					'delete' : function(annotation){
+						return this.ajaxcall('delete',{'id' : annotation.id});
+					},
 					ajaxcall: function(action,obj){
 						var id = obj && obj.id;
 						var data = {};
