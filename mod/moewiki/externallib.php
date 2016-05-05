@@ -210,14 +210,32 @@ class mod_moewiki_external extends external_api
     
     public static function update_parameters () {
         return new external_function_parameters(array(
-            'id' => new external_value(PARAM_INT,'annotation id'),
+            'id'      => new external_value(PARAM_INT),
+            'created' => new external_value(PARAM_TEXT),
+            'quote'   => new external_value(PARAM_TEXT),
+            'text'    => new external_value(PARAM_TEXT),
+            'updated' => new external_value(PARAM_TEXT),
+            'ranges'  => new external_multiple_structure(new external_single_structure(array(
+                'start'       => new external_value(PARAM_TEXT, "The annotaion start element"),
+                'end'         => new external_value(PARAM_TEXT, "The annotation end element"),
+                'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
+                'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
+            ))),
         ));
     }
     
-    public static function update($annotation) {
+    public static function update($id, $created, $quote, $text, $updated, $ranges, $userid) {
         global $DB;
         
-        
+        $annotation = new stdClass();
+        $annotation->id = $id;
+        $annotation->text = $text;
+        $annotation->updated = time();
+        $annotation->quote = $quote;
+        $annotation->userid = $userid;
+        $DB->update_record('moewiki_annotations', $annotation);
+        $annotation->created = $created;
+        $annotation->ranges = $ranges;
         return $annotation;
     }
     
