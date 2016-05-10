@@ -573,6 +573,118 @@ border-top: none;
 .format-topics .course-content ul.topics li.section .summary {
 	margin-right: 1em;
 }
+.path-mod-assign #region-main div[role="main"] > h2 > span {
+	background-image: url([[pix:theme|bg/headerBG]]);
+	padding: 0.2em;
+	background-repeat: no-repeat;
+	border: 1px solid #af9dbb;
+	border-bottom: 0px;
+	background-size: cover;
+	color: #000000;
+	font-size: 0.8em;
+}
+
+.path-mod-assign #region-main div[role="main"] > h2 {
+	margin-bottom: -1px;
+}
+
+.path-mod-assign #region-main div[role="main"] #intro, .path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	background-color: #f0eee4;
+	border: 1px solid #af9dbb;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 10px;
+}
+
+.path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	border-bottom: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary, .path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"]  .gradingtable {
+	background-color: #f0eee4;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-left:  1px solid #af9dbb;
+	border-right:  1px solid #af9dbb;
+	padding: 10px;
+}
+
+.path-mod-assign #region-main div[role="main"]  .gradingtable {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingbatchoperationsform, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
+	background-color: #f0eee4;
+	margin: 0px;
+	border-left:  1px solid #af9dbb;
+	border-right:  1px solid #af9dbb;
+	padding: 10px;
+}
+
+.path-mod-assign .gradingtable tr.unselectedrow td {
+	background-color: #f0eee4;
+}
+
+.path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
+	border-bottom:  1px solid #af9dbb;
+}
+
+.path-mod-assign #region-main div[role="main"] .generaltable tbody>tr:nth-child(odd)>td {
+	background-color: #e8e6de;
+}
+
+.path-mod-assign td.submissionnotgraded {
+	background-color: #d4d4ce;
+}
+
+.path-mod-assign #region-main div[role="main"] input[type="submit"] {
+	background-color: #00716e;
+}
+
+.path-mod-assign #region-main div[role="main"] a:link {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] a:visited {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary > h3, .path-mod-assign #region-main div[role="main"] .submissionstatustable > h3 {
+	margin-top: 0;
+}
+
+.dir-rtl .btn-group>.btn:first-child {
+	margin-right: 0;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-bottom-right-radius: 4px;
+	margin-left: 0;
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.dir-rtl .btn-group>.btn:last-child, .dir-rtl .btn-group>.dropdown-toggle {
+	-webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
+	-webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    border-bottom-right-radius: 0px;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
