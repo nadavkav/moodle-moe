@@ -602,6 +602,11 @@ border-top: none;
 	border: none;
 	background-color: #f0eee4;
 }
+
+#page-mod-assign-grading div.urlselect label {
+	display: inline-block;
+	margin: 1em;
+}
 .path-mod-assign #region-main div[role="main"] > h2 {
 	margin-bottom: -1px;
 }
@@ -694,6 +699,10 @@ border-top: none;
     -webkit-border-bottom-right-radius: 0px;
     -moz-border-radius-bottomright: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.dir-rtl .form-item .form-label, .dir-rtl .mform .fitem div.fitemtitle {
+	text-align: right;
 }
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
