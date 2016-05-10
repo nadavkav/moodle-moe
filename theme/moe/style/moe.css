@@ -1196,62 +1196,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	display:none;
 }
 
-/*titles*/
-#page-mod-glossary-view .entrybox table+div:nth-of-type(2n) {
-	
-	background-color: #f2ece2!important;
+#page-mod-glossary-view .entrybox .paging~ :nth-child(2n)
+{
+	background-color: #fbf4e7 ;
 	width: 100% !important;
 	border-bottom: 1px solid #c8d3cb;
 }
 
-#page-mod-glossary-view .entrybox table+div:nth-of-type(2n+1) {
-	background-color: #fbf4e7;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-
-/*terms*/
-#page-mod-glossary-view .entrybox  table+div:nth-of-type(2n)~ .glossarypost.encyclopedia{
-	background-color: #f2ece2!important;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-
-
-#page-mod-glossary-view .entrybox  table+div:nth-of-type(2n+1)~ .glossarypost.encyclopedia{
-	background-color: #fbf4e7;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-
-
-
-
-/*first child*/
-#page-mod-glossary-view .entrybox .paging+div {
+#page-mod-glossary-view .entrybox  .paging~ :nth-child(2n+1)
+{
 	background-color: #f2ece2;
 	width: 100% !important;
 	border-bottom: 1px solid #c8d3cb;
 }
-
-
-
-#page-mod-glossary-view .entrybox  .paging+div ~ .glossarypost.encyclopedia{
-	background-color: #f2ece2;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-
-/*order by date*/
-#page-mod-glossary-view .entrybox  .glossarypost.encyclopedia:nth-of-type(2n){
-	background-color: #fbf4e7;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-
-#page-mod-glossary-view .entrybox  .glossarypost.encyclopedia:nth-of-type(2n+1){
-	background-color: #f2ece2;
-	width: 100% !important;
-	border-bottom: 1px solid #c8d3cb;
-}
-	
