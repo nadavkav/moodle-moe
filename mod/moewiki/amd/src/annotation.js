@@ -14,6 +14,8 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 			    element: document.querySelector('.moewiki_content')
 			});
 			app.include(annotator.identity.simple);
+			app.include(annotator.authz.acl);
+			app.include(remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params);
@@ -80,3 +82,17 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 	};
 	return annotation;
 });
+
+function remarks() {
+	return {
+		annotationsLoaded: function(annotations) {
+			editor = new Annotator.Editor;
+			editor.addField({
+				     label: 'My custom input field',
+			         type:  'textarea',
+			         load:  someLoadCallback,
+			         save:  someSaveCallback,
+			       });
+		}
+	};
+}
