@@ -13842,6 +13842,7 @@ Editor.template = [
     '     <a href="#cancel" class="annotator-cancel">' + _t('Cancel') + '</a>',
     '      <a href="#save"',
     '         class="annotator-save annotator-focus">' + _t('Save') + '</a>',
+    '      <a href="#solved" class="annotator-solved">' + _t('Solved') + '</a>',
     '    </div>',
     '  </form>',
     '</div>'
