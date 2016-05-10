@@ -850,6 +850,14 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	margin: 0 0.5em;
 }
 
+.onetopic .btn.btn-navbar {
+	margin-bottom: 1em;
+	background-color: #009ca8;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 13px;
+}
+
 .que .formulation {
 	background-color: #f1efe3;
 	border-color: #c6bed3;
