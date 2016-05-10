@@ -583,14 +583,31 @@ border-top: none;
 	color: #000000;
 	font-size: 0.8em;
 }
+#page-mod-assign-grading #region-main div[role="main"] {
+	background-image: url([[pix:theme|bg/Bg_divider]]);
+	border: 1px solid #af9dbb;
+}
 
+#page-mod-assign-grading #region-main div[role="main"] >h2 {
+	background-color: #f0eee4;
+    border-top: 1px solid #af9dbb;
+}
+
+#page-mod-assign-grading #region-main div[role="main"] > h2 > span {
+	background: none;
+	border: none;
+}
+
+#page-mod-assign-grading #fitem_id_submitbutton {
+	border: none;
+	background-color: #f0eee4;
+}
 .path-mod-assign #region-main div[role="main"] > h2 {
 	margin-bottom: -1px;
 }
 
 .path-mod-assign #region-main div[role="main"] #intro, .path-mod-assign #region-main div[role="main"] .urlselect > form > div {
 	background-color: #f0eee4;
-	border: 1px solid #af9dbb;
 	margin-top: 0;
 	margin-bottom: 0;
 	padding: 10px;
@@ -604,8 +621,6 @@ border-top: none;
 	background-color: #f0eee4;
 	margin-top: 0;
 	margin-bottom: 0;
-	border-left:  1px solid #af9dbb;
-	border-right:  1px solid #af9dbb;
 	padding: 10px;
 }
 
@@ -617,17 +632,12 @@ border-top: none;
 .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingbatchoperationsform, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
 	background-color: #f0eee4;
 	margin: 0px;
-	border-left:  1px solid #af9dbb;
-	border-right:  1px solid #af9dbb;
 	padding: 10px;
 }
 
-.path-mod-assign .gradingtable tr.unselectedrow td {
+.path-mod-assign .gradingtable tr.unselectedrow td,
+.path-mod-assign .quickgradingform .mform fieldset {
 	background-color: #f0eee4;
-}
-
-.path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
-	border-bottom:  1px solid #af9dbb;
 }
 
 .path-mod-assign #region-main div[role="main"] .generaltable tbody>tr:nth-child(odd)>td {
