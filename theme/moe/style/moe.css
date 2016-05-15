@@ -1052,7 +1052,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background-image: url([[pix:theme|bg/learning-spaces]]);
 	background-repeat: no-repeat;
 	background-size: 100%;
-	width: 100%;
 	height:10px;
 	display: block;
 	border-top: #beb1cc 1px solid;
@@ -1069,6 +1068,25 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .format-socialwall div[role=main] .course-content ul.topics li.section .content {
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+.format-socialwall div[role=main] .course-content ul.topics {
+	border-right: #bad4cd 1px solid;
+	border-left:  #bad4cd 1px solid;
+}
+
+.format-socialwall div[role=main] .course-content ul.topics ul.tl-posts, .format-socialwall div[role=main] .course-content ul.topics ul.tl-posts li.tl-post{
+	border-top: #bad4cd 1px solid !important;
+	border-bottom:  #bad4cd 1px solid !important;
+}
+
+.format-socialwall .tl-post-actionarea {
+	border: 2px solid #cccccc;
+}
+
+.format-socialwall h3.sectionname {
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 @media screen and (max-width:26em) {
