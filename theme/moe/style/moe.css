@@ -620,6 +620,21 @@ border-top: none;
 .format-topics .course-content ul.topics li.section .summary {
 	margin-right: 1em;
 }
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+	line-height: 22px;
+	height: 22px;
+	width: 26px;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton .trafficlight {
+	display: none;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton.thispage .thispageholder .qnbutton.answersaved .thispageholder {
+	border-width: 1px;
+}
+
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2{
 	   font-size:2em;
