@@ -13,14 +13,42 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 			app.include(annotator.ui.main, {
 			    element: document.querySelector('.moewiki_content')
 			});
+			function remarks() {
+				return {
+					start: function (app) {
+						viewer = new annotator.ui.viewer.Viewer({defaultFields: false});
+						viewer.setRenderer(this.annotationEditorShown);
+					},
+					annotationsLoaded: function(annotations) {
+						for (key in annotations) {
+							
+						} 
+					},
+					beforeAnnotationCreated: function(annotation) {
+						annotation.page = params.wikiid;
+						annotation.userpage = params.userpage;
+					},
+					annotationEditorShown : function(annotation){
+						return '<img src="'+ annotation.userpicture +'" />';
+					}
+				};
+			}
+			/*var editor = new annotator.ui.editor.Editor();
+			editor.addField({
+			     label: 'My custom input field',
+		         type:  'checkbox',
+		         load:  remarks,
+		         save:  remarks,
+		       });*/
 			app.include(annotator.identity.simple);
 			app.include(annotator.authz.acl);
 			app.include(remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
-			     var promise = app.annotations.store.query(params);
+			     var promise = app.annotations.store.query(params.wikiid,params.userpage);
 			     promise.then(function(data){
 			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);
+			    	 app.ident.identity = params.userid;
 			     });
 			});
 		},
@@ -43,16 +71,16 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 						if(typeof annotation === 'undefined' || annotation === null){
 							annotation = {};
 						}
-						var reg = /id=[0-9]+/;
-						annotation.page = reg.exec(window.location.search);
-						annotation.page = annotation.page[0].substring(3);
 						return this.ajaxcall('create', annotation);
 					},
-					query : function(wikiid){
-						return this.search(wikiid);
+					query : function(wikiid,userpage){
+						return this.search(wikiid,userpage);
 					},
-					search: function(wikiid){
-						return this.ajaxcall('search', {'wikiid': wikiid});
+					search: function(wikiid,userpage){
+						return this.ajaxcall('search', {
+							'wikiid': wikiid,
+							'userpage' : userpage
+						});
 					},
 					'delete' : function(annotation){
 						return this.ajaxcall('delete',{'id' : annotation.id});
@@ -82,17 +110,3 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 	};
 	return annotation;
 });
-
-function remarks() {
-	return {
-		annotationsLoaded: function(annotations) {
-			editor = new Annotator.Editor;
-			editor.addField({
-				     label: 'My custom input field',
-			         type:  'textarea',
-			         load:  someLoadCallback,
-			         save:  someSaveCallback,
-			       });
-		}
-	};
-}
