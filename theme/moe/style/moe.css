@@ -661,8 +661,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 /*main page*/
-#page-mod-glossary-view .span9 {
+#page-mod-glossary-view #region-main {
 	background-color: #f9ebd0;
+	border: 1px solid #a8c0b9;
 }
 
 #page-mod-glossary-view  .glossarydisplay {
