@@ -38,6 +38,7 @@
     margin-right: 100px;
 }
 
+
 .format-socialwall #postform #fgroup_id_group_1 {
     margin-top:30px;
     float:right;
@@ -69,6 +70,7 @@
     margin: 10px 0px;
 }
 
+
 .format-socialwall .tl-commentform .mform .fitem div.fitemtitle {
     width: 10px;
 }
@@ -79,7 +81,8 @@
 
 .format-socialwall .tl-comment-replywrapper .tl-actionlink {
     text-align: right;
-    border-top : 1px solid #cccccc;
+
+  border-top : 1px solid #cccccc;
 }
 
 .format-socialwall .tl-posts .section li.activity {
@@ -92,33 +95,37 @@
     line-height: 18px;
 }
 
+
 .format-socialwall .tl-post {
     margin: 30px 0;
 }
 
-.format-socialwall .tl-leftcol, .tl-author   {
+.format-socialwall .tl-leftcol ,.tl-author {
     float:left;
-    width:40px;
+    width:40px;	
 }
 
 .format-socialwall .tl-author {
     margin-bottom: 10px;
+	
 }
 
 .format-socialwall .tl-text {
-    margin-left: 40px;
-    padding: 0 5px;
+	padding: 0 5px;   
+	margin-left: 40px;
     border-left: 2px solid #efefef;
 }
 
-.format-socialwall .tl-comments .tl-text {
-    border: none;
+.formal-socialwall .tl-comments .tl-text{
+	border:none;
 }
+
+
 
 .format-socialwall .tl-authorname {
     font-weight: bold;
     font-size: 14px;
-}
+  	}
 
 .format-socialwall .tl-locked, .tl-postcomment, .tl-sticky, .tl-edited-wrapper {
     float:right;
@@ -140,6 +147,12 @@
     line-height: 10px;
 }
 
+
+
+
+
+
+
 .format-socialwall .tl-counts span {
     margin-right: 6px;
 }
@@ -155,7 +168,8 @@
 
 .format-socialwall .tl-showall {
     text-align: center;
-    border-top: 1px solid #efefef;
+	padding-bottom:5px;
+   border-top: 1px solid #efefef;
     border-bottom: 1px solid #efefef;
 }
 
@@ -203,6 +217,8 @@
     padding-left: 0px;
 }
 
+
+
 .format-socialwall .tl-post-actionarea {
     border-top: 1px solid #cccccc;
     padding: 4px;
@@ -216,11 +232,12 @@
 
 .format-socialwall.tl-commentform .fitemtitle {
     display:none;
+   
 }
-
 .format-socialwall .tl-commentform .mform .fitem .felement.ftextarea {
     margin-left: 0;
 }
+
 
 .format-socialwall .tl-commentform .tl-commenttext {
     width: 97%;
