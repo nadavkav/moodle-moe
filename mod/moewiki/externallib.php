@@ -48,25 +48,26 @@ class mod_moewiki_external extends external_api
                     'rel'  => new external_value(PARAM_ALPHAEXT),
                     'href' => new external_value(PARAM_URL),
                 )), "annotauion links", false), */
-                /* 'permissions' => new external_single_structure(array(
+            'permissions' => new external_single_structure(array(
                     'read' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT)
-                    )),
+                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
+                    ),'',false, array('group' => '')),
                     'delete' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT)
-                    )),
+                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
+                    ),'',false, array('group' => '')),
                     'admin' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT)
-                    )),
+                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
+                    ),'',false,array('group' => '')),
                     'update' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT)
-                    )),
-                ), "annotaion permissino", false), */
-                'text' => new external_value(PARAM_TEXT)
+                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
+                    ),'',false,array('group' => '')),
+                ), "annotaion permissino", false, array()),
+            'text' => new external_value(PARAM_TEXT),
+            'userpage' => new external_value(PARAM_INT)
         ));
     }
 
-    public static function create($ranges, $quote, $page, $text)
+    public static function create($ranges, $quote, $page, $permissions, $text, $userpage)
     {
         global $DB, $USER;
         
@@ -77,6 +78,7 @@ class mod_moewiki_external extends external_api
         $annotation->quote = $quote;
         $annotation->text = $text;
         $annotation->updated = $annotation->created;
+        $annotation->userpage = $userpage;
         $annotation->id = $DB->insert_record('moewiki_annotations', $annotation);
         
         foreach ($ranges as $range) {
@@ -113,16 +115,18 @@ class mod_moewiki_external extends external_api
     public static function search_parameters()
     {
         return new external_function_parameters(array(
-            'wikiid' => new external_value(PARAM_INT, "The wiki ID")
+            'wikiid' => new external_value(PARAM_INT, "The wiki ID"),
+            'userpage' => new external_value(PARAM_INT, "The user page ID")
         ));
     }
 
-    public static function search($wikiid)
+    public static function search($wikiid,$userpage)
     {
-        global $DB;
+        global $DB, $PAGE;
         
         $annotations = $DB->get_records('moewiki_annotations', array(
-            'pageid' => $wikiid
+            'pageid' => $wikiid,
+            'userpage' => $userpage
         ));
         $annotationsreturn = array();
         $total=0;
@@ -144,6 +148,17 @@ class mod_moewiki_external extends external_api
             $annotationsreturn[$key]->text = $annotation->text;
             $annotationsreturn[$key]->created = $annotation->created;
             $annotationsreturn[$key]->updated = $annotation->updated;
+            $annotationsreturn[$key]->userid = $annotation->userid;
+            $user = new stdClass();
+            $user->id = $annotation->userid;
+            $userpicture = new user_picture($user);
+            $course = $DB->get_record_select('course',
+                'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($wikiid),
+                '*', MUST_EXIST);
+            $modinfo = get_fast_modinfo($course);
+            $cm = $modinfo->get_cm($wikiid);
+            $PAGE->set_cm($cm);
+            $annotationsreturn[$key]->userpicture = $userpicture->get_url($PAGE)->out();
             $total++;
         }
         return array(
@@ -186,6 +201,8 @@ class mod_moewiki_external extends external_api
             'text' => new external_value(PARAM_TEXT),
             'created' => new external_value(PARAM_TEXT),
             'updated' => new external_value(PARAM_TEXT),
+            'userid' => new external_value(PARAM_INT),
+            'userpicture' => new external_value(PARAM_URL),
         )))));
     }
     

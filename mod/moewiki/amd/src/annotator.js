@@ -13842,6 +13842,7 @@ Editor.template = [
     '     <a href="#cancel" class="annotator-cancel">' + _t('Cancel') + '</a>',
     '      <a href="#save"',
     '         class="annotator-save annotator-focus">' + _t('Save') + '</a>',
+    '      <a href="#replay" class="annotator-replay">' + _t('replay') + '</a>',
     '      <a href="#solved" class="annotator-solved">' + _t('Solved') + '</a>',
     '    </div>',
     '  </form>',
@@ -15303,7 +15304,8 @@ var Viewer = exports.Viewer = Widget.extend({
         if (this.options.defaultFields) {
             this.addField({
                 load: function (field, annotation) {
-                    $(field).html(self.render(annotation));
+                	$(field).prepend('<img src="' + annotation.userpicture +'" class="anottatepicture"/>');
+                    $(field).append('<span>' +self.render(annotation)+ '</span>');
                 }
             });
         }
