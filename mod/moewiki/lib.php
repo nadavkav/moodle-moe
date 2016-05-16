@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 /* Do not include any libraries here! */
 
 function moewiki_add_instance($data, $mform) {
-    global $DB;
+    global $DB, $COURSE, $USER;
 
     $cmid = $data->coursemodule;
     $context = context_module::instance($cmid);
@@ -57,6 +57,34 @@ function moewiki_add_instance($data, $mform) {
         if (isset($mform) && $filename = $mform->get_new_filename('template_file')) {
             $file = $mform->save_stored_file('template_file', $context->id, 'mod_moewiki', 'template', $moewikiid, '/', $filename);
             $DB->set_field('moewiki', 'template', '/'.$file->get_filename(), array('id' => $formdata->id));
+        }
+        
+        //if there is a text template for all students to be implemented
+        if($texttemplate = $data->template_text['text']) {
+            $cmid = $data->coursemodule;
+            $cm = $DB->get_record('course_modules', array("id" => $cmid));
+            $context = context_module::instance($cmid);
+            $moewiki = $DB->get_record_select('moewiki', 'id = ?', array($moewikiid));
+            $coursecontext = context_course::instance($COURSE->id);
+            
+            //Create the user's wiki
+            $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $USER->id);
+            //create the wiki main page
+            $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
+            //put the template text in the user's main page
+            moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
+            
+            //find all the course students
+            $students = get_users_from_role_on_context($DB->get_record('role', array("shortname" => "student")), $coursecontext);
+            foreach ($students as $student) {
+                //Create student's wiki
+                $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $student->userid);
+                //create the wiki main page
+                $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
+                //put the template text in the students main page
+                moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
+            }
+        
         }
 
         return $moewikiid;

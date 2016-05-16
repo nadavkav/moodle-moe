@@ -89,6 +89,11 @@ class mod_moewiki_mod_form extends moodleform_mod {
         $mform->addElement('filepicker', 'template_file', get_string('template', 'moewiki'), null, $filepickeroptions);
         $mform->addHelpButton('template_file', 'template', 'moewiki');
 
+        
+        //Text template to implement on all students
+        $mform->addElement('editor', 'template_text', get_string('template', 'moewiki'), null, array('rows' => 10), array('maxfiles' => EDITOR_UNLIMITED_FILES,
+            'noclean' => true, 'context' => $this->context, 'subdirs' => true));
+
         // Wordcount
         $wordcountoptions = array('0' => get_string('no'), '1' => get_string('yes'));
         $mform->addElement('select', 'enablewordcount', get_string('showwordcounts', 'moewiki'), $wordcountoptions);
