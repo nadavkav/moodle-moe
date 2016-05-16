@@ -482,7 +482,44 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 		{
 		display: none;
 	}
+
+#page-mod-glossary-view .singlebutton.glossaryaddentry {
+	
+	width: 100%
+	
 }
+#page-mod-glossary-view .singlebutton {
+	
+	
+	width: 100%
+	
+}
+
+#page-mod-glossary-view  .boxaligncenter {
+	
+	width: 100%
+}
+
+
+#page-mod-glossary-view  .nav-tabs a {
+	margin-top: 1em;
+	
+}
+
+
+#page-mod-glossary-view .nav-tabs>.active>a {
+	background-color: transparent !important;
+	border: 0px solid transparent;
+	box-shadow: inset 0 0 0 0px #e2d7ce, 0 0 0 0px #e2d7ce;
+	margin-top: 1.5em;
+	text-decoration: none;
+}
+
+}
+
+
+
+
 
 .path-mod-forum .discussioncontrols {
 	background-color: #c2e8e6;
@@ -911,7 +948,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 /*text inside each value*/
 #page-mod-glossary-view  .glossarypost p {
-	margin-right: 2.8em;
+	margin-right: 2.9em;
 }
 
 #page-mod-glossary-view  .glossarypost .commands {
@@ -935,7 +972,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view  .glossarypost.dictionary h4 {
 	padding-top: 1em;
-	padding-right: 2em;
+	padding-right: 1.8em;
 }
 #page-mod-glossary-view  .glossarypost.dictionary  {
 	text-align: right!important;
@@ -1250,7 +1287,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-#id_definition_editoreditable
+#page-mod-glossary-edit #id_definition_editoreditable
 	{
 		box-sizing: border-box!important;
 		display:block;
@@ -1258,37 +1295,4 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	
 	}
 
-@media screen and (max-width: 480px) {
-#page-mod-glossary-view .singlebutton.glossaryaddentry {
 	
-	width: 100%
-	
-}
-#page-mod-glossary-view .singlebutton {
-	
-	
-	width: 100%
-	
-}
-
-#page-mod-glossary-view  .boxaligncenter {
-	
-	width: 100%
-}
-
-
-#page-mod-glossary-view  .nav-tabs a {
-	margin-top: 1em;
-	
-}
-
-
-#page-mod-glossary-view .nav-tabs>.active>a {
-	background-color: transparent !important;
-	border: 0px solid transparent;
-	box-shadow: inset 0 0 0 0px #e2d7ce, 0 0 0 0px #e2d7ce;
-	margin-top: 1.5em;
-	text-decoration: none;
-}
-
-}	
