@@ -74,9 +74,9 @@ define('DEFAULT_SHOWPERCENTAGE', 0);
  * @return array
  */
 function block_progress_monitorable_modules() {
-    global $DB;
+    global $CFG, $DB;
 
-    return array(
+    $modules = array(
         'aspirelist' => array(
             'actions' => array(
                 'viewed' => array (
@@ -105,51 +105,116 @@ function block_progress_monitorable_modules() {
                                      FROM {assign_submission}
                                     WHERE assignment = :eventid
                                       AND userid = :userid
+                                      AND status = 'submitted'",
+                'marked'       => "SELECT g.rawgrade
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
+                'passed'       => "SELECT g.finalgrade, i.gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
+            ),
+            'defaultAction' => 'marked',
+            'alternatelink' => array(
+                'url' => '/mod/assign/view.php?id=:cmid&action=grading',
+                'capability' => 'mod/assign:grade',
+            ),
+            'showsubmittedfirst' => true,
+        ),
+        'assign28on' => array(
+            'defaultTime' => 'duedate',
+            'actions' => array(
+                'submitted'    => "SELECT id
+                                     FROM {assign_submission}
+                                    WHERE assignment = :eventid
+                                      AND userid = :userid
                                       AND latest = 1
                                       AND status = 'submitted'",
-                'marked'       => "SELECT a.grade
-                                     FROM {assign_grades} a, {assign_submission} s, {grade_items} i, {grade_grades} g
+                'graded'       => "SELECT g.rawgrade
+                                     FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'assign'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND g.excluded = 0
-                                      AND s.assignment = :eventid1
-                                      AND s.userid = :userid1
-                                      AND latest = 1
-                                      AND a.assignment = s.assignment
-                                      AND a.userid = s.userid
-                                      AND a.attemptnumber = s.attemptnumber
-                                      AND a.grade IS NOT NULL",
-                'passed'       => "SELECT a.grade AS finalgrade, i.gradepass
-                                     FROM {assign_grades} a, {assign_submission} s, {grade_items} i, {grade_grades} g
-                                    WHERE i.itemmodule = 'assign'
-                                      AND i.iteminstance = :eventid
-                                      AND i.id = g.itemid
-                                      AND g.userid = :userid
-                                      AND g.excluded = 0
-                                      AND s.assignment = :eventid1
-                                      AND s.userid = :userid1
-                                      AND latest = 1
-                                      AND a.assignment = s.assignment
-                                      AND a.userid = s.userid
-                                      AND a.attemptnumber = s.attemptnumber
-                                      AND a.grade IS NOT NULL",
-                'passedby'     => "SELECT a.grade AS finalgrade, i.gradepass
-                                     FROM {assign_grades} a, {assign_submission} s, {grade_items} i, {grade_grades} g
-                                    WHERE i.itemmodule = 'assign'
-                                      AND i.iteminstance = :eventid
-                                      AND i.id = g.itemid
-                                      AND g.userid = :userid
-                                      AND g.excluded = 0
-                                      AND s.assignment = :eventid1
-                                      AND s.userid = :userid1
-                                      AND latest = 1
+                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
+                'marked'       => "SELECT a.grade AS finalgrade
+                                     FROM {assign_grades} a, {assign_submission} s
+                                    WHERE s.assignment = :eventid
+                                      AND s.userid = :userid
+                                      AND s.latest = 1
                                       AND a.assignment = s.assignment
                                       AND a.userid = s.userid
                                       AND a.attemptnumber = s.attemptnumber
                                       AND a.grade IS NOT NULL
-                                      AND a.grade >= i.gradepass",
+                                    UNION
+                                   SELECT g.finalgrade
+                                     FROM {grade_items} i, {grade_grades} g
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passed'       => "SELECT a.grade AS finalgrade, i.gradepass
+                                     FROM {assign_grades} a, {assign_submission} s, {grade_items} i
+                                    WHERE s.assignment = :eventid
+                                      AND s.userid = :userid
+                                      AND s.latest = 1
+                                      AND a.assignment = s.assignment
+                                      AND a.userid = s.userid
+                                      AND a.attemptnumber = s.attemptnumber
+                                      AND a.grade IS NOT NULL
+                                      AND i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid1
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_items} i, {grade_grades} g
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid2
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT a.grade
+                                     FROM {assign_grades} a, {assign_submission} s, {grade_items} i
+                                    WHERE s.assignment = :eventid
+                                      AND s.userid = :userid
+                                      AND s.latest = 1
+                                      AND a.assignment = s.assignment
+                                      AND a.userid = s.userid
+                                      AND a.attemptnumber = s.attemptnumber
+                                      AND a.grade IS NOT NULL
+                                      AND i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid1
+                                      AND a.grade >= i.gradepass
+                                    UNION
+                                   SELECT g.finalgrade
+                                     FROM {grade_items} i, {grade_grades} g
+                                    WHERE i.itemmodule = 'assign'
+                                      AND i.iteminstance = :eventid2
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
             ),
             'defaultAction' => 'marked',
             'alternatelink' => array(
@@ -182,15 +247,22 @@ function block_progress_monitorable_modules() {
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
-                'passedby'     => "SELECT g.finalgrade, i.gradepass
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'assignment'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
                                      FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'assignment'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)
-                                      AND g.finalgrade >= i.gradepass",
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
             ),
             'defaultAction' => 'submitted'
         ),
@@ -558,15 +630,22 @@ function block_progress_monitorable_modules() {
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
-                'passedby'     => "SELECT g.finalgrade, i.gradepass
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'lesson'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
                                      FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'lesson'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)
-                                      AND g.finalgrade >= i.gradepass",
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
             ),
             'defaultAction' => 'attempted',
             'alternatelink' => array(
@@ -705,15 +784,22 @@ function block_progress_monitorable_modules() {
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
-                'passedby'     => "SELECT g.finalgrade, i.gradepass
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'quiz'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
                                      FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'quiz'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)
-                                      AND g.finalgrade >= i.gradepass",
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
             ),
             'defaultAction' => 'finished',
             'alternatelink' => array(
@@ -761,15 +847,22 @@ function block_progress_monitorable_modules() {
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
-                'passedby'     => "SELECT g.finalgrade, i.gradepass
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'subcourse'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
                                      FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'subcourse'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)
-                                      AND g.finalgrade >= i.gradepass",
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
             ),
             'defaultAction' => 'graded'
         ),
@@ -846,6 +939,46 @@ function block_progress_monitorable_modules() {
             ),
             'defaultAction' => 'viewed'
         ),
+        'videoassessment' => array(
+            'defaultTime' => 'timedue',
+            'actions' => array(
+                'attempted'    => "SELECT id
+                                     FROM {videoassessment_video_assocs}
+                                    WHERE videoassessment = :eventid
+                                      AND associationid = :userid",
+                'graded'       => "SELECT g.rawgrade
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'videoassessment'
+                                      AND i.iteminstance = :eventid
+                                      AND i.itemnumber = 0
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
+                'passed'       => "SELECT g.finalgrade, i.gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'videoassessment'
+                                      AND i.iteminstance = :eventid
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'videoassessment'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'videoassessment'
+                                      AND i.iteminstance = :eventid
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
+            ),
+            'defaultAction' => 'attempted'
+        ),
         'vpl' => array(
             'defaultTime' => 'duedate',
             'actions' => array(
@@ -866,15 +999,22 @@ function block_progress_monitorable_modules() {
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)",
-                'passedby'     => "SELECT g.finalgrade, i.gradepass
+                                      AND g.finalgrade IS NOT NULL
+                                    UNION
+                                   SELECT 100 AS finalgrade, 0 AS gradepass
+                                     FROM {grade_grades} g, {grade_items} i
+                                    WHERE i.itemmodule = 'vpl'
+                                      AND i.iteminstance = :eventid1
+                                      AND i.id = g.itemid
+                                      AND g.userid = :userid1
+                                      AND g.excluded <> 0",
+                'passedby'     => "SELECT g.finalgrade
                                      FROM {grade_grades} g, {grade_items} i
                                     WHERE i.itemmodule = 'vpl'
                                       AND i.iteminstance = :eventid
                                       AND i.id = g.itemid
                                       AND g.userid = :userid
-                                      AND (g.finalgrade IS NOT NULL OR g.excluded <> 0)
-                                      AND g.finalgrade >= i.gradepass",
+                                      AND ((g.finalgrade IS NOT NULL AND g.finalgrade >= i.gradepass) OR g.excluded <> 0)",
             ),
             'defaultAction' => 'marked'
         ),
@@ -924,6 +1064,17 @@ function block_progress_monitorable_modules() {
             'showsubmittedfirst' => true,
         ),
     );
+
+    if ($CFG->version >= 2014072400) {
+        $modules['assign'] = $modules['assign28on'];
+    }
+    unset($modules['assign28on']);
+
+    if ($CFG->version > 2015111604) {
+        $modules['assign']['alternatelink']['url'] = '/mod/assign/view.php?id=:cmid&action=grade&userid=:userid';
+    }
+
+    return $modules;
 }
 
 /**
@@ -1117,10 +1268,10 @@ function block_progress_attempts($modules, $config, $events, $userid, $course) {
     foreach ($events as $event) {
         $module = $modules[$event['type']];
         $uniqueid = $event['type'].$event['id'];
-        $parameters = array('courseid' => $course, 'courseid1' => $course,
-                            'userid' => $userid, 'userid1' => $userid,
-                            'eventid' => $event['id'], 'eventid1' => $event['id'],
-                            'cmid' => $event['cm']->id, 'cmid1' => $event['cm']->id,
+        $parameters = array('courseid' => $course, 'courseid1' => $course, 'courseid2' => $course,
+                            'userid' => $userid, 'userid1' => $userid, 'userid2' => $userid,
+                            'eventid' => $event['id'], 'eventid1' => $event['id'], 'eventid2' => $event['id'],
+                            'cmid' => $event['cm']->id, 'cmid1' => $event['cm']->id, 'cmid2' => $event['cm']->id,
                       );
 
         // Check for passing grades as unattempted, passed or failed.
@@ -1206,8 +1357,7 @@ function block_progress_attempts($modules, $config, $events, $userid, $course) {
             array_key_exists('submitted', $module['actions']) &&
             isset($config->{'action_'.$uniqueid}) &&
             $config->{'action_'.$uniqueid} != 'submitted' &&
-            isset($config->{'showsubmitted_'.$uniqueid}) &&
-            $config->{'showsubmitted_'.$uniqueid} &&
+            (!isset($config->{'showsubmitted_'.$uniqueid}) || $config->{'showsubmitted_'.$uniqueid}) &&
             $attempts[$uniqueid] !== true &&
             $attempts[$uniqueid] !== 'failed'
         ) {
