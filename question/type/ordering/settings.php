@@ -15,13 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Ordering question type javascript plugins definition
+ * Ordering question settings page.
  *
  * @package    qtype_ordering
- * @copyright  2014 Gordon Bateson (gordon.bateson@gmail.com)
+ * @copyright  2016 Vadim Dvorovenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugins = array(
-    'ui.touch-punch' => array('files' => array('jquery-ui.touch-punch.js'))
-);
+defined('MOODLE_INTERNAL') || die;
+
+if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configselect('qtype_ordering/defaultanswerformat',
+            get_string('defaultanswerformat', 'qtype_ordering'), '', FORMAT_MOODLE, format_text_menu()));
+}

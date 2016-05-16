@@ -1,11 +1,25 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * The language strings for the QTYPENAME question type.
+ * Ordering question type language srings
  *
- * @copyright &copy; 2006 YOURNAME
- * @author YOUREMAILADDRESS
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
- * @package YOURPACKAGENAME
+ * @package    qtype_ordering
+ * @copyright  2013 Gordon Bateson (gordon.bateson@gmail.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['pluginname'] = 'Ordering';
@@ -15,15 +29,23 @@ $string['pluginnameadding'] = 'Adding an Ordering question';
 $string['pluginnameediting'] = 'Editing an Ordering question';
 $string['pluginnamesummary'] = 'Put jumbled items into a meaningful order.';
 
+$string['editingordering'] = 'Editing ordering question';
+$string['addingordering'] = 'Adding a Ordering question';
+
 $string['absoluteposition'] = 'Absolute position';
 $string['addmoreanswers'] = 'Add {$a} more items';
+$string['allornothing'] = 'All or nothing';
 $string['answer'] = 'Item text';
 $string['answerheader'] = 'Draggable item {no}';
 $string['correctorder'] = 'The correct order for these items is as follows:';
+$string['defaultanswerformat'] = 'Default answer format';
 $string['defaultquestionname'] = 'Drag the following items into the correct order.';
 $string['gradedetails'] = 'Grade details';
 $string['gradingtype'] = 'Grading type';
 $string['gradingtype_help'] = 'Choose the type of grading calculation.
+
+**All or nothing**
+: If all items are in the correct position, then full marks are awarded. Otherwise, the score is zero.
 
 **Absolute position**
 : An item is considered correct if it is in the same position as in the correct answer. The highest possible score for the question is **the same as** the number of items displayed to the student.
@@ -68,9 +90,3 @@ $string['selectrandom'] = 'Select a random subset of items';
 $string['selecttype_help'] = 'Choose whether to display all the items or a subset of the items.';
 $string['selecttype'] = 'Item selection type';
 $string['vertical'] = 'Vertical';
-
-// requred strings for Moodle 2.0
-$string['ordering'] = 'Ordering';
-$string['ordering_help'] = 'Several items are displayed in a jumbled order. The items can be dragged into a meaningful order.';
-$string['ordering_link'] = 'question/type/ordering';
-$string['orderingsummary'] = 'Put jumbled items into a meaningful order.';

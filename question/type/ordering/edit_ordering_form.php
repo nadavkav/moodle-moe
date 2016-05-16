@@ -15,41 +15,47 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the editing form for the multiple choice question type.
+ * Defines the editing form for the ordering question type.
  *
- * @package    qtype
- * @subpackage ordering
- * @copyright  2007 Jamie Pratt
+ * @package    qtype_ordering
+ * @copyright  2013 Gordon Bateson (gordon.bateson@gmail.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/** Prevent direct access to this script */
+// Prevent direct access to this script.
 defined('MOODLE_INTERNAL') || die();
 
-/** Include required files */
+// Include required files.
 require_once($CFG->dirroot.'/question/type/ordering/question.php');
 
 /**
  * Ordering editing form definition
- * (originally based on mutiple choice form)
  *
- * @copyright  2007 Jamie Pratt
+ * @copyright  2013 Gordon Bateson (gordon.bateson@gmail.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_ordering_edit_form extends question_edit_form {
 
-    const NUM_ANS_ROWS    =  2;
-    const NUM_ANS_COLS    = 60;
-    const NUM_ANS_DEFAULT =  6;
-    const NUM_ANS_MIN     =  3;
-    const NUM_ANS_ADD     =  3;
+    /** Rows count in answer field */
+    const NUM_ANS_ROWS = 2;
 
-    // this functionality is currently disabled
-    // because it is not fully functional
-    protected $use_editor_for_answers = true;
+    /** Cols count in answer field */
+    const NUM_ANS_COLS = 60;
+
+    /** Number of answers in question by default */
+    const NUM_ANS_DEFAULT = 6;
+
+    /** Minimal number of answers to show */
+    const NUM_ANS_MIN = 3;
+
+    /** Number of answers to add on demand */
+    const NUM_ANS_ADD = 3;
 
     /**
-     * unique name for this question type
+     * Unique name for this question type
+     *
+     * @return the question type name, should be the same as the name() method
+     *      in the question type class.
      */
     public function qtype() {
         return 'ordering';
@@ -62,48 +68,45 @@ class qtype_ordering_edit_form extends question_edit_form {
      */
     public function definition_inner($mform) {
 
-        // cache this plugins name
+        // Cache this plugins name.
         $plugin = 'qtype_ordering';
 
-        // layouttype
+        // Field for layouttype.
         $name = 'layouttype';
         $label = get_string($name, $plugin);
         $options = qtype_ordering_question::get_layout_types();
         $mform->addElement('select', $name, $label, $options);
         $mform->addHelpButton($name, $name, $plugin);
-        $mform->setDefault($name, 0);
+        $mform->setDefault($name, $this->get_default_value($name, qtype_ordering_question::LAYOUT_VERTICAL));
 
-        // selecttype
+        // Field for selecttype.
         $name = 'selecttype';
         $label = get_string($name, $plugin);
         $options = qtype_ordering_question::get_select_types();
         $mform->addElement('select', $name, $label, $options);
         $mform->addHelpButton($name, $name, $plugin);
-        $mform->setDefault($name, 0);
+        $mform->setDefault($name, $this->get_default_value($name, qtype_ordering_question::SELECT_ALL));
 
-        // selectcount
+        // Field for selectcount.
         $name = 'selectcount';
         $label = get_string($name, $plugin);
         $options = array(0 => get_string('all'));
-        for ($i=3; $i <= 20; $i++) {
+        for ($i = 3; $i <= 20; $i++) {
             $options[$i] = $i;
         }
         $mform->addElement('select', $name, $label, $options);
         $mform->disabledIf($name, 'selecttype', 'eq', 0);
         $mform->addHelpButton($name, $name, $plugin);
-        $mform->setDefault($name, 0);
+        $mform->setDefault($name, 6);
 
-        // gradingtype
+        // Field for gradingtype.
         $name = 'gradingtype';
         $label = get_string($name, $plugin);
         $options = qtype_ordering_question::get_grading_types();
         $mform->addElement('select', $name, $label, $options);
         $mform->addHelpButton($name, $name, $plugin);
-        $mform->setDefault($name, 0);
+        $mform->setDefault($name, $this->get_default_value($name, qtype_ordering_question::GRADING_ABSOLUTE_POSITION));
 
-        // answers (=items)
-        //     get_per_answer_fields()
-        //     add_per_answer_fields()
         $elements = array();
         $options = array();
 
@@ -113,33 +116,35 @@ class qtype_ordering_edit_form extends question_edit_form {
         $options[$name] = array('expanded' => true);
 
         $name = 'answer';
-        if (isset($this->question->id)) {
-            $elements[] = $mform->createElement('editor', $name, $label, $this->get_editor_attributes(), $this->get_editor_options());
-            $elements[] = $mform->createElement('submit', $name.'removeeditor', get_string('removeeditor', $plugin), array('onclick' => 'skipClientValidation = true;'));
-            //$elements[] = $mform->createElement('submit', $name.'removeitem', get_string('removeitem', $plugin));
-        } else {
-            $elements[] = $mform->createElement('textarea', $name, $label, $this->get_editor_attributes());
-        }
+        $elements[] = $mform->createElement('editor', $name, $label, $this->get_editor_attributes(), $this->get_editor_options());
+        $elements[] = $mform->createElement('submit', $name . 'removeeditor', get_string('removeeditor', $plugin),
+                array('onclick' => 'skipClientValidation = true;'));
         $options[$name] = array('type' => PARAM_RAW);
 
         $repeats = $this->get_answer_repeats($this->question);
-        $label = get_string('addmoreanswers', $plugin, self::NUM_ANS_ADD); // button text
+        $label = get_string('addmoreanswers', $plugin, self::NUM_ANS_ADD); // Button text.
         $this->repeat_elements($elements, $repeats, $options, 'countanswers', 'addanswers', self::NUM_ANS_ADD, $label);
 
         if (optional_param('addanswers', 0, PARAM_RAW)) {
             $repeats += self::NUM_ANS_ADD;
         }
 
-        // adjust HTML editor and removal buttons
+        // Adjust HTML editor and removal buttons.
         $this->adjust_html_editors($mform, $name, $repeats);
 
-        // feedback
-        $this->add_ordering_feedback_fields(true);
+        // Adding feedback fields.
+        $this->add_combined_feedback_fields(false);
 
-        // interactive
-        $this->add_ordering_interactive_settings(true, true);
+        // Adding interactive settings.
+        $this->add_interactive_settings(false, false);
     }
 
+    /**
+     * Returns answer repeats count
+     *
+     * @param object $question
+     * @return int
+     */
     protected function get_answer_repeats($question) {
         if (isset($question->id)) {
             $repeats = count($question->options->answers);
@@ -153,7 +158,9 @@ class qtype_ordering_edit_form extends question_edit_form {
     }
 
     /**
-     * get_editor_attributes
+     * Returns editor attributes
+     *
+     * @return array
      */
     protected function get_editor_attributes() {
         return array(
@@ -163,7 +170,9 @@ class qtype_ordering_edit_form extends question_edit_form {
     }
 
     /**
-     * get_editor_options
+     * Returns editor options
+     *
+     * @return array
      */
     protected function get_editor_options() {
         return array(
@@ -174,7 +183,11 @@ class qtype_ordering_edit_form extends question_edit_form {
     }
 
     /**
-     * reset_editor_format
+     * Resets editor format to specified
+     *
+     * @param object $editor
+     * @param int $format
+     * @return int
      */
     protected function reset_editor_format($editor, $format=FORMAT_MOODLE) {
         $value = $editor->getValue();
@@ -184,12 +197,16 @@ class qtype_ordering_edit_form extends question_edit_form {
     }
 
     /**
-     * adjust_html_editors
+     * Adjust HTML editor and removal buttons.
+     *
+     * @param object $mform
+     * @param string $name
+     * @param int $repeats
      */
     protected function adjust_html_editors($mform, $name, $repeats) {
 
-        // cache the number of formats supported
-        // by the preferred editor for each format
+        // Cache the number of formats supported
+        // by the preferred editor for each format.
         $count = array();
 
         if (isset($this->question->options->answers)) {
@@ -198,9 +215,11 @@ class qtype_ordering_edit_form extends question_edit_form {
             $ids = array();
         }
 
-        for ($i=0; $i<$repeats; $i++) {
+        $defaultanswerformat = get_config('qtype_ordering', 'defaultanswerformat');
 
-            $editor = $name.'['.$i.']';
+        for ($i = 0; $i < $repeats; $i++) {
+
+            $editor = $name . '[' . $i . ']';
             if ($mform->elementExists($editor)) {
                 $editor = $mform->getElement($editor);
 
@@ -210,24 +229,23 @@ class qtype_ordering_edit_form extends question_edit_form {
                     $id = 0;
                 }
 
-                // the old/new name of the button to remove the HTML editor
+                // The old/new name of the button to remove the HTML editor
                 // old : the name of the button when added by repeat_elements
-                // new : the simplified name of the button to satisfy
-                //       "no_submit_button_pressed()" in lib/formslib.php
+                // new : the simplified name of the button to satisfy "no_submit_button_pressed()" in lib/formslib.php.
                 $oldname = $name.'removeeditor['.$i.']';
                 $newname = $name.'removeeditor_'.$i;
 
-                // remove HTML editor, if necessary
+                // Remove HTML editor, if necessary.
                 if (optional_param($newname, 0, PARAM_RAW)) {
-                    $format = $this->reset_editor_format($editor);
-                    $_POST['answer'][$i]['format'] = $format; // overwrite incoming data
+                    $format = $this->reset_editor_format($editor, FORMAT_MOODLE);
+                    $_POST['answer'][$i]['format'] = $format; // Overwrite incoming data.
                 } else if ($id) {
                     $format = $this->question->options->answers[$id]->answerformat;
                 } else {
-                    $format = $this->reset_editor_format($editor);
+                    $format = $this->reset_editor_format($editor, $defaultanswerformat);
                 }
 
-                // check we have a submit button - it should always be there !!
+                // Check we have a submit button - it should always be there !!
                 if ($mform->elementExists($oldname)) {
                     if (! isset($count[$format])) {
                         $editor = editors_get_preferred_editor($format);
@@ -247,17 +265,21 @@ class qtype_ordering_edit_form extends question_edit_form {
     }
 
     /**
-     * data_preprocessing
+     * Perform an preprocessing needed on the data passed to {@link set_data()}
+     * before it is used to initialise the form.
+     * @param object $question the data being passed to the form.
+     * @return object $question the modified data.
      */
     public function data_preprocessing($question) {
 
         $question = parent::data_preprocessing($question);
-        //$question = $this->data_preprocessing_answers($question, true);
+        $question = $this->data_preprocessing_answers($question, true);
 
-        // feedback
-        $question = $this->data_preprocessing_ordering_feedback($question);
+        // Preprocess feedback.
+        $question = $this->data_preprocessing_combined_feedback($question);
+        $question = $this->data_preprocessing_hints($question, false, false);
 
-        // answers and fractions
+        // Preprocess answers and fractions.
         $question->answer     = array();
         $question->fraction   = array();
 
@@ -267,14 +289,15 @@ class qtype_ordering_edit_form extends question_edit_form {
             $answerids = array_keys($question->options->answers);
         }
 
+        $defaultanswerformat = get_config('qtype_ordering', 'defaultanswerformat');
         $repeats = $this->get_answer_repeats($question);
-        for ($i=0; $i<$repeats; $i++) {
+        for ($i = 0; $i < $repeats; $i++) {
 
             if ($answerid = array_shift($answerids)) {
                 $answer = $question->options->answers[$answerid];
             } else {
                 $answer = (object)array('answer' => '',
-                                        'answerformat' => FORMAT_MOODLE);
+                                        'answerformat' => $defaultanswerformat);
                 $answerid = 0;
             }
 
@@ -292,48 +315,43 @@ class qtype_ordering_edit_form extends question_edit_form {
             $question->fraction[$i] = ($i + 1);
         }
 
-        // layouttype
-        if (isset($question->options->layouttype)) {
-            $question->layouttype = $question->options->layouttype;
-        } else {
-            $question->layouttype = qtype_ordering_question::LAYOUT_VERTICAL;
-        }
-
-        // selecttype
-        if (isset($question->options->selecttype)) {
-            $question->selecttype = $question->options->selecttype;
-        } else {
-            $question->selecttype = qtype_ordering_question::SELECT_ALL;
-        }
-
-        // selectcount
-        if (isset($question->options->selectcount)) {
-            $question->selectcount = $question->options->selectcount;
-        } else {
-            $question->selectcount = max(3, count($question->answer));
-        }
-
-        // gradingtype
-        if (isset($question->options->gradingtype)) {
-            $question->gradingtype = $question->options->gradingtype;
-        } else {
-            $question->gradingtype = qtype_ordering_question::GRADING_ABSOLUTE_POSITION;
+        // Defining default values.
+        $names = array(
+            'layouttype'  => qtype_ordering_question::LAYOUT_VERTICAL,
+            'selecttype'  => qtype_ordering_question::SELECT_ALL,
+            'selectcount' => 0, // 0 means all.
+            'gradingtype' => qtype_ordering_question::GRADING_ABSOLUTE_POSITION
+        );
+        foreach ($names as $name => $default) {
+            if (isset($question->options->$name)) {
+                $question->$name = $question->options->$name;
+            } else {
+                $question->$name = $this->get_default_value($name, $default);
+            }
         }
 
         return $question;
     }
 
+    /**
+     * Form validation
+     *
+     * @param array $data array of ("fieldname"=>value) of submitted data
+     * @param array $files array of uploaded files "element_name"=>tmp_file_path
+     * @return array of "element_name"=>"error_description" if there are errors,
+     *         or an empty array if everything is OK (true allowed for backwards compatibility too).
+     */
     public function validation($data, $files) {
         $errors = array();
         $plugin = 'qtype_ordering';
 
         $answercount = 0;
-        foreach ($data['answer'] as $answer){
+        foreach ($data['answer'] as $answer) {
             if (is_array($answer)) {
                 $answer = $answer['text'];
             }
-            if (trim($answer)=='') {
-                continue; // skip empty answer
+            if (trim($answer) == '') {
+                continue; // Skip empty answer.
             }
             $answercount++;
         }
@@ -343,74 +361,43 @@ class qtype_ordering_edit_form extends question_edit_form {
             case 1: $errors['answer[1]'] = get_string('notenoughanswers', $plugin, 2);
         }
 
+        // If adding a new ordering question, update defaults.
+        if (empty($errors) && empty($data['id'])) {
+            $fields = array('layouttype', 'selecttype', 'selectcount', 'gradingtype');
+            foreach ($fields as $field) {
+                if (array_key_exists($field, $data)) {
+                    $this->set_default_value($field, $data[$field]);
+                }
+            }
+        }
+
         return $errors;
     }
 
-    protected function add_ordering_feedback_fields($shownumpartscorrect = false) {
-        if (method_exists($this, 'add_combined_feedback_fields')) {
-            // Moodle >= 2.1
-            $this->add_combined_feedback_fields($shownumpartscorrect);
-        } else {
-            // Moodle 2.0
-            $mform = $this->_form;
-            $names = array('correctfeedback', 'partiallycorrectfeedback', 'incorrectfeedback');
-            foreach ($names as $name) {
-                $label = get_string($name, 'qtype_multichoice'); // borrow string from standard core
-                $mform->addElement('editor', $name, $label, array('rows' => 10), $this->editoroptions);
-                $mform->setType($name, PARAM_RAW);
-            }
-        }
-    }
-
-    protected function add_ordering_interactive_settings($clearwrong=false, $shownumpartscorrect=false) {
-        if (method_exists($this, 'add_interactive_settings')) {
-            // Moodle >= 2.1
-            $this->add_interactive_settings($clearwrong, $shownumpartscorrect);
-        }
-    }
-
-    protected function data_preprocessing_ordering_feedback($question, $shownumcorrect=false) {
-        if (method_exists($this, 'data_preprocessing_combined_feedback')) {
-            // Moodle >= 2.1
-            $question = $this->data_preprocessing_combined_feedback($question, $shownumcorrect);
-        } else {
-            // Moodle 2.0
-            $names = array('correctfeedback', 'partiallycorrectfeedback', 'incorrectfeedback');
-            foreach ($names as $name) {
-                $draftid = file_get_submitted_draft_itemid($name);
-
-                if (isset($question->id)) {
-                    $itemid = $question->id;
-                } else {
-                    $itemid = null;
-                }
-
-                if (isset($question->options->$name)) {
-                    $text = $question->options->$name;
-                } else {
-                    $text = '';
-                }
-
-                $text = file_prepare_draft_area($draftid, $this->context->id, 'qtype_ordering',
-                                                $name, $itemid, $this->editoroptions, $text);
-
-                $format = $name.'format';
-                if (isset($question->options->$format)) {
-                    $format = $question->options->$format;
-                } else {
-                    $format = FORMAT_MOODLE;
-                }
-
-                $question->$name = array('text'   => $text,
-                                         'format' => $format,
-                                         'itemid' => $draftid);
-            }
-        }
-        return $question;
+    /**
+     * Returns default value for item
+     *
+     * @param string $name Item name
+     * @param string|mixed|null $default Default value (optional, default = null)
+     * @return string|mixed|null Default value for field with this $name
+     */
+    protected function get_default_value($name, $default=null) {
+        return get_user_preferences("qtype_ordering_$name", $default);
     }
 
     /**
-     * this javascript could be useful for inserting buttons
+     * Saves default value for item
+     *
+     * @param string $name Item name
+     * @param string|mixed|null $value
+     * @return bool Always true or exception
+     */
+    protected function set_default_value($name, $value) {
+        return set_user_preferences(array("qtype_ordering_$name" => $value));
+    }
+
+    /**
+     * This javascript could be useful for inserting buttons
      * into the form once it has loaded in the browser
      * however this means that the buttons are not recognized
      * by the Moodle Form API
