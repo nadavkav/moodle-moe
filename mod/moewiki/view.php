@@ -109,8 +109,11 @@ $jsmodule = array('name'     => 'mod_moewiki_view',
                   'strings'  => $stringlist
                  );
 $PAGE->requires->js_init_call('M.mod_moewiki_view.init', array(), true, $jsmodule);
-$PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(
-    'wikiid'  => $id
-));
+$userid = ($userid == 0) ? $USER->id : $userid;
+$PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(array(
+    'wikiid'   => $id,
+    'userid'   => $USER->id,
+    'userpage' => $userid,
+)));
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);
