@@ -496,3 +496,4 @@ $string['viewsubmissiongradingtable'] = 'View submission grading table.';
 $string['viewrevealidentitiesconfirm'] = 'View reveal student identities confirmation page.';
 $string['workflowfilter'] = 'Workflow filter';
 $string['xofy'] = '{$a->x} of {$a->y}';
+$string['gotogradebook'] = 'Go to the class gradebook';
