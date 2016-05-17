@@ -6698,15 +6698,17 @@ class assign {
         if (has_all_capabilities($capabilitylist, $this->get_course_context())) {
             $urlparams = array('id'=>$this->get_course()->id);
             $url = new moodle_url('/grade/report/grader/index.php', $urlparams);
-            $usergrade = '-';
-            if (isset($gradinginfo->items[0]->grades[$userid]->str_grade)) {
+            $usergrade = get_string('gotogradebook', 'assign'); 
+            if (isset($gradinginfo->items[0]->grades[$userid]->str_grade) && 
+                    trim($gradinginfo->items[0]->grades[$userid]->str_grade) != "-") {
                 $usergrade = $gradinginfo->items[0]->grades[$userid]->str_grade;
             }
             $gradestring = $this->get_renderer()->action_link($url, $usergrade);
         } else {
-            $usergrade = '-';
+            $usergrade = get_string('gotogradebook', 'assign'); 
             if (isset($gradinginfo->items[0]->grades[$userid]) &&
-                    !$gradinginfo->items[0]->grades[$userid]->hidden) {
+                    !$gradinginfo->items[0]->grades[$userid]->hidden && 
+                    trim($gradinginfo->items[0]->grades[$userid]->str_grade) != "-") {
                 $usergrade = $gradinginfo->items[0]->grades[$userid]->str_grade;
             }
             $gradestring = $usergrade;
