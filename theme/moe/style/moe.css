@@ -30,8 +30,10 @@
 	text-align: right;
 	line-height: 2em;
 }
-
-.usermenu .login {
+.usermenu .moodle-actionmenu .toggle-display:hover{
+    color: #a2eff4;
+}
+.usermenu .login,.usermenu .login a:hover, .usermenu .login a:focus {
 	color: #ffffff;
 }
 
@@ -586,7 +588,36 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border-width: 3px;
 	background-color: #fcf3e6;
 }
+.format-topics #section-0 {
+	margin-top: 5px;
+}
 
+.format-topics .content h3.sectionname {
+    border: none;	
+}
+
+.format-topics .course-content ul.topics{
+	border: 1px solid #c8bdd4;
+	background-image: url([[pix:theme_moe|bg/Bg_divider]]);
+	background-repeat: repeat-y;
+	background-size: contain;
+}
+
+.format-topics .course-content ul.topics li {
+	background-color: #ffffff;
+}
+
+.format-topics  .course-content ul li.section.main {
+	padding: 0px 0 !important; */
+}
+
+.format-topics .course-content ul.topics li.section .content{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.format-topics .course-content ul.topics li.section .summary {
+	margin-right: 1em;
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
 		font-size: 2em;
@@ -667,8 +698,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 /*main page*/
-#page-mod-glossary-view .span9 {
+#page-mod-glossary-view #region-main {
 	background-color: #f9ebd0;
+	border: 1px solid #a8c0b9;
 }
 
 #page-mod-glossary-view  .glossarydisplay {

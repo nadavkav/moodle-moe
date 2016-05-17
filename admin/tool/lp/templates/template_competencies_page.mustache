@@ -19,11 +19,12 @@
 }}
 <div data-region="templatecompetenciespage">
     <h2>
-        {{template.shortname}}
+        {{{template.shortname}}}
         {{#template.canmanage}}
             <a href="{{pluginbaseurl}}/edittemplate.php?id={{template.id}}&amp;pagecontextid={{pagecontextid}}">{{#pix}}t/edit, core, {{#str}}edittemplate, tool_lp{{/str}}{{/pix}}</a>
         {{/template.canmanage}}
     </h2>
+    <div>{{{template.description}}}</div>
     {{#canmanagetemplatecompetencies}}
     <div data-region="actions" class="clearfix">
         <div class="pull-left">
@@ -54,7 +55,7 @@
                         {{#hascourses}}
                         <ul class="inline">
                         {{#linkedcourses}}
-                            <li><a href="{{viewurl}}?id={{id}}">{{fullname}} ({{shortname}})</a></li>
+                            <li><a href="{{viewurl}}?id={{id}}">{{{fullname}}} ({{{shortname}}})</a></li>
                         {{/linkedcourses}}
                         </ul>
                         {{/hascourses}}
