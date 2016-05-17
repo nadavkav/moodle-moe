@@ -1339,4 +1339,14 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	margin-top: 6px;
 }
 
+#page-mod-glossary-view #maincontent ~ h2:before {
+	border-top: 1px solid #d9d5c6;
+	border-bottom: 1px solid #d9d5c6
+}
+
+#page-mod-glossary-view #maincontent ~ h2 {
+	border-bottom: 1px solid #d9d5c6;
+	border-left: 1px solid #d9d5c6;
+	border-right: 1px solid #d9d5c6;
+}
 	
