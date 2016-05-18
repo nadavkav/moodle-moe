@@ -115,5 +115,6 @@ $PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(arr
     'userid'   => $USER->id,
     'userpage' => $userid,
 )));
+$PAGE->requires->strings_for_js(array('annotation'),'mod_moewiki');
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);

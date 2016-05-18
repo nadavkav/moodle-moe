@@ -10,9 +10,38 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 	var annotation = {
 		merkannotaion : function(params) {
 			var app = new annotator.App();
-			app.include(annotator.ui.main, {
-			    element: document.querySelector('.moewiki_content')
+			remark = new remarks();
+			/*var viewer = new annotator.ui.viewer.Viewer({
+				defaultFields: false,
+				onEdit: function (ann) {
+	                // Copy the interaction point from the shown viewer:
+	                s.interactionPoint = util.$(s.viewer.element)
+	                                         .css(['top', 'left']);
+
+	                app.annotations.update(ann);
+	            },
+	            onDelete: function (ann) {
+	                app.annotations['delete'](ann);
+	            },
+	            permitEdit: function (ann) {
+	                return ;
+	            },
+	            permitDelete: function (ann) {
+	                return ;
+	            },
+	            autoViewHighlights: document.querySelector('.moewiki_content')
 			});
+			viewer.addField({
+			    load: function (field, annotation) {
+            	$(field).prepend('<img src="' + annotation.userpicture +'" class="anottatepicture"/>ssss');
+                $(field).append('<span>' +viewer.render(annotation)+ '</span>');
+                }
+			});
+			viewer.attach();*/
+			app.include(annotator.ui.main, {
+			    element: document.querySelector('.moewiki_content'),
+			});
+			
 			function remarks() {
 				return {
 					start: function (app) {
@@ -41,7 +70,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 		         save:  remarks,
 		       });*/
 			app.include(annotator.identity.simple);
-			app.include(annotator.authz.acl);
+			/*app.include(annotator.authz.acl);*/
 			app.include(remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
