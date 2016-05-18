@@ -4,7 +4,7 @@
 
 $(function () {
 	//run only on tab mode
-	if($(".nav-tabs").length) {
+	if($(".nav-tabs").length && !$(".path-mod-glossary .nav-tabs").length) {
 		var right = 0;
 		var btnswidth;
 		var direction = 0;
