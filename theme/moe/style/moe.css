@@ -653,10 +653,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	color: #48403b !important;
 	border: 5px solid transparent;
 	box-shadow: inset 0 0 0 2px #ecc89c, 0 0 0 2px #ecc89c;
-	-moz-border-image: -moz-linear-gradient(left, #ecb6a1 0%, #d4d4aa 100%);
-	-webkit-border-image: -webkit-linear-gradient(left, #ecb6a1 0%, #d4d4aa 100%);
-	border-image: linear-gradient(to right, #ecb6a1 0%, #d4d4aa 100%);
-	border-image-slice: 1;
+	-moz-border-image: url([[pix:theme|bg/btnbg]]) 30;
+	-webkit-border-image: url([[pix:theme|bg/btnbg]]) 30;
+	border-image: url([[pix:theme|bg/btnbg]]) 30;
 	background: #fedc9b
 }
 
@@ -668,14 +667,27 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	color: #48403b !important;
 	border: 5px solid transparent;
 	box-shadow: inset 0 0 0 2px #ecc89c, 0 0 0 2px #ecc89c;
-	-moz-border-image: -moz-linear-gradient(left, #ecb6a1 0%, #d4d4aa 100%);
-	-webkit-border-image: -webkit-linear-gradient(left, #ecb6a1 0%, #d4d4aa 100%);
-	border-image: linear-gradient(to right, #ecb6a1 0%, #d4d4aa 100%);
-	border-image-slice: 1;
+	-moz-border-image: url([[pix:theme|bg/btnbg]]) 30;
+	-webkit-border-image: url([[pix:theme|bg/btnbg]]) 30;
+	border-image: url([[pix:theme|bg/btnbg]]) 30;
 }
 
 #page-mod-glossary-view .glossarydisplay .entrybox a {
 	border: 1px solid #e0dccb !important;
+	padding: 1px 4px 1px 4px !important;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 3px;
+}
+
+#page-mod-glossary-view .glossarydisplay .entrybox b {
+	border: 1px solid #e0dccb !important;
+	background-color: #daf6b1;
+	padding: 1px 4px 1px 4px !important;
+	font-size: 16px;
+	font-weight: bold;
+    color: #966b00;
+	margin-right: 3px;
 }
 
 /*second title*/
@@ -752,23 +764,20 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view  .nav-tabs li a {
 	background-color: #f5e3e3 !important;
-	border: 5px solid transparent;
-	box-shadow: inset 0 0 0 3px #e2d7ce, 0 0 0 3px #e2d7ce;
-	-moz-border-image: -moz-linear-gradient(left, #f1b2bd 0%, #b7c7be 100%);
-	-webkit-border-image: -webkit-linear-gradient(left, #f1b2bd 0%, #b7c7be 100%);
-	border-image: linear-gradient(to right, #f1b2bd 0%, #b7c7be 100%);
-	border-image-slice: 1;
+	border: 8px solid transparent;
+	box-shadow: inset 0 0 0 1px #aa879a, 0 0 0 1px #aa879a !important;
+	-moz-border-image: url([[pix:theme|bg/btm2bg]]) 30;
+	-webkit-border-image: url([[pix:theme|bg/btn2bg]]) 30;
+	border-image: url([[pix:theme|bg/btn2bg]]) 30;
 	cursor: pointer;
+	border-radius: 0px 0px 0px 0px !important;
 	box-shadow: inset 0 0 0 1px #e2d7ce, 0 0 0 1px #e2d7ce;
+	font-size: 1.2em;
+    font-weight: 700;
 }
 
 #page-mod-glossary-view .nav-tabs>.active>a {
 	background-color: #b9e2d5 !important;
-	border: 5px solid transparent;
-	-moz-border-image: -moz-linear-gradient(left, #b7c7be 0%, #f1b2bd 100%);
-	-webkit-border-image: -webkit-linear-gradient(left, #b7c7be 0%, #f1b2bd 100%);
-	border-image: linear-gradient(to right, #b7c7be 0%, #f1b2bd 100%);
-	border-image-slice: 1;
 	cursor: pointer;
 	margin-top: 2px;
 }
@@ -817,7 +826,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	width: 100%;
 	height: 10px;
 	border-top: 3px solid #d9d5c6;
-	background: linear-gradient(to left, #bacdcc, #e37395);
+	background: url([[pix:theme|bg/learning-spaces]]);
+    background-repeat: no-repeat;
+    background-size: cover;
 	border-bottom: 3px solid #d9d5c6;
 	top: -10px;
 	left: 0;
@@ -866,6 +877,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view .glossarydisplay .entrybox {
 	background-color: #f9efdc;
+	font-size: 1px;
+}
+
+#page-mod-glossary-view .glossarydisplay .entrybox > div {
+	font-size: 13px;
 }
 
 
