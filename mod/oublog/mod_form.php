@@ -120,24 +120,6 @@ class mod_oublog_mod_form extends moodleform_mod {
             $mform->addElement('checkbox', 'allowimport', get_string('allowimport', 'oublog'), '', 0);
             $mform->addHelpButton('allowimport', 'allowimport', 'oublog');
 
-            $mform->addElement('header', 'tagheading', get_string('tags', 'oublog'));
-
-            $mform->addElement('text', 'tags', get_string('tags', 'oublog'),
-                            array('size'=>'48'));
-            $mform->addHelpButton('tags', 'predefinedtags', 'oublog');
-            $mform->setType('tags', PARAM_TAGLIST);
-            $mform->addRule('tags', get_string('maximumchars', '', 255),
-                            'maxlength', 255, 'client');
-
-            $tagopts = array(
-                    '0' => get_string('none'),
-                    '1' => get_string('restricttags_set', 'oublog'),
-                    '2' => get_string('restricttags_req', 'oublog'),
-                    '3' => get_string('restricttags_req_set', 'oublog'),
-            );
-            $mform->addElement('select', 'restricttags', get_string('restricttags', 'oublog'), $tagopts);
-            $mform->addHelpButton('restricttags', 'restricttags', 'oublog');
-
             $mform->addElement('header', 'limits', get_string('limits', 'oublog'));
 
             // Limiting post/comments dates.
