@@ -1390,7 +1390,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 
 /*add new definitiohn button*/
-#page-mod-glossary-view .singlebutton.glossaryaddentry input {
+#page-mod-glossary-view .singlebutton.glossaryaddentry input, #page-mod-glossary-view .entrybox table tr > td.aliases > label{
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin: 0 auto; 
@@ -1417,21 +1417,22 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border-image: url([[pix:theme|bg/btnbg]]) 30;
 }
 
-#page-mod-glossary-view .glossarydisplay .entrybox a {
-	border: 1px solid #e0dccb !important;
+#page-mod-glossary-view .glossarydisplay .entrybox > a {
+	border: 1px solid #b4a0ac !important;
 	padding: 1px 4px 1px 4px !important;
 	font-size: 16px;
-	font-weight: bold;
 	margin-right: 3px;
+	background-color: #c7f1e5 !important;
+	color: #6d3f56;
 }
 
-#page-mod-glossary-view .glossarydisplay .entrybox b {
-	border: 1px solid #e0dccb !important;
-	background-color: #daf6b1;
+#page-mod-glossary-view .glossarydisplay .entrybox > b {
+	border: 2px solid #886978 !important;
+	background-color: #f9e9eb;
 	padding: 1px 4px 1px 4px !important;
 	font-size: 16px;
 	font-weight: bold;
-    color: #966b00;
+    color: #6d3f56;
 	margin-right: 3px;
 }
 
@@ -1462,6 +1463,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view #region-main {
 	background-color: #f9ebd0;
 	border: 1px solid #a8c0b9;
+	border-top: 0px;
 }
 
 #page-mod-glossary-view  .glossarydisplay {
@@ -1553,31 +1555,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 /*page title*/
-#page-mod-glossary-view #maincontent ~ h2 {
-	border-top: 10px solid #d9d5c6;
-	border-bottom: 3px solid #d9d5c6;
-	border-left: 3px solid #d9d5c6;
-	border-right: 3px solid #d9d5c6;
-	background-color: #ededed;
-	padding-right: 1em;
-	position: relative;
-	margin-top: 0px !important;
-	]
-}
-
-#page-mod-glossary-view  #maincontent ~ h2:before {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 10px;
-	border-top: 3px solid #d9d5c6;
-	background: url([[pix:theme|bg/learning-spaces]]);
-    background-repeat: no-repeat;
-    background-size: cover;
-	border-bottom: 3px solid #d9d5c6;
-	top: -10px;
-	left: 0;
-}
 
 #page-mod-glossary-view .notifications ~ div .first-child {
 	margin-right: 0px !important;
@@ -1628,18 +1605,37 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .glossarydisplay .entrybox > div {
 	font-size: 13px;
 }
+#page-mod-glossary-view .glossarydisplay .entrybox > table {
+	font-size: 13px;
+}
 
 
 
 /*first alpahbeth letter*/
 #page-mod-glossary-view  .glossarydisplay .entrybox br+b:first-of-type {
-	margin-right: 1em;
-	
+	margin-right: 1em;	
 }
 
-#page-mod-glossary-view  .glossarydisplay .entrybox br+b+a:first-of-type
-	{
+#page-mod-glossary-view  .glossarydisplay .entrybox br+b+a:first-of-type {
 	margin-right: 0em;
+}
+
+#page-mod-glossary-view .entrybox table tr > td.aliases {
+	text-align: center !important;
+}
+
+#page-mod-glossary-view .entrybox table tr > td.aliases > label {
+	display: inline;
+	padding: 5px 10px 7px 10px;
+    margin-left: 10px;
+}
+
+#page-mod-glossary-view .entrybox table tr > td.aliases select {
+	margin-top: 9px;
+}
+
+#page-mod-glossary-view .entrybox div:has( table.glossarycategoryheader) {
+	background-color: #ff0000;
 }
 
 /*private name*/
@@ -1792,18 +1788,14 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding-top: 0px !important;
 }
 
-
-
-#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a:hover
-	{
+#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a:hover {
 	background-color: transparent;
 	border: 0px solid #e0dccb;
 	padding: 2px 6px 2px 6px;
 }
 
 
-	/*private name*/ 
-
+/*private name*/ 
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a
 	{
 	background-color: transparent;
@@ -2100,14 +2092,36 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	margin-top: 6px;
 }
 
-#page-mod-glossary-view #maincontent ~ h2:before {
-	border-top: 1px solid #d9d5c6;
-	border-bottom: 1px solid #d9d5c6
+#page-mod-glossary-view div[role="main"]:before {
+	content: '';
+	width: 100%;
+	height: 10px;
+	border-top: 1px solid #bdb1c9;
+	background: url([[pix:theme|bg/learning-spaces]]);
+    background-repeat: no-repeat;
+    background-size: cover;
+	border-bottom: 1px solid #c0bcbd;
+	display: block;
+}
+
+#page-mod-glossary-view #maincontent {
+	display: none;
 }
 
 #page-mod-glossary-view #maincontent ~ h2 {
-	border-bottom: 1px solid #d9d5c6;
-	border-left: 1px solid #d9d5c6;
-	border-right: 1px solid #d9d5c6;
+	background-color: #ededed;
+	padding-right: 0.2em;
+	padding-top: 0.1em;
+	position: relative;
+	margin-top: 0px !important;
+	border-bottom: 1px solid #c1bfbe;
+	
 }
 
+#page-mod-glossary-view  {
+	border-top: 0px !important;
+}
+
+#page-mod-glossary-view .entrybox > table {
+	width: 54% !important;
+}
