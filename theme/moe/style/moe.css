@@ -1428,3 +1428,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     border-right: #ab6f72 1px solid;
 	font-weight: 700;
 }
+
+#page-mod-lightboxgallery-imageedit .nav-tabs {
+    height: auto;
+    padding-top: 1px;
+}
+
+#page-mod-lightboxgallery-imageedit .nav-tabs li {
+	margin: 0 0.5em;
+}
