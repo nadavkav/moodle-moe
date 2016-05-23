@@ -1526,7 +1526,9 @@ function print_upgrade_part_end($plugin, $installation, $verbose) {
         }
     }
     if ($verbose) {
-        echo $OUTPUT->notification(get_string('success'), 'notifysuccess');
+        $notification = new \core\output\notification(get_string('success'), \core\output\notification::NOTIFY_SUCCESS);
+        $notification->set_show_closebutton(false);
+        echo $OUTPUT->render($notification);
         print_upgrade_separator();
     }
 }
@@ -2281,4 +2283,28 @@ function upgrade_install_plugins(array $installable, $confirmed, $heading='', $c
         echo $output->footer();
         die();
     }
+}
+/**
+ * Method used to check the installed unoconv version.
+ *
+ * @param environment_results $result object to update, if relevant.
+ * @return environment_results|null updated results or null if unoconv path is not executable.
+ */
+function check_unoconv_version(environment_results $result) {
+    global $CFG;
+
+    if (!during_initial_install() && !empty($CFG->pathtounoconv) && file_is_executable(trim($CFG->pathtounoconv))) {
+        $unoconvbin = \escapeshellarg($CFG->pathtounoconv);
+        $command = "$unoconvbin --version";
+        exec($command, $output);
+        preg_match('/([0-9]+\.[0-9]+)/', $output[0], $matches);
+        $currentversion = (float)$matches[0];
+        $supportedversion = 0.7;
+        if ($currentversion < $supportedversion) {
+            $result->setInfo('unoconv version not supported');
+            $result->setStatus(false);
+            return $result;
+        }
+    }
+    return null;
 }

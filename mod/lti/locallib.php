@@ -79,6 +79,10 @@ define('LTI_SETTING_NEVER', 0);
 define('LTI_SETTING_ALWAYS', 1);
 define('LTI_SETTING_DELEGATE', 2);
 
+define('LTI_COURSEVISIBLE_NO', 0);
+define('LTI_COURSEVISIBLE_PRECONFIGURED', 1);
+define('LTI_COURSEVISIBLE_ACTIVITYCHOOSER', 2);
+
 /**
  * Return the launch data required for opening the external tool.
  *
@@ -302,6 +306,7 @@ function lti_build_registration_request($toolproxy) {
     $requestparams['lti_version'] = 'LTI-2p0';
     $requestparams['reg_key'] = $key;
     $requestparams['reg_password'] = $secret;
+    $requestparams['reg_url'] = $toolproxy->regurl;
 
     // Add the profile URL.
     $profileservice = lti_get_service_by_name('profile');
@@ -1087,19 +1092,26 @@ function lti_filter_tool_types(array $tools, $state) {
  * Returns all lti types visible in this course
  *
  * @param int $courseid The id of the course to retieve types for
+ * @param array $coursevisible options for 'coursevisible' field,
+ *        default [LTI_COURSEVISIBLE_PRECONFIGURED, LTI_COURSEVISIBLE_ACTIVITYCHOOSER]
  * @return stdClass[] All the lti types visible in the given course
  */
-function lti_get_lti_types_by_course($courseid) {
+function lti_get_lti_types_by_course($courseid, $coursevisible = null) {
     global $DB, $SITE;
 
+    if ($coursevisible === null) {
+        $coursevisible = [LTI_COURSEVISIBLE_PRECONFIGURED, LTI_COURSEVISIBLE_ACTIVITYCHOOSER];
+    }
+
+    list($coursevisiblesql, $coursevisparams) = $DB->get_in_or_equal($coursevisible, SQL_PARAMS_NAMED, 'coursevisible');
     $query = "SELECT *
                 FROM {lti_types}
-               WHERE coursevisible = 1
+               WHERE coursevisible $coursevisiblesql
                  AND (course = :siteid OR course = :courseid)
                  AND state = :active";
 
     return $DB->get_records_sql($query,
-        array('siteid' => $SITE->id, 'courseid' => $courseid, 'active' => LTI_TOOL_STATE_CONFIGURED));
+        array('siteid' => $SITE->id, 'courseid' => $courseid, 'active' => LTI_TOOL_STATE_CONFIGURED) + $coursevisparams);
 }
 
 /**
@@ -1126,18 +1138,23 @@ function lti_get_types_for_add_instance() {
  *
  * @param int $courseid The id of the course to retieve types for
  * @param int $sectionreturn section to return to for forming the URLs
- * @return array Array of lti types. Each element is object with properties: name, title, icon, help, link
+ * @return array Array of lti types. Each element is object with properties: name, title, icon, help, helplink, link
  */
 function lti_get_configured_types($courseid, $sectionreturn = 0) {
     global $OUTPUT;
     $types = array();
-    $admintypes = lti_get_lti_types_by_course($courseid);
+    $admintypes = lti_get_lti_types_by_course($courseid, [LTI_COURSEVISIBLE_ACTIVITYCHOOSER]);
 
     foreach ($admintypes as $ltitype) {
         $type           = new stdClass();
         $type->modclass = MOD_CLASS_ACTIVITY;
         $type->name     = 'lti_type_' . $ltitype->id;
         $type->title    = $ltitype->name;
+        $trimmeddescription = trim($ltitype->description);
+        if ($trimmeddescription != '') {
+            $type->help     = $trimmeddescription;
+            $type->helplink = get_string('modulename_shortcut_link', 'lti');
+        }
         if (empty($ltitype->icon)) {
             $type->icon = $OUTPUT->pix_icon('icon', '', 'lti', array('class' => 'icon'));
         } else {
@@ -1458,8 +1475,7 @@ function lti_prepare_type_for_save($type, $config) {
         $type->name = $config->lti_typename;
     }
     if (isset($config->lti_coursevisible)) {
-        $type->coursevisible = !empty($config->lti_coursevisible) ? $config->lti_coursevisible : 0;
-        $config->lti_coursevisible = $type->coursevisible;
+        $type->coursevisible = $config->lti_coursevisible;
     }
 
     if (isset($config->lti_icon)) {
@@ -1617,6 +1633,30 @@ function lti_get_tool_proxy($id) {
 
     $toolproxy = $DB->get_record('lti_tool_proxies', array('id' => $id));
     return $toolproxy;
+}
+
+/**
+ * Returns lti tool proxies.
+ *
+ * @param bool $orphanedonly Only retrieves tool proxies that have no type associated with them
+ * @return array of basicLTI types
+ */
+function lti_get_tool_proxies($orphanedonly) {
+    global $DB;
+
+    if ($orphanedonly) {
+        $tools = $DB->get_records('lti_types');
+        $usedproxyids = array_values($DB->get_fieldset_select('lti_types', 'toolproxyid', 'toolproxyid IS NOT NULL'));
+        $proxies = $DB->get_records('lti_tool_proxies', null, 'state DESC, timemodified DESC');
+        foreach ($proxies as $key => $value) {
+            if (in_array($value->id, $usedproxyids)) {
+                unset($proxies[$key]);
+            }
+        }
+        return $proxies;
+    } else {
+        return $DB->get_records('lti_tool_proxies', null, 'state DESC, timemodified DESC');
+    }
 }
 
 /**
@@ -2270,6 +2310,19 @@ function get_tool_type_edit_url(stdClass $type) {
 }
 
 /**
+ * Returns the edit url for the given tool proxy.
+ *
+ * @param stdClass $proxy The tool proxy
+ *
+ * @return string The url to edit the tool type
+ */
+function get_tool_proxy_edit_url(stdClass $proxy) {
+    $url = new moodle_url('/mod/lti/registersettings.php',
+                          array('action' => 'update', 'id' => $proxy->id, 'sesskey' => sesskey(), 'returnto' => 'toolconfigure'));
+    return $url->out();
+}
+
+/**
  * Returns the course url for the given tool type
  *
  * @param stdClass $type The tool type
@@ -2290,7 +2343,7 @@ function get_tool_type_course_url(stdClass $type) {
  *
  * @param stdClass $type The tool type
  *
- * @return string The url to the course of the tool type
+ * @return string The urls of the tool type
  */
 function get_tool_type_urls(stdClass $type) {
     $courseurl = get_tool_type_course_url($type);
@@ -2303,6 +2356,24 @@ function get_tool_type_urls(stdClass $type) {
     if ($courseurl) {
         $urls['course'] = $courseurl;
     }
+
+    return $urls;
+}
+
+/**
+ * Returns the icon and edit urls for the tool proxy.
+ *
+ * @param stdClass $proxy The tool proxy
+ *
+ * @return string The urls of the tool proxy
+ */
+function get_tool_proxy_urls(stdClass $proxy) {
+    global $OUTPUT;
+
+    $urls = array(
+        'icon' => $OUTPUT->pix_url('icon', 'lti')->out(),
+        'edit' => get_tool_proxy_edit_url($proxy),
+    );
 
     return $urls;
 }
@@ -2429,6 +2500,34 @@ function serialise_tool_type(stdClass $type) {
 }
 
 /**
+ * Serialises this tool proxy.
+ *
+ * @param stdClass $proxy The tool proxy
+ *
+ * @return array An array of values representing this type
+ */
+function serialise_tool_proxy(stdClass $proxy) {
+    return array(
+        'id' => $proxy->id,
+        'name' => $proxy->name,
+        'description' => get_string('activatetoadddescription', 'mod_lti'),
+        'urls' => get_tool_proxy_urls($proxy),
+        'state' => array(
+            'text' => get_string('pending', 'mod_lti'),
+            'pending' => true,
+            'configured' => false,
+            'rejected' => false,
+            'unknown' => false
+        ),
+        'hascapabilitygroups' => true,
+        'capabilitygroups' => array(),
+        'courseid' => 0,
+        'instanceids' => array(),
+        'instancecount' => 0
+    );
+}
+
+/**
  * Loads the cartridge information into the tool type, if the launch url is for a cartridge file
  *
  * @param stdClass $type The tool type object to be filled in
@@ -2504,6 +2603,10 @@ function lti_load_type_from_cartridge($url, $type) {
             "secure_icon_url" => "lti_secureicon"
         )
     );
+    // If an activity name exists, unset the cartridge name so we don't override it.
+    if (isset($type->lti_typename)) {
+        unset($toolinfo['lti_typename']);
+    }
     foreach ($toolinfo as $property => $value) {
         $type->$property = $value;
     }
@@ -2530,6 +2633,10 @@ function lti_load_tool_from_cartridge($url, $lti) {
             "secure_icon_url" => "secureicon"
         )
     );
+    // If an activity name exists, unset the cartridge name so we don't override it.
+    if (isset($lti->name)) {
+        unset($toolinfo['name']);
+    }
     foreach ($toolinfo as $property => $value) {
         $lti->$property = $value;
     }
