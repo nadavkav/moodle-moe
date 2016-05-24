@@ -19,7 +19,7 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
  
@@ -55,14 +55,10 @@ echo $OUTPUT->doctype() ?>
 <div id="wrapper">
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
-<div class="text-center" style="line-height:1em;">
-	<img src="<?php echo $CFG->wwwroot;?>/theme/lambda/pix/bg/shadow.png" class="slidershadow frontpage-shadow" alt="">
-</div>
-
 <div id="page" class="container-fluid">
 
 <?php require_once(dirname(__FILE__).'/includes/slideshow.php');?>
-
+	<header id="page-header" class="clearfix"> </header>
     <div id="page-content" class="row-fluid">
     	<?php if ($hasfrontpageblocks==1) { ?>
             <div id="<?php echo $regionbsid ?>" class="span9">
@@ -116,11 +112,9 @@ echo $OUTPUT->doctype() ?>
 
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
 
-
 <!--[if lte IE 9]>
 <script src="<?php echo $CFG->wwwroot;?>/theme/lambda/javascript/ie/iefix.js"></script>
 <![endif]-->
-
 
 <script>
 jQuery(document).ready(function ($) {

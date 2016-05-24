@@ -19,10 +19,12 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
-
+ 
+$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
+$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
 $left = (!right_to_left());
 $standardlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
 
@@ -44,21 +46,16 @@ echo $OUTPUT->doctype() ?>
 <div id="wrapper">
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
-<div class="text-center" style="line-height:1em;">
-	<img src="<?php echo $CFG->wwwroot;?>/theme/lambda/pix/bg/shadow.png" class="slidershadow" alt="">
-</div>
-
 <div id="page" class="container-fluid">
 
-    <?php if (isloggedin() and !isguestuser()) { ?>
     <header id="page-header" class="clearfix">
+    	<?php if (!($hide_breadrumb)) { ?>
         <div id="page-navbar" class="clearfix">
             <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
             <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
         </div>
+        <?php } ?>
     </header>
-    <?php } ?>
-
 
     <div id="page-content" class="row-fluid">
         <section id="region-main" class="span9<?php if ($left) { echo ' pull-left'; } ?><?php if ($standardlayout) { echo ' pull-right'; } ?>">

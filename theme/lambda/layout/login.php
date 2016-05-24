@@ -18,20 +18,13 @@
  * Parent theme: Bootstrapbase by Bas Brands
  * Built on: Essential by Julian Ridden
  *
- * @package   theme_moe
- * @copyright 2014 redPIthemes
+ * @package   theme_lambda
+ * @copyright 2016 redPIthemes
  *
  */
-
-$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
-$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
-$standardlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
-
-if (right_to_left()) {
-    $regionbsid = 'region-bs-main-and-post';
-} else {
-    $regionbsid = 'region-bs-main-and-pre';
-}
+ 
+$custom_login=$PAGE->theme->settings->custom_login;
+$haslogo = (!empty($PAGE->theme->settings->logo));
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
@@ -48,62 +41,65 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html(); ?>
 
-<div id="wrapper">
+<div id="wrapper" <?php if ($custom_login==1) echo 'style="background: transparent none repeat scroll 0 0; border: medium none;"';?>>
 
+<?php if ($custom_login==0) {?>
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
+<?php } else { ?>
 
-<!-- Start Main Regions -->
+<header id="page-header" class="clearfix">
+       
+    <div class="container-fluid">    
+    <div class="row-fluid">
+    <!-- HEADER: LOGO AREA -->
+        	
+            <?php if (!$haslogo) { ?>
+            	<div class="span6">
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
+                </div>
+            <?php } else { ?>
+                <div class="logo-header">
+                	<a class="logo" href="<?php echo $CFG->wwwroot; ?>" title="<?php print_string('home'); ?>">
+                    <?php 
+					echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->setting_file_url('logo', 'logo'), 'class'=>'logo', 'alt'=>'logo'));
+					?>
+                    </a>
+                </div>
+            <?php } ?> 
+            
+    </div>
+    </div>
+               
+</header>
+
+<?php } ?>
+
 <div id="page" class="container-fluid">
 
-    <header id="page-header" class="clearfix">
-    	<?php if (!($hide_breadrumb)) { ?>
-        <div id="page-navbar" class="clearfix">
-            <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
-            <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
-        </div>
-        <?php } ?>
-    </header>
-
-    <div id="page-content" class="row-fluid">
-        <div id="<?php echo $regionbsid ?>" class="span9">
-            <div class="row-fluid">
-            	<?php if ($standardlayout) { ?>
-                <section id="region-main" class="span8 pull-right">
-                <?php } else { ?>
-                <section id="region-main" class="span8">
-                <?php } ?>
-                    <?php
-                    echo $OUTPUT->course_content_header();
-                    echo $OUTPUT->main_content();
-                    echo $OUTPUT->course_content_footer();
-                    ?>
-                </section>
-                <?php 
-				if ($standardlayout) {echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column pull-left');}
-				else {echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column pull-right');}
-				?>
-            </div>
-        </div>
-        <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
+    <div id="page-content" class="row-fluid" <?php if ($custom_login==1) {echo 'style="background-clip:padding-box;background-color: rgba(255, 255, 255, 0.85);border: 8px solid rgba(255, 255, 255, 0.35);border-radius: 3px;"';}?>>
+        <section id="region-main" class="span12">
+        
+            <?php
+            echo $OUTPUT->course_content_header();
+            echo $OUTPUT->main_content();
+            echo $OUTPUT->course_content_footer();
+            ?>
+        </section>
     </div>
     
-    <!-- End Main Regions -->
+    <a href="#top" class="back-to-top"><i class="fa fa-chevron-circle-up fa-3x"></i><p><?php print_string('backtotop', 'theme_lambda'); ?></p></a>
+    
+</div>
 
-    <a href="#top" class="back-to-top"><i class="fa fa-chevron-circle-up fa-3x"></i><p><?php print_string('backtotop', 'theme_moe'); ?></p></a>
-
-	</div>
-
-	<footer id="page-footer" class="container-fluid">
+	<footer id="page-footer" class="container-fluid" <?php if ($custom_login==1) echo 'style="display:none;"';?>>
 		<?php require_once(dirname(__FILE__).'/includes/footer.php'); ?>
 	</footer>
 
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
 
-</div>
-
 
 <!--[if lte IE 9]>
-<script src="<?php echo $CFG->wwwroot;?>/theme/moe/javascript/ie/iefix.js"></script>
+<script src="<?php echo $CFG->wwwroot;?>/theme/lambda/javascript/ie/iefix.js"></script>
 <![endif]-->
 
 
