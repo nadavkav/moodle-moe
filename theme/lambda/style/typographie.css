@@ -63,14 +63,67 @@ blockquote:before {
 .plus {
 	font-size:1.05em;
 }
-.wp1 {
-	margin-top:15px;
+.main-heading {
+    font-size: 3.5em;
+    font-weight: bold !important;
+    line-height: 1.25em;
 }
-.wp2 {
-	margin-top:30px;
+.row-fluid.frontpage {
+    margin-bottom: 40px;
+    margin-top: 40px;
 }
-.wp3 {
-	margin-top:45px;
+
+/*================================================== * 
+Dividers
+=====================================================*/
+.divider.line-01:after {
+    background: #f9bf3b none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 3px;
+    max-width: 75px;
+    padding: 0;
+    width: 50%;
+}
+.divider.line-01 {
+    background: rgba(0, 0, 0, 0) url([[pix:theme|bg/block-divider]]) repeat-x scroll left bottom;
+    margin: 20px 0;
+}
+.divider.line-02:before {
+    background: #f9bf3b none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    max-width: 100%;
+    position: absolute;
+    width: 150px;
+}
+.divider.line-02:after {
+    background: #f9bf3b none repeat scroll 0 0;
+    bottom: -10px;
+    content: "";
+    height: 2px;
+    max-width: 100%;
+    position: absolute;
+    width: 150px;
+}
+.divider.line-02 {
+    height: 1px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.divider.line-03 {
+    background: #f9bf3b none repeat scroll 0 0;
+    border-radius: 4px;
+    content: "";
+    display: block;
+    height: 4px;
+    margin: 20px auto;
+    position: relative;
+    width: 50px;
+}
+.divider-page {
+    margin-top: 0 !important;
 }
 
 /*================================================== * 
@@ -85,7 +138,7 @@ margin-bottom:15px;
 margin-left:55px;
 list-style:square;
 }
-.prom-box-default h1,.prom-box-default h2,.prom-box-default h3 {
+.prom-box-default h1, .prom-box-default h2, .prom-box-default h3, .prom-box-default h4, .prom-box-default h5 {
 margin-top:0;
 color:#666;
 }
@@ -93,7 +146,7 @@ color:#666;
 background-color:#f4f4f4;
 border-left:6px solid [[setting:maincolor]];
 }
-.prom-box-warning h1,.prom-box-warning h2,.prom-box-warning h3 {
+.prom-box-warning h1, .prom-box-warning h2, .prom-box-warning h3, .prom-box-warning h4, .prom-box-warning h5 {
 margin-top:0;
 color:#F0AD4E;
 }
@@ -101,7 +154,7 @@ color:#F0AD4E;
 background-color:#FCF8F2;
 border-left:6px solid #F0AD4E;
 }
-.prom-box-danger h1,.prom-box-danger h2,.prom-box-danger h3 {
+.prom-box-danger h1,.prom-box-danger h2,.prom-box-danger h3, .prom-box-danger h4, .prom-box-danger h5 {
 margin-top:0;
 color:#D9534F;
 }
@@ -109,7 +162,7 @@ color:#D9534F;
 background-color:#FDF7F7;
 border-left:6px solid #D9534F;
 }
-.prom-box-info h1,.prom-box-info h2,.prom-box-info h3 {
+.prom-box-info h1,.prom-box-info h2,.prom-box-info h3, .prom-box-info h4, .prom-box-info h5 {
 margin-top:0;
 color:#5BC0DE;
 }
@@ -264,6 +317,7 @@ iconbox
 }
 .iconbox .iconbox-content {
 	text-align: center;
+	word-wrap: break-word;
 }
 
 /* =========================================================== *
@@ -348,6 +402,49 @@ Numbers
 }
 
 /* =========================================================== *
+row colored
+============================================================== */
+.row-fluid.colored {
+    display: flex;
+}
+.row-fluid.colored > [class*="span"] {
+    background: #fbfbfb none repeat scroll 0 0;
+    margin: 0 !important;
+    padding: 30px !important;
+}
+.row-fluid.colored > .span3 {
+    width: 25% !important;
+}
+.row-fluid.colored > .span4 {
+    width: 33.33% !important;
+}
+.row-fluid.colored > .span5 {
+    width: 41.66% !important;
+}
+.row-fluid.colored > .span6 {
+    width: 50% !important;
+}
+.row-fluid.colored > .span7 {
+    width: 58.33% !important;
+}
+.row-fluid.colored > .span8 {
+    width: 66.66% !important;
+}
+.row-fluid.colored > .span9 {
+    width: 75% !important;
+}
+@media(max-width:767px){
+	.row-fluid.colored {display: block;}
+	.row-fluid.colored > [class*="span"] {width: 100% !important;}
+}
+.row-fluid.colored > [class*="span"]:hover {
+    background: #efefef none repeat scroll 0 0 !important;
+}
+.row-fluid.colored > [class*="span"]:nth-child(2n) {
+    background: #f4f4f4 none repeat scroll 0 0;
+}
+
+/* =========================================================== *
 Headlines
 ============================================================== */
 .headline {
@@ -362,9 +459,11 @@ Headlines
 }
 .headline-v2 {
 	background:  [[setting:maincolor]];
+	color: [[setting:menufirstlevel_linkcolor]];
 }
 .headline-v3 {
-	background: [[setting:menufirstlevelcolor]];;
+	background: [[setting:menufirstlevelcolor]];
+	color: [[setting:menufirstlevel_linkcolor]];
 }
 .headline .fa {
     font-size: 1.25em;
@@ -392,6 +491,8 @@ Headlines
     border-width: 1px 1px 1px 3px;
 	padding-left: 4px;
 	margin-top:0;
+	font-size: 1.4em;
+    line-height: 20px;
 }
 .course-content .single-section .section-navigation .title {
     clear: both;
@@ -411,14 +512,14 @@ Headlines
     border-left: none;
     border-top: 1px solid #e1e1e1;
     font-size: 1.75em;
-    margin-bottom: 20px;
     line-height: 25px;
     box-shadow: inset 0 1px 0 rgba(256, 256, 256, 0.35);
 }
 .course-pano.wrapper {
+    position:relative;
     height: 175px;
     overflow: hidden;
-    position: relative; 
+    position: relative;
     background: #f4f4f4;
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
 }
@@ -426,8 +527,8 @@ Headlines
     height: 135px;
     left: 0;
     padding: 20px;
-    position: absolute;
     top: 0;
+	position: absolute;
 }
 .course-pano.title h2 {
 	margin-top:20px;
@@ -462,12 +563,12 @@ Headlines
 	.course-pano.title h4 > span {font-size: 0.63em;}
 }
 .course-pano > img {
-    display: block;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden !important;
-    width: 100vw;
+    bottom: 0;
     margin: 0 !important;
+    min-height: 175px;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
 }
 .ie .course-pano > img {
 	display: block;
@@ -511,10 +612,8 @@ Spotlight
     padding-bottom:15px;
 }
 .spotlight-v1 .btn-primary {
-    border: 1px solid #fff;
+    border: 2px solid #fff;
     text-decoration: none;
-    text-shadow: 1px 0 1px #333;
-	box-shadow: 1px 1px 1px #999;
 }
 .spotlight-v2 {
 	background: none repeat scroll 0 0 #f8f8f8;
@@ -525,20 +624,26 @@ Spotlight
 .spotlight-v2.shadow2:after {
 	margin-top: 2px;
 }
-.spotlight-v3 {
+.spotlight-v3, .spotlight-v4 {
     background-attachment: fixed;
     background-color: #323a45;
-    background-image: url([[pix:theme|bg/spotlight-3-bg]]);
     background-size: cover;
 	color: #fff;
 }
-.spotlight-v3 h1, .spotlight-v3 h2, .spotlight-v3 h3, .spotlight-v3 h4, .spotlight-v3 h5, .spotlight-v3 h6, spotlight-v3 p {
+.spotlight-v3 {
+    background-image: url([[pix:theme|bg/spotlight-3-bg]]);
+}
+.spotlight-v4 {
+    background-image: url([[pix:theme|bg/spotlight-4-bg]]);
+}
+.spotlight-v3 h1, .spotlight-v3 h2, .spotlight-v3 h3, .spotlight-v3 h4, .spotlight-v3 h5, .spotlight-v3 h6, spotlight-v3 p,
+.spotlight-v4 h1, .spotlight-v4 h2, .spotlight-v4 h3, .spotlight-v4 h4, .spotlight-v4 h5, .spotlight-v4 h6, spotlight-v4 p {
     color: #fff;
 }
-.spotlight-v3 a {
+.spotlight-v3 a, .spotlight-v4 a {
 	color:[[setting:maincolor]];
 }
-.spotlight-v3 a:hover {
+.spotlight-v3 a:hover, .spotlight-v4 a:hover {
 	color:[[setting:mainhovercolor]];
 }
 .spotlight-full {
@@ -590,21 +695,20 @@ Spotlight
 /* =========================================================== *
 Buttons & Bootstrap Buttons
 ============================================================== */
-
-button, .btn, .btn-default, btn-success, input.form-submit, input[type="button"], input[type="submit"], input[type="reset"], input.form-submit, input#id_submitbutton, input#id_submitbutton2, .path-admin .buttons input[type="submit"], td.submit input, .submit.buttons input[name="cancel"], #notice .singlebutton + .singlebutton input  {
+button, .btn, .btn-default, input.form-submit, input[type="button"], input[type="submit"], input[type="reset"], input.form-submit, input#id_submitbutton, input#id_submitbutton2, .path-admin .buttons input[type="submit"], td.submit input, .submit.buttons input[name="cancel"], #notice .singlebutton + .singlebutton input  {
     background-image:none;
 	background-color: [[setting:def_buttoncolor]];
-    color: #fff !important;
+    color: #fff;
 	border: none;
     border-radius: 2px;
-	box-shadow:0 1px 2px 0 rgba(0,0,0,0.34);
     text-shadow: none;
 	padding:6px 18px;
+	box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
 }
-button a, .btn a {
+button a, .btn a, button a:visited, .btn a:visited, a.btn, a.btn:visited, #page-footer .content a.btn, #page-footer .footerlinks a.btn {
 	color:#fff;
 }
-button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .btn-success:hover, .btn-success:focus, .btn-success:active, .open .dropdown-toggle.btn-default , input.form-submit:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, button:focus, input.form-submit:focus, input[type="button"]:focus, input[type="submit"]:focus, input[type="reset"]:focus, button.active, input.form-submit.active, input.active[type="button"], input.active[type="submit"], input.active[type="reset"], button:active, input.form-submit:active, input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:active, input.form-submit:hover, input#id_submitbutton:hover, input#id_submitbutton2:hover, .path-admin .buttons input[type="submit"]:hover, td.submit input:hover, input.form-submit:focus, input#id_submitbutton:focus, input#id_submitbutton2:focus, .path-admin .buttons input[type="submit"]:focus, td.submit input:focus, input.form-submit:active, input#id_submitbutton:active, input#id_submitbutton2:active, .path-admin .buttons input[type="submit"]:active, td.submit input:active, input.form-submit.active, input#id_submitbutton.active, input#id_submitbutton2.active, .path-admin .buttons input.active[type="submit"], td.submit input.active, input.form-submit.disabled, input#id_submitbutton.disabled, input#id_submitbutton2.disabled, .path-admin .buttons input.disabled[type="submit"], td.submit input.disabled, input.form-submit[disabled], input#id_submitbutton[disabled], input#id_submitbutton2[disabled], .path-admin .buttons input[type="submit"][disabled], td.submit input[disabled], #notice .singlebutton + .singlebutton input:hover  {
+button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active,  .open .dropdown-toggle.btn-default , input.form-submit:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, button:focus, input.form-submit:focus, input[type="button"]:focus, input[type="submit"]:focus, input[type="reset"]:focus, button.active, input.form-submit.active, input.active[type="button"], input.active[type="submit"], input.active[type="reset"], button:active, input.form-submit:active, input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:active, input.form-submit:hover, input#id_submitbutton:hover, input#id_submitbutton2:hover, .path-admin .buttons input[type="submit"]:hover, td.submit input:hover, input.form-submit:focus, input#id_submitbutton:focus, input#id_submitbutton2:focus, .path-admin .buttons input[type="submit"]:focus, td.submit input:focus, input.form-submit:active, input#id_submitbutton:active, input#id_submitbutton2:active, .path-admin .buttons input[type="submit"]:active, td.submit input:active, input.form-submit.active, input#id_submitbutton.active, input#id_submitbutton2.active, .path-admin .buttons input.active[type="submit"], td.submit input.active, input.form-submit.disabled, input#id_submitbutton.disabled, input#id_submitbutton2.disabled, .path-admin .buttons input.disabled[type="submit"], td.submit input.disabled, input.form-submit[disabled], input#id_submitbutton[disabled], input#id_submitbutton2[disabled], .path-admin .buttons input[type="submit"][disabled], td.submit input[disabled], #notice .singlebutton + .singlebutton input:hover  {
     background-color: [[setting:def_buttonhovercolor]];
     color: #fff;
 	transition: all 0.3s ease 0.1s;
@@ -614,6 +718,15 @@ button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
     background-color: [[setting:mainhovercolor]] !important;
+	color: #fff;
+	transition: all 0.3s ease 0.1s;
+}
+.btn-success {
+    background-color: #5bb75b;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
+    background-color: #51a351 !important;
+	color: #fff;
 	transition: all 0.3s ease 0.1s;
 }
 .btn-info {
@@ -621,6 +734,7 @@ button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-
 }
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] {
     background-color: #29A7D8 !important;
+	color: #fff;
 	transition: all 0.3s ease 0.1s;
 }
 .btn-warning {
@@ -628,6 +742,7 @@ button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-
 }
 .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .btn-warning.disabled, .btn-warning[disabled] {
     background-color: #EDC202 !important;
+	color: #fff;
 	transition: all 0.3s ease 0.1s;
 }
 .btn-danger, .btn-cancel, .submit.buttons input[name="cancel"], #notice .singlebutton + .singlebutton input  {
@@ -635,6 +750,7 @@ button:hover, button:focus, button:active, .btn:hover, .btn-default:hover, .btn-
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-cancel:hover, .btn-cancel:focus, .btn-cancel:active, .submit.buttons input[name="cancel"]:hover, .submit.buttons input[name="cancel"]:focus, .submit.buttons input[name="cancel"]:active, #notice .singlebutton + .singlebutton input:hover, #notice .singlebutton + .singlebutton input:focus, #notice .singlebutton + .singlebutton input:active {
     background-color: #b82d27 !important;
+	color: #fff;
 	transition: all 0.3s ease 0.1s;
 }
 

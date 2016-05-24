@@ -19,7 +19,7 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
 
@@ -27,7 +27,7 @@ $THEME->name = 'lambda';
 
 $THEME->doctype = 'html5';
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('slider', 'font-awesome.min', 'style', 'typographie');
+$THEME->sheets = array('slider', 'font-awesome.min', 'style', 'typographie', 'auth');
 $THEME->editor_sheets = array();
 $THEME->supportscssoptimisation = false;
 $THEME->enable_dock = true;
@@ -99,7 +99,7 @@ $THEME->layouts = array(
         'defaultregion' => 'side-post',
     ),
     'login' => array(
-        'file' => 'columns1.php',
+        'file' => 'login.php',
         'regions' => array('footer-left', 'footer-middle', 'footer-right', 'hidden-dock'),
         'defaultregion' => 'hidden-dock',
         'options' => array('langmenu'=>true),

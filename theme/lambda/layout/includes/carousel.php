@@ -17,7 +17,9 @@ $has_additional_html = (!empty($PAGE->theme->settings->carousel_add_html));
 
 	<div class="carousel">
     <?php if ($hasheading) {
-  		echo '<h'.$PAGE->theme->settings->carousel_hi.' class="bx-heading">'.$PAGE->theme->settings->carousel_h.'</h'.$PAGE->theme->settings->carousel_hi.'>';	
+		$carouselheading = $PAGE->theme->settings->carousel_h;
+		$carouselheading = format_text($carouselheading, FORMAT_HTML);
+  		echo '<h'.$PAGE->theme->settings->carousel_hi.' class="bx-heading">'.$carouselheading.'</h'.$PAGE->theme->settings->carousel_hi.'>';	
 		echo '<span id="slider-prev"></span><span id="slider-next"></span>';
 	} else {
 		echo '<div style="padding-bottom: 20px;"><span id="slider-prev"></span><span id="slider-next"></span></div>';
@@ -50,9 +52,11 @@ $has_additional_html = (!empty($PAGE->theme->settings->carousel_add_html));
 					else if ($color_number=='5') {$color = 'turquoise';}
 					echo '<div class="mask '.$color.'">';
 					$heading = $PAGE->theme->settings->$current_heading;
+					$heading = format_text($heading, FORMAT_HTML);
 					echo '<h2>'.$heading.'</h2>';
 					$current_caption = 'carousel_caption_'.$i;
 					$caption = $PAGE->theme->settings->$current_caption;
+					$caption = format_text($caption, FORMAT_HTML);
 					echo '<p>'.$caption.'</p>';
 					$current_url = 'carousel_url_'.$i;
 					$url = $PAGE->theme->settings->$current_url;

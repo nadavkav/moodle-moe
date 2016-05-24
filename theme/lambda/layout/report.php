@@ -19,10 +19,12 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
 
+$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
+$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
 $left = (!right_to_left());
 $standardlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
 
@@ -44,25 +46,18 @@ echo $OUTPUT->doctype() ?>
 <div id="wrapper">
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
-<div class="text-center" style="line-height:1em;">
-	<img src="<?php echo $CFG->wwwroot;?>/theme/lambda/pix/bg/shadow.png" class="slidershadow" alt="">
-</div>
-
 <div id="page" class="container-fluid">
 
-    <?php if (isloggedin() and !isguestuser()) { ?>
     <header id="page-header" class="clearfix">
+    	<?php if (!($hide_breadrumb)) { ?>
         <div id="page-navbar" class="clearfix">
             <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
             <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
         </div>
+        <?php } ?>
     </header>
-    <?php } ?>
-
 
     <div id="page-content" class="row-fluid">
-    	<div id="<?php echo $regionbsid ?>" class="span12">
-        	<div class="row-fluid">
         		<section id="region-main" class="span12">
             		<?php
             			echo $OUTPUT->course_content_header();
@@ -71,10 +66,12 @@ echo $OUTPUT->doctype() ?>
             		?>
         		</section>
             </div>
-        	<?php
-        		echo $OUTPUT->blocks('side-pre', 'report-blocks');
-        	?>
-    	</div>
+            <div class="hidden-blocks">
+            	<div class="row-fluid">
+        		<?php
+        			echo $OUTPUT->blocks('side-pre', 'report-blocks');
+        		?>
+            	</div>
     </div>
 
     <a href="#top" class="back-to-top"><i class="fa fa-chevron-circle-up fa-3x"></i><p><?php print_string('backtotop', 'theme_lambda'); ?></p></a>

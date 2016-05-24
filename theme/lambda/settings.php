@@ -19,7 +19,7 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
 
@@ -44,7 +44,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
 	$name = 'theme_lambda/logo_res';
     $title = get_string('logo_res', 'theme_lambda');
     $description = get_string('logo_res_desc', 'theme_lambda');
-    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 	
@@ -62,15 +62,6 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/layout';
     $title = get_string('layout', 'theme_lambda');
     $description = get_string('layoutdesc', 'theme_lambda');
-    $default = false;
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);
-	
-    // Show MyCourses dropdown in custommenu.
-    $name = 'theme_lambda/mycourses_dropdown';
-    $title = get_string('mycourses_dropdown', 'theme_lambda');
-    $description = get_string('mycourses_dropdown_desc', 'theme_lambda');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -147,7 +138,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/maincolor';
     $title = get_string('maincolor', 'theme_lambda');
     $description = get_string('maincolordesc', 'theme_lambda');
-    $default = '#e2a500';
+    $default = '#f9bf3b';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -157,7 +148,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/mainhovercolor';
     $title = get_string('mainhovercolor', 'theme_lambda');
     $description = get_string('mainhovercolordesc', 'theme_lambda');
-    $default = '#c48f00';
+    $default = '#E8B60F';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -167,7 +158,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/linkcolor';
     $title = get_string('linkcolor', 'theme_lambda');
     $description = get_string('linkcolordesc', 'theme_lambda');
-    $default = '#966b00';
+    $default = '#EBA600';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -197,7 +188,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/menufirstlevelcolor';
     $title = get_string('menufirstlevelcolor', 'theme_lambda');
     $description = get_string('menufirstlevelcolordesc', 'theme_lambda');
-    $default = '#323A45';
+    $default = '#3A454b';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -247,7 +238,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/footerheadingcolor';
     $title = get_string('footerheadingcolor', 'theme_lambda');
     $description = get_string('footerheadingcolordesc', 'theme_lambda');
-    $default = '#f9f9f9';
+    $default = '#f2f2f2';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -277,7 +268,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
     $name = 'theme_lambda/copyright_textcolor';
     $title = get_string('copyright_textcolor', 'theme_lambda');
     $description = get_string('copyright_textcolordesc', 'theme_lambda');
-    $default = '#bdc3c7';
+    $default = '#bdc3c2';
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -416,7 +407,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
 		'11'=>'Imprima',
 		'12'=>'Lekton',
 		'13'=>'Nixie One',
-		'14'=>'Nobile',
+		'14'=>'Montserrat',
 		'15'=>'Playfair Display',
 		'16'=>'Pontano Sans',
 		'17'=>'PT Sans',
@@ -450,7 +441,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
 		'15'=>'Lekton',
 		'16'=>'Lobster',
 		'17'=>'Nixie One',
-		'18'=>'Nobile',
+		'18'=>'Montserrat',
 		'19'=>'Pacifico',
 		'20'=>'Playfair Display',
 		'21'=>'Pontano Sans',
@@ -831,7 +822,7 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
         $title = get_string('carousel_caption', 'theme_lambda');
         $description = get_string('carousel_caption_desc', 'theme_lambda');
         $default = '';
-        $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
+        $setting = new admin_setting_configtextarea($name, $title, $description, $default);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $temp->add($setting);
 
@@ -870,3 +861,77 @@ $ADMIN->add('themes', new admin_category('theme_lambda', 'Theme-Lambda'));
         $temp->add($setting);
     }
     $ADMIN->add('theme_lambda', $temp);
+	
+	// "settings login and navigations" settingpage
+	$temp = new admin_settingpage('theme_lambda_login',  get_string('settings_login', 'theme_lambda'));
+	
+	// Additional Login Link
+    $name = 'theme_lambda/login_link';
+    $title = get_string('login_link', 'theme_lambda');
+    $description = get_string('login_link_desc', 'theme_lambda');
+    $default = 2;
+    $choices = array(0=>get_string('none'), 1=>get_string('startsignup'), 2=>get_string('forgotten'), 3=>get_string('moodle_login_page','theme_lambda'));
+    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+    // Custom Login Link URL.
+    $name = 'theme_lambda/custom_login_link_url';
+    $title = get_string('custom_login_link_url', 'theme_lambda');
+    $description = get_string('custom_login_link_url_desc', 'theme_lambda');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+	// Custom Login Link Text.
+    $name = 'theme_lambda/custom_login_link_txt';
+    $title = get_string('custom_login_link_txt', 'theme_lambda');
+    $description = get_string('custom_login_link_txt_desc', 'theme_lambda');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+	// customized login page.
+	$name = 'theme_lambda/auth_googleoauth2';
+    $title = get_string('auth_googleoauth2', 'theme_lambda');
+    $description = get_string('auth_googleoauth2_desc', 'theme_lambda');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+	// customized login page.
+	$name = 'theme_lambda/custom_login';
+    $title = get_string('custom_login', 'theme_lambda');
+    $description = get_string('custom_login_desc', 'theme_lambda');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
+	// hide breadcrumd for guest users
+	$name = 'theme_lambda/hide_breadcrumb';
+    $title = get_string('hide_breadcrumb', 'theme_lambda');
+    $description = get_string('hide_breadcrumb_desc', 'theme_lambda');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+	// custom menu with shadow effect
+	$name = 'theme_lambda/shadow_effect';
+    $title = get_string('shadow_effect', 'theme_lambda');
+    $description = get_string('shadow_effect_desc', 'theme_lambda');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+    // Show MyCourses dropdown in custommenu.
+    $name = 'theme_lambda/mycourses_dropdown';
+    $title = get_string('mycourses_dropdown', 'theme_lambda');
+    $description = get_string('mycourses_dropdown_desc', 'theme_lambda');
+    $default = false;
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+	
+	$ADMIN->add('theme_lambda', $temp);

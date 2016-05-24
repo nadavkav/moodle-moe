@@ -19,7 +19,7 @@
  * Built on: Essential by Julian Ridden
  *
  * @package   theme_lambda
- * @copyright 2014 redPIthemes
+ * @copyright 2016 redPIthemes
  *
  */
 
@@ -37,7 +37,7 @@ $string['choosereadme'] = '
 </div>
 <h4>Caracter&iacute;sticas del tema</h4>
 <div style="color: #888; text-transform: uppercase; margin-bottom:20px;">
-<p>Compatibilidad: Moodle 2.5/2.6/2.7/2.8/2.9/3.0<br />Versi&oacute;n del tema: 1.44<br />Tema matriz: Bootstrapbase de Bas Brands<br />Basado en: Essential de Julian Ridden</p>
+<p>Compatibilidad: Moodle 2.5/2.6/2.7/2.8/2.9/3.0/3.1<br />Versi&oacute;n del tema: 1.50<br />Tema matriz: Bootstrapbase de Bas Brands<br />Basado en: Essential de Julian Ridden</p>
 </div>
 <hr />
 <p style="text-align:center;"><img class="img-polaroid" src="lambda/pix/redPIthemes.jpg" /></p>';
