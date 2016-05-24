@@ -23,6 +23,8 @@
  *
  */
 
+$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
+$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
 $standardlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
 
 if (right_to_left()) {
@@ -50,21 +52,17 @@ echo $OUTPUT->doctype() ?>
 
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
-<div class="text-center" style="line-height:1em;">
-	<img src="<?php echo $CFG->wwwroot;?>/theme/moe/pix/bg/shadow.png" class="slidershadow" alt="">
-</div>
-
 <!-- Start Main Regions -->
 <div id="page" class="container-fluid">
 
-    <?php if (isloggedin() and !isguestuser()) { ?>
     <header id="page-header" class="clearfix">
+    	<?php if (!($hide_breadrumb)) { ?>
         <div id="page-navbar" class="clearfix">
             <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
             <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
         </div>
+        <?php } ?>
     </header>
-    <?php } ?>
 
     <div id="page-content" class="row-fluid">
         <div id="<?php echo $regionbsid ?>" class="span9">

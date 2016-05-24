@@ -37,7 +37,7 @@ $string['choosereadme'] = '
 </div>
 <h4>Theme Summary</h4>
 <div style="color: #888; text-transform: uppercase; margin-bottom:20px;">
-<p>Compatibility: Moodle 2.5/2.6/2.7/2.8/2.9/3.0<br />Theme Version: 1.44<br />Parent theme: Bootstrapbase by Bas Brands<br />Built on: Essential by Julian Ridden</p>
+<p>Compatibility: Moodle 2.5/2.6/2.7/2.8/2.9/3.0/3.1<br />Theme Version: 1.50<br />Parent theme: Bootstrapbase by Bas Brands<br />Built on: Essential by Julian Ridden</p>
 </div>
 <hr />
 <p style="text-align:center;"><img class="img-polaroid" src="moe/pix/redPIthemes.jpg" /></p>';
@@ -48,7 +48,7 @@ $string['lemidadigit'] = 'Digital Learning';
 $string['logo'] = 'Logo';
 $string['logodesc'] = 'Please upload your custom logo here. If you upload a logo it will appear in the header.';
 $string['logo_res'] = 'Standard logo dimension';
-$string['logo_res_desc'] = 'Sets the dimension of your logo to a maximum height of 100px. Using this setting, your logo will always correspond to the height of the login container and you can also use a @2x version for high-res screens.';
+$string['logo_res_desc'] = 'Sets the dimension of your logo to a maximum height of 90px. Using this setting, your logo will adapt to different screen resolutions and you can also use a @2x version for high-res screens.';
 $string['pagewidth'] = 'Set Page Width';
 $string['pagewidthdesc'] = 'Choose from the list of availble page layouts.';
 $string['boxed_wide'] = 'Boxed - fixed width wide';
@@ -57,8 +57,6 @@ $string['boxed_variable'] = 'Boxed - variable width';
 $string['full_wide'] = 'Wide - variable width';
 $string['layout'] = 'Use standard block layout';
 $string['layoutdesc'] = 'This theme is designed to put both block columns on the side. If you prefer the standard Moodle course layout you can check to use the standard three column layout.';
-$string['mycourses_dropdown'] = 'MyCourses dropdown menu';
-$string['mycourses_dropdown_desc'] = 'Shows the enrolled courses for a user as a dropdown entry in the Custom Menu.';
 $string['footnote'] = 'Footnote';
 $string['footnotedesc'] = 'Whatever you add to this textarea will be displayed in the footer throughout your Moodle site, e.g. Copyright and the name of your organisation.';
 $string['customcss'] = 'Custom CSS';
@@ -131,14 +129,12 @@ $string['socials_color_desc'] = 'Set the color for your social media icons.<br /
 $string['socials_position'] = 'Icons Position';
 $string['socials_position_desc'] = 'Choose where to place the social media icons: at the bottom of the page (footer) or at the top (header).';
 
-
 /* Settings - Fonts */
 $string['settings_fonts'] = 'Fonts';
 $string['fontselect_heading'] = 'Font Selector - Headings';
 $string['fontselectdesc_heading'] = 'Choose from the list of availble fonts.';
 $string['fontselect_body'] = 'Font Selector - Body';
 $string['fontselectdesc_body'] = 'Choose from the list of availble fonts.';
-
 
 /* Settings - Slider */
 $string['settings_slider'] = 'Slideshow';
@@ -180,7 +176,7 @@ $string['slideshow_txtfx_desc'] ='Choose a transition effect text in your slides
 /* Settings - Carousel */
 $string['settings_carousel'] = 'Carousel';
 $string['carouselheadingsub'] = 'Settings for the Frontpage Carousel';
-$string['carouseldesc'] = 'Here you can setup a carousel slider for your Frontpage.<br /><strong>Note: </strong>You have to upload at least the images to make the slider appear. The caption settings will appear as a hover effect for the images and are optional.';
+$string['carouseldesc'] = 'Here you can setup a carousel slider for your Frontpage.<br /><strong>Please note: </strong>You have to upload at least the images to make the slider appear. The caption settings will appear as a hover effect for the images and are optional.';
 $string['carousel_position'] = 'Carousel Position';
 $string['carousel_positiondesc'] = 'Select a position for the carousel slider.<br />You can choose to place the slider at the top or bottom of the content area.';
 $string['carousel_h'] = 'Heading';
@@ -203,6 +199,27 @@ $string['carousel_btntext'] = 'Caption - Link Text';
 $string['carousel_btntextdesc'] = 'Enter a link text for the URL.';
 $string['carousel_color'] = 'Caption - Color';
 $string['carousel_colordesc'] = 'Select a color for the caption.';
+
+/* Settings - Login */
+$string['settings_login'] = 'Login and Navigation';
+$string['custom_login'] = 'Custom login page';
+$string['custom_login_desc'] = 'Mark the checkbox to display a customized version of the default Moodle login page.';
+$string['mycourses_dropdown'] = 'MyCourses dropdown menu';
+$string['mycourses_dropdown_desc'] = 'Shows the enrolled courses for a user as a dropdown entry in the Custom Menu.';
+$string['hide_breadcrumb'] = 'Hide Breadcrumb';
+$string['hide_breadcrumb_desc'] = 'Hide the Moodle breadcrumb navigation for non-logged in and guest users?';
+$string['shadow_effect'] = 'Shadow Effect';
+$string['shadow_effect_desc'] = 'Use a shadow effect for the Moodle custom menu bar and the slideshow?';
+$string['login_link'] = 'Additional Login Link';
+$string['login_link_desc'] = 'Shows an additional link at the login form of the theme.';
+$string['moodle_login_page'] = 'Moodle Login Page';
+$string['custom_login_link_url'] = 'Custom Login Link URL';
+$string['custom_login_link_url_desc'] = 'Here you can enter a custom URL for your additional link at the login form. This will override the setting from the dropdown.';
+$string['custom_login_link_txt'] = 'Custom Login Link Text';
+$string['custom_login_link_txt_desc'] = 'Here you can enter a custom text for your additional link at the login form. This will override the setting from the dropdown.';
+$string['auth_googleoauth2'] = 'Oauth2';
+$string['auth_googleoauth2_desc'] = 'Use the Moodle Oauth2 authentication plugin instead of the default login form?<br /><strong>Please note: </strong>You have to install this additional plugin first from the Moodle plugins directory. This plugin allows your users to sign-in with a Google / Facebook / Github / Linkedin / Windows Live / VK / Battle.net account. The first time a user signs in, a new account is created.';
+
 
 /* Theme */
 $string['visibleadminonly'] ='Blocks moved into the area below will only be seen by admins';

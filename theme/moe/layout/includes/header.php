@@ -23,8 +23,12 @@
  *
  */
 
+$login_link = theme_lambda_get_setting('login_link');
+$login_custom_url = theme_lambda_get_setting('custom_login_link_url');
+$login_custom_txt = theme_lambda_get_setting('custom_login_link_txt');
+$shadow_effect = theme_lambda_get_setting('shadow_effect');
+$auth_googleoauth2 = theme_lambda_get_setting('auth_googleoauth2');
 $haslogo = (!empty($PAGE->theme->settings->logo));
-
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
 
 $checkuseragent = '';
@@ -47,7 +51,16 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
     <div class="container-fluid">    
     <div class="row-fluid">
     <!-- HEADER: LOGO AREA -->
-        	
+        		<div id="lemidaDigit" class="hidden-phone span6">
+                	<span>
+                	<?php 
+					   echo get_string('lemidadigit','theme_moe');
+					?>
+					</span>
+                </div>
+                <div class="span4 hidden-phone">
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>             		
+                </div>
             <?php if (!$haslogo) { ?>
             	<div class="span6">
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
@@ -56,24 +69,14 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                 <div class="span2 logo-header">
                 	<a class="logo" href="<?php echo $CFG->wwwroot; ?>" title="<?php print_string('home'); ?>">
                     <?php 
-					echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->setting_file_url('logo', 'logo'), 'class'=>'logo', 'alt'=>'logo'));
+					echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->setting_file_url('logo', 'logo'), 'class'=>'logo img-responsive', 'alt'=>'logo'));
 					?>
                     </a>
                 </div>
             <?php } ?>      	
-                <div class="span4 hidden-phone">
-              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
-              		
-                </div>
-                <div id="lemidaDigit" class="hidden-phone span6">
-                	<span>
-                	<?php 
-					   echo get_string('lemidadigit','theme_moe');
-					?>
-					</span>
-                </div>            
-            <div class="login-header">
-            <div class="profileblock">
+                
+                            
+            
             
             <?php 
 	function get_content () {
@@ -87,8 +90,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 		$wwwroot = str_replace("http://", "https://", $CFG->wwwroot);
 	}?>
 
-	</div>
-	</div>
+	
             
     </div>
     </div>
@@ -106,7 +108,6 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
             </a>
             <div class="nav-collapse collapse">
                 <?php echo $OUTPUT->custom_menu(); ?>
-                <div class="nav-divider-right"></div>
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                     <li><?php echo $OUTPUT->user_menu()?></li>
@@ -122,3 +123,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
         </div>
     </nav>
 </header>
+
+<?php if ($shadow_effect) { ?>
+<div class="container-fluid"><img src="<?php echo $OUTPUT->pix_url('bg/lambda-shadow', 'theme'); ?>" class="lambda-shadow" alt=""></div>
+<?php } ?>

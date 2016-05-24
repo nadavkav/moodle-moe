@@ -86,7 +86,7 @@ function moe_set_pagewidth1($css, $pagewidth) {
 function moe_set_pagewidth2($css, $pagewidth) {
     $tag = '[[setting:pagewidth_wide]]';
     if ($pagewidth == "100") {
-        $replacement = 'body {background:none repeat scroll 0 0 #fff;padding-top:0;} @media(max-width:767px){body {padding-left: 0; padding-right: 0;} #page {padding: 10px 0;}} #wrapper {max-width:100%;width:100%;} #page-header {margin:0 auto;max-width:90%;} .container-fluid {padding: 0; max-width:100%} .navbar {background: none repeat scroll 0 0 [[setting:menufirstlevelcolor]];padding: 0;} .navbar-inner {margin: 0 auto; max-width: 90%;} .navbar .brand {margin-left:0;} .navbar #search {margin-right:0;} .slidershadow.frontpage-shadow {display:none;} .camera_wrap {margin-top: -10px;} #page-content.row-fluid {margin: 0 auto; max-width: 90%;} #page-footer .row-fluid {margin: 0 auto; max-width: 90%;} .spotlight-full {margin-left: -5.8% !important; margin-right: -5.8% !important;} .socials-header .social_icons.pull-right {padding-right:10%;} .socials-header .social_contact {padding-left:10%;}';
+        $replacement = 'body {background:none repeat scroll 0 0 #fff;padding-top:0;} @media(max-width:767px){body {padding-left: 0; padding-right: 0;} #page {padding: 10px 0;}} #wrapper {max-width:100%;width:100%;} #page-header {margin:0 auto;max-width:90%;} .container-fluid {padding: 0; max-width:100%} .navbar {background: none repeat scroll 0 0 [[setting:menufirstlevelcolor]];padding: 0;} .navbar-inner {margin: 0 auto; max-width: 90%;} .navbar .brand {margin-left:0;} .navbar #search {margin-right:0;} .pagelayout-frontpage header.navbar + .container-fluid > img.lambda-shadow {display: none;} .camera_wrap {margin-top: -10px;} #page-content.row-fluid {margin: 0 auto; max-width: 90%;} #page-footer .row-fluid {margin: 0 auto; max-width: 90%;} .spotlight-full {margin-left: -5.8% !important; margin-right: -5.8% !important;} .socials-header .social_icons.pull-right {padding-right:10%;} .socials-header .social_contact {padding-left:10%;}';
 		$css = str_replace($tag, $replacement, $css);
 	}
 	else { 
@@ -98,7 +98,7 @@ function moe_set_pagewidth2($css, $pagewidth) {
 function moe_set_logo_res($css, $logo_res) {
     $tag = '[[setting:logo_res]]';
     if ($logo_res) {
-        $replacement = '.logo {display: block;max-height:100px;width: auto;}';
+        $replacement = 'a.logo img {max-height:90px;} @media(max-width:767px){a.logo img {max-height:75px;}} @media(max-width:480px){a.logo img {max-height:60px;}}';
 		$css = str_replace($tag, $replacement, $css);
 	}
 	else { 
@@ -191,7 +191,7 @@ function theme_moe_process_css($css, $theme) {
         $bodysize = '13px';
         $bodyweight = '400';
 	} else if ($theme->settings->font_body ==14) {
-        $bodyfont = 'Nobile';
+        $bodyfont = 'Montserrat';
         $bodysize = '12px';
         $bodyweight = '400';
 	} else if ($theme->settings->font_body ==15) {
@@ -262,7 +262,7 @@ function theme_moe_process_css($css, $theme) {
     } else if ($theme->settings->font_heading ==17) {
         $headingfont = 'Nixie One';
     } else if ($theme->settings->font_heading ==18) {
-        $headingfont = 'Nobile';
+        $headingfont = 'Montserrat';
     } else if ($theme->settings->font_heading ==19) {
         $headingfont = 'Pacifico';
     } else if ($theme->settings->font_heading ==20) {

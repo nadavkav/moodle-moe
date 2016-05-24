@@ -22,7 +22,10 @@
  * @copyright 2014 redPIthemes
  *
  */
-
+ 
+$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
+$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
+		
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
@@ -42,21 +45,16 @@ echo $OUTPUT->doctype() ?>
 
 <?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
-<div class="text-center" style="line-height:1em;">
-	<img src="<?php echo $CFG->wwwroot;?>/theme/moe/pix/bg/shadow.png" class="slidershadow" alt="">
-</div>
-
 <div id="page" class="container-fluid">
 
-	<?php if (isloggedin() and !isguestuser()) { ?>
     <header id="page-header" class="clearfix">
+    	<?php if (!($hide_breadrumb)) { ?>
         <div id="page-navbar" class="clearfix">
             <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
             <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
         </div>
+        <?php } ?>
     </header>
-    <?php } ?>
-
 
     <div id="page-content" class="row-fluid">
         <section id="region-main" class="span12">

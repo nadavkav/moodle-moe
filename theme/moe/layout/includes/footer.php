@@ -47,7 +47,8 @@ $hasfooterright = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->re
     	<div class="row-fluid">
     		<p class="helplink"><?php echo page_doc_link(get_string('moodledocslink')); ?></p>
     		<?php if ($hasfootnote) {
-        		echo '<div class="footnote">'.$hasfootnote.'</div>';
+				$footnote_HTML = format_text($hasfootnote,FORMAT_HTML);
+        		echo '<div class="footnote">'.$footnote_HTML.'</div>';
     		} ?>
 		</div>
         
@@ -57,5 +58,3 @@ $hasfooterright = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->re
 		} ?>
         
    	</div>
-	
-

@@ -63,7 +63,7 @@
 <?php } ?>
 
 <?php if($PAGE->theme->settings->font_body == 14 || $PAGE->theme->settings->font_heading == 18) { ?>
-	<link href="//fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <?php } ?>
 
 <?php if($PAGE->theme->settings->font_heading == 19) { ?>
@@ -83,7 +83,7 @@
 <?php } ?>
 
 <?php if($PAGE->theme->settings->font_body == 18 || $PAGE->theme->settings->font_heading == 23) { ?>
-	<link href="//fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet" type="text/css">
+	<link href="//fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet" type="text/css">
 <?php } ?>
 
 <?php if($PAGE->theme->settings->font_heading == 24) { ?>
