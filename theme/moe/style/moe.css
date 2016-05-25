@@ -2134,3 +2134,18 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .singlebutton.glossaryaddentry {
 	width: auto;
 }
+
+#page-mod-glossary-view .nav.nav-tabs {
+	height: auto;
+}
+
+#page-mod-glossary-view .nav-tabs>.active>a {
+    border: 8px solid transparent;
+    moz-border-image: url([[pix:theme|bg/btn2bg]])  30;
+    -webkit-border-image: url([[pix:theme|bg/btn2bg]])  30;
+    border-image: url([[pix:theme|bg/btn2bg]])  30;
+}
+
+#page-mod-glossary-view #intro {
+    height: 10px;
+}
