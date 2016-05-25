@@ -1523,12 +1523,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     font-weight: 700;
 }
 
-#page-mod-glossary-view .nav-tabs>.active>a {
-	background-color: #b9e2d5 !important;
-	cursor: pointer;
-	margin-top: 2px;
-}
-
 .glossarycategoryheader  span {
 	background-color: #ededed !important;
 	color: #3b3340;
@@ -1539,7 +1533,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .glossarysearchbox input[type=submit], #page-mod-glossary-view .singlebutton.glossaryaddentry input {
 	box-shadow: inset 0 0 0 1px #ecc89c, 0 0 0 1px #ecc89c;
 }
-
 /*margin top of letters*/
 .glossarycategoryheader  h3 {
 	margin-bottom: 1em !important;
@@ -2125,4 +2118,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     height: 2px;
     border-top: 1px solid #a8c2b7;
     border-bottom: 1px solid #a8c2b7;
+}
+
+
+#page-mod-glossary-view .nav-tabs>.active>a {
+	background-color: #b9e2d5 !important;
+	cursor: pointer;
+	margin-top: 2px;
 }
