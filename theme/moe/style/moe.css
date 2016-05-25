@@ -2126,3 +2126,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	cursor: pointer;
 	margin-top: 2px;
 }
+
+#page-mod-glossary-view div[role="main"] form table.boxaligncenter {
+	width: 50% !important;
+}
+
+#page-mod-glossary-view .singlebutton.glossaryaddentry {
+	width: auto;
+}
