@@ -1856,7 +1856,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-mod-glossary-view  .glossarydisplay {
-	border-top: solid 3px #d6decf;
 	margin-bottom: 0px !important;
 	clear: both;
 }
@@ -2010,21 +2009,15 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-#page-mod-glossary-view .paging a
-{
+#page-mod-glossary-view .paging a {
 	background-color: #f9efdc! important;
 	border: 0px solid  #f9efdc! important;
 	
 }
 
-#page-mod-glossary-view .paging 
-{
+#page-mod-glossary-view .paging {
 	padding-top:10px;
 	background-color: #f9efdc! important;
-	border-bottom: 2px solid #c8d3cb;
-	
-		
-	
 }
 
 #page-mod-glossary-view .paging + br
@@ -2038,15 +2031,13 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-#page-mod-glossary-view .entrybox .paging~ :nth-child(2n)
-{
+#page-mod-glossary-view .entrybox .paging~ table {
 	background-color: #fbf4e7 ;
 	width: 100% !important;
 	border-bottom: 1px solid #c8d3cb;
 }
 
-#page-mod-glossary-view .entrybox  .paging~ :nth-child(2n+1)
-{
+#page-mod-glossary-view .entrybox  .paging~ div {
 	background-color: #f2ece2;
 	width: 100% !important;
 	border-bottom: 1px solid #c8d3cb;
@@ -2124,4 +2115,14 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view .entrybox > table {
 	width: 54% !important;
+}
+
+#page-mod-glossary-view .glossarydisplay::before, #page-mod-glossary-view .paging:after {
+    content: " ";
+    display: block;
+    width: 100%;
+    background-color: #d6decf;
+    height: 2px;
+    border-top: 1px solid #a8c2b7;
+    border-bottom: 1px solid #a8c2b7;
 }
