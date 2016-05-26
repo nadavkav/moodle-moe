@@ -21,7 +21,7 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->dirroot.'/mod/moewiki/locallib.php');
 
 class mod_moewiki_mod_form extends moodleform_mod {
-
+    
     public function definition() {
         global $CFG, $COURSE;
 
@@ -32,7 +32,7 @@ class mod_moewiki_mod_form extends moodleform_mod {
 
         // Name and intro
         $mform->addElement('text', 'name', get_string('name'));
-        $mform->setType('name', PARAM_TEXT);
+        $mform->setType('name', PARAM_TEXT);+
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
 
         $this->standard_intro_elements(get_string('wikiintro', 'wiki'));
@@ -114,7 +114,8 @@ class mod_moewiki_mod_form extends moodleform_mod {
         }
 
         $this->add_action_buttons();
-
+        $data = new stdClass();
+        $data->template_text = "ASDFJASDKF AKSFD AKSJD F0";
         $this->set_data($data);
     }
 
@@ -161,6 +162,9 @@ class mod_moewiki_mod_form extends moodleform_mod {
         if (empty($data->allowimport)) {
             $data->allowimport = 0;
         }
+        if(!empty($data->template_text['text'])) {
+            $data->template_text = $data->template_text['text'];
+        }
 
         return $data;
     }
@@ -176,6 +180,11 @@ class mod_moewiki_mod_form extends moodleform_mod {
         $default_values['completioneditsenabled'] = !empty($default_values['completionedits']) ? 1 : 0;
         if (empty($default_values['completionedits'])) {
             $default_values['completionedits'] = 1;
+        }
+        if(!empty($default_values['template_text'])) {
+            $text = $default_values['template_text'];
+            $default_values['template_text'] = [];
+            $default_values['template_text']['text'] = $text;
         }
     }
 
