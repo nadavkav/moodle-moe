@@ -1325,7 +1325,22 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border: none;
 	
 }
+.loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
+	max-width: inherit;
+}
+.loginbox .subcontent.loginsub {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 500px;
+}
 
+.loginbox .subcontent.guestsub {
+	margin: 5px auto;
+	max-width: 500px;
+}
+.dir-rtl .loginbox .loginpanel .desc {
+	text-align: right;
+}
 @media (min-width: 980px) {
 	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
 	   content: none;
