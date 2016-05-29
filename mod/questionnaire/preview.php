@@ -45,7 +45,7 @@ if ($id) {
         print_error('coursemisconf');
     }
     // Dummy questionnaire object.
-    $questionnaire = new Object();
+    $questionnaire = new stdClass();
     $questionnaire->id = 0;
     $questionnaire->course = $course->id;
     $questionnaire->name = $survey->title;
@@ -77,7 +77,7 @@ if ($sid) {
 $PAGE->set_url($url);
 
 $PAGE->set_context($context);
-$PAGE->set_cm($cm);   //CONTRIB-5872 - I don't know why this is needed.
+$PAGE->set_cm($cm);   // CONTRIB-5872 - I don't know why this is needed.
 
 $questionnaire = new questionnaire($qid, $questionnaire, $course, $cm);
 
