@@ -56,13 +56,15 @@
 {{/duedate}}
 </span>
 </div>
-<div data-region="user-info" class="span4" data-assignmentid="{{assignmentid}}" data-groupid="{{groupid}}">
-    {{> mod_assign/grading_navigation_user_info }}
-</div>
-<div data-region="user-selector" class="span4">
-    <div class="alignment">
-        {{> mod_assign/grading_navigation_user_selector }}
-    </div>
+<div data-region="user-selection">
+	<div data-region="user-info" class="span4" data-assignmentid="{{assignmentid}}" data-groupid="{{groupid}}">
+	    {{> mod_assign/grading_navigation_user_info }}
+	</div>
+	<div data-region="user-selector" class="span4">
+	    <div class="alignment">
+	        {{> mod_assign/grading_navigation_user_selector }}
+	    </div>
+	</div>
 </div>
 </div>
 {{#js}}
