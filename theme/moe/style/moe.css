@@ -1,10 +1,21 @@
 @CHARSET "UTF-8";
 
+
 .format-socialwall .tl-showall {
 	text-align: center;
 	padding-bottom: 5px;
 	border-top: 0px solid #efefef;
 	border-bottom: 0px solid #efefef;
+}
+
+body.pagelayout-embedded{
+	position: static;
+}
+
+#wrapper > #page-header {
+	background-image: url([[pix:theme|bg/header_bg]]);
+    background-repeat: no-repeat;
+    background-size: cover; 
 }
 
 .format-socialwall .tl-leftcol {
@@ -1079,46 +1090,100 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	margin-right: 1em;
 }
 
-#page-course-view-socialwall .course-content::before {
-	content: " ";
-	background-image: url([[pix:theme|bg/learning-spaces]]);
+.path-mod-assign #region-main div[role="main"] > h2 > span {
+	background-image: url([[pix:theme|bg/headerBG]]);
+	padding: 0.2em;
 	background-repeat: no-repeat;
-	background-size: 100%;
-	height:10px;
-	display: block;
-	border-top: #beb1cc 1px solid;
-	border-left: #beb1cc 1px solid;
-	border-right: #beb1cc 1px solid;
-	border-bottom: #c1bdbf 1px solid;
+	border: 1px solid #af9dbb;
+	border-bottom: 0px;
+	background-size: cover;
+	color: #000000;
+	font-size: 0.8em;
+}
+#page-mod-assign-grading #region-main div[role="main"] {
+	background-image: url([[pix:theme|bg/Bg_divider]]);
+	border: 1px solid #af9dbb;
 }
 
-.format-socialwall div[role=main] .course-content ul.topics li.section .content .summary {
-	margin-left: 8px;
-	margin-right: 8px;
+#page-mod-assign-grading #region-main div[role="main"] >h2 {
+	background-color: #f0eee4;
+    border-top: 1px solid #af9dbb;
 }
 
-.format-socialwall div[role=main] .course-content ul.topics li.section .content {
-	margin-left: 0px;
-	margin-right: 0px;
+#page-mod-assign-grading #region-main div[role="main"] > h2 > span {
+	background: none;
+	border: none;
 }
 
-.format-socialwall div[role=main] .course-content ul.topics {
-	border-right: #bad4cd 1px solid;
-	border-left:  #bad4cd 1px solid;
+#page-mod-assign-grading #fitem_id_submitbutton {
+	border: none;
+	background-color: #f0eee4;
 }
 
-.format-socialwall div[role=main] .course-content ul.topics ul.tl-posts, .format-socialwall div[role=main] .course-content ul.topics ul.tl-posts li.tl-post{
-	border-top: #bad4cd 1px solid !important;
-	border-bottom:  #bad4cd 1px solid !important;
+#page-mod-assign-grading div.urlselect label {
+	display: inline-block;
+	margin: 1em;
+}
+.path-mod-assign #region-main div[role="main"] > h2 {
+	margin-bottom: -1px;
 }
 
-.format-socialwall .tl-post-actionarea {
-	border: 2px solid #cccccc;
+.path-mod-assign #region-main div[role="main"] #intro, .path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	background-color: #f0eee4;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 10px;
 }
 
-.format-socialwall h3.sectionname {
-	padding-left: 8px;
-	padding-right: 8px;
+.path-mod-assign #region-main div[role="main"] .urlselect > form > div {
+	border-bottom: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary, .path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"]  .gradingtable {
+	background-color: #f0eee4;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 10px;
+}
+
+.path-mod-assign #region-main div[role="main"]  .gradingtable {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingbatchoperationsform, .path-mod-assign #region-main div[role="main"] .boxaligncenter.gradingoptionsform {
+	background-color: #f0eee4;
+	margin: 0px;
+	padding: 10px;
+}
+
+.path-mod-assign .gradingtable tr.unselectedrow td,
+.path-mod-assign .quickgradingform .mform fieldset {
+	background-color: #f0eee4;
+}
+
+.path-mod-assign #region-main div[role="main"] .generaltable tbody>tr:nth-child(odd)>td {
+	background-color: #e8e6de;
+}
+
+.path-mod-assign td.submissionnotgraded {
+	background-color: #d4d4ce;
+}
+
+.path-mod-assign #region-main div[role="main"] input[type="submit"] {
+	background-color: #00716e;
+}
+
+.path-mod-assign #region-main div[role="main"] a:link {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] a:visited {
+	color: #083480;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary > h3, .path-mod-assign #region-main div[role="main"] .submissionstatustable > h3 {
+	margin-top: 0;
 }
 
 .dir-rtl .btn-group>.btn:first-child {
@@ -1151,6 +1216,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     -webkit-border-bottom-right-radius: 0px;
     -moz-border-radius-bottomright: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.dir-rtl .form-item .form-label, .dir-rtl .mform .fitem div.fitemtitle {
+	text-align: right;
 }
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
