@@ -1125,6 +1125,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	text-align: left !important;
 	direction: rtl;
 }
+.dir-rtl .camera_caption {
+    left: 4%;
+	right: auto;
+}
 
 .camera_caption.moveFromLeft div span {
 	background-color: #80599B;
@@ -1133,6 +1137,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border-left: 0px;
 }
 
+#page-navbar {
+    margin-top: -20px;	
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
 		font-size: 2em;
