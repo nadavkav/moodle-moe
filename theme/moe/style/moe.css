@@ -1135,6 +1135,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding: 10px;
 }
 
+.path-mod-assign #region-main div[role="main"] .groupselector {
+    display: block;
+    background-color: #f0eee4;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-right: #bdb0c9 1px solid;
+    border-left: #bdb0c9 1px solid;
+    padding: 10px;
+}
+
 .path-mod-assign #region-main div[role="main"] #intro {
 	border-top: #bdb0c9 1px solid;
 	border-right: #bdb0c9 1px solid;
