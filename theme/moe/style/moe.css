@@ -1135,8 +1135,25 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding: 10px;
 }
 
+.path-mod-assign #region-main div[role="main"] #intro {
+	border-top: #bdb0c9 1px solid;
+	border-right: #bdb0c9 1px solid;
+	border-left: #bdb0c9 1px solid;
+}
+
 .path-mod-assign #region-main div[role="main"] .urlselect > form > div {
 	border-bottom: 0px;
+}
+
+.path-mod-assign #region-main div[role="main"] .gradingsummary {
+	border-right: #bdb0c9 1px solid;
+	border-left: #bdb0c9 1px solid;
+}
+
+.path-mod-assign #region-main div[role="main"] .submissionstatustable {
+	border-bottom: #bdb0c9 1px solid;
+	border-right: #bdb0c9 1px solid;
+	border-left: #bdb0c9 1px solid;
 }
 
 .path-mod-assign #region-main div[role="main"] .gradingsummary, .path-mod-assign #region-main div[role="main"] .submissionstatustable, .path-mod-assign #region-main div[role="main"]  .gradingtable {
