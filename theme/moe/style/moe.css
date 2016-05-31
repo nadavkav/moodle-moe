@@ -1488,7 +1488,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-assign-grader div[data-region="user-selection"] {
     width: auto;
     position: absolute;
-    right: 400px;
+    right: 10%;
 }
 
 .dir-rtl.path-mod-assign [data-region="user-selector"] .alignment > a {
@@ -1561,4 +1561,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .path-mod-assign [data-region="user-info"] a {
     color: #634d75;
+}
+
+.path-mod-assign [data-region="grading-navigation-panel"] {
+	left: 26px;
 }
