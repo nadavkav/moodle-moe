@@ -1049,6 +1049,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 #page-mod-quiz-view #region-main div[role='main']>h2 span {
 	background-image: url([[pix:theme|bg/headerBG]]);
+	background-size:cover;
 	color: #5d4a6a;
 	border: 1px solid #ac9dbe;
 	border-bottom: 0px;
@@ -1058,9 +1059,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-quiz-view #intro.generalbox{
 	margin-top: 0px;
-	border: 1px solid #ac9dbe;
 	background-color: #f1efe3;
 	border-bottom: 0px;
+}
+
+#page-mod-quiz-view div[role="main"] > div:first-of-type {
+    border: 1px solid #ac9dbe;
 }
 
  #page-mod-quiz-view .generalbox#feedback{
