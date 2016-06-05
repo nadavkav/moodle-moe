@@ -15404,6 +15404,9 @@ var Viewer = exports.Viewer = Widget.extend({
             .on("click." + NS, '.annotator-delete', function (e) {
                 self._onDeleteClick(e);
             })
+            .on("click." + NS,'.annotator-cancel', function (e){
+            	self._startHideTimer();
+            })
             .on("mouseenter." + NS, function () {
                 self._clearHideTimer();
             })
