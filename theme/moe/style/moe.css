@@ -1053,7 +1053,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1212,7 +1212,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1323,7 +1323,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 .loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
 	max-width: inherit;
@@ -1345,4 +1345,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	#page-mod-forum-discuss a[id]:empty::before, #page-mod-forum-discuss a[name]:empty::before {
 	   content: none;
 	}
+}
+
+.onetopic .btn.btn-navbar {
+	background-color: #156f79 !important;
+}
+
+.navbar .btn-navbar:hover, .navbar .btn-navbar:focus {
+	background-color: #37b7c5 !important;
 }
