@@ -1641,12 +1641,17 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-mod-glossary-view .entrybox table tr > td.aliases > label {
+	background-color: #c5f7e7;
+    border: 1px solid #c7d9cb;
+    margin-top: 3px;
+    color: #3b3340 ! important;
+    padding: 5px;
 	display: inline;
-	padding: 5px 10px 7px 10px;
     margin-left: 10px;
-	background: transparent;
 	box-shadow: inherit;
-	border: none;
+}
+#page-mod-glossary-view form[action="editcategories.php"] input[type="submit"] {
+	margin-right: 20em;
 }
 
 #page-mod-glossary-view .entrybox table tr > td.aliases select {
