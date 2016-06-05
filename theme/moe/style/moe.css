@@ -1807,12 +1807,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .glossarypost.faq:first-of-type .entryheader:first-of-type {
 	margin-right: 0em;
 }
-.glossarypost:first-of-type .entryheader:first-of-type {
-	display: inline-block !important;
-	margin-right: 3em;
-	margin-top: 0.2em !important;
-	padding-top: 0px !important;
-}
+
 .glossarypost.faq td.entry b {
 	border: 2px solid #9b7f8c;
 	background-color: #b0e0d4;
@@ -2109,7 +2104,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view .entrybox table:first-of-type tr:first-child td:nth-of-type(1) {
 	display: table-cell;
-	text-align: left;
+	text-align: right;
 }
 
 #page-mod-glossary-view .entrybox table:first-of-type tr:first-child td:nth-of-type(3) {
