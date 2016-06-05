@@ -1453,7 +1453,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     color: #6d3f56;
 	margin-right: 3px;
 }
-
+#page-mod-glossary-view  .glossarydisplay .entrybox  a[href*="sortkey=LASTNAME"] + b:nth-of-type(2){
+	background-color: #97f9db !important;
+}
+#page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+a[href*="sortkey=LASTNAME"]+b a{
+	background-color: #ffd99c !important;
+}
 /*second title*/
 #page-mod-glossary-view .printicon {
 	background-color: #f9ebd0 !important;
@@ -1651,7 +1656,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 /*private name*/
 #page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+a+b a {
-	background-color: #f9efdc !important;
+	background-color: #ffd99c !important;
 	border: 0px solid;
 	margin-bottom: 5em !important;
 }
@@ -1730,12 +1735,25 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 /*family name*/
-#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a {
+#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a{
+	background-color: #ffd99c !important;
+    border: 2px solid #997f8e !important;
+    padding: 2px 6px 2px 6px;
+}
+#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a[href*="sortkey=LASTNAME"] {
 	background-color: #ffd99c !important;;
 	border: 2px solid #997f8e !important;
 	padding: 2px 6px 2px 6px;
 }
 
+#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a[href*="sortkey=CREATION"] {
+	background-color: #ffd99c !important;;
+    border: 2px solid #997f8e !important;
+    padding: 2px 6px 2px 6px;
+}
+#page-mod-glossary-view  .glossarydisplay .entrybox  a[href*="sortkey=LASTNAME"] + b{
+	background-color: #97f9db !important;
+}
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a:hover {
 	background-color: #ffd99c !important;;
 	border: 2px solid #997f8e !important;
@@ -1879,7 +1897,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2) {
-	background-color: transparent !important;
 	border: 0px solid #e0dccb;
 	padding: 2px 6px 2px 6px;
 }
