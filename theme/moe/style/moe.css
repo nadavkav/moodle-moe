@@ -15,7 +15,7 @@ body.pagelayout-embedded{
 #wrapper > #page-header {
 	background-image: url([[pix:theme|bg/header_bg]]);
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
 }
 
 .format-socialwall .tl-leftcol {
@@ -1064,7 +1064,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1339,7 +1339,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1450,7 +1450,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 
 @media (min-width: 980px) {
@@ -1469,7 +1469,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 
 #page-mod-assign-grader div[data-region="assignment-info"] > a {
-    border: #b3b68f 1px solid;
+    border: #b3b68f 2px solid;
     padding: 3px 6px;
     display: inline-block;
     float: right;
