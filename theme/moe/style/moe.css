@@ -1644,6 +1644,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	display: inline;
 	padding: 5px 10px 7px 10px;
     margin-left: 10px;
+	background: transparent;
+	box-shadow: inherit;
+	border: none;
 }
 
 #page-mod-glossary-view .entrybox table tr > td.aliases select {
