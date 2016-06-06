@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+#page-navbar .breadcrumb-button {
+    margin-top: 0px;
+}
+
 .format-socialwall .tl-showall {
 	text-align: center;
 	padding-bottom: 5px;
@@ -1053,7 +1057,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1212,7 +1216,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1323,7 +1327,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 .loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
 	max-width: inherit;
