@@ -33,6 +33,14 @@ $functions = array(
         'type'        => 'write',
         'ajax'        => 'true',
     ),
+    'moe_wiki_resolved' => array(
+        'classname'   => 'mod_moewiki_external',
+        'methodname'  => 'resolved',
+        'classpath'   => 'mod/moewiki/externallib.php',
+        'description' => 'Resolved annotation',
+        'type'        => 'write',
+        'ajax'        => 'true',
+    ),
 );
 
 $services = array(
@@ -41,7 +49,8 @@ $services = array(
             'moe_wiki_search',
             'moe_wiki_create',
             'moe_wiki_delete',
-            'moe_wiki_update',),
+            'moe_wiki_update',
+            'moe_wiki_resolved',),
         'restrictedusers' => 0,
         'enabled'=>1,
         'requiredcapability' => '',

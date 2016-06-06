@@ -117,6 +117,9 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 					update: function(annotation){
 						return this.ajaxcall('update', annotation);
 					},
+					resolved: function(annotation){
+						return this.ajaxcall('resolved',{'id' : annotation});
+					},
 					ajaxcall: function(action,obj){
 						var id = obj && obj.id;
 						var data = {};

@@ -63,11 +63,12 @@ class mod_moewiki_external extends external_api
                     ),'',false,array('group' => '')),
                 ), "annotaion permissino", false, array()),
             'text' => new external_value(PARAM_TEXT),
-            'userpage' => new external_value(PARAM_INT)
+            'userpage' => new external_value(PARAM_INT),
+            'parent' => new external_value(PARAM_INT,'parent annotation',false, null, true)
         ));
     }
 
-    public static function create($ranges, $quote, $page, $permissions, $text, $userpage)
+    public static function create($ranges, $quote, $page, $permissions, $text, $userpage,$parent = null)
     {
         global $DB, $USER;
         
@@ -79,6 +80,8 @@ class mod_moewiki_external extends external_api
         $annotation->text = $text;
         $annotation->updated = $annotation->created;
         $annotation->userpage = $userpage;
+        $annotation->resolved = 0;
+        $annotation->parent = $parent;
         $annotation->id = $DB->insert_record('moewiki_annotations', $annotation);
         
         foreach ($ranges as $range) {
@@ -108,7 +111,8 @@ class mod_moewiki_external extends external_api
                 'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
                 'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
             ))),
-            'userid' => new external_value(PARAM_INT)
+            'userid' => new external_value(PARAM_INT),
+            'parent' => new external_value(PARAM_INT,'annotation parent',false, null, true),
         ));
     }
 
@@ -126,7 +130,8 @@ class mod_moewiki_external extends external_api
         
         $annotations = $DB->get_records('moewiki_annotations', array(
             'pageid' => $wikiid,
-            'userpage' => $userpage
+            'userpage' => $userpage,
+            'resolved' => 0,
         ));
         $annotationsreturn = array();
         $total=0;
@@ -149,6 +154,7 @@ class mod_moewiki_external extends external_api
             $annotationsreturn[$key]->created = $annotation->created;
             $annotationsreturn[$key]->updated = $annotation->updated;
             $annotationsreturn[$key]->userid = $annotation->userid;
+            $annotationsreturn[$key]->parent = $annotation->parent;
             $user = new stdClass();
             $user->id = $annotation->userid;
             $userpicture = new user_picture($user);
@@ -203,6 +209,7 @@ class mod_moewiki_external extends external_api
             'updated' => new external_value(PARAM_TEXT),
             'userid' => new external_value(PARAM_INT),
             'userpicture' => new external_value(PARAM_URL),
+            'parent' => new external_value(PARAM_INT),
         )))));
     }
     
@@ -223,6 +230,34 @@ class mod_moewiki_external extends external_api
     
     public static function delete_returns(){
         return null;
+    }
+    
+    public static function resolved_parameters () {
+        return new external_function_parameters(array(
+            'id' => new external_value(PARAM_INT,'annotation id'),
+        ));
+    }
+    
+    public static function resolved($id) {
+        global $DB;
+        
+        $annotaion = new stdClass();
+        $annotaion->id = (int)$id;
+        $annotaion->resolved =1;
+        if($DB->update_record('moewiki_annotations', $annotaion)){
+            if($childs = $DB->get_records('moewiki_annotations',array('parent' => $annotaion->id))){
+                foreach ($childs as $childsannotation){
+                    $childsannotation->resolved = 1;
+                    $DB->update_record('moewiki_annotations', $childsannotation);
+                }
+            }
+            return $id;
+        }
+        return null;
+    }
+    
+    public static function resolved_returns($id) {
+            return null;
     }
     
     public static function update_parameters () {

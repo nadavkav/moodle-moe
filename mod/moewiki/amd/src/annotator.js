@@ -13091,6 +13091,10 @@ StorageAdapter.prototype.load = function (query) {
         });
 };
 
+StorageAdapter.prototype.resolved = function (item){
+	var self = this;
+	return Promise.resolve(this.store.resolved(item.id));
+}
 // Cycle a store event, keeping track of the annotation object and updating it
 // as necessary.
 StorageAdapter.prototype._cycle = function (
@@ -14871,11 +14875,19 @@ function main(options) {
             onDelete: function (ann) {
                 app.annotations['delete'](ann);
             },
+            onResolved: function (ann) {
+            	app.annotations.resolved(ann);
+            },
             permitEdit: function (ann) {
                 return authz.permits('update', ann, ident.who());
             },
             permitDelete: function (ann) {
                 return authz.permits('delete', ann, ident.who());
+            },
+            onReplay: function (ann){
+            	 s.interactionPoint = util.$(s.viewer.element)
+                 .css(['top', 'left']);
+                    app.annotations.create(ann);
             },
             autoViewHighlights: options.element,
             extensions: options.viewerExtensions,
@@ -14901,6 +14913,7 @@ function main(options) {
         annotationsLoaded: function (anns) { s.highlighter.drawAll(anns); },
         annotationCreated: function (ann) { s.highlighter.draw(ann); },
         annotationDeleted: function (ann) { s.highlighter.undraw(ann); },
+        annotationResolved: function(ann) {s.highlighter.undraw(ann);},
         annotationUpdated: function (ann) { s.highlighter.redraw(ann); },
 
         beforeAnnotationCreated: function (annotation) {
@@ -15361,6 +15374,12 @@ var Viewer = exports.Viewer = Widget.extend({
         if (typeof this.options.permitDelete !== 'function') {
             throw new TypeError("permitDelete callback must be a function");
         }
+        if (typeof this.options.onResolved !== 'function') {
+            throw new TypeError("onResolved callback must be a function");
+        }
+        if (typeof this.options.onReply !== 'function') {
+            throw new TypeError("onReply callback must be a function");
+        }
 
         if (this.options.autoViewHighlights) {
             this.document = this.options.autoViewHighlights.ownerDocument;
@@ -15404,8 +15423,14 @@ var Viewer = exports.Viewer = Widget.extend({
             .on("click." + NS, '.annotator-delete', function (e) {
                 self._onDeleteClick(e);
             })
-            .on("click." + NS,'.annotator-cancel', function (e){
+            .on("click." + NS, '.annotator-cancel', function (e){
             	self._startHideTimer();
+            })
+            .on("click." + NS, '.annotator-resolved', function(e) {
+            	self._onResolvedClick(e);
+            })
+            .on("click." + NS, '.annotator-reply', function(e) {
+            	self._onReplyClick(e);
             })
             .on("mouseenter." + NS, function () {
                 self._clearHideTimer();
@@ -15590,7 +15615,34 @@ var Viewer = exports.Viewer = Widget.extend({
         this.hide();
         this.options.onEdit(item);
     },
+    
+    _onResolvedClick: function(event) {
+    	var item = $(event.target).parents('.annotator-viewer').find('.annotator-annotation').data('annotation');
+    	this.hide();
+    	this.options.onResolved(item);
+    },
+    
+    _onReplyClick: function(event){
+    	this.annotation = $(event.target).parents('.annotator-viewer').find('.annotator-annotation').data('annotation');
+    	  // Do nothing for right-clicks, middle-clicks, etc.
+        if (event.which > 1) {
+            return;
+        }
+        var annotation = {};
+        annotation.quote = this.annotation.quote;
+        annotation.ranges = this.annotation.ranges;
+        annotation.parent = this.annotation.id;
+        
+        
+        event.preventDefault();
 
+        this.ignoreMouseup = false;
+
+        // Create a new annotation
+        if (annotation !== null && typeof this.options.onReplay === 'function') {
+            this.options.onReplay(annotation, event);
+        }
+    },
     // Event callback: called when the delete button is clicked.
     //
     // event - An Event object.
@@ -15786,7 +15838,10 @@ Viewer.options = {
     onDelete: function () {},
     
     //Callback, called wen the user click the reply button for annotation
-    onReply: function () {}
+    onReply: function () {},
+    
+  //Callback, called wen the user click the resolved button for annotation
+    onResolved: function () {}
 };
 
 
@@ -15820,7 +15875,13 @@ exports.standalone = function standalone(options) {
             
             if (typeof option.onReply === 'undefiend') {
             	options.onReply = function (annotation){
-            		app.annotations;
+            		app.annotations.create(annotation);
+            	}
+            }
+            
+            if (typeof option.onResolved === 'undefiend') {
+            	options.onResolved = function (annotation) {
+            		app.annotations.resolved(annotation);
             	}
             }
 

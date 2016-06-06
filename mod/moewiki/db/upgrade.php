@@ -519,6 +519,12 @@ WHERE
         upgrade_mod_savepoint(true, 2016052601, 'moewiki');
     }
     
+    if ($oldversion < 2016060600) {
+        $table = new xmldb_table('moewiki_annotations');
+        $dbman->add_field($table, new xmldb_field('resolved', XMLDB_TYPE_INTEGER, "1", true, false, false,0));
+        $dbman->add_field($table, new xmldb_field('parent', XMLDB_TYPE_INTEGER, "10", true, false, false,null));
+        upgrade_mod_savepoint(true, 2016060600, 'moewiki');
+    }
     
     // Must always return true from these functions
     return true;
