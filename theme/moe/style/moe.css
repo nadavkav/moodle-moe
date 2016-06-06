@@ -1053,7 +1053,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1212,7 +1212,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1323,7 +1323,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 .loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
 	max-width: inherit;
@@ -1355,7 +1355,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-tab-view .TabbedPanelsTab {
     border-radius: 0;
     border: none;
-    margin-left: 3px;
+    margin-left: 4px;
     margin-right: 0;
     background-color: #fce8ee;
     color: #414042;
@@ -1372,7 +1372,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     background-color: #e9f6e0 !important;
     color: #6c6565 !important;
     border: 7px solid transparent;
-    box-shadow: inset 0 0 0 1px #a46365, 0 0 0 1px #c39697;
+    box-shadow: inset 0 0 0 1px #a5ab6b, 0 0 0 1px #a5ab6b;
     border-radius: 0px 0px 0px 0px;
     text-shadow: none;
     padding: 5px 9px;
