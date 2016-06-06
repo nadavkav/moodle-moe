@@ -1053,7 +1053,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1212,7 +1212,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1323,7 +1323,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 
 @media (min-width: 980px) {
@@ -1349,7 +1349,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding-bottom: 100px;
 }
 
-#page-mod-folder-view div[role="main"] .folder-download-button .singlebutton form div input[type="submit"] {
+#page-mod-folder-view div[role="main"] .folder-download-button .singlebutton form div input[type="submit"], #page-mod-folder-view div[role="main"] .folder-download-button .singlebutton form div input[type="submit"]:focus, #page-mod-folder-view div[role="main"] .folder-download-button .singlebutton form div input[type="submit"]:hover {
 	background-image: none;
     background-color: #e0f7f9 !important;
     color: #606365 !important;
@@ -1361,7 +1361,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     border-image: url([[pix:theme|bg/btnhalfbg]]) 1;
     font-weight: 700;
     font-size: 1.1em;
+	transition: none;
+	outline: 0px !important;
 }
+
 
 #page-mod-folder-view div[role="main"] .mdl-align {
 	width: auto;
