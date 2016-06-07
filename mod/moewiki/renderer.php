@@ -325,50 +325,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
             $output .= $this->moewiki_get_edit_link($str, $pagename, $subwiki, $cm, $xhtmlid);
         }
 
-        // output the annotate link if using annotation system, only for page not section
-        if (!$xhtmlid && $subwiki->annotation) {
-            // Add annotate link
-            if ($subwiki->canannotate) {
-                $output .= $this->moewiki_get_annotate_link($pagename, $subwiki, $cm);
-            }
-
-            // 'Expand/collapse all' and 'Show/hide all' annotation controls
-            if ($annotations != false) {
-                $orphancount = 0;
-                foreach ($annotations as $annotation) {
-                    if ($annotation->orphaned == 1) {
-                        $orphancount++;
-                    }
-                }
-                if (count($annotations) > $orphancount) {
-                    // Show and hide annotation icon links. Visibility controlled by CSS.
-                    $output .= html_writer::start_tag('span', array('id' => 'showhideannotationicons'));
-                    $output .= ' '.html_writer::tag('a', get_string('showannotationicons', 'moewiki'),
-                            array('href' => 'hideannotations.php?hide=0&' . moewiki_display_wiki_parameters(
-                            $pagename, $subwiki, $cm, MOEWIKI_PARAMS_URL) . '&sesskey=' . sesskey(),
-                            'id' => 'showannotationicons'));
-                    $output .= html_writer::tag('a', get_string('hideannotationicons', 'moewiki'),
-                            array('href' => 'hideannotations.php?hide=1&' . moewiki_display_wiki_parameters(
-                            $pagename, $subwiki, $cm, MOEWIKI_PARAMS_URL) . '&sesskey=' . sesskey(),
-                            'id' => 'hideannotationicons'));
-                    $output .= html_writer::end_tag('span');
-
-                    // Expand and collapse annotations links.
-                    $output .= html_writer::start_tag('span', array('id' => 'expandcollapseannotations'));
-                    $output .= ' '.html_writer::tag('a', get_string('expandallannotations', 'moewiki'),
-                        array(
-                            'href' => 'javascript:M.mod_moewiki_view.moewikiShowAllAnnotations("block")',
-                            'id' => 'expandallannotations'
-                        ));
-                    $output .= html_writer::tag('a', get_string('collapseallannotations', 'moewiki'),
-                        array(
-                            'href' => 'javascript:M.mod_moewiki_view.moewikiShowAllAnnotations("none")',
-                            'id' => 'collapseallannotations'
-                        ));
-                    $output .= html_writer::end_tag('span');
-                }
-            }
-        }
+        
 
         // On main page, add export button
         if (!$xhtmlid && $CFG->enableportfolios) {
