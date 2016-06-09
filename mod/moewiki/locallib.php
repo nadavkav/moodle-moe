@@ -77,6 +77,31 @@ define('MOEWIKI_PARTICIPATION_PERPAGE', 100);
 // User preference
 define('MOEWIKI_PREF_HIDEANNOTATIONS', 'moewiki_hide_annotations');
 
+function moewiki_reopen_annotation ($id = null) {
+    global $DB;
+    
+    if($id === null) {
+        return false;
+    }
+    
+    $annotat = new stdClass();
+    $annotat->id = $id;
+    $annotat->resolved = 0;
+    $DB->update_record('moewiki_annotations', $annotat);
+    if ($childs = $DB->get_records('moewiki_annotations', array('parent' => $id))){
+        foreach ($childs as $annotat){
+            $annotat->resolved = 0;
+            $DB->update_record('moewiki_annotations', $annotat);
+        }
+    } elseif ($parent = $DB->get_record('moewiki_annotations', array('id' => $id),'parent')) {
+        if ($parent->parent != null){
+            $parent = $DB->get_record('moewiki_annotations', array('id' => $parant->parent));
+            moewiki_reopen_annotation($parent->id);
+        }
+    }
+    return true;
+}
+
 function moewiki_dberror($error, $source = null) {
     if (!$source) {
         $backtrace = debug_backtrace();

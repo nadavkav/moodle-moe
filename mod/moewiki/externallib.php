@@ -28,6 +28,7 @@ use assignfeedback_editpdf\annotation;
 defined('MOODLE_INTERNAL') || die();
 
 require_once ("$CFG->libdir/externallib.php");
+require_once ("$CFG->dirroot/mod/moewiki/locallib.php");
 
 class mod_moewiki_external extends external_api
 {
@@ -214,6 +215,22 @@ class mod_moewiki_external extends external_api
             'parent' => new external_value(PARAM_INT),
             'username' => new external_value(PARAM_TEXT),
         )))));
+    }
+    
+    public static function reopen_parameters () {
+        return new external_function_parameters(array(
+            'id' => new external_value(PARAM_INT,'annotation_id'),
+        ));
+    }
+    
+    public static function reopen($id) {
+        return array('success' => moewiki_reopen_annotation($id));
+    }
+    
+    public static function reopen_returns(){
+        return new external_function_parameters(array(
+            'success' => new external_value(PARAM_BOOL),
+        ));
     }
     
     public static function delete_parameters () {

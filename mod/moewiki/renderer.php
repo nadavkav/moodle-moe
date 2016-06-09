@@ -1314,4 +1314,33 @@ class mod_moewiki_renderer extends plugin_renderer_base {
     public function set_export_button($type, $id, $courseid, $tree = 0) {
         return;
     }
+    
+    public function show_resolved_annotation($user=0, $page){
+        global $DB, $USER;
+        
+        $context = new stdClass();
+        $context->datestr = get_string('date');
+        $context->namestr = get_string('username');
+        $context->annotationstr = get_string('annotations','mod_moewiki');
+        $context->actionstr = get_string('action');
+        $context->reopen = get_string('reopen','mod_moewiki');
+        
+        $user = ($user != 0) ? $user : $USER->id;
+        $annotations = $DB->get_records('moewiki_annotations',array(
+            'resolved' => 1,
+            'pageid' => $page,
+            'userpage' => $user,
+        ));
+        $context->annotations = array();
+        foreach ($annotations as $key => $annotat) {
+            $ann = new stdClass();
+            $ann->date = date("d.m.Y",$annotat->created);
+            $user = $DB->get_record('user', array('id' => $annotat->userid));
+            $ann->name = $user->firstname . ' ' . $user->lastname;
+            $ann->annotation = $annotat->text;
+            $ann->id = $annotat->id;
+            $context->annotations[] = $ann;
+        }
+        return $this->render_from_template('mod_moewiki/annotation_resolved', $context);
+    }
 }

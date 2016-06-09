@@ -41,6 +41,14 @@ $functions = array(
         'type'        => 'write',
         'ajax'        => 'true',
     ),
+    'moe_wiki_reopen' => array(
+        'classname'   => 'mod_moewiki_external',
+        'methodname'  => 'reopen',
+        'classpath'   => 'mod/moewiki/externallib.php',
+        'description' => 'Reopen resolved annotation',
+        'type'        => 'write',
+        'ajax'        => 'true',
+    ),
 );
 
 $services = array(
@@ -50,7 +58,9 @@ $services = array(
             'moe_wiki_create',
             'moe_wiki_delete',
             'moe_wiki_update',
-            'moe_wiki_resolved',),
+            'moe_wiki_resolved',
+            'moe_wiki_reopen',
+        ),
         'restrictedusers' => 0,
         'enabled'=>1,
         'requiredcapability' => '',

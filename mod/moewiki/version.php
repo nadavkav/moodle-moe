@@ -22,8 +22,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version  = 2016060600;
+$plugin->version  = 2016060900;
 $plugin->requires = null;
 $plugin->component = 'mod_moewiki';
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.1.1';
+$plugin->release = '0.2.1';

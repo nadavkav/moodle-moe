@@ -588,3 +588,4 @@ $string['event:moewikipagecreated'] = 'moewiki page created';
 $string['event:moewikipageupdated'] = 'moewiki page updated';
 $string['event:savefailed'] = 'Session fail on page save';
 $string['moewikicrontask'] = 'MOE wiki maintenance jobs';
+$string['reopen'] = 'Reopen';
