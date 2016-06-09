@@ -11,33 +11,6 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 		merkannotaion : function(params) {
 			var app = new annotator.App();
 			remark = new remarks();
-			/*var viewer = new annotator.ui.viewer.Viewer({
-				defaultFields: false,
-				onEdit: function (ann) {
-	                // Copy the interaction point from the shown viewer:
-	                s.interactionPoint = util.$(s.viewer.element)
-	                                         .css(['top', 'left']);
-
-	                app.annotations.update(ann);
-	            },
-	            onDelete: function (ann) {
-	                app.annotations['delete'](ann);
-	            },
-	            permitEdit: function (ann) {
-	                return ;
-	            },
-	            permitDelete: function (ann) {
-	                return ;
-	            },
-	            autoViewHighlights: document.querySelector('.moewiki_content')
-			});
-			viewer.addField({
-			    load: function (field, annotation) {
-            	$(field).prepend('<img src="' + annotation.userpicture +'" class="anottatepicture"/>ssss');
-                $(field).append('<span>' +viewer.render(annotation)+ '</span>');
-                }
-			});
-			viewer.attach();*/
 			app.include(annotator.ui.main, {
 			    element: document.querySelector('.moewiki_content'),
 			});
@@ -62,13 +35,6 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 					}
 				};
 			}
-			/*var editor = new annotator.ui.editor.Editor();
-			editor.addField({
-			     label: 'My custom input field',
-		         type:  'checkbox',
-		         load:  remarks,
-		         save:  remarks,
-		       });*/
 			app.include(annotator.identity.simple);
 			/*app.include(annotator.authz.acl);*/
 			app.include(remarks);
@@ -118,7 +84,13 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 						return this.ajaxcall('update', annotation);
 					},
 					resolved: function(annotation){
-						return this.ajaxcall('resolved',{'id' : annotation});
+						this.ajaxcall('resolved',{'id' : annotation.id}).done(function(response) {
+						       if(response.success){
+						    	     
+						       }
+						}).fail(function(ex) {
+						      console.log(ex);
+						});
 					},
 					ajaxcall: function(action,obj){
 						var id = obj && obj.id;

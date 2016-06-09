@@ -95,7 +95,7 @@ function moewiki_reopen_annotation ($id = null) {
         }
     } elseif ($parent = $DB->get_record('moewiki_annotations', array('id' => $id),'parent')) {
         if ($parent->parent != null){
-            $parent = $DB->get_record('moewiki_annotations', array('id' => $parant->parent));
+            $parent = $DB->get_record('moewiki_annotations', array('id' => $parent->parent));
             moewiki_reopen_annotation($parent->id);
         }
     }

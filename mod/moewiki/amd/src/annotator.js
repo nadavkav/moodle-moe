@@ -13097,7 +13097,12 @@ StorageAdapter.prototype.load = function (query) {
 
 StorageAdapter.prototype.resolved = function (item){
 	var self = this;
-	return Promise.resolve(this.store.resolved(item.id));
+	 return this._cycle(
+			 item,
+			 'resolved',
+		     'beforeAnnotationResolved',
+		     'annotationResolved'
+	 );
 }
 // Cycle a store event, keeping track of the annotation object and updating it
 // as necessary.
@@ -14378,6 +14383,7 @@ exports.standalone = function (options) {
         annotationsLoaded: function () { widget.updateHighlights(); },
         annotationCreated: function () { widget.updateHighlights(); },
         annotationUpdated: function () { widget.updateHighlights(); },
+        annotationResolved: function () { widget.updateHighlights(); },
         annotationDeleted: function () { widget.updateHighlights(); }
     };
 };
@@ -14605,6 +14611,7 @@ exports.standalone = function standalone(element, options) {
         annotationsLoaded: function (anns) { widget.drawAll(anns); },
         annotationCreated: function (ann) { widget.draw(ann); },
         annotationDeleted: function (ann) { widget.undraw(ann); },
+        annotationResolved: function (ann) { widget.undraw(ann); },
         annotationUpdated: function (ann) { widget.redraw(ann); }
     };
 };
@@ -15633,9 +15640,13 @@ var Viewer = exports.Viewer = Widget.extend({
     },
     
     _onResolvedClick: function(event) {
-    	var item = $(event.target).parents('.annotator-viewer').find('.annotator-annotation').data('annotation');
+    	var view =  this;
+    	$(event.target).parents('.annotator-viewer').find('.annotator-annotation').each(function(){
+    		var item = $(this).data('annotation');   		
+    		view.options.onResolved(item);
+    		$(this).remove();
+    	})
     	this.hide();
-    	this.options.onResolved(item);
     },
     
     _onReplyClick: function(event){
