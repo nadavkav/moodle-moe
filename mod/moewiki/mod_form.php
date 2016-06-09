@@ -21,7 +21,7 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->dirroot.'/mod/moewiki/locallib.php');
 
 class mod_moewiki_mod_form extends moodleform_mod {
-    
+
     public function definition() {
         global $CFG, $COURSE;
 
@@ -47,10 +47,12 @@ class mod_moewiki_mod_form extends moodleform_mod {
         $mform->addElement('select', 'subwikis', get_string("subwikis", "moewiki"), $subwikisoptions);
         $mform->addHelpButton('subwikis', 'subwikis', 'moewiki');
 
+
         // Annotation
         $annotationoptions = array('0' => get_string('no'), '1' => get_string('yes'));
         $mform->addElement('select', 'annotation', get_string('annotationsystem', 'moewiki'), $annotationoptions);
         $mform->addHelpButton('annotation', 'annotationsystem', 'moewiki');
+        $mform->disabledIf('annotation', 'allowimport');
 
         // Editing timeout
         $timeoutoptions = array();
@@ -88,10 +90,15 @@ class mod_moewiki_mod_form extends moodleform_mod {
         $filepickeroptions['maxbytes'] = $COURSE->maxbytes;
         $mform->addElement('filepicker', 'template_file', get_string('template', 'moewiki'), null, $filepickeroptions);
         $mform->addHelpButton('template_file', 'template', 'moewiki');
-        
+
+
         //Text template to implement on all students
+        if($this->is_text_template_visible()) {
         $mform->addElement('editor', 'template_text', get_string('template', 'moewiki'), null, array('rows' => 10), array('maxfiles' => EDITOR_UNLIMITED_FILES,
-            'noclean' => true, 'context' => $this->context, 'subdirs' => true));
+                'noclean' => true, 'context' => $this->context, 'subdirs' => true));
+        } else {
+            $mform->addElement('html', '<label>'.get_string('templatecannotbechanged', 'moewiki').'</label>');
+        }
 
         // Wordcount
         $wordcountoptions = array('0' => get_string('no'), '1' => get_string('yes'));
@@ -115,8 +122,7 @@ class mod_moewiki_mod_form extends moodleform_mod {
 
         $this->add_action_buttons();
         $data = new stdClass();
-        $data->template_text = "ASDFJASDKF AKSFD AKSJD F0";
-        $this->set_data($data);
+            $this->set_data($data);
     }
 
     public function add_completion_rules() {
@@ -197,5 +203,28 @@ class mod_moewiki_mod_form extends moodleform_mod {
             $errors['groupmode'] = get_string('errorgroupssubwiki', 'moewiki');
         }
         return $errors;
+    }
+
+    private function is_text_template_visible() {
+        global $DB;
+
+       try {
+           $updatedwikis = $DB->get_record_sql("SELECT COUNT(ver.id) FROM mdl_moewiki_versions ver
+
+                                                    JOIN mdl_moewiki_pages page
+                                                    ON ver.pageid = page.id
+                                                    JOIN mdl_moewiki_subwikis sub
+                                                    ON sub.id = page.subwikiid
+                                                    WHERE sub.wikiid = ".$this->_cm->instance."
+                                                    AND ver.previousversionid > 0;");
+        if($updatedwikis->count > 0) {
+              return false;
+        }
+        return true;
+
+       } catch(Exception $e) {
+           return true;
+       }
+
     }
 }
