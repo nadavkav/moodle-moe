@@ -23,9 +23,10 @@ require_once($CFG->dirroot.'/mod/moewiki/locallib.php');
 class mod_moewiki_mod_form extends moodleform_mod {
     
     public function definition() {
-        global $CFG, $COURSE;
+        global $CFG, $COURSE, $PAGE;
 
         $mform =& $this->_form;
+        $PAGE->requires->js_call_amd('mod_moewiki/form', 'init');
         $data    = $this->_customdata['data'];
 
         $mform->addElement('header', 'general', get_string('general', 'form'));
@@ -48,9 +49,8 @@ class mod_moewiki_mod_form extends moodleform_mod {
         $mform->addHelpButton('subwikis', 'subwikis', 'moewiki');
 
         // Annotation
-        $annotationoptions = array('0' => get_string('no'), '1' => get_string('yes'));
-        $mform->addElement('select', 'annotation', get_string('annotationsystem', 'moewiki'), $annotationoptions);
-        $mform->addHelpButton('annotation', 'annotationsystem', 'moewiki');
+        $mform->addElement('hidden', 'annotation', 1);
+        $mform->setType('annotation', PARAM_INT);
 
         // Editing timeout
         $timeoutoptions = array();
@@ -92,6 +92,7 @@ class mod_moewiki_mod_form extends moodleform_mod {
         //Text template to implement on all students
         $mform->addElement('editor', 'template_text', get_string('template', 'moewiki'), null, array('rows' => 10), array('maxfiles' => EDITOR_UNLIMITED_FILES,
             'noclean' => true, 'context' => $this->context, 'subdirs' => true));
+        $mform->setType('template_text', PARAM_RAW);
 
         // Wordcount
         $wordcountoptions = array('0' => get_string('no'), '1' => get_string('yes'));
