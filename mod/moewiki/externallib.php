@@ -44,24 +44,19 @@ class mod_moewiki_external extends external_api
             ))),
             'quote' => new external_value(PARAM_TEXT),
             'page' => new external_value(PARAM_INT),
-/*                 'links' => new external_multiple_structure(new external_single_structure(array(
-                    'type' => new external_value(PARAM_SAFEPATH),
-                    'rel'  => new external_value(PARAM_ALPHAEXT),
-                    'href' => new external_value(PARAM_URL),
-                )), "annotauion links", false), */
             'permissions' => new external_single_structure(array(
                     'read' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
-                    ),'',false, array('group' => '')),
+                        new external_value(PARAM_TEXT,'',false, 'null',true)
+                    ),'',false,array()),
                     'delete' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
-                    ),'',false, array('group' => '')),
+                        new external_value(PARAM_TEXT,'',false, 'null',true)
+                    ),'',false,array()),
                     'admin' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
-                    ),'',false,array('group' => '')),
+                        new external_value(PARAM_TEXT,'',false, 'null',true)
+                    ),'',false,array()),
                     'update' => new external_single_structure(array(
-                        'group' => new external_value(PARAM_ALPHAEXT,'',false, '__world__')
-                    ),'',false,array('group' => '')),
+                        new external_value(PARAM_TEXT,'',false, 'null',true)
+                    ),'',false,array()),
                 ), "annotaion permissino", false, array()),
             'text' => new external_value(PARAM_TEXT),
             'userpage' => new external_value(PARAM_INT),
@@ -71,7 +66,7 @@ class mod_moewiki_external extends external_api
 
     public static function create($ranges, $quote, $page, $permissions, $text, $userpage,$parent = null)
     {
-        global $DB, $USER;
+        global $DB, $USER, $PAGE;
         
         $annotation = new stdClass();
         $annotation->pageid = $page;
@@ -94,7 +89,33 @@ class mod_moewiki_external extends external_api
             $rangeobj->annotaionid = $annotation->id;
             $DB->insert_record('moewiki_annotations_ranges', $rangeobj);
         }
+        
+        $permission = new stdClass();
+        $permission->annotaionid = (int)$annotation->id;
+        $permission->read_prem = ($permissions['read'][0] == 'null') ? null : (int)$permissions['read'][0];
+        $permission->delete_prem = ($permissions['delete'][0] == 'null') ? $USER->id : (int)$permissions['delete'][0];
+        $permission->admin_prem = ($permissions['admin'][0] == 'null') ? $USER->id : (int)$permissions['admin'][0];
+        $permission->update_prem = ($permissions['update'][0] == 'null') ? null: (int)$permissions['update'][0];
+        if($DB->insert_record('moewiki_annotations_permiss', $permission)) {
+            $annotation->permissions = new stdClass();
+            $annotation->permissions->read = array($permission->read_prem);
+            $annotation->permissions->delete = array($permission->delete_prem);
+            $annotation->permissions->admin = array($permission->admin_prem);
+            $annotation->permissions->update = array($permission->update_prem);
+        }
         $annotation->ranges = $ranges;
+        $user = new stdClass();
+        $user->id = $annotation->userid;
+        $user = $DB->get_record('user', array('id' => $user->id));
+        $userpicture = new user_picture($user);
+        $course = $DB->get_record_select('course',
+            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($page),
+            '*', MUST_EXIST);
+        $modinfo = get_fast_modinfo($course);
+        $cm = $modinfo->get_cm($page);
+        $PAGE->set_cm($cm);
+        $annotation->username =  $user->firstname . ' ' . $user->lastname;
+        $annotation->userpicture = $userpicture->get_url($PAGE)->out();
         return $annotation;
     }
 
@@ -112,8 +133,24 @@ class mod_moewiki_external extends external_api
                 'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
                 'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
             ))),
+            'permissions' => new external_single_structure(array(
+                'read' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'delete' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'admin' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'update' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+            ), "annotaion permissino", false, array()),
             'userid' => new external_value(PARAM_INT),
             'parent' => new external_value(PARAM_INT,'annotation parent',false, null, true),
+            'userpicture' => new external_value(PARAM_URL),
+            'username' => new external_value(PARAM_TEXT),
         ));
     }
 
@@ -127,7 +164,7 @@ class mod_moewiki_external extends external_api
 
     public static function search($wikiid,$userpage)
     {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $USER;
         
         $annotations = $DB->get_records('moewiki_annotations', array(
             'pageid' => $wikiid,
@@ -137,6 +174,10 @@ class mod_moewiki_external extends external_api
         $annotationsreturn = array();
         $total=0;
         foreach ($annotations as $key => $annotation) {
+            $permissions = $DB->get_record('moewiki_annotations_permiss', array('annotaionid' => $annotation->id));
+            if($permissions->read_prem != null && $permissions->read_prem != $USER->id && !has_capability('moodle/site:config', context_system::instance())){
+                continue;
+            }
             $annotationsreturn[$key] = new stdClass();
             $annotationsreturn[$key]->id = $annotation->id;
             $annotationsreturn[$key]->ranges = array();
@@ -150,6 +191,11 @@ class mod_moewiki_external extends external_api
                 $annotationsreturn[$key]->ranges[$rangekey]->start = $range->start;
                 $annotationsreturn[$key]->ranges[$rangekey]->startOffset = $range->startoffset;
             }
+            $annotationsreturn[$key]->permissions = new stdClass();
+            $annotationsreturn[$key]->permissions->read = array($permissions->read_prem);
+            $annotationsreturn[$key]->permissions->delete = array($permissions->delete_prem);
+            $annotationsreturn[$key]->permissions->admin = array($permissions->admin_prem);
+            $annotationsreturn[$key]->permissions->update = array($permissions->update_prem);
             $annotationsreturn[$key]->quote = $annotation->quote;
             $annotationsreturn[$key]->text = $annotation->text;
             $annotationsreturn[$key]->created = $annotation->created;
@@ -193,20 +239,20 @@ class mod_moewiki_external extends external_api
                 'rel' => new external_value(PARAM_ALPHAEXT),
                 'href' => new external_value(PARAM_URL)
             )), "annotauion links", false),
-            'permissions' => new external_single_structure(array(
+           'permissions' => new external_single_structure(array(
                 'read' => new external_single_structure(array(
-                    'group' => new external_value(PARAM_ALPHAEXT)
-                )),
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
                 'delete' => new external_single_structure(array(
-                    'group' => new external_value(PARAM_ALPHAEXT)
-                )),
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
                 'admin' => new external_single_structure(array(
-                    'group' => new external_value(PARAM_ALPHAEXT)
-                )),
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
                 'update' => new external_single_structure(array(
-                    'group' => new external_value(PARAM_ALPHAEXT)
-                ))
-            ), "annotaion permissino", false),
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+            ), "annotaion permissino", false, array()),
             'text' => new external_value(PARAM_TEXT),
             'created' => new external_value(PARAM_TEXT),
             'updated' => new external_value(PARAM_TEXT),
@@ -242,7 +288,8 @@ class mod_moewiki_external extends external_api
     public static function delete($id) {
         global $DB;
         
-        if($DB->delete_records('moewiki_annotations_ranges',array('annotaionid' => $id))) {
+        if($DB->delete_records('moewiki_annotations_ranges',array('annotaionid' => $id)) &&
+            $DB->delete_records('moewiki_annotations_permiss',array('annotaionid' => $id))) {
             $DB->delete_records('moewiki_annotations',array('id' => $id));
         }
         return null;
@@ -301,11 +348,29 @@ class mod_moewiki_external extends external_api
                 'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
                 'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
             ))),
+            'userid' => new external_value(PARAM_INT),
+            'permissions' => new external_single_structure(array(
+                'read' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'delete' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'admin' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'update' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+            ), "annotaion permissino", false, array()),
+            'userpicture' => new external_value(PARAM_URL),
+            'parent' => new external_value(PARAM_INT),
+            'username' => new external_value(PARAM_TEXT),
         ));
     }
     
-    public static function update($id, $created, $quote, $text, $updated, $ranges, $userid) {
-        global $DB;
+    public static function update($id, $created, $quote, $text, $updated, $ranges, $userid, $permissions) {
+        global $DB, $PAGE;
         
         $annotation = new stdClass();
         $annotation->id = $id;
@@ -314,8 +379,31 @@ class mod_moewiki_external extends external_api
         $annotation->quote = $quote;
         $annotation->userid = $userid;
         $DB->update_record('moewiki_annotations', $annotation);
-        $annotation->created = $created;
+        $annotation =  $DB->get_record('moewiki_annotations', array('id' => $id));
         $annotation->ranges = $ranges;
+        $permission = $DB->get_record('moewiki_annotations_permiss', array('annotaionid' => $id));
+        $permission->read_prem = ($permissions['read'][0] == 'null') ? null : (int)$permissions['read'][0];
+        $permission->delete_prem = ($permissions['delete'][0] == 'null') ? $permission->delete_prem : (int)$permissions['delete'][0];
+        $permission->admin_prem = ($permissions['admin'][0] == 'null') ? $permission->admin_prem : (int)$permissions['admin'][0];
+        $permission->update_prem = ($permissions['update'][0] == 'null') ? null: (int)$permissions['update'][0];
+        $DB->update_record('moewiki_annotations_permiss', $permission);
+        $annotation->permissions = new stdClass();
+        $annotation->permissions->read = array($permission->read_prem);
+        $annotation->permissions->delete = array($permission->delete_prem);
+        $annotation->permissions->admin = array($permission->admin_prem);
+        $annotation->permissions->update = array($permission->update_prem);
+        $user = new stdClass();
+        $user->id = $annotation->userid;
+        $user = $DB->get_record('user', array('id' => $user->id));
+        $userpicture = new user_picture($user);
+        $course = $DB->get_record_select('course',
+            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($annotation->pageid),
+            '*', MUST_EXIST);
+        $modinfo = get_fast_modinfo($course);
+        $cm = $modinfo->get_cm($annotation->pageid);
+        $PAGE->set_cm($cm);
+        $annotation->username =  $user->firstname . ' ' . $user->lastname;
+        $annotation->userpicture = $userpicture->get_url($PAGE)->out();
         return $annotation;
     }
     
@@ -332,7 +420,24 @@ class mod_moewiki_external extends external_api
                 'startOffset' => new external_value(PARAM_INT, "The start offset position of the annotaion in the element"),
                 'endOffset'   => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
             ))),
-            'userid' => new external_value(PARAM_INT)
+            'permissions' => new external_single_structure(array(
+                'read' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'delete' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'admin' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+                'update' => new external_single_structure(array(
+                    new external_value(PARAM_TEXT,'',false, 'null',true)
+                ),'',false,array()),
+            ), "annotaion permissino", false, array()),
+            'userid' => new external_value(PARAM_INT),
+            'parent' => new external_value(PARAM_INT,'annotation parent',false, null, true),
+            'userpicture' => new external_value(PARAM_URL),
+            'username' => new external_value(PARAM_TEXT),
         ));
     }
 }

@@ -526,6 +526,14 @@ WHERE
         upgrade_mod_savepoint(true, 2016060600, 'moewiki');
     }
     
+    if ($oldversion < 2016061303) {
+        $table =  new xmldb_table('moewiki_annotations_permiss');
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/mod/moewiki/db/install.xml', 'moewiki_annotations_permiss');
+        }
+        
+        upgrade_mod_savepoint(true, 2016061303, 'moewiki');
+    }
     // Must always return true from these functions
     return true;
 }

@@ -36,14 +36,14 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 				};
 			}
 			app.include(annotator.identity.simple);
-			/*app.include(annotator.authz.acl);*/
+			app.include(annotator.authz.acl);
 			app.include(remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.wikiid,params.userpage);
 			     promise.then(function(data){
-			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);
 			    	 app.ident.identity = params.userid;
+			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);			    	
 			     });
 			});
 		},
