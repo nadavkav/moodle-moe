@@ -302,3 +302,5 @@ $string['words'] = 'מילים';
 $string['wordsadded'] = 'מילים נוספו';
 $string['wordsdeleted'] = 'מילים נמחקו';
 $string['wouldyouliketocreate'] = 'האם אתם מעונינים ליצור אותו?';
+$string['reopen'] = 'פתיחה';
+$string['templatecannotbechanged'] = 'לא ניתן לערוך את התבנית מכיוון שהתלמידים החלו לערוך.';

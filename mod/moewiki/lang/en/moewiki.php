@@ -589,3 +589,4 @@ $string['event:moewikipageupdated'] = 'moewiki page updated';
 $string['event:savefailed'] = 'Session fail on page save';
 $string['moewikicrontask'] = 'MOE wiki maintenance jobs';
 $string['reopen'] = 'Reopen';
+$string['templatecannotbechanged'] = 'Text template cannot be changed, Students already started editing';

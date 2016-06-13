@@ -58,22 +58,22 @@ function moewiki_add_instance($data, $mform) {
             $file = $mform->save_stored_file('template_file', $context->id, 'mod_moewiki', 'template', $moewikiid, '/', $filename);
             $DB->set_field('moewiki', 'template', '/'.$file->get_filename(), array('id' => $formdata->id));
         }
-        
+
         //if there is a text template for all students to be implemented
-        if($texttemplate = $data->template_text['text']) {
+        if($texttemplate = $data->template_text) {
             $cmid = $data->coursemodule;
             $cm = $DB->get_record('course_modules', array("id" => $cmid));
             $context = context_module::instance($cmid);
             $moewiki = $DB->get_record_select('moewiki', 'id = ?', array($moewikiid));
             $coursecontext = context_course::instance($COURSE->id);
-            
+
             //Create the user's wiki
             $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $USER->id);
             //create the wiki main page
             $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
             //put the template text in the user's main page
             moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
-            
+
             //find all the course students
             $students = get_users_from_role_on_context($DB->get_record('role', array("shortname" => "student")), $coursecontext);
             foreach ($students as $student) {
@@ -84,7 +84,7 @@ function moewiki_add_instance($data, $mform) {
                 //put the template text in the students main page
                 moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
             }
-        
+
         }
 
         return $moewikiid;
@@ -141,18 +141,18 @@ function moewiki_update_instance($data, $mform) {
             }
         }
     }
-    
+
     if(!empty($data->template_text)) {
         $texttemplate = $data->template_text;
         $subwikis = moewiki_get_subwikis($data->id);
         foreach ($subwikis as $subwiki) {
             $page = $DB->get_record("moewiki_pages", array("title" => "", "subwikiid" => $subwiki->id));
-            
+
             if($page->currentversionid == $page->firstversionid) {
                 $currentversion = $DB->get_record('moewiki_versions', array("id" => $page->currentversionid));
-                
+
                 $currentversion->xhtml = $texttemplate;
-                
+
                 $DB->update_record("moewiki_versions", $currentversion);
             }
         }
