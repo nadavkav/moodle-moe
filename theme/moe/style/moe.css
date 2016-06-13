@@ -1,6 +1,5 @@
 @CHARSET "UTF-8";
 
-
 .loginbox .loginform {
 	text-align: center;
 }
@@ -13,6 +12,10 @@
 	margin: 0 auto;
 	float: none;
 	text-align: center;
+}
+
+#page-navbar .breadcrumb-button {
+    margin-top: 0px;
 }
 
 .format-socialwall .tl-showall {
