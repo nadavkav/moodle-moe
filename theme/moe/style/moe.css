@@ -1053,7 +1053,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1140,11 +1140,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	}
 }
 
-@media ( min-width :980px) and (max-width: 1368px) {
-	#wrapper>#page-header {
-		background-size: contain;
-	}
+@media (max-width: 1310px) and (min-width: 1270px)
+#wrapper > #page-header {
+    background-size: contain;
 }
+
 .ouw_subwiki .individualselector label, .ouw_subwiki span {
 	background-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
     padding: 0.3em;
@@ -1212,7 +1212,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1323,7 +1323,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 .loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
 	max-width: inherit;
