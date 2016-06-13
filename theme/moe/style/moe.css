@@ -1347,6 +1347,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	}
 }
 
+#page-mod-advmindmap-view .generalbox strong{
+	margin-left: 1em;
+}
+
 #page-mod-advmindmap-view div#intro:before {
     content: '';
     width: 100%;
