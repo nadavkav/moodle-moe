@@ -1689,3 +1689,109 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-folder-view div[role="main"] .box.generalbox.foldertree {
 	padding: 0px 10px;
 }
+
+#page-mod-lightboxgallery-view div[role="main"]:before {
+	content: '';
+    width: 100%;
+    height: 10px;
+    background: url([[pix:theme|bg/learning-spaces]]);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom: #b98385 1px solid;
+    display: block;
+}
+
+#page-mod-lightboxgallery-view div[role="main"] {
+    background-color: #f8f6f6;
+    border: #b98385 1px solid;
+}
+
+#page-mod-lightboxgallery-view div[role="main"] > h2 {
+    margin-top: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#page-mod-lightboxgallery-view .lightbox-gallery-image-frame {
+    border: #ba8486 1px solid !important;
+}
+
+
+
+
+
+#page-mod-lightboxgallery-view .lightbox-gallery.clearfix > .box.clearfix {
+    display: none;
+}
+
+#page-mod-lightboxgallery-view .breadcrumb-button input[type="submit"], #page-mod-lightboxgallery-imageedit .breadcrumb-button .singlebutton div input[type="submit"] {
+    border: #b98385 1px solid;
+    border-radius: 0px;
+    background-color: #ecc7c8;
+    color: #6c6565 !important;
+    font-size: 1.1em;
+    font-weight: 700;
+    padding: 5px 10px;
+}
+
+#page-mod-lightboxgallery-view div[role="main"] > .box.center > a, #page-mod-lightboxgallery-imageedit div[role="main"] input[type="submit"]  {
+    background-image: none;
+    background-color: #fedddd !important;
+    color: #6c6565 !important;
+    border: 5px solid transparent;
+    box-shadow: inset 0 0 0 1px #a46365, 0 0 0 1px #c39697;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 6px 18px;
+    border-image: url([[pix:theme|bg/blogtitlebg]]);
+    border-image-slice: 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    display: inline-block;
+    margin: 15px 15px 15px 15px;
+}
+
+#page-mod-lightboxgallery-imageedit div[role="main"] .generaltable {
+    border: #bc8a8c 1px solid;
+}
+
+#page-mod-lightboxgallery-imageedit div[role="main"] .generaltable > tbody > tr >td {
+    background-color: #fdf0f1;
+    border-top: #bc8a8c 1px solid;
+}
+
+#page-mod-lightboxgallery-imageedit div[role="main"] ul.nav-tabs li > a {
+    background-color: #ab6f72;
+    border-radius: 0px;
+    color: #e9d8d8;
+    font-size: 1.2em;
+    border-bottom: #e7c2c3 8px solid;
+    padding: 5px 10px;
+	cursor: pointer;
+}
+
+#page-mod-lightboxgallery-imageedit div[role="main"] ul.nav-tabs li.active {
+    margin-right: 0px;
+    border-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: -1px;
+}
+
+#page-mod-lightboxgallery-imageedit div[role="main"] ul.nav-tabs li.active > a {
+    background-color: #fdf0f1;
+    border-bottom-color: #ab6f72;
+    color: #6e666e;
+    border-top: #ab6f72 1px solid;
+    border-left: #ab6f72 1px solid;
+    border-right: #ab6f72 1px solid;
+	font-weight: 700;
+}
+
+#page-mod-lightboxgallery-imageedit .nav-tabs {
+    height: auto;
+    padding-top: 1px;
+}
+
+#page-mod-lightboxgallery-imageedit .nav-tabs li {
+	margin: 0 0.2em;
+}
