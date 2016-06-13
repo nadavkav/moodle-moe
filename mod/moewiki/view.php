@@ -115,6 +115,24 @@ $PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(arr
     'userid'   => $USER->id,
     'userpage' => $userid,
 )));
-$PAGE->requires->strings_for_js(array('annotation'),'mod_moewiki');
+$PAGE->requires->strings_for_js(array(
+    'alloweveryoneedit',
+    'alloweveryoneview',
+    'annotation',
+    'annotate',
+    'cancel',
+    'clear',
+    'comments',
+    'delete',
+    'edit',
+    'filterby',
+    'navigate',
+    'next',
+    'nocomment',
+    'previous',
+    'repaly',
+    'resolved',
+    'save',
+    ),'mod_moewiki');
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);

@@ -13,19 +13,27 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+$string['alloweveryoneedit'] = 'Allow anyone to <strong>edit</strong> this annotation';
+$string['alloweveryoneview'] = 'Allow anyone to <strong>view</strong> this annotation';
+$string['annotation'] = 'Annotation';
+$string['attachments'] = 'Attachments';
+$string['clear'] = 'Clear';
+$string['comments'] = 'Comments';
+$string['delete'] = 'Delete';
+$string['edit'] = 'Edit';
+$string['filterby'] = 'Filter By';
+$string['lastmodified'] = 'Last edit: {$a}';
 $string['modulename'] = 'MOE wiki';
 $string['modulenameplural'] = 'MOE wikis';
+$string['nocomment'] = 'No comment';
 $string['pluginadministration'] = 'MOE wiki administration';
 $string['pluginname'] = 'MOE wiki';
-
-$string['lastmodified'] = 'Last edit: {$a}';
+$string['repaly'] = 'Reply';
+$string['resolved'] = 'Resolved';
 $string['strftimerecent'] = '%d %B %y, %H:%M';
-
 $string['summary'] = 'Summary';
-
-$string['attachments'] = 'Attachments';
 $string['noattachments'] = 'No attachments';
-
+$string['navigate'] = 'Navigate: ';
 $string['subwikis'] = 'Sub-wikis';
 $string['subwikis_single'] = 'Single wiki for course';
 $string['subwikis_groups'] = 'One wiki per group';
@@ -418,6 +426,7 @@ use a wiki when you want your students to create content.
 <p>
 The MOE wiki has a variety of options. Please see the individual help by each item for more information.
 </p>';
+$string['save'] = 'Save';
 $string['subwikis_help'] = '
 <ul>
 <li><strong>Single wiki for course</strong><br />

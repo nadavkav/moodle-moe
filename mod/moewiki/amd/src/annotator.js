@@ -13303,7 +13303,7 @@ var Adder = Widget.extend({
 
 Adder.template = [
     '<div class="annotator-adder annotator-hide">',
-    '  <button type="button">' + _t('Annotate') + '</button>',
+    '  <button type="button">' + M.util.get_string('annotate', 'mod_moewiki') + '</button>',
     '</div>'
 ].join('\n');
 
@@ -13552,7 +13552,7 @@ var Editor = exports.Editor = Widget.extend({
         if (this.options.defaultFields) {
             this.addField({
                 type: 'textarea',
-                label: _t('Comments') + '\u2026',
+                label: M.util.get_string('comments', 'mod_moewiki') + '\u2026',
                 load: function (field, annotation) {
                     $(field).find('textarea').val(annotation.text || '');
                 },
@@ -13890,9 +13890,9 @@ Editor.template = [
     '  <form class="annotator-widget">',
     '    <ul class="annotator-listing"></ul>',
     '    <div class="annotator-controls">',
-    '     <a href="#cancel" class="annotator-cancel">' + _t('Cancel') + '</a>',
+    '     <a href="#cancel" class="annotator-cancel">' + M.util.get_string('cancel','mod_moewiki') + '</a>',
     '      <a href="#save"',
-    '         class="annotator-save">' + _t('Save') + '</a>',
+    '         class="annotator-save">' + M.util.get_string('save', 'mod_moewiki') + '</a>',
     '    </div>',
     '  </form>',
     '</div>'
@@ -13978,7 +13978,7 @@ var Filter = exports.Filter = function Filter(options) {
     this._insertSpacer();
 
     if (this.options.addAnnotationFilter) {
-        this.addFilter({label: _t('Annotation'), property: 'text'});
+        this.addFilter({label: M.util.get_string('annotation', 'mod_moewiki'), property: 'text'});
     }
 };
 
@@ -14049,7 +14049,7 @@ Filter.prototype.addFilter = function (options) {
         filter.element.find('input')
             .attr({
                 id: filter.id,
-                placeholder: _t('Filter by ') + filter.label + '\u2026'
+                placeholder: M.util.get_string('filterby', 'mod_moewiki') + filter.label + '\u2026'
             });
         filter.element.find('button').hide();
 
@@ -14301,16 +14301,16 @@ Filter.classes = {
 Filter.html = {
     element: [
         '<div class="annotator-filter">',
-        '  <strong>' + _t('Navigate:') + '</strong>',
+        '  <strong>' + M.util.get_string('navigate', 'mod_moewiki') + '</strong>',
         '  <span class="annotator-filter-navigation">',
         '    <button type="button"',
         '            class="annotator-filter-previous">' +
-            _t('Previous') +
+            M.util.get_string('previous', 'mod_moewiki') +
             '</button>',
         '    <button type="button"',
-        '            class="annotator-filter-next">' + _t('Next') + '</button>',
+        '            class="annotator-filter-next">' + M.util.get_string('next', 'mod_moewiki') + '</button>',
         '  </span>',
-        '  <strong>' + _t('Filter by:') + '</strong>',
+        '  <strong>' + M.util.get_string('filterby', 'mod_moewiki') + '</strong>',
         '</div>'
     ].join('\n'),
 
@@ -14319,7 +14319,7 @@ Filter.html = {
         '  <label></label>',
         '  <input/>',
         '  <button type="button"',
-        '          class="annotator-filter-clear">' + _t('Clear') + '</button>',
+        '          class="annotator-filter-clear">' + M.util.get_string('clear', 'mod_moewiki') + '</button>',
         '</span>'
     ].join('\n')
 };
@@ -14781,14 +14781,14 @@ function addPermissionsCheckboxes(editor, ident, authz) {
 
     editor.addField({
         type: 'checkbox',
-        label: _t('Allow anyone to <strong>view</strong> this annotation'),
+        label: M.util.get_string('alloweveryoneview', 'mod_moewiki'),
         load: createLoadCallback('read'),
         submit: createSubmitCallback('read')
     });
 
     editor.addField({
         type: 'checkbox',
-        label: _t('Allow anyone to <strong>edit</strong> this annotation'),
+        label: M.util.get_string('alloweveryoneedit', 'mod_moewiki'),
         load: createLoadCallback('update'),
         submit: createSubmitCallback('update')
     });
@@ -14974,7 +14974,7 @@ var render = exports.render = function render(annotation) {
     if (annotation.text) {
         return convert(annotation.text);
     } else {
-        return "<i>" + _t('No comment') + "</i>";
+        return "<i>" + M.util.get_string('nocomment') + "</i>";
     }
 };
 
@@ -15356,7 +15356,7 @@ var Viewer = exports.Viewer = Widget.extend({
             if (annotation.text) {
                 return util.escapeHtml(annotation.text);
             } else {
-                return "<i>" + _t('No comment') + "</i>";
+                return "<i>" + M.util.get_string('nocomment', 'mod_moewiki') + "</i>";
             }
         };
         this.adder = options.adder;
@@ -15809,9 +15809,9 @@ Viewer.template = [
     '<div class="annotator-outer annotator-viewer annotator-hide row-fluid">',
     '  <ul class="annotator-widget annotator-listing row-fluid"></ul>',
     '  <div class="annotator-viewer-controls row-fluid">',
-    '     <a href="#cancel" class="annotator-cancel span3 offset1">' + _t('Cancel') + '</a>',
-    '     <a href="#resolved" class="annotator-resolved span4">' + _t('Resolved') + '</a>',
-    '     <a href="#repay" class="annotator-reply span3 offset1">' + _t('Repaly') +'</a>',
+    '     <a href="#cancel" class="annotator-cancel span3 offset1">' + M.util.get_string('cancel', 'mod_moewiki') + '</a>',
+    '     <a href="#resolved" class="annotator-resolved span4">' + M.util.get_string('resolved' , 'mod_moewiki') + '</a>',
+    '     <a href="#repay" class="annotator-reply span3 offset1">' + M.util.get_string('repaly', 'mod_moewiki') +'</a>',
     '  </div>',
     '</div>'
 ].join('\n');
@@ -15825,12 +15825,12 @@ Viewer.itemTemplate = [
     '       	class="annotator-link">' + _t('View as webpage') + '</a>',*/
     '				<div class="span12">',			
     '    				<a',
-    '            			title="' + _t('Edit') + '"',
+    '            			title="' + M.util.get_string('edit', 'mod_moewiki') + '"',
     '            			class="annotator-edit"></a>',
     '				</div>',
     '				<div class="span12">',
     '    				<a',
-    '            			title="' + _t('Delete') + '"',
+    '            			title="' + M.util.get_string('delete', 'mod_moeiki') + '"',
     '            			class="annotator-delete"></a>',
     '				</div>',
     '			</div>',
