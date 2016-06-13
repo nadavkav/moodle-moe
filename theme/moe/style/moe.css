@@ -1,5 +1,20 @@
 @CHARSET "UTF-8";
 
+
+.loginbox .loginform {
+	text-align: center;
+}
+
+.loginbox .loginform .form-input input {
+	width:100%;
+}
+
+.loginbox .loginform .form-label, .dir-rtl .loginbox .loginform .form-label,.dir-rtl .loginbox .loginform .form-input {
+	margin: 0 auto;
+	float: none;
+	text-align: center;
+}
+
 .format-socialwall .tl-showall {
 	text-align: center;
 	padding-bottom: 5px;
