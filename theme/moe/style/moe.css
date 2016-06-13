@@ -1795,3 +1795,60 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-lightboxgallery-imageedit .nav-tabs li {
 	margin: 0 0.2em;
 }
+
+#page-mod-advmindmap-view .generalbox strong{
+	margin-left: 1em;
+}
+
+#page-mod-advmindmap-view div#intro:before {
+    content: '';
+    width: 100%;
+    height: 4px;
+    border-top: 1px solid #bdb1c9;
+    background: url(/theme/image.php?theme=moe&component=theme&image=bg%2Flearning-spaces);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom: 1px solid #c0bcbd;
+    display: block;
+}
+
+#page-mod-advmindmap-view div#intro.generalbox {
+    margin-top: 0px !important;
+    padding: 0px !important;
+}
+
+#page-mod-advmindmap-view div[role="main"] > .generalbox > :first-child {
+    background-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
+    background-repeat: no-repeat;
+    margin-bottom: 0px;
+    background-size: cover;
+    color: #5d4a6a;
+    border: 1px solid #ac9dbe;
+    border-bottom: 0px;
+    padding: 0.2em 1em;
+    display: inline-block;
+    font-size: 21px;
+}
+
+#page-mod-advmindmap-view div[role="main"] > .generalbox > :first-child a {
+	background-color: #eadcf8;
+    color: #5c4b67 !important;
+    font-weight: bold;
+    border: #a794b4 2px solid;
+    font-size: 0.7em;
+    padding: 3px 5px 3px 5px;
+}
+
+#page-mod-advmindmap-view div[role="main"] > .generalbox > #intro {
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	color: #555;
+	border: none;
+	display: block;
+	font-size:13px;
+}
+
+#page-mod-advmindmap-view div[role="main"] .generaltable a {
+	color: #644d72;
+}
