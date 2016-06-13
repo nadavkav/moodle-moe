@@ -1312,6 +1312,26 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .dir-rtl .form-item .form-label, .dir-rtl .mform .fitem div.fitemtitle {
 	text-align: right;
 }
+
+.dir-rtl .camera_caption.moveFromLeft div span div {
+	text-align: left !important;
+	direction: rtl;
+}
+.dir-rtl .camera_caption {
+    left: 4%;
+	right: auto;
+}
+
+.camera_caption.moveFromLeft div span {
+	background-color: #80599B;
+	font-size: 2.2em;
+	line-height: 1.5em;
+	border-left: 0px;
+}
+
+#page-navbar {
+    margin-top: -20px;	
+}
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
 		font-size: 2em;
