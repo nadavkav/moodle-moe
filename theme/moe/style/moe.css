@@ -1622,3 +1622,22 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .path-mod-assign [data-region="grading-navigation-panel"] {
 	left: 26px;
 }
+
+.ftitle-gradebook-btn {
+	border: #b3b68f 2px solid;
+    padding: 3px 6px;
+    display: inline-block;
+    float: right;
+    width: auto;
+    margin-left: 10px;
+    background-color: #ebecd8;
+    color: #5b4e65;
+}
+
+.dir-rtl .ftitle-gradebook-btn {
+	float: left;
+}
+
+.ftitle-gradebook-btn:hover, .ftitle-gradebook-btn:active, .ftitle-gradebook-btn:link, .ftitle-gradebook-btn:visited {
+    color: #5b4e65;
+}

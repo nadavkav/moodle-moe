@@ -6737,7 +6737,16 @@ class assign {
             $mform->disabledIf('allocatedmarker', 'workflowstate', 'eq', ASSIGN_MARKING_WORKFLOW_STATE_RELEASED);
         }
         $gradestring = '<span class="currentgrade">' . $gradestring . '</span>';
-        $mform->addElement('static', 'currentgrade', get_string('currentgrade', 'assign'), $gradestring);
+
+        /**
+         * Leo's Changes, printing the "go to gradebook btn next to title
+         */
+        $urlparams = array('id'=>$this->get_course()->id);
+        $url = new moodle_url('/grade/report/grader/index.php', $urlparams);
+        $currgradestr = get_string('currentgrade', 'assign');
+        $currgradestr .= "<a class=\"ftitle-gradebook-btn\" href=\"".$url."\">".get_string('gotogradebook', 'assign')."</a>";
+
+        $mform->addElement('static', 'currentgrade', $currgradestr, $gradestring);
 
         if (count($useridlist) > 1) {
             $strparams = array('current'=>$rownum+1, 'total'=>count($useridlist));
