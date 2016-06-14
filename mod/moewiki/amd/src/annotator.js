@@ -13051,7 +13051,7 @@ AclAuthzPolicy.prototype.permits = function (action, context, identity) {
         // Fine-grained authorization on permissions field
         var tokens = permissions[action];
 
-        if (typeof tokens === 'undefined' || tokens === null) {
+        if (typeof tokens === 'undefined' || tokens[0] === null) {
             // Missing tokens array for this action: anyone can perform
             // action.
             return true;

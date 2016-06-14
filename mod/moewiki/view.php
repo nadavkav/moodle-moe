@@ -114,6 +114,7 @@ $PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(arr
     'wikiid'   => $id,
     'userid'   => $USER->id,
     'userpage' => $userid,
+    'admin'    => has_capability('mod/moewiki:grade', $context),
 )));
 $PAGE->requires->strings_for_js(array(
     'alloweveryoneedit',

@@ -33,6 +33,12 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.wikiid,params.userpage);
 			     promise.then(function(data){
+			    	 if(params.admin){
+			    		 for (var index in data.rows){
+			    			 data.rows[index].permissions.update.push(params.userid);
+			    			 data.rows[index].permissions['delete'].push(params.userid);
+						 }
+			    	 }
 			    	 app.ident.identity = params.userid;
 			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);			    	
 			     });
