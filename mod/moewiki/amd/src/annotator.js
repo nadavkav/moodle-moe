@@ -15584,7 +15584,7 @@ function addPermissionsCheckboxes(editor, ident, authz) {
             }
 
             // See if we can authorise without a user.
-            if (authz.permits(action, annotation, null)) {
+            if (authz.permits(action, annotation, null) && action != 'update') {
                 input.attr('checked', 'checked');
             } else {
                 input.removeAttr('checked');
