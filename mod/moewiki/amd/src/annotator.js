@@ -16666,7 +16666,7 @@ Viewer.itemTemplate = [
     '				</div>',
     '				<div class="span12">',
     '    				<button',
-    '            			title="' + M.util.get_string('delete', 'mod_moeiki') + '"',
+    '            			title="' + M.util.get_string('delete', 'mod_moewiki') + '"',
     '            			class="annotator-delete"></button>',
     '				</div>',
     '			</div>',
