@@ -7,12 +7,12 @@
  */
 
 define(['jquery', 'core/ajax'],function($, ajax){
-	function resolved() {
+	function Resolved() {
 				
 	}
 		
-	resolved.prototype.reopen = function (){
-			$('#resolvedAnnotation button').click(function(e){
+	Resolved.prototype.reopen = function (){
+			$('#resolvedAnnotation button').click(function(){
 				var obj = {};
 				var button = $(this);
 				obj.id = button.attr('id');
@@ -24,12 +24,9 @@ define(['jquery', 'core/ajax'],function($, ajax){
 				       if(response.success){
 				    	   button.parents("tr").remove();  
 				       }
-				}).fail(function(ex) {
-				      console.log(ex);
 				});
-				
 			});
-	}
+	};
 	
-	return new resolved();
+	return new Resolved();
 });

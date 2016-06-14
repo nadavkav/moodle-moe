@@ -9,23 +9,8 @@
 define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator, ajax) {
 	var annotation = {
 		merkannotaion : function(params) {
-			var app = new annotator.App();
-			remark = new remarks();
-			app.include(annotator.ui.main, {
-			    element: document.querySelector('.moewiki_content'),
-			});
-			
-			function remarks() {
+			function Remarks() {
 				return {
-					start: function (app) {
-						viewer = new annotator.ui.viewer.Viewer({defaultFields: false});
-						viewer.setRenderer(this.annotationEditorShown);
-					},
-					annotationsLoaded: function(annotations) {
-						for (key in annotations) {
-							
-						} 
-					},
 					beforeAnnotationCreated: function(annotation) {
 						annotation.page = params.wikiid;
 						annotation.userpage = params.userpage;
@@ -35,9 +20,15 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 					}
 				};
 			}
+			var app = new annotator.App();
+			app.include(annotator.ui.main, {
+			    element: document.querySelector('.moewiki_content'),
+			});
+			
+			
 			app.include(annotator.identity.simple);
 			app.include(annotator.authz.acl);
-			app.include(remarks);
+			app.include(Remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.wikiid,params.userpage);
@@ -56,8 +47,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 		    }
 
 		    // Use the notifier unless an onError handler has been set.
-		    options.onError = options.onError || function (msg, xhr) {
-		        console.error(msg, xhr);
+		    options.onError = options.onError || function (msg) {
 		        notify(msg, 'error');
 		    };
 
@@ -84,16 +74,9 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 						return this.ajaxcall('update', annotation);
 					},
 					resolved: function(annotation){
-						this.ajaxcall('resolved',{'id' : annotation.id}).done(function(response) {
-						       if(response.success){
-						    	     
-						       }
-						}).fail(function(ex) {
-						      console.log(ex);
-						});
+						this.ajaxcall('resolved',{'id' : annotation.id});
 					},
 					ajaxcall: function(action,obj){
-						var id = obj && obj.id;
 						var data = {};
 						data.methodname = 'moe_wiki_'+action;
 						data.args = obj;
