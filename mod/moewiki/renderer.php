@@ -1334,7 +1334,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         $context->annotations = array();
         foreach ($annotations as $key => $annotat) {
             $ann = new stdClass();
-            $ann->date = date("d.m.Y",$annotat->created);
+            $ann->date = date("d.m.Y H:i",$annotat->created);
             $user = $DB->get_record('user', array('id' => $annotat->userid));
             $ann->name = $user->firstname . ' ' . $user->lastname;
             $ann->annotation = $annotat->text;

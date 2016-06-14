@@ -16205,7 +16205,13 @@ var Viewer = exports.Viewer = Widget.extend({
                 			    '<div class="span6">'+
                 			    	'<div class="row-fluid userdetails">'+
                 			    		'<div class="username sapn12">' + annotation.username + '</div>'+
-                			    		'<div class="date span12">' + date.toLocaleDateString('he') + '</div>'+
+                			    		'<div class="date span12">' + date.toLocaleDateString('he',{
+                			    			year:'2-digit',
+                			    			month:'2-digit',
+                			    			day:'2-digit', 
+                			    			hour:'2-digit', 
+                			    			minute:'2-digit'
+                			    		}) + '</div>'+
                 			    	'</div>'+
                 			    '</div>'+
                 			'</div>'+
