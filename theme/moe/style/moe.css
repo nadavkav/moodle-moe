@@ -2771,3 +2771,55 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     width: 2em;
 	height: auto;	
 }
+
+#page-mod-book-edit form#mform1 {
+	border: 1px solid #c3ab8a;
+	border-top: none;
+	background-color: #ffe7cc;
+	padding: 1em;
+}
+
+#page-mod-book-edit #fgroup_id_buttonar {
+	background-color: rgba(0,0,0,0);
+	border: none;
+}
+
+#page-mod-book-edit legend {
+	border: none;
+}
+
+#page-mod-book-edit input#id_submitbutton {
+	background-image: none;
+    background-color: #955419 !important;
+    color: #f9f7f4 !important;
+    border: 8px solid transparent;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    box-shadow: inset 0 0 0 1px #99724b, 0 0 0 1px #99724b;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 3px 10px;
+    border-image: url([[pix:theme|bg/BG_kaftor]]) 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: none;
+    outline: 0px !important;
+}
+
+#page-mod-book-edit input#id_cancel {
+    background-image: none;
+    background-color: #fcf5db !important;
+    color: #6d4218 !important;
+    border: 8px solid transparent;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    box-shadow: inset 0 0 0 1px #99724b, 0 0 0 1px #99724b;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 3px 10px;
+    border-image: url([[pix:theme|bg/BG_kaftor]]) 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: none;
+    outline: 0px !important;
+}
