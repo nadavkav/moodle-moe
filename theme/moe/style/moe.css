@@ -2720,3 +2720,54 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view #intro {
     height: 10px;
 }
+
+.path-mod-book div[role="main"] > h2 {
+	border: 1px solid #c3ab8a;
+	background-image: url([[pix:theme|bg/BG_Titlle]]);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	margin-bottom: 0px;
+	padding-right: 0.5em;
+	color: #565656;
+}
+
+.path-mod-book .navtop {
+	position: absolute;
+	left: 6.5%;
+	top: 14%;
+	background-color: #ffe7cc;
+}
+
+.path-mod-book .navbottom {
+	margin-top: 0px;
+	border: 1px solid #c3ab8a;
+	border-top: none;
+	background-color: #ffe7cc;
+}
+.path-mod-book .book_content{
+	border-left: 1px solid #c3ab8a;
+	border-right: 1px solid #c3ab8a;
+	background-color: #ffe7cc;
+	padding-top: 1em;
+}
+.path-mod-book .book_content >h3 {
+	margin-top: 0px;
+	margin-bottom: 0.7em;
+}
+
+.path-mod-book .book_content >h3 span {
+	border: 1px solid #c5b39f;
+    border-right: none;
+	background-color: #f3cda6;
+}
+
+.path-mod-book .book_content >h4 span {
+    border: 1px solid #c5b39f;
+    border-right: none;
+    background-color: #f6dac0;
+}
+
+.path-mod-book .navtop img.icon, .path-mod-book .navbottom img.icon{
+    width: 2em;
+	height: auto;	
+}
