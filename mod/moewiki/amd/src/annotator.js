@@ -3359,7 +3359,9 @@ Expr = Sizzle.selectors = {
 							}
 
 						// Use previously-cached element index if available
-						} else if ( useCache && (cache = (elem[ expando ] || (elem[ expando ] = {}))[ type ]) && cache[0] === dirruns ) {
+						} else if ( useCache && 
+								(cache = (elem[ expando ] || (elem[ expando ] = {}))[ type ]) &&
+									cache[0] === dirruns ) {
 							diff = cache[1];
 
 						// xml :nth-child(...) or :nth-last-child(...) or
@@ -3515,7 +3517,9 @@ Expr = Sizzle.selectors = {
 		},
 
 		"focus": function( elem ) {
-			return elem === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(elem.type || elem.href || ~elem.tabIndex);
+			return elem === document.activeElement &&
+				(!document.hasFocus || document.hasFocus()) &&
+					!!(elem.type || elem.href || ~elem.tabIndex);
 		},
 
 		// Boolean properties
@@ -4948,7 +4952,8 @@ jQuery.extend({
 										.fail( newDefer.reject )
 										.progress( newDefer.notify );
 								} else {
-									newDefer[ tuple[ 0 ] + "With" ]( this === promise ? newDefer.promise() : this, fn ? [ returned ] : arguments );
+									newDefer[ tuple[ 0 ] + "With" ]( this === promise ? newDefer.promise() : this,
+											fn ? [ returned ] : arguments );
 								}
 							});
 						});
@@ -6474,7 +6479,8 @@ jQuery.event = {
 	},
 
 	// Includes some event props shared by KeyEvent and MouseEvent
-	props: "altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which".split(" "),
+	props: "altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey " +
+			"target timeStamp view which".split(" "),
 
 	fixHooks: {},
 
@@ -6504,8 +6510,18 @@ jQuery.event = {
 				doc = eventDoc.documentElement;
 				body = eventDoc.body;
 
-				event.pageX = original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
-				event.pageY = original.clientY + ( doc && doc.scrollTop  || body && body.scrollTop  || 0 ) - ( doc && doc.clientTop  || body && body.clientTop  || 0 );
+				event.pageX = original.clientX + ( doc && 
+						doc.scrollLeft || body && 
+						body.scrollLeft || 0 ) - ( doc && 
+								doc.clientLeft || 
+								body && 
+								body.clientLeft || 0 );
+				event.pageY = original.clientY + ( doc && 
+						doc.scrollTop  || 
+						body && 
+						body.scrollTop  || 0 ) - ( doc 
+								&& doc.clientTop  || 
+								body && body.clientTop  || 0 );
 			}
 
 			// Add relatedTarget, if necessary

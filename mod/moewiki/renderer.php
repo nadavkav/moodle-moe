@@ -1326,11 +1326,8 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         $context->reopen = get_string('reopen','mod_moewiki');
         
         $user = ($user != 0) ? $user : $USER->id;
-        $annotations = $DB->get_records('moewiki_annotations',array(
-            'resolved' => 1,
-            'pageid' => $page,
-            'userpage' => $user,
-        ));
+        $select = "resolved = 1 AND pageid = $page AND userpage = $user AND parent is NULL";
+        $annotations = $DB->get_records_select('moewiki_annotations', $select);
         $context->annotations = array();
         foreach ($annotations as $key => $annotat) {
             $ann = new stdClass();
