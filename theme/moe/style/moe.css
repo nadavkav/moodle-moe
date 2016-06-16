@@ -1108,7 +1108,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1174,6 +1174,20 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .format-socialwall h3.sectionname {
 	padding-left: 8px;
 	padding-right: 8px;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+	line-height: 22px;
+	height: 22px;
+	width: 26px;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton .trafficlight {
+	display: none;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton.thispage .thispageholder .qnbutton.answersaved .thispageholder {
+	border-width: 1px;
 }
 
 @media screen and (max-width:26em) {
@@ -1267,7 +1281,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .ouw_topheading h2 {
- 	display: none; 
+ 	display: none;
 }
 
 .path-mod-ouwiki .nav-tabs > li > a {
@@ -1378,7 +1392,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background: none;
 	padding: 0;
 	border: none;
-	
+
 }
 .loginbox .loginpanel h2, .loginbox .loginpanel .subcontent {
 	max-width: inherit;
