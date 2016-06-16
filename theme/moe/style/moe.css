@@ -168,7 +168,7 @@
 /*post form*/
 .dir-rtl .mform .fitem .felement {
 	margin-right: 0px;
-	margin-left: auto;
+	margin-left: 4em;
 	text-align: right;
 	padding-top: 1px;
 }
@@ -1053,7 +1053,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .format-topics .content h3.sectionname {
-    border: none;	
+    border: none;
 }
 
 .format-topics .course-content ul.topics{
@@ -1123,7 +1123,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 /* oublog */
 
-/* 
+/*
 .path-mod-oublog #region-main::before {
 	content: "בלוג - פרסום";
     background-image: url([[pix:theme|bg/blogtitlebg]]);
@@ -1179,7 +1179,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 
 @media (min-width: 1200px) {
- 	#page-mod-oublog-participationlist .mform .fitem div.fitemtitle { 
+ 	#page-mod-oublog-participationlist .mform .fitem div.fitemtitle {
 		width: 60px;
 	}
 }
@@ -1393,8 +1393,22 @@ div#middle-column {
     border-image-slice: 1;
     font-weight: 700;
     font-size: 1.1em;
+	margin-top: -5px;
+}
+
+#page-mod-oublog-participation div[role="main"] div#fitem_id_end {
+    margin-right: 5em;
+}
+
+#page-mod-oublog-participation div[role="main"] fieldset.hidden:nth-child(odd) {
+    margin-right: 0px;
 }
 
 #page-mod-oublog-participation div[role="main"] .savegradesbutton {
 	padding-top: 30px;
 }
+
+.path-mod-oublog #participation tbody>tr:nth-child(odd)>td {
+    background-color: #e8e6de;
+}
+
