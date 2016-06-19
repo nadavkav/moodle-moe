@@ -210,7 +210,7 @@ body.pagelayout-embedded{
 /*post form*/
 .dir-rtl .mform .fitem .felement {
 	margin-right: 0px;
-	margin-left: auto;
+	margin-left: 4em;
 	text-align: right;
 	padding-top: 1px;
 }
@@ -1025,29 +1025,29 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	}
 
 	#page-mod-glossary-view .singlebutton.glossaryaddentry {
-		
+
 		width: 100%
-		
+
 	}
 	#page-mod-glossary-view .singlebutton {
-		
-		
+
+
 		width: 100%
-		
+
 	}
-	
+
 	#page-mod-glossary-view  .boxaligncenter {
-		
+
 		width: 100%
 	}
-	
-	
+
+
 	#page-mod-glossary-view  .nav-tabs a {
 		margin-top: 1em;
-		
+
 	}
-	
-	
+
+
 	#page-mod-glossary-view .nav-tabs>.active>a {
 		background-color: transparent !important;
 		border: 0px solid transparent;
@@ -1330,8 +1330,198 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-navbar {
-    margin-top: -20px;	
+    margin-top: -20px;
 }
+/* oublog */
+
+/*
+.path-mod-oublog #region-main::before {
+	content: "בלוג - פרסום";
+    background-image: url([[pix:theme|bg/blogtitlebg]]);
+	background-size: cover;
+    border: 1px solid #ac9dbe;
+    color: #5d4a6a;
+    border-bottom: 0px;
+    padding-left: 0.2em;
+    font-size: 28px;
+    padding-right: 0.2em;
+}
+*/
+
+#page-mod-oublog-participationlist  #region-main::before {
+	content: " ";
+    background-image: url([[pix:theme|bg/Bg_divider]]);
+	background-size: cover;
+    border: 1px solid #ac9dbe;
+	height: 5px;
+	display: block;
+	padding: 0;
+	margin: 0;
+	border-bottom: 0;
+}
+
+#page-mod-oublog-participationlist  #maincontent {
+	display: none;
+}
+
+#page-mod-oublog-participationlist h2.oublog-post-title {
+	background-color: #dbdbd4;
+    border-bottom: #c0bdbd 1px solid;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+#page-mod-oublog-participationlist .fitem.fitem_fdate_selector {
+    float: right;
+    margin-top: 40px;
+}
+
+#page-mod-oublog-participationlist #mform1 fieldset:first-of-type {
+	float: right;
+	width: 80%;
+}
+
+#page-mod-oublog-participationlist #fitem_id_submitbutton {
+	background-color: transparent !important;
+	border: none !important;
+}
+
+
+@media (min-width: 1200px) {
+ 	#page-mod-oublog-participationlist .mform .fitem div.fitemtitle {
+		width: 60px;
+	}
+}
+
+#page-mod-oublog-participationlist div[role=main] {
+	background-color: #fdfaed;
+}
+
+.path-mod-oublog div[role=main] {
+	background-color: #f0efe4;
+    border: #bfb3cb 1px solid;
+}
+
+.path-mod-oublog #oublogbuttons input[type="submit"], #page-mod-oublog-participationlist input[type="submit"]{
+	background-image: none;
+    background-color: #eef1cf !important;
+    color: #6c6565 !important;
+    border: 5px solid transparent;
+    box-shadow: inset 0 0 0 1px #9ea57c, 0 0 0 1px #9ea57c;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 6px 18px;
+    border-image: url([[pix:theme|bg/blogtitlebg]]);
+    border-image-slice: 1;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.oublog-post {
+	padding: 0;
+	padding-bottom: 30px;
+
+}
+
+.oublog-post.oublog-odd {
+	background-color: #e7e5db;
+}
+
+.oublog-post .oublog-post-top-details {
+	margin-left: 0;
+	width: 100%;
+}
+
+.oublog-post .oublog-userpic .userpicture {
+	margin-top: 50px;
+
+}
+
+.oublog-post .oublog-userpic {
+	margin-left: 10px;
+    margin-right: 10px;
+}
+
+.oublog-post h2.oublog-title {
+	background-color: #dbdbd4;
+    border-bottom: #c0bdbd 1px solid;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-size: 1.8em;
+}
+
+.oublog-post-links > a {
+    border: #bf9d9e 1px solid;
+    background-color: #e6d7d7;
+    color: #6e4a4b;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 2px 6px;
+}
+
+.oublog-post-top-details .oublog-post-date, .oublog-post-top-details .oublog-post-visibility {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.oublog-post-content {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.oublog-post::before {
+    display: block;
+    background-color: #eef1cf;
+    border-bottom: #b4b990 1px solid;
+    border-top: #b4b990 1px solid;
+    width: 100%;
+    height: 3px;
+    content: " ";
+}
+
+.oublog-views {
+    display: inline-block;
+    position: absolute;
+    width: 20%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 20px;
+	border: #c3c0bf 1px solid;
+	background-color: #ececec;
+	color: #676350;
+	padding: 6px 10px;
+	font-size: 1em;
+    font-weight: 700;
+}
+
+.oublog-views::after {
+    content: " ";
+    float: left;
+    margin-left: 4px;
+    width: 27px;
+    height: 15px;
+    margin-top: 5px;
+    background-image: url(/theme/image.php?theme=moe&component=theme&image=eye);
+    background-size: cover;
+}
+
+#page-mod-oublog-participationlist .fitem.fitem_fdate_selector {
+	width:50%;
+}
+
+#page-mod-oublog-participationlist .generaltable tbody>tr:nth-child(odd)>td {
+	background-color: #e8e7de;
+}
+
+div#middle-column {
+    position: relative;
+	padding-bottom: 100px;
+}
+
+
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
 		font-size: 2em;
@@ -1356,6 +1546,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 		background-size: contain;
 	}
 }
+
 .ouw_subwiki .individualselector label, .ouw_subwiki span {
 	background-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
     padding: 0.3em;
@@ -1932,7 +2123,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .singlebutton.glossaryaddentry input, #page-mod-glossary-view .entrybox table tr > td.aliases > label{
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin: 0 auto; 
+	margin: 0 auto;
 	background : #fedc9b;
 	color: #48403b !important;
 	border: 5px solid transparent;
@@ -2152,7 +2343,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 /*first alpahbeth letter*/
 #page-mod-glossary-view  .glossarydisplay .entrybox br+b:first-of-type {
-	margin-right: 1em;	
+	margin-right: 1em;
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox br+b+a:first-of-type {
@@ -2352,7 +2543,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-/*private name*/ 
+/*private name*/
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a
 	{
 	background-color: transparent;
@@ -2375,7 +2566,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-	/*private name*/ 
+	/*private name*/
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  a {
 	background-color: transparent;
@@ -2427,7 +2618,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding: 2px 6px 2px 6px;
 }
 
-#page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2)  
+#page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2)
 	~ a:hover {
 	background-color: transparent;
 	border: 0px solid #e0dccb;
@@ -2540,7 +2731,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-mod-glossary-view  .box.generalbox.boxaligncenter.boxwidthwide {
-	
+
 	padding-right: 1em;
 	margin-bottom: 2em;
 	padding-bottom: 2em;
@@ -2568,7 +2759,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .paging a {
 	background-color: #f9efdc! important;
 	border: 0px solid  #f9efdc! important;
-	
+
 }
 
 #page-mod-glossary-view .paging {
@@ -2580,7 +2771,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 {
 	display: none;
 }
-	
+
 #page-mod-glossary-view .entrybox hr
 {
 	display:none;
@@ -2630,7 +2821,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 		box-sizing: border-box!important;
 		display:block;
 		width: 100%
-	
+
 }
 
 #page-mod-glossary-view .entrybox table:first-of-type tr:first-child td:nth-of-type(1) {
@@ -2670,7 +2861,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	position: relative;
 	margin-top: 0px !important;
 	border-bottom: 1px solid #c1bfbe;
-	
+
 }
 
 #page-mod-glossary-view  {
@@ -2720,3 +2911,83 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view #intro {
     height: 10px;
 }
+
+
+#page-mod-oublog-participation div[role="main"] h2.oublog-post-title {
+    background-color: #f6f4eb;
+    margin: 0 !important;
+    border-bottom: #c3c1c0 1px solid;
+    margin-bottom: 40px !important;
+    color: #6c6565;
+    font-size: 1.9em;
+}
+
+#page-mod-oublog-participation div[role="main"] .oublog-groups-individual-selectors {
+	margin:0 !important;
+}
+
+#page-mod-oublog-participation div[role=main]:before {
+    content: '';
+    width: 100%;
+    height: 8px;
+    background: url(/theme/image.php?theme=moe&component=theme&image=bg%2Flearning-spaces);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom: 1px solid #c0bcbd;
+    display: block;
+}
+
+#page-mod-oublog-participation div[role="main"] .fitem_fdate_selector {
+    float: right;
+}
+
+#page-mod-oublog-participation div[role="main"] .fitem_fdate_selector .fitemtitle {
+    width: 4em;
+}
+
+#page-mod-oublog-participation div[role="main"] fieldset.hidden {
+	display: inline;
+	float: right;
+	margin-right: 60px;
+	margin-bottom: 50px;
+}
+
+#page-mod-oublog-participation div[role="main"] fieldset.hidden #fitem_id_submitbutton, #page-mod-oublog-participation div[role="main"] fieldset.hidden #fitem_id_submitbutton .fsubmit {
+	background-color: transparent;
+	padding: 0px;
+	margin: 0px;
+}
+
+#page-mod-oublog-participation div[role="main"] input[type="submit"] {
+    background-image: none;
+    background-color: #eef1cf !important;
+    color: #6c6565 !important;
+    border: 5px solid transparent;
+    box-shadow: inset 0 0 0 1px #9ea57c, 0 0 0 1px #9ea57c;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 6px 18px;
+    border-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2Fblogtitlebg);
+    border-image-slice: 1;
+    font-weight: 700;
+    font-size: 1.1em;
+	margin-top: -5px;
+}
+
+#page-mod-oublog-participation div[role="main"] div#fitem_id_end {
+    margin-right: 5em;
+}
+
+#page-mod-oublog-participation div[role="main"] fieldset.hidden:nth-child(odd) {
+    margin-right: 0px;
+}
+
+#page-mod-oublog-participation div[role="main"] .savegradesbutton {
+	padding-top: 30px;
+}
+
+.path-mod-oublog #participation tbody>tr:nth-child(odd)>td {
+    background-color: #e8e6de;
+}
+
+
