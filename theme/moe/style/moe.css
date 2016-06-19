@@ -2827,3 +2827,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-book-view div[role="main"] {
 	position: relative;
 }
+
+#page-mod-book-view .book_content div.no-overflow {
+	padding: 1em;
+}
