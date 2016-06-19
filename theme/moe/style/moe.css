@@ -2990,4 +2990,8 @@ div#middle-column {
     background-color: #e8e6de;
 }
 
-
+.path-mod-oublog div[role="main"] .mdl-align {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
