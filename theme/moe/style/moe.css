@@ -1025,29 +1025,29 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	}
 
 	#page-mod-glossary-view .singlebutton.glossaryaddentry {
-		
+
 		width: 100%
-		
+
 	}
 	#page-mod-glossary-view .singlebutton {
-		
-		
+
+
 		width: 100%
-		
+
 	}
-	
+
 	#page-mod-glossary-view  .boxaligncenter {
-		
+
 		width: 100%
 	}
-	
-	
+
+
 	#page-mod-glossary-view  .nav-tabs a {
 		margin-top: 1em;
-		
+
 	}
-	
-	
+
+
 	#page-mod-glossary-view .nav-tabs>.active>a {
 		background-color: transparent !important;
 		border: 0px solid transparent;
@@ -1330,7 +1330,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-navbar {
-    margin-top: -20px;	
+    margin-top: -20px;
 }
 @media screen and (max-width:26em) {
 	#frontpage-course-list h2 {
@@ -1932,7 +1932,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .singlebutton.glossaryaddentry input, #page-mod-glossary-view .entrybox table tr > td.aliases > label{
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin: 0 auto; 
+	margin: 0 auto;
 	background : #fedc9b;
 	color: #48403b !important;
 	border: 5px solid transparent;
@@ -2152,7 +2152,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 /*first alpahbeth letter*/
 #page-mod-glossary-view  .glossarydisplay .entrybox br+b:first-of-type {
-	margin-right: 1em;	
+	margin-right: 1em;
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox br+b+a:first-of-type {
@@ -2352,7 +2352,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-/*private name*/ 
+/*private name*/
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a
 	{
 	background-color: transparent;
@@ -2375,7 +2375,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 
-	/*private name*/ 
+	/*private name*/
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  a {
 	background-color: transparent;
@@ -2427,7 +2427,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding: 2px 6px 2px 6px;
 }
 
-#page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2)  
+#page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2)
 	~ a:hover {
 	background-color: transparent;
 	border: 0px solid #e0dccb;
@@ -2540,7 +2540,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 #page-mod-glossary-view  .box.generalbox.boxaligncenter.boxwidthwide {
-	
+
 	padding-right: 1em;
 	margin-bottom: 2em;
 	padding-bottom: 2em;
@@ -2568,7 +2568,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 #page-mod-glossary-view .paging a {
 	background-color: #f9efdc! important;
 	border: 0px solid  #f9efdc! important;
-	
+
 }
 
 #page-mod-glossary-view .paging {
@@ -2580,7 +2580,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 {
 	display: none;
 }
-	
+
 #page-mod-glossary-view .entrybox hr
 {
 	display:none;
@@ -2630,7 +2630,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 		box-sizing: border-box!important;
 		display:block;
 		width: 100%
-	
+
 }
 
 #page-mod-glossary-view .entrybox table:first-of-type tr:first-child td:nth-of-type(1) {
@@ -2670,7 +2670,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	position: relative;
 	margin-top: 0px !important;
 	border-bottom: 1px solid #c1bfbe;
-	
+
 }
 
 #page-mod-glossary-view  {
@@ -2719,4 +2719,65 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 #page-mod-glossary-view #intro {
     height: 10px;
+}
+
+.path-mod-certificate div[role="main"] >h2 {
+    border: #879378 1px solid;
+    padding: 0px 10px;
+    color: #2a3429;
+	background-image: url([[pix:theme|bg/cert/bgtitle]]);
+	background-size: cover;
+	margin-bottom: 0px;
+}
+
+#page-mod-certificate-report.path-mod-certificate div[role="main"] >h2 {
+    border: #879378 1px solid;
+    padding: 0px 10px;
+    color: #2a3429;
+	background-image: url([[pix:theme|bg/cert/bgtitle]]);
+	background-size: cover;
+	margin: 0px;
+	border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] table.generaltable {
+    width: 100% !important;
+    border-left: #d3e7cc 25vw solid;
+    border-right: #d3e7cc 25vw solid;
+    border-top: #d3e7cc 4em solid;
+ }
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] table.generaltable th {
+    background-color: #d9e7cc;
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] h2 ~ p {
+    background-color: #d9e7cc;
+	margin-bottom: 0px;
+	padding-bottom: 10px;
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] .singlebutton {
+    background-color: #d9e7cc;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+}
+
+#page-mod-certificate-report div[role="main"] {
+    background-color: #d3e7cc;
+	border: #879378 1px solid;
+}
+
+.path-mod-certificate input[type="submit"] {
+    background-color: #516a9e;
+}
+
+#page-mod-certificate-report .generaltable tbody>tr:nth-child(odd)>td {
+    background-color: #badbaf;
+}
+#page-mod-certificate-report .generaltable tbody>tr:nth-child(even)>td {
+    background-color: #d3e7cc;
 }
