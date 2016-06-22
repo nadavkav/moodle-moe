@@ -2731,6 +2731,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	border: none;
 }
 
+
+
+/**
+ * Questionnaire
+ */
 .path-mod-questionnaire div[role="main"] > .generalbox h3.surveyTitle, #page-mod-questionnaire-view div[role="main"] > h2 {
     display: block;
     color: #4e5b5c;
