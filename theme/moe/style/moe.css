@@ -1346,3 +1346,17 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	   content: none;
 	}
 }
+
+#wrapper>#page-header {
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position-x: right;
+    background-position-y: bottom;
+}
+
+@media (max-width: 980px) {
+	#wrapper>#page-header {
+	    background-size: cover !important;
+	    background-position-x: center;
+	}
+}
