@@ -317,16 +317,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
 
         $output = '';
         $output .= html_writer::start_tag('div', array('class' => 'ouw_byheading'));
-
-        // Add edit link for page or section
-        if ($subwiki->canedit && !$locked) {
-            $str = $xhtmlid ? 'editsection' : 'editpage';
-
-            $output .= $this->moewiki_get_edit_link($str, $pagename, $subwiki, $cm, $xhtmlid);
-        }
-
-        
-
+ 
         // On main page, add export button
         if (!$xhtmlid && $CFG->enableportfolios) {
             $button = new portfolio_add_button();
