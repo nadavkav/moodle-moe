@@ -2995,3 +2995,20 @@ div#middle-column {
     text-align: center;
     width: 100%;
 }
+
+@media screen and (max-width: 1520px) {
+ 	#page-mod-oublog-participation div[role="main"] .fitem_fdate_selector {
+		float: none;
+	}
+
+	#page-mod-oublog-participation div[role="main"] div#fitem_id_end {
+		margin: 0px
+	}
+
+	#page-mod-oublog-participation div[role="main"] fieldset.hidden #fitem_id_submitbutton {
+		    margin-top: 30%;
+    		margin-right: 90%;
+	}
+}
+
+}
