@@ -696,7 +696,8 @@ module.exports = "button{box-shadow:none;}" +
 		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls{display:block;}" +
 		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a{border: 1px solid #b6b7b2;background-color: #d9eef4;}" +
 		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-cancel{margin-left:46%;background-color:#faeceb;}" +
-		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-save{width:50px}";
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-save{width:50px}" +
+		".annotator-viewer .annotator-controls button{background-position-x: 60%;}";
 },{}],
 3:[function(require,module,exports){
 (function (definition) {
