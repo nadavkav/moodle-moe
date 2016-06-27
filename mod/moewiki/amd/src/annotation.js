@@ -6,7 +6,7 @@
  * @module mod_moewiki/annotation
  */
 
-define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator, ajax) {
+define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize'], function($, annotator, ajax, autosize) {
 	var annotation = {
 		merkannotaion : function(params) {
 			function Remarks() {
@@ -43,6 +43,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax'], function($, annotator,
 			    	 app.annotations.runHook('annotationsLoaded',[data.rows]);			    	
 			     });
 			});
+			autosize($('div.annotator-outer.annotator-editor textarea'));
 		},
 		moodlestorage: function (options) {
 			// This gets overridden on app start
