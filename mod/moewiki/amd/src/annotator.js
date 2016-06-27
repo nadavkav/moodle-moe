@@ -690,7 +690,13 @@ module.exports = "button{box-shadow:none;}" +
 		".annotator-widget .image *{background-color:#ffffff;border:none;}" +
 		".annotator-viewer .row-fluid{border:none;}" +
 		".annotator-viewer div.userdetails div.date{width:96%;}" +
-		".annotator-item_part.text.span7{border-right:1px solid #b6b7b2}";
+		".annotator-item_part.text.span7{border-right:1px solid #b6b7b2}" +
+		"div.annotator-outer.annotator-viewer div.annotator-outer.annotator-editor{position:relative;buttom:0;left:19px;top:0;height:auto;width:101%}" +
+		"div.annotator-outer.annotator-viewer div.annotator-outer.annotator-editor form{position:relative;top:0}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls{display:block;}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a{border: 1px solid #b6b7b2;background-color: #d9eef4;}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-cancel{margin-left:46%;background-color:#faeceb;}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-save{width:50px}";
 },{}],
 3:[function(require,module,exports){
 (function (definition) {
@@ -16305,15 +16311,26 @@ var Viewer = exports.Viewer = Widget.extend({
             })
             .on("click." + NS, '.annotator-reply', function(e) {
             	self._onReplyClick(e);
+            	$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-outer.annotator-viewer ul.annotator-listing');
+            	$("div.annotator-outer.annotator-editor").css({
+            		'left': 19,
+            		'top': 0
+            	});
             })
             .on("mouseenter." + NS, function () {
                 self._clearHideTimer();
             })
             .on("mouseleave." + NS, function () {
                 self._startHideTimer();
+                self.returnEditor();
             });
     },
-
+    returnEditor: function() {
+    	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
+    		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
+    		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
+    	}
+    },
     destroy: function () {
         if (this.options.autoViewHighlights) {
             $(this.options.autoViewHighlights).off("." + NS);
