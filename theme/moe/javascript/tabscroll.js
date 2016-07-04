@@ -12,10 +12,10 @@ $(function () {
 		var firstright;
 		
 		//limit tabs area width to inject left and right buttons
-		$(".nav-tabs").width($(".tabs-container").parent().width() - 91);
+		$(".nav-tabs").first().width($(".tabs-container").parent().width() - 91);
 		
 		//order the tabs
-		$(".nav-tabs li").each(function (index) {
+		$('.nav-tabs').first().children('li').each(function (index) {
 			
 			$(this).css('position', 'absolute');
 			$(this).css('right', right);
@@ -25,19 +25,19 @@ $(function () {
 			
 			right = right + 3 + $(this).outerWidth();
 		});
-		if(right > $(".nav-tabs").width()){
+		if(right > $(".nav-tabs").first().width()){
 			$('#tabmoveleft').css('display','block');
 			$('#tabmoveright').css('display','block');
 		}
-		$(".nav-tabs").prepend('<li style="background-color: #FF0000; width: ' + right + 'px;  visibility: hidden;" >asdf</li>');
-		$(".nav-tabs").addClass('dragscroll');
+		$(".nav-tabs").first().prepend('<li style="background-color: #FF0000; width: ' + right + 'px;  visibility: hidden;" >asdf</li>');
+		$(".nav-tabs").first().addClass('dragscroll');
 		
 		//figure at what left to put the selected tab
-		var activeLiPos = $(".nav-tabs").offset().left + $(".nav-tabs").width();
+		var activeLiPos = $(".nav-tabs").first().offset().left + $(".nav-tabs").width();
 		
-		if($(".nav-tabs li.active :first").offset().left < $(".nav-tabs").offset().left + $(".tabs-container").parent().width()) {
+		if($(".nav-tabs li.active :first").offset().left < $(".nav-tabs").first().offset().left + $(".tabs-container").parent().width()) {
 			var offset = ($(".nav-tabs li.active :first").offset().left - activeLiPos) + $(".nav-tabs li.active :first").width();
-			$(".nav-tabs").animate({
+			$(".nav-tabs").first().animate({
 				scrollLeft: '+=' + offset }, 50);
 		}
 
@@ -52,13 +52,13 @@ $(function () {
 		});
 		
 		$(window).resize(function () {
-			$(".nav-tabs").width($(".tabs-container").parent().width() - 91);
+			$(".nav-tabs").first().width($(".tabs-container").parent().width() - 91);
 					
-			var activeLiPos = $(".nav-tabs").offset().left + $(".nav-tabs").width();
+			var activeLiPos = $(".nav-tabs").offset().left + $(".nav-tabs").first().width();
 			
 			if($(".nav-tabs li.active :first").offset().left < $(".nav-tabs").offset().left + $(".tabs-container").parent().width()) {
 				var offset = ($(".nav-tabs li.active :first").offset().left - activeLiPos) + $(".nav-tabs li.active :first").width();
-				$(".nav-tabs").animate({
+				$(".nav-tabs").first().animate({
 					scrollLeft: '+=' + offset }, 50);
 			}
 		});
