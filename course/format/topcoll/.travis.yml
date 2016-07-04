@@ -16,10 +16,11 @@ php:
 matrix:
  allow_failures:
   - php: 7.0
+ fast_finish: true
 
 env:
  global:
-  - MOODLE_BRANCH=MOODLE_30_STABLE
+  - MOODLE_BRANCH=MOODLE_31_STABLE
   - IGNORE_NAMES=tc_colourpopup.php,tc_colourpopup.js
  matrix:
   - DB=pgsql

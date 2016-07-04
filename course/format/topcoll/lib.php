@@ -119,11 +119,12 @@ class format_topcoll extends format_base {
         $o = '';
         $tcsettings = $this->get_settings();
         $tcsectionsettings = $this->get_format_options($thesection->section);
-        $coursecontext = context_course::instance($course->id);
+        // Use supplied course as could be a different course to us due to a navigation block call.
+        $context = context_course::instance($course->id);
 
         // We can't add a node without any text.
         if ((string) $thesection->name !== '') {
-            $o .= format_string($thesection->name, true, array('context' => $coursecontext));
+            $o .= format_string($thesection->name, true, array('context' => $context));
             if (($thesection->section != 0) && (($tcsettings['layoutstructure'] == 2) ||
                 ($tcsettings['layoutstructure'] == 3) || ($tcsettings['layoutstructure'] == 5))) {
                 $o .= ' ';
@@ -158,7 +159,7 @@ class format_topcoll extends format_base {
                 case 3:
                 case 4:
                     // The word 'Toggle'.
-                    $o .= '<span class="cttoggle"> - ' . get_string('topcolltoggle', 'format_topcoll') . '</span>';
+                    $o .= '<div class="cttoggle"> - ' .get_string('topcolltoggle', 'format_topcoll') . '</div>';
                     break;
             }
         }
@@ -224,7 +225,8 @@ class format_topcoll extends format_base {
             if ($sectionno != 0 && $usercoursedisplay == COURSE_DISPLAY_MULTIPAGE) {
                 $url->param('section', $sectionno);
             } else {
-                if (!empty($options['navigation'])) {
+                global $CFG;
+                if (empty($CFG->linkcoursesections) && !empty($options['navigation'])) {
                     return null;
                 }
                 $url->set_anchor('section-' . $sectionno);
@@ -453,7 +455,7 @@ class format_topcoll extends format_base {
                 $defaulttgbghvrcolour = substr($defaulttgbghvrcolour, 1);
             }
 
-            $coursecontext = context_course::instance($this->courseid);
+            $context = $this->get_context();
 
             $courseconfig = get_config('moodlecourse');
             $sectionmenu = array();
@@ -500,7 +502,7 @@ class format_topcoll extends format_base {
                     )
                 )
             );
-            if (has_capability('format/topcoll:changelayout', $coursecontext)) {
+            if (has_capability('format/topcoll:changelayout', $context)) {
                 $courseformatoptionsedit['layoutelement'] = array(
                     'label' => new lang_string('setlayoutelements', 'format_topcoll'),
                     'help' => 'setlayoutelements',
@@ -602,7 +604,7 @@ class format_topcoll extends format_base {
                     'label' => get_config('format_topcoll', 'defaultshowsectionsummary'), 'element_type' => 'hidden');
             }
 
-            if (has_capability('format/topcoll:changetogglealignment', $coursecontext)) {
+            if (has_capability('format/topcoll:changetogglealignment', $context)) {
                 $courseformatoptionsedit['togglealignment'] = array(
                     'label' => new lang_string('settogglealignment', 'format_topcoll'),
                     'help' => 'settogglealignment',
@@ -619,7 +621,7 @@ class format_topcoll extends format_base {
                     'label' => get_config('format_topcoll', 'defaulttogglealignment'), 'element_type' => 'hidden');
             }
 
-            if (has_capability('format/topcoll:changetoggleiconset', $coursecontext)) {
+            if (has_capability('format/topcoll:changetoggleiconset', $context)) {
                 $courseformatoptionsedit['toggleiconset'] = array(
                     'label' => new lang_string('settoggleiconset', 'format_topcoll'),
                     'help' => 'settoggleiconset',
@@ -659,7 +661,7 @@ class format_topcoll extends format_base {
                     'label' => get_config('format_topcoll', 'defaulttoggleallhover'), 'element_type' => 'hidden');
             }
 
-            if (has_capability('format/topcoll:changecolour', $coursecontext)) {
+            if (has_capability('format/topcoll:changecolour', $context)) {
                 $courseformatoptionsedit['toggleforegroundcolour'] = array(
                     'label' => new lang_string('settoggleforegroundcolour', 'format_topcoll'),
                     'help' => 'settoggleforegroundcolour',
@@ -731,7 +733,7 @@ class format_topcoll extends format_base {
 
         $elements = parent::create_edit_form_elements($mform, $forsection);
         if ($forsection == false) {
-            global $COURSE, $USER;
+            global $USER;
             /*
              Increase the number of sections combo box values if the user has increased the number of sections
              using the icon on the course page beyond course 'maxsections' or course 'maxsections' has been
@@ -749,12 +751,12 @@ class format_topcoll extends format_base {
                 }
             }
 
-            $coursecontext = context_course::instance($COURSE->id);
+            $context = $this->get_context();
 
-            $changelayout = has_capability('format/topcoll:changelayout', $coursecontext);
-            $changecolour = has_capability('format/topcoll:changecolour', $coursecontext);
-            $changetogglealignment = has_capability('format/topcoll:changetogglealignment', $coursecontext);
-            $changetoggleiconset = has_capability('format/topcoll:changetoggleiconset', $coursecontext);
+            $changelayout = has_capability('format/topcoll:changelayout', $context);
+            $changecolour = has_capability('format/topcoll:changecolour', $context);
+            $changetogglealignment = has_capability('format/topcoll:changetogglealignment', $context);
+            $changetoggleiconset = has_capability('format/topcoll:changetoggleiconset', $context);
             $resetall = is_siteadmin($USER); // Site admins only.
 
             $elements[] = $mform->addElement('header', 'ctreset', get_string('ctreset', 'format_topcoll'));
@@ -1093,9 +1095,9 @@ class format_topcoll extends format_base {
      * @param int $toggleiconset If true, reset the toggle icon set to the default in the settings for the format.
      */
     public function reset_topcoll_setting($courseid, $displayinstructions, $layout, $colour, $togglealignment, $toggleiconset) {
-        global $DB, $USER, $COURSE;
+        global $DB, $USER;
 
-        $coursecontext = context_course::instance($COURSE->id);
+        $context = $this->get_context();
 
         $currentcourseid = 0;
         if ($courseid == 0) {
@@ -1117,7 +1119,7 @@ class format_topcoll extends format_base {
             $updatedata['displayinstructions'] = get_config('format_topcoll', 'defaultdisplayinstructions');
             $updatedisplayinstructions = true;
         }
-        if ($layout && has_capability('format/topcoll:changelayout', $coursecontext) && $resetallifall) {
+        if ($layout && has_capability('format/topcoll:changelayout', $context) && $resetallifall) {
             $updatedata['coursedisplay'] = get_config('format_topcoll', 'defaultcoursedisplay');
             $updatedata['layoutelement'] = get_config('format_topcoll', 'defaultlayoutelement');
             $updatedata['layoutstructure'] = get_config('format_topcoll', 'defaultlayoutstructure');
@@ -1127,18 +1129,18 @@ class format_topcoll extends format_base {
             $updatedata['showsectionsummary'] = get_config('format_topcoll', 'defaultshowsectionsummary');
             $updatelayout = true;
         }
-        if ($togglealignment && has_capability('format/topcoll:changetogglealignment', $coursecontext) && $resetallifall) {
+        if ($togglealignment && has_capability('format/topcoll:changetogglealignment', $context) && $resetallifall) {
             $updatedata['togglealignment'] = get_config('format_topcoll', 'defaulttogglealignment');
             $updatetogglealignment = true;
         }
-        if ($colour && has_capability('format/topcoll:changecolour', $coursecontext) && $resetallifall) {
+        if ($colour && has_capability('format/topcoll:changecolour', $context) && $resetallifall) {
             $updatedata['toggleforegroundcolour'] = get_config('format_topcoll', 'defaulttgfgcolour');
             $updatedata['toggleforegroundhovercolour'] = get_config('format_topcoll', 'defaulttgfghvrcolour');
             $updatedata['togglebackgroundcolour'] = get_config('format_topcoll', 'defaulttgbgcolour');
             $updatedata['togglebackgroundhovercolour'] = get_config('format_topcoll', 'defaulttgbghvrcolour');
             $updatecolour = true;
         }
-        if ($toggleiconset && has_capability('format/topcoll:changetoggleiconset', $coursecontext) && $resetallifall) {
+        if ($toggleiconset && has_capability('format/topcoll:changetoggleiconset', $context) && $resetallifall) {
             $updatedata['toggleiconset'] = get_config('format_topcoll', 'defaulttoggleiconset');
             $updatedata['toggleallhover'] = get_config('format_topcoll', 'defaulttoggleallhover');
             $updatetoggleiconset = true;
@@ -1215,7 +1217,7 @@ class format_topcoll extends format_base {
     }
 
     /**
-     * Whether this format allows to delete sections
+     * Whether this format allows to delete sections.
      *
      * Do not call this function directly, instead use {@link course_can_delete_section()}
      *
@@ -1224,6 +1226,61 @@ class format_topcoll extends format_base {
      */
     public function can_delete_section($section) {
         return true;
+    }
+
+    private function get_context() {
+        global $SITE;
+
+        if ($SITE->id == $this->courseid) {
+            // Use the context of the page which should be the course category.
+            global $PAGE;
+            return $PAGE->context;
+        } else {
+            return context_course::instance($this->courseid);
+        }
+    }
+
+    /**
+     * Prepares the templateable object to display section name.
+     *
+     * @param \section_info|\stdClass $section
+     * @param bool $linkifneeded
+     * @param bool $editable
+     * @param null|lang_string|string $edithint
+     * @param null|lang_string|string $editlabel
+     * @return \core\output\inplace_editable
+     */
+    public function inplace_editable_render_section_name($section, $linkifneeded = true,
+                                                         $editable = null, $edithint = null, $editlabel = null) {
+        if (empty($edithint)) {
+            $edithint = new lang_string('editsectionname', 'format_topcoll');
+        }
+        if (empty($editlabel)) {
+            $course = $this->get_course();
+            $title = $this->get_topcoll_section_name($course, $section, false);
+            $editlabel = new lang_string('newsectionname', 'format_topcoll', $title);
+        }
+        return parent::inplace_editable_render_section_name($section, $linkifneeded, $editable, $edithint, $editlabel);
+    }
+}
+
+/**
+ * Implements callback inplace_editable() allowing to edit values in-place.
+ *
+ * @param string $itemtype
+ * @param int $itemid
+ * @param mixed $newvalue
+ * @return \core\output\inplace_editable
+ */
+function format_topcoll_inplace_editable($itemtype, $itemid, $newvalue) {
+    global $CFG;
+    require_once($CFG->dirroot . '/course/lib.php');
+    if ($itemtype === 'sectionname' || $itemtype === 'sectionnamenl') {
+        global $DB;
+        $section = $DB->get_record_sql(
+            'SELECT s.* FROM {course_sections} s JOIN {course} c ON s.course = c.id WHERE s.id = ? AND c.format = ?',
+            array($itemid, 'topcoll'), MUST_EXIST);
+        return course_get_format($section->course)->inplace_editable_update_section_name($section, $itemtype, $newvalue);
     }
 }
 

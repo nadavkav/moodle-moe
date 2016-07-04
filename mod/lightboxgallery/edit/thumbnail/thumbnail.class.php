@@ -23,8 +23,8 @@ class edit_thumbnail extends edit_base {
     public function output() {
 
         $fs = get_file_storage();
-        $stored_file = $fs->get_file($this->context->id, 'mod_lightboxgallery', 'gallery_images', '0', '/', $this->image);
-        $image = new lightboxgallery_image($stored_file, $this->gallery, $this->cm);
+        $storedfile = $fs->get_file($this->context->id, 'mod_lightboxgallery', 'gallery_images', '0', '/', $this->image);
+        $image = new lightboxgallery_image($storedfile, $this->gallery, $this->cm);
 
         $result = '<input type="submit" name="index" value="' . get_string('setasindex', 'lightboxgallery')  . '" /><br /><br />' .
                    get_string('selectthumbpos', 'lightboxgallery') . '<br /><br />';
@@ -51,8 +51,8 @@ class edit_thumbnail extends edit_base {
     public function process_form() {
 
         $fs = get_file_storage();
-        $stored_file = $fs->get_file($this->context->id, 'mod_lightboxgallery', 'gallery_images', '0', '/', $this->image);
-        $image = new lightboxgallery_image($stored_file, $this->gallery, $this->cm);
+        $storedfile = $fs->get_file($this->context->id, 'mod_lightboxgallery', 'gallery_images', '0', '/', $this->image);
+        $image = new lightboxgallery_image($storedfile, $this->gallery, $this->cm);
         $domove = true;
 
         if (optional_param('index', '', PARAM_TEXT)) {
