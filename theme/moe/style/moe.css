@@ -3185,6 +3185,12 @@ div#middle-column {
     width: 100%;
 }
 
+#page-mod-oublog-participation input#id_submitbutton {
+    position: relative;
+    top: 31px;
+    left: 112px;
+}
+
 @media screen and (max-width: 1520px) {
  	#page-mod-oublog-participation div[role="main"] .fitem_fdate_selector {
 		float: none;
