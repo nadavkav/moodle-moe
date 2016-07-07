@@ -18,9 +18,10 @@ define(['jquery'], function($) {
 	
 	onetopic.prototype.init = function(){
 		if(this.ruler.width() >= $('.format-onetopic .course-content .single-section').width()){
-			consol.log('need arrow');
+			var error;
+			error = 'need arrow';
 		}
-	}
+	};
 	
 	return onetopic;
 });
