@@ -6,8 +6,6 @@
 (function (global, factory) {
 	if (typeof define === 'function' && define.amd) {
 		define(['exports', 'module'], factory);
-	} else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
-		factory(exports, module);
 	} else {
 		var mod = {
 			exports: {}
@@ -18,7 +16,7 @@
 })(this, function (exports, module) {
 	'use strict';
 
-	var set = typeof Set === 'function' ? new Set() : (function () {
+	var set =  (function () {
 		var list = [];
 
 		return {
@@ -55,7 +53,9 @@
 		var _ref$setOverflowY = _ref.setOverflowY;
 		var setOverflowY = _ref$setOverflowY === undefined ? true : _ref$setOverflowY;
 
-		if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || set.has(ta)) return;
+		if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || set.has(ta)) {
+			return;
+		}
 
 		var heightOffset = null;
 		var overflowY = null;
@@ -203,13 +203,17 @@
 	}
 
 	function destroy(ta) {
-		if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) return;
+		if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) {
+			return;
+		}
 		var evt = createEvent('autosize:destroy');
 		ta.dispatchEvent(evt);
 	}
 
 	function update(ta) {
-		if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) return;
+		if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) {
+			return;
+		}
 		var evt = createEvent('autosize:update');
 		ta.dispatchEvent(evt);
 	}
