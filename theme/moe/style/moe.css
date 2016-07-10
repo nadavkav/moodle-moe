@@ -3201,3 +3201,7 @@ ul.nav.nav-tabs {
 #page-mod-book-view .book_content div.no-overflow {
 	padding: 1em;
 }
+
+.block_course_list .content{
+	text-align: inherit;
+}
