@@ -17,7 +17,7 @@
 		g.annotator = f();
 	}
 })(function(){
-	var define,module,exports;
+	var define;
 	return (function e(t,n,r){
 		function s(o,u){
 			if(!n[o]){
@@ -107,7 +107,7 @@ exports.noConflict = function noConflict() {
 	"./src/util":39,
 	"insert-css":16
 }],
-2:[function(require,module,exports){
+2:[function(require,module){
 module.exports = "button{box-shadow:none;}" +
 		".annotator-filter *,.annotator-notice," +
 		".annotator-widget *{font-family:\"Helvetica Neue\",Arial,Helvetica,sans-serif;" +
@@ -691,12 +691,16 @@ module.exports = "button{box-shadow:none;}" +
 		".annotator-viewer .row-fluid{border:none;}" +
 		".annotator-viewer div.userdetails div.date{width:96%;}" +
 		".annotator-item_part.text.span7{border-right:1px solid #b6b7b2}" +
-		"div.annotator-outer.annotator-viewer div.annotator-outer.annotator-editor{position:relative;buttom:0;left:19px;top:0;height:auto;width:101%}" +
+		"div.annotator-outer.annotator-viewer div.annotator-outer.annotator-editor{" +
+		"position:relative;buttom:0;left:19px;top:0;height:auto;width:101%}" +
 		"div.annotator-outer.annotator-viewer div.annotator-outer.annotator-editor form{position:relative;top:0}" +
 		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls{display:block;}" +
-		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a{border: 1px solid #b6b7b2;background-color: #d9eef4;}" +
-		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-cancel{margin-left:46%;background-color:#faeceb;}" +
-		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-save{width:50px}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a{" +
+		"border: 1px solid #b6b7b2;background-color: #d9eef4;}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-cancel{" +
+		"margin-left:46%;background-color:#faeceb;}" +
+		".annotator-viewer div.annotator-outer.annotator-editor .annotator-controls a.annotator-save{" +
+		"width:50px}" +
 		".annotator-viewer .annotator-controls button{background-position-x: 60%;}";
 },{}],
 3:[function(require,module,exports){
@@ -776,7 +780,7 @@ module.exports = "button{box-shadow:none;}" +
   return extend;
 });
 
-},{}],4:[function(require,module,exports){
+},{}],4:[function(require,module){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -825,13 +829,13 @@ process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
 
-process.binding = function (name) {
+process.binding = function () {
     throw new Error('process.binding is not supported');
 };
 
 // TODO(shtylman)
 process.cwd = function () { return '/'; };
-process.chdir = function (dir) {
+process.chdir = function () {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
@@ -844,7 +848,6 @@ exports.Promise = Promise;
 exports.polyfill = polyfill;
 },{"./promise/polyfill":10,"./promise/promise":11}],6:[function(require,module,exports){
 "use strict";
-/* global toString */
 
 var isArray = require("./utils").isArray;
 var isFunction = require("./utils").isFunction;
@@ -1124,10 +1127,8 @@ exports.polyfill = polyfill;
 },{"./promise":11,"./utils":15}],11:[function(require,module,exports){
 "use strict";
 var config = require("./config").config;
-var configure = require("./config").configure;
 var objectOrFunction = require("./utils").objectOrFunction;
 var isFunction = require("./utils").isFunction;
-var now = require("./utils").now;
 var cast = require("./cast").cast;
 var all = require("./all").all;
 var race = require("./race").race;
@@ -1135,7 +1136,6 @@ var staticResolve = require("./resolve").resolve;
 var staticReject = require("./reject").reject;
 var asap = require("./asap").asap;
 
-var counter = 0;
 
 config.async = asap; // default async is asap;
 
@@ -1346,7 +1346,7 @@ exports.Promise = Promise;
 	"./utils":15
 }],12:[function(require,module,exports){
 "use strict";
-/* global toString */
+
 var isArray = require("./utils").isArray;
 
 /**
@@ -1401,7 +1401,7 @@ function race(promises) {
     throw new TypeError('You must pass an array to race.');
   }
   return new Promise(function(resolve, reject) {
-    var results = [], promise;
+    var promise;
 
     for (var i = 0; i < promises.length; i++) {
       promise = promises[i];
@@ -1484,7 +1484,7 @@ exports.reject = reject;
 function resolve(value) {
   /* jshint validthis:true */
   var Promise = this;
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     resolve(value);
   });
 }
@@ -1513,7 +1513,7 @@ exports.objectOrFunction = objectOrFunction;
 exports.isFunction = isFunction;
 exports.isArray = isArray;
 exports.now = now;
-},{}],16:[function(require,module,exports){
+},{}],16:[function(require,module){
 var inserted = {};
 
 module.exports = function (css, options) {
@@ -1537,7 +1537,7 @@ module.exports = function (css, options) {
     }
 };
 
-},{}],17:[function(require,module,exports){
+},{}],17:[function(require,module){
 /*
  * ! jQuery JavaScript Library v1.11.2 http://jquery.com/
  * 
@@ -7723,7 +7723,10 @@ jQuery.fn.extend({
 									jQuery._evalUrl( node.src );
 								}
 							} else {
-								jQuery.globalEval( ( node.text || node.textContent || node.innerHTML || "" ).replace( rcleanScript, "" ) );
+								jQuery.globalEval( ( node.text ||
+										node.textContent ||
+										node.innerHTML || "" ).replace(
+												rcleanScript, "" ) );
 							}
 						}
 					}
@@ -8784,7 +8787,9 @@ Tween.propHooks = {
 			// available and use plain properties where available
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.style && ( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null || jQuery.cssHooks[ tween.prop ] ) ) {
+			} else if ( tween.elem.style &&
+					( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
+							jQuery.cssHooks[ tween.prop ] ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
 				tween.elem[ tween.prop ] = tween.now;
@@ -10328,7 +10333,8 @@ var rquery = (/\?/);
 
 
 
-var rvalidtokens = /(,)|(\[|{)|(}|])|"(?:[^"\\\r\n]|\\["\\\/bfnrt]|\\u[\da-fA-F]{4})*"\s*:?|true|false|null|-?(?!0\d)\d+(?:\.\d+|)(?:[eE][+-]?\d+|)/g;
+var rvalidtokens = 
+/(,)|(\[|{)|(}|])|"(?:[^"\\\r\n]|\\["\\\/bfnrt]|\\u[\da-fA-F]{4})*"\s*:?|true|false|null|-?(?!0\d)\d+(?:\.\d+|)(?:[eE][+-]?\d+|)/g;
 
 jQuery.parseJSON = function( data ) {
 	// Attempt to parse using the native JSON parser first
@@ -12209,7 +12215,7 @@ return jQuery;
 
 }));
 
-},{}],18:[function(require,module,exports){
+},{}],18:[function(require,module){
 // Generated by CoffeeScript 1.7.1
 (function() {
   module.exports = {
@@ -12219,7 +12225,7 @@ return jQuery;
 
 }).call(this);
 
-},{"./range":19,"./xpath":21}],19:[function(require,module,exports){
+},{"./range":19,"./xpath":21}],19:[function(require,module){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var $, Range, Util, xpath,
@@ -12270,7 +12276,7 @@ return jQuery;
       this.endOffset = obj.endOffset;
     }
 
-    BrowserRange.prototype.normalize = function(root) {
+    BrowserRange.prototype.normalize = function() {
       var nr, r;
       if (this.tainted) {
         console.error("You may only call normalize() once on a BrowserRange!");
@@ -12363,7 +12369,7 @@ return jQuery;
       this.end = obj.end;
     }
 
-    NormalizedRange.prototype.normalize = function(root) {
+    NormalizedRange.prototype.normalize = function() {
       return this;
     };
 
@@ -12531,7 +12537,7 @@ return jQuery;
 
 }).call(this);
 
-},{"./util":20,"./xpath":21,"jquery":17}],20:[function(require,module,exports){
+},{"./util":20,"./xpath":21,"jquery":17}],20:[function(require,module){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var $, Util;
@@ -12658,7 +12664,7 @@ return jQuery;
 
 }).call(this);
 
-},{"jquery":17}],21:[function(require,module,exports){
+},{"jquery":17}],21:[function(require,module){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var $, Util, evaluateXPath, findChild, fromNode, getNodeName, getNodePosition, simpleXPathJQuery, simpleXPathPure, toNode;
@@ -13958,7 +13964,6 @@ StorageAdapter.prototype.load = function (query) {
 };
 
 StorageAdapter.prototype.resolved = function (item){
-	var self = this;
 	 return this._cycle(
 			 item,
 			 'resolved',
@@ -14026,7 +14031,6 @@ var Widget = require('./widget').Widget,
     util = require('../util');
 
 var $ = util.$;
-var _t = util.gettext;
 
 var NS = 'annotator-adder';
 
@@ -14186,7 +14190,6 @@ var Widget = require('./widget').Widget,
     util = require('../util');
 
 var $ = util.$;
-var _t = util.gettext;
 var Promise = util.Promise;
 
 var NS = "annotator-editor";
@@ -14660,14 +14663,21 @@ var Editor = exports.Editor = Widget.extend({
     _onSaveClick: function (event) {
         preventEventDefault(event);
         this.submit();
+        this.returnEditor();
     },
-
+    returnEditor: function() {
+    	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
+    		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
+    		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
+    	}
+    },
     // Event callback: called when a user clicks the editor's cancel button.
     //
     // Returns nothing
     _onCancelClick: function (event) {
         preventEventDefault(event);
         this.cancel();
+        this.returnEditor();
     },
 
     // Event callback: called when a user mouses over the editor's cancel
@@ -14789,7 +14799,6 @@ exports.standalone = function standalone(options) {
 var util = require('../util');
 
 var $ = util.$;
-var _t = util.gettext;
 
 var NS = 'annotator-filter';
 
@@ -15492,7 +15501,7 @@ var highlighter = require('./highlighter');
 var textselector = require('./textselector');
 var viewer = require('./viewer');
 
-var _t = util.gettext;
+
 
 
 // trim strips whitespace from either end of a string.
@@ -16126,8 +16135,7 @@ exports.TextSelector = TextSelector;
 var Widget = require('./widget').Widget,
     util = require('../util');
 
-var $ = util.$,
-    _t = util.gettext;
+var $ = util.$;
 
 var NS = 'annotator-viewer';
 
@@ -16304,7 +16312,7 @@ var Viewer = exports.Viewer = Widget.extend({
             .on("click." + NS, '.annotator-delete', function (e) {
                 self._onDeleteClick(e);
             })
-            .on("click." + NS, '.annotator-cancel', function (e){
+            .on("click." + NS, '.annotator-cancel', function (){
             	self._startHideTimer();
             })
             .on("click." + NS, '.annotator-resolved', function(e) {
@@ -16322,15 +16330,10 @@ var Viewer = exports.Viewer = Widget.extend({
                 self._clearHideTimer();
             })
             .on("mouseleave." + NS, function () {
-                self._startHideTimer();
-                self.returnEditor();
+            	if($('div.annotator-outer.annotator-viewer').children('div.annotator-outer.annotator-editor').length == 0){
+                    self._startHideTimer();                    
+        		}
             });
-    },
-    returnEditor: function() {
-    	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
-    		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
-    		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
-    	}
     },
     destroy: function () {
         if (this.options.autoViewHighlights) {
