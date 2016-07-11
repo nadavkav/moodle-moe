@@ -32,6 +32,7 @@
  *
  */
 require_once($CFG->dirroot . '/course/format/lib.php'); // For format_base.
+require_once($CFG->dirroot.'/course/modlib.php');
 
 class format_moetopcoll extends format_base {
     private $settings;
@@ -53,6 +54,85 @@ class format_moetopcoll extends format_base {
         parent::__construct($format, $courseid);
     }
 
+    /**
+     * Creates missing course section(s) and rebuilds course cache
+     *
+     * @param int|stdClass $courseorid course id or course object
+     * @param int|array $sections list of relative section numbers to create
+     * @return bool if there were any sections created
+     */
+    public function course_create_sections_if_missing($courseorid, $sections) {
+        global $DB,$CFG;
+        if (!is_array($sections)) {
+            $sections = array($sections);
+        }
+        $existing = array_keys(get_fast_modinfo($courseorid)->get_section_info_all());
+        if (is_object($courseorid)) {
+            $course = $courseorid;
+            $courseorid = $courseorid->id;
+        }
+        $coursechanged = false;
+        foreach ($sections as $sectionnum) {
+            if (!in_array($sectionnum, $existing)) {
+                $cw = new stdClass();
+                $cw->course   = $courseorid;
+                $cw->section  = $sectionnum;
+                $cw->summary  = '';
+                $cw->summaryformat = FORMAT_HTML;
+                $cw->sequence = '';
+                $id = $DB->insert_record("course_sections", $cw);
+                $section = $DB->get_record('course_sections', array('id' => $id));
+                $coursechanged = true;
+                rebuild_course_cache($courseorid, true);
+                $labels = array('למידה','תומכי למידה','ארגז כלים');
+                if($cw->section != 0 && !empty($labels)){
+                    foreach ($labels as $key => $label){
+                        list($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
+                        $cm = null;
+                        $data = new stdClass();
+                        $data->section          = $cw->section;  // The section number itself - relative!!! (section column in course_sections)
+                        $data->visible          = 1;
+                        $data->course           = $course->id;
+                        $data->module           = $module->id;
+                        $data->modulename       = $module->name;
+                        $data->groupmode        = $course->groupmode;
+                        $data->groupingid       = $course->defaultgroupingid;
+                        $data->id               = '';
+                        $data->instance         = '';
+                        $data->coursemodule     = '';
+                        $data->add              = 'label';
+                        $data->return           = 0; //must be false if this is an add, go back to course view on cancel
+                        $data->sr               = 0;
+                        if (plugin_supports('mod', $data->modulename, FEATURE_MOD_INTRO, true)) {
+                            $draftid_editor = file_get_submitted_draft_itemid('introeditor');
+                            $currentintro = file_prepare_draft_area(
+                                $draftid_editor, $context->id,
+                                'mod_'.$data->modulename,
+                                'intro', 0, array('subdirs'=>true),
+                                '<h2 class="moetopcalllabel">'. $label . '</h2>');
+                                $data->introeditor = array('text'=>$currentintro, 'format'=>1, 'itemid'=>$draftid_editor);
+                        }             
+                        $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
+                        if (file_exists($modmoodleform)) {
+                            require_once($modmoodleform);
+                        } else {
+                            print_error('noformdesc');
+                        }
+                        $mformclassname = 'mod_'.$module->name.'_mod_form';
+                        $mform = new $mformclassname($data, $cw->section, $cm, $course);
+                        $mform->set_data($data);
+                        $fromform = add_moduleinfo($data, $course, $mform);
+                    }
+                }
+            }
+        }
+        if ($coursechanged) {
+            rebuild_course_cache($courseorid, true);
+        }
+        
+       
+        return $coursechanged;
+    }
     /**
      * Returns the format's settings and gets them if they do not exist.
      * @return type The settings as an array.
@@ -510,6 +590,8 @@ class format_moetopcoll extends format_base {
                     'element_type' => 'select',
                     'element_attributes' => array( // In insertion order and not numeric for sorting purposes.
                         array(
+                            // No additions.
+                            7 => new lang_string('setlayout_no_additions', 'format_moetopcoll')),
                             // Toggle word, toggle section x and section number.
                             1 => new lang_string('setlayout_all', 'format_moetopcoll'),
                             // Toggle word and toggle section x.
@@ -523,9 +605,7 @@ class format_moetopcoll extends format_base {
                             // Toggle section x.
                             8 => new lang_string('setlayout_toggle_section_x', 'format_moetopcoll'),
                             // Section number.
-                            6 => new lang_string('setlayout_section_number', 'format_moetopcoll'),
-                            // No additions.
-                            7 => new lang_string('setlayout_no_additions', 'format_moetopcoll'))
+                            6 => new lang_string('setlayout_section_number', 'format_moetopcoll')
                     )
                 );
                 $courseformatoptionsedit['layoutstructure'] = array(
