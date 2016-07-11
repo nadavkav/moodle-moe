@@ -494,15 +494,19 @@ body.format-moetopcoll.editing.dir-rtl .ctopics .section .activity .mod-indent-o
 }
 
 body.format-moetopcoll .ctopics .section  {
-    margin: 1em 0;
+    margin: 0em 0;
 }
 
 body.format-moetopcoll .course-content ul.ctopics li.section .summary {
     margin-left: 0;
+	width: 50%;
+	background-color: #fbf8e7;
 }
 
 body.format-moetopcoll.dir-rtl .course-content ul.ctopics li.section .summary {
     margin-right: 0;
+	border-left: solid 3px #e4e0c3;
+	border-right: solid 3px #e4e0c3;
 }
 
 body.format-moetopcoll .course-content ul.ctopics li.section .summary.summaryalwaysshown {
@@ -579,8 +583,10 @@ body.jsenabled .toggledsection {
     display: none; /* If JavaScript is enabled then this css will apply and the section will be hidden. */
 }
 
-body.jsenabled .toggledsection.sectionopen {
-    display: block;
+body.jsenabled.format-moetopcoll .toggledsection.sectionopen {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 /* -- Size of the spacer row -- */
@@ -679,7 +685,44 @@ body.jsenabled #toggle-all {
 .course-content ul.ctopics li.section.hidden .sectionname {
     font-style: italic;
 }
+.format-moetopcoll .ctopics .section.main .content .section {
+	width: 50%;
+}
+body.format-moetopcoll .course-content ul.ctopics li.section .content .toggle{
+	margin-bottom: 0px;
+}
+body.format-moetopcoll .course-content ul.ctopics li.section.main .content{
+	border-bottom: solid 1px #cad5d1;
+	border-left: solid 1px #cad5d1;
+}
+body.format-moetopcoll .course-content ul.ctopics li#section-0.section.main .content{
+    border: none;
+}
+body.format-moetopcoll .content h3.sectionname{
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	background-color: transparent;
+}
+.moetopcalllabel {
+	border: 1px solid #dddcbd;
+	background: #f7efcb; /* Old browsers */
+    background: -moz-linear-gradient(top, #f7efcb 0%, #fffaf6 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f7efcb 0%,#fffaf6 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f7efcb 0%,#fffaf6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7efcb', endColorstr='#fffaf6',GradientType=0 );
+	margin: 0px
+}
 
+body.format-moetopcoll .section .activity.modtype_label.label {
+	padding: 0;
+	
+}
+
+body.format-moetopcoll.dir-rtl .section .activity .contentwithoutlink{
+	padding: 0px;
+}
+}
 /* Print styles. */
 @media print {
     body.jsenabled .toggledsection {
