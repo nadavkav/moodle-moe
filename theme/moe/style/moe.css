@@ -3209,6 +3209,6 @@ ul.nav.nav-tabs {
 	padding: 1em;
 }
 
-.block_course_list .content{
-	text-align: inherit;
+body.dir-rtl .block_course_list .content{
+	text-align: right;
 }
