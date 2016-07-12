@@ -14669,6 +14669,7 @@ var Editor = exports.Editor = Widget.extend({
     	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
     		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
     		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
+    		$('div.annotator-outer.annotator-viewer').addClass('annotator-hide');
     	}
     },
     // Event callback: called when a user clicks the editor's cancel button.

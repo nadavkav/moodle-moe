@@ -315,5 +315,6 @@ $string['words'] = 'מילים';
 $string['wordsadded'] = 'מילים נוספו';
 $string['wordsdeleted'] = 'מילים נמחקו';
 $string['wouldyouliketocreate'] = 'האם אתם מעונינים ליצור אותו?';
-$string['reopen'] = 'פתיחה';
+$string['reopen'] = 'שחזור';
 $string['templatecannotbechanged'] = 'לא ניתן לערוך את התבנית מכיוון שהתלמידים החלו לערוך.';
+$string['annotaionhelper'] = 'לרשותכם מנגנון טיוט המאפשר סימון טקסט והוספת הערות ע"י המורה והתלמידים';

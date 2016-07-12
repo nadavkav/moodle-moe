@@ -215,6 +215,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         } else {
             $output .= html_writer::end_tag('div');
         }
+        $output .= html_writer::div(get_string('annotaionhelper', 'mod_moewiki'),'annotatheper');
         return $output;
     }
 
@@ -317,7 +318,6 @@ class mod_moewiki_renderer extends plugin_renderer_base {
 
         $output = '';
         $output .= html_writer::start_tag('div', array('class' => 'ouw_byheading'));
- 
         // On main page, add export button
         if (!$xhtmlid && $CFG->enableportfolios) {
             $button = new portfolio_add_button();
