@@ -26,6 +26,7 @@
 /* Core */
 $string['configtitle'] = 'moe';
 $string['pluginname'] = 'moe';
+$string['backtocourse'] = 'Back to course';
 $string['choosereadme'] = '
 <div class="clearfix">
 <div style="margin-bottom:20px;">

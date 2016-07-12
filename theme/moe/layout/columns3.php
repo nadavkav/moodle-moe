@@ -84,7 +84,13 @@ echo $OUTPUT->doctype() ?>
 				?>
             </div>
         </div>
-        <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
+        
+        <?php 
+            if ( $PAGE->context->get_level_name() == get_string('activitymodule') || in_array($PAGE->bodyid,$showbacktocourse) ) {
+                echo "<a id='backtocourse_top' class='btn' href='$CFG->wwwroot/course/view.php?id=$COURSE->id'>".get_string('backtocourse','theme_moe')."</a>";
+            }        
+            echo $OUTPUT->blocks('side-post', 'span3'); 
+        ?>
     </div>
     
     <!-- End Main Regions -->
