@@ -631,6 +631,10 @@ class format_moetopcoll_renderer extends format_section_renderer_base {
         return $o;
     }
 
+    public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
+        return $this->courserenderer->course_section_cm_list_item($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
+    }
+    
     /**
      * Output the html for a multiple section page
      *

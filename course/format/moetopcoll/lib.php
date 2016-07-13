@@ -971,7 +971,7 @@ class format_moetopcoll extends format_base {
      * @return bool whether there were any changes to the options values
      */
     public function update_course_format_options($data, $oldcourse = null) {
-        global $DB; // MDL-37976.
+        global $DB,$PAGE,$CFG; // MDL-37976.
 
         /*
          * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
@@ -1062,6 +1062,71 @@ class format_moetopcoll extends format_base {
             for ($sectionnum = $maxsection; $sectionnum > $numsections; $sectionnum--) {
                 if (!$this->delete_section($sectionnum, false)) {
                     break;
+                }
+            }
+            /* test if there is three lables in all section and add it if need */
+            $renderer = $PAGE->get_renderer('format_moetopcoll');
+            $modinfo = get_fast_modinfo($this->courseid);
+            for ($sectionnum = 1; $sectionnum <= $numsections; $sectionnum++) {
+                $labels = array(
+                    get_string('study', 'format_moetopcoll'),
+                    get_string('supporterslearning', 'format_moetopcoll'),
+                    get_string('toolbox', 'format_moetopcoll')
+                );
+                $section = $modinfo->get_section_info($sectionnum);
+                $course = $DB->get_record('course', array('id' => $this->courseid));
+                $completioninfo = new completion_info($course);
+                foreach ($modinfo->sections[$section->section] as $modnumber) {
+                    $mod = $modinfo->cms[$modnumber];
+                    if ($mod->modname == 'label') {
+                        $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
+                        foreach ($labels as $key => $label) {
+                            if (strpos($modulehtml, $label)) {
+                                unset($labels[$key]);
+                            }
+                        }
+                    }
+                }
+                if (!empty($labels)) {
+                    list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
+                    foreach ($labels as $key => $label) {
+                        $cm = null;
+                        $data = new stdClass();
+                        $data->section = $section->section; // The section number itself - relative!!! (section column in course_sections)
+                        $data->visible = 1;
+                        $data->course = $course->id;
+                        $data->module = $module->id;
+                        $data->modulename = $module->name;
+                        $data->groupmode = $course->groupmode;
+                        $data->groupingid = $course->defaultgroupingid;
+                        $data->id = '';
+                        $data->instance = '';
+                        $data->coursemodule = '';
+                        $data->add = 'label';
+                        $data->return = 0; // must be false if this is an add, go back to course view on cancel
+                        $data->sr = 0;
+                        if (plugin_supports('mod', $data->modulename, FEATURE_MOD_INTRO, true)) {
+                            $draftid_editor = file_get_submitted_draft_itemid('introeditor');
+                            $currentintro = file_prepare_draft_area($draftid_editor, $context->id, 'mod_' . $data->modulename, 'intro', 0, array(
+                                'subdirs' => true
+                            ), $label);
+                            $data->introeditor = array(
+                                'text' => $currentintro,
+                                'format' => 1,
+                                'itemid' => $draftid_editor
+                            );
+                        }
+                        $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
+                        if (file_exists($modmoodleform)) {
+                            require_once ($modmoodleform);
+                        } else {
+                            print_error('noformdesc');
+                        }
+                        $mformclassname = 'mod_' . $module->name . '_mod_form';
+                        $mform = new $mformclassname($data, $section->section, $cm, $course);
+                        $mform->set_data($data);
+                        $fromform = add_moduleinfo($data, $course, $mform);
+                    }
                 }
             }
         }
