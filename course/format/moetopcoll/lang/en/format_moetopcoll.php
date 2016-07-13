@@ -334,3 +334,7 @@ $string['resetalldisplayinstructions_help'] = 'Resets the display instructions t
 // Readme.
 $string['readme_title'] = 'Collapsed Topics read-me';
 $string['readme_desc'] = 'Please click on \'{$a->url}\' for lots more information about Collapsed Topics.';
+
+$string['study'] = '<h3 class="moetopcalllabel multilang" lang="he">למידה</h3><h3 class="moetopcalllabel multilang" lang="en">study</h3>';
+$string['supporterslearning'] = '<h3 class="moetopcalllabel multilang" lang="he">תומכי למידה</h3><h3 class="moetopcalllabel multilang" lang="en">Supporters Learning</h3>';
+$string['toolbox'] = '<h3 class="moetopcalllabel multilang" lang="he">ארגז כלים</h3><h3 class="moetopcalllabel multilang" lang="en">Toolbox</h3>';

@@ -84,7 +84,7 @@ class format_moetopcoll extends format_base {
                 $section = $DB->get_record('course_sections', array('id' => $id));
                 $coursechanged = true;
                 rebuild_course_cache($courseorid, true);
-                $labels = array('למידה','תומכי למידה','ארגז כלים');
+                $labels = array(get_string('study','format_moetopcoll'), get_string('supporterslearning', 'format_moetopcoll'), get_string('toolbox', 'format_moetopcoll'));
                 if($cw->section != 0 && !empty($labels)){
                     foreach ($labels as $key => $label){
                         list($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
@@ -109,7 +109,7 @@ class format_moetopcoll extends format_base {
                                 $draftid_editor, $context->id,
                                 'mod_'.$data->modulename,
                                 'intro', 0, array('subdirs'=>true),
-                                '<h2 class="moetopcalllabel">'. $label . '</h2>');
+                                $label );
                                 $data->introeditor = array('text'=>$currentintro, 'format'=>1, 'itemid'=>$draftid_editor);
                         }             
                         $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
