@@ -2890,3 +2890,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
     transition: none;
     outline: 0px !important;
 }
+
+#page-mod-data-view.dir-rtl #checkall {
+	margin-right:24%;
+}
