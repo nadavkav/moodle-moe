@@ -497,7 +497,7 @@ body.format-moetopcoll .ctopics .section  {
     margin: 0em 0;
 }
 
-body.format-moetopcoll .course-content ul.ctopics li.section .summary {
+body.format-moetopcoll .course-content ul.ctopics li.section:not(#section-0) .summary {
     margin-left: 0;
 	width: 50%;
 	background-color: #fbf8e7;
