@@ -1,0 +1,919 @@
+#page-mod-moewiki-edit .ouw_preview {
+    border:1px solid #ddd;
+    padding:10px;
+    margin:1em;
+}
+#page-mod-moewiki-view .ouw_recentchanges {
+    font-size:0.85em;
+    color:#636363;
+    margin-top:0.5em;
+}
+#page-mod-moewiki-view .ouw_recentchanges h2 {
+    margin:0 1em 0 0;
+    display:inline;
+    font-size:1.0em;
+    font-weight:normal;
+}
+#page-mod-moewiki-view .ouw_recentchanges ul,
+#page-mod-moewiki-view .ouw_recentchanges li {
+    display:inline;
+    margin:0;
+    padding:0;
+}
+#page-mod-moewiki-view .ouw_recentchanges li {
+    margin-right:0.5em;
+}
+
+#page-mod-moewiki-edit #ouw_countdown {
+    float:right;
+    margin-left:2em;
+    border:1px solid #ddd;
+    padding:4px;
+}
+.dir-rtl#mod-moewiki-edit #ouw_countdown {
+    float: left;
+}
+#page-mod-moewiki-edit form#ouw_edit {
+    margin-top:1em;
+}
+#page-mod-moewiki-edit #ouw_countdownurgent {
+    font-weight:bold;
+    color:red;
+}
+#page-mod-moewiki-wikihistory .actions a[href*='view.php']{
+	font-weight: bolder;
+}
+#page-mod-moewiki-history .actions a[href*='view.php']{
+	font-weight: bolder;
+	background-color: #c96423;
+}
+
+#page-mod-moewiki-history table,
+#page-mod-moewiki-wikihistory table,
+#page-mod-moewiki-contributions table {
+    width:100%;
+}
+
+#page-mod-moewiki-history .ouw_history th,
+#page-mod-moewiki-wikihistory th,
+#page-mod-moewiki-contributions th {
+    text-align:left;
+    padding: 5px 12px 5px 4px;
+}
+.dir-rtl#page-mod-moewiki-history .ouw_history th,
+.dir-rtl#page-mod-moewiki-wikihistory th,
+.dir-rtl#page-mod-moewiki-contributions th {
+    text-align: right;
+}
+
+#page-mod-moewiki-history .ouw_history td,
+#page-mod-moewiki-wikihistory td,
+#page-mod-moewiki-contributions td {
+    padding: 3px 12px 3px 4px;
+}
+#page-mod-moewiki-history .ouw_history td.check,
+#page-mod-moewiki-history .ouw_history td.comparebutton {
+    padding-right:4px;
+}
+#page-mod-moewiki-history .ouw_history td.comparebutton {
+    padding-top:6px;
+    border-bottom:none;
+}
+#page-mod-moewiki-history .ouw_history tr.current,
+#page-mod-moewiki-wikihistory tr.current {
+    background:#dcedff;
+}
+#page-mod-moewiki-history .ouw_history td.comparebutton {
+    text-align:right;
+    padding-bottom:6px;
+}
+.dir-rtl#mod-moewiki-history .ouw_history td.comparebutton {
+    text-align:left;
+}
+#page-mod-moewiki-history .ouw_history table,
+#page-mod-moewiki-wikihistory table{
+    margin-top:1em;
+}
+#page-mod-moewiki-contributions .ouw_contributionsgroups {
+    background:#f0f0f0;
+    padding:8px;
+}
+
+
+#moewiki_belowtabs {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#moewiki_belowtabs_annotate {
+    display: none;
+}
+
+body.jsenabled #moewiki_belowtabs_annotate {
+    display: block;
+}
+
+#moewiki_belowtabs_annotate_nojs {
+    display: block;
+}
+
+body.jsenabled #moewiki_belowtabs_annotate_nojs {
+    display: none;
+}
+
+#page-mod-moewiki-viewold .ouw_versionbox,
+#page-mod-moewiki-diff .ouw_versionbox {
+    border-top:1px solid #888;
+    background:#dcedff;
+    padding:8px 8px 10px 8px;
+}
+#page-mod-moewiki-diff .ouw_versionbox .ouw_date {
+    font-weight:bold;
+}
+#page-mod-moewiki-viewold .ouw_oldversion h1 {
+    font-size:1em;
+    margin:0;
+}
+#page-mod-moewiki-viewold .ouw_oldversion .ouw_person {
+    font-weight:normal;
+}
+
+#page-mod-moewiki-viewold .ouw_prev {
+    float:left;
+}
+.dir-rtl#page-mod-moewiki-viewold .ouw_prev {
+    float: right;
+}
+#page-mod-moewiki-viewold .ouw_next {
+    float:right;
+}
+.dir-rtl#page-mod-moewiki-viewold .ouw_next {
+    float: left;
+}
+
+#moewiki_indexlinks {
+    margin:0 0 8px;
+    padding:0;
+    text-align:right;
+}
+.dir-rtl #moewiki_indexlinks {
+    text-align: left;
+}
+
+#moewiki_indexlinks ul {
+    margin:0;
+    padding:0;
+    display:inline;
+}
+#moewiki_indexlinks form,
+#moewiki_indexlinks form div {
+    display:inline;
+}
+#moewiki_indexlinks form input {
+    font-size:0.85em;
+}
+#moewiki_indexlinks #ouw_searchbox {
+    width:10em;
+}
+
+#moewiki_indexlinks li {
+    margin:0 0.5em 0 0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+#moewiki_noindexlink {
+    height:1em;
+}
+#moewiki_indexlinks a {
+    border:1px solid #aaa;
+    padding:2px;
+    font-size:84%;
+}
+#moewiki_indexlinks span {
+    background-color: #cbedd8;
+    padding: 4px 5px;
+    font-size: 1em;
+    border: #b4b78e 1px solid;
+    color: #5e4c65 !important;
+    box-shadow: 0px 0px;
+    border-radius: 0px;
+}
+
+
+
+#page-mod-moewiki-wikiindex ul.ouw_index,
+#page-mod-moewiki-wikiindex ul.ouw_index li,
+#page-mod-moewiki-wikiindex ul.ouw_indextree,
+#page-mod-moewiki-wikiindex ul.ouw_indextree li,
+#page-mod-moewiki-import ul.ouw_indextree,
+#page-mod-moewiki-import ul.ouw_indextree li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+#page-mod-moewiki-wikiindex ul.ouw_index,
+#page-mod-moewiki-wikiindex ul.ouw_indextree {
+    margin-bottom:2em;
+}
+#page-mod-moewiki-import .ouw_title,
+#page-mod-moewiki-wikiindex .ouw_title {
+    display:block;
+    font-weight:bold;
+    background:#babf6b;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+    margin-top:-1px;
+    color: black;
+}
+#page-mod-moewiki-wikiindex a.ouw_title_link,
+#page-mod-moewiki-import a.ouw_title_link {
+    color:black;
+}
+#page-mod-moewiki-import .ouw_indexinfo,
+#page-mod-moewiki-wikiindex .ouw_indexinfo {
+    border:1px dotted #888;
+    border-top:none;
+    padding:4px 8px 6px;
+    font-size:0.8em;
+    color:#888;
+}
+#page-mod-moewiki-wikiindex .ouw_index .ouw_index_startpage .ouw_indexinfo {
+    border-bottom:1px dotted #888;
+}
+.ie#page-mod-moewiki-wikiindex .ouw_index_startpage .ouw_title {
+    border-top:2px solid #888;
+}
+
+
+
+#page-mod-moewiki-wikiindex .ouw_missingfrom {
+    font-size:0.85em;
+}
+#page-mod-moewiki-wikiindex #moewiki_belowtabs h2 {
+    font-size:1.0em;
+    margin-bottom:0.5em;
+    margin-top:2em;
+}
+#page-mod-moewiki-wikiindex h2.ouw_orphans {
+    margin-bottom:0.75em;
+}
+
+#page-mod-moewiki-import ul.ouw_indextree ul,
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul {
+    margin-left:3em;
+    padding-left:0;
+    margin-top:0;
+    margin-bottom:0;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree li ul {
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul {
+    margin-left:2.75em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul {
+    margin-left:2.5em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul {
+    margin-left:2.25em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul ul {
+    margin-left:2em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul ul ul {
+    margin-left:1.75em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul {
+    margin-left:1.5em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul ul {
+    margin-left:1.25em;
+}
+#page-mod-moewiki-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul ul ul {
+    margin-left:1em;
+}
+
+#page-mod-moewiki-diff .ouw_left,
+#page-mod-moewiki-diff .ouw_right {
+    float:left;
+    width:50%;
+}
+.dir-rtl#page-mod-moewiki-diff .ouw_left,
+.dir-rtl#page-mod-moewiki-diff .ouw_right {
+    float:right;
+}
+#page-mod-moewiki-diff .ouw_diff {
+    background:#f0f0f0;
+    color:#636363;
+    border-left:1px dotted #888;
+    border-right:1px dotted #888;
+    border-bottom:1px dotted #888;
+    padding:8px;
+}
+#page-mod-moewiki-diff .ouw_left .ouw_diff,
+#page-mod-moewiki-diff .ouw_left .ouw_versionbox {
+    margin-right:1em;
+}
+#page-mod-moewiki-diff .ouw_right .ouw_diff,
+#page-mod-moewiki-diff .ouw_right .ouw_versionbox {
+    margin-left:1em;
+}
+#page-mod-moewiki-diff .ouw_deleted {
+    background:white;
+    color:red;
+    text-decoration:line-through;
+}
+#page-mod-moewiki-diff .ouw_added {
+    background:white;
+    color:green;
+}
+
+#page-mod-moewiki-diff .ouw_advice {
+    margin-bottom:1em;
+}
+
+.ouw_subwiki {
+    font-size:0.85em;
+}
+.ouw_subwiki form,
+.ouw_subwiki div {
+    display:inline;
+}
+#page-mod-moewiki-view .ouw_intro {
+    margin-top:1em;
+}
+
+#page-mod-moewiki-view .ouw_byheading {
+    display:inline;
+    font-weight:normal;
+    font-style:normal;
+    font-size:0.85em;
+    margin-left:1em;
+}
+
+#page-mod-moewiki-view .ouw_editsection,
+#page-mod-moewiki-view .ouw_annotate,
+#page-mod-moewiki-view .ouw_editpage,
+#page-mod-moewiki-view #expandcollapseannotations,
+#page-mod-moewiki-view #showhideannotationicons {
+    margin-right:1em;
+}
+
+/* Annotation icon show/hide link logic */
+#page-mod-moewiki-view .moewiki-hide-annotations #hideannotationicons {
+    display: none;
+}
+#page-mod-moewiki-view #showannotationicons {
+    display: none;
+}
+#page-mod-moewiki-view .moewiki-hide-annotations #showannotationicons {
+    display: inline;
+}
+#page-mod-moewiki-view .moewiki-hide-annotations .moewiki-annotation-tag {
+    display: none;
+}
+#page-mod-moewiki-view.jsenabled .moewiki-hide-annotations #expandcollapseannotations {
+    display: none;
+}
+
+.moewiki_content h1,
+.moewiki_content h2 {
+    font-size:1.5em;
+    display:inline;
+}
+.moewiki_content h3,
+.moewiki_content h4,
+.moewiki_content h5 {
+    font-size:1em;
+    display:inline;
+}
+.moewiki_content h6 {
+    font-size:0.85em;
+    display:inline;
+}
+
+.moewiki_content .ouw_heading1,
+.moewiki_content .ouw_heading2 {
+    margin:0.6667em 0 0.3333em 0;
+}
+.moewiki_content .ouw_heading3,
+.moewiki_content .ouw_heading4,
+.moewiki_content .ouw_heading5 {
+    margin:1em 0 0.5em 0;
+}
+.moewiki_content .ouw_heading6 {
+    margin:1.25em 0 0.625em 0;
+}
+
+.moewiki_content h1.ouw_fixedheading,
+.moewiki_content h2.ouw_fixedheading,
+.moewiki_content h3.ouw_fixedheading,
+.moewiki_content h4.ouw_fixedheading,
+.moewiki_content h5.ouw_fixedheading,
+.moewiki_content h6.ouw_fixedheading {
+    font-size:1em;
+    margin:1em 0 0.5em 0;
+}
+
+.moewiki_content h1.ouw_fixedheading .ouw_headingtext,
+.moewiki_content h2.ouw_fixedheading .ouw_headingtext {
+    font-size:1.5em;
+}
+.moewiki_content h1 {
+    padding-bottom:2px;
+    border-bottom:1px dotted #888;
+}
+.moewiki_content h6.ouw_fixedheading .ouw_headingtext {
+    font-size:0.85em;
+}
+.moewiki_content h3 {
+    border-bottom:1px dotted #888;
+    padding-bottom:2px;
+}
+.moewiki_content h5,
+.moewiki_content h6 {
+    font-weight:normal;
+    font-style:italic;
+}
+
+#ouw_ac_formcontainer {
+  margin-top:1.5em;
+  clear:right;
+}
+.dir-rtl#ouw_ac_formcontainer {
+    clear:left;
+}
+.ouw_deletedrow {
+    background-color:#cccccc;
+}
+.ouw_deleted {
+    color:#cc0000;
+}
+
+.ouw_recenter {
+    font-weight:bold;
+    color:black;
+}
+.ouw_recent {
+    color:black;
+}
+.ouw_recentnot {
+    color:#636363;
+}
+
+#page-mod-moewiki-wikiindex .ouw_wikirecentchanges ul,
+#page-mod-moewiki-wikiindex .ouw_wikirecentchanges li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+
+#page-mod-moewiki-wikihistory .ouw_paging {
+    margin-top:1em;
+}
+#page-mod-moewiki-wikihistory .ouw_paging_prev {
+    float:left;
+    width:50%;
+    text-align:right;
+}
+.dir-rtl#mod-moewiki-wikihistory .ouw_paging_prev {
+    float: right;
+    text-align: left;
+}
+#page-mod-moewiki-wikihistory .ouw_paging_prev a {
+    margin-right:2em;
+}
+#page-mod-moewiki-wikihistory .ouw_paging_next {
+    float:left;
+    width:50%;
+}
+.dir-rtl#page-mod-moewiki-wikihistory .ouw_paging_next {
+    float:right;
+}
+#page-mod-moewiki-wikihistory .ouw_paging_next a {
+    margin-left:2em;
+}
+
+/* Hack because font-family:inherit doesn't work in IE */
+#page-mod-moewiki-view.ie textarea {
+    font-family: Verdana,sans-serif;
+}
+
+#page-mod-moewiki-view .ouw_linkedfrom {
+    margin-top:1.5em;
+    font-size:0.85em;
+}
+#page-mod-moewiki-view .ouw_linkedfrom h3 {
+    margin:0;
+    font-size:1em;
+    font-weight:normal;
+}
+#page-mod-moewiki-view .ouw_linkedfrom ul,
+#page-mod-moewiki-view .ouw_linkedfrom li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+
+#page-mod-moewiki-wikiindex .ouw_missingpages ul,
+#page-mod-moewiki-wikiindex .ouw_missingpages li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+
+
+.ouw_subwiki {
+    float:left;
+}
+.dir-rtl .ouw_subwiki {
+    float: right;
+}
+.moewiki_notabs.moewiki_gotselector {
+    margin-top:1em;
+}
+
+.moewiki_lockinfobuttons form {
+    display:inline;
+}
+
+a.moewiki_noshow:link,a.moewiki_noshow:visited {
+    color:inherit;
+}
+
+.ouw_index .ouw_index_startpage {
+   margin-bottom:1em;
+}
+
+.ouw_timelocked {
+    margin-top:3em;
+    font-style:italic;
+}
+
+#page-mod-moewiki-wikiindex .ouw_savetemplate,
+#page-mod-moewiki-wikihistory .ouw_contributionslink {
+    margin-top:2em;
+}
+
+#page-mod-moewiki-contributions h2, #mod-moewiki-contributions h3 {
+    font-size:1em;
+    margin:1em 0 0.5em;
+}
+#page-mod-moewiki-contributions small {
+    font-size:1em;
+    font-weight:normal;
+}
+#page-mod-moewiki-contributions table {
+    margin-bottom:2em;
+}
+
+#page-mod-moewiki-entirewiki h1 a {
+    color:black;
+}
+#page-mod-moewiki-entirewiki .ouw_entry {
+    margin-bottom:2em;
+}
+
+.ouw_subscribe {
+    margin-top:2em;
+    font-size:0.85em;
+}
+.ouw_subscribe img {
+    vertical-align:bottom;
+}
+.ouw_subscribe span {
+    position:relative;
+    top:-1px;
+}
+
+.ouw_belowmainhead {
+    border:1px dotted #888;
+    border-top:none;
+    padding:0px 8px 4px;
+}
+.ouw_topspacer {
+     padding-top:4px;
+}
+.ouw_topheading {
+    background:#dcedff;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+    margin-top:1.5em;
+}
+
+.ouw_topheading h2 {
+    border:none;
+}
+
+
+.ouw_indextree,
+.ouw_indextree li {
+    list-style-type:none;
+}
+
+#page-mod-moewiki-entirewiki .ouw_entry h1.ouw_entry_heading {
+    background:#dcedff;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+    border-bottom:none;
+    display:block;
+    margin:0.5em 0 0;
+}
+#page-mod-moewiki-entirewiki .ouw_entry .moewiki_content {
+    border:1px dotted #888;
+    border-top:none;
+    padding:4px 8px;
+    margin-top:0;
+}
+
+#page-mod-moewiki_addnew {
+    display:inline;
+}
+
+
+#page-mod-moewiki_addnew ul,
+#page-mod-moewiki_addnew li {
+    margin:0;
+    padding:0;
+    display:inline;
+    list-style-type:none;
+}
+
+
+.moewiki_addnew_class {
+    display:inline;
+}
+
+.moewiki-annotation,
+.moewiki-orphaned-annotation {
+    display:block;
+    width:50%;
+    min-height:42px;
+    margin:0.3em;
+    padding:0.3em;
+    background-color:#F7F0D9;
+}
+
+.moewiki-annotation h3,
+.moewiki-orphaned-annotation h3 {
+    display:block;
+    font-weight:bold;
+    border:0;
+    margin:0 0 0.2em;
+}
+
+.moewiki-annotation .userpicture,
+.moewiki-orphaned-annotation .userpicture {
+    float:left;
+    margin: 0.2em 0.1em;
+}
+.dir-rtl .moewiki-annotation .userpicture,
+.dir-rtl .moewiki-orphaned-annotation .userpicture {
+    float: right;
+}
+
+.moewiki-annotation .moewiki-annotation-content,
+.moewiki-orphaned-annotation .moewiki-annotation-content {
+    display:block;
+    margin-left:40px;
+    padding-left:0.3em;
+    font-weight:normal;
+}
+
+.moewiki-annotation .moewiki-annotation-content .moewiki-annotation-content-title,
+.moewiki-orphaned-annotation .moewiki-annotation-content .moewiki-annotation-content-title {
+    display:block;
+    padding-bottom:0.3em;
+    font-weight:bold;
+}
+
+.moewiki-annotation-tag {
+    padding:1px 1px 0 1px;
+    margin:0;
+    cursor:default;
+}
+
+.moewiki-annotation-marker {
+    padding:0;
+    margin:0;
+    cursor:default;
+}
+
+.moewiki-annotation-marker img {padding:1px;}
+
+.moewiki-annotation-tag img {padding:0;}
+
+.moewiki-annotation-marker:hover{background-color:#99ccff;}
+
+#page-mod-moewiki-view #expandcollapseannotations {display:none;}
+#page-mod-moewiki-view.jsenabled #expandcollapseannotations {display:inline;}
+#page-mod-moewiki-view #expandallannotations {display:inline;}
+#page-mod-moewiki-view #collapseallannotations {display:none;}
+
+
+#moewiki_addannotation label {
+    display:block;
+}
+
+#moewiki_addannotation_buttons {
+}
+/** Override styles for annotation.php **/
+#page-mod-moewiki-annotate #mform1 {
+    margin-top:2em;
+}
+
+#page-mod-moewiki-annotate #mform1 .fitem .fitemtitle {
+    padding-right: 15px;
+    width: 160px;
+}
+
+#page-mod-moewiki-annotate #mform1 .fitem .ftextarea {
+    margin-left: 140px;
+    width: 400px;
+}
+
+#page-mod-moewiki-annotate #mform1 .fitem .fcheckbox {
+    margin-left: 140px;
+}
+
+#page-mod-moewiki-annotate #mform1 .fitem .fgroup {
+    margin-left: 140px;
+}
+#page-mod-moewiki-annotate #resolvedAnnotation{
+	border: 1px solid grey;
+	text-align: center;
+}
+#page-mod-moewiki-annotate #resolvedAnnotation thead,
+#page-mod-moewiki-annotate #resolvedAnnotation tr,
+#page-mod-moewiki-annotate #resolvedAnnotation td{
+	border-bottom:1px solid grey;
+}
+.moewiki_lock_div {margin-top:2em;}
+
+/* Ugh, problems when resized, I can't get it to work */
+.ie7 #wikiselect {
+    font-size:11px;
+}
+
+#annotationdialog label {
+    display:block;
+    float:left;
+    width:30%;
+    clear:left;
+}
+.dir-rtl#annotationdialog label {
+    float: right;
+    clear: right;
+}
+
+#page-mod-moewiki-edit #annotationdialog {display: none;}
+#page-mod-moewiki-edit div#annotationdialog_c{width:90%;}
+#page-mod-moewiki-edit div#annotationdialog_c .mform,
+#annotationdialog_c select{width:100%;}
+
+.clear {
+    clear:both;
+}
+
+.yui-pe .yui-pe-content {
+    display:none;
+}
+
+#yui-gen0-button {color:#000000;}
+
+.moewiki-notifyproblem {
+    color: #ffffff;
+    background-color: #ff0000;
+    padding: 0 2em;
+}
+
+.moewiki-sizewarning img {
+    margin-right: 4px;
+    position:relative;
+    top: 3px;
+}
+
+.moewiki-sizewarning {
+    margin-top: 10px;
+    margin-left: 20px;
+    text-indent: -20px;
+}
+
+.ouw_wordcount span {
+    margin-top: 0.5em;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #555;
+}
+
+#ouw_newsectionname,
+#ouw_newpagename {
+    margin-right:5px;
+}
+
+#page-mod-moewiki-edit .fp-pathbar {
+    display: none;
+}
+
+/** Styles for participation.php **/
+#page-mod-moewiki-participation fieldset.felement {margin-left: 16%;}
+#page-mod-moewiki-participation form#options div {text-align:right;margin-left:auto;margin-right:20px;}
+#page-mod-moewiki-participation .header .commands {display: inline;}
+#page-mod-moewiki-participation .picture {width: 35px;}
+#page-mod-moewiki-participation .fullname,
+#page-mod-moewiki-participation .pagescreated,
+#page-mod-moewiki-participation .pagesedited,
+#page-mod-moewiki-participation .wordsadded,
+#page-mod-moewiki-participation .wordsdeleted {text-align: left;}
+#page-mod-moewiki-participation .participation .grade,
+#page-mod-moewiki-participation .qgprefs #optiontable {text-align:right;margin-left:auto;}
+
+/** Styles for userparticipation.php **/
+#page-mod-moewiki-user-participation fieldset.felement {margin-left: 16%;}
+#page-mod-moewiki-user-participation form#options div {text-align:right;margin-left:auto;margin-right:20px;}
+#page-mod-moewiki-user-participation .header .commands {display: inline;}
+#page-mod-moewiki-user-participation .date,
+#page-mod-moewiki-user-participation .time,
+#page-mod-moewiki-user-participation .page,
+#page-mod-moewiki-user-participation .words,
+#page-mod-moewiki-user-participation .view {text-align: left;}
+#page-mod-moewiki-user-participation .qgprefs #optiontable {text-align:right;margin-left:auto;}
+
+#page-mod-moewiki-user-participation .savegradesbutton {text-align: center;}
+
+/** Style for missing template images message **/
+.imgremoved {
+    font-weight:bold;
+}
+
+/* Import process */
+#page-mod-moewiki-import .moewiki_import h3 {
+    font-weight: bold;
+}
+.moewiki_import.moewiki_import_step2 form {
+    background: 0;
+    padding: 0;
+}
+.moewiki_import .moewiki_import_act {
+    margin-bottom: .5em;
+}
+.moewiki_import .moewiki_import_act .moewiki_import_link a {
+    margin-left: 50px;
+    text-decoration: none;
+}
+.moewiki_import .moewiki_import_act .fitem {
+    margin-left: 40px;
+}
+.moewiki_import .moewiki_import_act .moewiki_import_link img {
+    margin-right: 5px;
+}
+.moewiki_import .moewiki_import_act .moewiki_import_nocontent {
+    margin-left: 100px;
+    font-style: italic;
+}
+.ouw_indextree input.moewiki_page_checkbox {
+    float: left;
+    margin-top: 8px;
+    margin-left: 3px;
+    margin-right: 5px;
+    position: relative;
+    display: inline;
+}
+.ie7 .ouw_indextree input.moewiki_page_checkbox {
+    margin-top:25px;
+}
+.moewiki_import.moewiki_import_step3 div.fstatic ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.moewiki_import_warn {
+    padding: 1em;
+    color: red;
+}
+.moewiki_import_info {
+    padding: 1em;
+}
+.moewiki_import.moewiki_import_step4 ul {
+    list-style: none;
+}
+
+.moewikilmt {
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+.ouw-comparebutton-wrapper {
+    text-align: right;
+}
+
+#page-mod-moewiki-view #testmodal {
+	display: none;
+	position: absolute;
+	top: 568px;
+}
+#page-mod-moewiki-view #annotationFrom{
+	
+}
