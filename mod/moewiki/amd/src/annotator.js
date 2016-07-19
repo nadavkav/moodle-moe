@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 (function(f){
 	if(typeof exports==="object"&&typeof module!=="undefined"){
 		module.exports=f();
@@ -890,7 +891,6 @@ var isFunction = require("./utils").isFunction;
  *         fulfilled, or rejected if any of them become rejected.
  */
 function all(promises) {
-  /* jshint validthis:true */
   var Promise = this;
 
   if (!isArray(promises)) {
@@ -1050,7 +1050,6 @@ exports.asap = asap;
 
 
 function cast(object) {
-  /* jshint validthis:true */
   if (object && typeof object === 'object' && object.constructor === this) {
     return object;
   }
@@ -1082,7 +1081,6 @@ exports.configure = configure;
 },{}],10:[function(require,module,exports){
 (function (global){
 "use strict";
-/* global self */
 var RSVPPromise = require("./promise").Promise;
 var isFunction = require("./utils").isFunction;
 
@@ -1394,7 +1392,6 @@ var isArray = require("./utils").isArray;
  *         promise was rejected with.
  */
 function race(promises) {
-  /* jshint validthis:true */
   var Promise = this;
 
   if (!isArray(promises)) {
@@ -1446,7 +1443,6 @@ exports.race = race;
  *         `reason`.
  */
 function reject(reason) {
-  /* jshint validthis:true */
   var Promise = this;
 
   return new Promise(function (resolve, reject) {
@@ -1482,7 +1478,6 @@ exports.reject = reject;
  * @return {Promise} a promise that will become fulfilled with the given `value`
  */
 function resolve(value) {
-  /* jshint validthis:true */
   var Promise = this;
   return new Promise(function(resolve) {
     resolve(value);
@@ -8932,7 +8927,6 @@ function createTween( value, prop, animation ) {
 }
 
 function defaultPrefilter( elem, props, opts ) {
-	/* jshint validthis: true */
 	var prop, value, toggle, tween, hooks, oldfire, display, checkDisplay,
 		anim = this,
 		orig = {},
@@ -17064,3 +17058,4 @@ exports.mousePosition = mousePosition;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"es6-promise":5,"jquery":17}]},{},[1])(1)
 });
+/* jshint ignore:end */
