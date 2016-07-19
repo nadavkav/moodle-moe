@@ -26,7 +26,7 @@
 /* Core */
 $string['configtitle'] = 'moe';
 $string['pluginname'] = 'moe';
-$string['backtocourse'] = 'Back to course';
+$string['backtocourse'] = 'חזרה לקורס';
 $string['choosereadme'] = '
 <div class="clearfix">
 <div style="margin-bottom:20px;">
@@ -44,8 +44,8 @@ $string['choosereadme'] = '
 <p style="text-align:center;"><img class="img-polaroid" src="moe/pix/redPIthemes.jpg" /></p>';
 
 /* Settings - General */
-$string['settings_general'] = 'General';
-$string['lemidadigit'] = 'Digital Learning';
+$string['settings_general'] = 'כללי';
+$string['lemidadigit'] = 'למידה דיגיטלית';
 $string['logo'] = 'Logo';
 $string['logodesc'] = 'Please upload your custom logo here. If you upload a logo it will appear in the header.';
 $string['logo_res'] = 'Standard logo dimension';
@@ -223,13 +223,13 @@ $string['auth_googleoauth2_desc'] = 'Use the Moodle Oauth2 authentication plugin
 
 
 /* Theme */
-$string['visibleadminonly'] ='Blocks moved into the area below will only be seen by admins';
-$string['region-side-post'] = 'Right';
-$string['region-side-pre'] = 'Left';
+$string['visibleadminonly'] ='בלוקים הנמצאים מטה ניתנים לצפייה רק על ידי מנהלי מערכת';
+$string['region-side-post'] = 'ימין';
+$string['region-side-pre'] = 'שמאל';
 $string['region-footer-left'] = 'Footer (Left)';
 $string['region-footer-middle'] = 'Footer (Middle)';
 $string['region-footer-right'] = 'Footer (Right)';
-$string['region-hidden-dock'] = 'Hidden from users';
+$string['region-hidden-dock'] = 'מוסתר מהמשתמשים';
 $string['nextsection'] = '';
 $string['previoussection'] = '';
 $string['backtotop'] = '';

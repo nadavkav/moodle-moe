@@ -677,9 +677,10 @@ div.course_category_tree .coursebox.even {
 }
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
-	{
+{
 	background-color: #d8eaf5;
 	border: 1px solid #7fafcd;
+	padding-right: 1em;
 }
 
 .course-content ul.ctopics #toggle-1 {
@@ -696,7 +697,13 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .course-content ul.ctopics li.section .content .toggle {
 	border: 1px solid #c4d2d0;
 }
-
+.course-content ul.ctopics li.section .content .toggle span.the_toggle h3.sectionname {
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+}
 .course-content ul.ctopics li.section:nth-child(odd) .content .toggle,
 	.course-content ul.ctopics li.section:nth-child(odd) .content.sectionhidden
 	{
@@ -3313,4 +3320,8 @@ background-image: none;
     background: -webkit-linear-gradient(top, #ffdecd 0%,#ecab8d 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #ffdecd 0%,#ecab8d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdecd', endColorstr='#ecab8d',GradientType=0 );
+}
+
+body.dir-rtl .block_course_list .content{
+	text-align: right;
 }
