@@ -148,7 +148,7 @@ function moewiki_update_instance($data, $mform) {
         foreach ($subwikis as $subwiki) {
             $page = $DB->get_record("moewiki_pages", array("title" => "", "subwikiid" => $subwiki->id));
 
-            if($page->currentversionid == $page->firstversionid) {
+            if($page && $page->currentversionid == $page->firstversionid) {
                 $currentversion = $DB->get_record('moewiki_versions', array("id" => $page->currentversionid));
 
                 $currentversion->xhtml = $texttemplate;
