@@ -57,16 +57,16 @@ if ($certificate->orientation == 'L') {
 } else { // Portrait
     $x = 10;
     $y = 40;
-    $sealx = 150;
-    $sealy = 220;
+    $sealx = 117;
+    $sealy = 222;
     $sigx = 30;
     $sigy = 230;
     $custx = 30;
     $custy = 230;
-    $wmarkx = 26;
-    $wmarky = 58;
-    $wmarkw = 158;
-    $wmarkh = 170;
+    $wmarkx = 10;
+    $wmarky = 10;
+    $wmarkw = 190;
+    $wmarkh = 277;
     $brdrx = 0;
     $brdry = 0;
     $brdrw = 210;
@@ -82,7 +82,7 @@ $fontserif = get_config('certificate', 'fontserif');
 certificate_print_image($pdf, $certificate, CERT_IMAGE_BORDER, $brdrx, $brdry, $brdrw, $brdrh);
 certificate_draw_frame($pdf, $certificate);
 // Set alpha to semi-transparency
-$pdf->SetAlpha(0.2);
+$pdf->SetAlpha(1);
 certificate_print_image($pdf, $certificate, CERT_IMAGE_WATERMARK, $wmarkx, $wmarky, $wmarkw, $wmarkh);
 $pdf->SetAlpha(1);
 certificate_print_image($pdf, $certificate, CERT_IMAGE_SEAL, $sealx, $sealy, '', '');
