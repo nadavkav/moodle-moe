@@ -34,7 +34,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2016072002;
+$plugin->version = 2016072003;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->requires  = 2016052300.00; // 3.1 (Build: 20160523).
 $plugin->component = 'format_moetopcoll';

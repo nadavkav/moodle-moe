@@ -307,121 +307,123 @@ function moewiki_create_subwiki($moewiki, $cm, $course, $userid = null, $groupid
  */
 function moewiki_init_pages($course, $cm, $moewiki, $subwiki) {
     global $CFG;
-
-    if (is_null($moewiki->template)) {
+    
+    if (is_null($moewiki->template) && is_null($moewiki->template_text)) {
         return;
     }
-
-    $fs = get_file_storage();
-    $zip = get_file_packer();
-    $context = context_module::instance($cm->id);
-    $filepath = '/'.$context->id.'/mod_moewiki/template/'.$moewiki->id.$moewiki->template;
-    if ($file = $fs->get_file_by_hash(sha1($filepath)) AND !$file->is_directory()) {
-        if (strpos($moewiki->template, '.xml') !== false) {
-            // XML template expected.
-            $xmlfile = $file;
-        } else {
-            // Zip format expected.
-            $xmlfilename = strtolower(get_string('template', 'mod_moewiki')) . '.xml';
-            if (!$xmlfile = $fs->get_file($context->id, 'mod_moewiki', 'template', $moewiki->id, '/',
-                    $xmlfilename)) {
-                // XML (and other files) not extracted yet. Do once only.
-                $zip->extract_to_storage($file, $context->id, 'mod_moewiki', 'template', $moewiki->id, '/');
-                $xmlfile = $fs->get_file($context->id, 'mod_moewiki', 'template', $moewiki->id, '/',
-                    $xmlfilename);
+    
+    if ($moewiki->template_text) {
+        $title = null;
+        $xhtml = $moewiki->template_text;
+        $newverid = moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $title, $xhtml, - 1, - 1, - 1, true);
+    } else {
+        $fs = get_file_storage();
+        $zip = get_file_packer();
+        $context = context_module::instance($cm->id);
+        $filepath = '/' . $context->id . '/mod_moewiki/template/' . $moewiki->id . $moewiki->template;
+        if ($file = $fs->get_file_by_hash(sha1($filepath)) and ! $file->is_directory()) {
+            if (strpos($moewiki->template, '.xml') !== false) {
+                // XML template expected.
+                $xmlfile = $file;
+            } else {
+                // Zip format expected.
+                $xmlfilename = strtolower(get_string('template', 'mod_moewiki')) . '.xml';
+                if (! $xmlfile = $fs->get_file($context->id, 'mod_moewiki', 'template', $moewiki->id, '/', $xmlfilename)) {
+                    // XML (and other files) not extracted yet. Do once only.
+                    $zip->extract_to_storage($file, $context->id, 'mod_moewiki', 'template', $moewiki->id, '/');
+                    $xmlfile = $fs->get_file($context->id, 'mod_moewiki', 'template', $moewiki->id, '/', $xmlfilename);
+                }
             }
-        }
-
-        $content = $xmlfile->get_content();
-        $xml =  new DOMDocument();
-        $xml->loadXML($content);
-        if (!$xml) {
-            moewiki_error('Failed to load wiki template - not valid XML.
+            
+            $content = $xmlfile->get_content();
+            $xml = new DOMDocument();
+            $xml->loadXML($content);
+            if (! $xml) {
+                moewiki_error('Failed to load wiki template - not valid XML.
                     Check file in XML viewer and correct.');
-        }
-        if ($xml->documentElement->tagName != 'wiki') {
-            moewiki_error('Failed to load wiki template - must begin with &lt;wiki> tag.');
-        }
-        for ($page = $xml->documentElement->firstChild; $page; $page = $page->nextSibling) {
-            if ($page->nodeType != XML_ELEMENT_NODE) {
-                continue;
             }
-            if ($page->tagName != 'page') {
-                moewiki_error('Failed to load wiki template - expected &lt;page>.');
+            if ($xml->documentElement->tagName != 'wiki') {
+                moewiki_error('Failed to load wiki template - must begin with &lt;wiki> tag.');
             }
-            $title = null;
-            $xhtml = null;
-            $oldcontextid = null;
-            $oldpagever = null;
-            $oldversionid = null;
-            $attachments = array();
-            for ($child = $page->firstChild; $child; $child = $child->nextSibling) {
-                if ($child->nodeType != XML_ELEMENT_NODE) {
+            for ($page = $xml->documentElement->firstChild; $page; $page = $page->nextSibling) {
+                if ($page->nodeType != XML_ELEMENT_NODE) {
                     continue;
                 }
-                if (!$child->firstChild) {
-                    $text = '';
-                } else {
-                    if ($child->firstChild->nodeType != XML_TEXT_NODE &&
-                       $child->firstChild->nodeType != XML_CDATA_SECTION_NODE) {
-                        moewiki_error('Failed to load wiki template - expected text node.');
-                    }
-                    if ($child->firstChild->nextSibling) {
-                        moewiki_error('Failed to load wiki template - expected single text node.');
-                    }
-                    $text = $child->firstChild->nodeValue;
+                if ($page->tagName != 'page') {
+                    moewiki_error('Failed to load wiki template - expected &lt;page>.');
                 }
-                switch ($child->tagName) {
-                    case 'title':
-                        // Replace non-breaking spaces with normal spaces in title
-                        $title = str_replace(html_entity_decode('&nbsp;', ENT_QUOTES, 'UTF-8'), ' ', $text);
-                        break;
-                    case 'xhtml':
-                        $xhtml = $text;
-                        break;
-                    case 'versionid':
-                        $oldversionid = (int) $text;
-                        break;
-                    case 'attachments':
-                        $attachments = explode('|', $text);
-                        break;
-                    default:
-                        moewiki_error('Failed to load wiki template - unexpected element &lt;'.
-                                $child->tagName.'>.');
+                $title = null;
+                $xhtml = null;
+                $oldcontextid = null;
+                $oldpagever = null;
+                $oldversionid = null;
+                $attachments = array();
+                for ($child = $page->firstChild; $child; $child = $child->nextSibling) {
+                    if ($child->nodeType != XML_ELEMENT_NODE) {
+                        continue;
+                    }
+                    if (! $child->firstChild) {
+                        $text = '';
+                    } else {
+                        if ($child->firstChild->nodeType != XML_TEXT_NODE && $child->firstChild->nodeType != XML_CDATA_SECTION_NODE) {
+                            moewiki_error('Failed to load wiki template - expected text node.');
+                        }
+                        if ($child->firstChild->nextSibling) {
+                            moewiki_error('Failed to load wiki template - expected single text node.');
+                        }
+                        $text = $child->firstChild->nodeValue;
+                    }
+                    switch ($child->tagName) {
+                        case 'title':
+                            // Replace non-breaking spaces with normal spaces in title
+                            $title = str_replace(html_entity_decode('&nbsp;', ENT_QUOTES, 'UTF-8'), ' ', $text);
+                            break;
+                        case 'xhtml':
+                            $xhtml = $text;
+                            break;
+                        case 'versionid':
+                            $oldversionid = (int) $text;
+                            break;
+                        case 'attachments':
+                            $attachments = explode('|', $text);
+                            break;
+                        default:
+                            moewiki_error('Failed to load wiki template - unexpected element &lt;' . $child->tagName . '>.');
+                    }
                 }
-            }
-            if ($xhtml === null) {
-                moewiki_error('Failed to load wiki template - required &lt;xhtml>.');
-            }
-
-            $newverid = moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $title, $xhtml,
-                     -1, -1, -1, true);
-
-            // Copy any images or attachments associated with old version id.
-            if ($oldfiles = $fs->get_directory_files($context->id, 'mod_moewiki', 'template',
-                    $moewiki->id, "/$oldversionid/")) {
-                foreach ($oldfiles as $oldfile) {
-                    if (in_array($oldfile->get_filename(), $attachments)) {
-                        // Copy this file to the version attachment record.
-                        $fs->create_file_from_storedfile(array(
+                if ($xhtml === null) {
+                    moewiki_error('Failed to load wiki template - required &lt;xhtml>.');
+                }
+                
+                $newverid = moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $title, $xhtml, - 1, - 1, - 1, true);
+                
+                // Copy any images or attachments associated with old version id.
+                if ($oldfiles = $fs->get_directory_files($context->id, 'mod_moewiki', 'template', $moewiki->id, "/$oldversionid/")) {
+                    foreach ($oldfiles as $oldfile) {
+                        if (in_array($oldfile->get_filename(), $attachments)) {
+                            // Copy this file to the version attachment record.
+                            $fs->create_file_from_storedfile(array(
                                 'contextid' => $context->id,
                                 'filearea' => 'attachment',
                                 'itemid' => $newverid,
-                                'filepath' => '/'), $oldfile);
-                    }
-                    if (mimeinfo('string', $oldfile->get_filename()) == 'image') {
-                        // Copy this image file to the version record.
-                        $fs->create_file_from_storedfile(array(
+                                'filepath' => '/'
+                            ), $oldfile);
+                        }
+                        if (mimeinfo('string', $oldfile->get_filename()) == 'image') {
+                            // Copy this image file to the version record.
+                            $fs->create_file_from_storedfile(array(
                                 'contextid' => $context->id,
                                 'filearea' => 'content',
                                 'itemid' => $newverid,
-                                'filepath' => '/'), $oldfile);
+                                'filepath' => '/'
+                            ), $oldfile);
+                        }
                     }
                 }
             }
+        } else {
+            moewiki_error('Failed to load wiki template - file missing.');
         }
-    } else {
-        moewiki_error('Failed to load wiki template - file missing.');
     }
 }
 

@@ -14,16 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Version.
- *
- * @package mod_moewiki
- * @copyright 2014 The Open University
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-$plugin->version  = 2016072000;
-$plugin->requires = null;
-$plugin->component = 'mod_moewiki';
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.2.1';
+$observers = array(
+    array(
+        'eventname' => '\core\event\user_enrolment_created',
+        'callback'  => '\mod_moewiki\observer::userenrolled'
+    ),
+    array(
+        'eventname' => '\core\event\user_enrolment_deleted',
+        'callback'   => '\mod_moewiki\observer::userdeleted'
+    ),
+);

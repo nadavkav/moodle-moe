@@ -207,13 +207,17 @@ class mod_moewiki_mod_form extends moodleform_mod {
         global $DB;
 
        try {
-           $updatedwikis = $DB->get_record_sql("SELECT COUNT(ver.id) FROM mdl_moewiki_versions ver
+            if(isset($this->_cm->instance)){
+                $updatedwikis = $DB->get_record_sql("SELECT COUNT(ver.id) FROM mdl_moewiki_versions ver
                                                     JOIN mdl_moewiki_pages page
                                                     ON ver.pageid = page.id
                                                     JOIN mdl_moewiki_subwikis sub
                                                     ON sub.id = page.subwikiid
                                                     WHERE sub.wikiid = ".$this->_cm->instance."
                                                     AND ver.previousversionid > 0;");
+            } else {
+                return true;
+            }
             if(isset($updatedwikis->count) && $updatedwikis->count > 0) {
                 return false;
             }
