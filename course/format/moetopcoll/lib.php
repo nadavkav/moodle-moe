@@ -1087,7 +1087,7 @@ class format_moetopcoll extends format_base {
                         }
                     }
                 }
-                if (!empty($labels)) {
+                if ((!empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
                     foreach ($labels as $key => $label) {
                         $cm = null;
