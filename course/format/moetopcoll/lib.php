@@ -1076,7 +1076,8 @@ class format_moetopcoll extends format_base {
                 $section = $modinfo->get_section_info($sectionnum);
                 $course = $DB->get_record('course', array('id' => $this->courseid));
                 $completioninfo = new completion_info($course);
-                foreach ($modinfo->sections[$section->section] as $modnumber) {
+                if($section != null)
+                {foreach ($modinfo->sections[$section->section] as $modnumber) {
                     $mod = $modinfo->cms[$modnumber];
                     if ($mod->modname == 'label') {
                         $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
@@ -1086,6 +1087,7 @@ class format_moetopcoll extends format_base {
                             }
                         }
                     }
+                }
                 }
                 if ((!empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
