@@ -502,7 +502,9 @@ body.format-moetopcoll .course-content ul.ctopics li.section:not(#section-0) .su
 	width: 50%;
 	background-color: #fbf8e7;
 }
-
+body.format-moetopcoll .course-content ul.ctopics li#section-0 .summary{
+	border: none;
+}
 body.format-moetopcoll.dir-rtl .course-content ul.ctopics li.section .summary {
     margin-right: 0;
 	padding: 0 1em;
