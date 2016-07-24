@@ -3057,10 +3057,6 @@ ul.nav.nav-tabs {
     margin-bottom: -1px;
 }
 
-#page-mod-questionnaire-report br {
-    display: none;
-}
-
 #page-mod-questionnaire-report.path-mod-questionnaire div[role="main"] > .generalbox h3.surveyTitle {
     background: none;
 }
@@ -3345,4 +3341,16 @@ background-image: none;
 
 body.dir-rtl .block_course_list .content{
 	text-align: right;
+}
+
+.path-mod-questionnaire div[role="main"] .qn-content{
+	padding: 0 1em;
+}
+
+.path-mod-questionnaire .nav-tabs:nth-of-type(3) {
+	float: none;
+}
+
+#page-mod-questionnaire-preview div[role="main"] h2 {
+	line-height: 55px;
 }
