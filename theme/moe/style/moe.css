@@ -2960,3 +2960,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .path-mod-questionnaire .nav-tabs:nth-of-type(3) {
 	float: none;
 }
+
+#page-mod-questionnaire-preview div[role="main"] h2 {
+	line-height: 55px;
+}
