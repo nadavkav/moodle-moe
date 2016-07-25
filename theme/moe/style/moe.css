@@ -3325,3 +3325,7 @@ background-image: none;
 body.dir-rtl .block_course_list .content{
 	text-align: right;
 }
+
+.gradeparent {
+	overflow-x: auto;
+}
