@@ -3339,3 +3339,6 @@ body.dir-rtl .block_course_list .content{
 .dir-rtl #region-main .block .header .title h2{
 	padding: 0 16px 0 6px;
 }
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
+	width: 45%;
+}
