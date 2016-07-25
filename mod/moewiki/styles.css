@@ -914,6 +914,6 @@ a.moewiki_noshow:link,a.moewiki_noshow:visited {
 	position: absolute;
 	top: 568px;
 }
-#page-mod-moewiki-view #annotationFrom{
-	
+.annotatheper{
+	font-weight: bolder;
 }
