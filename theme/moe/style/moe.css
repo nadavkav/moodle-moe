@@ -3333,3 +3333,9 @@ body.dir-rtl .block_course_list .content{
 #backtocourse_top {
 	margin-bottom: 1em;
 }
+.dir-rtl #region-main .block .header .title{
+	padding-right: 0px;
+}
+.dir-rtl #region-main .block .header .title h2{
+	padding: 0 16px 0 6px;
+}
