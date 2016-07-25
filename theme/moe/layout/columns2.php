@@ -75,7 +75,7 @@ echo $OUTPUT->doctype() ?>
             $classextra2 = ' desktop-first-column';
         }
         if ( $PAGE->context->get_level_name() == get_string('activitymodule') || (isset($showbacktocourse) && in_array($PAGE->bodyid,$showbacktocourse)) ) {
-            echo "<a id='backtocourse_top' class='btn' href='$CFG->wwwroot/course/view.php?id=$COURSE->id'>".get_string('backtocourse','theme_moe')."</a>";
+            echo "<a id='backtocourse_top' class='btn span3' href='$CFG->wwwroot/course/view.php?id=$COURSE->id'>".get_string('backtocourse','theme_moe')."</a>";
         }
         echo $OUTPUT->blocks('side-pre', 'span3'.$classextra1.$classextra2);
         ?>
