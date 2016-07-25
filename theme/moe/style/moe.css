@@ -3342,3 +3342,6 @@ body.dir-rtl .block_course_list .content{
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
 	width: 45%;
 }
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow{
+    padding: 0 1em 0 1em;
+}
