@@ -1034,11 +1034,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	font-weight: bold;
 }
 
-.moeforumcontainer tbody tr.discussion td.picture, .moeforumcontainer tbody tr.discussion td.replies,
-	.moeforumcontainer tbody tr.discussion td.lastpost {
-	background-color: #bbf4f1 !important;
-}
-
 .moeforumcontainer thead th.header.lastpost, .moeforumcontainer tbody tr.discussion td.lastpost,
 	.moeforumcontainer thead th.header.replies, .moeforumcontainer tbody tr.discussion td.replies
 	{
@@ -3344,4 +3339,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 }
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow{
     padding: 0 1em 0 1em;
+}
+.path-mod-forum .discussionsubscription > a > img {
+	width:  33px;
+	padding: 11px 4px;
 }
