@@ -3807,3 +3807,63 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
     		margin-right: 90%;
 	}
 }
+.path-mod-certificate div[role="main"] >h2 {
+    border: #879378 1px solid;
+    padding: 0px 10px;
+    color: #2a3429;
+	background-image: url([[pix:theme|bg/cert/bgtitle]]);
+	background-size: cover;
+	margin-bottom: 0px;
+}
+
+#page-mod-certificate-report.path-mod-certificate div[role="main"] >h2 {
+    border: #879378 1px solid;
+    padding: 0px 10px;
+    color: #2a3429;
+	background-image: url([[pix:theme|bg/cert/bgtitle]]);
+	background-size: cover;
+	margin: 0px;
+	border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] table.generaltable {
+    width: 100% !important;
+    border-left: #d3e7cc 25vw solid;
+    border-right: #d3e7cc 25vw solid;
+    border-top: #d3e7cc 4em solid;
+ }
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] table.generaltable th {
+    background-color: #d9e7cc;
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] h2 ~ p {
+    background-color: #d9e7cc;
+	margin-bottom: 0px;
+	padding-bottom: 10px;
+}
+
+#page-mod-certificate-view.path-mod-certificate div[role="main"] .singlebutton {
+    background-color: #d9e7cc;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+}
+
+#page-mod-certificate-report div[role="main"] {
+    background-color: #d3e7cc;
+	border: #879378 1px solid;
+}
+
+.path-mod-certificate input[type="submit"] {
+    background-color: #516a9e;
+}
+
+#page-mod-certificate-report .generaltable tbody>tr:nth-child(odd)>td {
+    background-color: #badbaf;
+}
+#page-mod-certificate-report .generaltable tbody>tr:nth-child(even)>td {
+    background-color: #d3e7cc;
+}
