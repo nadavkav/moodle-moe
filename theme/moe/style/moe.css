@@ -1011,10 +1011,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding-bottom: 40px;
 }
 
-.moeforumcontainer tbody tr td, .moeforumcontainer tbody tr {
-	background-color: #e4f6f5 !important;
+.moeforumcontainer tbody tr {
+	background-color: #e4f6f5;
 }
-
+.moeforumcontainer tbody tr:NTH-CHILD(2n+1) {
+	background-color: #d4f4f2;
+}
+.forumtype-news .forumheaderlist tbody>tr:nth-child(odd)>td,
+.forumtype-news .forumheaderlist tbody tr:hover>td{
+	background-color: transparent;
+}
 .moeforumcontainer tbody a:link {
 	color: #5c4b67 !important;
 	font
