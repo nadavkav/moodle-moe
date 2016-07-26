@@ -2668,7 +2668,7 @@ ul.nav.nav-tabs {
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
 	margin-right: 1em;
-	margin-bottom: 5em !important;
+	margin-bottom: 5em ;
 }
 
 /*all alphabeth letters*/
@@ -2676,7 +2676,7 @@ ul.nav.nav-tabs {
 	padding: 2px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
-	margin-bottom: 5em !important;
+	margin-bottom: 5em;
 }
 
 /*all alphabeth letters*/
@@ -2684,7 +2684,7 @@ ul.nav.nav-tabs {
 	padding: 2px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
-	margin-bottom: 5em !important;
+	margin-bottom: 5em;
 }
 
 
@@ -2694,7 +2694,6 @@ ul.nav.nav-tabs {
 	background-color: #dcfcad;
 	border: 2px solid #e0dccb;
 	padding: 2px 6px 2px 6px;
-	margin-bottom: 5em !important;
 }
 /*all alphabeth letters*/
 #page-mod-glossary-view  .glossarydisplay .entrybox b+a {
@@ -3872,4 +3871,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 }
 #page-mod-certificate-report .generaltable tbody>tr:nth-child(even)>td {
     background-color: #d3e7cc;
+}
+#page-mod-glossary-view td.icons div.mdl-left a.comment-link{
+	
+    margin-bottom: 0px;
+	
 }
