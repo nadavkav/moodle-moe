@@ -24,6 +24,7 @@
 namespace mod_dataform\plugininfo;
 
 use core\plugininfo\base;
+use \part_of_admin_tree;
 
 defined('MOODLE_INTERNAL') || die();
 
