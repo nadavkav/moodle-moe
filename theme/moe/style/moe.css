@@ -3344,3 +3344,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	width:  33px;
 	padding: 11px 4px;
 }
+#page-mod-glossary-view td.icons div.mdl-left a.comment-link{
+	
+    margin-bottom: 0px;
+	
+}
