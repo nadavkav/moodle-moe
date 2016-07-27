@@ -3877,3 +3877,77 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
     margin-bottom: 0px;
 	
 }
+.path-mod-checklist div[role="main"]{
+	border: 1px solid #7db7b8;
+	border-top: none;
+	background-color: #cfedf8;
+}
+.path-mod-checklist div[role="main"] h2 {
+	margin: 0 0;
+	color: #464948;
+	border-bottom: 1px solid #7db7b8;
+	border-top: 1px solid #7db7b8;
+	padding: 0 1em;
+	background-image: url([[pix:theme|bg/questionnaire/title]]);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.path-mod-checklist div[role="main"] > .tabs-container{
+	margin-top: 26px;
+}
+.path-mod-checklist div[role="main"] > .tabs-container ul.nav-tabs{
+	height: 40px;
+}
+.path-mod-checklist div[role="main"] > .tabs-container ul.nav-tabs li{
+	border-bottom: 4px solid #fdce86;
+}
+.path-mod-checklist div[role="main"] > .tabs-container ul.nav-tabs li a{
+	color: #000000;
+    background-color: #d1a361;
+}
+.path-mod-checklist div[role="main"] > .tabs-container ul.nav-tabs li.active{
+	   border-bottom: 4px solid #d1a361;
+	   border-top:2px solid #f6d9b0;
+}
+.path-mod-checklist div[role="main"] > .tabs-container ul.nav-tabs li.active a{
+	color: #000000;
+    background-color: #f6d9b0;
+}
+.path-mod-checklist div[role="main"] > .checklistbox{
+	border: 2px solid #eacda4;
+	background-color: #f9eedc;
+	padding: 0 3em;
+}
+.path-mod-checklist .boxwidthwide {
+	width: 90%;
+}
+.checklist_progress_outer{
+	border-color: #7cafba;
+	background-color: #dbf4fe;
+	border-radius: 0;
+}
+.checklist_progress_inner{
+	background-color: #539038;
+}
+.dir-rtl.path-mod-checklist .checklist_progress_outer,
+.dir-rtl.path-mod-checklist .checklist_progress_heading {
+	float: right !important;
+}
+.dir-rtl.path-mod-checklist .checklist_progress_heading {
+	width:100px !important;
+}
+.checklistbox > form input[type="submit"] {
+	background-image: none;
+    color: #005353 !important;
+    border: 8px solid transparent;
+    box-shadow: inset 0 0 0 1px #6ca6a5, 0 0 0 1px #6ca6a5;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 6px 18px;
+    border-image: url(/theme/image.php?theme=moe&component=theme&image=bg%2Fquestionnaire%2Fbtn) 1;
+    background: #96dde1;
+    background: -moz-linear-gradient(top, #96dde1 0%, #c9f2f8 73%);
+    background: -webkit-linear-gradient(top, #96dde1 0%,#c9f2f8 73%);
+    background: linear-gradient(to bottom, #96dde1 0%,#c9f2f8 73%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96dde1', endColorstr='#c9f2f8',GradientType=0 );
+}
