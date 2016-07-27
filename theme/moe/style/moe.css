@@ -3885,7 +3885,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	border-top: none;
 	background-color: #cfedf8;
 }
-.path-mod-checklist div[role="main"] h2 {
+.path-mod-checklist div[role="main"]>h2 {
 	margin: 0 0;
 	color: #464948;
 	border-bottom: 1px solid #7db7b8;
@@ -3962,17 +3962,35 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
     background: linear-gradient(to bottom, #96dde1 0%,#c9f2f8 73%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96dde1', endColorstr='#c9f2f8',GradientType=0 );
 }
+#page-mod-checklist-report div[role="main"] > .checklistbox{
+	border: none;
+}
 #page-mod-checklist-report  #region-main form:nth-of-type(1) input[type=submit],
-#page-mod-checklist-report  #region-main form:nth-of-type(2) input[type=submit] {
+#page-mod-checklist-report  #region-main form:nth-of-type(2) input[type=submit],
+#page-mod-checklist-report #region-main form:nth-of-type(3) input[type=submit] {
 	position: relative;
 	top: 1em;
 }
-
+#page-mod-checklist-report form + br+div.checklist_progress_heading,
+#page-mod-checklist-report form + br+div.checklist_progress_heading+#checklistprogressall div {
+	margin-top: 1em;
+}
+#page-mod-checklist-report form + br+div.checklist_progress_heading+#checklistprogressall span.checklist_progress_percent{
+	line-height: 3em;
+}
 table.checklistreport {
 	margin-top: 1em;
 }
+
+.generaltable tbody>tr:nth-child(odd)>th{
+	background-color: #fcf7e7;
+	border: 1px solid #eacea2;
+}
 table.checklistreport tr{
 	background-color: #e5dbce;
+}
+table.checklistreport tr td {
+	border: 1px solid #fdfdf5;
 }
 table.checklistreport tr:NTH-CHILD(2n+1),
 .generaltable tbody>tr:nth-child(odd)>td,
