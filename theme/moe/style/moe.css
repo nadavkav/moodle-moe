@@ -4104,6 +4104,3 @@ table.checklistreport tr:NTH-CHILD(2n+1),
 .que.essay .qtype_essay_response.readonly {
 	background-color: transparent;
 }
-body.format-moetopcoll .section .activity.modtype_label.label{
-	padding: 0 1em;
-}
