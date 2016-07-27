@@ -1970,7 +1970,10 @@ ul.nav.nav-tabs {
 .ouw_heading.ouw_heading3 {
 	background-color: #a2e0c7;
 }
-
+.ouw_byheading a.ouw_editsection{
+	background-color: transparent;
+	border: none;
+}
 .ouw_byheading a {
 	border: 1px solid #cdccc6;
 	padding: 0.3em;
