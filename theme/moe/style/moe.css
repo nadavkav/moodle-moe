@@ -3705,7 +3705,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	width: 45%;
 }
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow{
-    padding: 0 1em 0 1em;
+    padding: 0 2em 0 2em;
 }
 .path-mod-forum .discussionsubscription > a > img {
 	width:  33px;
