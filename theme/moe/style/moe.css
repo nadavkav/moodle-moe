@@ -4098,3 +4098,6 @@ table.checklistreport tr:NTH-CHILD(2n+1),
 #page-mod-checklist-view #additembox{
 	margin-left: 1em; 
 }
+.que.essay .qtype_essay_response.readonly {
+	background-color: transparent;
+}
