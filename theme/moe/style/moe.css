@@ -1,7 +1,16 @@
 @CHARSET "UTF-8";
-	
+
+#page-grade-grading-form-guide-edit #fitem_id_guide .addcomment input
+
+{	
+	color: black!important;
+}
 
 
+#page-grade-grading-form-guide-edit #fitem_id_guide .addcriterion input
+{	
+	color: black!important;
+}
 .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active > a 
 {
 	    margin-top:0.4px!important
