@@ -1,9 +1,25 @@
 @CHARSET "UTF-8";
+	
 
-#page-mod-data-view  div[role="main"] .nav-tabs > li.active > a
+
+.path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active > a 
+{
+	    margin-top:0.4px!important
+	
+}
+
+
+#page-mod-data-templates .tabs-container.clearfix .dragscroll
+{
+	    width: 94%!important;
+	
+}
+
+.path-mod-data div[role="main"] .nav-tabs > li.active > a
 
  { 
  
+ 	background:#DCDCDC;
 	margin-top:-7px!important;
  	border:1px solid #9785a2!important;
 }
@@ -4119,8 +4135,8 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel {
 	padding: 0 1em;
 }
 .path-mod-data div[role="main"] input[type="submit"], .path-mod-data div[role="main"] button, .path-mod-data div[role="main"] button.visibleifjs {
-    background-color: #d3cada;
-    border: 1px solid #9684a1;
+    background-color: #ebebeb;
+    border: 1px solid #BBB;
     color: #1e1e1c !important;
     box-shadow: none;
     border-radius: 0px;
