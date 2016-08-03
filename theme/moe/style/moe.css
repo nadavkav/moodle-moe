@@ -3191,6 +3191,7 @@ ul.nav.nav-tabs {
     height: 10px;
 }
 
+<<<<<<< HEAD
 #wrapper>#page-header {
     background-repeat: no-repeat;
     background-size: cover !important;
@@ -4109,4 +4110,267 @@ body.format-moetopcoll .section .activity.modtype_label.label div div div div di
 }
 body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel {
 	padding: 0 1em;
+}
+.path-mod-data div[role="main"] input[type="submit"], .path-mod-data div[role="main"] button, .path-mod-data div[role="main"] button.visibleifjs {
+    background-color: #d3cada;
+    border: 1px solid #9684a1;
+    color: #1e1e1c !important;
+    box-shadow: none;
+    border-radius: 0px;
+	font-weight: 700;
+}
+
+.path-mod-data div[role="main"] >h2 >span {
+    background-image: url([[pix:theme|bg/database/BG_titlle]]);
+    padding: 0 5px;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #8eab6b;
+    background-size: cover;
+    color: #2e2e2e;
+    font-size: 0.8em;
+    display: block;
+}
+
+.path-mod-data div[role="main"] #maincontent {
+	display: none;
+}
+
+.path-mod-data div[role="main"] >h2 {
+	margin: 0;
+}
+
+.path-mod-data div[role="main"] {
+    background-color: #ecf4d4;
+    border: 1px solid #73905a;
+}
+
+.path-mod-data div[role="main"] .nav-tabs > li > a {
+    background-color: #ddcee9;
+    border-radius: 0px;
+    color: #19171a;
+    border: 1px solid #9785a2;
+	cursor: pointer;
+}
+
+.path-mod-data div[role="main"] .nav-tabs {
+	width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    background-color: #b9c995;
+}
+
+.path-mod-data div[role="main"] form {
+	width: 94%;
+	margin-left: 3%;
+	margin-right: 3%;
+	background-color: #deeeb8;
+	border: 1px solid #748f5c;
+	margin-top: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.path-mod-data div[role="main"] .datapreferences form {
+	border-bottom: 0px;
+}
+.path-mod-data div[role="main"] .nav-tabs > li.active > a {
+	background-color: #6c5177;	
+	border: 0px;
+	color: #ffffff;
+}
+
+.path-mod-data div[role="main"] .nav-tabs > li.active {
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+.path-mod-data div[role="main"] .nav-tabs > li {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.path-mod-data div[role="main"] fieldset > .ftoggler {
+    background-image: url([[pix:theme|bg/database/BG_title_small]]);
+    padding: 3px 6px;
+    background-repeat: no-repeat;
+    border: 1px solid #c0d09b;
+    border-bottom: 0px;
+    background-size: cover;
+    color: #4d4255;
+    font-size: 1.5em;
+    display: inline;
+	margin-bottom: 0;
+	float: left;
+    width: auto;
+}
+
+.dir-rtl.path-mod-data div[role="main"] fieldset > .ftoggler {
+	float: right;
+}
+
+.path-mod-data div[role="main"] fieldset > .fcontainer {
+	border: 1px solid #bbc894;
+	background-color: #e9f1d2;
+    width: 90%;
+    padding: 26px 5%;
+}
+
+.path-mod-data div[role="main"] fieldset:nth-child(3) > .fcontainer {
+	background-color: #d1e0af;
+}
+
+.path-mod-data div[role="main"] fieldset > .fcontainer {
+	float: right;
+}
+
+.path-mod-data div[role="main"] form > fieldset {
+    margin-top: 40px;
+}
+
+.path-mod-data div[role="main"] form {
+	color: #803758;
+}
+
+.path-mod-data div[role="main"] form input#id_submitbutton {
+    background-color: #d4cbdb;
+    border: 1px solid #9684a1;
+    border-radius: 0px;
+    box-shadow: none;
+	color: #1d1f1e !important;
+	font-weight: 700;
+}
+
+.path-mod-data div[role="main"] form input#id_cancel {
+    background-color: #f79980 !important;
+    border: 1px solid #a55842;
+    border-radius: 0px;
+    box-shadow: none;
+	color: #1d1f1e !important;
+	font-weight: 700;
+}
+
+.path-mod-data div[role="main"] #fgroup_id_buttonar {
+	background-color: transparent;
+}
+
+.path-mod-data div[role="main"] .nav-tabs > li.active {
+    padding-top: 2px;
+    border: 0px;
+	cursor: pointer;
+}
+
+.path-mod-data div[role="main"] .paging {
+	background-color: #d4ccda;
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: 1px solid #9684a1;
+	color: #292429;
+}
+
+.path-mod-data div[role="main"] .paging > span, .path-mod-data div[role="main"] .paging > a {
+    display: inline-block;
+	padding-right: 5px;
+	padding-left: 5px;
+	color: #292429;
+}
+
+.path-mod-data div[role="main"] .paging > .next, .path-mod-data div[role="main"] .paging > .previous {
+	padding: 0px;
+}
+
+.path-mod-data div[role="main"] > br {
+    display: none;
+}
+
+.path-mod-data div[role="main"] .datapreferences input[type="submit"] {
+    background-color: #d3cada;
+    border: 1px solid #9684a1;
+    color: #1e1e1c !important;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.path-mod-data div[role="main"] form input[type="submit"], .path-mod-data div[role="main"] form input[type="button"] {
+	background-image: none;
+    background-color: #d5cad9 !important;
+    color: #1e1e1e !important;
+    border: 5px solid transparent;
+    box-shadow: inset 0 0 0 1px #9785a2, 0 0 0 1px #9785a2;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 6px 18px;
+    border-image: url([[pix:theme|bg/database/BG_kaftor]]) 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: none;
+    outline: 0px !important;
+}
+
+#page-mod-data-view.dir-rtl #checkall {
+	margin-right:24%;
+}
+
+.path-mod-data div[role="main"] .nav-tabs:nth-of-type(2), .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs {
+    background-color: #6c5177;
+}
+
+.path-mod-data div[role="main"] .nav-tabs:nth-of-type(2) > li > a, .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li > a {
+    background-color: transparent;
+    border: 0px;
+    color: #ffffff;
+}
+
+.path-mod-data div[role="main"] .nav-tabs:nth-of-type(2) > li.active, .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.path-mod-data .defaulttemplate {
+    border-bottom: 1px solid #74915b;
+	margin-bottom: 10px;
+}
+
+
+.path-mod-data div[role="main"] .nav-tabs:nth-of-type(2) > li.active > a, .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active > a {
+    background-color: #deeeb8;
+    border: 1px solid #374123;
+    color: #000000;
+    font-weight: 700;
+}
+
+.path-mod-data div[role="main"] .nav-tabs:nth-of-type(2) > li.active,  .path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active{
+	padding-top: 0px;
+}
+
+.path-mod-data hr {
+    display: none;
+}
+
+#page-mod-data-templates div[role="main"] > .template_heading {
+    background-image: url([[pix:theme|bg/database/BG_subtitle]]);
+    padding: 5px 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #4d4255;
+    font-size: 1.2em;
+    font-weight: 800;
+    display: inline-block;
+    margin-left: 3%;
+    margin-right: 3%;
+    border: 1px solid #b9c995;
+    border-bottom: 0px;
+}
+
+.path-mod-data div[role="main"] form#tempform table {
+    background-color: #e9f1d2;
+    border: 1px solid #9684a1;
+	padding: 10px;
+}
+
+.path-mod-data div[role="main"] form#tempform table .template_heading label {
+    color: #6b4246;
+}
+
+.path-mod-data div[role="main"] form#tempform table td {
+    padding: 15px;
 }
