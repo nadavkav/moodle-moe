@@ -1,5 +1,24 @@
 @CHARSET "UTF-8";
+/*.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a*/
 
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a
+{
+	color: white;
+	  
+}
+/*
+.dropdown-menu>li>a:not:hover 
+{ background-color: white!important; }
+
+.editor_atto_menu .dropdown-menu > li > a
+{
+	background-color: white!important;
+}
+.dropdown-menu>li>a
+{
+	background-color: white!important;
+}
+*/
 .atto_form textarea.fullwidth, .atto_form input.fullwidth
 {
 	width:90%;
