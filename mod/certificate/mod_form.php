@@ -130,7 +130,7 @@ class mod_certificate_mod_form extends moodleform_mod {
         // Design Options
         $mform->addElement('header', 'designoptions', get_string('designoptions', 'certificate'));
         $mform->addElement('select', 'certificatetype', get_string('certificatetype', 'certificate'), certificate_types());
-        $mform->setDefault('certificatetype', 'A4_non_embedded');
+        $mform->setDefault('certificatetype', 'typeA4_embedded');
         $mform->addHelpButton('certificatetype', 'certificatetype', 'certificate');
 
         $orientation = array( 'L' => get_string('landscape', 'certificate'), 'P' => get_string('portrait', 'certificate'));
