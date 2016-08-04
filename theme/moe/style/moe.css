@@ -1,6 +1,22 @@
 @CHARSET "UTF-8";
 
 
+#page-group-members  #assignform #existingcell 
+{
+	padding-right:10px;
+}
+
+#page-group-members  #assignform #existingcell p:first-child
+{
+  margin-top: 28px;
+}
+
+
+
+.loginbox .loginform {
+	text-align: center;
+}
+
 
 
 .loginbox .loginform {
