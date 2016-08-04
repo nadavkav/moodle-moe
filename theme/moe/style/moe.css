@@ -1,6 +1,36 @@
 @CHARSET "UTF-8";
 
 
+#page-admin-setting-editorsettingstinymce .tinymcesubplugins
+{
+	width: 90%;
+	
+}
+
+#page-admin-setting-editorsettingstinymce #adminsettings h3
+{
+	width: 90%;
+	
+}
+
+.tinymcebuttons
+{
+		width: 10%;
+}
+.generaltable .cell .c1
+{
+	width: 10%;
+}
+
+td .cell .c0
+{
+	width: 10%;
+}
+td .cell .c1
+{
+	width: 20px!important;
+	background-color:blue!important;
+}
 
 
 .loginbox .loginform {
