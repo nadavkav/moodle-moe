@@ -1,5 +1,15 @@
 @CHARSET "UTF-8";
 
+.atto_form textarea.fullwidth, .atto_form input.fullwidth
+{
+	width:90%;
+}
+
+.editor_atto_content
+{
+	
+padding-right:30px;
+}
 
 
 
