@@ -4557,3 +4557,13 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	margin-top: -7px !important;
 	border: 1px solid #9785a2 !important;
 }
+
+#page-group-members  #assignform #existingcell 
+{
+    padding-right:10px;
+}
+
+#page-group-members  #assignform #existingcell p:first-child
+{
+  margin-top: 28px;
+}
