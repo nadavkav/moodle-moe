@@ -1,72 +1,5 @@
 @CHARSET "UTF-8";
 
-
-#fgroup_id_buttonar  #id_submitbutton
-{
-		margin-right: 1em;
-	
-}
-
-#page-mod-oublog-editpost #region-main .mform .fitem .fitemtitle label
-
-{
-	padding-right:1em;
-	
-}
-
-#page-mod-oublog-editpost #fitem_id_tags .helptooltip .iconhelp
-{
-	
-	padding-right:1em;
-}
-
-
-.editor_atto_toolbar
-{
-	margin-right: 11.1em;
-	width: 87%!important;
-	
-}
-
-#page-mod-glossary-edit .editor_atto_toolbar
-{
-	margin-right: 11.1em;
-	width: 87%!important;
-}
-#page-mod-glossary-mod .editor_atto_toolbar
-{
-	margin-right: 11.1em;
-	width: 87%!important;
-}
-#page-mod-oublog-editpost .editor_atto_toolbar
-
-{
-	margin-right: 11.1em;
-	width: 87%!important;
-	box-sizing: border-box;
-}
-
-#page-mod-oublog-editpost .editor_atto_toolbar, .editor_atto_content_wrap, .editor_atto + textarea
-{
-	margin-right: 11.1em;
-	width: 87%!important;
-}
-
-#page-mod-oublog-editpost .filemanager .fp-navbar
-{
-	margin-right: 13em;
-	width: 87%!important;
-	margin-top:0px!important;
-}
-
-
-#page-mod-oublog-editpost .filemanager-container, .filepicker-filelist
-{
-	margin-right: 13em;
-	width: 87%!important;
-}
-
-
 .loginbox .loginform {
 	text-align: center;
 }
@@ -276,7 +209,6 @@ body.pagelayout-embedded{
 
 /*post form*/
 .dir-rtl .mform .fitem .felement {
-	margin-right: 0px;
 	margin-left: 4em;
 	text-align: right;
 	padding-top: 1px;
