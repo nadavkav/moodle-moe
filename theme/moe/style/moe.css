@@ -1,31 +1,5 @@
 @CHARSET "UTF-8";
 	
-
-
-.path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active > a 
-{
-	    margin-top:0.4px!important
-	
-}
-
-
-#page-mod-data-templates .tabs-container.clearfix .dragscroll
-{
-	    width: 94%!important;
-	
-}
-
-.path-mod-data div[role="main"] .nav-tabs > li.active > a
-
- { 
- 
- 	background:#DCDCDC;
-	margin-top:-7px!important;
- 	border:1px solid #9785a2!important;
-}
-
-
-
 .loginbox .loginform {
 	text-align: center;
 }
@@ -4174,7 +4148,9 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel {
     border: 1px solid #9785a2;
 	cursor: pointer;
 }
-
+.path-mod-data div[role="main"] >.tabs-container .nav-tabs{
+	width:94% !important;
+}
 .path-mod-data div[role="main"] .nav-tabs {
 	width: 94%;
     margin-left: 3%;
@@ -4225,7 +4201,15 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel {
 	float: left;
     width: auto;
 }
+.path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs > li.active > a {
+    margin-top:0.4px!important
+}
 
+.path-mod-data div[role="main"] .nav-tabs > li.active > a{ 
+    background:#DCDCDC;
+    margin-top:-7px!important;
+    border:1px solid #9785a2!important;
+}
 .dir-rtl.path-mod-data div[role="main"] fieldset > .ftoggler {
 	float: right;
 }
