@@ -4126,8 +4126,8 @@ table.checklistreport tr td {
 	border: 1px solid #fdfdf5;
 }
 
-table.checklistreport tr:NTH-CHILD(2n+1), .generaltable tbody>tr:nth-child(odd)>td,
-	.generaltable tbody tr:hover>td {
+table.checklistreport tr:NTH-CHILD(2n+1),.path-mod-checklist .generaltable tbody>tr:nth-child(odd)>td,
+.path-mod-checklist	.generaltable tbody tr:hover>td {
 	background-color: #ddd3c4;
 }
 
