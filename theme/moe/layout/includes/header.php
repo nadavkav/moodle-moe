@@ -59,11 +59,11 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 					</span>
                 </div>
                 <div class="span4 hidden-phone">
-              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>             		
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>             		
                 </div>
             <?php if (!$haslogo) { ?>
             	<div class="span6">
-              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->shortname; ?></h1>
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>
                 </div>
             <?php } else { ?>
                 <div class="span3 logo-header">
