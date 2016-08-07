@@ -16,6 +16,10 @@ body{
     color: #555;
     padding-top: 35px;
 }
+body.pagelayout-login {
+    background: url([[setting:pagebackground]]) [[setting:background-repeat]] !important;
+    background-size: [[setting:background-size]] !important;
+}
 #wrapper{
 	width:90%;
 	max-width: [[setting:pagewidth]];
@@ -719,6 +723,38 @@ td.ygtvcell {
     font-size: 1.5em;
 }
 
+/*================================================== * 
+Moodle 3.1 assignment grader
+=====================================================*/
+body#page-mod-assign-grader {
+    position: static;
+}
+.path-mod-assign [data-region="grading-navigation-panel"], .path-mod-assign [data-region="grade-actions"] {
+    background: #fff none repeat scroll 0 0;
+}
+.path-mod-assign .fullwidth[data-region="grade-panel"] {
+    background: rgba(235, 235, 235, 0.75) none repeat scroll 0 0;
+    width: 98%;
+    margin: 0 auto;
+}
+.path-mod-assign [data-region="grade-actions-panel"] {
+    bottom: -2px;
+}
+.path-mod-assign [data-region="user-selector"] .alignment {
+    margin-top: 0;
+}
+@media (max-width: 767px) {
+.path-mod-assign [data-region="user-info"] {display: block !important; padding-left: 10px;}
+.path-mod-assign [data-region="grading-navigation-panel"] {line-height: 20px;}
+.path-mod-assign [data-region="grade-actions-panel"] {bottom: -15px; position: absolute; top: unset;}
+.path-mod-assign [data-region="user-selector"] {display: none;}
+.path-mod-assign .fullwidth[data-region="grade-panel"] {top: 10em;}
+}
+@media (min-width:481px) and (max-width: 767px) {
+body#page-mod-assign-grader, body#page-mod-assign-grader #page {padding:0;}
+.path-mod-assign [data-region="grading-navigation-panel"] {background: #fff none repeat scroll 0 0; margin: 0 auto; width: 98%;}
+}
+
 /* =========================================================== *
 Blocks
 ============================================================== */
@@ -1078,10 +1114,45 @@ Profile
     transition:border 1s ease;
     border:5px solid [[setting:maincolor]];
 }
-img.profilepicture
-{
+img.profilepicture {
     width:120px;
     height:120px;
+}
+
+/*================================================== * 
+user profile
+=====================================================*/
+.page-context-header .header-button-group a img.iconsmall {
+    display: none;
+}
+.page-context-header .btn-group.header-button-group {
+    float: unset;
+}
+.userprofile .profile_tree section.node_category {
+    border: none;
+}
+.userprofile .profile_tree section.node_category h3, #page-report-outline-user .section h2  {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+}
+.page-context-header .page-header-image img {
+    border-right: 3px solid #f9bf3b;
+    margin-right: 10px;
+    padding-right: 20px;
+}
+.page-context-header .page-header-headings {
+    margin-top: 25px;
+}
+.page-context-header {
+    border-bottom: 3px dashed #f9bf3b;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+#page-report-outline-user .section {
+    border: medium none;
+}
+#page-user-profile .node_category .editprofile, .path-user .node_category .editprofile, #page-user-profile .node_category .viewmore, .path-user .node_category .viewmore {
+    text-align: unset;
 }
 
 /* =========================================================== *

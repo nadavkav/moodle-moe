@@ -72,12 +72,15 @@ blockquote:before {
     margin-bottom: 40px;
     margin-top: 40px;
 }
+.fa-ul {
+	list-style-type: none !important;
+}
 
 /*================================================== * 
 Dividers
 =====================================================*/
 .divider.line-01:after {
-    background: #f9bf3b none repeat scroll 0 0;
+    background: [[setting:maincolor]] none repeat scroll 0 0;
     content: "";
     display: block;
     height: 3px;
@@ -90,7 +93,7 @@ Dividers
     margin: 20px 0;
 }
 .divider.line-02:before {
-    background: #f9bf3b none repeat scroll 0 0;
+    background: [[setting:maincolor]] none repeat scroll 0 0;
     bottom: 0;
     content: "";
     height: 2px;
@@ -99,7 +102,7 @@ Dividers
     width: 150px;
 }
 .divider.line-02:after {
-    background: #f9bf3b none repeat scroll 0 0;
+    background: [[setting:maincolor]] none repeat scroll 0 0;
     bottom: -10px;
     content: "";
     height: 2px;
@@ -113,7 +116,7 @@ Dividers
     position: relative;
 }
 .divider.line-03 {
-    background: #f9bf3b none repeat scroll 0 0;
+    background: [[setting:maincolor]] none repeat scroll 0 0;
     border-radius: 4px;
     content: "";
     display: block;
@@ -624,11 +627,10 @@ Spotlight
 .spotlight-v2.shadow2:after {
 	margin-top: 2px;
 }
-.spotlight-v3, .spotlight-v4 {
+.spotlight-v3, .spotlight-v4, .spotlight-v5 {
     background-attachment: fixed;
     background-color: #323a45;
     background-size: cover;
-	color: #fff;
 }
 .spotlight-v3 {
     background-image: url([[pix:theme|bg/spotlight-3-bg]]);
@@ -636,15 +638,15 @@ Spotlight
 .spotlight-v4 {
     background-image: url([[pix:theme|bg/spotlight-4-bg]]);
 }
-.spotlight-v3 h1, .spotlight-v3 h2, .spotlight-v3 h3, .spotlight-v3 h4, .spotlight-v3 h5, .spotlight-v3 h6, spotlight-v3 p,
-.spotlight-v4 h1, .spotlight-v4 h2, .spotlight-v4 h3, .spotlight-v4 h4, .spotlight-v4 h5, .spotlight-v4 h6, spotlight-v4 p {
+.spotlight-v5 {
+    background-image: url([[pix:theme|bg/spotlight-5-bg]]);
+}
+.spotlight-v3, .spotlight-v3 h1, .spotlight-v3 h2, .spotlight-v3 h3, .spotlight-v3 h4, .spotlight-v3 h5, .spotlight-v3 h6, spotlight-v3 p,
+.spotlight-v4, .spotlight-v4 h1, .spotlight-v4 h2, .spotlight-v4 h3, .spotlight-v4 h4, .spotlight-v4 h5, .spotlight-v4 h6, spotlight-v4 p {
     color: #fff;
 }
-.spotlight-v3 a, .spotlight-v4 a {
-	color:[[setting:maincolor]];
-}
-.spotlight-v3 a:hover, .spotlight-v4 a:hover {
-	color:[[setting:mainhovercolor]];
+.spotlight-v5, .spotlight-v5 h1, .spotlight-v5 h2, .spotlight-v5 h3, .spotlight-v5 h4, .spotlight-v5 h5, .spotlight-v5 h6, spotlight-v5 p {
+    color: #555;
 }
 .spotlight-full {
     margin-left:-23px;

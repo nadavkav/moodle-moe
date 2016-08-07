@@ -107,3 +107,6 @@ a.singinprovider .social-button.vk:hover {
 .pagelayout-login .profileblock a.singinprovider {
     display: none !important;
 }
+.pagelayout-login .forgotpass.oauth2 {
+    display: none;
+}

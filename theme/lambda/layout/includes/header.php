@@ -84,10 +84,25 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 	}
 
 		if (!isloggedin() or isguestuser()) {
+			
+			$login_link_url = '';
+			$login_link_txt = '';
+			if ($login_link=='1') {$login_link_url = $wwwroot.'/login/signup.php'; $login_link_txt = get_string('startsignup');}
+			else if ($login_link=='2') {$login_link_url = $wwwroot.'/login/forgot_password.php'; $login_link_txt = get_string('forgotten');}
+			else if ($login_link=='3') {$login_link_url = $wwwroot.'/login/index.php'; $login_link_txt = get_string('moodle_login_page','theme_lambda');}
+			if ($login_custom_url != '') {$login_link_url = $login_custom_url;}
+			if ($login_custom_txt != '') {$login_link_txt = $login_custom_txt;}
         	
 			if ($auth_googleoauth2) {
-        		require_once($CFG->dirroot . '/auth/googleoauth2/lib.php'); auth_googleoauth2_display_buttons();   
-			} else { ?>
+        		require_once($CFG->dirroot . '/auth/googleoauth2/lib.php'); auth_googleoauth2_display_buttons(); ?>
+                <div style="clear:both;"></div>
+                <div class="forgotpass oauth2">
+        			<?php 
+					if ($login_link_url != '' and $login_link_txt != '') { ?>
+						<a target="_self" href="<?php echo $login_link_url; ?>"><?php echo $login_link_txt; ?></a>
+            		<?php } ?> 
+				</div>
+			<?php } else { ?>
         
 				<form class="navbar-form pull-right" method="post" action="<?php echo $wwwroot; ?>/login/index.php?authldap_skipntlmsso=1">
 					<div id="block-login">
@@ -97,16 +112,6 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
         			<input id="inputPassword" class="span2" type="password" name="password" id="password" placeholder="<?php echo get_string('password'); ?>">
 					<input type="submit" id="submit" name="submit" value=""/>
 					</div>
-                     
-        			<?php
-						$login_link_url = '';
-						$login_link_txt = '';
-						if ($login_link=='1') {$login_link_url = '/login/signup.php'; $login_link_txt = get_string('startsignup');}
-						else if ($login_link=='2') {$login_link_url = '/login/forgot_password.php'; $login_link_txt = get_string('forgotten');}
-						else if ($login_link=='3') {$login_link_url = '/login/index.php'; $login_link_txt = get_string('moodle_login_page','theme_lambda');}
-						if ($login_custom_url != '') {$login_link_url = $login_custom_url;}
-						if ($login_custom_txt != '') {$login_link_txt = $login_custom_txt;}
-					?>
         
         			<div class="forgotpass">
         			<?php 
@@ -118,7 +123,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 				</form>
 			<?php } ?>
  
-	<?php } else { 
+	<?php } else {
 
  		echo '<div id="loggedin-user">';		
 		echo $OUTPUT->user_menu();
