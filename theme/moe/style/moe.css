@@ -1,5 +1,26 @@
 @CHARSET "UTF-8";
 
+#page-mod-forum-discuss .discussioncontrols .discussioncontrol .singleselect
+{
+  margin-top:5px;
+}
+
+.movediscussionoption  .urlselect input[type='submit']
+{
+	margin-right:14px;
+	margin-top:7px;
+	
+}
+
+.controlscontainer  .singlebutton input[type='submit']
+{
+	margin-top:7px;
+}
+
+.discussioncontrol input[type='submit']
+{
+	padding-right:5px;
+}
 .loginbox .loginform {
 	text-align: center;
 }
@@ -3990,6 +4011,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 .path-mod-forum .discussionsubscription>a>img {
 	width: 33px;
 	padding: 11px 4px;
+	margin-top: 10px;
 }
 
 #page-mod-oublog-participation div[role="main"] h2.oublog-post-title {
