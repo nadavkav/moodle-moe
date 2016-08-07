@@ -928,8 +928,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .que .formulation {
-	background-color: #f1efe3;
+	background-color: #f9f8f0;
 	border-color: #c6bed3;
+	border-radius: 0px;
 }
 
 .que .info {
@@ -1161,7 +1162,61 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background-color: #fcf3e6;
 	border: 1px solid #c6bdb7;
 }
+#page-mod-quiz-view #region-main div[role='main']>h2 {
+	margin-bottom: 0px;
+	line-height: 39px;
+}
+#page-mod-quiz-view #region-main div[role='main']>h2 span {
+	background-image: url([[pix:theme|bg/headerBG]]);
+	background-size:cover;
+	color: #5d4a6a;
+	border: 1px solid #ac9dbe;
+	border-bottom: 0px;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
 
+#page-mod-quiz-view #intro.generalbox{
+	margin-top: 0px;
+	background-color: #f1efe3;
+	border-bottom: 0px;
+}
+
+#page-mod-quiz-view div[role="main"] > div:first-of-type {
+    border: 1px solid #ac9dbe;
+}
+
+ #page-mod-quiz-view .generalbox#feedback{
+	width: 100%;
+ 	padding-top: 15px
+}
+
+#page-mod-quiz-view .quizinfo p {
+	margin: 0px;
+}
+#page-mod-quiz-view div[role='main']>h3 {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+	border-bottom: 0px;
+	margin: 0px;
+}
+
+#page-mod-quiz-view table.quizattemptsummary,
+#page-mod-quiz-view #feedback,
+#page-mod-quiz-view .quizinfo,
+#page-mod-quiz-view .quizattemptcounts {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+    border-top: 0px;
+	border-bottom: 0px;
+	margin: 0px;
+}
+
+#page-mod-quiz-view .box.quizattempt {
+	border: 1px solid #ac9dbe;
+    background-color: #f1efe3;
+    border-top: 0px;
+}
 #gridshadebox_content {
 	border-color: #6d4979;
 	border-width: 3px;
@@ -1550,8 +1605,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	width: 27px;
 	height: 15px;
 	margin-top: 5px;
-	background-image:
-		url(/theme/image.php?theme=moe&component=theme&image=eye);
+	background-image: url([[pix:theme|eye]]);
 	background-size: cover;
 }
 
@@ -1729,8 +1783,7 @@ div#middle-column {
 	width: 27px;
 	height: 15px;
 	margin-top: 5px;
-	background-image:
-		url(/theme/image.php?theme=moe&component=theme&image=eye);
+	background-image: url([[pix:theme|eye]]);
 	background-size: cover;
 }
 
@@ -1746,6 +1799,134 @@ div#middle-column {
 div#middle-column {
 	position: relative;
 	padding-bottom: 100px;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton {
+	line-height: 22px;
+	height: 22px;
+	width: 26px;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton .trafficlight {
+	display: none;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton.thispage .thispageholder .qnbutton.answersaved .thispageholder {
+	border-width: 1px;
+}
+
+.path-mod-quiz .que .info {
+    padding: 0;
+    width: 110px;
+}
+
+.path-mod-quiz .que >.info >h3 {
+    display: block;
+    text-align: center;
+    border-bottom: #c5bdd1 1px solid;
+    padding: 10px 0px;
+    color: #827b8d;
+    font-size: 1.5em;
+    background-image: url([[pix:theme|bg/quiz/info]]);
+}
+
+.path-mod-quiz .que >.info >h3 >.qno {
+    font-size: 1em;
+}
+
+.dir-rtl.path-mod-quiz .que >.info >div {
+    border-bottom: #c5bdd1 1px solid;
+    margin: 0px;
+    display: block;
+    padding-right: 14px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+.path-mod-quiz .que >.info >div {
+    border-bottom: #c5bdd1 1px solid;
+    margin: 0px;
+    display: block;
+    padding-left: 14px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+.path-mod-quiz .que >.info >div >a:hover {
+    color: #644d74;
+}
+
+.path-mod-quiz .que >.info >div >a {
+    color: #644d74;
+}
+
+.path-mod-quiz .que:nth-child(even) .formulation {
+    background-color: #f8e7db;
+}
+
+.path-mod-quiz .submitbtns input[type="submit"] {
+	background-image: none;
+    background-color: #fcf5db !important;
+    color: #606365 !important;
+    border: 8px solid transparent;
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    box-shadow: inset 0 0 0 1px #a3bfc2, 0 0 0 1px #a3bfc2;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 3px 10px;
+    border-image: url([[pix:theme|bg/quiz/btnborder]]) 1;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: none;
+    outline: 0px !important;
+}
+
+#mod_quiz_navblock .singlebutton input[type="submit"] {
+    color: #546c6b !important;
+    border: 0px;
+    border-radius: 0px 0px 0px 0px;
+    text-shadow: none;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: 1em;
+    background-image: url([[pix:theme|bg/quiz/btnborder]]);
+    transition: none;
+	box-shadow: none;
+	display: block;
+    float: right;
+	margin: 0px;
+}
+
+#mod_quiz_navblock .singlebutton input[type="submit"]:hover {
+	background-color: transparent;
+    background-position: 0px 0px;
+    box-shadow: none;
+    border: 0px;
+}
+
+#mod_quiz_navblock .singlebutton >form >div:after {
+    content: "";
+    display: block;
+    float: right;
+    background-color: #daeddb;
+    height: 26px;
+    width: 2vw;
+	background-image: url([[pix:theme|bg/quiz/degel]]);
+	background-size: 57%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#mod_quiz_navblock .singlebutton >form >div {
+    border: #95a3a2 1px solid;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.34);
+}
+
+@media (max-width: 1235px) {
+	#mod_quiz_navblock .singlebutton >form >div:after  {
+		display: none;
+	}
 }
 
 @media screen and (max-width:26em) {
@@ -1845,13 +2026,12 @@ ul.nav.nav-tabs {
 }
 
 .ouw_subwiki .individualselector label, .ouw_subwiki span {
-	background-image:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
-	padding: 0.3em;
-	background-repeat: no-repeat;
-	border: 1px solid #af9dbb;
-	background-size: cover;
-	color: #5c4b67;
+	background-image: url([[pix:theme|bg/headerBG);
+    padding: 0.3em;
+    background-repeat: no-repeat;
+    border: 1px solid #af9dbb;
+    background-size: cover;
+    color: #5c4b67;
 	font-size: 2em;
 }
 
@@ -1952,13 +2132,12 @@ ul.nav.nav-tabs {
 }
 
 .ouw_subwiki .individualselector label, .ouw_subwiki span {
-	background-image:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
-	padding: 0.3em;
-	background-repeat: no-repeat;
-	border: 1px solid #af9dbb;
-	background-size: cover;
-	color: #5c4b67;
+	background-image: url([[pix:theme|bg/headerBG]]);
+    padding: 0.3em;
+    background-repeat: no-repeat;
+    border: 1px solid #af9dbb;
+    background-size: cover;
+    color: #5c4b67;
 	font-size: 2em;
 }
 
@@ -2401,8 +2580,7 @@ ul.nav.nav-tabs {
 	width: 100%;
 	height: 4px;
 	border-top: 1px solid #bdb1c9;
-	background:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2Flearning-spaces);
+	background: url([[pix:theme|bg/learning-spaces]]);
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #c0bcbd;
@@ -2415,8 +2593,7 @@ ul.nav.nav-tabs {
 }
 
 #page-mod-advmindmap-view div[role="main"]>.generalbox>:first-child {
-	background-image:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2FheaderBG);
+	background-image: url([[pix:theme|bg/headerBG]]);
 	background-repeat: no-repeat;
 	margin-bottom: 0px;
 	background-size: cover;
@@ -3828,8 +4005,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	content: '';
 	width: 100%;
 	height: 8px;
-	background:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2Flearning-spaces);
+	background: url([[pix:theme|bg/learning-spaces]]);
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #c0bcbd;
@@ -3869,8 +4045,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	border-radius: 0px 0px 0px 0px;
 	text-shadow: none;
 	padding: 6px 18px;
-	border-image:
-		url(/theme/image.php?theme=moe&component=theme&image=bg%2Fblogtitlebg);
+	border-image: url([[pix:theme|bg/blogtitlebg]]);
 	border-image-slice: 1;
 	font-weight: 700;
 	font-size: 1.1em;
