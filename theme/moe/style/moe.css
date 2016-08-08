@@ -2593,7 +2593,7 @@ ul.nav.nav-tabs {
 	border: 1px solid #ac9dbe;
 	border-bottom: 0px;
 	padding: 0.2em 1em;
-	display: inline-block;
+	display: inline;
 	font-size: 21px;
 }
 
