@@ -249,7 +249,9 @@ body.pagelayout-embedded {
 	right: 0;
 	float: right;
 }
-
+.format-socialwall #postform .fitem .felement{
+	margin-right: 0;
+}
 .format-socialwall #postform .fitem div.fitemtitle {
 	padding-top: 5px;
 	text-align: left;
