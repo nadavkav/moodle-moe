@@ -1,26 +1,31 @@
 @CHARSET "UTF-8";
 
+.dir-rtl .forumpost .author::before {
+    float: right;
+   }
+   
 #page-mod-forum-discuss .discussioncontrols .discussioncontrol .singleselect
 {
-  margin-top:5px;
+  margin-top:5.5px;
 }
 
-.movediscussionoption  .urlselect input[type='submit']
+#page-mod-forum-discuss .movediscussionoption  .urlselect input[type='submit']
 {
 	margin-right:14px;
 	margin-top:7px;
 	
 }
 
-.controlscontainer  .singlebutton input[type='submit']
+#page-mod-forum-discuss .controlscontainer  .singlebutton input[type='submit']
 {
 	margin-top:7px;
 }
 
-.discussioncontrol input[type='submit']
+#page-mod-forum-discuss .discussioncontrol input[type='submit']
 {
 	padding-right:5px;
 }
+
 .loginbox .loginform {
 	text-align: center;
 }
