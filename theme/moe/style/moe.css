@@ -4732,3 +4732,9 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 {
   margin-top: 28px;
 }
+.cameraContents .camera_caption span{
+	border-left: none;
+}
+.dir-rtl .cameraContents .camera_caption span {
+	border-right: none;
+}
