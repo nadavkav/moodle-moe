@@ -3660,13 +3660,9 @@ ul.nav.nav-tabs {
 	margin-bottom: -1px;
 }
 
-#page-mod-questionnaire-report br {
-	display: none;
-}
 
-#page-mod-questionnaire-report.path-mod-questionnaire div[role="main"]>.generalbox h3.surveyTitle
-	{
-	background: none;
+#page-mod-questionnaire-report.path-mod-questionnaire div[role="main"] > .generalbox h3.surveyTitle {
+    background: none;
 }
 
 .path-mod-questionnaire a {
@@ -3678,14 +3674,31 @@ ul.nav.nav-tabs {
 	background: none;
 }
 
-#page-mod-questionnaire-report .generaltable tbody tr:hover>td {
-	background-color: #daf7fb;
-}
 
 #page-mod-questionnaire-report .generaltable tbody tr>td {
-	background-color: #daf7fb;
+	background-color: transparent;
 	border: none;
 }
+
+.path-mod-questionnaire .generaltable {
+    width: 60%;
+}
+
+.path-mod-questionnaire .nav-tabs > li {
+	margin-left: 2px;
+	margin-right: 2px;
+	border: none !important
+}
+
+.path-mod-questionnaire .tabs-container .tabs-container > .nav-tabs, .path-mod-questionnaire .nav-tabs:nth-of-type(2) {
+	margin-right: 19em;
+}
+
+.path-mod-questionnaire .tabs-container .tabs-container .tabs-container > .nav-tabs, .path-mod-questionnaire .nav-tabs:nth-of-type(3) {
+	float:left;
+	display: inline-block;
+}
+
 
 #page-mod-questionnaire-view.path-mod-questionnaire div[role="main"]>.generalbox.boxaligncenter.boxwidthwide
 	{
@@ -4743,4 +4756,19 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 #section-0 .sectionname {
 	padding-right: 1em;
 	padding-left: 1em;
+}
+
+.path-mod-questionnaire div[role="main"] .qn-content{
+	padding: 0 1em;
+}
+
+.path-mod-questionnaire .nav-tabs:nth-of-type(3) {
+	float: none;
+}
+
+#page-mod-questionnaire-preview div[role="main"] h2 {
+	line-height: 55px;
+}
+.path-mod-questionnaire div[role="main"]  .nav.nav-tabs{
+	height: 40px;
 }
