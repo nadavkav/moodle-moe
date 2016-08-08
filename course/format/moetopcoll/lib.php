@@ -1067,7 +1067,11 @@ class format_moetopcoll extends format_base {
             /* test if there is three lables in all section and add it if need */
             $renderer = $PAGE->get_renderer('format_moetopcoll');
             $modinfo = get_fast_modinfo($this->courseid);
-            for ($sectionnum = 1; $sectionnum <= $numsections; $sectionnum++) {
+            $i=1;
+            if ($maxsection!=null){
+                $i=$maxsection+1;
+            }
+            for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum++) {
                 $labels = array(
                     get_string('study', 'format_moetopcoll'),
                     get_string('supporterslearning', 'format_moetopcoll'),
