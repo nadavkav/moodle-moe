@@ -4774,3 +4774,7 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 .path-mod-questionnaire div[role="main"]  .nav.nav-tabs{
 	height: 40px;
 }
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary{
+	width: 44%;
+	word-break: break-all;
+}
