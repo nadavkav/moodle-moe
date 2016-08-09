@@ -3759,6 +3759,8 @@ ul.nav.nav-tabs {
 	border: 1px solid #c5b39f;
 	border-right: none;
 	background-color: #f3cda6;
+	padding-left: 5px;
+    padding-right: 5px;
 }
 
 .path-mod-book .book_content>h4 span {
