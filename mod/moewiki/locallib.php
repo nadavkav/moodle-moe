@@ -308,7 +308,7 @@ function moewiki_create_subwiki($moewiki, $cm, $course, $userid = null, $groupid
 function moewiki_init_pages($course, $cm, $moewiki, $subwiki) {
     global $CFG;
     
-    if (is_null($moewiki->template) && is_null($moewiki->template_text)) {
+    if (is_null($moewiki->template) && !$moewiki->template_text) {
         return;
     }
     
