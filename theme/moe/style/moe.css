@@ -1,8 +1,36 @@
 @CHARSET "UTF-8";
+/*
+.tree_item .branch
+{
+	margin-right:20px;
+	
+}
+.type_course .depth_3 .contains_branch .current_branch:first-child
+{
+	margin-right:10px;
+	margin-top:10px;
+}
+
+.tree_item .branch .active_tree_node .canexpand:first-child
+{
+		margin-right:10px;
+	margin-top:10px;
+}
 
 
+.tree_item .branch .active_tree_node .canexpand a
+{
+	margin-right:10px;
+	margin-top:10px;
+	padding-top:10px;
+}
 
-
+.type_course .depth_3 .contains_branch .current_branch:first-child
+{
+	margin-top:10px;
+margin-right:10px;
+}
+*/
 #page-footer .tree_item .branch .active_tree_node .canexpand
 {
 	text-align:right;
