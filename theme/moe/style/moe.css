@@ -1,5 +1,11 @@
 @CHARSET "UTF-8";
 
+.path-mod-questionnaire div[role="main"] .notice .buttons input[type="submit"], #page-mod-questionnaire-view.path-mod-questionnaire div[role="main"]>.generalbox.boxaligncenter.boxwidthwide>a
+{
+	margin-right: 9px;
+	margin-top:9px;
+}
+
 .loginbox .loginform {
 	text-align: center;
 }
