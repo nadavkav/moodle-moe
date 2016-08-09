@@ -4778,3 +4778,17 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	width: 44%;
 	word-break: break-all;
 }
+
+a.skip-block, a.skip {
+	display: block;
+}
+
+@media ( max-width : 980px) {
+	.dir-rtl.editing .section .activity .contentwithoutlink, .dir-rtl.editing .section .activity .activityinstance {
+	    padding-left: 120px !important;
+	}
+	
+	.categorypicker .singleselect {
+		width:100% !important;
+	}
+}
