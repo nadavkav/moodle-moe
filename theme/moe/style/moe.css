@@ -532,6 +532,8 @@ body.pagelayout-embedded {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
+	max-width: 75%;
+	word-wrap:break-word;
 }
 
 .tl-comment   .tl-comments  .tl-comment:nth-child(odd) .tl-text:after,
