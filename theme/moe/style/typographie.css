@@ -1,3 +1,10 @@
+ @font-face {
+         font-family: 'Name of your font';
+         src: url([[font:theme|trado.ttf]]);
+         font-weight: normal;
+         font-style: normal;
+    }
+
 @font-face {
 	font-family:'FontAwesome';
 	src: url([[font:theme|fontawesome-webfont.eot]]);
