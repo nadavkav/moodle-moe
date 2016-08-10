@@ -52,3 +52,4 @@ $string['taborder'] = 'Tab display activity order within menu';
 $string['tab:addinstance'] = 'Add a new Tab Display';
 $string['tab:view'] = 'View Tabs';
 $string['updatethis'] = 'Update this tab display';
+$string['processmoodle'] = 'Show Moodle website only main section';

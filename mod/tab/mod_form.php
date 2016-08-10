@@ -97,7 +97,9 @@ class mod_tab_mod_form extends moodleform_mod
         $repeatarray[] = $mform->createElement('text', 'tabname', get_string('tabname', 'tab'), array('size' => '65'));
         $repeatarray[] = $mform->createElement('editor', 'content', get_string('tabcontent', 'tab'), null, $editoroptions);
         $repeatarray[] = $mform->createElement('url', 'externalurl', get_string('externalurl', 'tab'), array('size' => '60'), array('usefilepicker' => true));
-        $repeatarray[] = $mform->createElement('checkbox', 'processmoodle', '', get_string('processmoodle', 'tab'));
+        $repeatarray[] = $mform->createElement('advcheckbox', 'processmoodle', get_string('processmoodle', 'tab')
+            , get_string('processmoodle', 'tab'), array(), array(0, 1));
+        
         $repeatarray[] = $mform->createElement('hidden', 'revision', 1);
         $repeatarray[] = $mform->createElement('select', 'tabcontentorder', get_string('order', 'tab'), $taborderarray);
         $repeatarray[] = $mform->createElement('hidden', 'optionid', 0);
@@ -105,6 +107,7 @@ class mod_tab_mod_form extends moodleform_mod
         $mform->setType('tabname', PARAM_TEXT);
         $mform->setType('content', PARAM_RAW);
         $mform->setType('externalurl', PARAM_URL);
+        $mform->setType('processmoodle', PARAM_INT);
         $mform->setType('revision', PARAM_INT);
         $mform->setType('tabcontentorder', PARAM_INT);
         $mform->setType('optionid', PARAM_INT);
@@ -185,6 +188,7 @@ class mod_tab_mod_form extends moodleform_mod
 
                 //$default_values['format['.$key.']'] = $options[$key]->format;
                 $default_values['externalurl[' . $key . ']'] = $options[$key]->externalurl;
+                $default_values['processmoodle[' . $key . ']'] = $options[$key]->processmoodle;
                 $default_values['tabcontentorder[' . $key . ']'] = $options[$key]->tabcontentorder;
                 $default_values['optionid[' . $key . ']'] = $tabids[$key];
             }

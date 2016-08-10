@@ -208,6 +208,8 @@ function tab_update_instance($tab)
         $option->tabname = $value;
         $option->tabcontentorder = $tab->tabcontentorder[$key];
         $option->externalurl = $tab->externalurl[$key];
+        $option->processmoodle = $tab->processmoodle[$key];
+        
         //tab content is now an array due to the new editor
         $draftitemid = $tab->content[$key]['itemid'];
 

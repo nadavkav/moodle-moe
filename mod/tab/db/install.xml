@@ -34,8 +34,9 @@
         <FIELD NAME="tabname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="tabid" NEXT="tabcontent"/>
         <FIELD NAME="tabcontent" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="tabname" NEXT="tabcontentorder"/>
         <FIELD NAME="tabcontentorder" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="Determines what order the tabs are displayed" PREVIOUS="tabcontent" NEXT="externalurl"/>
-        <FIELD NAME="externalurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" PREVIOUS="tabcontentorder" NEXT="contentformat"/>
-        <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="New editor value" PREVIOUS="externalurl" NEXT="timemodified"/>
+        <FIELD NAME="externalurl" TYPE="char" LENGTH="255" NOTNULL="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="tabcontentorder" NEXT="processmoodle"/>
+        <FIELD NAME="processmoodle" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" DEFAULT="0" PREVIOUS="externalurl" NEXT="contentformat"/>
+        <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="New editor value" PREVIOUS="processmoodle" NEXT="timemodified"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="contentformat"/>
       </FIELDS>
       <KEYS>

@@ -12,7 +12,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later  **
  * *************************************************************************
  * ************************************************************************ */
-defined('MOODLE_INTERNAL') || die; 
+defined('MOODLE_INTERNAL') || die;
 
 /**
  * This function is run when the plugin have to be updated
@@ -231,76 +231,107 @@ function xmldb_tab_upgrade($oldversion = 0)
     {
         // + Add description available
         // + Add PDF embed in a tab
-        
+
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2012121200, 'tab');
     }
-    
+
     if ($oldversion < 2013010200)
     {
         // + Correction in the JS for an old YAHOO Code
-        
+
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013010200, 'tab');
     }
-    
+
     if ($oldversion < 2013021200)
     {
         // + Add the RTL support. Thanks to nadavkav
-        
+
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013021200, 'tab');
     }
-    
+
     if ($oldversion < 2013021201)
     {
         // + Correction on the tab content to allow to put custom HTML like object tag, etc. => change the settype from TYPE_CLEAN to TYPE_RAW
-        
+
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013021201, 'tab');
     }
-    
+
     if ($oldversion < 2013032800)
     {
         // + Changes on the logs
-        
+
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013032800, 'tab');
     }
-    
+
     if ($oldversion < 2013062500)
     {
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013062500, 'tab');
     }
-    
+
     if ($oldversion < 2013072200)
     {
         //+Patch on backups
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013072200, 'tab');
     }
-    
+
     if ($oldversion < 2013072400)
     {
         //+Patch on filters
         // tab savepoint reached
         upgrade_mod_savepoint(true, 2013072400, 'tab');
     }
-    
-    if ($oldversion < 2014040200)
+
+    if ($oldversion < 2014040201)
     {
         //+ Moodle 2.6 Update
+
+        // Added AGAIN, because it was skipped for some unknown reason
+
         // tab savepoint reached
-        upgrade_mod_savepoint(true, 2014040200, 'tab');
+        // Define field intro to be added to tab
+        $table = new xmldb_table('tab');
+        $field = new xmldb_field('intro', XMLDB_TYPE_TEXT, 'small', null, null, null, null, 'course');
+        $field2 = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', null, null, null, null, 'timemodified');
+
+        // Conditionally launch add field intro
+        if (!$dbman->field_exists($table, $field))
+        {
+            $dbman->add_field($table, $field);
+        }
+        if (!$dbman->field_exists($table, $field2))
+        {
+            $dbman->add_field($table, $field2);
+        }
+
+        upgrade_mod_savepoint(true, 2014040201, 'tab');
     }
 
-
-    if ($oldversion < 2015122900)
+    if ($oldversion < 2014040202)
     {
-        //+ Moodle 3.0 Update
+        //+Patch on filters
         // tab savepoint reached
-        upgrade_mod_savepoint(true, 2015122900, 'tab');
+        upgrade_mod_savepoint(true, 2014040202, 'tab');
     }
+    
+    if ($oldversion < 2016022801)
+    {
+        $table = new xmldb_table('tab_content');
+        $field = new xmldb_field('processmoodle', XMLDB_TYPE_INTEGER, '2', null, true, null, 0, 'externalurl');
+        if (!$dbman->field_exists($table, $field))
+        {
+            $dbman->add_field($table, $field);
+        }
+        
+        upgrade_mod_savepoint(true, 2016022801, 'tab');
+    }
+    
+    
 
 }
