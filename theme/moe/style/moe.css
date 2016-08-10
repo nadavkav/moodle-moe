@@ -4372,6 +4372,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 .path-mod-checklist div[role="main"]>.tabs-container ul.nav-tabs li a {
 	color: #000000;
 	background-color: #d1a361;
+	border-radius: 0px;
 }
 
 .path-mod-checklist div[role="main"]>.tabs-container ul.nav-tabs li.active
@@ -5013,4 +5014,30 @@ a.skip-block, a.skip {
 	.categorypicker .singleselect {
 		width: 100% !important;
 	}
+}
+
+.path-mod-checklist .checklistreport .cell.reportheading {
+    background-color: #006474 !important;
+}
+
+.path-mod-checklist .checklistreport .cell.level0-checked {
+	background-color: #8bdb75 !important;
+}
+
+.path-mod-checklist #checklistprogressall > div {
+    margin-top: 0.4em;
+}
+
+.path-mod-checklist #checklistprogressrequired > div {
+    display: block;
+    margin-top: 1.4em;
+}
+
+.path-mod-checklist #checklistprogressrequired > span {
+    display: block;
+    margin-top: 1em;
+}
+
+.path-mod-checklist .checklist_progress_inner {
+    background-image:none !important;
 }
