@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
-/*.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a*/
+.dir-ltr .loginbox .loginform .form-input
+{   margin: 0 auto;
+	float: none;
+	text-align: center;
+}
+
 .dir-rtl .forumpost .author::before {
 	float: right;
 }
