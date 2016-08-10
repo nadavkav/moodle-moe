@@ -1,38 +1,5 @@
 @CHARSET "UTF-8";
 
-
-#page-admin-setting-editorsettingstinymce .tinymcesubplugins
-{
-	width: 90%;
-	
-}
-
-#page-admin-setting-editorsettingstinymce #adminsettings h3
-{
-	width: 90%;
-	
-}
-
-.tinymcebuttons
-{
- width: 10%;
-}
-.generaltable .cell .c1
-{
-	width: 10%;
-}
-
-td .cell .c0
-{
-	width: 10%;
-}
-td .cell .c1
-{
-	width: 20px!important;
-	background-color:blue!important;
-}
-
-
 .loginbox .loginform {
 	text-align: center;
 }
@@ -4139,4 +4106,11 @@ body.format-moetopcoll .section .activity.modtype_label.label div div div div di
 }
 body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel {
 	padding: 0 1em;
+}
+#page-admin-setting-editorsettingstinymce .settingsform fieldset{
+    min-width: 0px;
+}
+#page-admin-setting-editorsettingstinymce .form-item .form-setting .form-defaultinfo{
+    display: block;
+    word-wrap: break-word; 
 }
