@@ -4255,6 +4255,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	position: relative;
 	top: 31px;
 	left: 112px;
+	display: table-row;
 }
 
 @media screen and (max-width: 1520px) {
@@ -4266,7 +4267,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	}
 	#page-mod-oublog-participation div[role="main"] fieldset.hidden #fitem_id_submitbutton
 		{
-		margin-top: 30%;
+		margin-top: 105%;
 		margin-right: 90%;
 	}
 }
@@ -5040,4 +5041,11 @@ a.skip-block, a.skip {
 
 .path-mod-checklist .checklist_progress_inner {
     background-image:none !important;
+}
+.path-mod-assign [data-region="grading-navigation-panel"], .path-mod-assign [data-region="grade-actions"] {
+	background:  repeat scroll 0 0;
+}
+
+#page-mod-oublog-participation.dir-rtl .mform .fitem .felement {
+    margin-right: 45px;
 }
