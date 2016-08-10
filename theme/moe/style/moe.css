@@ -26,6 +26,58 @@
 	padding-right:5px;
 }
 
+#page-footer .contains_branch ul
+{
+	padding-top:10px;
+	padding-right:30px;
+}
+
+#page-footer .canexpand
+{
+padding-right:20px;
+}
+
+
+#page-footer .branch li
+{
+	padding-right:10px;
+}
+
+#page-footer .current_branch ul
+{
+	padding-right:30px;
+}
+#page-footer .tree_item .branch .active_tree_node .canexpand
+{
+	text-align:right;
+	
+}
+
+
+#page-footer .block .content
+{
+	text-align:right;
+}
+
+
+#page-footer  .block_navigation .block_tree .tree_item.branch
+{
+	text-align:right;
+}
+
+
+#page-footer  .block_settings .block_tree .tree_item.branch
+{
+	text-align:right;
+}
+
+
+#page-footer ul li, #greyboxright ul li
+{
+	text-align:right;
+}
+
+
 .loginbox .loginform {
 	text-align: center;
 }
