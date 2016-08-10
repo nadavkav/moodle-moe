@@ -188,7 +188,7 @@ class mod_tab_mod_form extends moodleform_mod
 
                 //$default_values['format['.$key.']'] = $options[$key]->format;
                 $default_values['externalurl[' . $key . ']'] = $options[$key]->externalurl;
-                $default_values['processmoodle[' . $key . ']'] = $options[$key]->processmoodle;
+                $default_values['processmoodle[' . $key . ']'] = (isset($options[$key]->processmoodle))? $options[$key]->processmoodle : null;
                 $default_values['tabcontentorder[' . $key . ']'] = $options[$key]->tabcontentorder;
                 $default_values['optionid[' . $key . ']'] = $tabids[$key];
             }
