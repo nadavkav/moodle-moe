@@ -558,8 +558,6 @@ switch ($action) {
             }
             echo isset($groupselect) ? $groupselect : '';
             $currentgroupid = groups_get_activity_group($cm);
-        } else {
-            echo ('<br />');
         }
         if ($currentgroupid > 0) {
              $groupname = get_string('group').': <strong>'.groups_get_group_name($currentgroupid).'</strong>';
