@@ -162,16 +162,17 @@ function process_urls($string)
  * @param string $clicktoopen
  * @return string html
  */
-function tab_embed_general($fullurl, $title, $clicktoopen, $mimetype)
+function tab_embed_general($fullurl, $title, $clicktoopen, $mimetype, $processmoodle=false)
 {
     global $CFG, $PAGE;
 
     $iframe = false;
     $force_link = false;
+    $local = false;
     // IE can not embed stuff properly if stored on different server
     // that is why we use iframe instead, unfortunately this tag does not validate
     // in xhtml strict mode
-    if ($mimetype === 'text/html' and check_browser_version('MSIE', 5))
+    if ($mimetype === 'text/html' and core_useragent::check_browser_version('MSIE', 5))
     {
         if (preg_match('(^https?://[^/]*)', $fullurl, $matches))
         {
@@ -186,6 +187,10 @@ function tab_embed_general($fullurl, $title, $clicktoopen, $mimetype)
             }
         }
     }
+    if(strpos($fullurl, $CFG->wwwroot) !== false && $processmoodle) {
+        $iframe = true;
+        $local = true;
+    }
     $id_suffix = md5($fullurl);
     //we force the link because IE doesn't support embedding web pages
     if ($force_link)
@@ -194,6 +199,39 @@ function tab_embed_general($fullurl, $title, $clicktoopen, $mimetype)
         $code = <<<EOT
 <div class="resourcecontent resourcegeneral">
         $clicktoopen
+</div>
+EOT;
+    }
+    elseif ($iframe && $local) {
+        $code = <<<EOT
+<div class="resourcecontent resourcegeneral">
+  <iframe id="resourceobject_$id_suffix" src="$fullurl">
+    $clicktoopen
+  </iframe>
+  <script>
+        $(function() {
+            $("#resourceobject_$id_suffix").load(function (e) {
+                    $(this).contents().find("header").hide();
+                    $(this).contents().find("nav").hide();
+                    $(this).contents().find("aside").hide();
+                    $(this).contents().find("footer").hide();
+                    $(this).contents().find("#backtocourse_top").hide();
+                    $(this).contents().find(".col-sm-8").css("width", "100%");
+                    $(this).contents().find(".col-sm-8").css("height", "100%");      
+                    $(this).contents().find("#region-main").css("margin", "0");
+                    $(this).contents().find("#page").css("padding", "0");
+                    $(this).contents().find("#page-content").css("margin", "0");
+                    $(this).contents().find("#main").css("background", "none");
+                    $(this).contents().find("body").css("background", "none");
+                    $(this).contents().find("body").css("padding", "0");
+                    $(this).contents().find("#wrapper").css("padding", "0");
+                    $(this).contents().find("#wrapper").css("margin", "0");
+                    $(this).contents().find("#wrapper").css("width", "100%");
+                 $(this).contents().find("#region-main").css("width", "100%");
+                    
+            });
+        });
+  </script>
 </div>
 EOT;
     }

@@ -21,6 +21,7 @@ require_once($CFG->dirroot . '/lib/completionlib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or
 $a = optional_param('a', 0, PARAM_INT); // tab ID
+$showtab = optional_param('showtab', 0, PARAM_INT); // tab index, to show
 
 if ($id)
 {
@@ -227,7 +228,11 @@ foreach (array_keys($options) as $key)
     }
     elseif (!empty($externalurl[$key]))
     {
-        $html_content = tab_embed_general(process_urls($externalurl[$key]), '', get_string('embed_fail_msg', 'tab') . "<a href='$externalurl[$key]' target='_blank' >" . get_string('embed_fail_link_text', 'tab') . '</a>', 'text/html');
+		$processmoodle = false;
+        if($options[$key]->processmoodle == 1) {
+            $processmoodle = true;
+        }
+        $html_content = tab_embed_general(process_urls($externalurl[$key]), '', get_string('embed_fail_msg', 'tab') . "<a href='$externalurl[$key]' target='_blank' >" . get_string('embed_fail_link_text', 'tab') . '</a>', 'text/html', $processmoodle);
     }
     else
     {
