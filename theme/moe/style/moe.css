@@ -4823,7 +4823,26 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 #page-admin-setting-editorsettingstinymce .settingsform fieldset{
     min-width: 0px;
 }
+
 #page-admin-setting-editorsettingstinymce .form-item .form-setting .form-defaultinfo{
     display: block;
     word-wrap: break-word; 
+}
+
+#page-mod-questionnaire-report div[role="main"] > .generalbox > div:first-of-type  {
+        padding: 10px;
+        font-size: 1.1em;
+}
+
+.dir-rtl #respondentscolumn {
+    float:right;
+    margin-right: 7em;
+}
+
+#page-mod-questionnaire-report #respondentscolumn a {
+    background-color: #eee8e6;
+    padding:5px 10px 5px 15px;
+    display: block;
+    border: 1px solid #a18581;
+
 }
