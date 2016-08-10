@@ -1,4 +1,9 @@
 @CHARSET "UTF-8";
+.dir-ltr .loginbox .loginform .form-input
+{   margin: 0 auto;
+	float: none;
+	text-align: center;
+}
 
 .dir-rtl .forumpost .author::before {
     float: right;
