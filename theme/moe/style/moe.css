@@ -1,5 +1,35 @@
 @CHARSET "UTF-8";
 
+.cell .c0
+
+{
+	width:10px;
+	
+}
+.no-overflow>.generaltable
+{
+	width:100%;
+	margin-right:0px;
+	margin-left:0px;
+}
+
+.generalbox
+{
+	width:100%;
+	margin-right:0px;
+	margin-left:0px;
+	
+}
+/*
+#mod_assign_grading_r0
+{
+	background: blue!important;
+}
+.unselectedrow
+{
+	background: blue!important;
+}
+*/
 .dir-rtl .forumpost .author::before {
     float: right;
    }
