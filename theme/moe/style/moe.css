@@ -5074,3 +5074,7 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
+    width: 45%;
+    word-break: break-word;
+}
