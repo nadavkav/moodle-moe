@@ -5074,3 +5074,9 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+
+#page-admin-tool-capability-index select#id_capability{
+	min-width: 0px;
+    width: 100%;
+    overflow-x: auto;
+}
