@@ -4245,7 +4245,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	background-color: #e8e6de;
 }
 
-.path-mod-oublog div[role="main"] .mdl-align {
+#page-mod-oublog-participation div[role="main"] .mdl-align {
 	display: inline-block;
 	text-align: center;
 	width: 100%;
