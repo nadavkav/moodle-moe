@@ -1,54 +1,35 @@
 @CHARSET "UTF-8";
-#page-mod-assign-grading .gradingtable input
-{
-	width:40px;
-}
 
-
-
-#page-mod-assign-grading  .generaltable
- td.c12
-
-{
-	width:80px;
-	
-}
-
-#page-mod-assign-grading  .generaltable
- td.c5
-
-{
-	width:100px;
-	
-}
-#page-mod-assign-grading  .generaltable
- td.c13
-
-{
-	padding-left:25px
-	
-	
-}
-#page-mod-assign-grading  .generaltable
- td.c0
+.cell .c0
 
 {
 	width:10px;
 	
 }
-.generaltable
+.no-overflow>.generaltable
 {
-	width: 100%;
+	width:100%;
 	margin-right:0px;
 	margin-left:0px;
-	border-collapse: collapse;
-	display:block;
-	position:relative;
-	border-collapse: collapse;
-    table-layout: fixed;
-	overflow:auto;
 }
 
+.generalbox
+{
+	width:100%;
+	margin-right:0px;
+	margin-left:0px;
+	
+}
+/*
+#mod_assign_grading_r0
+{
+	background: blue!important;
+}
+.unselectedrow
+{
+	background: blue!important;
+}
+*/
 .dir-rtl .forumpost .author::before {
     float: right;
    }
