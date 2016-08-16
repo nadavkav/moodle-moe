@@ -5074,3 +5074,7 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+#page-mod-assign-grading td:LAST-CHILD,
+#page-mod-assign-grading td.c5 {
+	min-width: 7em;
+}
