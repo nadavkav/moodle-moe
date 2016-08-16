@@ -5083,3 +5083,9 @@ a.skip-block, a.skip {
 .dir-rtl .navbar .brand {
 	padding-right: 1em;
 }
+#region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
+	padding-left: 1em;
+}
+.dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
+	padding-right: 1em;
+}
