@@ -4819,3 +4819,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 .path-mod-assign [data-region="grading-navigation-panel"], .path-mod-assign [data-region="grade-actions"] {
 	background:  repeat scroll 0 0;
 }
+#page-mod-assign-grading td.c15,
+#page-mod-assign-grading td.c5 {
+	min-width: 7em;
+}
