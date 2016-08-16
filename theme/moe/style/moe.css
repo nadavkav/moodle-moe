@@ -5080,3 +5080,6 @@ a.skip-block, a.skip {
     width: 100%;
     overflow-x: auto;
 }
+.dir-rtl .navbar .brand {
+	padding-right: 1em;
+}
