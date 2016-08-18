@@ -60,7 +60,8 @@ function moewiki_add_instance($data, $mform) {
         }
 
         //if there is a text template for all students to be implemented
-        if($texttemplate = $data->template_text) {
+        if(isset($data->template_text) && $data->template_text['text'] != "") {
+            $texttemplate = $data->template_text['text'];
             $cmid = $data->coursemodule;
             $cm = $DB->get_record('course_modules', array("id" => $cmid));
             $context = context_module::instance($cmid);
