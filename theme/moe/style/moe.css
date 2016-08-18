@@ -2087,6 +2087,9 @@ div#middle-column {
 	#frontpage-course-list .paging-morelink {
 		width: 97%;
 	}
+	body.format-moetopcoll .course-content ul.ctopics li#section-0.section.main .content{
+	   margin: 0 0;
+	}
 }
 
 #tabmoveright, #tabmoveleft {
