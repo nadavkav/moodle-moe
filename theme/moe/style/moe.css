@@ -1027,7 +1027,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .nav-tabs>li.active .tab_content {
-	background-color: #e1cff5;
+	background-color: #7a5b9a;
+	border-bottom: 5px solid #462965;
+	color: #ffffff;
+	font-weight: bold;
 }
 
 .nav-tabs>li.active {
