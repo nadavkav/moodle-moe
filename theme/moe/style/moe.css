@@ -5077,7 +5077,7 @@ a.skip-block, a.skip {
     border: 1px solid #c8bdd4;
     background-image: url([[pix:theme_moe|bg/Bg_divider]]);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 5px;
 }
 
 #page-course-view-socialwall .course-content ul.topics li#section-0 {
