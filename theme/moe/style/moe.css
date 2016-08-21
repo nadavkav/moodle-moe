@@ -4391,7 +4391,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 .path-mod-checklist div[role="main"]>.checklistbox {
 	border: 2px solid #eacda4;
 	background-color: #f9eedc;
-	padding: 0 3em 0 3em;
 	display: inline-block;
 }
 
@@ -4488,7 +4487,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 	display: block;
 	border: 1px solid #ebcda4;
 	background-color: #fcd8a1;
-	padding: 0 1em;
+	padding: 0 3em;
 }
 
 .checklistreport .cell.level0 {
@@ -4544,7 +4543,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 
 #page-mod-checklist-view .box.generalbox.boxwidthwide.boxaligncenter {
 	background-color: #f9eedc;
-	padding: 0 3em 1em 3em;
+	padding: 0 0 1em 0;
 	width: 99%;
 	border-left: 2px solid #eacda4;
 	border-right: 2px solid #eacda4;
@@ -5073,4 +5072,19 @@ a.skip-block, a.skip {
     padding:5px 10px 5px 15px;
     display: block;
     border: 1px solid #a18581;
+}
+.checklistbox>form input[type="submit"] {
+	margin-top: 1em;
+}
+#page-mod-checklist-view .checklist_progress_heading,
+#page-mod-checklist-view .checklistbox > form:FIRST-OF-TYPE
+{
+    margin-right: 3em;
+}
+#page-mod-checklist-view.dir-rtl .checklistbox ol{
+	margin: 0 0 10px 0;
+}
+
+#page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem {
+	margin-right: 3em;
 }
