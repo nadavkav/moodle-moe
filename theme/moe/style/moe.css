@@ -1462,9 +1462,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .path-mod-assign #region-main div[role="main"] #intro {
-	border-top: #bdb0c9 1px solid;
-	border-right: #bdb0c9 1px solid;
-	border-left: #bdb0c9 1px solid;
+	border: #bdb0c9 1px solid;
 }
 
 .path-mod-assign #region-main div[role="main"] .urlselect>form>div {
@@ -5077,4 +5075,8 @@ a.skip-block, a.skip {
 #page-mod-assign-grading td:LAST-CHILD,
 #page-mod-assign-grading td.c5 {
 	min-width: 7em;
+}
+#page-mod-assign-view .gradingsummary table.generaltable,
+#page-mod-assign-view .submissionstatustable table.generaltable{
+	border: 1px solid #ddd;
 }
