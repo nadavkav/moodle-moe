@@ -4648,15 +4648,13 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	width: 94%;
 	margin-left: 3%;
 	margin-right: 3%;
-	background-color: #deeeb8;
 	border: 1px solid #748f5c;
 	margin-top: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
 .path-mod-data div[role="main"] .datapreferences form {
 	border-bottom: 0px;
+	background-color: #dbeeb7;
 }
 
 .path-mod-data div[role="main"] .nav-tabs>li.active>a {
@@ -4753,10 +4751,8 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data div[role="main"] .paging {
 	background-color: #d4ccda;
-	display: inline-block;
 	font-size: 1.1em;
 	font-weight: 700;
-	border: 1px solid #9684a1;
 	color: #292429;
 }
 
@@ -4800,6 +4796,7 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	font-size: 1.1em;
 	transition: none;
 	outline: 0px !important;
+	margin-top: 1em;
 }
 
 #page-mod-data-view.dir-rtl #checkall {
@@ -4828,9 +4825,21 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data .defaulttemplate {
 	border-bottom: 1px solid #74915b;
-	margin-bottom: 10px;
+	background-color: #dbeeb7;
 }
-
+#page-mod-data-view .defaulttemplate p{
+	margin: 0px;
+}
+#page-mod-data-view .datapreferences+form > p{
+	background-color: #dbeeb7;
+	margin: 0px
+}
+.path-mod-data .defaulttemplate:NTH-OF-TYPE(2n+1){
+	background-color: #d7e1c1;
+}
+#page-mod-data-view .datapreferences+form > p:NTH-OF-TYPE(2n+1){
+	background-color: #d7e1c1;
+}
 .path-mod-data div[role="main"] .nav-tabs:nth-of-type(2)>li.active>a,
 	.path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs>li.active>a
 	{
