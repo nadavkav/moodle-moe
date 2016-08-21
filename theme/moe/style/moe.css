@@ -5036,7 +5036,12 @@ a.skip-block, a.skip {
 .path-mod-checklist #checklistprogressrequired > span {
     display: block;
 }
-
+#page-mod-checklist-report #checklistprogressrequired > div {
+	margin-top: 1.4em;
+}
+#page-mod-checklist-report #checklistprogressrequired > span {
+	margin-top: 1em;
+}
 .path-mod-checklist .checklist_progress_inner {
     background-image:none !important;
 }
