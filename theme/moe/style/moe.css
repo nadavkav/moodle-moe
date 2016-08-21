@@ -5047,3 +5047,6 @@ a.skip-block, a.skip {
 .dir-rtl .mod-data-default-template .template-field{
 	text-align: right;
 }
+#page-mod-data-view.dir-rtl input[type="checkbox"]{
+	margin-right: 7px;
+}
