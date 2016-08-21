@@ -4423,6 +4423,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	#page-mod-checklist-view #region-main .checklistimportexport a:nth-child(2),
 	#page-mod-checklist-view ol.checklist+form input[type="submit"] {
 	background-image: none;
+	font-weight: bold;
 	color: #19171a !important;
 	border: 8px solid transparent;
 	box-shadow: inset 0 0 0 1px #6ca6a5, 0 0 0 1px #6ca6a5;
@@ -4554,7 +4555,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 
 #page-mod-checklist-view #region-main .checklistimportexport {
 	background-color: #f9eedc;
-	padding: 20px 1em;
+	padding: 20px 3em;
 	box-sizing: border-box;
 	width: 99%;
 	border-top: 2px solid #eacda4;
@@ -4572,6 +4573,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 	border: 1px solid #6da5b1;
 	background-color: #d1f2f8;
 	color: #005857 !important;
+	font-weight: bold;
 }
 
 #page-mod-checklist-view #additembox {
@@ -5085,10 +5087,13 @@ a.skip-block, a.skip {
 {
     margin-right: 3em;
 }
-#page-mod-checklist-view.dir-rtl .checklistbox ol{
+#page-mod-checklist-view.dir-rtl  ol{
 	margin: 0 0 10px 0;
 }
 
-#page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem {
+#page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem,
+#page-mod-checklist-view.dir-rtl ol > form> li > span:FIRST-OF-TYPE,
+#page-mod-checklist-view.dir-rtl ol > form > input[type="submit"],
+#page-mod-checklist-view.dir-rtl .box> p{
 	margin-right: 3em;
 }
