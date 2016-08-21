@@ -5030,12 +5030,11 @@ a.skip-block, a.skip {
 
 .path-mod-checklist #checklistprogressrequired > div {
     display: block;
-    margin-top: 1.4em;
+    margin-top: 0.4em;
 }
 
 .path-mod-checklist #checklistprogressrequired > span {
     display: block;
-    margin-top: 1em;
 }
 
 .path-mod-checklist .checklist_progress_inner {
