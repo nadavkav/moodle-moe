@@ -5056,3 +5056,6 @@ a.skip-block, a.skip {
 #page-mod-data-export.dir-rtl .mform .fitem .felement{
 	margin-right: 1em;
 }
+#fgroup_id_exportar fieldset > span:NTH-OF-TYPE(2) {
+	margin-right: 1.5em;
+}
