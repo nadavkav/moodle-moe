@@ -2919,7 +2919,7 @@ ul.nav.nav-tabs {
 .glossarycategoryheader  span {
 	background-color: #ededed !important;
 	color: #3b3340;
-	border: 2px solid #e5e1d9;
+	border: 2px solid #b5b4b4;
 	padding: 3px 10px 3px 10px;
 }
 
@@ -3009,8 +3009,6 @@ ul.nav.nav-tabs {
 }
 
 #page-mod-glossary-view .entrybox table tr>td.aliases>label {
-	background-color: #c5f7e7;
-	border: 1px solid #c7d9cb;
 	margin-top: 3px;
 	color: #3b3340 ! important;
 	padding: 5px;
@@ -3019,8 +3017,7 @@ ul.nav.nav-tabs {
 	box-shadow: inherit;
 }
 
-#page-mod-glossary-view form[action="editcategories.php"] input[type="submit"]
-	{
+#page-mod-glossary-view form[action="editcategories.php"] input[type="submit"] {
 	margin-right: 20em;
 }
 
@@ -5069,4 +5066,7 @@ a.skip-block, a.skip {
     padding:5px 10px 5px 15px;
     display: block;
     border: 1px solid #a18581;
+}
+table.glossarypost.faq {
+	padding: 1.5em;
 }
