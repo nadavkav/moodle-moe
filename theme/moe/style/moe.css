@@ -5050,3 +5050,9 @@ a.skip-block, a.skip {
 #page-mod-data-view.dir-rtl input[type="checkbox"]{
 	margin-right: 7px;
 }
+#page-mod-data-export.dir-rtl #fgroup_id_exportar div.fitemtitle{
+	width: 1em;
+}
+#page-mod-data-export.dir-rtl .mform .fitem .felement{
+	margin-right: 1em;
+}
