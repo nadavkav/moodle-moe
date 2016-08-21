@@ -4583,44 +4583,8 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 	background-color: transparent;
 }
 
-body
-.format-moetopcoll
- 
-.section
- 
-.activity
-.modtype_label
-.label
- 
-div
- 
-div
- 
-div
- 
-div
- 
-div
- 
-div
->
-*
-:NOT
-
-	
-(
-.moetopcalllabel
- 
-){
-padding
-:
- 
-0
-1
-em
-;
-
-
+body.format-moetopcoll .section .activity.modtype_label.label div div div div div div>*:NOT(.moetopcalllabel){
+    padding:0 1em;
 }
 body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	{
@@ -4703,7 +4667,7 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data div[role="main"] .nav-tabs>li.active {
 	margin-bottom: 0px;
-	margin-top: 10px;
+	margin-top: 4px;
 }
 
 .path-mod-data div[role="main"] .nav-tabs>li {
@@ -4731,11 +4695,6 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	margin-top: 0.4px !important
 }
 
-.path-mod-data div[role="main"] .nav-tabs>li.active>a {
-	background: #DCDCDC;
-	margin-top: -7px !important;
-	border: 1px solid #9785a2 !important;
-}
 
 .dir-rtl.path-mod-data div[role="main"] fieldset>.ftoggler {
 	float: right;
@@ -4937,12 +4896,6 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 #page-mod-data-templates .tabs-container.clearfix .dragscroll {
 	width: 94% !important;
-}
-
-.path-mod-data div[role="main"] .nav-tabs>li.active>a {
-	background: #DCDCDC;
-	margin-top: -7px !important;
-	border: 1px solid #9785a2 !important;
 }
 
 #page-group-members  #assignform #existingcell {
