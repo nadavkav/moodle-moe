@@ -5040,3 +5040,10 @@ a.skip-block, a.skip {
 #page-mod-data-templates #tempform .boxwidthwide {
 	width: 91%;
 }
+.path-mod-data div[role="main"] .paging>span.current-page{
+	background-color: #466427;
+    color: #fff;
+}
+.dir-rtl .mod-data-default-template .template-field{
+	text-align: right;
+}
