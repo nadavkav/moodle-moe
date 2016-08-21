@@ -2812,12 +2812,12 @@ ul.nav.nav-tabs {
 }
 
 #page-mod-glossary-view .glossarydisplay .entrybox>b {
-	border: 2px solid #886978 !important;
-	background-color: #97f9db;
+	border: 2px solid #987985 !important;
+	background-color: #fbe9ea;
 	padding: 1px 4px 1px 0px !important;
 	font-size: 16px;
 	font-weight: bold;
-	color: #6d3f56;
+	color: #835667;
 	margin-right: 3px;
 }
 
@@ -3068,7 +3068,7 @@ background-color
 	padding: 2px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
-	margin-right: 1em;
+	margin-right: 1.5em;
 	margin-bottom: 5em;
 }
 
@@ -3462,10 +3462,6 @@ background-color
 	background-color: #f2ece2;
 	width: 100% !important;
 	border-bottom: 1px solid #c8d3cb;
-}
-
-#page-mod-glossary-view  .glossarydisplay .entrybox {
-	text-align: center;
 }
 
 #page-mod-glossary-view .box.generalbox.boxaligncenter.boxwidthwide {
