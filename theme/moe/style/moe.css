@@ -4577,7 +4577,8 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 }
 
 #page-mod-checklist-view #additembox {
-	margin-left: 1em;
+	margin-left: 3em;
+	margin-right: 3em;
 }
 
 .que.essay .qtype_essay_response.readonly {
@@ -5094,6 +5095,7 @@ a.skip-block, a.skip {
 #page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem,
 #page-mod-checklist-view.dir-rtl ol > form> li > span:FIRST-OF-TYPE,
 #page-mod-checklist-view.dir-rtl ol > form > input[type="submit"],
-#page-mod-checklist-view.dir-rtl .box> p{
+#page-mod-checklist-view.dir-rtl .box> p,
+#page-mod-checklist-view.dir-rtl .box> form > input[type="submit"]{
 	margin-right: 3em;
 }
