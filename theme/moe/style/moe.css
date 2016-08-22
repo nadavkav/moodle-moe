@@ -5111,3 +5111,7 @@ a.skip-block, a.skip {
 #page-course-view-socialwall #section-0 .content > h3.sectionname{
 	border-bottom: 1px solid #c1bdbf;
 }
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
+    width: 45%;
+    word-break: break-word;
+}
