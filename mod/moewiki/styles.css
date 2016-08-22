@@ -917,3 +917,6 @@ a.moewiki_noshow:link,a.moewiki_noshow:visited {
 .annotatheper{
 	font-weight: bolder;
 }
+.annotator-viewer-controls{
+	margin-top: 1em;
+}
