@@ -1377,6 +1377,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics .content h3.sectionname {
 	border: none;
+	border-bottom: 1px solid #bfb2cd;
+}
+
+#section-0 .content > h3.sectionname{
+	border-bottom: 1px solid #bfb2cd;
 }
 
 .format-topics .course-content ul.topics {
@@ -1392,7 +1397,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics  .course-content ul li.section.main {
 	padding: 0px 0 !important;
-	*/
+	border-top: 1px solid #bfb2cd;
+	border-bottom: 1px solid #bfb2cd;
 }
 
 .format-topics .course-content ul.topics li.section .content {
