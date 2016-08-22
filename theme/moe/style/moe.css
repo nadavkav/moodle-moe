@@ -3062,11 +3062,10 @@ background-color
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox a:first-of-type {
-	padding: 2px 6px 2px 6px;
+	padding: 10px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
 	margin-right: 1.5em;
-	margin-bottom: 5em;
 }
 
 /*all alphabeth letters*/
@@ -3074,35 +3073,13 @@ background-color
 	padding: 2px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
-	margin-bottom: 5em;
 }
 
-/*all alphabeth letters*/
-#page-mod-glossary-view  .glossarydisplay .entrybox a {
-	padding: 2px 6px 2px 6px;
-	background-color: #f4ffe2;
-	border: 2px solid #e0dccb;
-	margin-bottom: 5em;
-}
-
-/*all alphabeth letters*/
-#page-mod-glossary-view   .glossarydisplay .entrybox a:hover {
-	background-color: #dcfcad;
-	border: 2px solid #e0dccb;
-	padding: 2px 6px 2px 6px;
-}
 /*all alphabeth letters*/
 #page-mod-glossary-view  .glossarydisplay .entrybox b+a {
 	padding: 2px 6px 2px 6px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
-	margin-bottom: 5em !important;
-}
-/*all alphabeth letters*/
-#page-mod-glossary-view   .glossarydisplay .entrybox b+a:hover {
-	background-color: #dcfcad;
-	border: 2px solid #e0dccb;
-	padding: 2px 6px 2px 6px;
 	margin-bottom: 5em !important;
 }
 
@@ -3248,19 +3225,10 @@ background-color
 	{
 	background-color: transparent;
 	border: 0px solid #e0dccb;
-	padding: 2px 6px 2px 6px;
-	margin-top: 30px !important;
-	padding-top: 30px !important;
+	float: right;
 }
 
-#page-mod-glossary-view  .glossarydisplay .entrybox  .glossarycategoryheader  a:hover
-	{
-	background-color: transparent;
-	border: 0px solid #e0dccb;
-	padding: 2px 6px 2px 6px;
-	margin-top: 30px !important;
-	padding-top: 30px !important;
-}
+
 
 #page-mod-glossary-view  .glossarydisplay .entrybox {
 	margin-bottom: 0px !important;
@@ -5067,4 +5035,7 @@ table.glossarypost.faq {
 }
 table.glossarypost.encyclopedia td.picture{
 	padding-top: 2em;
+}
+#page-mod-glossary-view table.glossarycategoryheader th h3{
+	float: right;
 }
