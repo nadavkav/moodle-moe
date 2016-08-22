@@ -5065,3 +5065,6 @@ a.skip-block, a.skip {
 table.glossarypost.faq {
 	padding: 1.5em;
 }
+table.glossarypost.encyclopedia td.picture{
+	padding-top: 2em;
+}
