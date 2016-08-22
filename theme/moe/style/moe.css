@@ -262,12 +262,7 @@ body.pagelayout-embedded {
 }
 
 .format-socialwall .tl-post {
-	margin: 0px !important;
-	border: 0px solid #efefef;
-	margin-bottom: 0px !important;
-	margin-top: 0px !important;
-	padding: 0px;
-	border: 0px solid #efefef !important;
+	border-top: 2px solid #b1d5ce;
 }
 
 .tl-locked {
@@ -480,6 +475,9 @@ body.pagelayout-embedded {
 }
 
 /* Comments */
+.tl-posts .tl-comment  .tl-text{
+	word-wrap: break-word;
+}
 .tl-posts  .tl-comment:nth-child(even) .tl-text {
 	position: relative;
 	display: inline-block;
@@ -495,7 +493,7 @@ body.pagelayout-embedded {
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
 	-moz-margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
 }
 
 .tl-posts  .tl-comment:nth-child(even) .tl-text:after, .tl-posts  .tl-comment:nth-child(even) .tl-text:before
@@ -540,7 +538,7 @@ body.pagelayout-embedded {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
 }
 
 .tl-posts  .tl-comment:nth-child(odd) .tl-text:after, .tl-posts  .tl-comment:nth-child(odd) .tl-text:before
@@ -5077,7 +5075,6 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
-
 #page-admin-tool-capability-index select#id_capability{
 	min-width: 0px;
     width: 100%;
@@ -5091,4 +5088,26 @@ a.skip-block, a.skip {
 }
 .dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
 	padding-right: 1em;
+}
+
+#page-course-view-socialwall .course-content ul.topics {
+    border: 1px solid #c8bdd4;
+    background-image: url([[pix:theme_moe|bg/Bg_divider]]);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+}
+
+#page-course-view-socialwall .course-content ul.topics li#section-0 {
+	padding-top: 5px !important;
+}
+#page-course-view-socialwall .course-content ul.topics li#section-0 .content {
+	border-top: 1px solid #c1bdbf;
+	background-color: #dcf3ee;
+}
+#page-course-view-socialwall .course-content ul.topics li.section .content{
+    margin-left: 0px;
+	margin-right: 0px;	
+}
+#page-course-view-socialwall #section-0 .content > h3.sectionname{
+	border-bottom: 1px solid #c1bdbf;
 }
