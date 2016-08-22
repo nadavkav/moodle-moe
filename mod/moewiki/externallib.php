@@ -326,7 +326,7 @@ class mod_moewiki_external extends external_api
         return array('successs' => false);
     }
     
-    public static function resolved_returns($id) {
+    public static function resolved_returns() {
         return new external_function_parameters(array(
             'success' => new external_value(PARAM_BOOL),
             'childes' => new external_multiple_structure(new external_single_structure(array(
