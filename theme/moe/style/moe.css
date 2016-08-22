@@ -3062,7 +3062,7 @@ background-color
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox a:first-of-type {
-	padding: 10px 6px 2px 6px;
+	padding: 10px 6px 2px 0px;
 	background-color: #f4ffe2;
 	border: 2px solid #e0dccb;
 	margin-right: 1.5em;
@@ -3114,6 +3114,7 @@ background-color
 	background-color: #ffd99c !important;;
 	border: 2px solid #997f8e !important;
 	padding: 2px 6px 2px 6px;
+	margin-right: 1.3em;
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ a[href*="sortkey=CREATION"]
