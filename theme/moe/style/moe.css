@@ -5040,3 +5040,6 @@ table.glossarypost.encyclopedia td.picture{
 #page-mod-glossary-view table.glossarycategoryheader th h3{
 	float: right;
 }
+#page-mod-glossary-view td.entry div.concept h4 {
+	padding-right: 1.3em;
+}
