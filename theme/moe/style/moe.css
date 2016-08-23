@@ -2821,14 +2821,9 @@ ul.nav.nav-tabs {
 	margin-right: 3px;
 }
 
-#page-mod-glossary-view  .glossarydisplay .entrybox  a[href*="sortkey=LASTNAME"]+b:nth-of-type(2)
-	{
-	background-color: #97f9db !important;
-}
-
-#page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+a[href*="sortkey=LASTNAME"]+b a
-	{
-	background-color: #ffd99c !important;
+#page-mod-glossary-view  .glossarydisplay .entrybox  a[href*="sortkey=LASTNAME"]+b:nth-of-type(2){
+	background-color: #fbe9ea !important;
+	color: #835667;
 }
 /*second title*/
 #page-mod-glossary-view .printicon {
@@ -3050,13 +3045,12 @@ background-color
 
 /*private name*/
 #page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+a+b a {
-	background-color: #ffd99c !important;
 	border: 0px solid;
 	margin-bottom: 5em !important;
+	padding: 0px;
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+b a {
-	background-color: #ffd99c !important;
 	border: 0px solid;
 	margin-bottom: 5em !important;
 }
@@ -3186,20 +3180,10 @@ background-color
 	color: #6e7a76;
 	padding: 0 1em;
 }
-
-#page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a:hover
-	{
-	background-color: transparent;
-	border-right: 2px solid #997f8e !important;
-	padding: 1px 6px 1px 6px;
-}
-
 /*private name*/
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  ~ b a
 	{
 	background-color: transparent;
-	border-right: 2px solid #997f8e !important;
-	padding: 1px 6px 1px 6px;
 }
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  .accesshide  b: {
@@ -3253,9 +3237,11 @@ background-color
 
 #page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2) {
 	border: 0px solid #e0dccb;
-	padding: 2px 6px 2px 6px;
+	padding: 0 !important;
 }
-
+#page-mod-glossary-view.dir-rtl  .glossarydisplay .entrybox  b:nth-of-type(2){
+    margin-right: 1.3em;
+}
 #page-mod-glossary-view  .glossarydisplay .entrybox  b:nth-of-type(2)
 	 ~ a:hover {
 	background-color: transparent;
@@ -5040,6 +5026,10 @@ table.glossarypost.encyclopedia td.picture{
 #page-mod-glossary-view table.glossarycategoryheader th h3{
 	float: right;
 }
+
 #page-mod-glossary-view td.entry div.concept h4 {
 	padding-right: 1.3em;
+}
+#page-mod-glossary-view.dir-rtl  .glossarydisplay .entrybox .accesshide+a{
+	margin-right: 1.3em;
 }
