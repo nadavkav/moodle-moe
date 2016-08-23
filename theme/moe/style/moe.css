@@ -5095,7 +5095,6 @@ a.skip-block, a.skip {
 #page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem,
 #page-mod-checklist-view.dir-rtl ol > form> li > span:FIRST-OF-TYPE,
 #page-mod-checklist-view.dir-rtl ol > form > input[type="submit"],
-#page-mod-checklist-view.dir-rtl .box> p,
-#page-mod-checklist-view.dir-rtl .box> form > input[type="submit"]{
+#page-mod-checklist-view.dir-rtl .box> p{
 	margin-right: 3em;
 }
