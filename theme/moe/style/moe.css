@@ -5098,6 +5098,9 @@ a.skip-block, a.skip {
 #page-mod-checklist-view.dir-rtl .box> p{
 	margin-right: 3em;
 }
+#page-mod-checklist-report.dir-rtl td.cell.c0{
+	text-align: right !important;
+}
 .path-mod-checklist .nav-tabs li a {
 	font-weight: bolder;
 }
