@@ -5074,3 +5074,14 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+.dir-rtl .oublog-post .oublog-social-container,
+.dir-rtl .oublog-post .oublog-post-attachments {
+	float: left;
+	
+}
+.dir-rtl .oublog-userpic{
+	float: right;
+}
+.dir-rtl .oublog-post .oublog-social-container{
+	margin-top: 4em;
+}
