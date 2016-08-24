@@ -5104,3 +5104,9 @@ a.skip-block, a.skip {
 .path-mod-checklist .nav-tabs li a {
 	font-weight: bolder;
 }
+#page-mod-checklist-view.dir-rtl ol.checklist+form input[type="submit"]{
+	margin-right: 3em;
+}
+#page-mod-checklist-view  .checklistimportexport+.box form li label.itemheading{
+	display: inline;
+}
