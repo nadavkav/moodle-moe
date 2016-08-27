@@ -13,8 +13,6 @@
 	color: #bbb;
 
 }
-
-
  #page-mod-ouwiki-view .ouw_wordcount span
 {
 		margin-right: 15px;
@@ -2432,66 +2430,28 @@ ul.nav.nav-tabs {
 	padding-top: 5px;
 	margin: 0;
 }
-
-.path-mod-assign div[data-region="user-selector"] {
-	width: auto !important;
-	margin: 0;
-}
-
 .path-mod-assign [data-region="user-info"] em {
 	margin-right: 61px;
 }
-
 #page-mod-assign-grader div[data-region="user-info"] {
 	padding-bottom: 66px;
 	width: auto !important;
 	padding-left: 20px;
 }
-
 #page-mod-assign-grader div[data-region="user-selection"] {
-	width: auto;
 	position: absolute;
 	right: 10%;
 }
-
 .dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>a {
 	color: #f8f1f7;
 }
-
-.dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>a[data-action="previous-user"]
-	{
-	background-image: url([[pix:theme|right_arrow_grading]]);
-	float: right;
-	width: 29px;
-	height: 29px;
-	margin-right: 10px;
+.dir-rtl.path-mod-assign [data-region="user-selector"] .form-autocomplete-suggestions{
+	margin-right: 48px;
 }
-
-.dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>a[data-action="next-user"]
-	{
-	background-image: url([[pix:theme|left_arrow_grading]]);
-	float: right;
-	width: 29px;
-	height: 29px;
-}
-
-.path-mod-assign [data-region="user-selector"] .alignment>span:nth-of-type(1)
-	{
-	float: right;
-}
-
 .path-mod-assign div[data-region="user-selection"] {
 	border: #a596a9 2px solid;
 	background-color: #f8f1f7;
 }
-
-.path-mod-assign [data-region="user-selector"] .alignment>span[data-region="user-count"]
-	{
-	display: block;
-	float: right;
-	width: 100%;
-}
-
 .dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>a[data-region="user-filters"]
 	{
 	display: block;
@@ -2499,7 +2459,12 @@ ul.nav.nav-tabs {
 	width: 50%;
 	text-align: right;
 }
-
+.dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>a img.smallicon{
+	transform: rotate(180deg);
+}
+.dir-rtl.path-mod-assign [data-region="user-selector"] .form-autocomplete-suggestions{
+	text-align:right;
+}
 .dir-rtl.path-mod-assign [data-region="user-selector"] .alignment>span[data-region="user-count"]
 	{
 	display: block;

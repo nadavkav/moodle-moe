@@ -32,20 +32,20 @@
     This template includes ajax functionality, so it cannot be shown in the template library.
 }}
 <div data-region="grading-navigation" class="row-fluid">
-<div data-region="assignment-info" class="span4">
-<a href="{{config.wwwroot}}/course/view.php?id={{courseid}}">{{coursename}}</a><br/>
-<a href="{{config.wwwroot}}/mod/assign/view.php?id={{cmid}}">{{name}}</a>
-{{#caneditsettings}}
-<a href="{{config.wwwroot}}/course/modedit.php?update={{cmid}}&return=1">{{#pix}}t/edit, core,{{#str}}editsettings{{/str}}{{/pix}}</a>
-{{/caneditsettings}}
-<div role="tooltip" id="tooltip-{{uniqid}}" class="accesshide">
-{{#duedate}}
-{{#str}}duedatecolon, mod_assign, {{duedatestr}}{{/str}}
-{{/duedate}}
+<div data-region="assignment-info" class="span6">
+    <a href="{{config.wwwroot}}/course/view.php?id={{courseid}}">{{coursename}}</a><br/>
+    <a href="{{config.wwwroot}}/mod/assign/view.php?id={{cmid}}">{{name}}</a>
+    {{#caneditsettings}}
+        <a href="{{config.wwwroot}}/course/modedit.php?update={{cmid}}&return=1">{{#pix}}t/edit, core,{{#str}}editsettings{{/str}}{{/pix}}</a>
+    {{/caneditsettings}}
+    <div role="tooltip" id="tooltip-{{uniqid}}" class="accesshide">
+    {{#duedate}}
+        {{#str}}duedatecolon, mod_assign, {{duedatestr}}{{/str}}
+    {{/duedate}}
 
-{{#cutoffdate}}
-<br>{{cutoffdatestr}}
-{{/cutoffdate}}
+    {{#cutoffdate}}
+        <br>{{cutoffdatestr}}
+    {{/cutoffdate}}
 
 {{#duedate}}
 <br>{{timeremainingstr}}
@@ -56,11 +56,11 @@
 {{/duedate}}
 </span>
 </div>
-<div data-region="user-selection">
-	<div data-region="user-info" class="span4" data-assignmentid="{{assignmentid}}" data-groupid="{{groupid}}">
+<div data-region="user-selection" class="span6">
+	<div data-region="user-info"  data-assignmentid="{{assignmentid}}" data-groupid="{{groupid}}" class="span6">
 	    {{> mod_assign/grading_navigation_user_info }}
 	</div>
-	<div data-region="user-selector" class="span4">
+	<div data-region="user-selector" class="span6">
 	    <div class="alignment">
 	        {{> mod_assign/grading_navigation_user_selector }}
 	    </div>
