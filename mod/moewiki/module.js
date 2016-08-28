@@ -17,7 +17,7 @@
  * Javascript helper function for wiki
  *
  * @package   mod_moewiki
- * @copyright 2013 The Open University
+ * @copyright 2013 SysBind
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

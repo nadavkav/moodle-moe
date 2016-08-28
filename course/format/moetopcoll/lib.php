@@ -1068,9 +1068,10 @@ class format_moetopcoll extends format_base {
             $renderer = $PAGE->get_renderer('format_moetopcoll');
             $modinfo = get_fast_modinfo($this->courseid);
             $i=1;
-            if ($maxsection!=null){
+            if ($maxsection!=null && $oldcourse['format'] == 'moetopcoll'){
                 $i=$maxsection+1;
             }
+            $course = $DB->get_record('course', array('id' => $this->courseid));
             for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum++) {
                 $labels = array(
                     get_string('study', 'format_moetopcoll'),
@@ -1078,20 +1079,19 @@ class format_moetopcoll extends format_base {
                     get_string('toolbox', 'format_moetopcoll')
                 );
                 $section = $modinfo->get_section_info($sectionnum);
-                $course = $DB->get_record('course', array('id' => $this->courseid));
                 $completioninfo = new completion_info($course);
-                if($section != null){
-                foreach ($modinfo->sections[$section->section] as $modnumber) {
-                    $mod = $modinfo->cms[$modnumber];
-                    if ($mod->modname == 'label') {
-                        $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
-                        foreach ($labels as $key => $label) {
-                            if (strpos($modulehtml, $label)) {
-                                unset($labels[$key]);
+                if ($section != null && isset($modinfo->sections[$section->section])) {
+                    foreach ($modinfo->sections[$section->section] as $modnumber) {
+                        $mod = $modinfo->cms[$modnumber];
+                        if ($mod->modname == 'label') {
+                            $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
+                            foreach ($labels as $key => $label) {
+                                if (strpos($modulehtml, $label)) {
+                                    unset($labels[$key]);
+                                }
                             }
                         }
                     }
-                }
                 }
                 if ((!empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);

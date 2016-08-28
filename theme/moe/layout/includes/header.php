@@ -51,7 +51,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
     <div class="container-fluid">    
     <div class="row-fluid">
     <!-- HEADER: LOGO AREA -->
-        		<div id="lemidaDigit" class="hidden-phone span6">
+        		<div id="lemidaDigit" class="hidden-phone span5">
                 	<span>
                 	<?php 
 					   echo get_string('lemidadigit','theme_moe');

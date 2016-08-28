@@ -18,7 +18,7 @@
  * The mod_forumng instance list viewed event.
  *
  * @package    mod_forumng
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package    mod_moewiki
  * @since      Moodle 2.7
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {

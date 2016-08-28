@@ -262,12 +262,7 @@ body.pagelayout-embedded {
 }
 
 .format-socialwall .tl-post {
-	margin: 0px !important;
-	border: 0px solid #efefef;
-	margin-bottom: 0px !important;
-	margin-top: 0px !important;
-	padding: 0px;
-	border: 0px solid #efefef !important;
+	border-top: 2px solid #b1d5ce;
 }
 
 .tl-locked {
@@ -480,6 +475,9 @@ body.pagelayout-embedded {
 }
 
 /* Comments */
+.tl-posts .tl-comment  .tl-text{
+	word-wrap: break-word;
+}
 .tl-posts  .tl-comment:nth-child(even) .tl-text {
 	position: relative;
 	display: inline-block;
@@ -495,7 +493,7 @@ body.pagelayout-embedded {
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
 	-moz-margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
 }
 
 .tl-posts  .tl-comment:nth-child(even) .tl-text:after, .tl-posts  .tl-comment:nth-child(even) .tl-text:before
@@ -540,7 +538,7 @@ body.pagelayout-embedded {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
 }
 
 .tl-posts  .tl-comment:nth-child(odd) .tl-text:after, .tl-posts  .tl-comment:nth-child(odd) .tl-text:before
@@ -1027,7 +1025,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .nav-tabs>li.active .tab_content {
-	background-color: #e1cff5;
+	background-color: #7a5b9a;
+	border-bottom: 5px solid #462965;
+	color: #ffffff;
+	font-weight: bold;
 }
 
 .nav-tabs>li.active {
@@ -1376,6 +1377,11 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics .content h3.sectionname {
 	border: none;
+	border-bottom: 1px solid #bfb2cd;
+}
+
+#section-0 .content > h3.sectionname{
+	border-bottom: 1px solid #bfb2cd;
 }
 
 .format-topics .course-content ul.topics {
@@ -1391,7 +1397,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics  .course-content ul li.section.main {
 	padding: 0px 0 !important;
-	*/
+	border-top: 1px solid #bfb2cd;
+	border-bottom: 1px solid #bfb2cd;
 }
 
 .format-topics .course-content ul.topics li.section .content {
@@ -2086,6 +2093,9 @@ div#middle-column {
 	}
 	#frontpage-course-list .paging-morelink {
 		width: 97%;
+	}
+	body.format-moetopcoll .course-content ul.ctopics li#section-0.section.main .content{
+	   margin: 0 0;
 	}
 }
 
@@ -3999,7 +4009,7 @@ background-color
 }
 
 #page-mod-book-view .book_content div.no-overflow {
-	padding: 1em;
+	padding: 2em;
 }
 
 .path-mod-moewiki div[role="main"] div#moewiki_indexlinks>ul>li a.osep-smallbutton,
@@ -5073,4 +5083,44 @@ a.skip-block, a.skip {
     padding:5px 10px 5px 15px;
     display: block;
     border: 1px solid #a18581;
+}
+#page-admin-tool-capability-index select#id_capability{
+	min-width: 0px;
+    width: 100%;
+    overflow-x: auto;
+}
+.dir-rtl .navbar .brand {
+	padding-right: 1em;
+}
+#region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
+	padding-left: 1em;
+}
+.dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
+	padding-right: 1em;
+}
+
+#page-course-view-socialwall .course-content ul.topics {
+    border: 1px solid #c8bdd4;
+    background-image: url([[pix:theme_moe|bg/Bg_divider]]);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+}
+
+#page-course-view-socialwall .course-content ul.topics li#section-0 {
+	padding-top: 5px !important;
+}
+#page-course-view-socialwall .course-content ul.topics li#section-0 .content {
+	border-top: 1px solid #c1bdbf;
+	background-color: #dcf3ee;
+}
+#page-course-view-socialwall .course-content ul.topics li.section .content{
+    margin-left: 0px;
+	margin-right: 0px;	
+}
+#page-course-view-socialwall #section-0 .content > h3.sectionname{
+	border-bottom: 1px solid #c1bdbf;
+}
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
+    width: 45%;
+    word-break: break-word;
 }

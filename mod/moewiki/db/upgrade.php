@@ -534,6 +534,16 @@ WHERE
         
         upgrade_mod_savepoint(true, 2016061303, 'moewiki');
     }
+    
+    if ($oldversion < 2016082800) {
+        $table =  new xmldb_table('moewiki_annotations_permiss');
+        $dbman->rename_field($table, new xmldb_field('annotaionid', XMLDB_TYPE_INTEGER, 10, true, false, false, null), 'annotationid');
+        
+        $table =  new xmldb_table('moewiki_annotations_ranges');
+        $dbman->rename_field($table, new xmldb_field('annotaionid', XMLDB_TYPE_INTEGER, 10, true, false, false, null), 'annotationid');
+        
+        upgrade_mod_savepoint(true, 2016082800, 'moewiki');
+    }
     // Must always return true from these functions
     return true;
 }

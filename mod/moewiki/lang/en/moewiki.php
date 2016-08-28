@@ -309,7 +309,6 @@ $string['pagenameisstartpage'] = 'The page name is the same as the start page. U
 
 $string['moewiki:lock'] = 'Allowed to lock and unlock pages';
 $string['moewiki:annotate'] = 'Allowed to annotate';
-$string['orphanedannotations'] = 'Lost annotations';
 $string['annotationsystem'] = 'Annotation system';
 $string['addannotation'] = 'Add annotation';
 $string['annotations'] = 'Annotations';

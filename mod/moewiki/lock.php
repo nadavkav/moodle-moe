@@ -16,8 +16,8 @@
 /**
  * Lock editing page. Allows user to lock or unlock the editing of a wiki page
  *
- * @copyright &copy; 2009 The Open University
- * @author b.j.waddington@open.ac.uk
+ * @copyright &copy; 2009 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

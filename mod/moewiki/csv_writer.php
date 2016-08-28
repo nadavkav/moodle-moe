@@ -16,8 +16,8 @@
 /**
  * csv writer class
  *
- * @copyright &copy; 2008 The Open University
- * @author d.a.woolhead@open.ac.uk
+ * @copyright &copy; 2008 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

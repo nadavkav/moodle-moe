@@ -17,8 +17,8 @@
 /**
  * View page. Displays wiki pages.
  *
- * @copyright &copy; 2007 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2007 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */
@@ -111,7 +111,7 @@ $jsmodule = array('name'     => 'mod_moewiki_view',
 $PAGE->requires->js_init_call('M.mod_moewiki_view.init', array(), true, $jsmodule);
 $userid = ($userid == 0) ? $USER->id : $userid;
 $PAGE->requires->js_call_amd('mod_moewiki/annotation', 'merkannotaion',array(array(
-    'wikiid'   => $id,
+    'wikiid'   => $pageversion->pageid,
     'userid'   => $USER->id,
     'userpage' => $userid,
     'admin'    => has_capability('mod/moewiki:grade', $context),

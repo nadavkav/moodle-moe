@@ -19,7 +19,7 @@
  *
  *
  * @package    mod_moewiki
- * @copyright  2012 The Open University
+ * @copyright  2012 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

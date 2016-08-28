@@ -20,7 +20,7 @@
  *
  * @package    mod
  * @subpackage moewiki
- * @copyright  2013 The Open University
+ * @copyright  2013 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define('AJAX_SCRIPT', true);

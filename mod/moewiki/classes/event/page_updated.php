@@ -17,7 +17,7 @@
  * The mod_moewiki view moewiki event.
  *
  * @package    mod_moewiki
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package    mod_moewiki
  * @since      Moodle 2.7
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
