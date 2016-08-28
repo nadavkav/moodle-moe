@@ -40,6 +40,8 @@ class restore_moewiki_activity_structure_step extends restore_activity_structure
         $paths[] = new restore_path_element('moewiki_page', '/activity/moewiki/subs/subwiki/pages/page');
         $paths[] = new restore_path_element('moewiki_version', '/activity/moewiki/subs/subwiki/pages/page/versions/version');
         $paths[] = new restore_path_element('moewiki_annotation', '/activity/moewiki/subs/subwiki/pages/page/annotations/annotation');
+        $paths[] = new restore_path_element('moewiki_annotations_ranges', '/activity/moewiki/subs/subwiki/pages/page/annotations/annotation/annotations_ranges/annotation_ranges');
+        $paths[] = new restore_path_element('moewiki_annotations_permiss', '/activity/moewiki/subs/subwiki/pages/page/annotations/annotation/annotations_permissions/annotations_permiss');
         $paths[] = new restore_path_element('moewiki_link', '/activity/moewiki/subs/subwiki/pages/page/versions/version/links/link');
 
         // Set annotation elements id array.
@@ -196,11 +198,32 @@ class restore_moewiki_activity_structure_step extends restore_activity_structure
 
         $data->pageid = $this->get_new_parentid('moewiki_page');
         $data->userid = $this->get_mappingid('user', $data->userid);
+        $data->userpage = $this->get_mappingid('user', $data->userpage);
 
         $newitemid = $DB->insert_record('moewiki_annotations', $data);
-
-        // Add old and new annotation id to element ids array.
-        $this->elementsids['annotation'.$oldid] = 'annotation'.$newitemid;
+        $this->set_mapping('moewiki_annotation', $oldid, $newitemid);
+    }
+    
+    protected function process_moewiki_annotations_permiss($data){
+        global $DB;
+        
+        $data = (object)$data;
+        $oldid = $data->id;
+        
+        $data->annotationid = $this->get_new_parentid('moewiki_annotation');
+        
+        $DB->insert_record('moewiki_annotations_permiss', $data);
+    }
+    
+    protected function process_moewiki_annotations_ranges($data){
+        global $DB;
+        
+        $data = (object)$data;
+        $oldid = $data->id;
+        
+        $data->annotationid = $this->get_new_parentid('moewiki_annotation');
+        
+        $DB->insert_record('moewiki_annotations_ranges', $data);
     }
 
     protected function after_execute() {

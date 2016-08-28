@@ -18,12 +18,12 @@
  * Version.
  *
  * @package mod_moewiki
- * @copyright 2014 The Open University
+ * @copyright 2016 SysBind
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version  = 2016072000;
+$plugin->version  = 2016082800;
 $plugin->requires = null;
 $plugin->component = 'mod_moewiki';
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.2.1';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '1.0.0';

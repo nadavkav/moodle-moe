@@ -156,7 +156,7 @@
     <TABLE NAME="moewiki_annotations_permiss" PREVIOUS="moewiki_annotations" COMMENT="permissions for each annotation">
         <FIELDS>
             <FIELD SEQUENCE="true" TYPE="int" LENGTH="10" NOTNULL="true" NAME="id"/>
-            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotaionid"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotationid"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="read_prem"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="update_prem"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="delete_prem"/>
@@ -164,14 +164,14 @@
         </FIELDS>
         <KEYS>
             <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
-            <KEY NAME="moewiki_annotations_fk_id" TYPE="foreign" FIELDS="annotaionid" REFTABLE="moewiki_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+            <KEY NAME="moewiki_annotations_fk_id" TYPE="foreign" FIELDS="annotationid" REFTABLE="moewiki_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
             <KEY NAME="moewiki_annotations_fk_perr" TYPE="foreign" FIELDS="read_prem,update_prem,delete_prem,admin_prem" REFTABLE="user" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
         </KEYS>
     </TABLE>
     <TABLE NAME="moewiki_annotations_ranges" PREVIOUS="moewiki_annotations_permiss" COMMENT="ranges for the annaotaions remarks">
         <FIELDS>
             <FIELD SEQUENCE="true" TYPE="int" LENGTH="10" NOTNULL="true" NAME="id"/>
-            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotaionid"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotationid"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="0" NAME="startoffset"/>
             <FIELD SEQUENCE="false" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="0" NAME="endoffset"/>
             <FIELD SEQUENCE="false" TYPE="text" NOTNULL="true" NAME="start"/>
@@ -179,7 +179,7 @@
         </FIELDS>
         <KEYS>
             <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
-            <KEY NAME="moewiki_annotations_fk_id" TYPE="foreign" FIELDS="annotaionid" REFTABLE="moewiki_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+            <KEY NAME="moewiki_annotations_fk_id" TYPE="foreign" FIELDS="annotationid" REFTABLE="moewiki_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
         </KEYS>
     </TABLE>
   </TABLES>
