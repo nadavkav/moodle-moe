@@ -145,4 +145,88 @@ class local_remote_backup_provider_external extends external_api {
             )
         );
     }
+
+    public static function get_manual_course_backup_by_id_parameters() {
+        return new external_function_parameters(
+            array(
+                'id' => new external_value(PARAM_INT, 'id'),
+                'username' => new external_value(PARAM_USERNAME, 'username'),
+            )
+        );
+    }
+
+    public static function get_manual_course_backup_by_id($id, $username) {
+        global $CFG, $DB;
+
+        // Validate parameters passed from web service.
+        $params = self::validate_parameters(
+            self::get_manual_course_backup_by_id_parameters(), array('id' => $id, 'username' => $username)
+        );
+
+        // Extract the userid from the username.
+        $userid = $DB->get_field('user', 'id', array('username' => $username));
+
+        //$context = context_user::instance($userid);
+        $context = context_course::instance($id);
+
+        $fs = get_file_storage();
+        // todo: Maybe use automated backups?
+        $backupfiles = $fs->get_area_files($context->id, 'backup', 'automated', false, 'timecreated');
+        //$backupfiles = $fs->get_area_files($context->id, 'user', 'backup', false, 'timecreated');
+        $files = array_reverse($backupfiles);
+
+        // Populate a list with full details of backup files.
+        $autobackupfiles = array();
+        foreach ($files as $file) {
+            if ($file->is_directory()) {
+                continue;
+            }
+            $autobackupfiles[] = array($file);
+        }
+
+        // Get most recent backup file in the list.
+        $latestbackup = array_shift($autobackupfiles);
+
+        if (isset($latestbackup[0]) && $latestbackup[0]) {
+            $file = $latestbackup[0];
+            $context = context_course::instance($id);
+            $fs = get_file_storage();
+            $timestamp = time();
+
+            $filerecord = array(
+                'contextid' => $context->id,
+                'component' => 'local_remote_backup_provider',
+                'filearea' => 'backup',
+                'itemid' => $timestamp,
+                'filepath' => '/',
+                'filename' => 'foo',
+                'timecreated' => $timestamp,
+                'timemodified' => $timestamp
+            );
+            $storedfile = $fs->create_file_from_storedfile($filerecord, $file);
+            $file->delete();
+
+            // Make the link.
+            //$filepath = $storedfile->get_filepath() . $storedfile->get_filename();
+            $fileurl = moodle_url::make_webservice_pluginfile_url(
+                $storedfile->get_contextid(),
+                $storedfile->get_component(),
+                $storedfile->get_filearea(),
+                $storedfile->get_itemid(),
+                $storedfile->get_filepath(),
+                $storedfile->get_filename()
+            );
+            return array('url' => $fileurl->out(true));
+        } else {
+            return false;
+        }
+    }
+
+    public static function get_manual_course_backup_by_id_returns() {
+        return new external_single_structure(
+            array(
+                'url' => new external_value(PARAM_RAW, 'url of the backup file'),
+            )
+        );
+    }
 }
