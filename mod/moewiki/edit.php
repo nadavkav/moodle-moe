@@ -16,8 +16,8 @@
 /**
  * Edit page. Allows user to edit and/or preview wiki pages.
  *
- * @copyright &copy; 2007 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2007 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

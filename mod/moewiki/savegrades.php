@@ -19,7 +19,7 @@
  *
  * @package mod
  * @subpackage moewiki
- * @copyright 2011 The Open University
+ * @copyright 2011 SysBind
  * @author Stacey Walker <stacey@catalyst-eu.net>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

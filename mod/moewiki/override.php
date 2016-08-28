@@ -18,8 +18,8 @@
  * Handles what happens when a user with appropriate permission attempts to
  * override a wiki page editing lock.
  *
- * @copyright &copy; 2007 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2007 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

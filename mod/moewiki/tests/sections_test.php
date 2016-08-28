@@ -18,7 +18,7 @@
  * MOEWiki unit tests - test locallib functions
  *
  * @package    mod_moewiki
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

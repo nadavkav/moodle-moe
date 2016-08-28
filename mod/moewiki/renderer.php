@@ -168,24 +168,6 @@ class mod_moewiki_renderer extends plugin_renderer_base {
             }
         }
 
-        // Display the orphaned annotations.
-        if ($subwiki->annotation && $annotations && $page != 'history') {
-            $orphaned = '';
-            foreach ($annotations as $annotation) {
-                if ($annotation->orphaned) {
-                    $orphaned .= $this->moewiki_print_hidden_annotation($annotation);
-                }
-            }
-            if ($orphaned !== '') {
-                $output .= html_writer::start_div('ouw-orphaned-annotations');
-                $output .= html_writer::tag('h3', get_string('orphanedannotations', 'moewiki'));
-                $output .= $orphaned;
-                $output .= html_writer::end_div();
-            } else {
-                $output = $output;
-            }
-        }
-
         $output .= $this->get_new_buttons_section($gewgaws, $pageversion);
 
         return array($output, $annotations);

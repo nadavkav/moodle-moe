@@ -210,7 +210,6 @@ $string['numwords'] = '{$a} מילים';
 $string['olderversion'] = 'גירסה ישנה יותר';
 $string['oldversion'] = 'גירסה ישנה';
 $string['onepageview'] = 'באפשרותך לצפות בכל הדפים של ויקי זה לשם נוחות הדפסה או למען יצירת מסמך איזכור קבוע.';
-$string['orphanedannotations'] = 'הערות בגוף הטקסט, אבודות';
 $string['orphanpages'] = 'דפים לא מקושרים';
 $string['moewiki:addinstance'] = 'הוספת פעילות MOEWIKI חדשה';
 $string['moewiki:annotate'] = 'ניתן לכתוב הערות בגוף הטקסט';
