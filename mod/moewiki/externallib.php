@@ -108,11 +108,7 @@ class mod_moewiki_external extends external_api
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $course = $DB->get_record_select('course',
-            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($page),
-            '*', MUST_EXIST);
-        $modinfo = get_fast_modinfo($course);
-        $cm = $modinfo->get_cm($page);
+        $cm = moewiki_get_cm($page);
         $PAGE->set_cm($cm);
         $annotation->username =  $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();
@@ -206,11 +202,7 @@ class mod_moewiki_external extends external_api
             $user->id = $annotation->userid;
             $user = $DB->get_record('user', array('id' => $user->id));
             $userpicture = new user_picture($user);
-            $course = $DB->get_record_select('course',
-                'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($wikiid),
-                '*', MUST_EXIST);
-            $modinfo = get_fast_modinfo($course);
-            $cm = $modinfo->get_cm($wikiid);
+            $cm = moewiki_get_cm($wikiid);
             $PAGE->set_cm($cm);
             $annotationsreturn[$key]->username =  $user->firstname . ' ' . $user->lastname;
             $annotationsreturn[$key]->userpicture = $userpicture->get_url($PAGE)->out();
@@ -396,11 +388,7 @@ class mod_moewiki_external extends external_api
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $course = $DB->get_record_select('course',
-            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($annotation->pageid),
-            '*', MUST_EXIST);
-        $modinfo = get_fast_modinfo($course);
-        $cm = $modinfo->get_cm($annotation->pageid);
+        $cm = moewiki_get_cm($annotation->pageid);
         $PAGE->set_cm($cm);
         $annotation->username =  $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();
