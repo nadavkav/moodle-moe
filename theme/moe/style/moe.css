@@ -1002,11 +1002,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .dir-rtl #page-footer ul.menubar, #greyboxright ul.menubar {
 	float: left;
 }
-
-.dir-rtl ul {
-	margin-right: 0px;
-}
-
 .nav-tabs {
 	border-top: none;
 	border-left: none;
