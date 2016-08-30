@@ -5045,3 +5045,6 @@ a.skip-block, a.skip {
 #page-mod-assign-view .submissionstatustable table.generaltable{
 	border: 1px solid #ddd;
 }
+.form-autocomplete-suggestions li[aria-selected=true] {
+	background-color: transparent;
+}
