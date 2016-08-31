@@ -5070,3 +5070,7 @@ div#intro.generalbox{
 #page-mod-data-edit .defaulttemplate {
 	background-color: transparent;
 }
+.path-mod-data .search_inline .defaulttemplate{
+	background-color: #dbeeb7;
+	border-bottom: none;
+}
