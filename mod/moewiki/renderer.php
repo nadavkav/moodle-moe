@@ -1288,7 +1288,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         return;
     }
     
-    public function show_resolved_annotation($user=0, $page){
+    public function show_resolved_annotation($user=0, $subwiki){
         global $DB, $USER;
         
         $context = new stdClass();
@@ -1297,9 +1297,14 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         $context->annotationstr = get_string('annotations','mod_moewiki');
         $context->actionstr = get_string('action');
         $context->reopen = get_string('reopen','mod_moewiki');
-        
         $user = ($user != 0) ? $user : $USER->id;
-        $select = "resolved = 1 AND pageid = $page AND userpage = $user AND parent is NULL";
+        $pages = $DB->get_records('moewiki_pages', array('subwikiid' => $subwiki->id));
+        $pagelist = '';
+        foreach ($pages as $page){
+            $pagelist .= $page->id .',';
+        }
+        $pagelist = rtrim($pagelist, ',');
+        $select = "resolved = 1 AND pageid in ($pagelist) AND userpage = $user AND parent is NULL";
         $annotations = $DB->get_records_select('moewiki_annotations', $select);
         $context->annotations = array();
         foreach ($annotations as $key => $annotat) {

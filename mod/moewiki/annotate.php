@@ -105,7 +105,7 @@ print '<div id="moewiki_belowtabs_annotate">';
 moewiki_print_editlock($lock, $moewiki);
 
 // Print the annotation that resolved
-echo $moewikioutput->show_resolved_annotation($userid, $id);
+echo $moewikioutput->show_resolved_annotation($userid, $subwiki);
 // close <div id="#moewiki_belowtabs_annotate">
 print '</div>';
 $PAGE->requires->js_call_amd('mod_moewiki/resolved', 'reopen');
