@@ -5050,3 +5050,7 @@ a.skip-block, a.skip {
 #page-mod-data-view.dir-rtl input[type="checkbox"]{
 	margin-right: 7px;
 }
+.path-mod-data .search_inline .defaulttemplate{
+	background-color: #dbeeb7;
+	border-bottom: none;
+}
