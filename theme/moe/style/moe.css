@@ -5160,3 +5160,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 #page-mod-checklist-view  .checklistimportexport+.box form li label.itemheading{
 	display: inline;
 }
+#page-mod-quiz-report.dir-rtl table#attempts .header {
+	text-align: right;
+}
