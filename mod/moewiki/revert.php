@@ -17,8 +17,8 @@
 /**
  * Confirms reverting to previous version
  * when confirmed, reverts to previous version then redirects back to that page.
- * @copyright &copy; 2008 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2008 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

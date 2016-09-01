@@ -18,7 +18,7 @@
  * MOEWIKI data generator
  *
  * @package    mod_moewiki
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
  * moewiki module data generator class
  *
  * @package    mod_moewiki
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_moewiki_generator extends testing_module_generator {

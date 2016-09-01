@@ -1408,6 +1408,26 @@ function moewiki_get_subwiki_index($subwikiid, $limitfrom = '', $limitnum = '') 
 }
 
 /**
+ *
+ * @param int $pagid
+ * @throws moodle_exception
+ *
+ * return course_module object
+ */
+function moewiki_get_cm($pageid){
+    global $DB;
+
+    if(is_number($pageid)){
+        $page = $DB->get_record('moewiki_pages', array('id' => (int)$pageid));
+        $subwiki = $DB->get_record('moewiki_subwikis', array('id' => $page->subwikiid));
+        $moewiki = $DB->get_record('moewiki', array('id' => $subwiki->wikiid));
+        list($course, $cm) = get_course_and_cm_from_instance($moewiki->id, 'moewiki',$moewiki->course);
+        return $cm;
+    } else {
+        throw new moodle_exception('invalid param');
+    }
+}
+/**
  * Obtains the index information of a subwiki.
  *
  * @param object $subwiki

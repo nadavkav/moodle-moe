@@ -172,7 +172,7 @@ module.exports = "button{box-shadow:none;}" +
 		"mAAAAAElFTkSuQmCC);" +
 		"    background-repeat:no-repeat;margin-top:-48px;margin-left:-24px;width:38px;height:38px;" +
 		"    background-position:left top}" +
-		".annotator-hl{background:#FFFF0A;background:rgba(255,255,10,.3);" +
+		".annotator-hl{background:#ffd154;background:rgba(255,209,84,.3);" +
 		"	-ms-filter:\"progid:DXImageTransform.Microsoft.gradient(" +
 		"		startColorstr=#4DFFFF0A, endColorstr=#4DFFFF0A)\"}" +
 		".annotator-hl-temporary{background:#007CFF;background:rgba(0,124,255,.3);" +

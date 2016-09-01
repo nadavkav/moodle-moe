@@ -78,6 +78,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 						return this.ajaxcall('delete',{'id' : annotation.id});
 					},
 					update: function(annotation){
+						annotation.permissions['delete'] = [annotation.permissions['delete'][0]];
 						return this.ajaxcall('update', annotation);
 					},
 					resolved: function(annotation){

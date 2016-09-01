@@ -86,12 +86,12 @@ class mod_moewiki_external extends external_api
             $rangeobj->end = $range['end'];
             $rangeobj->startoffset = $range['startOffset'];
             $rangeobj->endoffset = $range['endOffset'];
-            $rangeobj->annotaionid = $annotation->id;
+            $rangeobj->annotationid = $annotation->id;
             $DB->insert_record('moewiki_annotations_ranges', $rangeobj);
         }
         
         $permission = new stdClass();
-        $permission->annotaionid = (int)$annotation->id;
+        $permission->annotationid = (int)$annotation->id;
         $permission->read_prem = ($permissions['read'][0] == 'null') ? null : (int)$permissions['read'][0];
         $permission->delete_prem = ($permissions['delete'][0] == 'null') ? $USER->id : (int)$permissions['delete'][0];
         $permission->admin_prem = ($permissions['admin'][0] == 'null') ? $USER->id : (int)$permissions['admin'][0];
@@ -108,11 +108,7 @@ class mod_moewiki_external extends external_api
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $course = $DB->get_record_select('course',
-            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($page),
-            '*', MUST_EXIST);
-        $modinfo = get_fast_modinfo($course);
-        $cm = $modinfo->get_cm($page);
+        $cm = moewiki_get_cm($page);
         $PAGE->set_cm($cm);
         $annotation->username =  $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();
@@ -174,7 +170,7 @@ class mod_moewiki_external extends external_api
         $annotationsreturn = array();
         $total=0;
         foreach ($annotations as $key => $annotation) {
-            $permissions = $DB->get_record('moewiki_annotations_permiss', array('annotaionid' => $annotation->id));
+            $permissions = $DB->get_record('moewiki_annotations_permiss', array('annotationid' => $annotation->id));
             if($permissions->read_prem != null && $permissions->read_prem != $USER->id && !has_capability('moodle/site:config', context_system::instance())){
                 continue;
             }
@@ -182,7 +178,7 @@ class mod_moewiki_external extends external_api
             $annotationsreturn[$key]->id = $annotation->id;
             $annotationsreturn[$key]->ranges = array();
             $ranges = $DB->get_records('moewiki_annotations_ranges', array(
-                'annotaionid' => $annotation->id
+                'annotationid' => $annotation->id
             ));
             foreach ($ranges as $rangekey => $range) {
                 $annotationsreturn[$key]->ranges[$rangekey] = new stdClass();
@@ -206,11 +202,7 @@ class mod_moewiki_external extends external_api
             $user->id = $annotation->userid;
             $user = $DB->get_record('user', array('id' => $user->id));
             $userpicture = new user_picture($user);
-            $course = $DB->get_record_select('course',
-                'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($wikiid),
-                '*', MUST_EXIST);
-            $modinfo = get_fast_modinfo($course);
-            $cm = $modinfo->get_cm($wikiid);
+            $cm = moewiki_get_cm($wikiid);
             $PAGE->set_cm($cm);
             $annotationsreturn[$key]->username =  $user->firstname . ' ' . $user->lastname;
             $annotationsreturn[$key]->userpicture = $userpicture->get_url($PAGE)->out();
@@ -288,8 +280,8 @@ class mod_moewiki_external extends external_api
     public static function delete($id) {
         global $DB;
         
-        if($DB->delete_records('moewiki_annotations_ranges',array('annotaionid' => $id)) &&
-            $DB->delete_records('moewiki_annotations_permiss',array('annotaionid' => $id))) {
+        if($DB->delete_records('moewiki_annotations_ranges',array('annotationid' => $id)) &&
+            $DB->delete_records('moewiki_annotations_permiss',array('annotationid' => $id))) {
             $DB->delete_records('moewiki_annotations',array('id' => $id));
         }
         return null;
@@ -381,7 +373,7 @@ class mod_moewiki_external extends external_api
         $DB->update_record('moewiki_annotations', $annotation);
         $annotation =  $DB->get_record('moewiki_annotations', array('id' => $id));
         $annotation->ranges = $ranges;
-        $permission = $DB->get_record('moewiki_annotations_permiss', array('annotaionid' => $id));
+        $permission = $DB->get_record('moewiki_annotations_permiss', array('annotationid' => $id));
         $permission->read_prem = ($permissions['read'][0] == 'null') ? null : (int)$permissions['read'][0];
         $permission->delete_prem = ($permissions['delete'][0] == 'null') ? $permission->delete_prem : (int)$permissions['delete'][0];
         $permission->admin_prem = ($permissions['admin'][0] == 'null') ? $permission->admin_prem : (int)$permissions['admin'][0];
@@ -396,11 +388,7 @@ class mod_moewiki_external extends external_api
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $course = $DB->get_record_select('course',
-            'id = (SELECT course FROM {course_modules} WHERE id = ?)', array($annotation->pageid),
-            '*', MUST_EXIST);
-        $modinfo = get_fast_modinfo($course);
-        $cm = $modinfo->get_cm($annotation->pageid);
+        $cm = moewiki_get_cm($annotation->pageid);
         $PAGE->set_cm($cm);
         $annotation->username =  $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();

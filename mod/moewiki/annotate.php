@@ -16,8 +16,8 @@
 /**
  * Annotate page. Allows user to add and edit wiki annotations.
  *
- * @copyright &copy; 2009 The Open University
- * @author b.j.waddington@open.ac.uk
+ * @copyright &copy; 2009 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */
@@ -105,7 +105,7 @@ print '<div id="moewiki_belowtabs_annotate">';
 moewiki_print_editlock($lock, $moewiki);
 
 // Print the annotation that resolved
-echo $moewikioutput->show_resolved_annotation($userid, $id);
+echo $moewikioutput->show_resolved_annotation($userid, $subwiki);
 // close <div id="#moewiki_belowtabs_annotate">
 print '</div>';
 $PAGE->requires->js_call_amd('mod_moewiki/resolved', 'reopen');

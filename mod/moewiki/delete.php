@@ -16,8 +16,8 @@
 
 /**
  * [Un]Deletes a version of a page then redirects back to the history page
- * @copyright &copy; 2008 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2008 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

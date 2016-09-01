@@ -18,8 +18,8 @@
  * List of wikis on course. (Not used in OU. I ripped it entirely off
  * from another module, deleting module-specific bits.)
  *
- * @copyright &copy; 2007 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2007 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */

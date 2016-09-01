@@ -17,8 +17,8 @@
 /**
  * Standard API to Moodle core.
  *
- * @copyright &copy; 2007 The Open University
- * @author s.marshall@open.ac.uk
+ * @copyright &copy; 2007 SysBind
+ * @author avi@sysbind.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package moewiki
  */
@@ -60,7 +60,9 @@ function moewiki_add_instance($data, $mform) {
         }
 
         //if there is a text template for all students to be implemented
-        if($texttemplate = $data->template_text) {
+        if(isset($data->template_text) && ((!is_array($data->template_text) && $data->template_text != "" ) 
+            || (isset($data->template_text['text']) &&  $data->template_text['text']!= ""))) {
+            $texttemplate = (is_array($data->template_text)) ? $data->template_text['text'] : $data->template_text;
             $cmid = $data->coursemodule;
             $cm = $DB->get_record('course_modules', array("id" => $cmid));
             $context = context_module::instance($cmid);

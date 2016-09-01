@@ -914,6 +914,12 @@ a.moewiki_noshow:link,a.moewiki_noshow:visited {
 	position: absolute;
 	top: 568px;
 }
+#page-mod-moewiki-view ul.annotator-listing{
+	margin-right: 0px;
+}
 .annotatheper{
 	font-weight: bolder;
+}
+.annotator-viewer-controls{
+	margin-top: 1em;
 }

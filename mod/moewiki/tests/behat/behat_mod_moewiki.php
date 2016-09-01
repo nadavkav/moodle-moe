@@ -19,7 +19,7 @@
  *
  * @package    mod_moewiki
  * @category   test
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
  *
  * @package    mod_moewiki
  * @category   test
- * @copyright  2014 The Open University
+ * @copyright  2014 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_mod_moewiki extends behat_base {
