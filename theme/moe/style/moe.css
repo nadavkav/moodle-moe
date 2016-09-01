@@ -5077,3 +5077,7 @@ div#intro.generalbox{
 #page-mod-data-export.dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label{
 	padding-right: 0px;
 }
+
+#page-mod-data-view .defaulttemplate{
+	padding-right: 35px;
+}
