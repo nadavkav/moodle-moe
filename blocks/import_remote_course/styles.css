@@ -1,0 +1,10 @@
+.block_import_remote_course .inprogress.hide {
+    display: none;
+}
+.block_import_remote_course .inprogress {
+    display: block;
+    text-align: center;
+}
+.block_import_remote_course .inprogress img {
+    width: 64px;
+}
