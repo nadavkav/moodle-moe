@@ -262,7 +262,12 @@ body.pagelayout-embedded {
 }
 
 .format-socialwall .tl-post {
-	border-top: 2px solid #b1d5ce;
+	margin: 0px !important;
+	border: 0px solid #efefef;
+	margin-bottom: 0px !important;
+	margin-top: 0px !important;
+	padding: 0px;
+	border: 0px solid #efefef !important;
 }
 
 .tl-locked {
@@ -475,9 +480,6 @@ body.pagelayout-embedded {
 }
 
 /* Comments */
-.tl-posts .tl-comment  .tl-text{
-	word-wrap: break-word;
-}
 .tl-posts  .tl-comment:nth-child(even) .tl-text {
 	position: relative;
 	display: inline-block;
@@ -493,7 +495,7 @@ body.pagelayout-embedded {
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
 	-moz-margin-right: 1.875em;
-	max-width: 75%;
+	max-width: 80%;
 }
 
 .tl-posts  .tl-comment:nth-child(even) .tl-text:after, .tl-posts  .tl-comment:nth-child(even) .tl-text:before
@@ -538,7 +540,7 @@ body.pagelayout-embedded {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
-	max-width: 75%;
+	max-width: 80%;
 }
 
 .tl-posts  .tl-comment:nth-child(odd) .tl-text:after, .tl-posts  .tl-comment:nth-child(odd) .tl-text:before
@@ -1025,10 +1027,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .nav-tabs>li.active .tab_content {
-	background-color: #7a5b9a;
-	border-bottom: 5px solid #462965;
-	color: #ffffff;
-	font-weight: bold;
+	background-color: #e1cff5;
 }
 
 .nav-tabs>li.active {
@@ -1377,11 +1376,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics .content h3.sectionname {
 	border: none;
-	border-bottom: 1px solid #bfb2cd;
-}
-
-#section-0 .content > h3.sectionname{
-	border-bottom: 1px solid #bfb2cd;
 }
 
 .format-topics .course-content ul.topics {
@@ -1397,8 +1391,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 
 .format-topics  .course-content ul li.section.main {
 	padding: 0px 0 !important;
-	border-top: 1px solid #bfb2cd;
-	border-bottom: 1px solid #bfb2cd;
+	*/
 }
 
 .format-topics .course-content ul.topics li.section .content {
@@ -2093,9 +2086,6 @@ div#middle-column {
 	}
 	#frontpage-course-list .paging-morelink {
 		width: 97%;
-	}
-	body.format-moetopcoll .course-content ul.ctopics li#section-0.section.main .content{
-	   margin: 0 0;
 	}
 }
 
@@ -4009,7 +3999,7 @@ background-color
 }
 
 #page-mod-book-view .book_content div.no-overflow {
-	padding: 2em;
+	padding: 1em;
 }
 
 .path-mod-moewiki div[role="main"] div#moewiki_indexlinks>ul>li a.osep-smallbutton,
@@ -4401,6 +4391,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 .path-mod-checklist div[role="main"]>.checklistbox {
 	border: 2px solid #eacda4;
 	background-color: #f9eedc;
+	padding: 0 3em 0 3em;
 	display: inline-block;
 }
 
@@ -4433,7 +4424,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	#page-mod-checklist-view #region-main .checklistimportexport a:nth-child(2),
 	#page-mod-checklist-view ol.checklist+form input[type="submit"] {
 	background-image: none;
-	font-weight: bold;
 	color: #19171a !important;
 	border: 8px solid transparent;
 	box-shadow: inset 0 0 0 1px #6ca6a5, 0 0 0 1px #6ca6a5;
@@ -4498,7 +4488,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 	display: block;
 	border: 1px solid #ebcda4;
 	background-color: #fcd8a1;
-	padding: 0 3em;
+	padding: 0 1em;
 }
 
 .checklistreport .cell.level0 {
@@ -4554,7 +4544,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 
 #page-mod-checklist-view .box.generalbox.boxwidthwide.boxaligncenter {
 	background-color: #f9eedc;
-	padding: 0 0 1em 0;
+	padding: 0 3em 1em 3em;
 	width: 99%;
 	border-left: 2px solid #eacda4;
 	border-right: 2px solid #eacda4;
@@ -4565,7 +4555,7 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 
 #page-mod-checklist-view #region-main .checklistimportexport {
 	background-color: #f9eedc;
-	padding: 20px 3em;
+	padding: 20px 1em;
 	box-sizing: border-box;
 	width: 99%;
 	border-top: 2px solid #eacda4;
@@ -4583,56 +4573,18 @@ table.checklistreport tr:NTH-CHILD(2n+1), .path-mod-checklist .generaltable tbod
 	border: 1px solid #6da5b1;
 	background-color: #d1f2f8;
 	color: #005857 !important;
-	font-weight: bold;
 }
 
 #page-mod-checklist-view #additembox {
-	margin-left: 3em;
-	margin-right: 3em;
+	margin-left: 1em;
 }
 
 .que.essay .qtype_essay_response.readonly {
 	background-color: transparent;
 }
 
-body
-.format-moetopcoll
- 
-.section
- 
-.activity
-.modtype_label
-.label
- 
-div
- 
-div
- 
-div
- 
-div
- 
-div
- 
-div
->
-*
-:NOT
-
-	
-(
-.moetopcalllabel
- 
-){
-padding
-:
- 
-0
-1
-em
-;
-
-
+body.format-moetopcoll .section .activity.modtype_label.label div div div div div div>*:NOT(.moetopcalllabel){
+    padding:0 1em;
 }
 body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	{
@@ -4696,15 +4648,13 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	width: 94%;
 	margin-left: 3%;
 	margin-right: 3%;
-	background-color: #deeeb8;
 	border: 1px solid #748f5c;
 	margin-top: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
 .path-mod-data div[role="main"] .datapreferences form {
 	border-bottom: 0px;
+	background-color: #dbeeb7;
 }
 
 .path-mod-data div[role="main"] .nav-tabs>li.active>a {
@@ -4715,7 +4665,7 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data div[role="main"] .nav-tabs>li.active {
 	margin-bottom: 0px;
-	margin-top: 10px;
+	margin-top: 4px;
 }
 
 .path-mod-data div[role="main"] .nav-tabs>li {
@@ -4743,11 +4693,6 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	margin-top: 0.4px !important
 }
 
-.path-mod-data div[role="main"] .nav-tabs>li.active>a {
-	background: #DCDCDC;
-	margin-top: -7px !important;
-	border: 1px solid #9785a2 !important;
-}
 
 .dir-rtl.path-mod-data div[role="main"] fieldset>.ftoggler {
 	float: right;
@@ -4806,10 +4751,8 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data div[role="main"] .paging {
 	background-color: #d4ccda;
-	display: inline-block;
 	font-size: 1.1em;
 	font-weight: 700;
-	border: 1px solid #9684a1;
 	color: #292429;
 }
 
@@ -4853,6 +4796,7 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 	font-size: 1.1em;
 	transition: none;
 	outline: 0px !important;
+	margin-top: 1em;
 }
 
 #page-mod-data-view.dir-rtl #checkall {
@@ -4881,9 +4825,21 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 .path-mod-data .defaulttemplate {
 	border-bottom: 1px solid #74915b;
-	margin-bottom: 10px;
+	background-color: #dbeeb7;
 }
-
+#page-mod-data-view .defaulttemplate p{
+	margin: 0px;
+}
+#page-mod-data-view .datapreferences+form > p{
+	background-color: #dbeeb7;
+	margin: 0px
+}
+.path-mod-data .defaulttemplate:NTH-OF-TYPE(2n+1){
+	background-color: #d7e1c1;
+}
+#page-mod-data-view .datapreferences+form > p:NTH-OF-TYPE(2n+1){
+	background-color: #d7e1c1;
+}
 .path-mod-data div[role="main"] .nav-tabs:nth-of-type(2)>li.active>a,
 	.path-mod-data div[role="main"] .tabs-container .tabs-container .nav-tabs>li.active>a
 	{
@@ -4949,12 +4905,6 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 #page-mod-data-templates .tabs-container.clearfix .dragscroll {
 	width: 94% !important;
-}
-
-.path-mod-data div[role="main"] .nav-tabs>li.active>a {
-	background: #DCDCDC;
-	margin-top: -7px !important;
-	border: 1px solid #9785a2 !important;
 }
 
 #page-group-members  #assignform #existingcell {
@@ -5043,18 +4993,14 @@ a.skip-block, a.skip {
 
 .path-mod-checklist #checklistprogressrequired > div {
     display: block;
-    margin-top: 0.4em;
+    margin-top: 1.4em;
 }
 
 .path-mod-checklist #checklistprogressrequired > span {
     display: block;
+    margin-top: 1em;
 }
-#page-mod-checklist-report #checklistprogressrequired > div {
-	margin-top: 1.4em;
-}
-#page-mod-checklist-report #checklistprogressrequired > span {
-	margin-top: 1em;
-}
+
 .path-mod-checklist .checklist_progress_inner {
     background-image:none !important;
 }
@@ -5090,76 +5036,67 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
-#page-admin-tool-capability-index select#id_capability{
-	min-width: 0px;
-    width: 100%;
-    overflow-x: auto;
-}
-.dir-rtl .navbar .brand {
-	padding-right: 1em;
-}
-#region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
-	padding-left: 1em;
-}
-.dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label {
-	padding-right: 1em;
-}
 
-#page-course-view-socialwall .course-content ul.topics {
-    border: 1px solid #c8bdd4;
-    background-image: url([[pix:theme_moe|bg/Bg_divider]]);
-    background-repeat: no-repeat;
-    background-size: 100% 5px;
+#page-mod-data-templates #tempform .boxwidthwide {
+	width: 91%;
 }
-
-#page-course-view-socialwall .course-content ul.topics li#section-0 {
-	padding-top: 5px !important;
+.path-mod-data div[role="main"] .paging>span.current-page{
+	background-color: #466427;
+    color: #fff;
 }
-#page-course-view-socialwall .course-content ul.topics li#section-0 .content {
-	border-top: 1px solid #c1bdbf;
-	background-color: #dcf3ee;
-}
-#page-course-view-socialwall .course-content ul.topics li.section .content{
-    margin-left: 0px;
-	margin-right: 0px;	
-}
-#page-course-view-socialwall #section-0 .content > h3.sectionname{
-	border-bottom: 1px solid #c1bdbf;
-}
-body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary {
-    width: 45%;
-    word-break: break-word;
-}
-.checklistbox>form input[type="submit"] {
-	margin-top: 1em;
-}
-#page-mod-checklist-view .checklist_progress_heading,
-#page-mod-checklist-view .checklistbox > form:FIRST-OF-TYPE
-{
-    margin-right: 3em;
-}
-#page-mod-checklist-view.dir-rtl  ol{
-	margin: 0 0 10px 0;
-}
-
-#page-mod-checklist-view.dir-rtl .checklistbox ol .checklistitem,
-#page-mod-checklist-view.dir-rtl ol > form> li > span:FIRST-OF-TYPE,
-#page-mod-checklist-view.dir-rtl ol > form > input[type="submit"],
-#page-mod-checklist-view.dir-rtl .box> p{
-	margin-right: 3em;
-}
-#page-mod-checklist-report.dir-rtl td.cell.c0{
-	text-align: right !important;
-}
-.path-mod-checklist .nav-tabs li a {
-	font-weight: bolder;
-}
-#page-mod-checklist-view.dir-rtl ol.checklist+form input[type="submit"]{
-	margin-right: 3em;
-}
-#page-mod-checklist-view  .checklistimportexport+.box form li label.itemheading{
-	display: inline;
-}
-#page-mod-quiz-report.dir-rtl table#attempts .header {
+.dir-rtl .mod-data-default-template .template-field{
 	text-align: right;
+}
+#page-mod-data-view.dir-rtl input[type="checkbox"]{
+	margin-right: 7px;
+}
+#page-mod-data-export.dir-rtl #fgroup_id_exportar div.fitemtitle{
+	width: 1em;
+}
+#page-mod-data-export.dir-rtl .mform .fitem .felement{
+	margin-right: 1em;
+}
+#fgroup_id_exportar fieldset > span:NTH-OF-TYPE(2) {
+	margin-right: 1.5em;
+}
+div#intro.generalbox{
+	padding-left: 2em;
+	padding-right: 2em;
+}
+#page-mod-data-preset h3{
+	padding-left: 2em;
+    padding-right: 2em;
+}
+#page-mod-data-edit .defaulttemplate {
+	background-color: transparent;
+}
+.path-mod-data .search_inline .defaulttemplate{
+	background-color: #dbeeb7;
+	border-bottom: none;
+}
+#page-mod-data-export.dir-rtl #region-main .mform:not(.unresponsive) .fitem .fitemtitle label{
+	padding-right: 0px;
+}
+
+.dir-rtl.path-mod-forum .discussion-nav .prev-discussion{
+	float: left;
+}
+.dir-rtl.path-mod-forum .discussion-nav .prev-discussion:before{
+	    content: '  ';
+}
+
+.dir-rtl.path-mod-forum .discussion-nav .prev-discussion:after{
+	content: ' ◄ ';
+}
+
+.dir-rtl.path-mod-forum .discussion-nav .next-discussion{
+	float: right;
+}
+
+.dir-rtl.path-mod-forum .discussion-nav .next-discussion:after{
+	content: '  ';
+}
+
+.dir-rtl.path-mod-forum .discussion-nav .next-discussion:before{
+	content: ' ► ';
 }
