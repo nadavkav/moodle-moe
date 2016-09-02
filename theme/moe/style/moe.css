@@ -5135,3 +5135,7 @@ div#intro.generalbox{
 #page-mod-data-view .defaulttemplate{
 	padding-right: 2em;
 }
+#section-0 .summary,
+#section-0 .sectionname {
+	padding: 1em;
+}
