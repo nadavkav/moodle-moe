@@ -5070,3 +5070,6 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+#page-mod-glossary-view .nav-tabs>.active>a:hover {
+	color: #6c5067;
+}
