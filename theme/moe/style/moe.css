@@ -5082,3 +5082,6 @@ div#intro.generalbox{
 	margin-right: auto;
 	margin-left: auto;
 }
+#page-mod-data-view .defaulttemplate{
+	padding-right: 2em;
+}
