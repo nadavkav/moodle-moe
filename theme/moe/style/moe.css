@@ -4193,7 +4193,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 	background-color: #e8e6de;
 }
 
-.path-mod-oublog div[role="main"] .mdl-align {
+#page-mod-oublog-participation div[role="main"] .mdl-align {
 	display: inline-block;
 	text-align: center;
 	width: 100%;
@@ -5133,4 +5133,15 @@ div#intro.generalbox{
 #section-0 .summary,
 #section-0 .sectionname {
 	padding: 1em;
+}
+.dir-rtl .oublog-post .oublog-social-container,
+.dir-rtl .oublog-post .oublog-post-attachments {
+	float: left;
+	
+}
+.dir-rtl .oublog-userpic{
+	float: right;
+}
+.dir-rtl .oublog-post .oublog-social-container{
+	margin-top: 4em;
 }
