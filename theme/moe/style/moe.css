@@ -4741,6 +4741,5 @@ body.format-moetopcoll .section .activity.modtype_label.label .moetopcalllabel
 
 #section-0 .summary,
 #section-0 .sectionname {
-	padding-right: 1em;
-	padding-left: 1em;
+	padding: 1em;
 }
