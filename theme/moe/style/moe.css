@@ -5053,3 +5053,28 @@ a.skip-block, a.skip {
 	background-color: #00a3f4;
     color: #fff;
 }
+.path-mod-assign td.submissionstatussubmitted, .path-mod-assign div.submissionstatussubmitted, .path-mod-assign a:link.submissionstatussubmitted{
+	background-color: #dff5cf;
+	border: 1px solid #bad7ab;
+	padding: 0.5em;
+}
+.path-mod-assign td.submissionstatus, .path-mod-assign div.submissionstatus, .path-mod-assign a:link.submissionstatus{
+	background-color: #d5d2cb;
+	border: 1px solid #bfbdb1;
+	padding: 0.5em;
+}
+.path-mod-assign td.submissionstatusdraft, .path-mod-assign div.submissionstatusdraft, .path-mod-assign a:link.submissionstatusdraft{
+	background-color: #f9b79f;
+	border: 1px solid #d2a393;
+	padding: 0.5em;
+}
+#page-mod-assign-grading .gradingtable .visibleifjs a.btn,
+#page-mod-assign-grading .gradingtable .visibleifjs a.btn:VISITED,
+#page-mod-assign-grading .gradingtable .visibleifjs a.btn:LINK{
+	background-color: #ddf2ed;
+	color: #4b4243 !important;
+	border: 5px solid transparent;
+	box-shadow: inset 0 0 0 1px #8fafac, 0 0 0 1px #7ea19d;
+	border-image: url([[pix:theme|bg/btnhalfbg]]) 1;
+	border-radius: 0 0 0 0;
+}
