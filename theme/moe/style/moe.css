@@ -5047,4 +5047,9 @@ a.skip-block, a.skip {
 }
 .form-autocomplete-suggestions li[aria-selected=true] {
 	background-color: transparent;
+	color: #333;
+}
+.form-autocomplete-suggestions li[aria-selected=true]:HOVER {
+	background-color: #00a3f4;
+    color: #fff;
 }
