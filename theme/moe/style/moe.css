@@ -5143,3 +5143,6 @@ div#intro.generalbox{
 #page-mod-certificate-view .reportlink{
 	font-size: 15px;
 }
+.dir-rtl .navbar .brand{
+	padding: 10px 20px 10px 20px;
+}
