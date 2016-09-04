@@ -794,7 +794,7 @@ div.course_category_tree .coursebox.even {
 }
 
 .prom-button {
-	width: 6em;
+	max-width: 10em; 
 	font-size: 2em;
 	background-image: url([[pix:theme|bg/BG]]);
 	background-position: 5% 47%, 100% 0%;
@@ -806,6 +806,8 @@ div.course_category_tree .coursebox.even {
 	padding: 10px 20px;
 	margin: auto;
 	box-shadow: black 0px 2px 4px;
+	display: inline-block;
+	padding-left: 100px;
 	
 }
 .prom-button a{
@@ -817,12 +819,11 @@ div.course_category_tree .coursebox.even {
 	background-repeat: no-repeat;
 	height: inherit;
     position: absolute;
-    width: 29%;
-    right: 139px;
+	width: 87px;
 	bottom: 0px;
     left: 0px;
     top: 0px;
-	background-position: right center;
+	background-position:center;
 }
 
 
