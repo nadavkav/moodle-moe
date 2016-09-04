@@ -5110,3 +5110,6 @@ a.skip-block, a.skip {
 #page-mod-checklist-view  .checklistimportexport+.box form li label.itemheading{
 	display: inline;
 }
+#page-mod-checklist-view ol.checklist li img{
+	vertical-align: baseline;
+}
