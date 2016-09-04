@@ -5074,3 +5074,6 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
+#page-mod-certificate-view .reportlink{
+	font-size: 15px;
+}
