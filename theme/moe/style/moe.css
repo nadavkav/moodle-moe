@@ -4,14 +4,8 @@
 	float: none;
 	text-align: center;
 }
-
-.breadcrumb-nav ul.breadcrumb li:after { 
+ul.breadcrumb li:after { 
 	content: "\f104";
-	font-family: FontAwesome;
-	font-size: 1.1em;
-	margin: 0px 6px 0px 3px;
-	color: #bbb;
-
 }
  #page-mod-ouwiki-view .ouw_wordcount span
 {
