@@ -5133,3 +5133,6 @@ div#intro.generalbox{
 	border-bottom-color: #67979d;
 	color: #5e5a5f;
 }
+#page-course-view-grid.dir-rtl ul.gtopics-0{
+	margin-right: 0px;
+}
