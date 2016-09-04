@@ -804,19 +804,35 @@ div.course_category_tree .coursebox.even {
 .prom-button {
 	width: 6em;
 	font-size: 2em;
-	color: #583d5f;
-	background-image: url([[pix:theme|icons/Yad]]), url([[pix:theme|bg/BG]]);
+	background-image: url([[pix:theme|bg/BG]]);
 	background-position: 5% 47%, 100% 0%;
-	background-color: #92ddd8;
 	border: 1px solid #99a3a2;
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
 		4px 6px #a0a0a0;
-	background-repeat: no-repeat, no-repeat;
-	background-size: 28%, contain;
+	background-repeat: no-repeat;
+	background-size: cover;
 	padding: 10px 20px;
 	margin: auto;
 	box-shadow: black 0px 2px 4px;
+	
 }
+.prom-button a{
+	color:#583d5f;
+}
+.prom-button div{
+	background-image: url([[pix:theme|icons/Yad]]);	
+	background-color: #92ddd8; 
+	background-repeat: no-repeat;
+	height: inherit;
+    position: absolute;
+    width: 29%;
+    right: 139px;
+	bottom: 0px;
+    left: 0px;
+    top: 0px;
+	background-position: right center;
+}
+
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	{
