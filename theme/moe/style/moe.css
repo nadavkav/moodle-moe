@@ -4933,7 +4933,6 @@ a.skip-block, a.skip {
     display: block;
     border: 1px solid #a18581;
 }
-
 #page-mod-data-templates #tempform .boxwidthwide {
 	width: 91%;
 }
@@ -5140,4 +5139,7 @@ div#intro.generalbox{
 }
 #page-course-view-grid.dir-rtl ul.gtopics-0{
 	margin-right: 0px;
+}
+#page-mod-certificate-view .reportlink{
+	font-size: 15px;
 }
