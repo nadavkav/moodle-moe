@@ -1102,6 +1102,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 .path-mod-forum #page div[role='main']>h2 span::before {
 	content: url([[pix:theme|icons/forum]]);
 	margin-left: 5px;
+	position: relative;
+	top: 10px;
 }
 
 .path-mod-forum #page div[role='main']>h3.discussionname span,
@@ -1117,7 +1119,8 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	font-size: 1.4em;
 	line-height: 20px;
 	display: inline-block;
-	overflow: none;
+	overflow: hidden;
+	padding: 1em;
 }
 
 .path-mod-forum #page div[role='main']>.box.generalbox .no-overflow {
@@ -5112,4 +5115,19 @@ div#intro.generalbox{
 
 .dir-rtl.path-mod-forum .discussion-nav .next-discussion:before{
 	content: ' ► ';
+}
+#page-mod-forum-view div[role="main"]>h2{
+	display: inline-block;
+    background: #d1eaed; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d1eaed 0%, #eeeaf1 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #d1eaed 0%,#eeeaf1 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #d1eaed 0%,#eeeaf1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1eaed', endColorstr='#eeeaf1',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #a4b6b5;
+	padding: 0em 0.3em;
+}
+#page-mod-forum-view #page-content #intro{
+	background-color: #dff5f5;
+	border-bottom-color: #67979d;
+	color: #5e5a5f;
 }
