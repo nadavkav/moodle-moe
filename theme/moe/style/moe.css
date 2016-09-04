@@ -1639,13 +1639,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	background-color: transparent !important;
 	border: none !important;
 }
-
-@media ( min-width : 1200px) {
-	#page-mod-oublog-participationlist .mform .fitem div.fitemtitle {
-		width: 60px;
-	}
-}
-
 #page-mod-oublog-participationlist div[role=main] {
 	background-color: #fdfaed;
 }
@@ -1812,7 +1805,11 @@ div#middle-column {
 		width: 60px;
 	}
 }
-
+@media ( min-width : 1375px){
+    ul.oublog-accordion li .oublog_statsview_content .fitem .felement {
+        margin-right: 37%;
+    }
+}
 #page-mod-oublog-participationlist div[role=main] {
 	background-color: #fdfaed;
 }
@@ -2157,21 +2154,11 @@ ul.nav.nav-tabs {
 	}
 }
 
-@media ( max-width : 1310px) and (min-width: 1270px) #wrapper >
-	#page-header {
-	background-size
-	
-	
-	:
-	
-	 
-	
-	contain
-	
-	
-	;
+@media ( max-width : 1310px) and (min-width: 1270px) {
+	#wrapper >#page-header {
+	   background-size:	contain	;
+    }
 }
-
 .ouw_subwiki .individualselector label, .ouw_subwiki span {
 	background-image: url([[pix:theme|bg/headerBG);
 	padding: 0.3em;
@@ -4875,7 +4862,12 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-
 a.skip-block, a.skip {
 	display: block;
 }
-
+@media ( max-width : 1375px) {
+    ul.oublog-accordion li .oublog_statsview_content .fitem .felement {
+        margin-right: auto;
+    	margin-left: auto;
+    }
+}
 @media ( max-width : 980px) {
 	.dir-rtl.editing .section .activity .contentwithoutlink, .dir-rtl.editing .section .activity .activityinstance
 		{
