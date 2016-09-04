@@ -5143,3 +5143,6 @@ div#intro.generalbox{
 	border-image: url([[pix:theme|bg/btnhalfbg]]) 1;
 	border-radius: 0 0 0 0;
 }
+#page-mod-checklist-view ol.checklist li img{
+	vertical-align: baseline;
+}
