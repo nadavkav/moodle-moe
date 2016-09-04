@@ -1,0 +1,3 @@
+[submodule "mod_lightboxgallery"]
+	path = mod/lightboxgallery
+	url = https://github.com/netspotau/moodle-mod_lightboxgallery.git
