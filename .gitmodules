@@ -1,3 +1,6 @@
 [submodule "mod_lightboxgallery"]
 	path = mod/lightboxgallery
 	url = https://github.com/netspotau/moodle-mod_lightboxgallery.git
+[submodule "mod_ouwiki"]
+	path = mod/ouwiki
+	url = https://github.com/moodleou/moodle-mod_ouwiki.git
