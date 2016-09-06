@@ -32,4 +32,8 @@ if ($hassiteconfig) {
         get_string('wstoken_desc', 'local_remote_backup_provider'), '');
     $adminsetting->plugin = 'local_remote_backup_provider';
     $settings->add($adminsetting);
+    
+    $settings->add(new admin_setting_configcheckbox('local_remote_backup_provider/selfsignssl',
+        get_string('selfsignssl_label', 'local_remote_backup_provider'),
+        get_string('selfsignssl_desc', 'local_remote_backup_provider'), true));
 }

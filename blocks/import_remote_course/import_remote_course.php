@@ -62,6 +62,7 @@ if (empty($sessiontoken) || $sessiontoken != session_id()) {
 // Get local_remote_backup_provider system-level config settings.
 $token      = get_config('local_remote_backup_provider', 'wstoken');
 $remotesite = get_config('local_remote_backup_provider', 'remotesite');
+$skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
 if (empty($token) || empty($remotesite)) {
     print_error('pluginnotconfigured', 'local_remote_backup_provider', $returnurl);
 }
@@ -79,11 +80,16 @@ if (empty($remoteusername)) {
 $fs = get_file_storage();
 $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
     '&wsfunction=local_remote_backup_provider_get_manual_course_backup_by_id&moodlewsrestformat=json';
+$options = [];
+if ($skipcertverify){
+    $options['curl_verify_ssl_host'] = false;
+    $options['curl_verify_ssl_peer'] = false;
+}
 $params = array('id' => $remote, 'username' => $remoteusername);
 //print_r($params);
 $curl = new curl;
 // todo: Use HTTPS?
-$resp = json_decode($curl->post($url, $params));
+$resp = json_decode($curl->post($url, $params, $options));
 
 //echo "<br>Link to file:<br>";
 //print_object($resp->url);
@@ -108,7 +114,7 @@ $filerecord = array(
 );
 //print_r($filerecord);
 //die;
-$downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, null, true);
+$downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
 
 // Used to redirect to a detailed restore process
 //$restoreurl = new moodle_url(
