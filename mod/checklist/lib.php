@@ -151,8 +151,8 @@ function checklist_delete_instance($id) {
         $course = $DB->get_record('course', array('id' => $checklist->course));
         $cm = get_coursemodule_from_instance('checklist', $checklist->id, $course->id);
         if ($cm) { // Should not be false, but check, just in case...
-            $chk = new checklist_class($cm->id, 0, $checklist, $cm, $course);
-            $chk->setallevents();
+            //$chk = new checklist_class($cm->id, 0, $checklist, $cm, $course);
+            //$chk->setallevents();
         }
     }
 

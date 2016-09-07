@@ -151,6 +151,10 @@ if ($rc->execute_precheck()) {
 } else {
     echo get_string('errorwhilerestoringthecourse', 'tool_uploadcourse');
 }
+$backupinfo = $rc->get_info();
+$course = $DB->get_record('course', array('id' => $destcourseid), '*', MUST_EXIST);
+$course->format = $backupinfo->original_course_format;
+$DB->update_record('course', $course);
 $rc->destroy();
 unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
