@@ -31,7 +31,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 			app.include(Remarks);
 			app.include(this.moodlestorage);
 			app.start().then(function () {
-			     var promise = app.annotations.store.query(params.wikiid,params.userpage);
+			     var promise = app.annotations.store.query(params.wikiid);
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -65,13 +65,12 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 						}
 						return this.ajaxcall('create', annotation);
 					},
-					query : function(wikiid,userpage){
-						return this.search(wikiid,userpage);
+					query : function(wikiid){
+						return this.search(wikiid);
 					},
-					search: function(wikiid,userpage){
+					search: function(wikiid){
 						return this.ajaxcall('search', {
-							'wikiid': wikiid,
-							'userpage' : userpage
+							'wikiid': wikiid
 						});
 					},
 					'delete' : function(annotation){

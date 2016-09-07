@@ -154,17 +154,15 @@ class mod_moewiki_external extends external_api
     {
         return new external_function_parameters(array(
             'wikiid' => new external_value(PARAM_INT, "The wiki ID"),
-            'userpage' => new external_value(PARAM_INT, "The user page ID")
         ));
     }
 
-    public static function search($wikiid,$userpage)
+    public static function search($wikiid)
     {
         global $DB, $PAGE, $USER;
         
         $annotations = $DB->get_records('moewiki_annotations', array(
             'pageid' => $wikiid,
-            'userpage' => $userpage,
             'resolved' => 0,
         ));
         $annotationsreturn = array();
