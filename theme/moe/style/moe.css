@@ -5149,3 +5149,12 @@ div#intro.generalbox{
 .course-content .current .content{
 	background-color: transparent;
 }
+
+@media (max-width:1308px) {
+	#page-mod-oublog-participation input#id_submitbutton{
+	    position: relative;
+        top: -49px;
+        left: 53px;
+	    display: block;
+    }
+}
