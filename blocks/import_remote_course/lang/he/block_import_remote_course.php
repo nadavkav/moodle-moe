@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['blockstring'] = 'יבוא תבניות קורסים פדגוגיות';
+$string['blockstring'] = 'תבניות חלופות בהערכה';
 $string['descconfig'] = 'Description of the config section';
 $string['descfoo'] = 'Config description';
 $string['headerconfig'] = 'Config section header';
@@ -33,7 +33,7 @@ $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course bloc
 $string['pluginname'] = 'יבוא תבניות קורסים פדגוגיות';
 
 // Specific
-$string['courseisnotempty'] = 'הקורס אינו ריק. <br> אנא הסירו את הרכיבים מהקורס לפני תחילת היבוא.';
+$string['courseisnotempty'] = 'לא ניתן לייבא תבנית היות ומרחב הלימוד אינו ריק';
 $string['noavailablecourses'] = 'טרם הוזנה רשימת תבניות פדגוגיות של קורסים ליבוא, אנא הזינו את הרשימה בהגדרות המערכת של רכיב זה.';
 $string['restoreinprogress'] = 'תהליך היבוא מתבצע...';
 
@@ -44,3 +44,4 @@ $string['remoteusername_label'] = 'שם משתמש';
 $string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיבויים לקורסים המקוריים במערכת מוודל המרוחקת.';
 $string['remotecourselist_label'] = 'רשימת קורסים לשיחזור';
 $string['remotecourselist_desc'] = 'רשימת התפניות הפדגוגיות אשר יהיו זמינות בקורסים ריקים לשיחזור  <br> each course in a seperate line, Format: "CourseID=Course title,"';
+$string['restore'] = 'יבוא תבנית';

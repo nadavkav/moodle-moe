@@ -44,3 +44,4 @@ $string['remoteusername_label'] = 'Username';
 $string['remoteusername_desc'] = 'Username used to backup the original courses on the remote system.';
 $string['remotecourselist_label'] = 'Remote course list';
 $string['remotecourselist_desc'] = 'Fixed list of remote courses (each course in a seperate line, Format: "CourseID=Course title,"';
+$string['restore'] = 'Impoert template';

@@ -86,8 +86,11 @@ class block_import_remote_course extends block_base {
         $form .= '<input type="hidden" name="sessionid" value="'.session_id().'">';
         //$form .= '<input type="submit" value="'.get_string("restore").'" onsubmit="Y(\'div.inprogress\').removeClass(\'hide\')">';
         if(count(get_fast_modinfo($COURSE->id)->cms) <= 1){
-            $form .= '<input type="button" value="'.get_string("restore").'" ' .
+            $form .= '<input type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
                 'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
+        } else {
+            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
+                'onclick="Y.one(\'form#restoreremotecourse\').append(\''. get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
         }
         $form .= '</form>';
 
