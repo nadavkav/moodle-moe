@@ -5125,3 +5125,6 @@ div#intro.generalbox{
 #page-course-view-grid.dir-rtl ul.gtopics-0{
 	margin-right: 0px;
 }
+#page-mod-oublog-view .oublog-post-top-details div.oublog-post-editsummary{
+	margin-right: 1em;
+}
