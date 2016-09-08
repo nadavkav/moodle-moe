@@ -45,3 +45,4 @@ $string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיב�
 $string['remotecourselist_label'] = 'רשימת קורסים לשיחזור';
 $string['remotecourselist_desc'] = 'רשימת התפניות הפדגוגיות אשר יהיו זמינות בקורסים ריקים לשיחזור  <br> each course in a seperate line, Format: "CourseID=Course title,"';
 $string['restore'] = 'יבוא תבנית';
+$string['trytemplates'] = 'התנסות בתבניות';

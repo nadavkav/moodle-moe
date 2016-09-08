@@ -139,7 +139,7 @@ $extractedbackup = $fb->extract_to_pathname($downloadedbackupfile, $extracttopat
 
 // Prepare for restore
 $rc = new restore_controller($filepath, $destcourseid, backup::INTERACTIVE_NO,
-    backup::MODE_IMPORT, $USER->id, backup::TARGET_CURRENT_ADDING);
+    backup::MODE_IMPORT, $USER->id, backup::TARGET_CURRENT_DELETING);
 // Check if the format conversion must happen first.
 if ($rc->get_status() == backup::STATUS_REQUIRE_CONV) {
     $rc->convert();

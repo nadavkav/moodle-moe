@@ -93,6 +93,7 @@ class block_import_remote_course extends block_base {
                 'onclick="Y.one(\'form#restoreremotecourse\').append(\''. get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
         }
         $form .= '</form>';
+        $form .= '<a id="importsite" href="' . get_config('local_remote_backup_provider', 'remotesite') . '" class="btn">' . get_string('trytemplates', 'block_import_remote_course') . '</a>';
 
         $form .= html_writer::start_div('inprogress hide');
             $form .= html_writer::start_div('notice');
