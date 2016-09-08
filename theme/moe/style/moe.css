@@ -5146,3 +5146,8 @@ div#intro.generalbox{
 .dir-rtl .navbar .brand{
 	padding: 10px 20px 10px 20px;
 }
+ .fitemtitle label{
+	margin-right: 1.5em;
+}
+
+}
