@@ -30,7 +30,7 @@ $string['headerconfig'] = 'Config section header';
 $string['labelfoo'] = 'Config label';
 $string['import_remote_course:addinstance'] = 'Add a import_remote_course block';
 $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course block to my moodle';
-$string['pluginname'] = 'יבוא תבניות קורסים פדגוגיות';
+$string['pluginname'] = 'תבניות חלופות בהערכה';
 
 // Specific
 $string['courseisnotempty'] = 'לא ניתן לייבא תבנית היות ומרחב הלימוד אינו ריק';
@@ -38,8 +38,8 @@ $string['noavailablecourses'] = 'טרם הוזנה רשימת תבניות פד�
 $string['restoreinprogress'] = 'תהליך היבוא מתבצע...';
 
 // Global system settings
-$string['config_header'] = 'יבוא תבניות קורסים פדגוגיות';
-$string['config_desc'] = 'הגדרות מערכת עבור יבוא תבניות קורסים פדגוגיות.';
+$string['config_header'] = 'תבניות חלופות בהערכה';
+$string['config_desc'] = 'הגדרות מערכת עבור תבניות חלופות בהערכה.';
 $string['remoteusername_label'] = 'שם משתמש';
 $string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיבויים לקורסים המקוריים במערכת מוודל המרוחקת.';
 $string['remotecourselist_label'] = 'רשימת קורסים לשיחזור';
