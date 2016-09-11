@@ -5146,3 +5146,6 @@ div#intro.generalbox{
 .dir-rtl .navbar .brand{
 	padding: 10px 20px 10px 20px;
 }
+.course-content .current .content{
+	background-color: transparent;
+}
