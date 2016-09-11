@@ -1030,7 +1030,10 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 }
 
 .nav-tabs>li.active .tab_content {
-	background-color: #e1cff5;
+	background-color: #7a5b9a;
+	border-bottom: 5px solid #421f66;
+	color: #ffffff;
+	font-weight: bolder;
 }
 
 .nav-tabs>li.active {
@@ -5145,4 +5148,7 @@ div#intro.generalbox{
 }
 .dir-rtl .navbar .brand{
 	padding: 10px 20px 10px 20px;
+}
+#page-course-view-onetopic.dir-rtl ul{
+	margin-right: 0px;
 }
