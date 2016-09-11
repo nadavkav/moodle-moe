@@ -4040,14 +4040,13 @@ body.dir-rtl .block_course_list .content {
 	padding: 0 16px 0 6px;
 }
 
-body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-0
-	 ) .summary {
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary{
 	width: 45%;
 }
 
-body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not (#section-0
-	 ) .summary>div.no-overflow {
+body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow {
 	padding: 0 2em 0 2em;
+	word-break: break-all;
 }
 
 .path-mod-forum .discussionsubscription>a>img {
