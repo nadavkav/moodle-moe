@@ -487,7 +487,7 @@ body.pagelayout-embedded {
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
 	-moz-margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
 }
 
 .tl-posts  .tl-comment:nth-child(even) .tl-text:after, .tl-posts  .tl-comment:nth-child(even) .tl-text:before
@@ -532,7 +532,8 @@ body.pagelayout-embedded {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin-right: 1.875em;
-	max-width: 80%;
+	max-width: 75%;
+	word-wrap: break-word;
 }
 
 .tl-posts  .tl-comment:nth-child(odd) .tl-text:after, .tl-posts  .tl-comment:nth-child(odd) .tl-text:before
