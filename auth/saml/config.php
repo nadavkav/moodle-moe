@@ -323,7 +323,7 @@ $(document).ready(function() {
 <div id="datamapping">
     <table class="center">
     <?php
-    print_auth_lock_options('saml', $user_fields, '<!-- empty help -->', true, false);
+    print_auth_lock_options('saml', $user_fields, '<!-- empty help -->', true, false, $this->customfields);
     ?>
     </table>
 </div>
