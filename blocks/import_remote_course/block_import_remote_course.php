@@ -56,7 +56,6 @@ class block_import_remote_course extends block_base {
         // user/index.php expect course context, so get one if page has module context.
         $currentcontext = $this->page->context->get_course_context(false);
 
-        $this->content = '';
         if (empty($currentcontext)) {
             return $this->content;
         }
