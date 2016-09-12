@@ -66,7 +66,7 @@ class block_import_remote_course extends block_base {
 //        if (!empty($this->config->text)) {
 //            $courselist = explode(',',$this->config->text);
 //        }
-        $remotecourselist = get_config('import_remote_course', 'remotecourselist');
+        $remotecourselist = get_config('block_import_remote_course', 'remotecourselist');
         if (empty($remotecourselist)) {
             $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
             return $this->content;
