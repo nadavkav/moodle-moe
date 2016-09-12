@@ -28,12 +28,12 @@ $settings->add(new admin_setting_heading('configheader',
     get_string('config_header', 'block_import_remote_course'),
     get_string('config_desc', 'block_import_remote_course')));
 
-$settings->add(new admin_setting_configtext('import_remote_course/remoteusername',
+$settings->add(new admin_setting_configtext('block_import_remote_course/remoteusername',
     get_string('remoteusername_label', 'block_import_remote_course'),
     get_string('remoteusername_desc', 'block_import_remote_course'),
     ''));
 
-$settings->add(new admin_setting_configtextarea('import_remote_course/remotecourselist',
+$settings->add(new admin_setting_configtextarea('block_import_remote_course/remotecourselist',
     get_string('remotecourselist_label', 'block_import_remote_course'),
     get_string('remotecourselist_desc', 'block_import_remote_course'),
     ''));
