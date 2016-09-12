@@ -1078,6 +1078,7 @@ class format_moetopcoll extends format_base {
                     get_string('supporterslearning', 'format_moetopcoll'),
                     get_string('toolbox', 'format_moetopcoll')
                 );
+                $countmoetopcolllabel = 0;
                 $section = $modinfo->get_section_info($sectionnum);
                 $completioninfo = new completion_info($course);
                 if ($section != null && isset($modinfo->sections[$section->section])) {
@@ -1086,6 +1087,9 @@ class format_moetopcoll extends format_base {
                         if ($mod->modname == 'label') {
                             $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
                             foreach ($labels as $key => $label) {
+                                if(strpos($modulehtml, 'moetopcalllabel')){
+                                    ++$countmoetopcolllabel;
+                                }
                                 if (strpos($modulehtml, $label)) {
                                     unset($labels[$key]);
                                 }
@@ -1093,7 +1097,7 @@ class format_moetopcoll extends format_base {
                         }
                     }
                 }
-                if ((!empty($labels)) && ($section != null)) {
+                if (($countmoetopcolllabel < 3) && (!empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
                     foreach ($labels as $key => $label) {
                         $cm = null;

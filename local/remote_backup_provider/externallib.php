@@ -204,7 +204,6 @@ class local_remote_backup_provider_external extends external_api {
                 'timemodified' => $timestamp
             );
             $storedfile = $fs->create_file_from_storedfile($filerecord, $file);
-            $file->delete();
 
             // Make the link.
             //$filepath = $storedfile->get_filepath() . $storedfile->get_filename();

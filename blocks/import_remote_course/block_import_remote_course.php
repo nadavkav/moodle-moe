@@ -85,9 +85,15 @@ class block_import_remote_course extends block_base {
         $form .= '<input type="hidden" name="destcourseid" value="'.$COURSE->id.'">';
         $form .= '<input type="hidden" name="sessionid" value="'.session_id().'">';
         //$form .= '<input type="submit" value="'.get_string("restore").'" onsubmit="Y(\'div.inprogress\').removeClass(\'hide\')">';
-        $form .= '<input type="button" value="'.get_string("restore").'" ' .
-            'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
+        if(count(get_fast_modinfo($COURSE->id)->cms) <= 1){
+            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
+                'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
+        } else {
+            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
+                'onclick="Y.one(\'form#restoreremotecourse\').append(\''. get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
+        }
         $form .= '</form>';
+        $form .= '<a id="importsite" href="' . get_config('local_remote_backup_provider', 'remotesite') . '" class="btn">' . get_string('trytemplates', 'block_import_remote_course') . '</a>';
 
         $form .= html_writer::start_div('inprogress hide');
             $form .= html_writer::start_div('notice');
@@ -101,11 +107,14 @@ class block_import_remote_course extends block_base {
 
         // If we have more then one (probably the "news forum") module in the course,
         // Display a warrening, and prevent restore.
-        $coursemodulescount = count(get_fast_modinfo($COURSE->id)->cms);
-        if ($coursemodulescount > 1) {
-            $this->content->text = get_string('courseisnotempty', 'block_import_remote_course');
-        } else {
+       
+        if(!($this->content instanceof  stdClass)) {
+            $this->content = new stdClass();
+        }
+        if(isset($this->content->text)){
             $this->content->text .= $form;
+        } else {
+            $this->content->text = $form;
         }
 
         return $this->content;

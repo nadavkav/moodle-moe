@@ -27,5 +27,5 @@ $string['remotesite_desc'] = 'The fully-qualified domain of the remote site';
 $string['wstoken'] = 'Web service token';
 $string['wstoken_desc'] = 'Add the web service token from the remote site.';
 $string['remote_backup_provider:access'] = 'Access';
-$string['selfsignssl_label'] = 'allow self sign certification';
-$string['selfsignssl_desc'] = 'If in the remote site the ssl is self sign';
+$string['selfsignssl_label'] = 'הרשמה תעודות חתומות עצמית';
+$string['selfsignssl_desc'] = 'האם האתר המרוחק משתמש בתעודה חתומה עצמית';
