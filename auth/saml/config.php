@@ -115,6 +115,9 @@
     if (!isset ($config->externalrolemappingsql)) { 
         $config->externalrolemappingsql = ''; 
     }
+    if (!isset($config->allowstudent)) {
+        $config->allowstudent = true;
+    }
 
 ?>
 
@@ -220,7 +223,13 @@ if (isset($err) && !empty($err)) {
     </td>
     <td><?php print_string("auth_saml_logfile_description", "auth_saml"); ?></td>
 </tr>
-
+<tr valign="top">
+	<td class="right"><?php print_string("auth_saml_allowstudent", "auth_saml"); ?>:</td>
+	<td>
+		<input name="allowstudent" type="checkbox" checked="<?php echo $config->allowstudent?>">
+	</td>
+	<td></td>
+</tr>
 <tr valign="top">
     <td class="right"><?php print_string("auth_saml_samlhookfile", "auth_saml"); ?>:</td>
     <td>
