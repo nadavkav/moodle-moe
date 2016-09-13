@@ -1211,52 +1211,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics #section-0 .summary
 	padding-left: 20px;
 }
 
-@media screen and (max-width: 480px) {
-	#page-mod-oublog-editpost .editor_atto_toolbar {
-		margin-right: 0em;
-		box-sizing: border-box;
-	}
-	#page-mod-oublog-editpost .editor_atto_toolbar,
-		.editor_atto_content_wrap, .editor_atto+textarea {
-		margin-right: 0em;
-	}
-	#page-mod-oublog-editpost .filemanager .fp-navbar {
-		margin-right: 0em;
-		/*margin-right: 13em;*/
-		/*width: 87%!important;*/
-		margin-top: 0px !important;
-	}
-	#page-mod-oublog-editpost .filemanager-container, .filepicker-filelist {
-		margin-right: 0em;
-		/*margin-right: 13em;
-	width: 87%!important;*/
-	}
-	.moeforumcontainer thead th.header.lastpost, .moeforumcontainer tbody tr.discussion td.lastpost,
-		.moeforumcontainer thead th.header.replies, .moeforumcontainer tbody tr.discussion td.replies
-		{
-		display: none;
-	}
-	#page-mod-glossary-view .singlebutton.glossaryaddentry {
-		width: 100%
-	}
-	#page-mod-glossary-view .singlebutton {
-		width: 100%
-	}
-	#page-mod-glossary-view  .boxaligncenter {
-		width: 100%
-	}
-	#page-mod-glossary-view  .nav-tabs a {
-		margin-top: 1em;
-	}
-	#page-mod-glossary-view .nav-tabs>.active>a {
-		background-color: transparent !important;
-		border: 0px solid transparent;
-		box-shadow: inset 0 0 0 0px #e2d7ce, 0 0 0 0px #e2d7ce;
-		margin-top: 1em !important;
-		text-decoration: none;
-	}
-}
-
 .path-mod-forum .discussioncontrols {
 	background-color: #c2e8e6;
 }
@@ -4092,7 +4046,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 #page-mod-oublog-participation div[role="main"] fieldset.hidden {
 	display: inline;
 	float: right;
-	margin-right: 60px;
+	margin-right: 1em;
 	margin-bottom: 50px;
 }
 
@@ -4103,7 +4057,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	padding: 0px;
 	margin: 0px;
 }
-
+#page-mod-oublog-participation #fitem_id_submitbutton{
+	border: none;
+}
 #page-mod-oublog-participation div[role="main"] input[type="submit"] {
 	background-image: none;
 	background-color: #eef1cf !important;
@@ -4156,11 +4112,6 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	}
 	#page-mod-oublog-participation div[role="main"] div#fitem_id_end {
 		margin: 0px
-	}
-	#page-mod-oublog-participation div[role="main"] fieldset.hidden #fitem_id_submitbutton
-		{
-		margin-top: 105%;
-		margin-right: 90%;
 	}
 }
 
@@ -5149,12 +5100,64 @@ div#intro.generalbox{
 .course-content .current .content{
 	background-color: transparent;
 }
-
-@media (max-width:1308px) {
+#page-mod-oublog-participation #downloadtype_download{
+	max-width: 90%;
+}
+@media screen and (max-width: 480px) {
+    #page-mod-oublog-editpost .editor_atto_toolbar {
+        margin-right: 0em;
+        box-sizing: border-box;
+    }
+    #page-mod-oublog-editpost .editor_atto_toolbar,
+        .editor_atto_content_wrap, .editor_atto+textarea {
+        margin-right: 0em;
+    }
+    #page-mod-oublog-editpost .filemanager .fp-navbar {
+        margin-right: 0em;
+        /*margin-right: 13em;*/
+        /*width: 87%!important;*/
+        margin-top: 0px !important;
+    }
+    #page-mod-oublog-editpost .filemanager-container, .filepicker-filelist {
+        margin-right: 0em;
+        /*margin-right: 13em;
+    width: 87%!important;*/
+    }
+    #page-mod-oublog-participation input#id_submitbutton {
+        position: static;
+    	margin: 0 1em;
+    	display: inline-block;
+    }
+    .moeforumcontainer thead th.header.lastpost, .moeforumcontainer tbody tr.discussion td.lastpost,
+        .moeforumcontainer thead th.header.replies, .moeforumcontainer tbody tr.discussion td.replies
+        {
+        display: none;
+    }
+    #page-mod-glossary-view .singlebutton.glossaryaddentry {
+        width: 100%
+    }
+    #page-mod-glossary-view .singlebutton {
+        width: 100%
+    }
+    #page-mod-glossary-view  .boxaligncenter {
+        width: 100%
+    }
+    #page-mod-glossary-view  .nav-tabs a {
+        margin-top: 1em;
+    }
+    #page-mod-glossary-view .nav-tabs>.active>a {
+        background-color: transparent !important;
+        border: 0px solid transparent;
+        box-shadow: inset 0 0 0 0px #e2d7ce, 0 0 0 0px #e2d7ce;
+        margin-top: 1em !important;
+        text-decoration: none;
+    }
+}
+@media (min-width:481px) and (max-width:1308px) {
 	#page-mod-oublog-participation input#id_submitbutton{
 	    position: relative;
-        top: -49px;
-        left: 53px;
+        top: 44px;
+        right: 0%;
 	    display: block;
     }
 }
