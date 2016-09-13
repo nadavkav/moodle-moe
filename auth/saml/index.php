@@ -222,11 +222,10 @@ define('SAML_INTERNAL', 1);
         if(isset($err) && !empty($err)) {
             auth_saml_error($err, $urltogo, $pluginconfig->samllogfile);
         }
-        if(isset($saml_attributes['http://schemas.education.gov.il/ws/2015/01/identity/claims/isstudent'][0]) &&
+        if($pluginconfig->allowstudent && isset($saml_attributes['http://schemas.education.gov.il/ws/2015/01/identity/claims/isstudent'][0]) &&
             $saml_attributes['http://schemas.education.gov.il/ws/2015/01/identity/claims/isstudent'][0] == 'Yes'){
                 require_logout();
-                redirect('http://sites.education.gov.il/cloud/home/Digital_Content/Pages/atarey_lemida_halufot_haaracha.aspx');
-            }
+                redirect($pluginconfig->studentredirect);
         }
         redirect($urltogo);
     }

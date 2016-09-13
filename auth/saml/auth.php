@@ -341,7 +341,7 @@ class auth_plugin_saml extends auth_plugin_base {
         else {
             $saml_param->dosinglelogout = $config->dosinglelogout;
         }
-
+        
 	    // set to defaults if undefined
 	    if (!isset ($config->username)) {
 	        $config->username = 'eduPersonPrincipalName';
@@ -363,6 +363,12 @@ class auth_plugin_saml extends auth_plugin_base {
 	    }
 	    if (!isset ($config->autologin)) { 
             $config->autologin = false; 
+        }
+        if(!isset($config->allowstudent)){
+            $config->allowstudent = false;
+        }
+        if(!isset($config->studentredirect)){
+            $config->studentredirect = '';
         }
 	    if (!isset ($config->samllogfile)) {
 	        $config->samllogfile = '';
@@ -406,6 +412,8 @@ class auth_plugin_saml extends auth_plugin_base {
 	    set_config('samllogoimage',   $config->samllogoimage,	'auth/saml');
 	    set_config('samllogoinfo',    $config->samllogoinfo,	'auth/saml');
 	    set_config('autologin',       $config->autologin,  'auth/saml');
+	    set_config('studentredirect', $config->studentredirect, 'auth/saml');
+	    set_config('allowstudent', $config->allowstudent, 'auth/saml');
 	    set_config('samllogfile',         $config->samllogfile,	'auth/saml');
 	    set_config('samlhookfile',        $config->samlhookfile,	'auth/saml');
 	    set_config('moodlecoursefieldid',   $config->moodlecoursefieldid,   'auth/saml');
