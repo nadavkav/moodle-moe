@@ -30,6 +30,7 @@ $string['headerconfig'] = 'Config section header';
 $string['labelfoo'] = 'Config label';
 $string['import_remote_course:addinstance'] = 'Add a import_remote_course block';
 $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course block to my moodle';
+$string['import_remote_course:view'] = 'מאפשר צפייה בבלוק';
 $string['pluginname'] = 'תבניות חלופות בהערכה';
 
 // Specific
