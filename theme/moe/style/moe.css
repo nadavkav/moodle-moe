@@ -4874,8 +4874,18 @@ a.skip-block, a.skip {
 	}
 }
 
-.path-mod-checklist .checklistreport .cell.reportheading {
+.path-mod-checklist .checklistreport .cell.reportheading,.path-mod-checklist .checklistreport .cell.c1 {
     background-color: #006474 !important;
+}
+
+.path-mod-checklist .checklistreport .c0 a{
+	color: #644977;
+}
+
+.path-mod-checklist .checklistreport .cell.c0 {
+
+	text-align: right !important;
+	
 }
 
 .path-mod-checklist .checklistreport .cell.level0-checked {
