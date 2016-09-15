@@ -5161,8 +5161,21 @@ div#intro.generalbox{
 		right: 0px;
 	}
 }
+@media ( max-width : 1301px) {
+	.path-mod.path-mod-moewiki  .annotator-outer{
+		right: 400px;
+		width: 265px;
+	}
+}
+@media ( max-width : 768px) {
+	
+	.path-mod.path-mod-moewiki  .annotator-outer{
+		right: 0px;
+		width: 265px;
+	}
 
-@media ( max-width : 414px) {
+
+@media ( max-width : 767px) {
 	
 	.path-mod.path-mod-moewiki  .annotator-outer{
 		right: 0px;
@@ -5195,16 +5208,5 @@ div#intro.generalbox{
 		width: 31%;
 		margin-left: 4px;
  	}
-
-}
-
-@media ( max-width : 768px) {
-	
-	.path-mod.path-mod-moewiki  .annotator-outer{
-		right: 0px;
-		width: 265px;
-	}
-
-	
 
 }
