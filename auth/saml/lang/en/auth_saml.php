@@ -1,5 +1,7 @@
 <?php
 
+$string['auth_saml_allowstudent'] = 'Allow student to logein';
+$string['auth_saml_studentredirect'] = 'Redirect not allowd student URL';
 $string['auth_saml_loginusing'] = 'Login here using your username and password';
 
 $string['auth_samltitle']  = 'SAML Authentication';

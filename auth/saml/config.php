@@ -115,6 +115,12 @@
     if (!isset ($config->externalrolemappingsql)) { 
         $config->externalrolemappingsql = ''; 
     }
+    if (!isset($config->allowstudent)) {
+        $config->allowstudent = false;
+    }
+    if(!isset($config->studentredirect)){
+        $config->studentredirect = '';
+    }
 
 ?>
 
@@ -220,7 +226,20 @@ if (isset($err) && !empty($err)) {
     </td>
     <td><?php print_string("auth_saml_logfile_description", "auth_saml"); ?></td>
 </tr>
-
+<tr valign="top">
+	<td class="right"><?php print_string("auth_saml_allowstudent", "auth_saml"); ?>:</td>
+	<td>
+		<input name="allowstudent" type="checkbox" <?php if($config->allowstudent) echo 'checked="CHECKED"'?> />
+	</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td class="right"><?php print_string('auth_saml_studentredirect', 'auth_saml')?>:</td>
+	<td>
+		<input name="studentredirect" type="url"  size="30" value="<?php echo $config->studentredirect?>" />
+	</td>
+	<td></td>
+</tr>
 <tr valign="top">
     <td class="right"><?php print_string("auth_saml_samlhookfile", "auth_saml"); ?>:</td>
     <td>
@@ -323,7 +342,7 @@ $(document).ready(function() {
 <div id="datamapping">
     <table class="center">
     <?php
-    print_auth_lock_options('saml', $user_fields, '<!-- empty help -->', true, false);
+    print_auth_lock_options('saml', $user_fields, '<!-- empty help -->', true, false, $this->customfields);
     ?>
     </table>
 </div>

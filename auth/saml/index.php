@@ -222,5 +222,10 @@ define('SAML_INTERNAL', 1);
         if(isset($err) && !empty($err)) {
             auth_saml_error($err, $urltogo, $pluginconfig->samllogfile);
         }
+        if(!$pluginconfig->allowstudent && isset($saml_attributes['http://schemas.education.gov.il/ws/2015/01/identity/claims/isstudent'][0]) &&
+            $saml_attributes['http://schemas.education.gov.il/ws/2015/01/identity/claims/isstudent'][0] == 'Yes'){
+                require_logout();
+                redirect($pluginconfig->studentredirect);
+        }
         redirect($urltogo);
     }
