@@ -40,7 +40,7 @@ class block_import_remote_course extends block_base {
             return $this->content;
         }
 
-        if (empty($this->instance)) {
+        if (empty($this->instance) || !has_capability('block/import_remote_course:view', $this->page->context)) {
             $this->content = '';
             return $this->content;
         }
