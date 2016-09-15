@@ -5155,3 +5155,17 @@ div#intro.generalbox{
 #page-course-view-onetopic.dir-rtl ul{
 	margin-right: 0px;
 }
+
+#page-course-view-topics.format-topics .sectionname{
+	border-top: 1px solid #c8bdd4;
+	border-bottom: 1px solid #c8bdd4;
+}
+
+#page-course-view-topics.format-topics .content{
+	border-bottom: 1px solid #c8bdd4;
+}
+
+#page-course-view-topics.format-topics .section_action_menu .moodle-actionmenu ul.menubar{
+	position: relative;
+    bottom: 11px;
+}
