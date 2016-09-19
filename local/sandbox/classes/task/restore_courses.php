@@ -210,7 +210,9 @@ class restore_courses extends \core\task\scheduled_task {
 
                     // Inform admin
                     local_sandbox_inform_admin(get_string('noticerestorecount', 'local_sandbox', $count), SANDBOX_LEVEL_NOTICE);
-
+                    
+                    purge_all_caches();
+                    
                     return true;
                 }
                 else {
