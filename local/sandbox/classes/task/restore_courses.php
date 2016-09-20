@@ -58,6 +58,7 @@ class restore_courses extends \core\task\scheduled_task {
         require_once($CFG->libdir.'/moodlelib.php');
         require_once($CFG->libdir.'/filestorage/zip_packer.php');
         require_once($CFG->dirroot.'/backup/util/includes/restore_includes.php');
+        require_once($CFG->dirroot.'/cache/classes/loaders.php');
 
         // Get plugin config
         $local_sandbox_config = get_config('local_sandbox');
@@ -210,9 +211,21 @@ class restore_courses extends \core\task\scheduled_task {
 
                     // Inform admin
                     local_sandbox_inform_admin(get_string('noticerestorecount', 'local_sandbox', $count), SANDBOX_LEVEL_NOTICE);
-                    
+                    $factory = \cache_factory::instance();
+                    $component = 'core';
+                    $coursecatcaches = array('coursecatrecords', 'coursecattree', 'coursecat');
+                    foreach ($coursecatcaches as $area) {
+                        $definition = $factory->create_definition($component, $area);
+                        if ($definition->has_required_identifiers()) {
+                            // We will have to purge the stores used by this definition.
+                            \cache_helper::purge_stores_used_by_definition($component, $area);
+                        } else {
+                            // Alrighty we can purge just the data belonging to this definition.
+                            \cache_helper::purge_by_definition($component, $area);
+                        }
+                    }
+                    \cache_helper::purge_store('default_session');
                     purge_all_caches();
-                    
                     return true;
                 }
                 else {
