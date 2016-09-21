@@ -5179,6 +5179,20 @@ div#intro.generalbox{
 li.section div.summary {
 	padding: 1em;
 }
+
+#page-course-view-topics.format-topics .sectionname{
+    border-top: 1px solid #c8bdd4;
+    border-bottom: 1px solid #c8bdd4;
+}
+
+#page-course-view-topics.format-topics .content{
+    border-bottom: 1px solid #c8bdd4;
+}
+
+#page-course-view-topics.format-topics .section_action_menu .moodle-actionmenu ul.menubar{
+    position: relative;
+    bottom: 11px;
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
