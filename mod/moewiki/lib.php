@@ -79,12 +79,14 @@ function moewiki_add_instance($data, $mform) {
             //find all the course students
             $students = get_users_from_role_on_context($DB->get_record('role', array("shortname" => "student")), $coursecontext);
             foreach ($students as $student) {
-                //Create student's wiki
-                $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $student->userid);
-                //create the wiki main page
-                $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
-                //put the template text in the students main page
-                moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
+                if ($student->userid != $USER->id) {
+                    // Create student's wiki
+                    $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $student->userid);
+                    // create the wiki main page
+                    $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
+                    // put the template text in the students main page
+                    moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
+                }
             }
 
         }

@@ -200,10 +200,9 @@ function moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid
                 $groups = groups_get_activity_allowed_groups($cm);
                 if (!$groups) {
                     if (!groups_get_all_groups($cm->course, 0, $cm->groupingid)) {
-                        moewiki_error('This wiki cannot be displayed because it is a group wiki,
-                                but no groups have been set up for the course (or grouping, if selected).');
+                        moewiki_error(get_string('nogroups', 'moewiki'));
                     } else {
-                        moewiki_error('You do not have access to any of the groups in this wiki.');
+                        moewiki_error(get_string('nogroupaccess', 'moewiki'));
                     }
                 }
                 $groupid = reset($groups)->id;
