@@ -5176,6 +5176,9 @@ div#intro.generalbox{
 #page-mod-oublog-participation #downloadtype_download{
 	max-width: 90%;
 }
+li.section div.summary {
+	padding: 1em;
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;

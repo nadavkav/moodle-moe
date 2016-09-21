@@ -507,7 +507,7 @@ body.format-moetopcoll .course-content ul.ctopics li#section-0 .summary{
 }
 body.format-moetopcoll.dir-rtl .course-content ul.ctopics li.section .summary {
     margin-right: 0;
-	padding: 0 1.5em;
+	padding: 1.5em;
 	border-left: solid 3px #e4e0c3;
 	border-right: solid 3px #e4e0c3;
 }
