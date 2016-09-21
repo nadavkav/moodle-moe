@@ -923,3 +923,6 @@ a.moewiki_noshow:link,a.moewiki_noshow:visited {
 .annotator-viewer-controls{
 	margin-top: 1em;
 }
+.annotator-item_part.text.span7 {
+	word-break: break-word;
+}

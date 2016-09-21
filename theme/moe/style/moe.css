@@ -5237,3 +5237,56 @@ li.section div.summary {
 	    display: block;
     }
 }
+@media ( max-width : 1308px) {
+    #page-mod-moewiki-view ul.annotator-widget{
+        right: 0px;
+    }
+}
+@media ( max-width : 1301px) {
+    .path-mod.path-mod-moewiki  .annotator-outer{
+        right: 400px;
+        width: 265px;
+    }
+}
+@media ( max-width : 768px) {
+    
+    .path-mod.path-mod-moewiki  .annotator-outer{
+        right: 0px;
+        width: 265px;
+    }
+}
+@media ( max-width : 767px) {
+    
+    .path-mod.path-mod-moewiki  .annotator-outer{
+        right: 0px;
+        width: 278px;
+    }
+    
+    .path-mod.path-mod-moewiki .annotator-cancel{
+        width: 74px;
+        right: 194px;
+        top: 30px;
+    }
+    
+    .path-mod.path-mod-moewiki .annotator-resolved{
+       width: 74px;
+       right: 93px;
+    }
+    
+    .path-mod.path-mod-moewiki .annotator-reply{
+         width: 74px;
+         bottom: 30px;
+        left: 8px;
+    }
+    
+     
+     .path-mod.path-mod-moewiki img.ig-responsive{
+         margin-left: 5px;
+     }
+    
+    .path-mod.path-mod-moewiki .annotator-item_part.image.span4{
+        width: 31%;
+        margin-left: 4px;
+    }
+
+}
