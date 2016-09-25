@@ -141,6 +141,10 @@ class restore_courses extends \core\task\scheduled_task {
                                 $controller->get_logger()->set_next(new \output_indented_logger(\backup::LOG_INFO, false, true));
                                 $controller->execute_precheck();
                                 $controller->execute_plan();
+                                $backupinfo = $controller->get_info();
+                                $course = $DB->get_record('course', array('id' => $newcourseid), '*', MUST_EXIST);
+                                $course->format = $backupinfo->original_course_format;
+                                $DB->update_record('course', $course);
                             }
                             else {
                                 // Output error message for cron listing
