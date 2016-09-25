@@ -226,6 +226,7 @@ class restore_courses extends \core\task\scheduled_task {
                     }
                     \cache_helper::purge_store('default_session');
                     purge_all_caches();
+                    fix_course_sortorder();
                     return true;
                 }
                 else {
