@@ -14055,7 +14055,13 @@ var Adder = Widget.extend({
             self._onMouseup(e);
         });
     },
-
+    returnEditor: function() {
+    	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
+    		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
+    		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
+    		$('div.annotator-outer.annotator-viewer').addClass('annotator-hide');
+    	}
+    },
     destroy: function () {
         this.element.off("." + NS);
         $(this.document.body).off("." + NS);
@@ -14074,6 +14080,7 @@ var Adder = Widget.extend({
     //
     // Returns nothing.
     load: function (annotation, position) {
+    	this.returnEditor();
         this.annotation = annotation;
         this.show(position);
     },
@@ -16309,9 +16316,11 @@ var Viewer = exports.Viewer = Widget.extend({
             })
             .on("click." + NS, '.annotator-cancel', function (){
             	self._startHideTimer();
+            	self.returnEditor();
             })
             .on("click." + NS, '.annotator-resolved', function(e) {
             	self._onResolvedClick(e);
+            	self.returnEditor();
             })
             .on("click." + NS, '.annotator-reply', function(e) {
             	self._onReplyClick(e);
@@ -16338,7 +16347,7 @@ var Viewer = exports.Viewer = Widget.extend({
         this.element.off("." + NS);
         Widget.prototype.destroy.call(this);
     },
-
+    
     // Public: Show the viewer.
     //
     // position - An Object specifying the position in which to show the editor
@@ -16403,7 +16412,13 @@ var Viewer = exports.Viewer = Widget.extend({
     setRenderer: function (renderer) {
         this.render = renderer;
     },
-
+    returnEditor: function() {
+    	if($("div.annotator-outer.annotator-editor").parent().prop('nodeName') == 'DIV'){
+    		$("div.annotator-outer.annotator-editor").insertAfter('div.annotator-adder.annotator-hide');
+    		$('div.annotator-outer.annotator-editor').addClass('annotator-hide');
+    		$('div.annotator-outer.annotator-viewer').addClass('annotator-hide');
+    	}
+    },
     // Private: create the list item for a single annotation
     _annotationItem: function (annotation) {
         var item = $(this.itemTemplate).clone();
