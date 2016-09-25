@@ -715,6 +715,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
             $output .= html_writer::end_tag('li');
         }
         // Check for mod setting and ability to edit that enables this link.
+        $participationstr = get_string('myparticipation', 'moewiki');
         if (($this->params->subwiki->canedit) && ($this->params->moewiki->allowimport)) {
             $output .= html_writer::start_tag('li', array('id' => 'moewiki_import_pages'));
             if ($this->params->page == 'import.php') {

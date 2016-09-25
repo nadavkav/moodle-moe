@@ -141,6 +141,7 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW,
             'coursecreator' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'student' => CAP_ALLOW,
         )
     ),
     'mod/moewiki:viewparticipation' => array(
