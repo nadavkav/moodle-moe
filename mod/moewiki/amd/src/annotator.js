@@ -14635,7 +14635,7 @@ var Editor = exports.Editor = Widget.extend({
     },
 
     checkOrientation: function () {
-        Widget.prototype.checkOrientation.call(this);
+        /*Widget.prototype.checkOrientation.call(this);
 
         var list = this.element.find('ul').first(),
             controls = this.element.find('.annotator-controls');
@@ -14644,7 +14644,7 @@ var Editor = exports.Editor = Widget.extend({
             controls.insertBefore(list);
         } else if (controls.is(':first-child')) {
             controls.insertAfter(list);
-        }
+        }*/
 
         return this;
     },
@@ -16532,6 +16532,9 @@ var Viewer = exports.Viewer = Widget.extend({
     },
     
     _onReplyClick: function(event){
+    	if($($('.annotator-editor')["0"].parentElement).hasClass("annotator-viewer")){
+    		return;
+    	}
     	this.annotation = $(event.target).parents('.annotator-viewer').find('.annotator-annotation').data('annotation');
     	  // Do nothing for right-clicks, middle-clicks, etc.
         if (event.which > 1) {
