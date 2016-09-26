@@ -5232,6 +5232,10 @@ input[type="submit"][disabled]:HOVER {
 #page-mod-quiz-report table#attempts .header{
 	text-align: right;	
 }
+#page-admin-tool-capability-index select#id_capability {
+	min-width: 10% !important;
+	width: 100%;
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
