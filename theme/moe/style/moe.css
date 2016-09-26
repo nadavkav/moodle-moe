@@ -5218,6 +5218,11 @@ li.section div.summary {
 #page-course-view-socialwall #section-0 .content > h3.sectionname{
     border-bottom: 1px solid #c1bdbf;
 }
+
+#page-mod-quiz-report table#attempts .header{
+	text-align: right;	
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
