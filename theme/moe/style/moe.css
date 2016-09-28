@@ -2709,7 +2709,7 @@ ul.nav.nav-tabs {
 	border-image: url([[pix:theme|bg/btnbg]]) 30;
 }
 
-#page-mod-glossary-view .glossarydisplay .entrybox>a {
+#page-mod-glossary-view .glossarydisplay .entrybox>a, #page-mod-glossary-view .glossarydisplay .entrybox div>a  {
 	border: 1px solid #b4a0ac !important;
 	padding: 1px 4px 1px 4px !important;
 	font-size: 16px;
@@ -2717,8 +2717,8 @@ ul.nav.nav-tabs {
 	background-color: #c7f1e5 !important;
 	color: #6d3f56;
 }
-
-#page-mod-glossary-view .glossarydisplay .entrybox>b {
+#page-mod-glossary-view  .glossarydisplay .entrybox .accesshide+a+b a,
+#page-mod-glossary-view .glossarydisplay .entrybox div b>a {
 	border: 2px solid #987985 !important;
 	background-color: #fbe9ea;
 	padding: 1px 4px 1px 0px !important;
@@ -5328,4 +5328,16 @@ li.section div.summary {
         margin-left: 4px;
     }
 
+@media ( max-width : 311px) {
+	#page-mod-glossary-view .glossarydisplay .entrybox div{
+        height: 65px;
+		width: 275px;
+	}
+	#page-mod-glossary-view .glossarydisplay .entrybox div b>a{
+		position: relative;
+		top: 34px;
+		left: 113px;
+						
+	}
 }
+    
