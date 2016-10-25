@@ -47,3 +47,5 @@ $string['remotecourselist_label'] = 'Remote course list';
 $string['remotecourselist_desc'] = 'Fixed list of remote courses (each course in a seperate line, Format: "CourseID=Course title,"';
 $string['restore'] = 'Impoert template';
 $string['trytemplates'] = 'Try templates';
+$string['testenv_label'] = 'Test Env';
+$string['testenv_desc'] = 'Test enviroment for see and test courses before import';

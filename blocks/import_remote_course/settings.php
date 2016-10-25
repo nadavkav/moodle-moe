@@ -38,4 +38,9 @@ if ($ADMIN->fulltree) {
         get_string('remotecourselist_label', 'block_import_remote_course'),
         get_string('remotecourselist_desc', 'block_import_remote_course'),
         ''));
+    
+    $settings->add(new admin_setting_configtext('block_import_remote_course/testenv',
+        get_string('testenv_label', 'block_import_remote_course'),
+        get_string('testenv_desc', 'block_import_remote_course'),
+        ''));
 }

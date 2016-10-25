@@ -47,3 +47,5 @@ $string['remotecourselist_label'] = 'רשימת קורסים לשיחזור';
 $string['remotecourselist_desc'] = 'רשימת התפניות הפדגוגיות אשר יהיו זמינות בקורסים ריקים לשיחזור  <br> each course in a seperate line, Format: "CourseID=Course title,"';
 $string['restore'] = 'יבוא תבנית';
 $string['trytemplates'] = 'התנסות בתבניות';
+$string['testenv_label'] = 'סביבת התנסות';
+$string['testenv_desc'] = 'סביבת התנסות לצפייה ובדיקות של הקרוסים לפני יבוא';
