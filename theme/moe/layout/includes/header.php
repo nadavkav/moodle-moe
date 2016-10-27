@@ -45,8 +45,10 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
         </div>
 <?php
 } ?>
-
-    <header id="page-header" class="clearfix">
+	
+	 <span>clock</span>  
+	<div id="countdown"></div>
+   <header id="page-header" class="clearfix">
        
     <div class="container-fluid">    
     <div class="row-fluid">
@@ -124,3 +126,59 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 <?php if ($shadow_effect) { ?>
 <div class="container-fluid"><img src="<?php echo $OUTPUT->pix_url('bg/lambda-shadow', 'theme'); ?>" class="lambda-shadow" alt=""></div>
 <?php } ?>
+
+
+<script>
+
+function countdown( elementName, minutes, seconds )
+{
+    var element, endTime, hours, mins, msLeft, time ;
+
+	
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+
+    function updateTimer()
+    {
+
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+         
+        countdown( "countdown",120, 0 );
+         
+		   
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+  
+   
+
+	    
+  while(true)
+	 {
+  	var now = new Date;
+	if((now.getSeconds()<1)&&(now.getHours()%2== 0)&&(now.getMinutes()==0))
+	{
+	updateTimer();
+	break;
+
+	}
+
+	}
+	}
+
+
+countdown("countdown", 120, 0 );
+
+</script>
