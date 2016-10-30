@@ -1,4 +1,13 @@
 @CHARSET "UTF-8";
+
+
+#countdown
+{
+	
+	position:fixed;
+	left:6%;
+
+}
 .dir-ltr .loginbox .loginform .form-input
 {   margin: 0 auto;
 	float: none;
