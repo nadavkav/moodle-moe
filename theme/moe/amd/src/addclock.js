@@ -55,7 +55,7 @@ define([ 'jquery'], function(){
 	  		countdown("countdown", 120, 0 );
 	  		}
 	  	else if(hours%2===0)
-	  	{
+	  	{ 
 	  		countminutes=60-minutes-1;
 	  		countminutes=countminutes+60;
 	  		countseconds=60-seconds;
