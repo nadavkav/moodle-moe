@@ -28,8 +28,16 @@ $login_custom_url = theme_lambda_get_setting('custom_login_link_url');
 $login_custom_txt = theme_lambda_get_setting('custom_login_link_txt');
 $shadow_effect = theme_lambda_get_setting('shadow_effect');
 $auth_googleoauth2 = theme_lambda_get_setting('auth_googleoauth2');
+
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
+$context=getdate();
+if (isloggedin()) {
+   $countdowntimer = theme_moe_get_setting('countdowntimer');
+    if($countdowntimer)
+$this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
+}
+
 
 $checkuseragent = '';
 if (!empty($_SERVER['HTTP_USER_AGENT'])) {
@@ -46,7 +54,6 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 <?php
 } ?>
 	
-	 <span>clock</span>  
 	<div id="countdown"></div>
    <header id="page-header" class="clearfix">
        
@@ -63,6 +70,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                 <div class="span4 hidden-phone">
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>             		
                 </div>
+ 
             <?php if (!$haslogo) { ?>
             	<div class="span6">
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>
@@ -128,57 +136,3 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 <?php } ?>
 
 
-<script>
-
-function countdown( elementName, minutes, seconds )
-{
-    var element, endTime, hours, mins, msLeft, time ;
-
-	
-    function twoDigits( n )
-    {
-        return (n <= 9 ? "0" + n : n);
-    }
-
-
-    function updateTimer()
-    {
-
-        msLeft = endTime - (+new Date);
-        if ( msLeft < 1000 ) {
-         
-        countdown( "countdown",120, 0 );
-         
-		   
-        } else {
-            time = new Date( msLeft );
-            hours = time.getUTCHours();
-            mins = time.getUTCMinutes();
-            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-        }
-    }
-
-    element = document.getElementById( elementName );
-    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
-  
-   
-
-	    
-  while(true)
-	 {
-  	var now = new Date;
-	if((now.getSeconds()<1)&&(now.getHours()%2== 0)&&(now.getMinutes()==0))
-	{
-	updateTimer();
-	break;
-
-	}
-
-	}
-	}
-
-
-countdown("countdown", 120, 0 );
-
-</script>

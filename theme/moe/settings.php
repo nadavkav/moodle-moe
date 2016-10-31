@@ -40,6 +40,9 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 	
+    
+    
+    
 	// Logo resolution.
 	$name = 'theme_moe/logo_res';
     $title = get_string('logo_res', 'theme_moe');
@@ -48,6 +51,16 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 	
+    // add/remove downlclock
+    $name = 'theme_moe/countdowntimer';
+    $title = get_string('countdowntimer', 'theme_moe');
+    $description = get_string('countdowntimerdesc', 'theme_moe');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+    
+    
+    
 	// Fixed or Variable Width.
     $name = 'theme_moe/pagewidth';
     $title = get_string('pagewidth', 'theme_moe');

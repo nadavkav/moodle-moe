@@ -1,7 +1,7 @@
  /**
   * @module format_lm/addtask
   */
-define([ 'jquery', 'core/ajax'], function($,ajax){
+define([ 'jquery'], function(){
  
     /**
      * @constructor
@@ -17,21 +17,10 @@ define([ 'jquery', 'core/ajax'], function($,ajax){
     };
  
     AddClock.prototype.init = function(hours, minutes, seconds) {
-    	
-    //	require(['core/ajax'], function(ajax) {
-    //	    var call = ajax.call([
-    //	        {methodname: 'lm_get_tasklist' , args: { context: context, course:id[1] }}]);
-   // 	    call[0].done(function (resp) {
-    //		$('#addtask_container').html(resp);
-    //	});
-   // });
-    	
-    	
-    	
+      	
     	function countdown( elementName, minutes, seconds )
     	{
     	    var element, endTime, hours, mins, msLeft, time ;
-
     		
     	    function twoDigits( n )
     	    {
@@ -41,13 +30,9 @@ define([ 'jquery', 'core/ajax'], function($,ajax){
 
     	    function updateTimer()
     	    {
-    	    	
-    	        msLeft = endTime - (+new Date);
-    	        
+    	        msLeft = endTime - (+new Date());
     	        if ( msLeft < 1 ) {
-    	         
     	        countdown( "countdown",120, 0 );
-    	         
     			   
     	        } else {
     	            time = new Date( msLeft );
@@ -59,55 +44,31 @@ define([ 'jquery', 'core/ajax'], function($,ajax){
     	    }
 
     	    element = document.getElementById( elementName );
-
-    	    var updateclockajax = ajaxcall('update_clock','aa');
-            updateclockajax[0].done(function(resp){
-        	   // location
-            	alert("sharon");
-           	 //alert(resp);
-           	 
-        		//.reload();
-        	}).fail(function(){
-        		alert("error");
-        	});	
-    		    
-    	  while(true)
-    		 {
-          	endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
-          	
-          
-    	  	var now =new Date();
-    		if((now.getSeconds()<1)&&(now.getMinutes()%2==0))
-
-    	  	//if((now.getSeconds()<1)&&(now.getHours()%2== 0)&&(now.getMinutes()==0))
-    		{
-    			
-    		updateTimer();
-    		break;
-
+    	    endTime = (+new Date()) + 1000 * (60*minutes + seconds) + 500;
+          	updateTimer();
     		}
 
-    		}
-    		}
-
-    	alert(hours);
-    	
-	  	alert(minutes);
-	  	alert(seconds);
-	  	//alert(php_var);
-    	countdown("countdown", 120, 0 );
-    	
-	
+    	var countminutes;
+	  	var countseconds;
+	  	if((seconds<1)&&(hours%2===0)&&(minutes===0))
+	  		{
+	  		countdown("countdown", 120, 0 );
+	  		}
+	  	else if(hours%2===0)
+	  	{
+	  		countminutes=60-minutes-1;
+	  		countminutes=countminutes+60;
+	  		countseconds=60-seconds;
+	  		countdown("countdown", countminutes,countseconds );
+	  	}	
+	  	else
+	    {
+	  		countminutes=60-minutes-1;
+	  		countseconds=60-seconds;
+	  		countdown("countdown", countminutes,countseconds );
+	    }
+	 
     };
-   //	
-   
-    
-    function ajaxcall(action,obj){
-    	var data = {};
-    	data.methodname = action;
-    	alert(data.methodname);
-    	//data.args = obj;
-    	return ajax.call([data]);
-        }
+       
     return new AddClock();
 });
