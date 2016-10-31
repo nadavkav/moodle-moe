@@ -44,6 +44,10 @@ $string['choosereadme'] = '
 <p style="text-align:center;"><img class="img-polaroid" src="moe/pix/redPIthemes.jpg" /></p>';
 
 /* Settings - General */
+
+$string['countdowntimerdesc'] = 'check for countdown timer reset every even hour';
+$string['countdowntimer'] = 'countdown timer';
+
 $string['settings_general'] = 'General';
 $string['lemidadigit'] = 'Digital Learning';
 $string['logo'] = 'Logo';
