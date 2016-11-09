@@ -28,14 +28,13 @@ $login_custom_url = theme_lambda_get_setting('custom_login_link_url');
 $login_custom_txt = theme_lambda_get_setting('custom_login_link_txt');
 $shadow_effect = theme_lambda_get_setting('shadow_effect');
 $auth_googleoauth2 = theme_lambda_get_setting('auth_googleoauth2');
+$countdowntimer = theme_moe_get_setting('countdowntimer');
 
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
 $context=getdate();
-if (isloggedin()) {
-   $countdowntimer = theme_moe_get_setting('countdowntimer');
-    if($countdowntimer)
-$this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
+if ($countdowntimer && isloggedin()) {
+    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
 }
 
 
@@ -53,7 +52,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
         </div>
 <?php
 } ?>
-	<?php if(isloggedin()) {?>
+	<?php if($countdowntimer && isloggedin()) {?>
    		<div id="countdown" class="btn"></div>
    	<?php }?>
    <header id="page-header" class="clearfix">
