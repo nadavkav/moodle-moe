@@ -53,8 +53,9 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
         </div>
 <?php
 } ?>
-	
-	<div id="countdown"></div>
+	<?php if(isloggedin()) {?>
+   		<div id="countdown" class="btn"></div>
+   	<?php }?>
    <header id="page-header" class="clearfix">
        
     <div class="container-fluid">    

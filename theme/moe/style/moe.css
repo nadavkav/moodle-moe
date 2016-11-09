@@ -1,13 +1,5 @@
 @CHARSET "UTF-8";
 
-
-#countdown
-{
-	
-	position:fixed;
-	left:6%;
-
-}
 .dir-ltr .loginbox .loginform .form-input
 {   margin: 0 auto;
 	float: none;
@@ -5226,6 +5218,11 @@ li.section div.summary {
 
 #page-course-view-socialwall #section-0 .content > h3.sectionname{
     border-bottom: 1px solid #c1bdbf;
+}
+#countdown {
+    position:fixed;
+    left:6%;
+    z-index: 99999999;
 }
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
