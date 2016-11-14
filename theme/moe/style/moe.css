@@ -5224,6 +5224,11 @@ li.section div.summary {
     left:6%;
     z-index: 99999999;
 }
+
+.path-grade-grading #rubric-rubric input[type="submit"] {
+	color: #000000 !important;
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
