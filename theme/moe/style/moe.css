@@ -5223,7 +5223,17 @@ li.section div.summary {
     position:fixed;
     left:6%;
     z-index: 99999999;
+	background-color: #5a5160;
+	color: #fefae0 !important;
+	font-size: 18px;
+	font-weight: bolder;
+	background-image: url([[pix:theme|icons/clock]]);
+    background-repeat: no-repeat;
+	background-size: 22px;
+	background-position: 5% 50%;
+	padding-left: 35px;
 }
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
