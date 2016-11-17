@@ -31,6 +31,14 @@ $functions = array(
         'type'        => 'write',
         'ajax'        => true
     ),
+    'moe_wiki_create_ver' => array(
+        'classname'   => 'mod_moewiki_external',
+        'methodname'  => 'create_version',
+        'classpath'   => 'mod/moewiki/externallib.php',
+        'description' => 'Save anotaion to the DB',
+        'type'        => 'write',
+        'ajax'        => true
+    ),
     'moe_wiki_delete' => array(
         'classname'   => 'mod_moewiki_external',
         'methodname'  => 'delete',
@@ -70,6 +78,7 @@ $services = array(
         'functions' => array(
             'moe_wiki_search',
             'moe_wiki_create',
+            'moe_wiki_create_ver',
             'moe_wiki_delete',
             'moe_wiki_update',
             'moe_wiki_resolved',

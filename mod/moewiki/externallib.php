@@ -426,4 +426,7 @@ class mod_moewiki_external extends external_api
             'username' => new external_value(PARAM_TEXT),
         ));
     }
+    public static function create_version(){
+        
+    }
 }

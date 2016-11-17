@@ -963,6 +963,7 @@ function moewiki_convert_content($content, $subwiki, $cm, $internallinks = null,
     // already handled manually.
     $options = moewiki_format_text_options();
     $options->para = false;
+    $options->noclean=true;
     $addwrapperdivs = true;
     if (strpos($content, '<div class="moewiki_content">') !== false) {
         // Stop adding text wrapper divs when already in data.

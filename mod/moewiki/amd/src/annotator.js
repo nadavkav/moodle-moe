@@ -15345,7 +15345,48 @@ Highlighter.prototype.destroy = function () {
             $(el).remove();
         });
 };
+Highlighter.prototype.drawnewannotation = function(annotation)  {
+	var normedRanges = [];
 
+    for (var i = 0, ilen = annotation.ranges.length; i < ilen; i++) {
+        var r = reanchorRange(annotation.ranges[i], this.element);
+        if (r !== null) {
+            normedRanges.push(r);
+        }
+    }
+
+    var hasLocal = (typeof annotation._local !== 'undefined' &&
+                    annotation._local !== null);
+    if (!hasLocal) {
+        annotation._local = {};
+    }
+    var hasHighlights = (typeof annotation._local.highlights !== 'undefined' &&
+                         annotation._local.highlights === null);
+    if (!hasHighlights) {
+        annotation._local.highlights = [];
+    }
+
+    for (var j = 0, jlen = normedRanges.length; j < jlen; j++) {
+        var normed = normedRanges[j];
+        $.merge(
+            annotation._local.highlights,
+            highlightRange(normed, this.options.highlightClass)
+        );
+    }
+
+    
+
+    // Add a data attribute for annotation id if the annotation has one
+    if (typeof annotation.id !== 'undefined' && annotation.id !== null) {
+        $(annotation._local.highlights)
+            .attr('data-annotation-id', annotation.id);
+    }
+    
+    // Save the annotation data on each highlighter element.
+    $("[data-annotation-id=" + annotation.id +"]").data('annotation', annotation);
+
+    return annotation._local.highlights;
+}
 // Public: Draw highlights for all the given annotations
 //
 // annotations - An Array of annotation Objects for which to draw highlights.
@@ -15412,20 +15453,20 @@ Highlighter.prototype.draw = function (annotation) {
 
     for (var j = 0, jlen = normedRanges.length; j < jlen; j++) {
         var normed = normedRanges[j];
-        $.merge(
+       /* $.merge(
             annotation._local.highlights,
             highlightRange(normed, this.options.highlightClass)
-        );
+        );*/
     }
 
     // Save the annotation data on each highlighter element.
-    $(annotation._local.highlights).data('annotation', annotation);
+    $("[data-annotation-id=" + annotation.id +"]").data('annotation', annotation);
 
     // Add a data attribute for annotation id if the annotation has one
-    if (typeof annotation.id !== 'undefined' && annotation.id !== null) {
+    /*if (typeof annotation.id !== 'undefined' && annotation.id !== null) {
         $(annotation._local.highlights)
             .attr('data-annotation-id', annotation.id);
-    }
+    }*/
 
     return annotation._local.highlights;
 };

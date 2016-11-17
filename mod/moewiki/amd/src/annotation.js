@@ -60,10 +60,13 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 
 		    var storage = {
 					create : function(annotation) {
-						if(typeof annotation === 'undefined' || annotation === null){
-							annotation = {};
-						}
-						return this.ajaxcall('create', annotation);
+						var result = this.ajaxcall('create', annotation);
+						result.then(function(annotation){
+							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.moewiki_content'));
+							Highlighter.drawnewannotation(annotation);
+						});
+						this.ajaxcall('create_ver', result});
+						return result;
 					},
 					query : function(wikiid){
 						return this.search(wikiid);
