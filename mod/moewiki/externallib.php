@@ -429,15 +429,43 @@ class mod_moewiki_external extends external_api
     
     public static function create_version_parameters(){
         return new external_function_parameters(array(
-            'text' => new external_value(PARAM_TEXT),
+            'text' => new external_value(PARAM_RAW),
+            'wiki_id' => new external_value(PARAM_RAW),
         ));
     }
     
-    public static function create_version($text){
-        moewiki_save_new_version_section();
+    public static function create_version($text,$wiki_id){
+        $id=$wiki_id;
+        if (!$cm = get_coursemodule_from_id('moewiki', $id)) {
+            print_error('invalidcoursemodule');
+        } 
+        $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+        if (!$moewiki = $DB->get_record('moewiki', array('id' => $cm->instance))) {
+            print_error('invalidcoursemodule');
+        }
+        if (!$subwiki->canedit) {
+            print_error('You do not have permission to edit this wiki');
+        }
+        $pageversion = moewiki_get_current_page($subwiki, $pagename, MOEWIKI_GETPAGE_CREATE);
+        $sectiondetails = moewiki_get_section_details($pageversion->xhtml, $section);
+        $content = null;
+        $formdata = null;
+        if ($formdata = $mform->get_data()) {
+            if ($content = $formdata->content['text']) {
+                // Check if they used the plaintext editor, if so fixup linefeeds
+                if ((isset($formdata->content['format'])) && ($formdata->content['format'] != FORMAT_HTML)) {
+                    $content = moewiki_plain_to_xhtml($content);
+                }
+                $content = moewiki_format_xhtml_a_bit($content); // Tidy up HTML
+            }
+        }
+        moewiki_save_new_version_section($course, $cm, $moewiki, $subwiki, $pagename, $pageversion->xhtml, $formdata->content['text'], $sectiondetails, $formdata);   
+        return [true];
     }
     
     public static function create_version_returns(){
-        
+         return new external_function_parameters(array(
+           new external_value(PARAM_BOOL),
+        ));
     }
 }

@@ -7,6 +7,7 @@
  */
 
 define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize'], function($, annotator, ajax, autosize) {
+	var wikiid;
 	var annotation = {
 		merkannotaion : function(params) {
 			function Remarks() {
@@ -32,6 +33,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 			app.include(this.moodlestorage);
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.wikiid);
+			     wikiid = params.wikiid;
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -64,12 +66,16 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 						result.then(function(annotation){
 							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.moewiki_content'));
 							Highlighter.drawnewannotation(annotation);
+							args = {
+								    text: $('.moewiki_content').html(),
+								    wikidid: wikiid
+							};
+							ajax.call([{
+								'methodname': 'moe_wiki_create_ver',
+								'args':args
+							}]);
 						});
-						args = {
-						    text: $('.moewiki_content').html(),
-						    wikidid: params.wikiid
-						};
-						this.ajaxcall('create_ver', args});
+						
 						return result;
 					},
 					query : function(wikiid){
@@ -109,5 +115,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 		    };
 		}
 	};
+	
+	
 	return annotation;
 });
