@@ -35,7 +35,7 @@ $functions = array(
         'classname'   => 'mod_moewiki_external',
         'methodname'  => 'create_version',
         'classpath'   => 'mod/moewiki/externallib.php',
-        'description' => 'Save anotaion to the DB',
+        'description' => 'create new wiki version when add new annotation',
         'type'        => 'write',
         'ajax'        => true
     ),

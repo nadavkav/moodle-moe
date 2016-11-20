@@ -65,7 +65,11 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.moewiki_content'));
 							Highlighter.drawnewannotation(annotation);
 						});
-						this.ajaxcall('create_ver', result});
+						args = {
+						    text: $('.moewiki_content').html(),
+						    wikidid: params.wikiid
+						};
+						this.ajaxcall('create_ver', args});
 						return result;
 					},
 					query : function(wikiid){

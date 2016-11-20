@@ -426,7 +426,18 @@ class mod_moewiki_external extends external_api
             'username' => new external_value(PARAM_TEXT),
         ));
     }
-    public static function create_version(){
+    
+    public static function create_version_parameters(){
+        return new external_function_parameters(array(
+            'text' => new external_value(PARAM_TEXT),
+        ));
+    }
+    
+    public static function create_version($text){
+        moewiki_save_new_version_section();
+    }
+    
+    public static function create_version_returns(){
         
     }
 }
