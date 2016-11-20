@@ -3422,25 +3422,12 @@ background-color
 	-webkit-border-image: url([[pix:theme|bg/btn2bg]]) 30;
 	border-image: url([[pix:theme|bg/btn2bg]]) 30;
 }
-
-#page-mod-glossary-view #intro {
-	height: 10px;
-}
-
 #wrapper>#page-header {
 	background-repeat: no-repeat;
 	background-size: cover !important;
 	background-position-x: right;
 	background-position-y: bottom;
 }
-
-@media ( max-width : 980px) {
-	#wrapper>#page-header {
-		background-size: cover !important;
-		background-position-x: center;
-	}
-}
-
 #page-mod-tab-view .TabbedPanelsContentGroup {
 	background-color: #e6f5dc;
 	border-color: #cbbabe;
@@ -5239,6 +5226,9 @@ input[type="submit"][disabled] {
 input[type="submit"][disabled]:HOVER {
 	font-weight: bolder;
 }
+#page-mod-glossary-view #intro .no-overflow {
+	width: 100%;
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
@@ -5306,6 +5296,12 @@ input[type="submit"][disabled]:HOVER {
     .path-mod.path-mod-moewiki  .annotator-outer{
         right: 400px;
         width: 265px;
+    }
+}
+@media ( max-width : 980px) {
+    #wrapper>#page-header {
+        background-size: cover !important;
+        background-position-x: center;
     }
 }
 @media ( max-width : 768px) {
