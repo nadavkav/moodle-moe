@@ -5233,7 +5233,12 @@ li.section div.summary {
 	background-position: 5% 50%;
 	padding-left: 35px;
 }
-
+input[type="submit"][disabled] {
+	background-color: #8e9696;
+}
+input[type="submit"][disabled]:HOVER {
+	font-weight: bolder;
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
