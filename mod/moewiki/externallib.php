@@ -255,12 +255,13 @@ class mod_moewiki_external extends external_api
     
     public static function reopen_parameters () {
         return new external_function_parameters(array(
-            'id' => new external_value(PARAM_INT,'annotation_id'),
+            'id'        => new external_value(PARAM_INT,'annotation_id'),
+            'subwikiid' => new external_value(PARAM_INT),
         ));
     }
     
-    public static function reopen($id) {
-        return array('success' => moewiki_reopen_annotation($id));
+    public static function reopen($id, $subwikiid) {
+        return array('success' => moewiki_reopen_annotation($id, $subwikiid));
     }
     
     public static function reopen_returns(){
@@ -429,13 +430,18 @@ class mod_moewiki_external extends external_api
     
     public static function create_version_parameters(){
         return new external_function_parameters(array(
-            'text' => new external_value(PARAM_RAW),
-            'wiki_id' => new external_value(PARAM_RAW),
+            'text'     => new external_value(PARAM_RAW),
+            'wikiid'   => new external_value(PARAM_INT),
+            'userid'   => new external_value(PARAM_INT),
+            'pagename' => new external_value(PARAM_TEXT),
+            'groupid'  => new external_value(PARAM_INT),
+            'id'       => new external_value(PARAM_INT),
         ));
     }
     
-    public static function create_version($text,$wiki_id){
-        $id=$wiki_id;
+    public static function create_version($text, $wikiid, $userid, $pagename = null, $groupid = 0, $id){ 
+        global $DB;
+        
         if (!$cm = get_coursemodule_from_id('moewiki', $id)) {
             print_error('invalidcoursemodule');
         } 
@@ -443,23 +449,14 @@ class mod_moewiki_external extends external_api
         if (!$moewiki = $DB->get_record('moewiki', array('id' => $cm->instance))) {
             print_error('invalidcoursemodule');
         }
+        $context = context_module::instance($cm->id);
+        $subwiki = moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid, true);
         if (!$subwiki->canedit) {
             print_error('You do not have permission to edit this wiki');
         }
         $pageversion = moewiki_get_current_page($subwiki, $pagename, MOEWIKI_GETPAGE_CREATE);
-        $sectiondetails = moewiki_get_section_details($pageversion->xhtml, $section);
-        $content = null;
-        $formdata = null;
-        if ($formdata = $mform->get_data()) {
-            if ($content = $formdata->content['text']) {
-                // Check if they used the plaintext editor, if so fixup linefeeds
-                if ((isset($formdata->content['format'])) && ($formdata->content['format'] != FORMAT_HTML)) {
-                    $content = moewiki_plain_to_xhtml($content);
-                }
-                $content = moewiki_format_xhtml_a_bit($content); // Tidy up HTML
-            }
-        }
-        moewiki_save_new_version_section($course, $cm, $moewiki, $subwiki, $pagename, $pageversion->xhtml, $formdata->content['text'], $sectiondetails, $formdata);   
+
+        moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $text, -1, -1, -1, null, null);
         return [true];
     }
     

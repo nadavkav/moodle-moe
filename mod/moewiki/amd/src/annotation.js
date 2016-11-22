@@ -8,6 +8,10 @@
 
 define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize'], function($, annotator, ajax, autosize) {
 	var wikiid;
+	var pagename;
+	var userid;
+	var groupid;
+	var moduleid;
 	var annotation = {
 		merkannotaion : function(params) {
 			function Remarks() {
@@ -34,6 +38,10 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.wikiid);
 			     wikiid = params.wikiid;
+			     pagename = params.pagename;
+			     userid = params.userid;
+			     groupid = params.groupid;
+			     moduleid = params.id;
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -59,21 +67,27 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 		    options.onError = options.onError || function (msg) {
 		        notify(msg, 'error');
 		    };
-
+		    function savenewversion (){
+				args = {
+					    'text': $('.moewiki_content').html(),
+					    'wikiid': wikiid,
+					    'pagename': pagename,
+					    'userid': userid,
+					    'groupid': groupid,
+					    'id': moduleid
+				};
+				ajax.call([{
+					'methodname': 'moe_wiki_create_ver',
+					'args':args
+				}]);
+		    }
 		    var storage = {
 					create : function(annotation) {
 						var result = this.ajaxcall('create', annotation);
 						result.then(function(annotation){
 							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.moewiki_content'));
 							Highlighter.drawnewannotation(annotation);
-							args = {
-								    text: $('.moewiki_content').html(),
-								    wikidid: wikiid
-							};
-							ajax.call([{
-								'methodname': 'moe_wiki_create_ver',
-								'args':args
-							}]);
+							savenewversion();
 						});
 						
 						return result;
@@ -87,14 +101,21 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 						});
 					},
 					'delete' : function(annotation){
-						return this.ajaxcall('delete',{'id' : annotation.id});
+						var result = this.ajaxcall('delete',{'id' : annotation.id});
+						result.then(function(annotation){
+							savenewversion();
+						});
+						return result;
 					},
 					update: function(annotation){
 						annotation.permissions['delete'] = [annotation.permissions['delete'][0]];
-						return this.ajaxcall('update', annotation);
+						var result = this.ajaxcall('update', annotation);
+						return result;
 					},
 					resolved: function(annotation){
 						this.ajaxcall('resolved',{'id' : annotation.id});
+						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl').addClass('annotator-hl-resolved');
+						savenewversion();
 					},
 					ajaxcall: function(action,obj){
 						var data = {};

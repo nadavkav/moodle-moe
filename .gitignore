@@ -38,3 +38,4 @@ atlassian-ide-plugin.xml
 /node_modules/
 /.dbeaver-data-sources.xml
 /Scripts/
+/dummy.php
