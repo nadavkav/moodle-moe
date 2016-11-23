@@ -16,7 +16,9 @@ define(['jquery', 'core/ajax'],function($, ajax){
 				var obj = {};
 				var button = $(this);
 				obj.id = button.attr('id');
-				obj.pagename = params.pagename;
+				obj.pagename = button.parent().siblings('.pagename').text();
+				obj.subwiki = params.subwiki;
+				obj.moduleid = params.moduleid;
 				var data = {};
 				data.methodname = 'moe_wiki_reopen';
 				data.args = obj;

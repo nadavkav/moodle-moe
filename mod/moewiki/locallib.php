@@ -77,7 +77,7 @@ define('MOEWIKI_PARTICIPATION_PERPAGE', 100);
 // User preference
 define('MOEWIKI_PREF_HIDEANNOTATIONS', 'moewiki_hide_annotations');
 
-function moewiki_reopen_annotation ($id = null) {
+function moewiki_reopen_annotation ($id = null, $subwiki, $pagename, $moduleid) {
     global $DB;
     
     if($id === null) {
@@ -96,9 +96,29 @@ function moewiki_reopen_annotation ($id = null) {
     } elseif ($parent = $DB->get_record('moewiki_annotations', array('id' => $id),'parent')) {
         if ($parent->parent != null){
             $parent = $DB->get_record('moewiki_annotations', array('id' => $parent->parent));
-            moewiki_reopen_annotation($parent->id);
+            moewiki_reopen_annotation($parent->id, $subwiki, $pagename);
         }
     }
+    if(is_array($subwiki)) {
+        $subwiki = (object) $subwiki;
+    }
+    $pageversion = moewiki_get_current_page($subwiki, $pagename);
+    $doc = new DOMDocument();
+    $doc->loadHTML(mb_convert_encoding($pageversion->xhtml, 'HTML-ENTITIES', 'UTF-8'));
+    $finder = new DOMXPath($doc);
+    $node = $finder->query('//*[attribute::data-annotation-id="' . $annotat->id .'"]');
+    foreach ($node as $anotationnode) {
+        $anotationnode->setAttribute('class', 'annotator-hl');
+    }
+    if (!$cm = get_coursemodule_from_id('moewiki', $moduleid)) {
+        print_error('invalidcoursemodule');
+    }
+    $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+    if (!$moewiki = $DB->get_record('moewiki', array('id' => $cm->instance))) {
+        print_error('invalidcoursemodule');
+    }
+    moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $doc->saveHTML(), -1, -1, -1, null, null);
+    
     return true;
 }
 

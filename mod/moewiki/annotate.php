@@ -111,6 +111,7 @@ print '</div>';
 $PAGE->requires->js_call_amd('mod_moewiki/resolved', 'reopen',array(array(
     'pagename' => $pagename,
     'subwiki'  => $subwiki,
+    'moduleid'       => $id,
 )));
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);
