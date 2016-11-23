@@ -1297,6 +1297,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         $context->namestr = get_string('username');
         $context->annotationstr = get_string('annotations','mod_moewiki');
         $context->actionstr = get_string('action');
+        $context->pagenamestr = get_string('pagename', 'mod_moewiki');
         $context->reopen = get_string('reopen','mod_moewiki');
         $user = ($user != 0) ? $user : $USER->id;
         $pages = $DB->get_records('moewiki_pages', array('subwikiid' => $subwiki->id));
@@ -1315,6 +1316,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
             $ann->name = $user->firstname . ' ' . $user->lastname;
             $ann->annotation = $annotat->text;
             $ann->id = $annotat->id;
+            $ann->pagename = $DB->get_field('moewiki_pages', 'title', array('id' => $annotat->pageid));
             $context->annotations[] = $ann;
         }
         return $this->render_from_template('mod_moewiki/annotation_resolved', $context);

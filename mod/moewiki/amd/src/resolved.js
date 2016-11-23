@@ -11,11 +11,12 @@ define(['jquery', 'core/ajax'],function($, ajax){
 				
 	}
 		
-	Resolved.prototype.reopen = function (){
+	Resolved.prototype.reopen = function (params){
 			$('#resolvedAnnotation button').click(function(){
 				var obj = {};
 				var button = $(this);
 				obj.id = button.attr('id');
+				obj.pagename = params.pagename;
 				var data = {};
 				data.methodname = 'moe_wiki_reopen';
 				data.args = obj;

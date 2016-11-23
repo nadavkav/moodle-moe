@@ -256,12 +256,23 @@ class mod_moewiki_external extends external_api
     public static function reopen_parameters () {
         return new external_function_parameters(array(
             'id'        => new external_value(PARAM_INT,'annotation_id'),
-            'subwikiid' => new external_value(PARAM_INT),
+            'subwikiid' => new external_single_structure(array(
+                'annotation'  => new external_value(PARAM_INT),
+                'canannotate' => new external_value(PARAM_BOOL),
+                'canedit'     => new external_value(PARAM_BOOL),
+                'defaultwiki' => new external_value(PARAM_BOOL),
+                'groupid'     => new external_value(PARAM_INT),
+                'id'          => new external_value(PARAM_INT),
+                'magic'       => new external_value(PARAM_FLOAT),
+                'userid'      => new external_value(PARAM_INT), 
+                'wikiid'      => new external_value(PARAM_INT),
+            )),
+            'pagename'  => new external_value(PARAM_RAW),
         ));
     }
     
     public static function reopen($id, $subwikiid) {
-        return array('success' => moewiki_reopen_annotation($id, $subwikiid));
+        return array('success' => moewiki_reopen_annotation($id, $subwikiid, $pagename));
     }
     
     public static function reopen_returns(){

@@ -1,10 +1,10 @@
 <table id="resolvedAnnotation">
     <thead>
-        <tr><th>{{datestr}}</th><th>{{namestr}}</th><th>{{annotationstr}}</th><th>{{actionstr}}</th></tr>
+        <tr><th>{{datestr}}</th><th>{{namestr}}</th><th>{{annotationstr}}</th><th>{{pagenamestr}}</th><th>{{actionstr}}</th></tr>
     </thead>
     <tbody>
     {{#annotations}}
-        <tr><td>{{date}}</td><td>{{name}}</td><td>{{annotation}}</td><td><button id="{{id}}">{{reopen}}</button></td></tr>
+        <tr><td>{{date}}</td><td>{{name}}</td><td>{{annotation}}</td><td>{{pagename}}</td><td><button id="{{id}}">{{reopen}}</button></td></tr>
     {{/annotations}}
     </tbody>
 </table>
