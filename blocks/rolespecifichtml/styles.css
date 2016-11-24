@@ -1,0 +1,8 @@
+
+.block.block_rolespecifichtml .content {
+    padding:0;
+}
+
+.block.block_rolespecifichtml .content .no-overflow {
+    padding:4px;
+}
