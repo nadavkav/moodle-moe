@@ -15,16 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines block metadata
+ * Version details
  *
- * @package    block_quickfindlist
- * @copyright  2010 Onwards Taunton's College, UK
- * @author      Mark Johnson <mark.johnson@tauntons.ac.uk>
+ * @package    block_rolespecifichtml
+ * @category   blocks
+ * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2014072202;
-$plugin->requires = 2010112400;
-$plugin->component = 'block_quickfindlist';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.0.3 (Build: 2014072202)';
+defined('MOODLE_INTERNAL') || die();
+
+$plugin->version   = 2016083100;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2016051900;        // Requires this Moodle version
+$plugin->component = 'block_rolespecifichtml';  // Full name of the plugin (used for diagnostics)
+$plugin->maturity = MATURITY_RC;
+$plugin->release = '3.1.0 (build 2016083100)';
+
+// Non Moodle fields
+// This fields will help overmanagement code builders without forcing upgrade to play
+$plugin->codeversion = 2016083100.00;
+$plugin->codeincrement = 0;
