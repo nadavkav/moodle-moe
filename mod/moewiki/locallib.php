@@ -89,14 +89,8 @@ function moewiki_reopen_annotation ($id = null, $subwiki, $pagename, $moduleid) 
     $annotat->resolved = 0;
     $DB->update_record('moewiki_annotations', $annotat);
     if ($childs = $DB->get_records('moewiki_annotations', array('parent' => $id))){
-        foreach ($childs as $annotat){
-            $annotat->resolved = 0;
-            $DB->update_record('moewiki_annotations', $annotat);
-        }
-    } elseif ($parent = $DB->get_record('moewiki_annotations', array('id' => $id),'parent')) {
-        if ($parent->parent != null){
-            $parent = $DB->get_record('moewiki_annotations', array('id' => $parent->parent));
-            moewiki_reopen_annotation($parent->id, $subwiki, $pagename);
+        foreach ($childs as $child){
+            moewiki_reopen_annotation($child->id, $subwiki, $pagename, $moduleid);
         }
     }
     if(is_array($subwiki)) {

@@ -39,7 +39,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 			     var promise = app.annotations.store.query(params.wikiid);
 			     wikiid = params.wikiid;
 			     pagename = params.pagename;
-			     userid = params.userid;
+			     userid = params.userpage;
 			     groupid = params.groupid;
 			     moduleid = params.id;
 			     promise.then(function(data){
@@ -68,7 +68,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 		        notify(msg, 'error');
 		    };
 		    function savenewversion (){
-				args = {
+				var args = {
 					    'text': $('.moewiki_content').html(),
 					    'wikiid': wikiid,
 					    'pagename': pagename,
@@ -102,7 +102,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 					},
 					'delete' : function(annotation){
 						var result = this.ajaxcall('delete',{'id' : annotation.id});
-						result.then(function(annotation){
+						result.then(function(){
 							savenewversion();
 						});
 						return result;
@@ -114,7 +114,8 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 					},
 					resolved: function(annotation){
 						this.ajaxcall('resolved',{'id' : annotation.id});
-						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl').addClass('annotator-hl-resolved');
+						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl')
+						.addClass('annotator-hl-resolved');
 						savenewversion();
 					},
 					ajaxcall: function(action,obj){
