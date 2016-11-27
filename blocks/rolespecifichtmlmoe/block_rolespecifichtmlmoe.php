@@ -17,18 +17,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * @package   block_rolespecifichtml
+ * @package   block_rolespecifichtmlmoe
  * @category  blocks
- * @author    Valery Fremaux (valery.fremaux@gmail.com)
+ * @author    meir
+ * @original  author  Valery Fremaux (valery.fremaux@gmail.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once($CFG->dirroot.'/lib/filelib.php');
 
-class block_rolespecifichtml extends block_base {
+class block_rolespecifichtmlmoe extends block_base {
 
     public function init() {
-        $this->title = get_string('pluginname', 'block_rolespecifichtml');
+        $this->title = get_string('pluginname', 'block_rolespecifichtmlmoe');
     }
 
     public function applicable_formats() {
@@ -37,7 +38,7 @@ class block_rolespecifichtml extends block_base {
     }
 
     public function specialization() {
-        $this->title = isset($this->config->title) ? format_string($this->config->title) : format_string(get_string('newhtmlblock', 'block_rolespecifichtml'));
+        $this->title = isset($this->config->title) ? format_string($this->config->title) : format_string(get_string('newhtmlblock', 'block_rolespecifichtmlmoe'));
     }
 
     public function instance_allow_multiple() {
@@ -78,7 +79,7 @@ class block_rolespecifichtml extends block_base {
             $this->config = new StdClass();
         }
 
-        $this->config->$tk = file_rewrite_pluginfile_urls(@$this->config->$tk, 'pluginfile.php', $this->context->id, 'block_rolespecifichtml', 'content', null);
+        $this->config->$tk = file_rewrite_pluginfile_urls(@$this->config->$tk, 'pluginfile.php', $this->context->id, 'block_rolespecifichtmlmoe', 'content', null);
         if (is_array($this->config->$tk)) {
             $arr = $this->config->$tk;
             $this->content->text .= !empty($arr['text']) ? format_text($arr['text'], $arr['format'], $filteropt) : '';
@@ -89,7 +90,7 @@ class block_rolespecifichtml extends block_base {
         if (!empty($roleids)) {
             foreach ($roleids as $roleid) {
                 $tk = "text_$roleid";
-                $this->config->$tk = file_rewrite_pluginfile_urls(@$this->config->$tk, 'pluginfile.php', $this->context->id, 'block_rolespecifichtml', 'content', null);
+                $this->config->$tk = file_rewrite_pluginfile_urls(@$this->config->$tk, 'pluginfile.php', $this->context->id, 'block_rolespecifichtmlmoe', 'content', null);
                 if (is_array($this->config->$tk)) {
                     $arr = $this->config->$tk;
                     $this->content->text .= !empty($arr['text']) ? format_text($arr['text'], $arr['format'], $filteropt) : '';
@@ -143,7 +144,7 @@ class block_rolespecifichtml extends block_base {
     public function instance_delete() {
         global $DB;
         $fs = get_file_storage();
-        $fs->delete_area_files($this->context->id, 'block_rolespecifichtml');
+        $fs->delete_area_files($this->context->id, 'block_rolespecifichtmlmoe');
         return true;
     }
 
