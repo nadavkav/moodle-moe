@@ -5229,6 +5229,9 @@ input[type="submit"][disabled]:HOVER {
 #page-mod-glossary-view #intro .no-overflow {
 	width: 100%;
 }
+#page-mod-quiz-report table#attempts .header{
+	text-align: right;	
+}
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
@@ -5311,8 +5314,7 @@ input[type="submit"][disabled]:HOVER {
         width: 265px;
     }
 }
-@media ( max-width : 767px) {
-    
+@media ( max-width : 767px) { 
     .path-mod.path-mod-moewiki  .annotator-outer{
         right: 0px;
         width: 278px;
@@ -5344,5 +5346,4 @@ input[type="submit"][disabled]:HOVER {
         width: 31%;
         margin-left: 4px;
     }
-
 }
