@@ -5368,13 +5368,13 @@ input[type="submit"][disabled]:HOVER {
     padding-top: 13px;
 }
 .Madrich{
-    background-image:  url([[pix:block_rolespecifichtml|Madrich]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
     
 }
 .eye{
-    background-image:  url([[pix:block_rolespecifichtml|Eye]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Eye]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
 .tmicha{
-    background-image:  url([[pix:block_rolespecifichtml|Tmicha]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
