@@ -5803,16 +5803,35 @@ a#choosetheme {
     padding-top: 13px;
 }
 
+.block_rolespecifichtml_main_block {
+    text-align: center;
+    }
+
+.block_rolespecifichtml_button{
+    background-position: 5% 50%, 0 0;
+    background-size: 15%, cover;
+    background-repeat: no-repeat, no-repeat;
+    color: #3c4845 ;
+    font-weight: bolder;
+    text-align:right;
+    display: inline-block;
+    border: 1px solid #89b2ab;
+    min-width: 80%;
+    font-size: 170%;    
+    height: 42px;
+    padding-right: 10px;
+    padding-top: 13px;
+}
 .Madrich{
-    background-image:  url([[pix:block_rolespecifichtml|Madrich]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
     
 }
 .eye{
-    background-image:  url([[pix:block_rolespecifichtml|Eye]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Eye]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
 .tmicha{
-    background-image:  url([[pix:block_rolespecifichtml|Tmicha]]),url([[pix:block_rolespecifichtml|Kaftor_orada]]);
+    background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
 @media screen and (max-width: 480px) {
@@ -5932,6 +5951,7 @@ a#choosetheme {
 
 }
 
+<<<<<<< Upstream, based on alt_master
 @media ( max-width : 311px) {
 	#page-mod-glossary-view .glossarydisplay .entrybox div{
         height: 65px;
