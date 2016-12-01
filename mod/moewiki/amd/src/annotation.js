@@ -101,6 +101,7 @@ define([ 'jquery', 'mod_moewiki/annotator', 'core/ajax', 'mod_moewiki/autosize']
 						});
 					},
 					'delete' : function(annotation){
+						$('[data-annotation-id=' + annotation.id + ']').contents().unwrap();
 						var result = this.ajaxcall('delete',{'id' : annotation.id});
 						result.then(function(){
 							savenewversion();
