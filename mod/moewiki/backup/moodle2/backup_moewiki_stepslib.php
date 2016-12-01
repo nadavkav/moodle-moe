@@ -36,7 +36,7 @@ class backup_moewiki_activity_structure_step extends backup_activity_structure_s
         $userinfo = $this->get_setting_value('userinfo');
 
         $els = array('name', 'subwikis', 'intro', 'editbegin', 'editend', 'annotation',
-                'introformat', 'completionedits', 'completionpages', 'enablewordcount', 'allowimport','template_text');
+                'introformat', 'completionedits', 'completionpages', 'enablewordcount', 'allowimport', 'template_text');
         if (!$userinfo) {
             $els[] = 'template';
         }
@@ -62,21 +62,21 @@ class backup_moewiki_activity_structure_step extends backup_activity_structure_s
             'userpage',
             'userid',
             'created',
-            'parent',            
+            'parent',
             'quote',
             'text',
             'updated',
             'resolved'
         ));
-        $annotations_permissrions = new backup_nested_element('annotations_permissions');
-        $annotation_permissrions = new backup_nested_element('annotations_permiss',array('id'),array(
+        $annotationspermissrions = new backup_nested_element('annotations_permissions');
+        $annotationpermissrions = new backup_nested_element('annotations_permiss', array('id'), array(
             'read_prem',
             'update_prem',
             'delete_prem',
             'admin_prem'
         ));
-        $annotations_ranges = new backup_nested_element('annotations_ranges');
-        $annotation_ranges = new backup_nested_element('annotation_ranges',array('id'),array(
+        $annotationsranges = new backup_nested_element('annotations_ranges');
+        $annotationranges = new backup_nested_element('annotation_ranges', array('id'), array(
             'startoffset',
             'endoffset',
             'start',
@@ -101,12 +101,12 @@ class backup_moewiki_activity_structure_step extends backup_activity_structure_s
 
         $page->add_child($annotations);
         $annotations->add_child($annotation);
-        
-        $annotation->add_child($annotations_permissrions);
-        $annotations_permissrions->add_child($annotation_permissrions);
-        
-        $annotation->add_child($annotations_ranges);
-        $annotations_ranges->add_child($annotation_ranges);
+
+        $annotation->add_child($annotationspermissrions);
+        $annotationspermissrions->add_child($annotationpermissrions);
+
+        $annotation->add_child($annotationsranges);
+        $annotationsranges->add_child($annotationranges);
 
         // Define sources
         $moewiki->set_source_table('moewiki', array('id' => backup::VAR_ACTIVITYID));
@@ -114,18 +114,12 @@ class backup_moewiki_activity_structure_step extends backup_activity_structure_s
         // All these source definitions only happen if we are including user info
         if ($userinfo) {
             $subwiki->set_source_table('moewiki_subwikis', array('wikiid' => backup::VAR_PARENTID));
-
             $page->set_source_table('moewiki_pages', array('subwikiid' => backup::VAR_PARENTID));
-
             $version->set_source_table('moewiki_versions', array('pageid' => backup::VAR_PARENTID));
-
             $link->set_source_table('moewiki_links', array('fromversionid' => backup::VAR_PARENTID));
-
             $annotation->set_source_table('moewiki_annotations', array('pageid' => backup::VAR_PARENTID));
-            
-            $annotation_permissrions->set_source_table('moewiki_annotations_permiss', array('annotationid' => backup::VAR_PARENTID));
-            
-            $annotation_ranges->set_source_table('moewiki_annotations_ranges', array('annotationid' => backup::VAR_PARENTID));
+            $annotationpermissrions->set_source_table('moewiki_annotations_permiss', array('annotationid' => backup::VAR_PARENTID));
+            $annotationranges->set_source_table('moewiki_annotations_ranges', array('annotationid' => backup::VAR_PARENTID));
         }
 
         // Define id annotations

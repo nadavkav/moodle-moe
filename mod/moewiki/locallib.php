@@ -40,8 +40,8 @@ define('MOEWIKI_SUBWIKIS_INDIVIDUAL', 2);
 // locks
 define('MOEWIKI_LOCK_PERSISTENCE', 120);
 define('MOEWIKI_LOCK_RECONFIRM', 60);
-define('MOEWIKI_LOCK_NOJS', 15*60);
-define('MOEWIKI_LOCK_TIMEOUT', 30*60);
+define('MOEWIKI_LOCK_NOJS', 15 * 60);
+define('MOEWIKI_LOCK_TIMEOUT', 30 * 60);
 define('MOEWIKI_SESSION_LOCKS', 'moewikilocks'); // Session variable used to store wiki locks
 
 // format params
@@ -79,22 +79,22 @@ define('MOEWIKI_PREF_HIDEANNOTATIONS', 'moewiki_hide_annotations');
 
 function moewiki_reopen_annotation ($id = null) {
     global $DB;
-    
-    if($id === null) {
+
+    if ($id === null) {
         return false;
     }
-    
+
     $annotat = new stdClass();
     $annotat->id = $id;
     $annotat->resolved = 0;
     $DB->update_record('moewiki_annotations', $annotat);
-    if ($childs = $DB->get_records('moewiki_annotations', array('parent' => $id))){
-        foreach ($childs as $annotat){
+    if ($childs = $DB->get_records('moewiki_annotations', array('parent' => $id))) {
+        foreach ($childs as $annotat) {
             $annotat->resolved = 0;
             $DB->update_record('moewiki_annotations', $annotat);
         }
-    } elseif ($parent = $DB->get_record('moewiki_annotations', array('id' => $id),'parent')) {
-        if ($parent->parent != null){
+    } else if ($parent = $DB->get_record('moewiki_annotations', array('id' => $id), 'parent')) {
+        if ($parent->parent != null) {
             $parent = $DB->get_record('moewiki_annotations', array('id' => $parent->parent));
             moewiki_reopen_annotation($parent->id);
         }
@@ -215,7 +215,7 @@ function moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid
                 return $subwiki;
             }
             if ($create) {
-                $subwiki =  moewiki_create_subwiki($moewiki, $cm, $course, null, $groupid);
+                $subwiki = moewiki_create_subwiki($moewiki, $cm, $course, null, $groupid);
                 moewiki_set_extra_subwiki_fields($subwiki, $moewiki, $context, $othergroup);
                 moewiki_init_pages($course, $cm, $moewiki, $subwiki);
                 return $subwiki;
@@ -266,7 +266,7 @@ function moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid
             }
             // Create one
             if ($create) {
-                $subwiki =  moewiki_create_subwiki($moewiki, $cm, $course, $userid);
+                $subwiki = moewiki_create_subwiki($moewiki, $cm, $course, $userid);
                 moewiki_set_extra_subwiki_fields($subwiki, $moewiki, $context, $otheruser, !$otheruser);
                 moewiki_init_pages($course, $cm, $moewiki, $subwiki);
                 return $subwiki;
@@ -306,11 +306,11 @@ function moewiki_create_subwiki($moewiki, $cm, $course, $userid = null, $groupid
  */
 function moewiki_init_pages($course, $cm, $moewiki, $subwiki) {
     global $CFG;
-    
+
     if (is_null($moewiki->template) && !$moewiki->template_text) {
         return;
     }
-    
+
     if ($moewiki->template_text) {
         $title = null;
         $xhtml = $moewiki->template_text;
@@ -333,7 +333,7 @@ function moewiki_init_pages($course, $cm, $moewiki, $subwiki) {
                     $xmlfile = $fs->get_file($context->id, 'mod_moewiki', 'template', $moewiki->id, '/', $xmlfilename);
                 }
             }
-            
+
             $content = $xmlfile->get_content();
             $xml = new DOMDocument();
             $xml->loadXML($content);
@@ -393,9 +393,9 @@ function moewiki_init_pages($course, $cm, $moewiki, $subwiki) {
                 if ($xhtml === null) {
                     moewiki_error('Failed to load wiki template - required &lt;xhtml>.');
                 }
-                
+
                 $newverid = moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $title, $xhtml, - 1, - 1, - 1, true);
-                
+
                 // Copy any images or attachments associated with old version id.
                 if ($oldfiles = $fs->get_directory_files($context->id, 'mod_moewiki', 'template', $moewiki->id, "/$oldversionid/")) {
                     foreach ($oldfiles as $oldfile) {
@@ -706,7 +706,7 @@ function moewiki_get_current_page($subwiki, $pagename, $option = MOEWIKI_GETPAGE
     global $DB;
 
     $params = array($subwiki->id);
-    $pagename_s = 'UPPER(p.title) = ?';
+    $pagenames = 'UPPER(p.title) = ?';
     $params[] = core_text::strtoupper($pagename);
 
     $jointype = $option == MOEWIKI_GETPAGE_REQUIREVERSION ? 'JOIN' : 'LEFT JOIN';
@@ -719,7 +719,7 @@ function moewiki_get_current_page($subwiki, $pagename, $option = MOEWIKI_GETPAGE
             FROM {moewiki_pages} p
             $jointype {moewiki_versions} v ON p.currentversionid = v.id
             LEFT JOIN {user} u ON v.userid = u.id
-            WHERE p.subwikiid = ? AND $pagename_s";
+            WHERE p.subwikiid = ? AND $pagenames";
 
     $pageversion = $DB->get_record_sql($sql, $params);
     if (!$pageversion) {
@@ -887,9 +887,9 @@ function moewiki_get_prevnext_version_details($pageversion) {
  */
 function moewiki_recent_span($time) {
     $now = time();
-    if ($now-$time < 5*60) {
+    if ($now - $time < 5 * 60) {
         $category = 'ouw_recenter';
-    } else if ($now - $time < 4*60*60) {
+    } else if ($now - $time < 4 * 60 * 60) {
         $category = 'ouw_recent';
     } else {
         $category = 'ouw_recentnot';
@@ -911,12 +911,12 @@ function moewiki_internal_re_plain_heading_bits($matches) {
 
 function moewiki_internal_re_internallinks($matches) {
     // Used to replace links when displaying wiki all one one page
-    global $moewiki_internallinks;
+    global $moewikiinternallinks;
 
     $details = moewiki_get_wiki_link_details($matches[1]);
 
     // See if it matches a known page
-    foreach ($moewiki_internallinks as $indexpage) {
+    foreach ($moewikiinternallinks as $indexpage) {
         if (($details->page === '' && $indexpage->title === '') ||
             (isset($indexpage->title) && strtoupper($indexpage->title) === strtoupper($details->page)) ) {
             // Page matches, return link
@@ -929,14 +929,13 @@ function moewiki_internal_re_internallinks($matches) {
 }
 
 function moewiki_internal_re_wikilinks($matches) {
-    global $moewiki_wikilinks;
+    global $moewikiwikilinks;
 
     $details = moewiki_get_wiki_link_details($matches[1]);
     return '<a class="ouw_wikilink" href="view.php?' .
-        moewiki_display_wiki_parameters('', $moewiki_wikilinks->subwiki,
-            $moewiki_wikilinks->cm) .
-        ($details->page !== ''
-            ? '&amp;page=' . htmlspecialchars(urlencode($details->page)) : '') .
+        moewiki_display_wiki_parameters('', $moewikiwikilinks->subwiki,
+            $moewikiwikilinks->cm) .
+        ($details->page !== '' ? '&amp;page=' . htmlspecialchars(urlencode($details->page)) : '') .
         '">' . $details->title . '</a>';
 }
 
@@ -947,14 +946,14 @@ function moewiki_convert_content($content, $subwiki, $cm, $internallinks = null,
     // links.
 
     // When displayed on one page
-    global $moewiki_internallinks, $moewiki_wikilinks;
+    global $moewikiinternallinks, $moewikiwikilinks;
 
     // Ordinary [[links]]
     if ($internallinks) {
-        $moewiki_internallinks = $internallinks;
+        $moewikiinternallinks = $internallinks;
         $function = 'moewiki_internal_re_internallinks';
     } else {
-        $moewiki_wikilinks = (object) array('subwiki' => $subwiki, 'cm' => $cm);
+        $moewikiwikilinks = (object) array('subwiki' => $subwiki, 'cm' => $cm);
         $function = 'moewiki_internal_re_wikilinks';
     }
     $content = preg_replace_callback(MOEWIKI_LINKS_SQUAREBRACKETS, $function, $content);
@@ -1196,7 +1195,7 @@ function moewiki_is_page_locked($pageid) {
         if ($lock->userid == $USER->id && $timeoutok) {
             // Cool, it's our lock.
             return false;
-        } else if (time()-$lock->seenat < MOEWIKI_LOCK_PERSISTENCE && $timeoutok) {
+        } else if (time() - $lock->seenat < MOEWIKI_LOCK_PERSISTENCE && $timeoutok) {
             return true;
         }
     }
@@ -1227,7 +1226,7 @@ function moewiki_obtain_lock($moewiki, $pageid) {
             // Cool, it's our lock, do nothing except remember it in session
             $lockid = $lock->id;
             $alreadyownlock = true;
-        } else if (time()-$lock->seenat < MOEWIKI_LOCK_PERSISTENCE && $timeoutok) {
+        } else if (time() - $lock->seenat < MOEWIKI_LOCK_PERSISTENCE && $timeoutok) {
             return array(false, $lock);
         } else {
             // Not locked any more. Get rid of the old lock record.
@@ -1255,7 +1254,7 @@ function moewiki_obtain_lock($moewiki, $pageid) {
 
     // Store lock information in session so we can clear it later
     if (!array_key_exists(MOEWIKI_SESSION_LOCKS, $_SESSION)) {
-            $_SESSION[MOEWIKI_SESSION_LOCKS]=array();
+            $_SESSION[MOEWIKI_SESSION_LOCKS] = array();
     }
     $_SESSION[MOEWIKI_SESSION_LOCKS][$pageid] = $lockid;
     $lockdata = new StdClass;
@@ -1413,14 +1412,14 @@ function moewiki_get_subwiki_index($subwikiid, $limitfrom = '', $limitnum = '') 
  *
  * return course_module object
  */
-function moewiki_get_cm($pageid){
+function moewiki_get_cm($pageid) {
     global $DB;
 
-    if(is_number($pageid)){
+    if (is_number($pageid)) {
         $page = $DB->get_record('moewiki_pages', array('id' => (int)$pageid));
         $subwiki = $DB->get_record('moewiki_subwikis', array('id' => $page->subwikiid));
         $moewiki = $DB->get_record('moewiki', array('id' => $subwiki->wikiid));
-        list($course, $cm) = get_course_and_cm_from_instance($moewiki->id, 'moewiki',$moewiki->course);
+        list($course, $cm) = get_course_and_cm_from_instance($moewiki->id, 'moewiki', $moewiki->course);
         return $cm;
     } else {
         throw new moodle_exception('invalid param');
@@ -1768,7 +1767,7 @@ function moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $
         $formdata = null, $revertversionid = null, $importversionid = null) {
 
     global $DB, $USER;
-    global $moewikiinternalre, $moewiki_count; // Nasty but I can't think of a better way!
+    global $moewikiinternalre, $moewikicount; // Nasty but I can't think of a better way!
 
     $transaction = $DB->start_delegated_transaction();
 
@@ -1803,7 +1802,7 @@ function moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $
     // List all headings that already have IDs, to check for duplicates
     $matches = array();
     preg_match_all('|<h[1-9] id="ouw_s(.*?)">(.*?)</h[1-9]>|',
-        $content, $matches, PREG_SET_ORDER|PREG_OFFSET_CAPTURE);
+        $content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
     // Organise list by ID
     $byid = array();
@@ -1858,7 +1857,7 @@ function moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $
     }
 
     // Replace existing empty headings with an ID including version count plus another index
-    $moewiki_count = 0;
+    $moewikicount = 0;
     $moewikiinternalre = new stdClass();
     $moewikiinternalre->version = $versionnumber;
     $moewikiinternalre->count = 0;
@@ -1971,7 +1970,7 @@ function moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $
     // Note that we used to support CamelCase links but have removed support because:
     // 1. Confusing: students type JavaScript or MySpace and don't expect it to become a link
     // 2. Not accessible: screenreaders cannot cope with run-together words, and
-    //    dyslexic students can have difficulty reading them
+    // dyslexic students can have difficulty reading them
 
     // External links
     preg_match_all('/<a [^>]*href=(?:(?:\'(.*?)\')|(?:"(.*?))")/',
@@ -2099,7 +2098,7 @@ function moewiki_get_wiki_link_details($wikilink) {
     $rawtitle = null;
     $bar = strpos($wikilink, '|');
     if ($bar !== false) {
-        $rawtitle = trim(substr($wikilink, $bar+1));
+        $rawtitle = trim(substr($wikilink, $bar + 1));
         $wikilink = substr($wikilink, 0, $bar);
     }
 
@@ -2219,7 +2218,7 @@ function moewiki_format_xhtml_a_bit($content) {
     // 1. Replace all (possibly multiple) whitespace with single spaces
     try {
         $content = preg_replace('/\s+/u', ' ', $content);
-    } catch(moodle_exception $e) {
+    } catch (moodle_exception $e) {
         // u modifier will throw error if invalid utf8 sent - fallback.
         $content = preg_replace('/\s+/', ' ', $content);
     }
@@ -2671,18 +2670,18 @@ function moewiki_internal_position_sort($a, $b) {
 /**
  * Cleans up the annotation tags
  *
- * @param $updated_annotations
+ * @param $updatedannotations
  * @param string &$xhtml A reference to the subwiki xhtml
  * @return bool $result
  */
-function moewiki_cleanup_annotation_tags($updated_annotations, &$xhtml) {
+function moewiki_cleanup_annotation_tags($updatedannotations, &$xhtml) {
     $result = false;
     $matches = array();
     $pattern = '~<span\b.id=\"annotation([0-9].+?)\"[^>]*>(.*?)</span>~';
 
     preg_match_all($pattern, $xhtml, $matches);
     foreach ($matches[1] as $match) {
-        if (!array_key_exists($match, $updated_annotations)) {
+        if (!array_key_exists($match, $updatedannotations)) {
             $deletepattern = '~<span\b.id=\"annotation'.$match.'\">.*?</span>~';
             $xhtml = preg_replace($deletepattern, '', $xhtml);
             $result = true;
@@ -2744,17 +2743,16 @@ function moewiki_is_page_editing_locked($pageid) {
  * @return string $result Contains the html for the form
  */
 function moewiki_display_lock_page_form($pageversion, $cmid, $pagename) {
-    $result='';
+    $result = '';
 
-    $genericformdetails ='<form method="get" action="lock.php">
+    $genericformdetails = '<form method="get" action="lock.php">
     <div class="moewiki_lock_div">
     <input type="hidden" name="ouw_pageid" value="'.$pageversion->pageid.'" />
     <input type="hidden" name="id" value="'.$cmid.'" />';
     if (!empty($pagename)) {
         $genericformdetails .= '<input type="hidden" name="page" value="' . $pagename . '" />';
     }
-    $buttonvalue = ($pageversion->locked == '1') ?  get_string('unlockpage', 'moewiki') :
-            get_string('lockpage', 'moewiki');
+    $buttonvalue = ($pageversion->locked == '1') ? get_string('unlockpage', 'moewiki') : get_string('lockpage', 'moewiki');
 
     $result .= '<div id="moewiki_lock">'.
     $genericformdetails.
@@ -2778,8 +2776,8 @@ function moewiki_print_editlock($lock, $moewiki) {
     // Prepare the warning about lock without JS...
     $a = new StdClass;
     $a->now = userdate(time(), get_string('strftimetime'));
-    $a->minutes = (int)(MOEWIKI_LOCK_NOJS/60);
-    $a->deadline = userdate(time() + $a->minutes*60, get_string('strftimetime'));
+    $a->minutes = (int)(MOEWIKI_LOCK_NOJS / 60);
+    $a->deadline = userdate(time() + $a->minutes * 60, get_string('strftimetime'));
     $nojswarning = get_string('nojswarning', 'moewiki', $a);
     $nojsstart = '<p class="ouw_nojswarning">';
 
@@ -3116,8 +3114,7 @@ function moewiki_can_view_participation($course, $moewiki, $subwiki, $cm, $useri
     $groupmode = groups_get_activity_groupmode($cm, $course);
     $groupid = $subwiki->groupid;
 
-    $allowgroup =
-            ($groupmode == NOGROUPS || $groupmode == VISIBLEGROUPS)
+    $allowgroup = ($groupmode == NOGROUPS || $groupmode == VISIBLEGROUPS)
             || (has_capability('moodle/site:accessallgroups', $context, $userid))
             || (groups_is_member($groupid, $userid));
 
@@ -3319,10 +3316,10 @@ function moewiki_update_user_grades($newgrades, $cm, $moewiki, $course) {
     global $CFG, $SESSION;
 
     require_once($CFG->libdir.'/gradelib.php');
-    $grading_info = grade_get_grades($course->id, 'mod',
+    $gradinginfo = grade_get_grades($course->id, 'mod',
         'moewiki', $moewiki->id, array_keys($newgrades));
 
-    foreach ($grading_info->items[0]->grades as $key => $grade) {
+    foreach ($gradinginfo->items[0]->grades as $key => $grade) {
         if (array_key_exists($key, $newgrades)) {
             if ($newgrades[$key] != $grade->grade) {
                 if ($newgrades[$key] == -1) {
@@ -3395,8 +3392,8 @@ function moewiki_display_entirewiki_page_in_index($pageinfo, $subwiki, $cm, $ind
     $output = '<div class="ouw_entry"><a name="' . $pageversion->pageid . '"></a><h1 class="ouw_entry_heading"><a href="view.php?' .
             moewiki_display_wiki_parameters($pageversion->title, $subwiki, $cm) .
             '">' . htmlspecialchars($visibletitle) . '</a></h1>';
-    $output .=  $pageversion->xhtml;
-    $output .=  '</div>';
+    $output .= $pageversion->xhtml;
+    $output .= '</div>';
 
     return $output;
 }
@@ -3408,8 +3405,8 @@ function moewiki_display_portfolio_page_in_index($pageversion) {
     }
 
     $output = '<div class="ouw_entry">';
-    $output .=  $pageversion->xhtml;
-    $output .=  '</div>';
+    $output .= $pageversion->xhtml;
+    $output .= '</div>';
     return $output;
 }
 
@@ -3837,8 +3834,7 @@ class moewiki_page_portfolio_caller extends moewiki_portfolio_caller_base {
         $pagehtml .= html_writer::end_tag('body') . html_writer::end_tag('html');
 
         $content = $pagehtml;
-        $name = $this->make_filename_safe($this->pageversion->title === '' ?
-                get_string('startpage', 'moewiki') : $this->pageversion->title) . '.html';
+        $name = $this->make_filename_safe($this->pageversion->title === '' ? get_string('startpage', 'moewiki') : $this->pageversion->title) . '.html';
         $manifest = ($this->exporter->get('format') instanceof PORTFOLIO_FORMAT_RICH);
 
         $this->copy_files($this->multifiles);
@@ -3929,7 +3925,7 @@ class moewiki_all_portfolio_caller extends moewiki_portfolio_caller_base {
         $pagehtml = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" ' .
                 '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' .
                 html_writer::start_tag('html', array('xmlns' => 'http://www.w3.org/1999/xhtml'));
-        $content =  html_writer::empty_tag('meta',
+        $content = html_writer::empty_tag('meta',
                         array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8')).
                         html_writer::tag('title', get_string('export', 'forumngfeature_export'));
         if ($this->tree) {
@@ -3941,7 +3937,7 @@ class moewiki_all_portfolio_caller extends moewiki_portfolio_caller_base {
 
         if ($this->tree) {
             $orphans = false;
-            $pagehtml .=  '</ul>';
+            $pagehtml .= '</ul>';
             foreach ($this->pageversions as $pageversion) {
                 if (count($pageversion->linksfrom) == 0 && $pageversion->title !== '') {
                     $orphans = true;
@@ -3957,10 +3953,10 @@ class moewiki_all_portfolio_caller extends moewiki_portfolio_caller_base {
                     $this->pageversions,
                     $this->subwiki,
                     $this->cm);
-            $pagehtml .=  '</ul>';
+            $pagehtml .= '</ul>';
             if ($orphans) {
-                $pagehtml .=  '<h2 class="ouw_orphans">'.get_string('orphanpages', 'moewiki').'</h2>';
-                $pagehtml .=  '<ul class="ouw_indextree">';
+                $pagehtml .= '<h2 class="ouw_orphans">'.get_string('orphanpages', 'moewiki').'</h2>';
+                $pagehtml .= '<ul class="ouw_indextree">';
                 foreach ($this->pageversions as $pageversion) {
                     if (count($pageversion->linksfrom) == 0 && $pageversion->title !== '') {
                         $pageversion->xhtml = $this->prepare_page($pageversion);
@@ -3969,7 +3965,7 @@ class moewiki_all_portfolio_caller extends moewiki_portfolio_caller_base {
                         $pagehtml .= moewiki_tree_index($func, $pageversion->pageid, $orphanindex, $this->subwiki, $this->cm);
                     }
                 }
-                $pagehtml .=  '</ul>';
+                $pagehtml .= '</ul>';
             }
         } else {
             $orphans = false;

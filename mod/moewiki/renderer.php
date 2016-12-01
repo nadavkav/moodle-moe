@@ -51,8 +51,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
 
         $output = '';
         $modcontext = context_module::instance($cm->id);
-        $title = $pageversion->title === '' ? get_string('startpage', 'moewiki') :
-                htmlspecialchars($pageversion->title);
+        $title = $pageversion->title === '' ? get_string('startpage', 'moewiki') : htmlspecialchars($pageversion->title);
 
         // Get annotations - only if using annotation system. Prevents unnecessary db access.
         if ($subwiki->annotation) {
@@ -62,15 +61,13 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         }
 
         // Setup annotations according to the page we are on.
-            if ($page == 'view') {
+        if ($page == 'view') {
             if ($subwiki->annotation && count($annotations)) {
-                $pageversion->xhtml =
-                        moewiki_highlight_existing_annotations($pageversion->xhtml, $annotations, 'view');
+                $pageversion->xhtml = moewiki_highlight_existing_annotations($pageversion->xhtml, $annotations, 'view');
             }
         } else if ($page == 'annotate') {
             $pageversion->xhtml = moewiki_setup_annotation_markers($pageversion->xhtml);
-            $pageversion->xhtml =
-                    moewiki_highlight_existing_annotations($pageversion->xhtml, $annotations, 'annotate');
+            $pageversion->xhtml = moewiki_highlight_existing_annotations($pageversion->xhtml, $annotations, 'annotate');
         }
 
         // Must rewrite plugin urls AFTER doing annotations because they depend on byte position.
@@ -197,7 +194,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         } else {
             $output .= html_writer::end_tag('div');
         }
-        $output .= html_writer::div(get_string('annotaionhelper', 'mod_moewiki'),'annotatheper');
+        $output .= html_writer::div(get_string('annotaionhelper', 'mod_moewiki'), 'annotatheper');
         return $output;
     }
 
@@ -1291,17 +1288,17 @@ class mod_moewiki_renderer extends plugin_renderer_base {
     
     public function show_resolved_annotation($user=0, $subwiki){
         global $DB, $USER;
-        
+
         $context = new stdClass();
         $context->datestr = get_string('date');
         $context->namestr = get_string('username');
-        $context->annotationstr = get_string('annotations','mod_moewiki');
+        $context->annotationstr = get_string('annotations', 'mod_moewiki');
         $context->actionstr = get_string('action');
-        $context->reopen = get_string('reopen','mod_moewiki');
+        $context->reopen = get_string('reopen', 'mod_moewiki');
         $user = ($user != 0) ? $user : $USER->id;
         $pages = $DB->get_records('moewiki_pages', array('subwikiid' => $subwiki->id));
         $pagelist = '';
-        foreach ($pages as $page){
+        foreach ($pages as $page) {
             $pagelist .= $page->id .',';
         }
         $pagelist = rtrim($pagelist, ',');
@@ -1310,7 +1307,7 @@ class mod_moewiki_renderer extends plugin_renderer_base {
         $context->annotations = array();
         foreach ($annotations as $key => $annotat) {
             $ann = new stdClass();
-            $ann->date = date("d.m.Y H:i",$annotat->created);
+            $ann->date = date("d.m.Y H:i", $annotat->created);
             $user = $DB->get_record('user', array('id' => $annotat->userid));
             $ann->name = $user->firstname . ' ' . $user->lastname;
             $ann->annotation = $annotat->text;
