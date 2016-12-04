@@ -601,3 +601,4 @@ $string['moewikicrontask'] = 'MOE wiki maintenance jobs';
 $string['reopen'] = 'Reopen';
 $string['templatecannotbechanged'] = 'Text template cannot be changed, Students already started editing';
 $string['annotaionhelper'] = 'You can annotat on this page by mark part of the text';
+$string['pagename'] = 'Page Name';

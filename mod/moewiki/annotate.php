@@ -108,6 +108,10 @@ moewiki_print_editlock($lock, $moewiki);
 echo $moewikioutput->show_resolved_annotation($userid, $subwiki);
 // close <div id="#moewiki_belowtabs_annotate">
 print '</div>';
-$PAGE->requires->js_call_amd('mod_moewiki/resolved', 'reopen');
+$PAGE->requires->js_call_amd('mod_moewiki/resolved', 'reopen',array(array(
+    'pagename' => $pagename,
+    'subwiki'  => $subwiki,
+    'moduleid'       => $id,
+)));
 // Footer
 moewiki_print_footer($course, $cm, $subwiki, $pagename);

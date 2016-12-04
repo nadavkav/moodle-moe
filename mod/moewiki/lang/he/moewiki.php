@@ -319,3 +319,4 @@ $string['wouldyouliketocreate'] = 'האם אתם מעונינים ליצור א�
 $string['reopen'] = 'שחזור';
 $string['templatecannotbechanged'] = 'לא ניתן לערוך את התבנית מכיוון שהתלמידים החלו לערוך.';
 $string['annotaionhelper'] = 'לרשותכם מנגנון טיוט המאפשר סימון טקסט והוספת הערות ע"י המורה והתלמידים';
+$string['pagename'] = 'שם העמוד';

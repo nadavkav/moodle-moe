@@ -255,12 +255,25 @@ class mod_moewiki_external extends external_api
     
     public static function reopen_parameters () {
         return new external_function_parameters(array(
-            'id' => new external_value(PARAM_INT,'annotation_id'),
+            'id'        => new external_value(PARAM_INT,'annotation_id'),
+            'subwiki' => new external_single_structure(array(
+                'annotation'  => new external_value(PARAM_INT),
+                'canannotate' => new external_value(PARAM_BOOL),
+                'canedit'     => new external_value(PARAM_BOOL),
+                'defaultwiki' => new external_value(PARAM_BOOL),
+                'groupid'     => new external_value(PARAM_INT),
+                'id'          => new external_value(PARAM_INT),
+                'magic'       => new external_value(PARAM_FLOAT),
+                'userid'      => new external_value(PARAM_INT), 
+                'wikiid'      => new external_value(PARAM_INT),
+            )),
+            'pagename'  => new external_value(PARAM_RAW),
+            'moduleid'  => new external_value(PARAM_INT),
         ));
     }
     
-    public static function reopen($id) {
-        return array('success' => moewiki_reopen_annotation($id));
+    public static function reopen($id, $subwikiid, $pagename, $moduleid) {
+        return array('success' => moewiki_reopen_annotation($id, $subwikiid, $pagename, $moduleid));
     }
     
     public static function reopen_returns(){
@@ -424,6 +437,44 @@ class mod_moewiki_external extends external_api
             'parent' => new external_value(PARAM_INT,'annotation parent',false, null, true),
             'userpicture' => new external_value(PARAM_URL),
             'username' => new external_value(PARAM_TEXT),
+        ));
+    }
+    
+    public static function create_version_parameters(){
+        return new external_function_parameters(array(
+            'text'     => new external_value(PARAM_RAW),
+            'wikiid'   => new external_value(PARAM_INT),
+            'userid'   => new external_value(PARAM_INT),
+            'pagename' => new external_value(PARAM_TEXT),
+            'groupid'  => new external_value(PARAM_INT),
+            'id'       => new external_value(PARAM_INT),
+        ));
+    }
+    
+    public static function create_version($text, $wikiid, $userid, $pagename = null, $groupid = 0, $id){ 
+        global $DB;
+        
+        if (!$cm = get_coursemodule_from_id('moewiki', $id)) {
+            print_error('invalidcoursemodule');
+        } 
+        $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+        if (!$moewiki = $DB->get_record('moewiki', array('id' => $cm->instance))) {
+            print_error('invalidcoursemodule');
+        }
+        $context = context_module::instance($cm->id);
+        $subwiki = moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid, true);
+        if (!$subwiki->canedit) {
+            print_error('You do not have permission to edit this wiki');
+        }
+        $pageversion = moewiki_get_current_page($subwiki, $pagename, MOEWIKI_GETPAGE_CREATE);
+
+        moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $text, -1, -1, -1, null, null);
+        return [true];
+    }
+    
+    public static function create_version_returns(){
+         return new external_function_parameters(array(
+           new external_value(PARAM_BOOL),
         ));
     }
 }
