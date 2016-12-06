@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_quizsbs-questionchooser",
+    "builds": {
+        "moodle-mod_quizsbs-questionchooser": {
+            "jsfiles": [
+                "questionchooser.js"
+            ]
+        }
+    }
+}

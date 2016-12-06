@@ -1,0 +1,10 @@
+{
+    "name": "moodle-quizsbsaccess_offlinemode-autosave",
+    "builds": {
+        "moodle-quizsbsaccess_offlinemode-autosave": {
+            "jsfiles": [
+                "autosave.js"
+            ]
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "moodle-mod_quizsbs-util": {
+    "requires": [
+        "node"
+    ],
+    "use": [
+        "moodle-mod_quizsbs-util-base"
+    ],
+    "submodules": {
+        "moodle-mod_quizsbs-util-base": {
+        },
+        "moodle-mod_quizsbs-util-slot": {
+            "requires": [
+                "node",
+                "moodle-mod_quizsbs-util-base"
+            ]
+        },
+        "moodle-mod_quizsbs-util-page": {
+            "requires": [
+                "node",
+                "moodle-mod_quizsbs-util-base"
+            ]
+        }
+    }
+  }
+}

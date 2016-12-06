@@ -1,0 +1,19 @@
+{
+    "moodle-mod_quizsbs-dragdrop": {
+        "requires": [
+            "base",
+            "node",
+            "io",
+            "dom",
+            "dd",
+            "dd-scroll",
+            "moodle-core-dragdrop",
+            "moodle-core-notification",
+            "moodle-mod_quizsbs-quizsbsbase",
+            "moodle-mod_quizsbs-util-base",
+            "moodle-mod_quizsbs-util-page",
+            "moodle-mod_quizsbs-util-slot",
+            "moodle-course-util"
+        ]
+    }
+}

@@ -1,0 +1,37 @@
+#page-mod-quizsbs-attempt .region-content .hidden {
+    display: none;
+}
+#page-mod-quizsbs-attempt .region-content .quizsbs-loading-hide {
+    opacity: 0;
+}
+#page-mod-quizsbs-accessrule-offlinemode-upload #region-main textarea {
+    width: 100%;
+}
+#page-admin-setting-modsettingsquizsbscatofflinemode #region-main textarea {
+    width: 100%;
+    font-family: monospace;
+    font-size: 80%;
+}
+#quizsbs-save-status {
+    font-size: 80%;
+    color: #444;
+}
+.quizsbs-save-failed {
+    background-color: #fcc;
+    padding: 0.5em;
+    color: #000;
+}
+#quizsbs-relogin-dialogue .moodle-dialogue-hd {
+    line-height: 20px;
+}
+#quizsbs-relogin-dialogue .moodle-dialogue-bd {
+    padding: 0;
+}
+#quizsbs-relogin-dialogue .moodle-dialogue-ft {
+    display: none;
+}
+#quizsbs-relogin-dialogue .moodle-dialogue-bd iframe {
+    border: 0;
+    width: 100%;
+    height: 350px;
+}
