@@ -513,7 +513,7 @@ $string['minutes'] = 'דקות';
 $string['missingcorrectanswer'] = 'יש לציין את התשובה הנכונה.';
 $string['missingitemtypename'] = 'שם חסר';
 $string['missingquestion'] = 'שאלה זו כבר איננה קיימת';
-$string['modulename'] = 'בוחן';
+$string['modulename'] = 'בוחן MOE';
 $string['modulename_help'] = 'פעילות "בוחן" (Quiz) מאפשרת למורה ליצור שאלות מסוגים שונים: שאלות בחירה מרובה, התאמה, תשובה קצרה, הזנת מאמר קצר באופן מקוון, נוסחאות מתמטיות ושאלות מבוססות תשובה מספרית.
 
 המורה יכול לאפשר מספר כניסות לבוחן, וזאת עם אפשרות של ערבוב מחדש של סדר השאלות או שליפתן באופן אקראי ממאגר השאלות. ניתן להגדיר מגבלת זמן לניסיון המענה על הבוחן.
@@ -678,7 +678,7 @@ $string['penaltyscheme_help'] = '<p align="center"><b>יישם קנס</b></p>
 $string['percentcorrect'] = 'אחוז תשובות נכונות';
 $string['pleaseclose'] = 'הבקשה שלך בוצעה. כעת ניתן לסגור את החלון.';
 $string['pluginadministration'] = 'ניהול בוחן';
-$string['pluginname'] = 'בוחן';
+$string['pluginname'] = 'בוחן MOE';
 $string['popup'] = 'הצגת המבחן בחלון "מוגן"';
 $string['popupblockerwarning'] = 'החלק של הבחינה נמצא במצב \'מוגן\', הדבר אומר שעליך לפתור את הבוחן בחלון המוגן. אנא כבה את חוסם החלונות ה\'קופצים\' שלך. תודה.';
 $string['popupnotice'] = 'הסטודנטים יראו את בוחן זה בחלון מוגן';
