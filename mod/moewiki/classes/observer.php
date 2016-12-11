@@ -21,14 +21,14 @@ require_once($CFG->dirroot . '/course/modlib.php');
 require_once($CFG->dirroot . '/mod/moewiki/locallib.php');
 
 class observer {
-    
+
     /**
-     * 
+     *
      * @param \core\event\user_enrolment_created $eventname
      */
-    public static function userenrolled (\core\event\user_enrolment_created $event){
-        global $DB,$COURSE;
-        
+    public static function userenrolled (\core\event\user_enrolment_created $event) {
+        global $DB, $COURSE;
+
         $data = $event->get_data();
         $modinfo = get_fast_modinfo($data['courseid']);
         $moewikiinstances = $modinfo->get_instances_of('moewiki');
@@ -36,15 +36,15 @@ class observer {
             list($cm, $context, $module, $mowikidata, $cw) = can_update_moduleinfo($moewiki);
             $moewiki = $DB->get_record('moewiki', array('id' => $mowikidata->id));
             $subwiki = moewiki_create_subwiki($moewiki, $moewiki->id, $COURSE, $data['relateduserid']);
-            if($texttemplate = $mowikidata->template_text) {             
+            if ($texttemplate = $mowikidata->template_text) {
                 $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
-                //put the template text in the students main page
+                // Put the template text in the students main page.
                 moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
             }
         }
     }
-    
-    public static function userdeleted ($eventanme){
+
+    public static function userdeleted ($eventanme) {
         global $DB;
     }
 }

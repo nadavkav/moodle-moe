@@ -24,6 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+
 $plugin->version  = 2016112000;
 $plugin->requires = null;
 $plugin->component = 'mod_moewiki';

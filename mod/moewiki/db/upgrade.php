@@ -101,8 +101,8 @@ function xmldb_moewiki_upgrade($oldversion=0) {
         if (!empty($rs)) {
             $ids = array_keys($rs);
             list($usql, $params) = $DB->get_in_or_equal($ids);
-            $update_sql = 'UPDATE {moewiki} SET annotation = 1 WHERE id '.$usql;
-            $DB->execute($update_sql, $params);
+            $updatesql = 'UPDATE {moewiki} SET annotation = 1 WHERE id '.$usql;
+            $DB->execute($updatesql, $params);
         }
 
         // retrieve new summary field
@@ -495,53 +495,52 @@ WHERE
         $dbman->drop_field($table, new xmldb_field('content'));
         $dbman->drop_field($table, new xmldb_field('timemodified'));
         $dbman->add_field($table, new xmldb_field('updated', XMLDB_TYPE_INTEGER, '10', null, true, false, time()));
-        
-        
-        $table =  new xmldb_table('moewiki_annotations_ranges');
+
+        $table = new xmldb_table('moewiki_annotations_ranges');
         if (!$dbman->table_exists($table)) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/mod/moewiki/db/install.xml', 'moewiki_annotations_ranges');
         }
-        
+
         upgrade_mod_savepoint(true, 2016050301, 'moewiki');
     }
-    
+
     if ($oldversion < 2016051508) {
         $table = new xmldb_table('moewiki_annotations');
         $dbman->add_field($table, new xmldb_field('userpage', XMLDB_TYPE_INTEGER, '10', null, false, false));
-        
+
         upgrade_mod_savepoint(true, 2016051508, 'moewiki');
     }
-    
+
     if ($oldversion < 2016052601) {
         $table = new xmldb_table('moewiki');
         $dbman->add_field($table, new xmldb_field('template_text', XMLDB_TYPE_TEXT, null, null, false, false));
-        
+
         upgrade_mod_savepoint(true, 2016052601, 'moewiki');
     }
-    
+
     if ($oldversion < 2016060600) {
         $table = new xmldb_table('moewiki_annotations');
-        $dbman->add_field($table, new xmldb_field('resolved', XMLDB_TYPE_INTEGER, "1", true, false, false,0));
-        $dbman->add_field($table, new xmldb_field('parent', XMLDB_TYPE_INTEGER, "10", true, false, false,null));
+        $dbman->add_field($table, new xmldb_field('resolved', XMLDB_TYPE_INTEGER, "1", true, false, false, 0));
+        $dbman->add_field($table, new xmldb_field('parent', XMLDB_TYPE_INTEGER, "10", true, false, false, null));
         upgrade_mod_savepoint(true, 2016060600, 'moewiki');
     }
-    
+
     if ($oldversion < 2016061303) {
-        $table =  new xmldb_table('moewiki_annotations_permiss');
+        $table = new xmldb_table('moewiki_annotations_permiss');
         if (!$dbman->table_exists($table)) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/mod/moewiki/db/install.xml', 'moewiki_annotations_permiss');
         }
-        
+
         upgrade_mod_savepoint(true, 2016061303, 'moewiki');
     }
-    
+
     if ($oldversion < 2016082800) {
-        $table =  new xmldb_table('moewiki_annotations_permiss');
+        $table = new xmldb_table('moewiki_annotations_permiss');
         $dbman->rename_field($table, new xmldb_field('annotaionid', XMLDB_TYPE_INTEGER, 10, true, false, false, null), 'annotationid');
-        
-        $table =  new xmldb_table('moewiki_annotations_ranges');
+
+        $table = new xmldb_table('moewiki_annotations_ranges');
         $dbman->rename_field($table, new xmldb_field('annotaionid', XMLDB_TYPE_INTEGER, 10, true, false, false, null), 'annotationid');
-        
+
         upgrade_mod_savepoint(true, 2016082800, 'moewiki');
     }
     // Must always return true from these functions
