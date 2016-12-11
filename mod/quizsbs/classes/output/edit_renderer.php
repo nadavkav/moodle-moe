@@ -27,6 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 
 use \mod_quizsbs\structure;
 use \html_writer;
+use \mod_quizsbs\form\content_load;
+use \mod_quizsbs\local\additional_content;
+use mod_quizsbs\local\question_content;
 
 /**
  * Renderer outputting the quizsbs editing UI.
@@ -82,6 +85,7 @@ class edit_renderer extends \plugin_renderer_base {
 
         $output .= $this->end_section_list();
 
+        $output .= $this->content_load_form($pageurl, $structure);
         // Initialise the JavaScript.
         $this->initialise_editing_javascript($structure, $contexts, $pagevars, $pageurl);
 
@@ -515,6 +519,40 @@ class edit_renderer extends \plugin_renderer_base {
         $menu->prioritise = true;
 
         return $this->render($menu);
+    }
+
+    /**
+     * retuen html content for content load form
+     *
+     * @param unknown $pageurl
+     * @param unknown $contexts
+     * @param unknown $pagevars
+     *
+     * @return string
+     */
+
+    public function content_load_form($pageurl, $structure) {
+        $contentloadform = new content_load($pageurl);
+        if ($contentdata = $contentloadform->get_data()) {
+            $additionalcontent = new additional_content('quizsbs_additional_content');
+            $additionalcontent->set_name($contentdata->additionalcontentname);
+            $additionalcontent->set_type($contentdata->contenttype);
+            $additionalcontent->set_quizsbsid($structure->get_quizsbsid());
+            $additionalcontent->add_entry();
+            if ($additionalcontent->get_id()) {
+                $questioncontent = new question_content('quizsbs_question_content');
+                switch ($additionalcontent->get_type()) {
+                    case 0:
+                    default:
+                       $questioncontent->set_type(question_content::HTML_CONTENT);
+                       $questioncontent->set_content($contentdata->htmleditor['text']);
+                       $questioncontent->set_additionalcontentid($additionalcontent->get_id());
+                       $questioncontent->add_entry();
+                    break;
+                }
+            }
+        }
+        return html_writer::div($contentloadform->render(), 'contentloadformforpopup');
     }
 
     /**

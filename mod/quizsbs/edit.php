@@ -51,8 +51,7 @@ require_once($CFG->dirroot . '/question/category_class.php');
 // this page otherwise they would go in question_edit_setup.
 $scrollpos = optional_param('scrollpos', '', PARAM_INT);
 
-list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) =
-        question_edit_setup('editq', '/mod/quizsbs/edit.php', true);
+list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) = question_edit_setup('editq', '/mod/quizsbs/edit.php', true);
 
 $defaultcategoryobj = question_make_default_categories($contexts->all());
 $defaultcategory = $defaultcategoryobj->id . ',' . $defaultcategoryobj->contextid;

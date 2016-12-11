@@ -180,5 +180,31 @@
         <INDEX NAME="name" UNIQUE="true" FIELDS="name"/>
       </INDEXES>
     </TABLE>
+    <TABLE NAME="quizsbs_additional_content" COMMENT="Table of all additionl question content">
+        <FIELDS>
+            <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10"/>
+            <FIELD SEQUENCE="false" TYPE="char" NOTNULL="true" NAME="name" LENGTH="255" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="quizsbsid" LENGTH="10" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="type" LENGTH="2" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="createdate" LENGTH="10" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="modifieddate" LENGTH="10" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
+            <KEY NAME="quizsbs" FIELDS="quizsbsid" TYPE="foreign" REFTABLE="quizsbs" REFFIELDS="id"/>
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="quizsbs_question_content" COMMENT="Add comment to the run with the question in the same window">
+        <FIELDS>
+            <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10"/>
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="additionalcontentid" LENGTH="10"/>
+            <FIELD SEQUENCE="false" TYPE="text" NOTNULL="false" NAME="content"/>
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="type" LENGTH="2" DEFAULT="0"/>
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
+            <KEY NAME="additioncontent" FIELDS="additionalcontentid" TYPE="foreign" REFTABLE="quizsbs_additional_content" REFFIELDS="id"/>
+        </KEYS>
+    </TABLE>
   </TABLES>
 </XMLDB>
