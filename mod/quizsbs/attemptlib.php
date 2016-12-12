@@ -1656,7 +1656,7 @@ class quizsbs_attempt {
         $bc->attributes['role'] = 'navigation';
         $bc->attributes['aria-labelledby'] = 'mod_quizsbs_navblock_title';
         $bc->title = html_writer::span(get_string('quizsbsnavigation', 'quizsbs'), '', array('id' => 'mod_quizsbs_navblock_title'));
-        $bc->content = $output->navigation_panel($panel);
+        $bc->content = $output->navigation_panel($panel, $this);
         return $bc;
     }
 
@@ -2516,10 +2516,7 @@ class quizsbs_attempt_nav_panel extends quizsbs_nav_panel_base {
     }
 
     public function render_end_bits(mod_quizsbs_renderer $output) {
-        return html_writer::link($this->attemptobj->summary_url(),
-                get_string('endtest', 'quizsbs'), array('class' => 'endtestlink')) .
-                $output->countdown_timer($this->attemptobj, time()) .
-                $this->render_restart_preview_link($output);
+        return $this->render_restart_preview_link($output);
     }
 }
 

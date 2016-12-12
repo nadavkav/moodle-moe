@@ -114,11 +114,6 @@ if (!$attemptobj->set_currentpage($page)) {
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->requires->js_init_call('M.mod_quizsbs.init_attempt_form', null, false, quizsbs_get_js_module());
 
-// Arrange for the navigation to be displayed in the first region on the page.
-$navbc = $attemptobj->get_navigation_panel($output, 'quizsbs_attempt_nav_panel', $page);
-$regions = $PAGE->blocks->get_regions();
-$PAGE->blocks->add_fake_block($navbc, reset($regions));
-
 $title = get_string('attempt', 'quizsbs', $attemptobj->get_attempt_number());
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->set_title($attemptobj->get_quizsbs_name());

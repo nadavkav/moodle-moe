@@ -1051,7 +1051,13 @@ table#categoryquestions {
 #page-mod-quizsbs-edit ul.slots li.section ul.section {
     list-style: none;
 }
+.path-mod-quizsbs #quizsbs_question{
+	float: right;
+}
 
+.path-mod-quizsbs #addtional_content{
+    float: right;
+}
 /** Print formatting for attempt and review pages **/
 
 @media print {

@@ -551,6 +551,7 @@ class edit_renderer extends \plugin_renderer_base {
                     break;
                 }
             }
+            redirect($pageurl);
         }
         return html_writer::div($contentloadform->render(), 'contentloadformforpopup');
     }

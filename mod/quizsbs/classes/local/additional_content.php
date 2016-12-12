@@ -38,8 +38,8 @@ class additional_content extends model{
 
     /**
      */
-    public function __construct($table = '', $id = null, $name = '', $quizsbsid = null, $createdate = null, $modifiedid = null,
-                                    $type = additional_content::HTML_CONTENT_TYPE) {
+    public function __construct($id = null, $name = '', $quizsbsid = null, $createdate = null, $modifiedid = null,
+                                    $type = additional_content::HTML_CONTENT_TYPE, $table = 'quizsbs_additional_content') {
         $this->set_table($table);
         $this->id = $id;
         $this->name = $name;

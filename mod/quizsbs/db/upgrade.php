@@ -193,19 +193,22 @@ function xmldb_quizsbs_upgrade($oldversion) {
     // Moodle v3.1.0 release upgrade line.
     // Put any upgrade step following this.
 
-    if ($oldversion < 2016120800) {
-        if ($dbman->table_exists('quizsbs_question_content')) {
-            $table = new xmldb_table('quizsbs_question_content');
-            $dbman->drop_table($table);
-        }
+    if ($oldversion < 2016121100) {
         if ($dbman->table_exists('quizsbs_additional_content')) {
             $table = new xmldb_table('quizsbs_additional_content');
             $dbman->drop_table($table);
         }
+        if ($dbman->table_exists('quizsbs_question_content')) {
+            $table = new xmldb_table('quizsbs_question_content');
+            $dbman->drop_table($table);
+        }
         $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'quizsbs_additional_content');
         $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'quizsbs_question_content');
+        $table = new xmldb_table('quizsbs_slots');
+        $table->add_field('additionalcontentid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'quizsbs_additional_content', array('id'));
 
-        upgrade_mod_savepoint(true, 2016120800, 'quizsbs');
+        upgrade_mod_savepoint(true, 2016121100, 'quizsbs');
     }
 
     return true;

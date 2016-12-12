@@ -1,4 +1,7 @@
 <?php
+use mod_quizsbs\local\additional_content;
+use mod_quizsbs\local\question_content;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -314,34 +317,21 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      *
      * @param quizsbs_nav_panel_base $panel instance of quizsbs_nav_panel_base
      */
-    public function navigation_panel(quizsbs_nav_panel_base $panel) {
+    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj) {
 
         $output = '';
-        $userpicture = $panel->user_picture();
-        if ($userpicture) {
-            $fullname = fullname($userpicture->user);
-            if ($userpicture->size === true) {
-                $fullname = html_writer::div($fullname);
-            }
-            $output .= html_writer::tag('div', $this->render($userpicture) . $fullname,
-                    array('id' => 'user-picture', 'class' => 'clearfix'));
-        }
-        $output .= $panel->render_before_button_bits($this);
-
-        $bcc = $panel->get_button_container_class();
-        $output .= html_writer::start_tag('div', array('class' => "qn_buttons clearfix $bcc"));
+        $data = new stdClass();
+        $data->bcc = $panel->get_button_container_class();
         foreach ($panel->get_question_buttons() as $button) {
-            $output .= $this->render($button);
+            $data->buttons[]['button'] = $this->render($button);
         }
-        $output .= html_writer::end_tag('div');
-
-        $output .= html_writer::tag('div', $panel->render_end_bits($this),
-                array('class' => 'othernav'));
+        $data->countdowntimer = $this->countdown_timer($attemptobj, time());
+        $data->link = $attemptobj->summary_url();
+        $data->restartpreview = $panel->render_end_bits($this);
 
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
-
-        return $output;
+        return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;
     }
 
     /**
@@ -475,50 +465,36 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      * @param int $nextpage Next page number
      */
     public function attempt_form($attemptobj, $page, $slots, $id, $nextpage) {
+        global $DB;
+
         $output = '';
-
-        // Start the form.
-        $output .= html_writer::start_tag('form',
-                array('action' => $attemptobj->processattempt_url(), 'method' => 'post',
-                'enctype' => 'multipart/form-data', 'accept-charset' => 'utf-8',
-                'id' => 'responseform'));
-        $output .= html_writer::start_tag('div');
-
+        $data = new stdClass();
+        $navbc = $attemptobj->get_navigation_panel($this, 'quizsbs_attempt_nav_panel', $page);
+        $data->navigation = $navbc->content;
+        $data->formacttion = $attemptobj->processattempt_url();
         // Print all the questions.
         foreach ($slots as $slot) {
             $output .= $attemptobj->render_question($slot, false, $this,
-                    $attemptobj->attempt_url($slot, $page), $this);
+                                            $attemptobj->attempt_url($slot, $page), $this);
+            $additionalcontent = new additional_content();
+            $additionalcontent->get_additional_content_record(1);
+            $questioncontent = new question_content();
+            $questioncontent = $DB->get_record('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
+            if ($questioncontent) {
+                $data->content = $questioncontent->content;
+            }
         }
+        $additionalcontent = new additional_content();
 
-        $output .= $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
-
-        // Some hidden fields to trach what is going on.
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'attempt',
-                'value' => $attemptobj->get_attemptid()));
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'thispage',
-                'value' => $page, 'id' => 'followingpage'));
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'nextpage',
-                'value' => $nextpage));
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'timeup',
-                'value' => '0', 'id' => 'timeup'));
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'sesskey',
-                'value' => sesskey()));
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'scrollpos',
-                'value' => '', 'id' => 'scrollpos'));
-
-        // Add a hidden field with questionids. Do this at the end of the form, so
-        // if you navigate before the form has finished loading, it does not wipe all
-        // the student's answers.
-        $output .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'slots',
-                'value' => implode(',', $attemptobj->get_active_slots($page))));
-
-        // Finish the form.
-        $output .= html_writer::end_tag('div');
-        $output .= html_writer::end_tag('form');
-
-        $output .= $this->connection_warning();
-
-        return $output;
+        $data->slots = $output;
+        $data->attempteid = $attemptobj->get_attemptid();
+        $data->page = $page;
+        $data->nextpage = $nextpage;
+        $data->sesskey = sesskey();
+        $data->questionid = implode(',', $attemptobj->get_active_slots($page));
+        $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
+        $data->connectionwarning = $this->connection_warning();
+        return $this->render_from_template('mod_quizsbs/attempt_form', $data);
     }
 
     /**

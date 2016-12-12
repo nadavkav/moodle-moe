@@ -53,7 +53,7 @@ class question_content extends model{
     protected $type;
     protected $additionalcontentid;
 
-    public function __construct($table = '') {
+    public function __construct($table = 'quizsbs_question_content') {
         $this->set_table($table);
     }
     /**
@@ -141,6 +141,17 @@ class question_content extends model{
             if ($id) {
                 $this->set_id($id);
             }
+        }
+    }
+
+    public function get_question_content_record(int $id = null) {
+        global $DB;
+
+        if (!is_null($id)) {
+            $record = $DB->get_record('quizsbs_additional_content', array('id' => $id));
+        }
+        if ($record) {
+            $this->map_to_db($record);
         }
     }
 }
