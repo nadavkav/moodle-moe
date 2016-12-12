@@ -1693,8 +1693,13 @@ function quizsbs_extend_settings_navigation($settings, $quizsbsnode) {
 
     if (has_capability('mod/quizsbs:manage', $PAGE->cm->context)) {
         $node = navigation_node::create(get_string('editquizsbs', 'quizsbs'),
-                new moodle_url('/mod/quizsbs/edit.php', array('cmid'=>$PAGE->cm->id)),
+                new moodle_url('/mod/quizsbs/edit.php', array('cmid' => $PAGE->cm->id)),
                 navigation_node::TYPE_SETTING, null, 'mod_quizsbs_edit',
+                new pix_icon('t/edit', ''));
+        $quizsbsnode->add_node($node, $beforekey);
+        $node = navigation_node::create(get_string('additionalcontentedit', 'quizsbs'),
+                new moodle_url('/mod/quizsbs/editcontent.php', array('cmid' => $PAGE->cm->id)),
+                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontent',
                 new pix_icon('t/edit', ''));
         $quizsbsnode->add_node($node, $beforekey);
     }

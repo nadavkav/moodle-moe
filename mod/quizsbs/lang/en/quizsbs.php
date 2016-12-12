@@ -34,6 +34,7 @@ $string['addarandomquestion'] = 'a random question';
 $string['addarandomquestion_help'] = 'When a random question is added, it results in a randomly-chosen question from the category being inserted into the quizsbs. This means that different students are likely to get a different selection of questions, and when a quizsbs allows multiple attempts then each attempt is likely to contain a new selection of questions.';
 $string['addarandomselectedquestion'] = 'Add a random selected question ...';
 $string['adddescriptionlabel'] = 'Add a description item';
+$string['additionalcontentedit'] = 'Edit Additional content';
 $string['additionalcontentname'] = 'Presentation Name';
 $string['addingquestion'] = 'Adding a question';
 $string['addingquestions'] = '<p>This side of the page is where you manage your database of questions. Questions are stored in categories to help you keep them organised, and can be used by any quizsbs in your course or even other courses if you choose to \'publish\' them.</p>

@@ -319,7 +319,6 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      */
     public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj) {
 
-        $output = '';
         $data = new stdClass();
         $data->bcc = $panel->get_button_container_class();
         foreach ($panel->get_question_buttons() as $button) {

@@ -187,8 +187,7 @@ body.jsenabled .questionflagcheckbox {
 }
 
 .path-mod-quizsbs .othernav {
-    clear: both;
-    margin: 0.5em 0;
+    
 }
 .path-mod-quizsbs .othernav a,
 .path-mod-quizsbs .othernav input {
@@ -1057,6 +1056,10 @@ table#categoryquestions {
 
 .path-mod-quizsbs #addtional_content{
     float: right;
+}
+
+#quizsbs #navigation div {
+	float: right;
 }
 /** Print formatting for attempt and review pages **/
 
