@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+require_once(__DIR__ . '/../../config.php');
+
 class block_links_for_moetopcoll extends block_base {
     public function init() {
         $this->title = get_string('links_for_moetopcoll', 'block_links_for_moetopcoll');
@@ -21,13 +23,15 @@ class block_links_for_moetopcoll extends block_base {
 
     public function get_content() {
         global  $PAGE, $COURSE, $USER;
+
         $renderer = $PAGE->get_renderer('core');
         if ($this->content !== null) {
             return $this->content;
         }
-        $isstudent = !has_capability('block/links_for_moetopcoll:canSeeLinks', $this->context) ? true : false;
+        $isstudent = !has_capability('block/links_for_moetopcoll:canseelinks', $this->context) ? true : false;
         if (($COURSE->format == "moetopcoll")&&(!$isstudent)) {
-            $this->content         = new stdClass;
+            $this->content = new stdClass;
+            $context = new stdClass();
             $this->content->text   = $renderer->render_from_template('block_links_for_moetopcoll/main', $context);
             return $this->content;
         }
