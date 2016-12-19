@@ -53,6 +53,7 @@ class content_load extends \moodleform {
      *
      */
 
+    protected $cmid;
 
     public function __construct($action = null, $customdata = null, $method = 'post', $target = '', $attributes = null, $editable = true,
                                     $ajaxformdata = null) {
@@ -69,14 +70,25 @@ class content_load extends \moodleform {
         global $CFG, $DB;
 
         $mform =& $this->_form;
-
+        $slots = $this->_customdata->get_slots();
+        $questions = array();
+        foreach ($slots as $slot) {
+            $question = $DB->get_record('question', array('id' => $slot->questionid));
+            if ($question) {
+                $questions[$question->id] = $question->name;
+            }
+        }
+        $options = array(
+            'multiple' => true,
+            'noselectionstring' => get_string('selectquestions', 'quizsbs'),
+        );
 
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
         $mform->setType('additionalcontentname', PARAM_ALPHANUMEXT);
+        $mform->addRule('additionalcontentname', get_string('error'), 'required');
         $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('editor', 'quizsbs'), 0);
-        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('scormpackage', 'quizsbs'), 1);
         $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('javascriptapp', 'quizsbs'), 2);
 
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
@@ -93,6 +105,14 @@ class content_load extends \moodleform {
             'enable_filemanagement' => true
         ));
         $mform->setType('htmleditor', PARAM_RAW);
+        $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'),'wrap="virtual" rows="20" cols="50"' );
+        $mform->setType('csseditor', PARAM_RAW);
+        $mform->disabledIf('csseditor', 'contenttype', 'neq', '2');
+        $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
+        $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
+        $mform->setType('javascripteditor', PARAM_RAW);
+        $mform->addElement('autocomplete', 'contentquestion', get_string('contentquestions', 'quizsbs'), $questions, $options);
+
         $this->add_action_buttons();
     }
 }

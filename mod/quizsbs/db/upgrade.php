@@ -193,7 +193,7 @@ function xmldb_quizsbs_upgrade($oldversion) {
     // Moodle v3.1.0 release upgrade line.
     // Put any upgrade step following this.
 
-    if ($oldversion < 2016121100) {
+    if ($oldversion < 2016121903) {
         if ($dbman->table_exists('quizsbs_additional_content')) {
             $table = new xmldb_table('quizsbs_additional_content');
             $dbman->drop_table($table);
@@ -205,10 +205,13 @@ function xmldb_quizsbs_upgrade($oldversion) {
         $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'quizsbs_additional_content');
         $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'quizsbs_question_content');
         $table = new xmldb_table('quizsbs_slots');
-        $table->add_field('additionalcontentid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
-        $table->add_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'quizsbs_additional_content', array('id'));
+        $field = new xmldb_field('additionalcontentid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, false, null, null);
+        $key = new xmldb_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'quizsbs_additional_content', array('id'));
 
-        upgrade_mod_savepoint(true, 2016121100, 'quizsbs');
+        $dbman->add_field($table, $field);
+        $dbman->add_key($table, $key);
+
+        upgrade_mod_savepoint(true, 2016121903, 'quizsbs');
     }
 
     return true;

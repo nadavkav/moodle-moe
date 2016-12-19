@@ -134,7 +134,7 @@ class question_content extends model{
         global $DB;
 
         $questioncontent = $DB->get_record($this->get_table(), array('id' => $this->get_id()));
-        if ($questioncontent){
+        if ($questioncontent) {
             $DB->update_record($this->get_table(), $this->to_std());
         } else {
             $id = $DB->insert_record($this->get_table(), $this->to_std());
