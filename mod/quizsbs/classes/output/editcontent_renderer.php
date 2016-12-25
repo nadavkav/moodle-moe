@@ -31,12 +31,20 @@ require_once("$CFG->libdir/formslib.php");
  */
 class editcontent_renderer extends \plugin_renderer_base {
 
+    /**
+     *
+     * @param \quizsbs $quizsbsobj
+     * @param structure $structure
+     * @param \question_edit_contexts $contexts
+     * @param \moodle_url $pageurl
+     * @param array $pagevars
+     * @return string|boolean
+     */
     public function editcontent_page(\quizsbs $quizsbsobj, structure $structure,
-            \question_edit_contexts $contexts, \moodle_url $pageurl, array $pagevars) {
-        global $DB;
+            \question_edit_contexts $contexts, \moodle_url $pageurl, array $pagevars, additional_content $additionalcontent) {
 
         $context = new \stdClass();
-        $context->content_form = $this->content_load_form($pageurl, $structure);
+        $context->content_form = $this->content_load_form($pageurl, $structure, $additionalcontent);
         return $this->render_from_template('mod_quizsbs/editcontent', $context);
     }
 
@@ -50,35 +58,63 @@ class editcontent_renderer extends \plugin_renderer_base {
      * @return string
      */
 
-    public function content_load_form($pageurl, $structure) {
+    public function content_load_form($pageurl, $structure, additional_content $additaional) {
         global $DB;
 
         $contentloadform = new content_load($pageurl, $structure);
+        $questioncontenthtml = new question_content();
+        $questioncontentcss = new question_content();
+        $questioncontentjavascript = new question_content();
+        $additaionalcontent = new \stdClass();
+        $additaionalcontent->id = $additaional->get_id();
+        $additaionalcontent->additionalcontentname = $additaional->get_name();
+        $additaionalcontent->contenttype = $additaional->get_type();
+        $additaionalcontent->createdate = $additaional->get_createdate();
+        $questioncontents = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additaional->get_id()));
+        foreach ($questioncontents as $questioncontent) {
+            switch ($questioncontent->type) {
+                case question_content::HTML_CONTENT:
+                    $additaionalcontent->htmleditor['text'] = $questioncontent->content;
+                    $questioncontenthtml->set_id($questioncontent->id);
+                    break;
+                case question_content::CSS_CONTENT:
+                    $additaionalcontent->csseditor = $questioncontent->content;
+                    $questioncontentcss->set_id($questioncontent->id);
+                    break;
+                case question_content::JAVASCRIPT_CONTENT:
+                default:
+                    $additaionalcontent->javascripteditor = $questioncontent->content;
+                    $questioncontentjavascript->set_id($questioncontent->id);
+                    break;
+            }
+        }
+        $contentloadform->set_data($additaionalcontent);
 
         if ($contentdata = $contentloadform->get_data()) {
             $additionalcontent = new additional_content('quizsbs_additional_content');
+            $additionalcontent->set_id($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
             $additionalcontent->set_type($contentdata->contenttype);
+            $additionalcontent->set_createdate($contentdata->createdate);
             $additionalcontent->set_quizsbsid($structure->get_quizsbsid());
             $additionalcontent->add_entry();
             if ($additionalcontent->get_id()) {
-                $questioncontent = new question_content('quizsbs_question_content');
                 switch ($additionalcontent->get_type()) {
                     case 2:
-                        $questioncontent->set_type(question_content::CSS_CONTENT);
-                        $questioncontent->set_content($contentdata->csseditor);
-                        $questioncontent->set_additionalcontentid($additionalcontent->get_id());
-                        $questioncontent->add_entry();
-                        $questioncontent->set_type(question_content::JAVASCRIPT_CONTENT);
-                        $questioncontent->set_content($contentdata->javascripteditor);
-                        $questioncontent->set_additionalcontentid($additionalcontent->get_id());
-                        $questioncontent->add_entry();
+                        $questioncontentcss->set_type(question_content::CSS_CONTENT);
+                        $questioncontentcss->set_content($contentdata->csseditor);
+                        $questioncontentcss->set_additionalcontentid($additionalcontent->get_id());
+                        $questioncontentcss->add_entry();
+                        $questioncontentjavascript->set_type(question_content::JAVASCRIPT_CONTENT);
+                        $questioncontentjavascript->set_content($contentdata->javascripteditor);
+                        $questioncontentjavascript->set_additionalcontentid($additionalcontent->get_id());
+                        $questioncontentjavascript->add_entry();
                     case 0:
                     default:
-                        $questioncontent->set_type(question_content::HTML_CONTENT);
-                        $questioncontent->set_content($contentdata->htmleditor['text']);
-                        $questioncontent->set_additionalcontentid($additionalcontent->get_id());
-                        $questioncontent->add_entry();
+                        $questioncontenthtml->set_type(question_content::HTML_CONTENT);
+                        $questioncontenthtml->set_content($contentdata->htmleditor['text']);
+                        $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
+                        $questioncontenthtml->add_entry();
                         break;
                 }
             }

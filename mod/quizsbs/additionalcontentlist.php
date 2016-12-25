@@ -1,6 +1,4 @@
 <?php
-use mod_quizsbs\local\additional_content;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -23,16 +21,20 @@ require_once($CFG->dirroot . '/question/category_class.php');
 
 // These params are only passed from page request to request while we stay on
 // this page otherwise they would go in question_edit_setup.
-$scrollpos = optional_param('scrollpos', '', PARAM_INT);
-$additionalcontentid = optional_param('additionalcontentid', '', PARAM_INT);
+$action = optional_param('action', '', PARAM_ALPHA);
+$additionalcontentid = optional_param('additionalcontentid', null, PARAM_INT);
 
-list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) = question_edit_setup('editq', '/mod/quizsbs/editcontent.php', true);
-
-$defaultcategoryobj = question_make_default_categories($contexts->all());
-$defaultcategory = $defaultcategoryobj->id . ',' . $defaultcategoryobj->contextid;
+$thispageurl = new moodle_url('/mod/quizsbs/additionalcontentlist.php');
+list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) = question_edit_setup('editq', '/mod/quizsbs/additionalcontentlist.php', true);
 
 $quizsbshasattempts = quizsbs_has_attempts($quizsbs->id);
 
+if ($action) {
+    $thispageurl->param('action', $action);
+}
+if ($additionalcontentid) {
+    $thispageurl->param('additionalcontentid', $additionalcontentid);
+}
 $PAGE->set_url($thispageurl);
 
 // Get the course object and related bits.
@@ -43,18 +45,29 @@ $structure = $quizsbsobj->get_structure();
 // You need mod/quizsbs:manage in addition to question capabilities to access this page.
 require_capability('mod/quizsbs:manage', $contexts->lowest());
 
-$additionalcontent = new additional_content($additionalcontentid);
+$params = array(
+    'courseid' => $course->id,
+    'context' => $contexts->lowest(),
+    'other' => array(
+        'quizsbsid' => $quizsbs->id
+    )
+);
 
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_pagetype('mod-quizsbs-editcontent');
 
-$output = $PAGE->get_renderer('mod_quizsbs', 'editcontent');
+$output = $PAGE->get_renderer('mod_quizsbs', 'contentlist');
 
 $PAGE->set_title(get_string('editingquizsbsx', 'quizsbs', format_string($quizsbs->name)));
 $PAGE->set_heading($course->fullname);
 
 echo $OUTPUT->header();
-
-echo $output->editcontent_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars, $additionalcontent);
-
+switch ($action) {
+    case 'delete':
+        echo $output->delete_content_page($thispageurl, $quizsbsobj);
+        break;
+    default:
+        echo $output->contentlist_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars);
+        break;
+}
 echo $OUTPUT->footer();

@@ -40,13 +40,15 @@ class additional_content extends model{
      */
     public function __construct($id = null, $name = '', $quizsbsid = null, $createdate = null, $modifiedid = null,
                                     $type = additional_content::HTML_CONTENT_TYPE, $table = 'quizsbs_additional_content') {
+        global $DB;
         $this->set_table($table);
         $this->id = $id;
-        $this->name = $name;
-        $this->quizsbsid = $quizsbsid;
-        $this->createdate = $createdate;
-        $this->modifieddate = $modifiedid;
-        $this->type = $type;
+        $this->load_from_db();
+        $this->name = (empty($this->name)) ? $name : $this->name;
+        $this->quizsbsid = (empty($this->quizsbsid)) ? $quizsbsid : $this->quizsbsid;
+        $this->createdate = (empty($this->createdate)) ? $createdate : $this->createdate;
+        $this->modifieddate = (empty($this->modifieddate)) ? $modifiedid : $this->modifieddate;
+        $this->type = (empty($this->type)) ? $type : $this->type;
     }
 
     /**

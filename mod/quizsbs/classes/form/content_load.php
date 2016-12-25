@@ -95,24 +95,27 @@ class content_load extends \moodleform {
         $mform->setDefault('contenttype', 0);
 
         $mform->addElement('editor', 'htmleditor', get_string('editor', 'quizsbs'), array(
-            'subdirs'=>0,
-            'maxbytes'=>0,
-            'maxfiles'=>0,
-            'changeformat'=>0,
-            'context'=>null,
-            'noclean'=>0,
-            'trusttext'=>0,
+            'subdirs' => 0,
+            'maxbytes' => 0,
+            'maxfiles' => 0,
+            'changeformat' => 0,
+            'context' => null,
+            'noclean' => 0,
+            'trusttext' => 0,
             'enable_filemanagement' => true
         ));
         $mform->setType('htmleditor', PARAM_RAW);
-        $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'),'wrap="virtual" rows="20" cols="50"' );
+        $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->setType('csseditor', PARAM_RAW);
         $mform->disabledIf('csseditor', 'contenttype', 'neq', '2');
         $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
         $mform->setType('javascripteditor', PARAM_RAW);
         $mform->addElement('autocomplete', 'contentquestion', get_string('contentquestions', 'quizsbs'), $questions, $options);
-
+        $mform->addElement('hidden', 'id', 'id', null);
+        $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'createdate', 'createdate', null);
+        $mform->setType('createdate', PARAM_INT);
         $this->add_action_buttons();
     }
 }

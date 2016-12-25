@@ -1697,11 +1697,19 @@ function quizsbs_extend_settings_navigation($settings, $quizsbsnode) {
                 navigation_node::TYPE_SETTING, null, 'mod_quizsbs_edit',
                 new pix_icon('t/edit', ''));
         $quizsbsnode->add_node($node, $beforekey);
-        $node = navigation_node::create(get_string('additionalcontentedit', 'quizsbs'),
+        $url = new moodle_url('/mod/quizsbs/aditionalcontent.php');
+        $contentnode = $quizsbsnode->add_node(navigation_node::create(get_string('additionalcontent', 'quizsbs'), $url,
+                                        navigation_node::TYPE_SETTING,
+                                        null, null, new pix_icon('i/report', '')), $beforekey);
+        $contentnode->add_node(navigation_node::create(get_string('additionalcontentlist', 'quizsbs'),
+                new moodle_url('/mod/quizsbs/additionalcontentlist.php', array('cmid' => $PAGE->cm->id)),
+                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontentlist',
+                new pix_icon('t/edit', '')));
+        $contentnode->add_node(navigation_node::create(get_string('additionalcontentedit', 'quizsbs'),
                 new moodle_url('/mod/quizsbs/editcontent.php', array('cmid' => $PAGE->cm->id)),
                 navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontent',
-                new pix_icon('t/edit', ''));
-        $quizsbsnode->add_node($node, $beforekey);
+                new pix_icon('t/edit', '')));
+
     }
 
     if (has_capability('mod/quizsbs:preview', $PAGE->cm->context)) {

@@ -1061,6 +1061,10 @@ table#categoryquestions {
 #quizsbs #navigation div {
 	float: right;
 }
+
+#id_csseditor, #id_javascripteditor {
+	direction: ltr;
+}
 /** Print formatting for attempt and review pages **/
 
 @media print {

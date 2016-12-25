@@ -42,7 +42,9 @@ $string['addasection'] = 'כותרת חדשה לחלק זה';
 $string['adddescriptionlabel'] = 'הוספת תיאור/הנחיה';
 $string['addingquestion'] = 'הוספת שאלה';
 $string['addingquestions'] = 'צד זה של הדף משמש לניהול מסד נתוני השאלות שלך. השאלות נשמרות בקטגוריות כדי לאפשר לך לשמור על סדר, ניתן להשתמש בהן בכל בוחן בקורס שלך ואפילו בקורסים אחרים אם תחליט "לפרסם" אותן. <br /><br />אחרי שתבחר או תיצור קטגורית שאלות תוכל ליצור או לערוך שאלות. תוכל לבחור להוסיף כל אחת משאלות אלו לבוחן שלך בצד השני של הדף.';
-$string['additionalcontentedit'] = 'ערכית תוכן נוסף לשאלות';
+$string['additionalcontent'] = 'תכנים נוספים';
+$string['additionalcontentlist'] = 'רשימת תכנים נוספים';
+$string['additionalcontentedit'] = 'יצירת תוכן נוסף לשאלות';
 $string['additionalcontentname'] = 'שם התוכן';
 $string['addmoreoverallfeedbacks'] = 'הוספת  {no}  שדות משוב נוספים';
 $string['addnewgroupoverride'] = 'הוספת הגדרות־מותאמות לקבוצה';
@@ -88,6 +90,7 @@ $string['answersingleno'] = 'אפשר תשובות מרובות';
 $string['answersingleyes'] = 'תשובה אחת בלבד';
 $string['answertoolong'] = 'תשובה ארוכה מדי אחרי השורה ה-{$a} (קיימת מגבלה של 255 תווים לתשובה)';
 $string['aon'] = 'תסדיר AON';
+$string['approvedelete'] = 'האם למחוק את התוכן?';
 $string['areyousureremoveselected'] = 'האם להסיר את כל השאלות שנבחרו?';
 $string['asshownoneditscreen'] = 'כפי שמוצג על מסך העריכה';
 $string['attempt'] = 'ניסיון מענה {$a}';
@@ -265,6 +268,7 @@ $string['delaylater_help'] = '<p align="center"><b>השהיית זמן בין נ
 <p>אם תגדירו כאן השהיית זמן, אז על הסטודנט להמתין עד שהזמן המוגדר יחלוף לפני שהוא יוכל לנסות לענות על הבוחן בפעם השלישית ובכל פעם נוספת.
 </p>';
 $string['deleteattemptcheck'] = 'האם למחוק נסיונות מענה אלו?';
+$string['deletecontent'] = 'מחיקת תוכן נוסף';
 $string['deleteselected'] = 'מחיקת הנבחר';
 $string['deletingquestionattempts'] = 'מחיקת נסיונות השאלה';
 $string['description'] = 'תיאור (לא שאלה)';

@@ -24,9 +24,11 @@ namespace mod_quizsbs\local;
 abstract class model {
 
     protected $table;
+    protected $id;
     /**
      */
-    public function __construct(string $table = '') {
+    public function __construct(string $table = '', int $id = null) {
+        $this->id = $id;
         $this->set_table($table);
     }
 
@@ -38,7 +40,7 @@ abstract class model {
         global $DB;
 
         $dbman = $DB->get_manager();
-        if ($dbman->table_exists($table)){
+        if ($dbman->table_exists($table)) {
             $this->table = $table;
             return true;
         }
@@ -50,6 +52,20 @@ abstract class model {
         foreach ($record as $key => $value) {
             if (key_exists($key, $vars)) {
                 $this->{$key} = $value;
+            }
+        }
+    }
+
+    public function load_from_db() {
+        global $DB;
+
+        if (!empty($this->id)) {
+            $vars = get_object_vars($this);
+            $obj = $DB->get_record($this->get_table(), array('id' => $this->id));
+            foreach ($obj as $key => $value) {
+                if (key_exists($key, $vars)) {
+                    $this->{$key} = $value;
+                }
             }
         }
     }
