@@ -53,8 +53,12 @@ class question_content extends model{
     protected $type;
     protected $additionalcontentid;
 
-    public function __construct($table = 'quizsbs_question_content') {
+    public function __construct($id = null, $table = 'quizsbs_question_content') {
+        $this->set_id($id);
         $this->set_table($table);
+        if(!is_null($this->get_id())) {
+            $this->load_from_db();
+        }
     }
     /**
      * @return the $id
@@ -88,7 +92,7 @@ class question_content extends model{
      * @param string $id
      */
     public function set_id($id) {
-        $this->id = $id;
+            $this->id = is_numeric($id) ? $id : null;
     }
 
     /**

@@ -475,15 +475,25 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         foreach ($slots as $slot) {
             $output .= $attemptobj->render_question($slot, false, $this,
                                             $attemptobj->attempt_url($slot, $page), $this);
-            $additionalcontent = new additional_content();
-            $additionalcontent->get_additional_content_record(1);
-            $questioncontent = new question_content();
-            $questioncontent = $DB->get_record('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
-            if ($questioncontent) {
-                $data->content = $questioncontent->content;
+            $slot = $DB->get_record('quizsbs_slots', array('id' => $slot));
+            $additionalcontent = new additional_content($slot->additionalcontentid);
+            $data->subject = $additionalcontent->get_name();
+            $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
+            foreach ($questioncontent as  $value) {
+                $content = new question_content($value->id);
+                switch ($content->get_type()) {
+                    case question_content::JAVASCRIPT_CONTENT:
+                        $data->content['javascript'] = $content->get_content();
+                        break;
+                    case question_content::CSS_CONTENT:
+                        $data->content['css'] = $content->get_content();
+                        break;
+                    default:
+                        $data->content['html'] = $content->get_content();
+                        break;
+                }
             }
         }
-        $additionalcontent = new additional_content();
 
         $data->slots = $output;
         $data->attempteid = $attemptobj->get_attemptid();

@@ -20,6 +20,7 @@
     </nav>
     <section id="questions" class="row-fluid">
         <section id="quizsbs_question" class="span6">
+        <h2>{{subject}}</h2>
         <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
             <div>
                 {{{slots}}}
@@ -36,7 +37,21 @@
         {{{connectionwarning}}}
         </section>
         <section id="addtional_content" class="span6">
-            {{{content}}}
+            {{#content}}
+                {{#content.css}}
+                <style>
+                    {{.}}               
+                </style>
+               {{/content.css}}
+               {{#content.html}}
+                    {{{.}}}
+               {{/content.html}}
+               {{#content.javascript}}
+                    <script>
+                        {{{content.javascript}}}
+                    </script>
+               {{/content.javascript}}
+            {{/content}}
         </section>
     </section>
 </section>

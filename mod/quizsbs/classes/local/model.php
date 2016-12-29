@@ -27,7 +27,7 @@ abstract class model {
     protected $id;
     /**
      */
-    public function __construct(string $table = '', int $id = null) {
+    public function __construct(int $id = null, string $table = '') {
         $this->id = $id;
         $this->set_table($table);
     }

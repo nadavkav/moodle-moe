@@ -99,26 +99,42 @@ class editcontent_renderer extends \plugin_renderer_base {
         $contentloadform->set_data($additaionalcontent);
 
         if ($contentdata = $contentloadform->get_data()) {
-            $additionalcontent = new additional_content();
-            $additionalcontent->set_id($contentdata->id);
+            $additionalcontent = new additional_content($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
             $additionalcontent->set_type($contentdata->contenttype);
-            $additionalcontent->set_createdate($contentdata->createdate);
+            if (!$additionalcontent->get_createdate()) {
+                $additionalcontent->set_createdate($contentdata->createdate);
+            }
             $additionalcontent->set_quizsbsid($structure->get_quizsbsid());
             $additionalcontent->add_entry();
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
                     case 2:
+                        $questioncontentcss->set_id($DB->get_field('quizsbs_question_content', 'id', array(
+                            'additionalcontentid' => $additionalcontent->get_id(),
+                            'type' => question_content::CSS_CONTENT,
+                        )));
+                        $questioncontentcss->load_from_db();
                         $questioncontentcss->set_type(question_content::CSS_CONTENT);
                         $questioncontentcss->set_content($contentdata->csseditor);
                         $questioncontentcss->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontentcss->add_entry();
+                        $questioncontentjavascript->set_id($DB->get_field('quizsbs_question_content', 'id', array(
+                            'additionalcontentid' => $additionalcontent->get_id(),
+                            'type' => question_content::JAVASCRIPT_CONTENT,
+                        )));
+                        $questioncontentjavascript->load_from_db();
                         $questioncontentjavascript->set_type(question_content::JAVASCRIPT_CONTENT);
                         $questioncontentjavascript->set_content($contentdata->javascripteditor);
                         $questioncontentjavascript->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontentjavascript->add_entry();
                     case 0:
                     default:
+                        $questioncontenthtml->set_id($DB->get_field('quizsbs_question_content', 'id', array(
+                            'additionalcontentid' => $additionalcontent->get_id(),
+                            'type' => question_content::HTML_CONTENT,
+                        )));
+                        $questioncontenthtml->load_from_db();
                         $questioncontenthtml->set_type(question_content::HTML_CONTENT);
                         $questioncontenthtml->set_content($contentdata->htmleditor['text']);
                         $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
@@ -127,24 +143,28 @@ class editcontent_renderer extends \plugin_renderer_base {
                 }
             }
             $contentquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $additionalcontent->get_id()));
-            foreach ($contentdata->contentquestion as $questionid) {
-                $key = false;
-                foreach ($contentquestion as $id => $question) {
-                    if($questionid == $question->questionid){
-                        $key = $id;
-                        break;
+            if (isset($contentdata->contentquestion)) {
+                foreach ($contentdata->contentquestion as $questionid) {
+                    $key = false;
+                    foreach ($contentquestion as $id => $question) {
+                        if ($questionid == $question->questionid) {
+                            $key = $id;
+                            break;
+                        }
                     }
-                }
-                if($key === false){
-                    $DB->set_field('quizsbs_slots', 'additionalcontentid', $additionalcontent->get_id(), array('questionid' => $questionid));
-                } else {
-                    unset($contentquestion[$key]);
+                    if ($key === false) {
+                        $DB->set_field('quizsbs_slots', 'additionalcontentid', $additionalcontent->get_id(),
+                                                        array('questionid' => $questionid));
+                    } else {
+                        unset($contentquestion[$key]);
+                    }
                 }
             }
             foreach ($contentquestion as $question) {
                 $DB->set_field('quizsbs_slots', 'additionalcontentid', null, array('id' => $question->id));
             }
-            $pageurl->param('additionalcontentid',$additionalcontent->get_id());
+
+            $pageurl->param('additionalcontentid', $additionalcontent->get_id());
             redirect($pageurl);
         }
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
