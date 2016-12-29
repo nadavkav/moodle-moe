@@ -5374,7 +5374,6 @@ div#chatcurrentusers table td.chatuserdetails {
     height: 25px;
     line-height: 22px;
     display: inline-block;
-    width: 80%;
     font-weight: bold;
 	min-width: 70px;
 }
@@ -5464,15 +5463,6 @@ a#choosetheme {
     border: 0px;
 }
 
-.path-mod-chat .mdl-chat-entry .chat-message .text {
-    background: #ecfbfd;
-    color: #101111;
-}
-
-.path-mod-chat .mdl-chat-my-entry .chat-message .text {
-    background: #f6f4da;
-}
-
 .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax #chat-userlist {
 	min-width: 165px;
 }
@@ -5481,10 +5471,26 @@ a#choosetheme {
     background: #f5f5f5;
 }
 
+.mdl-chat-my-entry .chat-message .text {
+	background: transparent !important;
+}
+
 .path-mod-chat #chat-input-area, .path-mod-chat #chat-input-area table.generaltable, .path-mod-chat #chat-input-area table.generaltable td.cell {
     background: #ffffff;
 }
 
+#page-mod-chat-gui_ajax-index #layout-doc .yui-layout-scroll.yui-resize {
+	min-width: 264px;
+}
+
+#page-mod-chat-gui_ajax-index #layout-doc .yui-layout-scroll.yui-resize .yui-layout-wrap, #page-mod-chat-gui_ajax-index #layout-doc .yui-layout-scroll.yui-resize .yui-layout-wrap .yui-layout-bd {
+	min-width: 262px;
+}
+
+#page-mod-chat-gui_ajax-index #layout-doc .yui-layout-unit-center.yui-layout-scroll, #page-mod-chat-gui_ajax-index #layout-doc .yui-layout-unit-center.yui-layout-scroll .yui-layout-wrap, #page-mod-chat-gui_ajax-index #layout-doc .yui-layout-unit-center.yui-layout-scroll .yui-layout-wrap .yui-layout-bd {
+    max-width: calc(100% - 42px);
+}
+ 
 #page-mod-chat-report div[role="main"] {
     background: #d1f0f4;
 	border: 1px solid #c4bfd1;
@@ -5696,4 +5702,3 @@ a#choosetheme {
 						
 	}
 }
-    
