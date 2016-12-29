@@ -42,7 +42,7 @@ class additional_content extends model{
                                     $type = additional_content::HTML_CONTENT_TYPE, $table = 'quizsbs_additional_content') {
         global $DB;
         $this->set_table($table);
-        $this->id = $id;
+        $this->set_id($id);
         $this->load_from_db();
         $this->name = (empty($this->name)) ? $name : $this->name;
         $this->quizsbsid = (empty($this->quizsbsid)) ? $quizsbsid : $this->quizsbsid;
@@ -104,7 +104,7 @@ class additional_content extends model{
      * @param field_type $id
      */
     public function set_id($id) {
-        $this->id = $id;
+        $this->id = is_numeric($id) ? $id : null;
     }
 
     /**

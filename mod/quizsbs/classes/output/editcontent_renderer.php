@@ -61,7 +61,10 @@ class editcontent_renderer extends \plugin_renderer_base {
     public function content_load_form($pageurl, $structure, additional_content $additaional) {
         global $DB;
 
-        $contentloadform = new content_load($pageurl, $structure);
+        $contentloadform = new content_load($pageurl, array(
+            'structure' => $structure,
+            'additional' => $additaional,
+        ));
         $questioncontenthtml = new question_content();
         $questioncontentcss = new question_content();
         $questioncontentjavascript = new question_content();
@@ -88,10 +91,15 @@ class editcontent_renderer extends \plugin_renderer_base {
                     break;
             }
         }
+        $contentquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $additaionalcontent->id));
+        $additaionalcontent->contentquestion = array();
+        foreach ($contentquestion as $question) {
+            $additaionalcontent->contentquestion[] = $question->questionid;
+        }
         $contentloadform->set_data($additaionalcontent);
 
         if ($contentdata = $contentloadform->get_data()) {
-            $additionalcontent = new additional_content('quizsbs_additional_content');
+            $additionalcontent = new additional_content();
             $additionalcontent->set_id($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
             $additionalcontent->set_type($contentdata->contenttype);
@@ -118,9 +126,25 @@ class editcontent_renderer extends \plugin_renderer_base {
                         break;
                 }
             }
+            $contentquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $additionalcontent->get_id()));
             foreach ($contentdata->contentquestion as $questionid) {
-                $DB->set_field('quizsbs_slots', 'additionalcontentid', $additionalcontent->get_id(), array('questionid' => $questionid));
+                $key = false;
+                foreach ($contentquestion as $id => $question) {
+                    if($questionid == $question->questionid){
+                        $key = $id;
+                        break;
+                    }
+                }
+                if($key === false){
+                    $DB->set_field('quizsbs_slots', 'additionalcontentid', $additionalcontent->get_id(), array('questionid' => $questionid));
+                } else {
+                    unset($contentquestion[$key]);
+                }
             }
+            foreach ($contentquestion as $question) {
+                $DB->set_field('quizsbs_slots', 'additionalcontentid', null, array('id' => $question->id));
+            }
+            $pageurl->param('additionalcontentid',$additionalcontent->get_id());
             redirect($pageurl);
         }
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');

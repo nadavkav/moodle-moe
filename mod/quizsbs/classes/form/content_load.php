@@ -70,12 +70,14 @@ class content_load extends \moodleform {
         global $CFG, $DB;
 
         $mform =& $this->_form;
-        $slots = $this->_customdata->get_slots();
+        $slots = $this->_customdata['structure']->get_slots();
         $questions = array();
         foreach ($slots as $slot) {
-            $question = $DB->get_record('question', array('id' => $slot->questionid));
-            if ($question) {
-                $questions[$question->id] = $question->name;
+            if(is_null($slot->additionalcontentid) || ($slot->additionalcontentid == $this->_customdata['additional']->get_id())){
+                $question = $DB->get_record('question', array('id' => $slot->questionid));
+                if ($question) {
+                    $questions[$question->id] = $question->name;
+                }
             }
         }
         $options = array(
