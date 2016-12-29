@@ -5372,10 +5372,11 @@ div#chatcurrentusers table td.chatuserdetails {
     padding-right: 5px;
     margin-top: 5px;
     height: 25px;
-    line-height: 22px;
-    display: inline-block;
+    line-height: 12px;
+   	display: inline-flex;
     font-weight: bold;
 	min-width: 70px;
+	position: relative;
 }
 
 .path-mod-chat #users-list li table tr > td a[href="###"]:after {
@@ -5389,6 +5390,9 @@ div#chatcurrentusers table td.chatuserdetails {
     display: block;
     float: left;
     border-right: 1px solid #c2becf;
+	position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .path-mod-chat #users-list li table tr > td a[href="###"]:first-of-type:after {
