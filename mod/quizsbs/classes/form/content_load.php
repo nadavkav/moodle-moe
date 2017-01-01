@@ -87,7 +87,7 @@ class content_load extends \moodleform {
 
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
-        $mform->setType('additionalcontentname', PARAM_ALPHANUMEXT);
+        $mform->setType('additionalcontentname', PARAM_TEXT);
         $mform->addRule('additionalcontentname', get_string('error'), 'required');
         $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('editor', 'quizsbs'), 0);
