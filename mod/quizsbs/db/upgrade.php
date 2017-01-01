@@ -208,8 +208,10 @@ function xmldb_quizsbs_upgrade($oldversion) {
         $field = new xmldb_field('additionalcontentid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, false, null, null);
         $key = new xmldb_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'quizsbs_additional_content', array('id'));
 
-        $dbman->add_field($table, $field);
-        $dbman->add_key($table, $key);
+        if(!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+            $dbman->add_key($table, $key);
+        }
 
         upgrade_mod_savepoint(true, 2016121903, 'quizsbs');
     }
