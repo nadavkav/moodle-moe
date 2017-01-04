@@ -21,9 +21,13 @@
     {{/buttons}}
 </div>
 <div class="othernav span6">
+   <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform2">
     <div class="row-fluid">
-        <a href="{{link}}" class="endtestlink btn span6">{{# str }} endtest, quizsbs {{/ str }}</a>
         {{{countdowntimer}}}
         {{{restartpreview}}}
+        {{{attemptnavigationbuttons}}}
+        <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
+        <input type="hidden" name="nextpage" value="{{nextpage}}" />
     </div>
+   </form>
 </div>

@@ -1656,7 +1656,7 @@ class quizsbs_attempt {
         $bc->attributes['role'] = 'navigation';
         $bc->attributes['aria-labelledby'] = 'mod_quizsbs_navblock_title';
         $bc->title = html_writer::span(get_string('quizsbsnavigation', 'quizsbs'), '', array('id' => 'mod_quizsbs_navblock_title'));
-        $bc->content = $output->navigation_panel($panel, $this);
+        $bc->content = $output->navigation_panel($panel, $this, $page);
         return $bc;
     }
 

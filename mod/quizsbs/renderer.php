@@ -317,17 +317,25 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      *
      * @param quizsbs_nav_panel_base $panel instance of quizsbs_nav_panel_base
      */
-    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj) {
+    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj,$page) {
 
         $data = new stdClass();
         $data->bcc = $panel->get_button_container_class();
         foreach ($panel->get_question_buttons() as $button) {
             $data->buttons[]['button'] = $this->render($button);
         }
+        if ($attemptobj->is_last_page($page)) {
+            $nextpage = -1;
+        } else {
+            $nextpage = $page + 1;
+        }
         $data->countdowntimer = $this->countdown_timer($attemptobj, time());
         $data->link = $attemptobj->summary_url();
         $data->restartpreview = $panel->render_end_bits($this);
-
+        $data->page = $page;
+        $data->nextpage = $nextpage;
+        $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
+        
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
         return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;
@@ -519,7 +527,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
         if ($page > 0) {
             $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
-                    'value' => get_string('navigateprevious', 'quizsbs'), 'class' => 'mod_quizsbs-prev-nav'));
+                    'value' => "", 'class' => 'mmod_quizsbs-prev-nav'));
         }
         if ($lastpage) {
             $nextlabel = get_string('endtest', 'quizsbs');
@@ -527,7 +535,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $nextlabel = get_string('navigatenext', 'quizsbs');
         }
         $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'next',
-                'value' => $nextlabel, 'class' => 'mod_quizsbs-next-nav'));
+                'value' => "", 'class' => 'mmod_quizsbs-next-nav'));
         $output .= html_writer::end_tag('div');
 
         return $output;
