@@ -17,13 +17,7 @@
 <section id="quizsbs" class="row-fluid">
     <nav id="navigation" class="row-fluid">
             {{{navigation}}}
-    </nav>
-    <section id="questions" class="row-fluid">
-        <section id="quizsbs_question" class="span6">
-        <h2>{{subject}}</h2>
-        <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
-            <div>
-                {{{slots}}}
+             <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
                 {{{attemptnavigationbuttons}}}
                 <input type="hidden" name="attempt" value="{{attempteid}}" />
                 <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
@@ -32,9 +26,28 @@
                 <input type="hidden" name="sesskey" value="{{sesskey}}" />
                 <input type="hidden" name="scrollpos" value="" id="scrollpos" />
                 <input type="hidden" name="slots" value="{{questionid}}" /> 
-            </div>
-        </form>
-        {{{connectionwarning}}}
+             </form>
+    </nav>
+    <section id="questions" class="row-fluid">
+        <section id="quizsbs_question" class="span6">
+            <section id="subjectheader" class=span12">
+                <h2>{{subject}}</h2>
+            </section>
+            <section id="questionbox" class="span12"> 
+                <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
+                    <div>
+                        {{{slots}}}
+                        <input type="hidden" name="attempt" value="{{attempteid}}" />
+                        <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
+                        <input type="hidden" name="nextpage" value="{{nextpage}}" />
+                        <input type="hidden" name="timeup" value="0" id="timeup" />
+                        <input type="hidden" name="sesskey" value="{{sesskey}}" />
+                        <input type="hidden" name="scrollpos" value="" id="scrollpos" />
+                        <input type="hidden" name="slots" value="{{questionid}}" /> 
+                    </div>
+                </form>
+                {{{connectionwarning}}}
+            </section>
         </section>
         <section id="addtional_content" class="span6">
             {{#content}}

@@ -317,7 +317,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      *
      * @param quizsbs_nav_panel_base $panel instance of quizsbs_nav_panel_base
      */
-    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj,$page) {
+    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj, $page) {
 
         $data = new stdClass();
         $data->bcc = $panel->get_button_container_class();
@@ -335,7 +335,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $data->page = $page;
         $data->nextpage = $nextpage;
         $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
-        
+
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
         return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;
@@ -487,7 +487,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $additionalcontent = new additional_content($slot->additionalcontentid);
             $data->green = $additionalcontent->get_name();
             $subject = $DB->get_record('quizsbs_subject', array('id' => $additionalcontent->get_subjectid()));
-            $data->subject = $subject->name;
+            $data->subject = ($subject) ? $subject->name : $additionalcontent->get_name();
             $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
             foreach ($questioncontent as  $value) {
                 $content = new question_content($value->id);
@@ -529,7 +529,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
         if ($page > 0) {
             $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
-                    'value' => "", 'class' => 'mmod_quizsbs-prev-nav'));
+                    'value' => get_string('navigateprevious', 'quizsbs'), 'class' => 'mod_quizsbs-prev-nav'));
         }
         if ($lastpage) {
             $nextlabel = get_string('endtest', 'quizsbs');
@@ -537,7 +537,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $nextlabel = get_string('navigatenext', 'quizsbs');
         }
         $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'next',
-                'value' => "", 'class' => 'mmod_quizsbs-next-nav'));
+                'value' => $nextlabel, 'class' => 'mod_quizsbs-next-nav'));
         $output .= html_writer::end_tag('div');
 
         return $output;
