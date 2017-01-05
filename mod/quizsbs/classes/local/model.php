@@ -36,6 +36,14 @@ abstract class model {
         return $this->table;
     }
 
+    public function get_id() {
+        return (isset($this->id)) ? $this->id : null;
+    }
+
+    public function set_id($id) {
+        $this->id = is_numeric($id) ? $id : null;
+    }
+
     public function set_table($table):bool {
         global $DB;
 

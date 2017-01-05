@@ -1701,6 +1701,20 @@ function quizsbs_extend_settings_navigation($settings, $quizsbsnode) {
         $contentnode = $quizsbsnode->add_node(navigation_node::create(get_string('additionalcontent', 'quizsbs'), $url,
                                         navigation_node::TYPE_SETTING,
                                         null, null, new pix_icon('i/report', '')), $beforekey);
+        $contentnode->add_node(navigation_node::create(get_string('editsubject', 'quizsbs'),
+                new moodle_url('/mod/quizsbs/editsubject.php', array(
+                    'cmid' => $PAGE->cm->id,
+                    'action' => 'edit',
+                )),
+                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_editsubject',
+                new pix_icon('t/edit', get_string('editsubject', 'quizsbs'))));
+        $contentnode->add_node(navigation_node::create(get_string('listsubject', 'quizsbs'),
+                new moodle_url('/mod/quizsbs/editsubject.php', array(
+                    'cmid' => $PAGE->cm->id,
+                    'action' => 'view',
+                )),
+                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_listsubject',
+                new pix_icon('t/edit', get_string('editsubject', 'quizsbs'))));
         $contentnode->add_node(navigation_node::create(get_string('additionalcontentlist', 'quizsbs'),
                 new moodle_url('/mod/quizsbs/additionalcontentlist.php', array('cmid' => $PAGE->cm->id)),
                 navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontentlist',

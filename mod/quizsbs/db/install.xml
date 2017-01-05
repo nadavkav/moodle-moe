@@ -54,7 +54,18 @@
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
       </INDEXES>
     </TABLE>
-        <TABLE NAME="quizsbs_additional_content" COMMENT="Table of all additionl question content">
+    <TABLE NAME="quizsbs_subject" COMMENT="quiz subjects">
+        <FIELDS>
+            <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="quizsbsid" LENGTH="10" />
+            <FIELD SEQUENCE="false" TYPE="char" NOTNULL="true" NAME="name" LENGTH="255" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="praimary" FIELDS="id" TYPE="primary"/>
+            <KEY NAME="quizsbs" FIELDS="quizsbsid" TYPE="foreign" REFTABLE="quizsbs" REFFIELDS="id"/>
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="quizsbs_additional_content" COMMENT="Table of all additionl question content">
         <FIELDS>
             <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10"/>
             <FIELD SEQUENCE="false" TYPE="char" NOTNULL="true" NAME="name" LENGTH="255" />
@@ -62,10 +73,12 @@
             <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="type" LENGTH="2" />
             <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="createdate" LENGTH="10" />
             <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="modifieddate" LENGTH="10" />
+            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="subjectid" LENGTH="10" />
         </FIELDS>
         <KEYS>
             <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
             <KEY NAME="quizsbs" FIELDS="quizsbsid" TYPE="foreign" REFTABLE="quizsbs" REFFIELDS="id"/>
+            <KEY NAME="subject" FIELDS="subjectid" TYPE="foreign" REFTABLE="quizsbs_subject" REFFIELDS="id"/>
         </KEYS>
     </TABLE>
     <TABLE NAME="quizsbs_slots" COMMENT="Stores the question used in a quizsbs, with the order, and for each question, which page it appears on, and the maximum mark (weight).">

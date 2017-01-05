@@ -35,6 +35,7 @@ class additional_content extends model{
     protected $createdate;
     protected $modifieddate;
     protected $type;
+    protected $subjectid;
 
     /**
      */
@@ -145,6 +146,22 @@ class additional_content extends model{
      */
     public function set_type(int $type) {
         $this->type = $type;
+    }
+
+    /**
+     * @return the $subjectid
+     */
+    public function get_subjectid()
+    {
+        return $this->subjectid;
+    }
+
+    /**
+     * @param field_type $subjectid
+     */
+    public function set_subjectid($subjectid)
+    {
+        $this->subjectid = $subjectid;
     }
 
     /**

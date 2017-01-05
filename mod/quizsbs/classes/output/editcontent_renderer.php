@@ -73,6 +73,7 @@ class editcontent_renderer extends \plugin_renderer_base {
         $additaionalcontent->additionalcontentname = $additaional->get_name();
         $additaionalcontent->contenttype = $additaional->get_type();
         $additaionalcontent->createdate = $additaional->get_createdate();
+        $additaionalcontent->subjectid = $additaional->get_subjectid();
         $questioncontents = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additaional->get_id()));
         foreach ($questioncontents as $questioncontent) {
             switch ($questioncontent->type) {
@@ -102,6 +103,7 @@ class editcontent_renderer extends \plugin_renderer_base {
             $additionalcontent = new additional_content($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
             $additionalcontent->set_type($contentdata->contenttype);
+            $additionalcontent->set_subjectid($contentdata->subjectid);
             if (!$additionalcontent->get_createdate()) {
                 $additionalcontent->set_createdate($contentdata->createdate);
             }

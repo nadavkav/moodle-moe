@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016121903;
+$plugin->version   = 2017010400;
 $plugin->requires  = 2016051900;
 $plugin->component = 'mod_quizsbs';
 $plugin->cron      = 60;

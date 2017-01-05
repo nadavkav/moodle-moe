@@ -477,7 +477,9 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
                                             $attemptobj->attempt_url($slot, $page), $this);
             $slot = $DB->get_record('quizsbs_slots', array('id' => $slot));
             $additionalcontent = new additional_content($slot->additionalcontentid);
-            $data->subject = $additionalcontent->get_name();
+            $data->green = $additionalcontent->get_name();
+            $subject = $DB->get_record('quizsbs_subject', array('id' => $additionalcontent->get_subjectid()));
+            $data->subject = $subject->name;
             $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
             foreach ($questioncontent as  $value) {
                 $content = new question_content($value->id);

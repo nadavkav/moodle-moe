@@ -84,7 +84,11 @@ class content_load extends \moodleform {
             'multiple' => true,
             'noselectionstring' => get_string('selectquestions', 'quizsbs'),
         );
-
+        $quizsbjects = $DB->get_records('quizsbs_subject', array('quizsbsid' => $this->_customdata['structure']->get_quizsbsid()));
+        $subjectoptions = array();
+        foreach ($quizsbjects as $key => $quizsubject) {
+            $subjectoptions[$key] = $quizsubject->name;
+        }
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
         $mform->setType('additionalcontentname', PARAM_TEXT);
@@ -113,6 +117,7 @@ class content_load extends \moodleform {
         $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
         $mform->setType('javascripteditor', PARAM_RAW);
+        $mform->addElement('select', 'subjectid', get_string('selectsubject', 'quizsbs'), $subjectoptions);
         $mform->addElement('autocomplete', 'contentquestion', get_string('contentquestions', 'quizsbs'), $questions, $options);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);

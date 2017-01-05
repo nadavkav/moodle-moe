@@ -216,5 +216,21 @@ function xmldb_quizsbs_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2016121903, 'quizsbs');
     }
 
+    if($oldversion < 2017010400) {
+        $table = new xmldb_table('quizsbs_subject');
+        if(!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'quizsbs_subject');
+        }
+        $table = new xmldb_table('quizsbs_additional_content');
+        $field = new xmldb_field('subjectid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, false, null, null);
+        $key = new xmldb_key('subject', XMLDB_KEY_FOREIGN, array('subjectid'), 'quizsbs_subject', array('id'));
+        if(!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+            $dbman->add_key($table, $key);
+        }
+
+        upgrade_mod_savepoint(true, 2017010400, 'quizsbs');
+    }
+
     return true;
 }
