@@ -4,6 +4,20 @@
     font-size: 0.7em;
 }
 
+.mmod_quizsbs-prev-nav{
+	background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
+	background-color:#c6e1e8 !important;
+	background-position:5%;
+    padding: 12px 24px !important;
+}
+
+.mmod_quizsbs-next-nav{
+	background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
+    background-color:#c6e1e8 !important;
+	background-position: center center; 
+	padding: 12px 24px !important; 	
+}
+
 /** Attempt and review pages **/
 #page-mod-quizsbs-attempt #page .controls,
 #page-mod-quizsbs-summary #page .controls,
@@ -1060,6 +1074,8 @@ table#categoryquestions {
 
 #quizsbs #navigation div {
 	float: right;
+	display: flex;
+	flex-direction : roe;
 }
 
 #id_csseditor, #id_javascripteditor {
