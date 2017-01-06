@@ -45,14 +45,6 @@ $structure = $quizsbsobj->get_structure();
 // You need mod/quizsbs:manage in addition to question capabilities to access this page.
 require_capability('mod/quizsbs:manage', $contexts->lowest());
 
-$params = array(
-    'courseid' => $course->id,
-    'context' => $contexts->lowest(),
-    'other' => array(
-        'quizsbsid' => $quizsbs->id
-    )
-);
-
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_pagetype('mod-quizsbs-editcontent');
 

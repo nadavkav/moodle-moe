@@ -31,13 +31,23 @@ class editsubject_renderer extends \plugin_renderer_base {
      public function editsubject_page(\quizsbs $quizsbsobj,\moodle_url $url = null, $subjectid = null) {
         $context = new \stdClass();
         $subjectform = new editsubject($url);
+        if($subjectid){
+            $customdata = new \stdClass();
+            $subject = new subject($subjectid);
+            $customdata->subjectname = $subject->get_name();
+            $subjectform->set_data($customdata);
+        } else {
+            $subject = new subject();
+        }
         $data = $subjectform->get_data();
         if(!is_null($data)) {
-            $subject = new subject();
             $subject->set_name($data->subjectname);
             $subject->set_quizsbsid($quizsbsobj->get_quizsbs()->id);
             $subject->add_entry();
-
+            redirect(new \moodle_url('/mod/quizsbs/editsubject.php', array(
+                'cmid' => $url->get_param('cmid'),
+                'action' => 'view',
+            )));
         }
         $context->subjectfrom = $subjectform->render();
         return $this->render_from_template('mod_quizsbs/editsubject', $context);
