@@ -21,7 +21,7 @@
     <section id="contentlist" class="span6">
         <ul>
         {{#content}}
-            <li class="content" id="{{id}}"><input type="checkbox" value="{{id}}"/>{{name}}</li>
+            <li class="content" id="{{id}}"><input type="checkbox" value="{{id}}" {{#subjectid}}checked="checked"{{/subjectid}}/>{{name}}</li>
         {{/content}}
         </ul>
     </section>

@@ -94,8 +94,9 @@ class editsubject_renderer extends \plugin_renderer_base {
         $context->subjectname = $subject->get_name();
         $context->subjectid = $subject->get_id();
         $this->page->requires->js_call_amd('mod_quizsbs/loadcontent', 'init');
-        foreach ($additionalcontent as $content) {
+        foreach ($additionalcontent as $key => $content) {
             $context->content[] = $content->to_std();
+            end($context->content)->subjectid = ($subject->get_id() == $content->get_subjectid()) ? $subject->get_id() : false;
         }
         return $this->render_from_template('mod_quizsbs/connecttosubject', $context);
      }
