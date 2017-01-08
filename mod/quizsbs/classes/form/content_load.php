@@ -85,10 +85,6 @@ class content_load extends \moodleform {
             'noselectionstring' => get_string('selectquestions', 'quizsbs'),
         );
         $quizsbjects = $DB->get_records('quizsbs_subject', array('quizsbsid' => $this->_customdata['structure']->get_quizsbsid()));
-        $subjectoptions = array();
-        foreach ($quizsbjects as $key => $quizsubject) {
-            $subjectoptions[$key] = $quizsubject->name;
-        }
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
         $mform->setType('additionalcontentname', PARAM_TEXT);
@@ -100,10 +96,10 @@ class content_load extends \moodleform {
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
         $mform->setDefault('contenttype', 0);
 
-        $mform->addElement('editor', 'htmleditor', get_string('editor', 'quizsbs'), array(
-            'subdirs' => 0,
+        $mform->addElement('editor', 'htmleditor', get_string('editor', 'quizsbs'),null , array(
+            'subdirs' => true,
             'maxbytes' => 0,
-            'maxfiles' => 0,
+            'maxfiles' => 99,
             'changeformat' => 0,
             'context' => null,
             'noclean' => 0,
@@ -117,8 +113,6 @@ class content_load extends \moodleform {
         $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
         $mform->setType('javascripteditor', PARAM_RAW);
-        $mform->addElement('select', 'subjectid', get_string('selectsubject', 'quizsbs'), $subjectoptions);
-        $mform->addElement('autocomplete', 'contentquestion', get_string('contentquestions', 'quizsbs'), $questions, $options);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);
         $mform->addElement('hidden', 'createdate', 'createdate', null);
