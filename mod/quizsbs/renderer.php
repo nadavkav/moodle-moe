@@ -529,7 +529,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
         if ($page > 0) {
             $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
-                    'value' => get_string('navigateprevious', 'quizsbs'), 'class' => 'mod_quizsbs-prev-nav'));
+                    'title' => get_string('navigateprevious', 'quizsbs'), 'value' => '', 'class' => 'mod_quizsbs-prev-nav'));
         }
         if ($lastpage) {
             $nextlabel = get_string('endtest', 'quizsbs');
@@ -537,7 +537,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $nextlabel = get_string('navigatenext', 'quizsbs');
         }
         $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'next',
-                'value' => $nextlabel, 'class' => 'mod_quizsbs-next-nav'));
+                'title' => $nextlabel, 'value' =>'', 'class' => 'mod_quizsbs-next-nav'));
         $output .= html_writer::end_tag('div');
 
         return $output;

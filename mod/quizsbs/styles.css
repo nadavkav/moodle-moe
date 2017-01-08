@@ -4,11 +4,60 @@
     font-size: 0.7em;
 }
 
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns .mod_quizsbs-next-nav, #page-mod-quizsbs-review.dir-rtl .submitbtns .mod_quizsbs-next-nav {
+    margin-left: 9px;
+	
+}
+
+#page-mod-quizsbs-attempt #quizsbs .singlebutton{
+	 margin-top: 12px;
+	 margin-right: 267px;
+}
+
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns, #page-mod-quizsbs-review.dir-rtl .submitbtns {
+	padding-top: 13px;
+}
+
+#page-mod-quizsbs-attempt  .singlebutton{
+	background: url([[pix:quizsbs|Kaftor_orada]]) no-repeat center ;
+	background-size: cover;
+    border-style: solid;
+	border-width: 1.5px;
+	border-color: #989ca5;
+	
+}
+
+#page-mod-quizsbs-attempt  .singlebutton input[type="submit"]{
+    background: #faf7da ;
+	color:black !important;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	padding: 0px;
+	
+}
+
+#quizsbs #navigation .othernav {
+ 	margin-left:auto; 
+}
+
+#quizsbs #navigation  .qn_buttons  {
+	max-width: 325px;
+    max-height: 49px;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	margin: 1%;
+}
+
+
 .mod_quizsbs-prev-nav{
 	background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
 	background-color:#c6e1e8 !important;
 	background-position:5%;
     padding: 12px 24px !important;
+    border-color: #989ca5;
+	
 }
 
 .mod_quizsbs-next-nav{
@@ -1124,6 +1173,7 @@ table#categoryquestions {
 }
 #navigation{
 	border-bottom: 1px solid #baacc9;
+	display: flex;
 }
 #subjectheader {
 	border: 1px solid #b8abb7;
