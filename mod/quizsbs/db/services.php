@@ -195,9 +195,21 @@ $functions = array(
     'mod_quizsbs_get_content_preview' => array(
         'classname'     => 'mod_quizsbs_external',
         'methodname'    => 'get_content_preview',
+        'classpath'     =>  'mod/quizsbs/classes/external.php',
         'descritption'  => 'Return content preview',
         'type'          => 'read',
         'capabilities'  => 'mod/quizsbs:manage',
         'ajax'          => true
+    ),
+);
+
+$services = array(
+    'quizsbs' => array(
+        'functions' => array(
+            'mod_quizsbs_get_content_preview',
+        ),
+        'requiredcapability' => '',
+        'restrictedusers' =>0,
+        'enabled'=>1,
     ),
 );

@@ -194,5 +194,18 @@ class additional_content extends model{
             $this->map_to_db($record);
         }
     }
+
+    public function get_connected_contents() {
+        global $DB;
+
+        $contents = array();
+        $dbcontents = $DB->get_records('quizsbs_question_content', array(
+            'additionalcontentid' => $this->get_id(),
+        ));
+        foreach ($dbcontents as $content) {
+            $contents[$content->type] = new question_content($content->id);
+        }
+        return $contents;
+    }
 }
 

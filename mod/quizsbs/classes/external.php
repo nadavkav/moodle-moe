@@ -1,4 +1,6 @@
 <?php
+use mod_quizsbs\local\additional_content;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -1888,6 +1890,33 @@ class mod_quizsbs_external extends external_api {
                 'warnings' => new external_warnings(),
             )
         );
+    }
+
+    public static function get_content_preview_parameters(){
+        return new external_function_parameters(array(
+            'id' => new external_value(PARAM_INT, 'additional content id'),
+        ));
+    }
+
+    public static function get_content_preview($id) {
+        global $DB;
+
+        $additionalcontent = new additional_content($id);
+        $contents = array();
+        foreach ($additionalcontent->get_connected_contents() as $key => $content) {
+            $contents[$key]['id'] = $content->get_id();
+            $contents[$key]['content'] = $content->get_content();
+            $contents[$key]['type'] = $content->get_type();
+        }
+        return $contents;
+    }
+
+    public static function get_content_preview_returns() {
+        return new external_multiple_structure(new external_single_structure(array(
+            'id' => new external_value(PARAM_INT),
+            'content' => new external_value(PARAM_RAW),
+            'type' => new external_value(PARAM_INT),
+        )));
     }
 
 }

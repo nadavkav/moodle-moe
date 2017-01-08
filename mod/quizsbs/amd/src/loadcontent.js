@@ -14,26 +14,42 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
-*
-* @module    mod_quizsbs/preflightcheck
+* @package   mod_quizsbs
+* @module    mod_quizsbs/loadcintent
 **/
-define(['query', 'core/ajax'], function($, ajax){
+define(['jquery', 'core/ajax'], function($, ajax){
 	var LoadContent = function () {
 		
-	}
+	};
 	
 	LoadContent.prototype.init = function (){
-		$('.content').click(function(element){
-			var getcontent = {
-			    'method': 'mod_quizsbs_get_content_preview',
+		$('.content').click(function(event){
+			var element = event.target;
+			var getcontent = [{
+			    'methodname': 'mod_quizsbs_get_content_preview',
 			    'args': {
 			    	'id': $(element).attr('id')
 			    }
-			};
+			}];
 			var promises = ajax.call(getcontent);
 			
 			promises[0].done(function(response){
-				
+				$('#htmlcontent').html('');
+				$('#csscontent').html('');
+				$('#javascriptcontent').html('');
+				for (var index in response) {
+					switch (response[index].type) {
+						case 0:
+							$('#htmlcontent').html(response[index].content);
+							break;
+						case 3:
+							$('#csscontent').html("<style>" + response[index].content + "</style>");
+							break;
+						case 2:
+							$('#javascriptcontent').html("<script>" + response[index].content + "</script>");
+							break;
+					}
+				}
 			}).fail(function(ex){
 				
 			});

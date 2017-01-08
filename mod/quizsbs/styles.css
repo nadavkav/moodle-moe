@@ -1078,6 +1078,13 @@ table#categoryquestions {
 	padding-right: 1em;
 	padding-left: 1em;
 }
+#contentconnect #contentlist,
+#contentconnect #addtional_content {
+	float: right;
+}
+#contentconnect #addtional_content {
+	width: 46%;
+}
 #quizsbs #navigation div {
 	float: right;
 	display: flex;
