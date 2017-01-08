@@ -201,12 +201,22 @@ $functions = array(
         'capabilities'  => 'mod/quizsbs:manage',
         'ajax'          => true
     ),
+    'mod_quizsbs_add_content_to_subject' => array(
+        'classname'     => 'mod_quizsbs_external',
+        'methodname'    => 'add_content_to_subject',
+        'classpath'     => 'mod/quizsbs/classes/external.php',
+        'descritption'  => 'add content to subject',
+        'type'          => 'write',
+        'capabilities'  => 'mod/quizsbs:manage',
+        'ajax'          => true
+    ),
 );
 
 $services = array(
     'quizsbs' => array(
         'functions' => array(
             'mod_quizsbs_get_content_preview',
+            'mod_quizsbs_add_content_to_subject'
         ),
         'requiredcapability' => '',
         'restrictedusers' =>0,

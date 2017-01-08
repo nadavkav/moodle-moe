@@ -54,6 +54,20 @@ define(['jquery', 'core/ajax'], function($, ajax){
 				
 			});
 		});
+		$('#aprroved').click(function(event){
+			var contentsids = [];
+			$('input[type="checkbox"]:checked').each(function(index, element){
+				contentsids.push($(element).val());
+			});
+			var getcontent = [{
+			    'methodname': 'mod_quizsbs_add_content_to_subject',
+			    'args': {
+			    	'ids': contentsids,
+			    	'subjectid': $('heading h2').attr('id')
+			    }
+			}];
+			var promises = ajax.call(getcontent);
+		});
 	};
 	return new LoadContent();
 });

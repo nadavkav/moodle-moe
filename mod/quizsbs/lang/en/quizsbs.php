@@ -85,6 +85,7 @@ $string['answersingleno'] = 'Multiple answers allowed';
 $string['answersingleyes'] = 'One answer only';
 $string['answertoolong'] = 'Answer too long after line {$a} (255 char. max)';
 $string['aon'] = 'AON format';
+$string['approved'] = 'Approved';
 $string['approvedelete'] = 'Are you sure you want to delete the Additional content?';
 $string['areyousureremoveselected'] = 'Are you sure you want to remove all the selected questions?';
 $string['asshownoneditscreen'] = 'As shown on the edit screen';

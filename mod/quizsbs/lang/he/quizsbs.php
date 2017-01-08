@@ -90,6 +90,7 @@ $string['answersingleno'] = 'אפשר תשובות מרובות';
 $string['answersingleyes'] = 'תשובה אחת בלבד';
 $string['answertoolong'] = 'תשובה ארוכה מדי אחרי השורה ה-{$a} (קיימת מגבלה של 255 תווים לתשובה)';
 $string['aon'] = 'תסדיר AON';
+$string['approved'] = 'אישור';
 $string['approvedelete'] = 'האם למחוק את התוכן?';
 $string['areyousureremoveselected'] = 'האם להסיר את כל השאלות שנבחרו?';
 $string['asshownoneditscreen'] = 'כפי שמוצג על מסך העריכה';

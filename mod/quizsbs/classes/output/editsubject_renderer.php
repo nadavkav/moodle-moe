@@ -92,6 +92,7 @@ class editsubject_renderer extends \plugin_renderer_base {
         $additionalcontent = $subject->get_avilable_contents();
         $context->content = array();
         $context->subjectname = $subject->get_name();
+        $context->subjectid = $subject->get_id();
         $this->page->requires->js_call_amd('mod_quizsbs/loadcontent', 'init');
         foreach ($additionalcontent as $content) {
             $context->content[] = $content->to_std();

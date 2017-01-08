@@ -1919,4 +1919,32 @@ class mod_quizsbs_external extends external_api {
         )));
     }
 
+    public static function add_content_to_subject_parameters() {
+        return new external_function_parameters(array(
+            'ids' => new external_multiple_structure(
+                new external_value(PARAM_INT, 'content IDs', false, null, true)
+            ),
+            'subjectid' => new external_value(PARAM_INT),
+        ));
+    }
+
+    public static function add_content_to_subject ($ids, $subjectid) {
+        global $DB;
+        $existingcontent = $DB->get_records('quizsbs_additional_content', array('subjectid' => $subjectid));
+        foreach ($existingcontent as $additionalcontent){
+            if(!in_array($additionalcontent->id, $ids)){
+                $DB->set_field('quizsbs_additional_content', 'subjectid', null, array('id' => $additionalcontent->id));
+            }
+        }
+        foreach ($ids as $id){
+            $DB->set_field('quizsbs_additional_content', 'subjectid', $subjectid, array('id' => $id));
+        }
+        return array('status' => 1);
+    }
+
+    public static function add_content_to_subject_returns() {
+        return new external_single_structure(array(
+            'status' => new external_value('PARAM_INT', 'status of execution', false, '1')
+        ));
+    }
 }
