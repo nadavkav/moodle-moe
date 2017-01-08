@@ -894,6 +894,7 @@ $string['status'] = 'Status';
 $string['stoponerror'] = 'Stop on error';
 $string['submitallandfinish'] = 'Submit all and finish';
 $string['subjectname'] = 'Subject Name';
+$string['subjectsuccessfulsave'] = 'Subject saved successfuly';
 $string['subneterror'] = 'Sorry, this quizsbs has been locked so that it is only accessible from certain locations.  Currently your computer is not one of those allowed to use this quizsbs.';
 $string['subnetnotice'] = 'This quizsbs has been locked so that it is only accessible from certain locations. Your computer is not on an allowed subnet. As teacher you are allowed to preview anyway.';
 $string['subplugintype_quizsbs'] = 'Report';

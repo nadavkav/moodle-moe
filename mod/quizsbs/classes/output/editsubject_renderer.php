@@ -19,6 +19,7 @@ namespace mod_quizsbs\output;
 use mod_quizsbs\form\editsubject;
 use mod_quizsbs\local\subject;
 use mod_quizsbs\form\delete_content;
+use core\notification;
 
 defined('MOODLE_INTERNAL') || die();
 /**
@@ -46,8 +47,9 @@ class editsubject_renderer extends \plugin_renderer_base {
             $subject->add_entry();
             redirect(new \moodle_url('/mod/quizsbs/editsubject.php', array(
                 'cmid' => $url->get_param('cmid'),
-                'action' => 'view',
-            )));
+                'action' => 'edit',
+                'id' => $subject->get_id(),
+            )), get_string('subjectsuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
         }
         $context->subjectfrom = $subjectform->render();
         $context->id = $url->get_param('id');
