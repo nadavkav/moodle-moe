@@ -54,6 +54,9 @@ switch ($action) {
     case 'edit':
         $content = $output->editsubject_page($quizsbsobj, $url, $id);
         break;
+    case 'connect':
+        $content = $output->connecttosubject_page($quizsbsobj, $url, $id);
+        break;
     case 'delete':
         $content =  $output->deletesubject_page($quizsbsobj, $url);
         break;

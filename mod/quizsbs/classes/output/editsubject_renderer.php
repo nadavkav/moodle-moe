@@ -50,6 +50,8 @@ class editsubject_renderer extends \plugin_renderer_base {
             )));
         }
         $context->subjectfrom = $subjectform->render();
+        $context->id = $url->get_param('id');
+        $context->cmid = $url->get_param('cmid');
         return $this->render_from_template('mod_quizsbs/editsubject', $context);
      }
 
@@ -81,6 +83,20 @@ class editsubject_renderer extends \plugin_renderer_base {
          $context = new \stdClass();
          $context->deleteform = $deleteform->render();
          return $this->render_from_template('mod_quizsbs/deletepage', $context);
+     }
+
+     public function connecttosubject_page(\quizsbs $quizsbs, \moodle_url $url, int $id = null) {
+        global $DB;
+        $context = new \stdClass();
+        $subject = new subject($id);
+        $additionalcontent = $subject->get_avilable_contents();
+        $context->content = array();
+        $context->subjectname = $subject->get_name();
+        $this->page->requires->js_call_amd('mod_quizsbs/loadcontent', 'init');
+        foreach ($additionalcontent as $content) {
+            $context->content[] = $content->to_std();
+        }
+        return $this->render_from_template('mod_quizsbs/connecttosubject', $context);
      }
 }
 

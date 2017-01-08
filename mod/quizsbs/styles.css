@@ -131,9 +131,9 @@ body.jsenabled .questionflagcheckbox {
     display: block;
     position: relative;
     float: left;
-    width: 1.5em;
+    width: 2em;
+	min-width: 2em;
     height: 1.5em;
-    overflow: hidden;
     margin: 0.3em 0.3em 0.3em 0;
     padding: 0;
     border: 1px solid #bbb;

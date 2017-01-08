@@ -217,6 +217,7 @@ $string['confirmclose'] = 'אתה עומד להגיש באופן סופי את �
 $string['confirmremovequestion'] = 'האם להסיר את השאלה {$a}?';
 $string['confirmremovesectionheading'] = 'האם הינך בטוח כי ברצונך להסיר את הכותרת  \'{$a}\' ?';
 $string['confirmserverdelete'] = 'האם להסיר את השרת <b>{$a}</b> מהרשימה?';
+$string['connectcontent'] = 'חיבור תכנים לנושא ';
 $string['connectionok'] = 'חיבור רשת נתונים שוחזרה. ניתן להמשיך בבטחה.';
 $string['containercategorycreated'] = 'קטגוריה זו נוצרה כדי לאחסן את כל הקטגוריות המקוריות שהועברו לרמת האתר בשל הסיבות המפורטות להלן.';
 $string['continueattemptquiz'] = 'המשך נסיון המענה האחרון שלך';

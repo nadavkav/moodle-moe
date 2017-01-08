@@ -82,5 +82,35 @@ class subject extends model {
     public function map_to_db($record) {
         parent::map_to_db($record);
     }
+
+    /**
+     *
+     * @return NULL|\mod_quizsbs\local\additional_content[]
+     */
+    public function get_connected_contents() {
+        global $DB;
+        $additionalcontents = array();
+        $contents = $DB->get_records('quizsbs_additional_content', array('subjectid' => $this->get_id()));
+        foreach ($contents as $content) {
+            $additionalcontents[$content->id] = new additional_content($content->id);
+        }
+        return (!empty($additionalcontents)) ? $additionalcontents : null;
+    }
+
+    /**
+     *
+     * @return NULL|\mod_quizsbs\local\additional_content[]
+     */
+    public function get_avilable_contents() {
+        global $DB;
+        $additionalcontents = array();
+        $contents = $DB->get_records_select('quizsbs_additional_content', 'subjectid IS NULL OR subjectid = ?', array(
+            $this->get_id()
+        ));
+        foreach ($contents as $content) {
+            $additionalcontents[$content->id] = new additional_content($content->id);
+        }
+        return (!empty($additionalcontents)) ? $additionalcontents : null;
+    }
 }
 

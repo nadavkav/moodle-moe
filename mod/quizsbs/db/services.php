@@ -191,4 +191,13 @@ $functions = array(
         'capabilities'  => 'mod/quizsbs:view',
         'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
     ),
+
+    'mod_quizsbs_get_content_preview' => array(
+        'classname'     => 'mod_quizsbs_external',
+        'methodname'    => 'get_content_preview',
+        'descritption'  => 'Return content preview',
+        'type'          => 'read',
+        'capabilities'  => 'mod/quizsbs:manage',
+        'ajax'          => true
+    ),
 );

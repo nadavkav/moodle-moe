@@ -78,7 +78,7 @@ abstract class model {
         }
     }
 
-    protected function to_std():\stdClass {
+    public function to_std():\stdClass {
         $obj = new \stdClass();
         $vars = get_object_vars($this);
         foreach ($vars as $key => $value) {

@@ -14,5 +14,17 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-{{{subjectfrom}}}
-<a href="/mod/quizsbs/editsubject.php?cmid={{cmid}}&id={{id}}&action=connect" class="btn">{{# str }} connectcontent, quizsbs {{/ str}}</a>
+<section id="contentconnect" class="row-fluid">
+    <heading class="span12">
+        <h2>{{subjectname}}</h2>
+    </heading>
+    <section id="contentlist" class="span6">
+        <ul>
+        {{#content}}
+            <li class="content" id="{{id}}"><input type="checkbox" value="{{id}}"/>{{name}}</li>
+        {{/content}}
+        </ul>
+    </section>
+    <section id="content" class="span6">
+    </section>
+</section>

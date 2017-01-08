@@ -176,6 +176,7 @@ $string['completionpass'] = 'Require passing grade';
 $string['completionpass_help'] = 'If enabled, this activity is considered complete when the student receives a passing grade, with the pass grade set in the gradebook.';
 $string['completionattemptsexhausted'] = 'Or all available attempts completed';
 $string['completionattemptsexhausted_help'] = 'Mark quizsbs complete when the student has exhausted the maximum number of attempts.';
+$string['connectcontent'] = 'Connect content to subject';
 $string['configadaptive'] = 'If you choose Yes for this option then the student will be allowed multiple responses to a question even within the same attempt at the quizsbs.';
 $string['configattemptsallowed'] = 'Restriction on the number of attempts students are allowed at the quizsbs.';
 $string['configdecimaldigits'] = 'Number of digits that should be shown after the decimal point when displaying grades.';
