@@ -164,6 +164,7 @@ $string['categoryadded'] = 'The category \'{$a}\' was added';
 $string['categorydeleted'] = 'The category \'{$a}\' was deleted';
 $string['categorynoedit'] = 'You do not have editing privileges in the category \'{$a}\'.';
 $string['categoryupdated'] = 'The category was successfully updated';
+$string['changessuccessfulsave'] = "Changes saved";
 $string['close'] = 'Close window';
 $string['closed'] = 'Closed';
 $string['closebeforeopen'] = 'Could not update the quizsbs. You have specified a close date before the open date.';

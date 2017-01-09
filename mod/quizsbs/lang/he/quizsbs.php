@@ -172,6 +172,7 @@ $string['categoryadded'] = 'הקטגוריה \'{$a}\' התווספה';
 $string['categorydeleted'] = 'הקטגוריה \'{$a}\' נמחקה';
 $string['categorynoedit'] = 'אין לך הרשאות עריכה בקטגוריה \'{$a}\'.';
 $string['categoryupdated'] = 'הקטגוריה עודכנה בהצלחה';
+$string['changessuccessfulsave'] = "השינויים נשמרו בהצלחה";
 $string['close'] = 'סגור חלון';
 $string['closebeforeopen'] = 'לא היה ניתן לעדכן את הבוחן. הגדרת את תאריך הסגירה לפני תאריך הפתיחה.';
 $string['closed'] = 'נסגר';

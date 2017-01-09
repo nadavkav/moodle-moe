@@ -22,7 +22,7 @@ require_once($CFG->dirroot . '/question/category_class.php');
 // These params are only passed from page request to request while we stay on
 // this page otherwise they would go in question_edit_setup.
 $action = optional_param('action', '', PARAM_ALPHA);
-$additionalcontentid = optional_param('additionalcontentid', null, PARAM_INT);
+$id = optional_param('id', null, PARAM_INT);
 
 $thispageurl = new moodle_url('/mod/quizsbs/additionalcontentlist.php');
 list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) = question_edit_setup('editq', '/mod/quizsbs/additionalcontentlist.php', true);
@@ -32,8 +32,8 @@ $quizsbshasattempts = quizsbs_has_attempts($quizsbs->id);
 if ($action) {
     $thispageurl->param('action', $action);
 }
-if ($additionalcontentid) {
-    $thispageurl->param('additionalcontentid', $additionalcontentid);
+if ($id) {
+    $thispageurl->param('additionalcontentid', $id);
 }
 $PAGE->set_url($thispageurl);
 

@@ -1,6 +1,4 @@
 <?php
-use mod_quizsbs\local\additional_content;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,6 +13,7 @@ use mod_quizsbs\local\additional_content;
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+use mod_quizsbs\local\additional_content;
 
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/quizsbs/locallib.php');
@@ -24,7 +23,8 @@ require_once($CFG->dirroot . '/question/category_class.php');
 // These params are only passed from page request to request while we stay on
 // this page otherwise they would go in question_edit_setup.
 $scrollpos = optional_param('scrollpos', '', PARAM_INT);
-$additionalcontentid = optional_param('additionalcontentid', '', PARAM_INT);
+$id = optional_param('id', '', PARAM_INT);
+$action = optional_param('action', 'edit', PARAM_ALPHA);
 
 list($thispageurl, $contexts, $cmid, $cm, $quizsbs, $pagevars) = question_edit_setup('editq', '/mod/quizsbs/editcontent.php', true);
 
@@ -43,7 +43,7 @@ $structure = $quizsbsobj->get_structure();
 // You need mod/quizsbs:manage in addition to question capabilities to access this page.
 require_capability('mod/quizsbs:manage', $contexts->lowest());
 
-$additionalcontent = new additional_content($additionalcontentid);
+$additionalcontent = new additional_content($id);
 
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_pagetype('mod-quizsbs-editcontent');
@@ -53,8 +53,18 @@ $output = $PAGE->get_renderer('mod_quizsbs', 'editcontent');
 $PAGE->set_title(get_string('editingquizsbsx', 'quizsbs', format_string($quizsbs->name)));
 $PAGE->set_heading($course->fullname);
 
+switch ($action) {
+    case 'connect':
+        $content = $output->connect_question_page($quizsbsobj, $structure, $additionalcontent);
+        break;
+    case 'edit':
+    default:
+        $content = $output->editcontent_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars, $additionalcontent);
+    break;
+}
+
 echo $OUTPUT->header();
 
-echo $output->editcontent_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars, $additionalcontent);
+echo $content;
 
 echo $OUTPUT->footer();

@@ -104,8 +104,9 @@ class subject extends model {
     public function get_avilable_contents() {
         global $DB;
         $additionalcontents = array();
-        $contents = $DB->get_records_select('quizsbs_additional_content', 'subjectid IS NULL OR subjectid = ?', array(
-            $this->get_id()
+        $contents = $DB->get_records_select('quizsbs_additional_content', '(subjectid IS NULL OR subjectid = ?) AND quizsbsid = ?', array(
+            $this->get_id(),
+            $this->get_quizsbsid(),
         ));
         foreach ($contents as $content) {
             $additionalcontents[$content->id] = new additional_content($content->id);

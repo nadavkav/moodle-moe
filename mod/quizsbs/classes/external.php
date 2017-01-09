@@ -30,6 +30,7 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/quizsbs/locallib.php');
+require_once($CFG->dirroot . '/question/editlib.php');
 
 /**
  * quizsbs external functions
@@ -1944,7 +1945,78 @@ class mod_quizsbs_external extends external_api {
 
     public static function add_content_to_subject_returns() {
         return new external_single_structure(array(
-            'status' => new external_value('PARAM_INT', 'status of execution', false, '1')
+            'status' => new external_value(PARAM_INT, 'status of execution', false, '1')
+        ));
+    }
+
+    public static function get_question_preview_parameters() {
+        return new external_function_parameters(array(
+            'id' => new external_value(PARAM_INT, 'additional content id'),
+            'cmid' => new external_value(PARAM_INT, 'cmid'),
+        ));
+    }
+
+    public static function get_question_preview ($id, $cmid) {
+        global $DB;
+        list($quizsbs, $cm) = get_module_from_cmid($cmid);
+        $courseid = $cm->course;
+        require_login($courseid, false, $cm);
+        $course = $DB->get_record('course', array('id' => $quizsbs->course), '*', MUST_EXIST);
+        $quizsbsobj = new quizsbs($quizsbs, $cm, $course);
+        $quba = \question_engine::make_questions_usage_by_activity('mod_quizbs', $quizsbsobj->get_context());
+        $quba->set_preferred_behaviour($quizsbsobj->get_quizsbs()->preferredbehaviour);
+        $options = new question_display_options();
+        $options->marks = question_display_options::MAX_ONLY;
+        $options->markdp = 2; // Display marks to 2 decimal places.
+        $options->feedback = question_display_options::VISIBLE;
+        $options->generalfeedback = question_display_options::HIDDEN;
+        $questiondb = question_bank::load_question($id);
+        $quba->add_question($questiondb);
+        $quba->start_question(1);
+        $questionhtml = $quba->render_question(1, $options, null);
+        return array('questionhtml' => $questionhtml);
+    }
+
+    public static function get_question_preview_returns() {
+        return new external_single_structure(array(
+            'questionhtml' => new external_value(PARAM_RAW),
+        ));
+    }
+
+    public static function add_question_to_content_parameters() {
+        return new external_function_parameters(array(
+            'ids' => new external_multiple_structure(
+                                            new external_value(PARAM_INT, 'content IDs', false, null, true)
+                                            ),
+            'contentid' => new external_value(PARAM_INT),
+            'cmid' => new external_value(PARAM_INT, 'cmid'),
+        ));
+    }
+
+    public static function add_question_to_content ($ids, $contentid, $cmid) {
+        global $DB;
+        list($quizsbs, $cm) = get_module_from_cmid($cmid);
+        $existingquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $contentid));
+        foreach ($existingquestion as $question){
+            if(!in_array($question->id, $ids)){
+                $DB->set_field('quizsbs_slots', 'additionalcontentid', null, array(
+                    'id' => $question->id,
+                    'quizsbsid' => $quizsbs->id,
+                ));
+            }
+        }
+        foreach ($ids as $id){
+            $DB->set_field('quizsbs_slots', 'additionalcontentid', $contentid, array(
+                'questionid' => $id,
+                'quizsbsid' => $quizsbs->id,
+            ));
+        }
+        return array('status' => 1);
+    }
+
+    public static function add_question_to_content_returns() {
+        return new external_single_structure(array(
+            'status' => new external_value(PARAM_INT, 'status of execution', false, 1)
         ));
     }
 }

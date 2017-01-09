@@ -15,53 +15,40 @@
 
 /**
 * @package   mod_quizsbs
-* @module    mod_quizsbs/loadcintent
+* @module    mod_quizsbs/loadquestions
 **/
 define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notification){
-	var LoadContent = function () {
+	var Question = function() {
 		
 	};
 	
-	LoadContent.prototype.init = function (){
-		$('.content').click(function(event){
+	Question.prototype.init = function(){
+		$('.question').click(function(event){
 			var element = event.target;
-			var getcontent = [{
-			    'methodname': 'mod_quizsbs_get_content_preview',
-			    'args': {
-			    	'id': $(element).attr('id')
-			    }
+			var getquestion = [{
+				'methodname': 'mod_quizsbs_get_question_preview',
+				'args': {
+					'id': $(element).attr('id'),
+					'cmid': $('#questionconnect heading h2').data('cmid')
+				}
 			}];
-			var promises = ajax.call(getcontent);
+			var promises = ajax.call(getquestion);
 			
 			promises[0].done(function(response){
-				$('#htmlcontent').html('');
-				$('#csscontent').html('');
-				$('#javascriptcontent').html('');
-				for (var index in response) {
-					switch (response[index].type) {
-						case 0:
-							$('#htmlcontent').html(response[index].content);
-							break;
-						case 3:
-							$('#csscontent').html("<style>" + response[index].content + "</style>");
-							break;
-						case 2:
-							$('#javascriptcontent').html("<script>" + response[index].content + "</script>");
-							break;
-					}
-				}
+				$('#question_preview').html(response.questionhtml);
 			});
 		});
 		$('#aprroved').click(function(){
-			var contentsids = [];
+			var questionsids = [];
 			$('input[type="checkbox"]:checked').each(function(index, element){
-				contentsids.push($(element).val());
+				questionsids.push($(element).val());
 			});
 			var getcontent = [{
-			    'methodname': 'mod_quizsbs_add_content_to_subject',
+			    'methodname': 'mod_quizsbs_add_question_to_content',
 			    'args': {
-			    	'ids': contentsids,
-			    	'subjectid': $('heading h2').attr('id')
+			    	'ids': questionsids,
+			    	'contentid': $('heading h2').attr('id'),
+			    	'cmid': $('#questionconnect heading h2').data('cmid')
 			    }
 			}];
 			var promises = ajax.call(getcontent);
@@ -74,5 +61,6 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 			});
 		});
 	};
-	return new LoadContent();
+	
+	return new Question();
 });

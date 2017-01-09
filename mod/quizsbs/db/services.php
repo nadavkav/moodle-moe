@@ -210,13 +210,33 @@ $functions = array(
         'capabilities'  => 'mod/quizsbs:manage',
         'ajax'          => true
     ),
+    'mod_quizsbs_get_question_preview' => array(
+        'classname'     => 'mod_quizsbs_external',
+        'methodname'    => 'get_question_preview',
+        'classpath'     => 'mod/quizsbs/classes/external.php',
+        'descritption'  => 'get question preivew',
+        'type'          => 'read',
+        'capabilities'  => 'mod/quizsbs:manage',
+        'ajax'          => true
+    ),
+    'mod_quizsbs_add_question_to_content' => array(
+        'classname'     => 'mod_quizsbs_external',
+        'methodname'    => 'add_question_to_content',
+        'classpath'     => 'mod/quizsbs/classes/external.php',
+        'descritption'  => 'add questions to content',
+        'type'          => 'write',
+        'capabilities'  => 'mod/quizsbs:manage',
+        'ajax'          => true
+    ),
 );
 
 $services = array(
     'quizsbs' => array(
         'functions' => array(
             'mod_quizsbs_get_content_preview',
-            'mod_quizsbs_add_content_to_subject'
+            'mod_quizsbs_add_content_to_subject',
+            'mod_quizsbs_get_question_preview',
+            'mod_quizsbs_add_question_to_content',
         ),
         'requiredcapability' => '',
         'restrictedusers' =>0,

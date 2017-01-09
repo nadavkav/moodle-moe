@@ -1128,10 +1128,13 @@ table#categoryquestions {
 	padding-left: 1em;
 }
 #contentconnect #contentlist,
-#contentconnect #addtional_content {
+#contentconnect #addtional_content,
+#questionconnect #question_preview,
+#questionconnect #questionlist
+ {
 	float: right;
 }
-#contentconnect #addtional_content {
+#contentconnect #addtional_content, #question_preview {
 	width: 46%;
 }
 #quizsbs #navigation div {
@@ -1178,6 +1181,9 @@ table#categoryquestions {
 #subjectheader {
 	border: 1px solid #b8abb7;
 	background-color: #fcf4e7;
+}
+#subjectlist i {
+	color: #999999;
 }
 /** Print formatting for attempt and review pages **/
 

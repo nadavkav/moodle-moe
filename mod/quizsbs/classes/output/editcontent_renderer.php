@@ -73,7 +73,6 @@ class editcontent_renderer extends \plugin_renderer_base {
         $additaionalcontent->additionalcontentname = $additaional->get_name();
         $additaionalcontent->contenttype = $additaional->get_type();
         $additaionalcontent->createdate = $additaional->get_createdate();
-        $additaionalcontent->subjectid = $additaional->get_subjectid();
         $questioncontents = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additaional->get_id()));
         foreach ($questioncontents as $questioncontent) {
             switch ($questioncontent->type) {
@@ -92,18 +91,12 @@ class editcontent_renderer extends \plugin_renderer_base {
                     break;
             }
         }
-        $contentquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $additaionalcontent->id));
-        $additaionalcontent->contentquestion = array();
-        foreach ($contentquestion as $question) {
-            $additaionalcontent->contentquestion[] = $question->questionid;
-        }
         $contentloadform->set_data($additaionalcontent);
 
         if ($contentdata = $contentloadform->get_data()) {
             $additionalcontent = new additional_content($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
             $additionalcontent->set_type($contentdata->contenttype);
-            $additionalcontent->set_subjectid($contentdata->subjectid);
             if (!$additionalcontent->get_createdate()) {
                 $additionalcontent->set_createdate($contentdata->createdate);
             }
@@ -144,32 +137,34 @@ class editcontent_renderer extends \plugin_renderer_base {
                         break;
                 }
             }
-            $contentquestion = $DB->get_records('quizsbs_slots', array('additionalcontentid' => $additionalcontent->get_id()));
-            if (isset($contentdata->contentquestion)) {
-                foreach ($contentdata->contentquestion as $questionid) {
-                    $key = false;
-                    foreach ($contentquestion as $id => $question) {
-                        if ($questionid == $question->questionid) {
-                            $key = $id;
-                            break;
-                        }
-                    }
-                    if ($key === false) {
-                        $DB->set_field('quizsbs_slots', 'additionalcontentid', $additionalcontent->get_id(),
-                                                        array('questionid' => $questionid));
-                    } else {
-                        unset($contentquestion[$key]);
-                    }
-                }
-            }
-            foreach ($contentquestion as $question) {
-                $DB->set_field('quizsbs_slots', 'additionalcontentid', null, array('id' => $question->id));
-            }
-
-            $pageurl->param('additionalcontentid', $additionalcontent->get_id());
+            $pageurl->param('id', $additionalcontent->get_id());
             redirect($pageurl);
         }
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
+    }
+
+    public function connect_question_page(\quizsbs $quizsbsobj, structure $structure,
+                                    additional_content $additionalcontent) {
+        global $DB;
+
+        $context = new \stdClass();
+        $context->contentid = $additionalcontent->get_id();
+        $context->contentname = $additionalcontent->get_name();
+        $context->cmid = $quizsbsobj->get_cmid();
+        $context->question = array();
+        foreach ($additionalcontent->get_avilable_questions() as $slot) {
+            $question = new \stdClass();
+            $dbquestion = $DB->get_record('question', array('id' => $slot->questionid));
+            $question->name = $dbquestion->name;
+            $question->id = $dbquestion->id;
+            $question->additionalcontentid = $slot->additionalcontentid;
+            $context->question[] = $question;
+        }
+        $this->page->requires->js_call_amd('mod_quizsbs/loadquestions', 'init');
+        $this->page->requires->strings_for_js(array(
+            'changessuccessfulsave'
+        ), 'mod_quizsbs');
+        return $this->render_from_template('mod_quizsbs/connectquestion', $context);
     }
 }
 
