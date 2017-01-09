@@ -4,14 +4,22 @@
     font-size: 0.7em;
 }
 
+#quizsbs-timer{
+	background-color: #f4f0c1;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	margin: auto;
+	padding: 1%;
+}
+
 #page-mod-quizsbs-attempt.dir-rtl .submitbtns .mod_quizsbs-next-nav, #page-mod-quizsbs-review.dir-rtl .submitbtns .mod_quizsbs-next-nav {
     margin-left: 9px;
 	
 }
 
 #page-mod-quizsbs-attempt #quizsbs .singlebutton{
-	 margin-top: 12px;
-	 margin-right: 267px;
+    margin:auto;
 }
 
 #page-mod-quizsbs-attempt.dir-rtl .submitbtns, #page-mod-quizsbs-review.dir-rtl .submitbtns {
@@ -33,9 +41,9 @@
 	border-style: solid;
     border-width: 1.5px;
     border-color: #989ca5;
-	padding: 0px;
-	
+	padding: 0px;	
 }
+
 
 #quizsbs #navigation .othernav {
  	margin-left:auto; 
@@ -1140,7 +1148,7 @@ table#categoryquestions {
 #quizsbs #navigation div {
 	float: right;
 	display: flex;
-	flex-direction : roe;
+	flex-direction : row;
 	overflow-x: auto; 
 }
 
