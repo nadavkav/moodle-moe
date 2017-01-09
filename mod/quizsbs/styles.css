@@ -4,6 +4,15 @@
     font-size: 0.7em;
 }
 
+#quizsbs-timer{
+	background-color: #f4f0c1;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	margin: auto;
+	padding: 1%;
+}
+
 #page-mod-quizsbs-attempt.dir-rtl .submitbtns .mod_quizsbs-next-nav, #page-mod-quizsbs-review.dir-rtl .submitbtns .mod_quizsbs-next-nav {
     margin-left: 9px;
 	
@@ -32,9 +41,9 @@
 	border-style: solid;
     border-width: 1.5px;
     border-color: #989ca5;
-	padding: 0px;
-	
+	padding: 0px;	
 }
+
 
 #quizsbs #navigation .othernav {
  	margin-left:auto; 

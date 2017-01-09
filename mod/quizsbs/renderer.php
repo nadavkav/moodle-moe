@@ -329,13 +329,14 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         } else {
             $nextpage = $page + 1;
         }
-        $data->countdowntimer = $this->countdown_timer($attemptobj, time());
+        
+        if (! $attemptobj ->is_preview()){
+            $data->countdowntimer = $this->countdown_timer($attemptobj, time());
+        }
         $data->link = $attemptobj->summary_url();
         $data->restartpreview = $panel->render_end_bits($this);
         $data->page = $page;
         $data->nextpage = $nextpage;
-        $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
-
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
         return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;
@@ -529,7 +530,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
         if ($page > 0) {
             $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
-                    'title' => get_string('navigateprevious', 'quizsbs'), 'value' => '', 'class' => 'mod_quizsbs-prev-nav'));
+                    'title' => get_string('navigateprevious', 'quizsbs'), 'value' => ' ', 'class' => 'mod_quizsbs-prev-nav'));
         }
         if ($lastpage) {
             $nextlabel = get_string('endtest', 'quizsbs');
@@ -537,7 +538,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $nextlabel = get_string('navigatenext', 'quizsbs');
         }
         $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'next',
-                'title' => $nextlabel, 'value' =>'', 'class' => 'mod_quizsbs-next-nav'));
+                'title' => $nextlabel, 'value' =>' ', 'class' => 'mod_quizsbs-next-nav'));
         $output .= html_writer::end_tag('div');
 
         return $output;
