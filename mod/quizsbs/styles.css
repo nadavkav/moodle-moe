@@ -10,8 +10,7 @@
 }
 
 #page-mod-quizsbs-attempt #quizsbs .singlebutton{
-	 margin-top: 12px;
-	 margin-right: 267px;
+    margin:auto;
 }
 
 #page-mod-quizsbs-attempt.dir-rtl .submitbtns, #page-mod-quizsbs-review.dir-rtl .submitbtns {
@@ -1137,7 +1136,7 @@ table#categoryquestions {
 #quizsbs #navigation div {
 	float: right;
 	display: flex;
-	flex-direction : roe;
+	flex-direction : row;
 	overflow-x: auto; 
 }
 
