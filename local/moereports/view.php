@@ -32,6 +32,7 @@ foreach ($schools as $key => $school) {
     //set the fields
     $tmp = [];
     $tmp[] = $school->id;
+    $tmp[] = $school->symbol;
     $tmp[] = $school->region;
     $tmp[] = $school->name;
     $tmp[] = $school->city; 
@@ -41,5 +42,5 @@ foreach ($schools as $key => $school) {
 }
 
 $PAGE->requires->js_call_amd('local_moereports/reports', 'init', array($report));
-$PAGE->requires->strings_for_js(array('id', 'name', 'region','city'), "local_moereports");
+$PAGE->requires->strings_for_js(array('symbol', 'name', 'region','city'), "local_moereports");
 echo $OUTPUT->footer();

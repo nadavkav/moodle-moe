@@ -2,7 +2,7 @@
 
 $string['title'] ='דוחות';
 $string['pluginname'] = 'דוחות';
-$string['id'] = 'סמל בית ספר';
+$string['symbol'] = 'סמל בית ספר';
 $string['name'] = 'שם בית ספר';
 $string['region'] = 'מחוז';
 $string['save'] ='שמור';

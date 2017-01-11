@@ -7,7 +7,8 @@ class local_moereports_external extends external_api {
         return new external_function_parameters(
             array('schools' => new external_multiple_structure(
                 new external_single_structure(array (
-                    new external_value(PARAM_NUMBER, 'School\'s ID'),
+                    new external_value(PARAM_NUMBER, 'School\'s ID', false, null, true),
+                    new external_value(PARAM_NUMBER, 'School\'s symbol'),
                     new external_value(PARAM_TEXT, 'School\'s region'),
                     new external_value(PARAM_TEXT, 'School\'s Name'),
                     new external_value(PARAM_TEXT, 'School\'s city'),     
@@ -25,9 +26,10 @@ class local_moereports_external extends external_api {
         for ($i = 0; $i < count($schools); $i++) {
             $tmp = new stdClass();
             $tmp->id = $schools[$i][0];
-            $tmp->region = $schools[$i][1];
-            $tmp->name = $schools[$i][2];
-            $tmp->city = $schools[$i][3];
+            $tmp->symbol = $schools[$i][1];
+            $tmp->region = $schools[$i][2];
+            $tmp->name = $schools[$i][3];
+            $tmp->city = $schools[$i][4];
 
             $records[] = $tmp;
         }
@@ -39,6 +41,7 @@ class local_moereports_external extends external_api {
         $return->inserted = 0;
         $return->existed = 0;
         foreach ($records as $linenumber => $record) {
+            $rec = null;
             if(empty($record->id)) {
                 if(empty($record->name) || empty($record->region)){
                     $return->message =  "missingschoolfield";
@@ -55,7 +58,7 @@ class local_moereports_external extends external_api {
                 }
 
                 if ($rec) {
-
+                    $rec->symbol = $record->symbol;
                     $rec->name = $record->name;
                     $rec->region =$record->region;
                     $rec->city = $record->city;
@@ -67,6 +70,7 @@ class local_moereports_external extends external_api {
                 }
 
                 $school = new stdClass();
+                $school->symbol =$record->symbol;
                 $school->region = $record->region;                
                 $school->id = $record->id;
                 $school->name = $record->name;
@@ -83,6 +87,7 @@ class local_moereports_external extends external_api {
             // Set the fields.
             $tmp = [];
             $tmp[] = $report->id;
+            $tmp[] = $report->symbol;
             $tmp[] = $report->region;
             $tmp[] = $report->name;
             $tmp[] = $report->city;
@@ -96,6 +101,8 @@ class local_moereports_external extends external_api {
         return new external_multiple_structure(
             new external_single_structure(array (
                 new external_value(PARAM_NUMBER, 'School\'s ID'),
+                new external_value(PARAM_NUMBER, 'School\'s ID'),
+                new external_value(PARAM_NUMBER, 'School\'s symbol'),
                 new external_value(PARAM_TEXT, 'School\'s region'),                
                 new external_value(PARAM_TEXT, 'School\'s name'),
                 new external_value(PARAM_TEXT, 'School\'s city'),

@@ -10,35 +10,34 @@ define(['local_moereports/handsontable', 'jquery', 'core/ajax'],function(Handson
 		var deleted = new Array();
 		
 		emptyValidator = function(value, callback) {
-		    if (value == '' || value == null || value == ' ' || value == false) { // isEmpty is a function that determines emptiness, you should define it
+		    if (value === '' || value === null || value === ' ' || value === false) { 
+		    	// isEmpty is a function that determines emptiness, you should define it
 		        callback(false);
 		    } else {
 		        callback(true);
 		    }
-		}
+		};
 		
 		rowErased = function (changes) {
 			var erased;
+			var colsnum = hot.countCols();
 			
-	    	if(changes.length > 3 && changes.length%4==0) {
+	    	if(changes.length > 3 && changes.length%4===0) {
 	    		for (var int = 0; int < changes.length; int++) {
-	    			if(changes[int][3] != '') {
-	    				return false;
-	    			}
-	    			if((int%4 == 0 && changes[int][1] != 1) || (int%4 != 0 && changes[int][1] == 1)) {
+	    			if(changes[int][3] !== '') {
 	    				return false;
 	    			}
 	    		}
 	    		erased = { 
 	    				start: changes[0][0],
-	    				times: (changes.length/4)
-	    		}
+	    				times: (changes.length/colsnum)
+	    		};
 			}
 			else {
 				return false;
 			}
 			return erased;
-		}
+		};
 		
 		eraseEmptyRows = function() {
 			var rowsnum = hot.countRows();
@@ -52,19 +51,23 @@ define(['local_moereports/handsontable', 'jquery', 'core/ajax'],function(Handson
 					rowsnum--;
 				}
 			}
-		}
+		};
 		
 		var hot = new Handsontable($('#reportstable')[0], {
 			data : report,
 			rowHeaders: true,
-		    colHeaders: [
-		 		M.util.get_string('id', 'local_moereports'),
+		    colHeaders: ['ID',
+		 		M.util.get_string('symbol', 'local_moereports'),
 		        M.util.get_string('region', 'local_moereports'),         
 		        M.util.get_string('name', 'local_moereports'),
 		        M.util.get_string('city', 'local_moereports'),
 		    ],
 		    contextMenu: true,
 		    columns: [
+		              {
+		            	  type: 'numeric', 
+		            	  readOnly: true
+		              },
 		              {
 		            	  type: 'numeric',
 		            	  validator: emptyValidator
@@ -96,9 +99,6 @@ define(['local_moereports/handsontable', 'jquery', 'core/ajax'],function(Handson
 		    		return false;
 		    	}
 		    	hot.validateCells(function(valid){
-		    		if(valid) {
-		    			
-		    		}
 		    	});
 		    },
 		    afterChange: function (changes, source) {
@@ -137,7 +137,7 @@ define(['local_moereports/handsontable', 'jquery', 'core/ajax'],function(Handson
 		$(this).closest('form').find("input[type='text'], textarea").val("");
 	});
 
-	}
+	};
 	
 	return new Report();
 });
