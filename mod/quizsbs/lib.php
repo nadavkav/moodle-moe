@@ -1701,13 +1701,6 @@ function quizsbs_extend_settings_navigation($settings, $quizsbsnode) {
         $contentnode = $quizsbsnode->add_node(navigation_node::create(get_string('additionalcontent', 'quizsbs'), $url,
                                         navigation_node::TYPE_SETTING,
                                         null, null, new pix_icon('i/report', '')), $beforekey);
-        $contentnode->add_node(navigation_node::create(get_string('editsubject', 'quizsbs'),
-                new moodle_url('/mod/quizsbs/editsubject.php', array(
-                    'cmid' => $PAGE->cm->id,
-                    'action' => 'edit',
-                )),
-                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_editsubject',
-                new pix_icon('t/edit', '')));
         $contentnode->add_node(navigation_node::create(get_string('listsubject', 'quizsbs'),
                 new moodle_url('/mod/quizsbs/editsubject.php', array(
                     'cmid' => $PAGE->cm->id,
@@ -1719,11 +1712,10 @@ function quizsbs_extend_settings_navigation($settings, $quizsbsnode) {
                 new moodle_url('/mod/quizsbs/additionalcontentlist.php', array('cmid' => $PAGE->cm->id)),
                 navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontentlist',
                 new pix_icon('t/edit', '')));
-        $contentnode->add_node(navigation_node::create(get_string('additionalcontentedit', 'quizsbs'),
-                new moodle_url('/mod/quizsbs/editcontent.php', array('cmid' => $PAGE->cm->id)),
-                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_additionalcontent',
+        $contentnode->add_node(navigation_node::create(get_string('connectcontentsandsubject', 'quizsbs'),
+                new moodle_url('/mod/quizsbs/connect.php', array('cmid' => $PAGE->cm->id)),
+                navigation_node::TYPE_SETTING, null, 'mod_quizsbs_connectcontenttosubject',
                 new pix_icon('t/edit', '')));
-
     }
 
     if (has_capability('mod/quizsbs:preview', $PAGE->cm->context)) {

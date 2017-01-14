@@ -216,6 +216,7 @@ $string['connectionerror'] = 'Network connection lost. (Autosave failed).
 Make a note of any responses entered on this page in the last few minutes, then try to re-connect.
 
 Once connection has been re-established, your responses should be saved and this message will disappear.';
+$string['connectcontentsandsubject'] = 'Connect subject/content';
 $string['containercategorycreated'] = 'This category has been created to store all the original categories moved to site level due to the causes specified below.';
 $string['continueattemptquizsbs'] = 'Continue the last attempt';
 $string['continuepreview'] = 'Continue the last preview';

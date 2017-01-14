@@ -1142,6 +1142,11 @@ table#categoryquestions {
  {
 	float: right;
 }
+#questionlist,
+#subjectlist {
+	max-height: 16em;
+	overflow-y: auto; 
+}
 #contentconnect #addtional_content, #question_preview {
 	width: 46%;
 }
@@ -1190,7 +1195,8 @@ table#categoryquestions {
 	border: 1px solid #b8abb7;
 	background-color: #fcf4e7;
 }
-#subjectlist i {
+#subjectlist i,
+#additionalcontentlist i{
 	color: #999999;
 }
 /** Print formatting for attempt and review pages **/

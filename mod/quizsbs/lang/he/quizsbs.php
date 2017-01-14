@@ -221,6 +221,7 @@ $string['confirmremovesectionheading'] = 'האם הינך בטוח כי ברצו
 $string['confirmserverdelete'] = 'האם להסיר את השרת <b>{$a}</b> מהרשימה?';
 $string['connectcontent'] = 'חיבור תכנים לנושא ';
 $string['connectionok'] = 'חיבור רשת נתונים שוחזרה. ניתן להמשיך בבטחה.';
+$string['connectcontentsandsubject'] = 'חיבור נושאים ותכנים לשאלות';
 $string['containercategorycreated'] = 'קטגוריה זו נוצרה כדי לאחסן את כל הקטגוריות המקוריות שהועברו לרמת האתר בשל הסיבות המפורטות להלן.';
 $string['continueattemptquiz'] = 'המשך נסיון המענה האחרון שלך';
 $string['continuepreview'] = 'המשך בצפיה המוקדמת האחרונה';
