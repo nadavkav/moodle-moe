@@ -15,111 +15,77 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file belongs to the redis cache store and contains the redis cache store class.
- *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ * Redis Cache Store - Main library
+*
+* @package   cachestore_redis
+* @copyright 2013 Adam Durana
+* @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+*/
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * The redis cache store class.
+ * Redis Cache Store
  *
- * @copyright 2014 Sam Hemelryk
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * To allow separation of definitions in Moodle and faster purging, each cache
+ * is implemented as a Redis hash.  That is a trade-off between having functionality of TTL
+ * and being able to manage many caches in a single redis instance.  Given the recommendation
+ * not to use TTL if at all possible and the benefits of having many stores in Redis using the
+ * hash configuration, the hash implementation has been used.
+ *
+ * @copyright   2013 Adam Durana
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class cachestore_redis extends cache_store implements cache_is_configurable {
-
+class cachestore_redis extends cache_store implements cache_is_key_aware, cache_is_lockable,
+cache_is_configurable, cache_is_searchable {
     /**
-     * The Redis cache store instance name.
+     * Name of this store.
+     *
      * @var string
      */
     protected $name;
 
     /**
-     * Set to true if this should be a persistent connection.
-     * @var bool
-     */
-    protected $persistentconnection = false;
-
-    /**
-     * The host to connect to. This could be an IP address, a hostname or a socket path.
+     * The definition hash, used for hash key
+     *
      * @var string
      */
-    protected $host;
+    protected $hash;
 
     /**
-     * The port to connect to. The default is 6379.
-     * @var int
-     */
-    protected $port = 6379;
-
-    /**
-     * The connection timeout in seconds.
-     * @var float
-     */
-    protected $timeout;
-
-    /**
-     * The string to use to identify this connection if it is persistent.
-     * @var null|string
-     */
-    protected $persistentid = null;
-
-    /**
-     * The retry interval in milliseconds (optional)
-     * @var int
-     */
-    protected $retryinterval;
-
-    /**
-     * Set to true is we are going to authenticate when opening a connection.
-     * @var bool
-     */
-    protected $authenticate = false;
-
-    /**
-     * The password to use for authentication if your server requires it.
-     * @var null|string
-     */
-    protected $authpassword = null;
-
-    /**
-     * The database to use, specified as an integer.
-     * @var int
-     */
-    protected $database = 0;
-
-    /**
-     * Gets set to true once the redis cache store is in a usable state.
-     * @var bool
+     * Flag for readiness!
+     *
+     * @var boolean
      */
     protected $isready = false;
 
     /**
-     * Gets set to true once this redis instance has been initialised.
-     * @var bool
-     */
-    protected $isinitialised = false;
-
-    /**
-     * @var cachestore_redis_driver
-     */
-    protected $connection = null;
-
-    /**
-     * Static method to check if the store requirements are met.
+     * Cache definition for this store.
      *
-     * @return bool True if the stores software/hardware requirements have been met and it can be used. False otherwise.
+     * @var cache_definition
+     */
+    protected $definition = null;
+
+    /**
+     * Connection to Redis for this store.
+     *
+     * @var Redis
+     */
+    protected $redis;
+
+    /**
+     * Determines if the requirements for this type of store are met.
+     *
+     * @return bool
      */
     public static function are_requirements_met() {
-        return extension_loaded('redis');
+        return class_exists('Redis');
     }
 
     /**
-     * Static method to check if a store is usable with the given mode.
+     * Determines if this type of store supports a given mode.
      *
-     * @param int $mode One of cache_store::MODE_*
+     * @param int $mode
      * @return bool
      */
     public static function is_supported_mode($mode) {
@@ -127,126 +93,90 @@ class cachestore_redis extends cache_store implements cache_is_configurable {
     }
 
     /**
-     * Returns the supported features as a binary flag.
+     * Get the features of this type of cache store.
      *
-     * @param array $configuration The configuration of a store to consider specifically.
-     * @return int The supported features.
+     * @param array $configuration
+     * @return int
      */
     public static function get_supported_features(array $configuration = array()) {
-        return self::SUPPORTS_DATA_GUARANTEE;
+        return self::SUPPORTS_DATA_GUARANTEE + self::DEREFERENCES_OBJECTS + self::IS_SEARCHABLE;
     }
 
     /**
-     * Returns the supported modes as a binary flag.
+     * Get the supported modes of this type of cache store.
      *
-     * @param array $configuration The configuration of a store to consider specifically.
-     * @return int The supported modes.
+     * @param array $configuration
+     * @return int
      */
     public static function get_supported_modes(array $configuration = array()) {
         return self::MODE_APPLICATION + self::MODE_SESSION;
     }
 
     /**
-     * Generates an instance of the cache store that can be used for testing.
+     * Constructs an instance of this type of store.
      *
-     * Returns an instance of the cache store, or false if one cannot be created.
-     *
-     * @param cache_definition $definition
-     * @return cache_store|false
-     */
-    public static function initialise_test_instance(cache_definition $definition) {
-        if (!self::are_requirements_met()) {
-            return false;
-        }
-
-        $config = get_config('cachestore_redis');
-        if (empty($config->testserver)) {
-            return false;
-        }
-
-        $configuration = array();
-        $configuration['server'] = $config->testserver;
-
-        $store = new cachestore_redis('Test redis', $configuration);
-        $store->initialise($definition);
-
-        return $store;
-    }
-
-    /**
-     * Constructs a new Redis cache store instance.
-     *
-     * @param string $name The name of the cache store
-     * @param array $configuration The configuration for this store instance.
+     * @param string $name
+     * @param array $configuration
      */
     public function __construct($name, array $configuration = array()) {
         $this->name = $name;
+
         if (!array_key_exists('server', $configuration) || empty($configuration['server'])) {
-            // Nothing configured.
             return;
         }
-        $bits = explode(':', $configuration['server']);
-        if ($bits[0]) {
-            $this->host = (string)$bits[0];
-        }
-        if (isset($bits[1])) {
-            $this->port = (int)$bits[1];
-        }
-        if (isset($bits[2])) {
-            $this->timeout = (float)$bits[2];
-        }
-        if (isset($bits[4])) {
-            $this->persistentid = null;
-            $this->retryinterval = (int)$bits[4];
-        }
-        if (isset($configuration['persistentconnection']) && (bool)$configuration['persistentconnection']) {
-            $this->persistentconnection = true;
-            if (isset($bits[3])) {
-                $this->persistentid = (string)$bits[3];
-            } else {
-                $this->persistentid = 'moodle';
-            }
-        }
-        if (isset($configuration['authpassword']) && !empty($configuration['authpassword'])) {
-            $this->authenticate = true;
-            $this->authpassword = (string)$configuration['authpassword'];
-        }
-        if (isset($configuration['database']) && !empty($configuration['database'])) {
-            $this->database = (int)$configuration['database'];
-        }
-        if (empty($this->host)) {
-            // Not properly configured.
-            return;
-        }
-        $this->isready = $this->ensure_connection_ready();
-        if ($this->isready && debugging()) {
-            $this->isready = $this->connection->ping();
-        }
+        $prefix = !empty($configuration['prefix']) ? $configuration['prefix'] : '';
+        $this->redis = $this->new_redis($configuration['server'], $prefix);
     }
 
     /**
-     * Ensures the Redis connection is ready for use.
+     * Create a new Redis instance and
+     * connect to the server.
+     *
+     * @param string $server The server connection string
+     * @param string $prefix The key prefix
+     * @return Redis
+     */
+    protected function new_redis($server, $prefix = '') {
+        $redis = new Redis();
+        $port = null;
+        if (strpos($server, ':')) {
+            $serverconf = explode(':', $server);
+            $server = $serverconf[0];
+            $port = $serverconf[1];
+        }
+        if ($redis->connect($server, $port)) {
+            $redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_PHP);
+            if (!empty($prefix)) {
+                $redis->setOption(Redis::OPT_PREFIX, $prefix);
+            }
+            // Database setting option...
+            $this->isready = $this->ping($redis);
+        } else {
+            $this->isready = false;
+        }
+        return $redis;
+    }
+
+    /**
+     * See if we can ping Redis server
+     *
+     * @param Redis $redis
      * @return bool
      */
-    protected function ensure_connection_ready() {
-        if ($this->connection === null) {
-            $this->connection = cachestore_redis_driver::instance(
-                $this->host,
-                $this->port,
-                $this->database,
-                $this->timeout,
-                $this->persistentid,
-                $this->retryinterval
-            );
-            if ($this->connection->is_connected() && $this->authenticate) {
-                $this->connection->authenticate($this->authpassword);
+    protected function ping(Redis $redis) {
+        try {
+            if ($redis->ping() === false) {
+                return false;
             }
+        } catch (Exception $e) {
+            return false;
         }
-        return $this->connection->is_connected();
+        return true;
     }
 
     /**
-     * Returns the name of this store instance.
+     * Get the name of the store.
+     *
      * @return string
      */
     public function my_name() {
@@ -254,32 +184,29 @@ class cachestore_redis extends cache_store implements cache_is_configurable {
     }
 
     /**
-     * Initialises a new instance of the cache store given the definition the instance is to be used for.
-     *
-     * This function should be used to run any definition specific setup the store instance requires.
-     * Tasks such as creating storage areas, or creating indexes are best done here.
-     *
-     * Its important to note that the initialise method is expected to always succeed.
-     * If there are setup tasks that may fail they should be done within the __construct method
-     * and should they fail is_ready should return false.
+     * Initialize the store.
      *
      * @param cache_definition $definition
+     * @return bool
      */
     public function initialise(cache_definition $definition) {
-        $this->connection->set_interation_instance('hash', $definition);
-        $this->isinitialised = true;
+        $this->definition = $definition;
+        $this->hash       = $definition->generate_definition_hash();
+        return true;
     }
 
     /**
-     * Returns true if this cache store instance has been initialised.
+     * Determine if the store is initialized.
+     *
      * @return bool
      */
     public function is_initialised() {
-        return $this->isinitialised;
+        return ($this->definition !== null);
     }
 
     /**
-     * Returns true if this cache store instance is ready to use.
+     * Determine if the store is ready for use.
+     *
      * @return bool
      */
     public function is_ready() {
@@ -287,117 +214,281 @@ class cachestore_redis extends cache_store implements cache_is_configurable {
     }
 
     /**
-     * Retrieves an item from the cache store given its key.
+     * Get the value associated with a given key.
      *
-     * @param string $key The key to retrieve
-     * @return mixed The data that was associated with the key, or false if the key did not exist.
+     * @param string $key The key to get the value of.
+     * @return mixed The value of the key, or false if there is no value associated with the key.
      */
     public function get($key) {
-        return $this->connection->get($key);
+        return $this->redis->hGet($this->hash, $key);
     }
 
     /**
-     * Retrieves several items from the cache store in a single transaction.
+     * Get the values associated with a list of keys.
      *
-     * If not all of the items are available in the cache then the data value for those that are missing will be set to false.
-     *
-     * @param array $keys The array of keys to retrieve
-     * @return array An array of items from the cache. There will be an item for each key, those that were not in the store will
-     *      be set to false.
+     * @param array $keys The keys to get the values of.
+     * @return array An array of the values of the given keys.
      */
     public function get_many($keys) {
-        return $this->connection->get_many($keys);
+        return $this->redis->hMGet($this->hash, $keys);
     }
 
     /**
-     * Sets an item in the cache given its key and data value.
+     * Set the value of a key.
      *
-     * @param string $key The key to use.
-     * @param mixed $data The data to set.
-     * @return bool True if the operation was a success false otherwise.
+     * @param string $key The key to set the value of.
+     * @param mixed $value The value.
+     * @return bool True if the operation succeeded, false otherwise.
      */
-    public function set($key, $data) {
-        return $this->connection->set($key, $data);
+    public function set($key, $value) {
+        return ($this->redis->hSet($this->hash, $key, $value) !== false);
     }
 
     /**
-     * Sets many items in the cache in a single transaction.
+     * Set the values of many keys.
      *
-     * @param array $keyvaluearray An array of key value pairs. Each item in the array will be an associative array with two
-     *      keys, 'key' and 'value'.
-     * @return int The number of items successfully set. It is up to the developer to check this matches the number of items
-     *      sent ... if they care that is.
+     * @param array $keyvaluearray An array of key/value pairs. Each item in the array is an associative array
+     *      with two keys, 'key' and 'value'.
+     * @return int The number of key/value pairs successfuly set.
      */
     public function set_many(array $keyvaluearray) {
-        $values = array();
+        $pairs = [];
         foreach ($keyvaluearray as $pair) {
-            $values[$pair['key']] = $pair['value'];
+            $pairs[$pair['key']] = $pair['value'];
         }
-        return $this->connection->set_many($values);
+        if ($this->redis->hMSet($this->hash, $pairs)) {
+            return count($pairs);
+        }
+        return 0;
     }
 
     /**
-     * Deletes an item from the cache store.
+     * Delete the given key.
      *
      * @param string $key The key to delete.
-     * @return bool Returns true if the operation was a success, false otherwise.
+     * @return bool True if the delete operation succeeds, false otherwise.
      */
     public function delete($key) {
-        return $this->connection->delete($key);
+        return ($this->redis->hDel($this->hash, $key) > 0);
     }
 
     /**
-     * Deletes several keys from the cache in a single action.
+     * Delete many keys.
      *
-     * @param array $keys The keys to delete
-     * @return int The number of items successfully deleted.
+     * @param array $keys The keys to delete.
+     * @return int The number of keys successfully deleted.
      */
     public function delete_many(array $keys) {
-        return $this->connection->delete_many($keys);
+        // Redis needs the hash as the first argument, so we have to put it at the start of the array.
+        array_unshift($keys, $this->hash);
+        return call_user_func_array(array($this->redis, 'hDel'), $keys);
     }
 
     /**
-     * Purges the cache deleting all items within it.
+     * Purges all keys from the store.
      *
-     * @return boolean True on success. False otherwise.
+     * @return bool
      */
     public function purge() {
-        return $this->connection->purge();
+        return ($this->redis->del($this->hash) !== false);
     }
 
     /**
-     * Given the data from the add instance form this function creates a configuration array.
+     * Cleans up after an instance of the store.
+     */
+    public function instance_deleted() {
+        $this->purge();
+        $this->redis->close();
+        unset($this->redis);
+    }
+
+    /**
+     * Determines if the store has a given key.
      *
+     * @see cache_is_key_aware
+     * @param string $key The key to check for.
+     * @return bool True if the key exists, false if it does not.
+     */
+    public function has($key) {
+        return $this->redis->hExists($this->hash, $key);
+    }
+
+    /**
+     * Determines if the store has any of the keys in a list.
+     *
+     * @see cache_is_key_aware
+     * @param array $keys The keys to check for.
+     * @return bool True if any of the keys are found, false none of the keys are found.
+     */
+    public function has_any(array $keys) {
+        foreach ($keys as $key) {
+            if ($this->has($key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determines if the store has all of the keys in a list.
+     *
+     * @see cache_is_key_aware
+     * @param array $keys The keys to check for.
+     * @return bool True if all of the keys are found, false otherwise.
+     */
+    public function has_all(array $keys) {
+        foreach ($keys as $key) {
+            if (!$this->has($key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Tries to acquire a lock with a given name.
+     *
+     * @see cache_is_lockable
+     * @param string $key Name of the lock to acquire.
+     * @param string $ownerid Information to identify owner of lock if acquired.
+     * @return bool True if the lock was acquired, false if it was not.
+     */
+    public function acquire_lock($key, $ownerid) {
+        return $this->redis->setnx($key, $ownerid);
+    }
+
+    /**
+     * Checks a lock with a given name and owner information.
+     *
+     * @see cache_is_lockable
+     * @param string $key Name of the lock to check.
+     * @param string $ownerid Owner information to check existing lock against.
+     * @return mixed True if the lock exists and the owner information matches, null if the lock does not
+     *      exist, and false otherwise.
+     */
+    public function check_lock_state($key, $ownerid) {
+        $result = $this->redis->get($key);
+        if ($result === $ownerid) {
+            return true;
+        }
+        if ($result === false) {
+            return null;
+        }
+        return false;
+    }
+
+    /**
+     * Finds all of the keys being used by this cache store instance.
+     *
+     * @return array of all keys in the hash as a numbered array.
+     */
+    public function find_all() {
+        return $this->redis->hKeys($this->hash);
+    }
+
+    /**
+     * Finds all of the keys whose keys start with the given prefix.
+     *
+     * @param string $prefix
+     *
+     * @return array List of keys that match this prefix.
+     */
+    public function find_by_prefix($prefix) {
+        $return = [];
+        foreach ($this->find_all() as $key) {
+            if (strpos($key, $prefix) === 0) {
+                $return[] = $key;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * Releases a given lock if the owner information matches.
+     *
+     * @see cache_is_lockable
+     * @param string $key Name of the lock to release.
+     * @param string $ownerid Owner information to use.
+     * @return bool True if the lock is released, false if it is not.
+     */
+    public function release_lock($key, $ownerid) {
+        if ($this->check_lock_state($key, $ownerid)) {
+            return ($this->redis->del($key) !== false);
+        }
+        return false;
+    }
+
+    /**
+     * Creates a configuration array from given 'add instance' form data.
+     *
+     * @see cache_is_configurable
      * @param stdClass $data
      * @return array
      */
     public static function config_get_configuration_array($data) {
-        return array(
-            'server' => $data->server
-        );
+        return array('server' => $data->server, 'prefix' => $data->prefix);
     }
 
     /**
-     * Allows the cache store to set its data against the edit form before it is shown to the user.
+     * Sets form data from a configuration array.
      *
+     * @see cache_is_configurable
      * @param moodleform $editform
      * @param array $config
      */
     public static function config_set_edit_form_data(moodleform $editform, array $config) {
         $data = array();
-        if (!empty($config['server'])) {
-            $data['server'] = $config['server'];
-        }
+        $data['server'] = $config['server'];
+        $data['prefix'] = !empty($config['prefix']) ? $config['prefix'] : '';
         $editform->set_data($data);
     }
 
+
     /**
-     * Performs any necessary clean up when the store instance is being deleted.
+     * Creates an instance of the store for testing.
+     *
+     * @param cache_definition $definition
+     * @return mixed An instance of the store, or false if an instance cannot be created.
      */
-    public function instance_deleted() {
-        $this->ensure_connection_ready();
-        $this->connection->purge();
-        $this->connection->close();
-        $this->connection = null;
+    public static function initialise_test_instance(cache_definition $definition) {
+        if (!self::are_requirements_met()) {
+            return false;
+        }
+        $config = get_config('cachestore_redis');
+        if (empty($config->test_server)) {
+            return false;
+        }
+        $cache = new cachestore_redis('Redis test', ['server' => $config->test_server]);
+        $cache->initialise($definition);
+
+        return $cache;
+    }
+
+    /**
+     * Return configuration to use when unit testing.
+     *
+     * @return array
+     */
+    public static function unit_test_configuration() {
+        global $DB;
+
+        if (!self::are_requirements_met() || !self::ready_to_be_used_for_testing()) {
+            throw new moodle_exception('TEST_CACHESTORE_REDIS_TESTSERVERS not configured, unable to create test configuration');
+        }
+
+        return ['server' => TEST_CACHESTORE_REDIS_TESTSERVERS,
+            'prefix' => $DB->get_prefix(),
+        ];
+    }
+
+    /**
+     * Returns true if this cache store instance is both suitable for testing, and ready for testing.
+     *
+     * When TEST_CACHESTORE_REDIS_TESTSERVERS is set, then we are ready to be use d for testing.
+     *
+     * @return bool
+     */
+    public static function ready_to_be_used_for_testing() {
+        return defined('TEST_CACHESTORE_REDIS_TESTSERVERS');
     }
 }

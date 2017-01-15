@@ -8,27 +8,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * This file belongs to the redis cache store and contains the settings for this plugin.
+ * Redis Cache Store - Settings
  *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package cachestore_redis
+ * @copyright 2013 Adam Durana
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
-
-defined('MOODLE_INTERNAL') || die;
-
+defined('MOODLE_INTERNAL') || die();
 $settings->add(
-    new admin_setting_configtextarea(
-        'cachestore_redis/testserver',
-        new lang_string('testserver', 'cachestore_redis'),
-        new lang_string('testserver_desc', 'cachestore_redis'),
-        '', PARAM_RAW, 60, 3
-    )
-);
+            new admin_setting_configtext('cachestore_redis/test_server', get_string('test_server', 'cachestore_redis'),
+                                        get_string('test_server_desc', 'cachestore_redis'), '', PARAM_TEXT, 16));

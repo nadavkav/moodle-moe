@@ -13,17 +13,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * This file belongs to the redis cache store and contains version information
- *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-defined('MOODLE_INTERNAL') || die;
-
-$plugin->version = 2014051400; // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2014050800; // Requires this Moodle version.
-$plugin->component = 'cachestore_redis'; // Full name of the plugin.
+ * Redis Cache Store - Version information
+*
+* @package   cachestore_redis
+* @copyright 2013 Adam Durana
+* @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+*/
+defined('MOODLE_INTERNAL') || die();
+$plugin->version    = 2016012600;
+$plugin->requires   = 2015111604; // Requires this Moodle version (3.0.4).
+$plugin->maturity   = MATURITY_STABLE;
+$plugin->component  = 'cachestore_redis';
+$plugin->release    = '3.0.4 (Build: 20160509)';

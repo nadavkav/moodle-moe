@@ -15,18 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file belongs to the redis cache store and contains strings belonging to this plugin.
- *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ * Redis Cache Store - English language strings
+*
+* @package   cachestore_redis
+* @copyright 2013 Adam Durana
+* @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+*/
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['pluginname'] = 'Redis';
+$string['prefix'] = 'Key prefix';
+$string['prefix_help'] = 'This prefix is used for all key names on the Redis server.
+* If you only have one Moodle instance using this server, you can leave this value default.
+* Due to key length restrictions, a maximum of 5 characters is permitted.';
+$string['prefixinvalid'] = 'Invalid prefix. You can only use a-z A-Z 0-9-_.';
+$string['test_server'] = 'Test Server';
+$string['test_server_desc'] = 'Redis server to use for testing.';
 $string['server'] = 'Server';
-$string['server_help'] = 'Enter your server details here, host:post:timeout:persistentid:retrytimeout';
-$string['pluginname'] = 'Redis cachestore';
-$string['exception_operationnotconnected'] = 'The requested operation cannot be performed as there is not an open connection to a Redis server';
-$string['testserver'] = 'Test server';
-$string['testserver_desc'] = 'Enter the server to use for testing - usually 127.0.0.1';
+$string['server_help'] = 'This sets the hostname or IP address of the Redis server to use.';

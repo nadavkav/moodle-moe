@@ -15,80 +15,112 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file belongs to the redis cache store and contains unit tests for the redis cache store.
- *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ * Redis cache test.
+*
+* If you wish to use these unit tests all you need to do is add the following definition to
+* your config.php file.
+*
+* define('TEST_CACHESTORE_REDIS_TESTSERVERS', '127.0.0.1');
+*
+* @package   cachestore_redis
+* @copyright Copyright (c) 2015 Moodlerooms Inc. (http://www.moodlerooms.com)
+* @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+*/
 
 defined('MOODLE_INTERNAL') || die();
 
-// Include the necessary evils.
-global $CFG;
-require_once($CFG->dirroot.'/cache/tests/fixtures/stores.php');
-require_once($CFG->dirroot.'/cache/stores/redis/lib.php');
+require_once(__DIR__.'/../../../tests/fixtures/stores.php');
+require_once(__DIR__.'/../lib.php');
 
 /**
- * Redis cache store test class.
+ * Redis cache test.
  *
- * @package    cachestore_redis
- * @copyright  2014 Sam Hemelryk
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   cachestore_redis
+ * @copyright Copyright (c) 2015 Moodlerooms Inc. (http://www.moodlerooms.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cachestore_redis_test extends cachestore_tests {
-
     /**
-     * Prepare to run tests.
+     * @var cachestore_redis
      */
-    public function setUp() {
-        if (defined('TEST_CACHESTORE_REDIS_TESTSERVER')) {
-            set_config('testserver', TEST_CACHESTORE_REDIS_TESTSERVER, 'cachestore_redis');
-            $this->resetAfterTest();
-        }
-        parent::setUp();
-    }
+    protected $store;
 
     /**
-     * Returns the memcache class name
+     * Returns the MongoDB class name
+     *
      * @return string
      */
     protected function get_class_name() {
         return 'cachestore_redis';
     }
 
-    /**
-     * Tests the valid keys to ensure they work.
-     */
-    public function test_valid_keys() {
-        $definition = cache_definition::load_adhoc(cache_store::MODE_APPLICATION, 'cachestore_redis', 'phpunit_test');
-        $instance = cachestore_redis::initialise_test_instance($definition);
+    public function setUp() {
+        if (!cachestore_redis::are_requirements_met() || !defined('TEST_CACHESTORE_REDIS_TESTSERVERS')) {
+            $this->markTestSkipped('Could not test cachestore_redis. Requirements are not met.');
+        }
+        parent::setUp();
+    }
+    protected function tearDown() {
+        parent::tearDown();
 
-        if (!$instance) { // Something prevented memcache store to be inited (extension, TEST_CACHESTORE_MEMCACHE_TESTSERVERS...).
+        if ($this->store instanceof cachestore_redis) {
+            $this->store->purge();
+        }
+    }
+
+    /**
+     * Creates the required cachestore for the tests to run against Redis.
+     *
+     * @return cachestore_redis
+     */
+    protected function create_cachestore_redis() {
+        /** @var cache_definition $definition */
+        $definition = cache_definition::load_adhoc(cache_store::MODE_APPLICATION, 'cachestore_redis', 'phpunit_test');
+        $store = new cachestore_redis('Test', cachestore_redis::unit_test_configuration());
+        $store->initialise($definition);
+
+        $this->store = $store;
+
+        if (!$store) {
             $this->markTestSkipped();
         }
 
-        $keys = array(
-            // Alphanumeric.
-            'abc', 'ABC', '123', 'aB1', '1aB',
-            // Hyphens.
-            'a-1', '1-a', '-a1', 'a1-',
-            // Underscores.
-            'a_1', '1_a', '_a1', 'a1_'
-        );
-        foreach ($keys as $key) {
-            $this->assertTrue($instance->set($key, $key), "Failed to set key `$key`");
-        }
-        foreach ($keys as $key) {
-            $this->assertEquals($key, $instance->get($key), "Failed to get key `$key`");
-        }
-        $values = $instance->get_many($keys);
-        foreach ($values as $key => $value) {
-            $this->assertEquals($key, $value);
-        }
+        return $store;
+    }
 
-        $testarray = array('a', 'b', 'c');
-        $this->assertTrue($instance->set('test_array', $testarray));
-        $this->assertEquals($testarray, $instance->get('test_array'));
+    public function test_has() {
+        $store = $this->create_cachestore_redis();
+
+        $this->assertTrue($store->set('foo', 'bar'));
+        $this->assertTrue($store->has('foo'));
+        $this->assertFalse($store->has('bat'));
+    }
+
+    public function test_has_any() {
+        $store = $this->create_cachestore_redis();
+
+        $this->assertTrue($store->set('foo', 'bar'));
+        $this->assertTrue($store->has_any(array('bat', 'foo')));
+        $this->assertFalse($store->has_any(array('bat', 'baz')));
+    }
+
+    public function test_has_all() {
+        $store = $this->create_cachestore_redis();
+
+        $this->assertTrue($store->set('foo', 'bar'));
+        $this->assertTrue($store->set('bat', 'baz'));
+        $this->assertTrue($store->has_all(array('foo', 'bat')));
+        $this->assertFalse($store->has_all(array('foo', 'bat', 'this')));
+    }
+
+    public function test_lock() {
+        $store = $this->create_cachestore_redis();
+
+        $this->assertTrue($store->acquire_lock('lock', '123'));
+        $this->assertTrue($store->check_lock_state('lock', '123'));
+        $this->assertFalse($store->check_lock_state('lock', '321'));
+        $this->assertNull($store->check_lock_state('notalock', '123'));
+        $this->assertFalse($store->release_lock('lock', '321'));
+        $this->assertTrue($store->release_lock('lock', '123'));
     }
 }
