@@ -24,11 +24,18 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function(
 		$('[name="content"]').click(function(event){
 			var element = event.target;
 			var data = [{
-				'methodname' : 'mod_quizsbs_load_connected_content',
-				'args' : {
-					'id' : $(element).val()
+					'methodname' : 'mod_quizsbs_load_connected_content',
+					'args' : {
+						'id' : $(element).val()
+					}
+				},
+				{
+					'methodname': 'mod_quizsbs_get_content_preview',
+				    'args': {
+				    	'id': $(element).val()
+				    }
 				}
-			}];
+			];
 			var promises = ajax.call(data);
 			promises[0].done(function(response){
 				var promise = templates.render('mod_quizsbs/connectsubject', response);
@@ -39,7 +46,40 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function(
 				promise = templates.render('mod_quizsbs/questionlist', response);
 				promise.done(function(source) {
 					$('#questionlist').html(source);
+					 $('.question').click(function(event){
+				            var element = event.target;
+				            var getquestion = [{
+				                'methodname': 'mod_quizsbs_get_question_preview',
+				                'args': {
+				                    'id': $(element).attr('id'),
+				                    'cmid': $('#contentslist').data('cmid')
+				                }
+				            }];
+				            var promises = ajax.call(getquestion);
+				            
+				            promises[0].done(function(response){
+				                $('#question_preview').html(response.questionhtml);
+				            });
+				        });
 				});
+			});		
+			promises[1].done(function(response){
+				$('#htmlcontent').html('');
+				$('#csscontent').html('');
+				$('#javascriptcontent').html('');
+				for (var index in response) {
+					switch (response[index].type) {
+						case 0:
+							$('#htmlcontent').html(response[index].content);
+							break;
+						case 3:
+							$('#csscontent').html("<style>" + response[index].content + "</style>");
+							break;
+						case 2:
+							$('#javascriptcontent').html("<script>" + response[index].content + "</script>");
+							break;
+					}
+				}
 			});
 		});
 		$('#connectsubject').click(function(){
@@ -52,7 +92,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function(
 			    'args': {
 			    	'ids': questionsids,
 			    	'contentid': $('[name="content"]:checked').val(),
-			    	'cmid': $('#contentlist').data('cmid')
+			    	'cmid': $('#contentslist').data('cmid')
 			    }
 			}];
 			var promises = ajax.call(getcontent);
@@ -61,7 +101,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function(
 			    'args': {
 			    	'id': $('input[name="subject"]:checked').val(),
 			    	'contentid': $('[name="content"]:checked').val(),
-			    	'cmid': $('#contentlist').data('cmid')
+			    	'cmid': $('#contentslist').data('cmid')
 			    }
 			}];
 			promises = ajax.call(getcontent);

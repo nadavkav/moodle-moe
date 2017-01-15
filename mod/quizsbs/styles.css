@@ -1138,7 +1138,9 @@ table#categoryquestions {
 #contentconnect #contentlist,
 #contentconnect #addtional_content,
 #questionconnect #question_preview,
-#questionconnect #questionlist
+#questionconnect #questionlist,
+#contentslist #contents,
+#contentslist #addtional_content
  {
 	float: right;
 }
@@ -1147,8 +1149,14 @@ table#categoryquestions {
 	max-height: 16em;
 	overflow-y: auto; 
 }
-#contentconnect #addtional_content, #question_preview {
+#contentconnect #addtional_content,
+#question_preview,
+#contentslist #addtional_content {
 	width: 46%;
+}
+
+#contentslist{
+	min-height: 10em;
 }
 #quizsbs #navigation div {
 	float: right;
@@ -1198,6 +1206,13 @@ table#categoryquestions {
 #subjectlist i,
 #additionalcontentlist i{
 	color: #999999;
+}
+#subjectlist,
+#questionlist {
+	float: right;
+}
+#page-mod-quizsbs-editcontent #region-main ul{
+    list-style-type: none;
 }
 /** Print formatting for attempt and review pages **/
 

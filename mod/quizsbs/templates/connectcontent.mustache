@@ -14,21 +14,35 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-<section id="contentlist" class="row-flouid" data-cmid="{{cmid}}">
-    <div class="span12">
+<h2>{{pagetitile}}</h2>
+<section id="contentslist" class="row-flouid" data-cmid="{{cmid}}">
+    <h3>{{#str}}contentlist, quizsbs{{/str}}</h3>
+    <section id="contents" class="span6">
         <ul>
         {{#content}}
             <li><input type="radio" name="content" id="contnet{{id}}" value="{{id}}" {{#subjectid}}data-subject="{{subjectid}}"{{/subjectid}}/><label for="contnet{{id}}">{{name}}</label></li>
         {{/content}}
         </ul>
-    </div>
+    </section>
+    <section id="addtional_content" class="span6">
+        <div id="csscontent"></div>
+        <div id="htmlcontent"></div>
+        <div id="javascriptcontent"></div>
+    </section>
 </section>
 <section id="connectlists" class="row-fluid">
-    <section id="subjectlist" class="span6">
+    <section class="row-fluid">
+        <h3>{{#str}}subjectlist, quizsbs{{/str}}</h3>
+        <section id="subjectlist" class="span6">
         
+        </section>
     </section>
-    <section id="questionlist" class="span6">
+    <section class="row-fluid">
+        <h3>{{#str}}questionlist, quizsbs{{/str}}</h3>
+        <section id="questionlist" class="span6">
         
+        </section>
+        <section id="question_preview" class="span6"></section>
     </section>
     <section class="span12">
         <button id="connectsubject" class="btn">{{#str}}approved, quizsbs{{/str}}</button>

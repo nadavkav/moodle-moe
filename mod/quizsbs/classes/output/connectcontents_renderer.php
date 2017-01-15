@@ -33,6 +33,7 @@ class connectcontents_renderer extends \plugin_renderer_base {
             'changessuccessfulsave'
         ), 'mod_quizsbs');
         $context->cmid = $quizsbsobj->get_cmid();
+        $context->pagetitile = $this->page->title;
         return $this->render_from_template('mod_quizsbs/connectcontent', $context);
     }
 

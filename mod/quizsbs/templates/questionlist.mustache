@@ -17,7 +17,26 @@
 <section id="questionslist" class="row-fluid">
     <ul>
     {{#question}}
-        <li><input type="checkbox" value="{{id}}" {{#additionalcontentid}}checked="checked"{{/additionalcontentid}}/>{{name}}</li>
+        <li class="question" id="{{id}}"><input type="checkbox" value="{{id}}" {{#additionalcontentid}}checked="checked"{{/additionalcontentid}}/>{{name}}</li>
     {{/question}}
     </ul>
 </section>
+{{#js}}
+    require(['jquery', 'core/ajax'], function($, ajax){
+        $('.question').click(function(event){
+            var element = event.target;
+            var getquestion = [{
+                'methodname': 'mod_quizsbs_get_question_preview',
+                'args': {
+                    'id': $(element).attr('id'),
+                    'cmid': $('#contentlist').data('cmid')
+                }
+            }];
+            var promises = ajax.call(getquestion);
+            
+            promises[0].done(function(response){
+                $('#question_preview').html(response.questionhtml);
+            });
+        });
+    });
+{{/js}}
