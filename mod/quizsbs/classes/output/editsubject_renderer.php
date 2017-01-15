@@ -47,8 +47,7 @@ class editsubject_renderer extends \plugin_renderer_base {
             $subject->add_entry();
             redirect(new \moodle_url('/mod/quizsbs/editsubject.php', array(
                 'cmid' => $url->get_param('cmid'),
-                'action' => 'edit',
-                'id' => $subject->get_id(),
+                'action' => 'view',
             )), get_string('subjectsuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
         }
         $context->subjectfrom = $subjectform->render();
