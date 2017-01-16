@@ -162,9 +162,7 @@ class tour {
         $this->id           = $record->id;
         if ($clean) {
             $this->name         = clean_param($record->name, PARAM_TEXT);
-            if(isset($record->description)){
-                $this->description  = clean_param($record->description, PARAM_RAW);
-            }
+            $this->description  = clean_param($record->description, PARAM_RAW);
         } else {
             $this->name         = $record->name;
             $this->description  = $record->description;
