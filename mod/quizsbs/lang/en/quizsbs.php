@@ -279,6 +279,7 @@ $string['eachattemptbuildsonthelast_help'] = 'If multiple attempts are allowed a
 $string['editcategories'] = 'Edit categories';
 $string['editcategory'] = 'Edit category';
 $string['editcatquestions'] = 'Edit category questions';
+$string['editcontent'] = 'Edit content';
 $string['editingquestion'] = 'Editing a question';
 $string['editingquizsbs'] = 'Editing quizsbs';
 $string['editingquizsbs_help'] = 'When creating a quizsbs, the main concepts are:

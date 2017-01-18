@@ -15,15 +15,15 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 <div id="additionalcontentlist" class="row-fluid">
+    <h2>{{#str}}additionalcontent , quizsbs{{/str}}</h2>
     <ul>
         {{#contents}}
             <li>
                 {{name}} 
                 <a href="/mod/quizsbs/editcontent.php?cmid={{cmid}}&id={{id}}">{{# pix }} t/edit, moodle, Edit context {{/ pix }}</a>
                 <a href="/mod/quizsbs/additionalcontentlist.php?cmid={{cmid}}&id={{id}}&action=delete">{{# pix }} t/delete, moodle, Delete context{{/ pix }}</a>
-{{!                <a href="/mod/quizsbs/editcontent.php?cmid={{cmid}}&id={{id}}&action=connect" title="{{#str}}connectcontent, quizsbs{{/str}}"><i class="fa fa-plug"></i>
-                <a href="/mod/quizsbs/editcontent.php?cmid={{cmid}}&id={{id}}&action=duplicate" title="{{#str}}duplicate{{/str}}"><i class="fa fa-files-o" aria-hidden="true"></i></a>}}
             </li>
         {{/contents}}
     </ul>
+    <a href="/mod/quizsbs/editcontent.php?cmid={{cmid}}&action=edit" class="btn">{{#str}}additionalcontentedit, quizsbs{{/str}}</a>
 </div>

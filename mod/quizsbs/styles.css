@@ -1145,7 +1145,8 @@ table#categoryquestions {
 	float: right;
 }
 #questionlist,
-#subjectlist ul{
+#subjectlist ul,
+#additionalcontentlist ul{
 	max-height: 16em;
 	overflow-y: auto; 
 }

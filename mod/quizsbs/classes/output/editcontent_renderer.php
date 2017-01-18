@@ -137,8 +137,9 @@ class editcontent_renderer extends \plugin_renderer_base {
                         break;
                 }
             }
-            $pageurl->param('id', $additionalcontent->get_id());
-            redirect($pageurl);
+            redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
+                'cmid' => $pageurl->get_param('cmid'),
+            )), get_string('subjectsuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
         }
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
     }

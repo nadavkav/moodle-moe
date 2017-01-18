@@ -307,6 +307,7 @@ $string['editingquizx'] = 'עריכת השאלות בבוחן {$a}';
 $string['editmaxmark'] = 'עריכת ניקוד מירבי';
 $string['editoverride'] = 'ניהול הגדרות־מותאמות';
 $string['editqcats'] = 'עריכת קטגוריות של שאלות';
+$string['editcontent'] = 'הוספת תוכן';
 $string['editquestion'] = 'עריכת שאלה';
 $string['editquestions'] = 'עריכת שאלות';
 $string['editquiz'] = 'עריכת השאלות בבוחן';
