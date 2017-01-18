@@ -2,6 +2,8 @@
 require_once($CFG->libdir . "/externallib.php");
 class local_moereports_external extends external_api {
 
+    
+    
     public static function saveschools_parameters() {
 
         return new external_function_parameters(
@@ -19,6 +21,10 @@ class local_moereports_external extends external_api {
                     'the schools to be deleted', VALUE_OPTIONAL))
             );
     }
+    
+    
+    
+    
     public static function saveschools($schools,$deleted) {
         global $DB;
         $records = [];
@@ -109,5 +115,6 @@ class local_moereports_external extends external_api {
             ), 'region\'s fields'),
             'the saveschools to be saved', VALUE_REQUIRED);
     }
-
+  
+    
 }

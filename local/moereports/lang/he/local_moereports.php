@@ -6,6 +6,6 @@ $string['symbol'] = 'סמל בית ספר';
 $string['name'] = 'שם בית ספר';
 $string['region'] = 'מחוז';
 $string['save'] ='שמור';
-$string['reports'] ='דוחות';
+$string['reports'] ='דוחות_';
 $string['city'] = 'רשות';
 $string['add'] = 'תוספת';

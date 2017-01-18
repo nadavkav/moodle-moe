@@ -2,7 +2,7 @@
 
 $string['title'] ='Moe Reports';
 $string['pluginname'] ='Moe Reports';
-$string['reports'] = 'reports';
+$string['reports'] = 'Mreports';
 $string['checkbox'] = 'checkbox';
 $string['checkboxdescription'] = 'check box description';
 $string['externalpage'] = 'external page';
