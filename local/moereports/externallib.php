@@ -3,6 +3,22 @@ require_once($CFG->libdir . "/externallib.php");
 class local_moereports_external extends external_api {
 
     
+    public static function saveclasses_parameters() {
+    
+        return new external_function_parameters(
+            array('classes' => new external_multiple_structure(
+                new external_single_structure(array (
+                    new external_value(PARAM_NUMBER, ' ID', false, null, true),
+                    new external_value(PARAM_NUMBER, 'School\'s symbol'),
+                    new external_value(PARAM_NUMBER, 'School\'s class'),
+                    new external_value(PARAM_NUMBER, 'number of students in class'),
+                ), 'School\'s fields'),
+                'the classes to be saved', VALUE_REQUIRED),
+                'del' => new external_multiple_structure(
+                    new external_value(PARAM_NUMBER, 'entry Id  to delete'),
+                    'the entry be deleted', VALUE_OPTIONAL))
+            );
+    }
     
     public static function saveschools_parameters() {
 
@@ -103,6 +119,80 @@ class local_moereports_external extends external_api {
         }
         return $schools;
     }
+    public static function saveclasses($classes,$deleted) {
+        global $DB;
+        $records = [];
+    
+        for ($i = 0; $i < count($classes); $i++) {
+            $tmp = new stdClass();
+            $tmp->id = $classes[$i][0];
+            $tmp->symbol = $classes[$i][1];
+            $tmp->class = $classes[$i][2];
+            $tmp->studentsnumber = $classes[$i][3];
+    
+            $records[] = $tmp;
+        }
+    
+        foreach ($deleted as $record) {
+            $DB->delete_records('moereports_reports_classes',["id" => $record]);
+        }
+    
+        $return->inserted = 0;
+        $return->existed = 0;
+        foreach ($records as $linenumber => $record) {
+            $rec = null;
+            if(empty($record->id)) {
+                if(empty($record->class) || empty($record->studentsnumber) || empty($record->symbol)){
+                    $return->message =  "missingschoolfield";
+                }
+                if ($return->message) {
+                    $validrecords = false;
+                    break;
+                }
+            }
+            if (! $return->message) {
+    
+                if(!empty($record->id)) {
+                    $rec = $DB->get_record('moereports_reports_classes', array('id' => $record->id));
+                }
+    
+                if ($rec) {
+                    $rec->symbol = $record->symbol;
+                    $rec->class = $record->class;
+                    $rec->studentsnumber =$record->studentsnumber;
+    
+                    $DB->update_record('moereports_reports_classes', $rec);
+    
+                    $return->existed ++;
+                    continue;
+                }
+    
+                $class = new stdClass();
+                $class->class =$record->class;
+                $class->studentsnumber = $record->studentsnumber;
+                $class->id = $record->id;
+                $class->symbol = $record->symbol;
+    
+                $DB->insert_record('moereports_reports_classes', $class);
+                $return->inserted ++;
+            }
+        }
+        $reports = $DB->get_records('moereports_reports_classes');
+        $schools = [];
+    
+        foreach ($reports as $key => $report) {
+            // Set the fields.
+            $tmp = [];
+            $tmp[] = $report->id;
+            $tmp[] = $report->symbol;
+            $tmp[] = $report->class;
+            $tmp[] = $report->studentsnumber;
+    
+            // Add the current group to the groups array.
+            $classes[] = $tmp;
+        }
+        return $classes;
+    }
     public static function saveschools_returns() {
         return new external_multiple_structure(
             new external_single_structure(array (
@@ -114,6 +204,17 @@ class local_moereports_external extends external_api {
                 new external_value(PARAM_TEXT, 'School\'s city'),
             ), 'region\'s fields'),
             'the saveschools to be saved', VALUE_REQUIRED);
+    }
+    
+    public static function saveclasses_returns() {
+        return new external_multiple_structure(
+            new external_single_structure(array (
+                    new external_value(PARAM_NUMBER, 'School\'s ID'),
+                    new external_value(PARAM_NUMBER, 'School\'s symbol'),
+                    new external_value(PARAM_NUMBER, 'School\'s class'),
+                    new external_value(PARAM_NUMBER, 'number of students in class'),
+            ), ' fields'),
+            'the classes to be saved', VALUE_REQUIRED);
     }
   
     

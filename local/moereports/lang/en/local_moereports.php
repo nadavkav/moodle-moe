@@ -12,3 +12,6 @@ $string['region'] = 'region';
 $string['city'] = 'city';
 $string['add'] = 'add';
 $string['save'] ='save';
+$string['class'] ='class';
+$string['studentsnumber'] ='number of student';
+$string['classesreports'] ='classes report';

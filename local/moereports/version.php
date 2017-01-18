@@ -7,7 +7,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2017011105;
+$plugin->version  = 2017011803;
 $plugin->requires = 2011120500;
 $plugin->component = 'local_moereports';
 $plugin->release = "1.0 (Build 2017010400)";
