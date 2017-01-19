@@ -1147,8 +1147,12 @@ table#categoryquestions {
 #questionlist,
 #subjectlist ul,
 #additionalcontentlist ul{
-	max-height: 16em;
+	max-height: 15.5em;
 	overflow-y: auto; 
+}
+
+#questionlist li {
+	cursor: pointer;
 }
 #contentconnect #addtional_content,
 #question_preview,
