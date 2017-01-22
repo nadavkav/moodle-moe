@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
+body {
+	background-image: url([[pix:theme|bg/bg_pix]]);
+	background-position: 0 0;
+    background-size: 6px 596px;
+    background-repeat: repeat-x;
+    background-color: #dbeede;
+}
 .dir-ltr .loginbox .loginform .form-input
 {   margin: 0 auto;
 	float: none;
