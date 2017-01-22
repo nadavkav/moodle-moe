@@ -1135,6 +1135,9 @@ table#categoryquestions {
 	padding-right: 1em;
 	padding-left: 1em;
 }
+#addtional_content {
+	word-wrap: break-word;
+}
 #contentconnect #contentlist,
 #contentconnect #addtional_content,
 #questionconnect #question_preview,
