@@ -11,7 +11,7 @@ node{
         sh 'sed -i -e "/require_once/i \\\\\\$CFG->phpunit_dataroot = \'\\/home\\/jenkins-slave\\/workspace\\/$JOB_BASE_NAME\\/$BRANCH_NAME\\/target\\/moodledata\\/phpunit_$BUILD_ID\';" -e "/require_once/i \\\\\\$CFG->phpunit_prefix = \'p_\';" config.php'
         sh 'composer config -g github-oauth.github.com ee71f264114584932339a01e0433ee0e15e82f12'
         sh 'composer install --prefer-source'
-        sh 'psql -h postgres-server -U postgres -c \'CREATE DATABASE \'$JOB_BASE_NAME\'\'$BUILD_ID\' WITH OWNER = postgres;\' postgres'
+        sh 'psql -h postgres-server -U postgres -c \'CREATE DATABASE "\'$JOB_BASE_NAME\'\'$BUILD_ID\'" WITH OWNER = postgres;\' postgres'
     }
     
     stage ('Run UnitTest') {
@@ -21,6 +21,6 @@ node{
     }
     
     stage ('Post Testing') {
-        sh 'psql -h postgres-server -U postgres -c \'DROP DATABASE \'$JOB_BASE_NAME\'\'$BUILD_ID\' \' postgres'
+        sh 'psql -h postgres-server -U postgres -c \'DROP DATABASE "\'$JOB_BASE_NAME\'\'$BUILD_ID\'"; \' postgres'
     }
 }
