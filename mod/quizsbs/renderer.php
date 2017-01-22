@@ -329,7 +329,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         } else {
             $nextpage = $page + 1;
         }
-        
+
         if (! $attemptobj ->is_preview()){
             $data->countdowntimer = $this->countdown_timer($attemptobj, time());
         }
@@ -514,6 +514,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $data->questionid = implode(',', $attemptobj->get_active_slots($page));
         $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
         $data->connectionwarning = $this->connection_warning();
+        $data->quizname = $attemptobj->get_quizsbs_name();
         return $this->render_from_template('mod_quizsbs/attempt_form', $data);
     }
 

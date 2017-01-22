@@ -15,6 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 <section id="quizsbs" class="row-fluid">
+    <header class="row-fluid">
+        <h2 class="span8">{{quizname}}</h2>
+    </header>
     <nav id="navigation" class="row-fluid">
             {{{navigation}}}
              <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
@@ -50,6 +53,7 @@
             </section>
         </section>
         <section id="addtional_content" class="span6">
+            <div class="wraper">
             {{#content}}
                 {{#content.css}}
                 <style>
@@ -65,6 +69,7 @@
                     </script>
                {{/content.javascript}}
             {{/content}}
+            </div>
         </section>
     </section>
 </section>

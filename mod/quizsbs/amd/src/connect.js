@@ -76,7 +76,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function(
 							$('#csscontent').html("<style>" + response[index].content + "</style>");
 							break;
 						case 2:
-							$('#javascriptcontent').html("<script>" + response[index].content + "</script>");
+							$('#javascriptcontent').html("<script>require(['jquery'], function($) {" +
+									response[index].content + "});</script>");
 							break;
 					}
 				}

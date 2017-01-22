@@ -5,10 +5,6 @@
 }
 
 #quizsbs-timer{
-	background-color: #f4f0c1;
-	border-style: solid;
-    border-width: 1.5px;
-    border-color: #989ca5;
 	margin: auto;
 	padding: 1%;
 }
@@ -57,18 +53,19 @@
 
 .mod_quizsbs-prev-nav{
 	background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
-	background-color:#c6e1e8 !important;
+	background-color:#bfe3e2 !important;
 	background-position:5%;
-    padding: 12px 24px !important;
-    border-color: #989ca5;
-	
+    padding: 12px 24px !important;	
+	color: #3e453e !important;
 }
 
 .mod_quizsbs-next-nav{
 	background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
-    background-color:#c6e1e8 !important;
+    background-color:#bfe3e2 !important;
 	background-position: center center; 
-	padding: 12px 24px !important; 	
+	padding: 12px 24px !important;
+	color: #3e453e !important;
+	margin-right: 1.3em !important;	
 }
 
 /** Attempt and review pages **/
@@ -140,6 +137,9 @@ body.jsenabled .questionflagcheckbox {
     left: 20%;
 }
 
+#page-mod-quizsbs-attempt #quizsbs header.row-fluid {
+	background-color: #f3e7d4;
+}
 /** Mod quizsbs attempt **/
 .generalbox#passwordbox {
     /* Should probably match .generalbox#intro above */
@@ -190,7 +190,7 @@ body.jsenabled .questionflagcheckbox {
     height: 2em;
     margin: 0.3em 0.3em 0.3em 0;
     padding: 0;
-    border: 1px solid #bbb;
+    border: 1px solid #8ebbb9;
     background: #ddd;
     text-align: center;
     vertical-align: middle;
@@ -217,20 +217,22 @@ body.jsenabled .questionflagcheckbox {
     right: 0;
 }
 
-.path-mod-quizsbs .qnbutton.thispage {
-    border-color: #666;
-}
+
 .path-mod-quizsbs .qnbutton.thispage .thispageholder {
-    border: 1px solid #666;
 	border-radius: 100%;
 }
 
 .path-mod-quizsbs .qnbutton.flagged .trafficlight {
     background: url([[pix:quizsbs|navflagged]]) no-repeat top right;
 }
-
+.path-mod-quizsbs .qnbutton.notyetanswered{
+	background-color: #e3f5f5;
+}
+.path-mod-quizsbs .qnbutton.thispage {
+    color: #d2d8d8;
+    background-color: #3d6362;
+}
 .path-mod-quizsbs .qnbutton.blocked,
-.path-mod-quizsbs .qnbutton.notyetanswered,
 .path-mod-quizsbs .qnbutton.requiresgrading,
 .path-mod-quizsbs .qnbutton.invalidanswer {
     background-color: white;
@@ -1121,7 +1123,6 @@ table#categoryquestions {
     list-style: none;
 }
 .path-mod-quizsbs #quizsbs_question{
-	border-left: 1px solid #baacc9;
 	float: right;
 	padding: 1em;
 }
@@ -1129,7 +1130,9 @@ table#categoryquestions {
 .path-mod-quizsbs #addtional_content{
     float: right;
 }
-
+.dir-rtl #quizsbs .row-fluid [class*="span"]{
+	float:right;
+}
 #addtional_content , #subjectheader{
 	padding-right: 1em;
 	padding-left: 1em;
@@ -1169,14 +1172,31 @@ table#categoryquestions {
 	float: right;
 	display: flex;
 	flex-direction : row;
-	overflow-x: auto; 
+	overflow-x: auto;
+	overflow-y: hidden;
 }
 
 #id_csseditor, #id_javascripteditor {
 	direction: ltr;
 }
-#quizsbs, #questionbox{
-	border: 1px solid #baacc9;
+
+#quizsbs {
+	background-color: #f9f1e4;
+}
+#questions {
+	display: flex;
+}
+#questions #quizsbs_question, 
+#questions #addtional_content{
+	flex: 1;
+}
+#questions #addtional_content {
+	padding: 1em;
+}
+#questions #addtional_content .wraper{
+	height: 100%;
+}
+#questionbox{
 	margin: 0px;
 }
 #questionbox {
@@ -1203,12 +1223,13 @@ table#categoryquestions {
 	border-radius: 0px;
 }
 #navigation{
-	border-bottom: 1px solid #baacc9;
 	display: flex;
 }
-#subjectheader {
-	border: 1px solid #b8abb7;
-	background-color: #fcf4e7;
+#subjectheader,
+#questionbox,
+#quizsbs .que .formulation,
+#questions #addtional_content .wraper {
+	background-color: #ffffff;
 }
 #subjectlist i,
 #additionalcontentlist i{
@@ -1220,7 +1241,7 @@ table#categoryquestions {
 }
 
 #navigation .submitbtns input[type="submit"] {
-    color: #000000 !important;
+    color: #3e453e !important;
 	background-size: auto 40% !important;
 }
 
