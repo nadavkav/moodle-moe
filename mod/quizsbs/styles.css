@@ -52,10 +52,6 @@
 #quizsbs #navigation  .qn_buttons  {
 	max-width: 325px;
     max-height: 49px;
-	border-style: solid;
-    border-width: 1.5px;
-    border-color: #989ca5;
-	margin: 1%;
 }
 
 
@@ -92,6 +88,7 @@
 #page-mod-quizsbs-attempt.dir-rtl .submitbtns,
 #page-mod-quizsbs-review.dir-rtl .submitbtns {
     text-align: right;
+	min-width: 325px;
 }
 
 #page-mod-quizsbs-attempt .submitbtns .mod_quizsbs-next-nav,
@@ -190,16 +187,17 @@ body.jsenabled .questionflagcheckbox {
     float: left;
     width: 2em;
 	min-width: 2em;
-    height: 1.5em;
+    height: 2em;
     margin: 0.3em 0.3em 0.3em 0;
     padding: 0;
     border: 1px solid #bbb;
     background: #ddd;
     text-align: center;
     vertical-align: middle;
-    line-height: 1.5em;
+    line-height: 2em;
     font-weight: bold;
     text-decoration: none;
+	border-radius: 100%;
 }
 .path-mod-quizsbs.dir-rtl  .qnbutton {
     float: right;
@@ -224,6 +222,7 @@ body.jsenabled .questionflagcheckbox {
 }
 .path-mod-quizsbs .qnbutton.thispage .thispageholder {
     border: 1px solid #666;
+	border-radius: 100%;
 }
 
 .path-mod-quizsbs .qnbutton.flagged .trafficlight {
@@ -1219,6 +1218,23 @@ table#categoryquestions {
 #questionlist {
 	float: right;
 }
+
+#navigation .submitbtns input[type="submit"] {
+    color: #000000 !important;
+	background-size: auto 40% !important;
+}
+
+#navigation .submitbtns input[name="previous"] {
+    background-position-x: 95% !important;
+    padding-right: 29px !important;
+}
+
+#navigation .submitbtns input[name="next"] {
+    background-position-x: 5% !important;
+    padding-left: 29px !important;
+}
+
+
 #page-mod-quizsbs-editcontent #region-main ul{
     list-style-type: none;
 }
