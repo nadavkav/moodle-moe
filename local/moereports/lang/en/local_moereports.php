@@ -2,7 +2,7 @@
 
 $string['title'] ='Moe Reports';
 $string['pluginname'] ='Moe Reports';
-$string['reports'] = 'Mreports';
+$string['reports'] = 'reports';
 $string['checkbox'] = 'checkbox';
 $string['checkboxdescription'] = 'check box description';
 $string['externalpage'] = 'external page';
@@ -12,3 +12,16 @@ $string['region'] = 'region';
 $string['city'] = 'city';
 $string['add'] = 'add';
 $string['save'] ='save';
+$string['school_task'] = 'Scope performing school in each of the tasks';
+$string['cors'] = 'field of knowledge';
+$string['activity'] = 'activity name';
+$string['makbila'] = 'Number of graders $makbila who carried out a mission';
+$string['percents']='percentage of students that have done the tasks of class $percents';
+$string['makbila9'] = 'מספר תלמידי כיתה ט שבצעו משימות';
+$string['percents9']=' אחוז התלמידים שבצעו משימות מתוך תלמידי כיתה ט ';
+$string['makbila10'] = 'מספר תלמידי כיתה י שבצעו משימות';
+$string['percents10']=' אחוז התלמידים שבצעו משימות מתוך תלמידי כיתה י ';
+$string['makbila11'] = 'מספר תלמידי כיתה יא שבצעו משימות';
+$string['percents11']=' אחוז התלמידים שבצעו משימות מתוך תלמידי כיתה יא ';
+$string['makbila12'] = 'מספר תלמידי כיתה יב שבצעו משימות';
+$string['percents12']=' אחוז התלמידים שבצעו משימות מתוך תלמידי כיתה יב ';

@@ -4,6 +4,23 @@ body#page-local-moereports-view section[role="main-content"] nav a { margin: 14p
 	text-align: left;
 	min-height: 360px;
 }
+
+/* css for moe results table */
+
+.resultTable {
+	
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
 .handsontable {
   position: relative;
 }
