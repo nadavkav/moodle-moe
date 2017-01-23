@@ -450,14 +450,22 @@ class edit_renderer extends \plugin_renderer_base {
      * @return string HTML to output.
      */
     public function page_row(structure $structure, $slot, $contexts, $pagevars, $pageurl) {
+        global $PAGE;
         $output = '';
 
         $pagenumber = $structure->get_page_number_for_slot($slot);
-        $pagename = $structure->get_content_name_for_slot($slot);
+        $pagename = $structure->get_content_name_for_slot($pagenumber);
 
         // Put page in a heading for accessibility and styling.
-        $page = $this->heading($pagename, 4);
+        $page = $this->heading(get_string('page') . ' ' . $pagenumber, 4);
 
+        if($pagename) {
+            $page .= ' - ' . \html_writer::span($pagename);
+        }
+        $editlink = \html_writer::link(new \moodle_url('/mod/quizsbs/connect.php', array(
+            'cmid' => $PAGE->cm->id,
+            'page' => $pagenumber,
+        )), \html_writer::img($this->pix_url('t/edit'), 'edit content'));
         if ($structure->is_first_slot_on_page($slot)) {
             // Add the add-menu at the page level.
             $addmenu = html_writer::tag('span', $this->add_menu_actions($structure,
@@ -467,7 +475,7 @@ class edit_renderer extends \plugin_renderer_base {
             $addquestionform = $this->add_question_form($structure,
                     $pagenumber, $pageurl, $pagevars);
 
-            $output .= html_writer::tag('li', $page . $addmenu . $addquestionform,
+            $output .= html_writer::tag('li', $page . $editlink . $addmenu . $addquestionform,
                     array('class' => 'pagenumber activity yui3-dd-drop page', 'id' => 'page-' . $pagenumber));
         }
 

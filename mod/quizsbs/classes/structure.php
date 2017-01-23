@@ -138,9 +138,13 @@ class structure {
         return $this->slotsinorder[$slotnumber]->page;
     }
 
-    public function get_content_name_for_slot($slotnumber) {
-        $additional = new additional_content($this->slotsinorder[$slotnumber]->additionalcontentid);
-        return $additional->get_name();
+    public function get_content_name_for_slot($pagenumber) {
+        global $DB;
+        $additional = $DB->get_record('quizsbs_additional_content', array(
+            'subjectid' => $pagenumber,
+            'quizsbsid' => $this->get_quizsbsid(),
+        ));
+        return ($additional)? $additional->name : '';
     }
     /**
      * Get the slot id of a given slot slot.

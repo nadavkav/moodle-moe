@@ -138,8 +138,11 @@ switch($requestmethod) {
                         $slots = $structure->update_page_break($id, $value);
                         $json = array();
                         foreach ($slots as $slot) {
+                            $pageslots = $DB->get_fieldset_select('quizsbs_slots','slot', 'page = ?', array($slot->page));
+                            $pageslots = implode(',', $pageslots);
+                            $page = $DB->get_record_select('quizsbs_sections', 'firstslot IN (?)', array($pageslots));
                             $json[$slot->slot] = array('id' => $slot->id, 'slot' => $slot->slot,
-                                                            'page' => $slot->page);
+                                                            'page' => $page->heading);
                         }
                         echo json_encode(array('slots' => $json));
                         break;

@@ -19,11 +19,7 @@
     <h3>{{#str}}contentlist, quizsbs{{/str}}</h3>
     <div class="span12">{{#str}}contentlistdesc, quizsbs{{/str}}</div>
     <section id="contents" class="span6">
-        <ul>
-        {{#content}}
-            <li><input type="radio" name="content" id="contnet{{id}}" value="{{id}}" {{#subjectid}}data-subject="{{subjectid}}"{{/subjectid}}/><label for="contnet{{id}}">{{name}}</label></li>
-        {{/content}}
-        </ul>
+       {{{form}}}
     </section>
     <section id="addtional_content" class="span6">
         <div id="csscontent"></div>
@@ -31,22 +27,4 @@
         <div id="javascriptcontent"></div>
     </section>
     <div class="clear"></div>
-</section>
-<section id="connectlists" class="row-fluid">
-    <section class="row-fluid">
-        <h3>{{#str}}subjectlist, quizsbs{{/str}}</h3>
-        <section id="subjectlist" class="span6">
-        
-        </section>
-    </section>
-    <section class="row-fluid">
-        <h3>{{#str}}questionlist, quizsbs{{/str}}</h3>
-        <section id="questionlist" class="span6">
-        
-        </section>
-        <section id="question_preview" class="span6"></section>
-    </section>
-    <section class="span12">
-        <button id="connectsubject" class="btn">{{#str}}approved, quizsbs{{/str}}</button>
-    </section>
 </section>

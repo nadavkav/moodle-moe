@@ -211,5 +211,4 @@ echo $output->edit_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagev
 
 // Questions wrapper end.
 echo html_writer::end_tag('div');
-
 echo $OUTPUT->footer();

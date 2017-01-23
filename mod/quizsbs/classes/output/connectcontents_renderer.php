@@ -15,6 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 namespace mod_quizsbs\output;
 
+use mod_quizsbs\form\connectcontent;
+use mod_quizsbs\local\additional_content;
+
 defined('MOODLE_INTERNAL') || die();
 /**
  *
@@ -23,17 +26,42 @@ defined('MOODLE_INTERNAL') || die();
  */
 class connectcontents_renderer extends \plugin_renderer_base {
 
-    public function content_list_page(\quizsbs $quizsbsobj, $id = null) {
-        global $DB;
+    public function content_list_page(\quizsbs $quizsbsobj, $page) {
+        global $DB, $PAGE;
         $context = new \stdClass();
+        $customdata = new \stdClass();
+        $customdata->contents = $DB->get_records_select('quizsbs_additional_content', 'quizsbsid = ? and (subjectid is null or subjectid = ?)',
+                                        array(
+                                            $quizsbsobj->get_quizsbsid(),
+                                            $page,
+                                        ));
+        $connectcontentform = new connectcontent($PAGE->url, $customdata);
+        $data = new \stdClass();
+        $data->contents = $DB->get_field('quizsbs_additional_content', 'id', array(
+            'quizsbsid' => $quizsbsobj->get_quizsbsid(),
+            'subjectid' => $page,
+        ));
+        $connectcontentform->set_data($data);
+        if($connectcontentform->is_submitted()) {
+            $data = $connectcontentform->get_data();
+            if(!empty($data)){
+                $additionalcontent = new additional_content($data->contents);
+                $additionalcontent->set_subjectid($page);
+                $additionalcontent->add_entry();
+                redirect(new \moodle_url('/mod/quizsbs/edit.php', array(
+                    'cmid' => $PAGE->url->get_param('cmid'),
+                )), get_string('pagesuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
+            }
+        }
         $context->content = array_values($DB->get_records('quizsbs_additional_content', array('quizsbsid' => $quizsbsobj->get_quizsbsid())));
+        $context->form = $connectcontentform->render();
         $this->page->requires->js_call_amd('mod_quizsbs/connect', 'init');
         $this->page->requires->strings_for_js(array(
             'approved',
             'changessuccessfulsave'
         ), 'mod_quizsbs');
         $context->cmid = $quizsbsobj->get_cmid();
-        $context->pagetitile = $this->page->title;
+        $context->pagetitile = get_string('connectcontent', 'quizsbs', $page);
         return $this->render_from_template('mod_quizsbs/connectcontent', $context);
     }
 

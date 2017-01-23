@@ -484,14 +484,20 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         foreach ($slots as $slot) {
             $output .= $attemptobj->render_question($slot, false, $this,
                                             $attemptobj->attempt_url($slot, $page), $this);
-            $slot = $DB->get_record('quizsbs_slots', array('id' => $slot));
-            $additionalcontent = new additional_content($slot->additionalcontentid);
-            $data->green = $additionalcontent->get_name();
-            $subject = $DB->get_record('quizsbs_sections', array(
-                'firstslot' => $slot->id,
+            $slot = $DB->get_record('quizsbs_slots', array(
+                'slot' => $slot,
                 'quizsbsid' => $attemptobj->get_quizsbsid(),
             ));
-            if (empty($data->subject) && $subject){
+            $additionalcontent = new additional_content($DB->get_field('quizsbs_additional_content', 'id', array(
+                'quizsbsid' => $slot->quizsbsid,
+                'subjectid' => $page+1,
+            )));
+            $data->green = $additionalcontent->get_name();
+            $subject = $DB->get_record('quizsbs_sections', array(
+                'firstslot' => $slot->slot,
+                'quizsbsid' => $attemptobj->get_quizsbsid(),
+            ));
+            if (empty($data->subject) && $subject) {
                 $data->subject = $subject->heading;
             }
             $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
@@ -510,7 +516,13 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
                 }
             }
         }
-
+        if (empty($data->subject)) {
+           $section = $DB->get_records_select('quizsbs_sections','quizsbsid = ? and firstslot <= ?', array(
+                $attemptobj->get_quizsbsid(),
+                reset($slots),
+            ), 'firstslot DESC', '*', 0, 1);
+           $data->subject = reset($section)->heading;
+        }
         $data->slots = $output;
         $data->attempteid = $attemptobj->get_attemptid();
         $data->page = $page;

@@ -19,7 +19,7 @@ require_once($CFG->dirroot . '/mod/quizsbs/locallib.php');
 require_once($CFG->dirroot . '/question/editlib.php');
 
 $cmid = required_param('cmid', PARAM_INT);
-$id = optional_param('id', null, PARAM_INT);
+$page = required_param('page', PARAM_INT);
 
 list($quizsbs, $cm) = get_module_from_cmid($cmid);
 $courseid = $cm->course;
@@ -27,10 +27,8 @@ require_login($courseid, false, $cm);
 $context = context_module::instance($cmid);
 $url = new moodle_url('/mod/quizsbs/connect.php', array(
     'cmid' => $cmid,
+    'page' => $page,
 ));
-if ($id) {
-   $url->param('id', $id);
-}
 require_capability('mod/quizsbs:manage', $context);
 navigation_node::override_active_url($url);
 $PAGE->set_url($url);
@@ -42,7 +40,7 @@ $output = $PAGE->get_renderer('mod_quizsbs', 'connectcontents');
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_pagetype('mod-quizsbs-editcontent');
 
-$content = $output->content_list_page($quizsbsobj, $id);
+$content = $output->content_list_page($quizsbsobj, $page);
 
 echo $OUTPUT->header();
 
