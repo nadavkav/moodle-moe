@@ -395,7 +395,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      * @return string HTML fragment.
      */
     protected function render_quizsbs_nav_section_heading(quizsbs_nav_section_heading $heading) {
-        return $this->heading($heading->heading, 3, 'mod_quizsbs-section-heading');
+        return '';
     }
 
     /**
@@ -487,8 +487,13 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $slot = $DB->get_record('quizsbs_slots', array('id' => $slot));
             $additionalcontent = new additional_content($slot->additionalcontentid);
             $data->green = $additionalcontent->get_name();
-            $subject = $DB->get_record('quizsbs_subject', array('id' => $additionalcontent->get_subjectid()));
-            $data->subject = ($subject) ? $subject->name : $additionalcontent->get_name();
+            $subject = $DB->get_record('quizsbs_sections', array(
+                'firstslot' => $slot->id,
+                'quizsbsid' => $attemptobj->get_quizsbsid(),
+            ));
+            if (empty($data->subject) && $subject){
+                $data->subject = $subject->heading;
+            }
             $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
             foreach ($questioncontent as  $value) {
                 $content = new question_content($value->id);

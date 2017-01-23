@@ -23,6 +23,8 @@
  */
 
 namespace mod_quizsbs;
+use mod_quizsbs\local\additional_content;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -136,6 +138,10 @@ class structure {
         return $this->slotsinorder[$slotnumber]->page;
     }
 
+    public function get_content_name_for_slot($slotnumber) {
+        $additional = new additional_content($this->slotsinorder[$slotnumber]->additionalcontentid);
+        return $additional->get_name();
+    }
     /**
      * Get the slot id of a given slot slot.
      * @param int $slotnumber the index of the slot in question.

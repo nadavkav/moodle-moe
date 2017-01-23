@@ -453,9 +453,10 @@ class edit_renderer extends \plugin_renderer_base {
         $output = '';
 
         $pagenumber = $structure->get_page_number_for_slot($slot);
+        $pagename = $structure->get_content_name_for_slot($slot);
 
         // Put page in a heading for accessibility and styling.
-        $page = $this->heading(get_string('page') . ' ' . $pagenumber, 4);
+        $page = $this->heading($pagename, 4);
 
         if ($structure->is_first_slot_on_page($slot)) {
             // Add the add-menu at the page level.
