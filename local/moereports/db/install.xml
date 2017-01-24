@@ -26,7 +26,6 @@
 	    <KEYS>
 	   		  <KEY NAME="symbol_fk_fromreports" TYPE="foreign" FIELDS="symbol" REFTABLE="moereports_reports" REFFIELDS="symbol"/>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-              <KEY NAME="symboluxi" TYPE="unique" FIELDS="symbol"/>
 	    </KEYS>
     </TABLE>
   </TABLES>

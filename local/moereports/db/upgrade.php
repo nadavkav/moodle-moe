@@ -28,5 +28,5 @@ function xmldb_local_moereports_upgrade($oldversion) {
     
         upgrade_plugin_savepoint(true, 2017011803, 'local', 'moereports');
     }
-    
+    return true;
 }

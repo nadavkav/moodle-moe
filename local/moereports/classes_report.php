@@ -3,7 +3,6 @@
 require_once ('../../config.php');
 
 $url = new moodle_url('/local/moereports/classes_report.php');
-
 $PAGE->set_url($url);
 
 // Make sure that the user has permissions to manage moe.
