@@ -45,13 +45,25 @@ class connectcontents_renderer extends \plugin_renderer_base {
         if($connectcontentform->is_submitted()) {
             $data = $connectcontentform->get_data();
             if(!empty($data)){
-                $additionalcontent = new additional_content($data->contents);
-                $additionalcontent->set_subjectid($page);
+                if($data->contents != 0){
+                    $additionalcontent = new additional_content($data->contents);
+                    $additionalcontent->set_subjectid($page);
+                } else {
+                    $additionalcontentid = $DB->get_field('quizsbs_additional_content', 'id', array(
+                        'subjectid' => $page,
+                        'quizsbsid' => $quizsbsobj->get_quizsbsid(),
+                    ));
+                    $additionalcontent = new additional_content($additionalcontentid);
+                    $additionalcontent->set_subjectid(null);
+                }
                 $additionalcontent->add_entry();
                 redirect(new \moodle_url('/mod/quizsbs/edit.php', array(
                     'cmid' => $PAGE->url->get_param('cmid'),
                 )), get_string('pagesuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
             }
+            redirect(new \moodle_url('/mod/quizsbs/edit.php', array(
+                'cmid' => $PAGE->url->get_param('cmid'),
+            )));
         }
         $context->content = array_values($DB->get_records('quizsbs_additional_content', array('quizsbsid' => $quizsbsobj->get_quizsbsid())));
         $context->form = $connectcontentform->render();

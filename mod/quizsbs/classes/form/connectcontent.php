@@ -73,11 +73,13 @@ class connectcontent extends \moodleform {
             'noselectionstring' => get_string('contentlist', 'quizsbs'),
         );
         $contents = array();
+        $contents[0] = get_string('nocontent', 'quizsbs');
         foreach ($this->_customdata->contents as $key => $value) {
             $contents[$key] = $value->name;
         }
 
-        $mform->addElement('select', 'contents', get_string('contentlist', 'quizsbs'), $contents, $options);
+        $select = $mform->addElement('select', 'contents', get_string('contentlist', 'quizsbs'), $contents, $options);
+        $select->setSelected('0');
 
         $this->add_action_buttons();
     }

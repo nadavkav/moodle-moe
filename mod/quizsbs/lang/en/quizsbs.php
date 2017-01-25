@@ -536,6 +536,7 @@ $string['nocategory'] = 'Incorrect or no category specified';
 $string['noclose'] = 'No close date';
 $string['nocommentsyet'] = 'No comments yet.';
 $string['noconnection'] = 'There is currently no connection to a web service that can process this question. Please contact your administrator';
+$string['nocontent'] = 'No content';
 $string['nodataset'] = 'nothing - it is not a wild card';
 $string['nodatasubmitted'] = 'No data was submitted.';
 $string['noessayquestionsfound'] = 'No manually graded questions found';

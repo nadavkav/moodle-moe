@@ -580,6 +580,7 @@ $string['nocategory'] = 'לא נכון או שלא פורטה קטגוריה.';
 $string['noclose'] = 'ללא תאריך סגירה';
 $string['nocommentsyet'] = 'עדיין אין הערות.';
 $string['noconnection'] = 'נכון לרגע זה אין חיבור לשירות רשת שיכול לעבד את השאלה הזו. אנא צור קשר עם המנהל שלך.';
+$string['nocontent'] = 'ללא תוכן';
 $string['nodataset'] = 'כלום - זהו אינו תו-כללי';
 $string['nodatasubmitted'] = 'לא הוגש כל מידע';
 $string['noessayquestionsfound'] = 'לא נמצאו שאלות שניתן להם ציון באופן ידני.';
