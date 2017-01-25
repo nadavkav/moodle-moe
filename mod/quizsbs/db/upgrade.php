@@ -232,5 +232,24 @@ function xmldb_quizsbs_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017010400, 'quizsbs');
     }
 
+    if ($oldversion < 2017012503){
+        $table = new xmldb_table('quizsbs_subject');
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+        $table = new xmldb_table('quizsbs_slots');
+        $key = new xmldb_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'quizsbs_additional_content', array('id'));
+        $field = new xmldb_field('additionalcontentid');
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_key($table, $key);
+            $dbman->drop_field($table, $field);
+        }
+        $table = new xmldb_table('quizsbs_additional_content');
+        $index = new xmldb_index('pageinquiz', XMLDB_INDEX_UNIQUE, array('quizsbsid', 'subjectid'));
+        $dbman->add_index($table, $index);
+
+        upgrade_mod_savepoint(true, 2017012503, 'quizsbs');
+    }
+
     return true;
 }

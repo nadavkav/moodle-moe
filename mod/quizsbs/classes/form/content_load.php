@@ -70,20 +70,6 @@ class content_load extends \moodleform {
         global $CFG, $DB;
 
         $mform =& $this->_form;
-        $slots = $this->_customdata['structure']->get_slots();
-        $questions = array();
-        foreach ($slots as $slot) {
-            if(is_null($slot->additionalcontentid) || ($slot->additionalcontentid == $this->_customdata['additional']->get_id())){
-                $question = $DB->get_record('question', array('id' => $slot->questionid));
-                if ($question) {
-                    $questions[$question->id] = $question->name;
-                }
-            }
-        }
-        $options = array(
-            'multiple' => true,
-            'noselectionstring' => get_string('selectquestions', 'quizsbs'),
-        );
         $quizsbjects = $DB->get_records('quizsbs_subject', array('quizsbsid' => $this->_customdata['structure']->get_quizsbsid()));
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));

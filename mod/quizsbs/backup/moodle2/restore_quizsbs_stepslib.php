@@ -59,6 +59,8 @@ class restore_quizsbs_activity_structure_step extends restore_questions_activity
 
         $paths[] = new restore_path_element('quizsbs_question_instance',
                 '/activity/quizsbs/question_instances/question_instance');
+        $paths[] = new restore_path_element('quizsbs_additional_content', '/activity/quizsbs/additional_contents/additional_content');
+        $paths[] = new restore_path_element('quizsbs_question_content', '/activity/quizsbs/additional_contents/additional_content/questioncontents/questioncontent');
         $paths[] = new restore_path_element('quizsbs_section', '/activity/quizsbs/sections/section');
         $paths[] = new restore_path_element('quizsbs_feedback', '/activity/quizsbs/feedbacks/feedback');
         $paths[] = new restore_path_element('quizsbs_override', '/activity/quizsbs/overrides/override');
@@ -288,6 +290,24 @@ class restore_quizsbs_activity_structure_step extends restore_questions_activity
         $data->questionid = $this->get_mappingid('question', $data->questionid);
 
         $DB->insert_record('quizsbs_slots', $data);
+    }
+
+    protected function process_quizsbs_additional_content($data) {
+        global $DB;
+
+        $data = (object) $data;
+        $oldid = $data->id;
+        $data->quizsbsid = $this->get_new_parentid('quizsbs');
+        $newid = $DB->insert_record('quizsbs_additional_content', $data);
+        $this->set_mapping('quizsbs_additional_content', $oldid, $newid);
+    }
+
+    protected function process_quizsbs_question_content($data) {
+        global $DB;
+
+        $data = (object) $data;
+        $data->additionalcontentid = $this->get_new_parentid('quizsbs_additional_content');
+        $newitemid = $DB->insert_record('quizsbs_question_content', $data);
     }
 
     protected function process_quizsbs_section($data) {

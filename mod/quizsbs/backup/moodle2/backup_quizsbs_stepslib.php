@@ -54,19 +54,17 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
         // Define elements for access rule subplugin settings.
         $this->add_subplugin_structure('quizsbsaccess', $quizsbs, true);
 
-        $quizsbsubjects = new backup_nested_element('quizsbs_subjects');
-        $quizsbssubject = new backup_nested_element('quizsbs_subject', array('id'), array('name'));
-
         $additionalcontents = new backup_nested_element('additional_contents');
         $additionalcontent = new backup_nested_element('additional_content', array('id'), array(
             'name',
-            'createddate',
+            'createdate',
             'modifieddate',
             'type',
+            'subjectid',
         ));
 
         $qestioncontents = new backup_nested_element('questioncontents');
-        $qestioncontent = new backup_nested_element('questioncontents', array('id'), array(
+        $qestioncontent = new backup_nested_element('questioncontent', array('id'), array(
             'content',
             'type',
         ));
@@ -113,8 +111,11 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
         $quizsbs->add_child($qinstances);
         $qinstances->add_child($qinstance);
 
-        $quizsbs->add_child($quizsbsubjects);
-        $quizsbsubjects->add_child($qestioncontent);
+        $quizsbs->add_child($additionalcontents);
+        $additionalcontents->add_child($additionalcontent);
+
+        $additionalcontent->add_child($qestioncontents);
+        $qestioncontents->add_child($qestioncontent);
 
         $quizsbs->add_child($sections);
         $sections->add_child($section);
@@ -136,6 +137,14 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
 
         $qinstance->set_source_table('quizsbs_slots',
                 array('quizsbsid' => backup::VAR_PARENTID));
+
+        $additionalcontent->set_source_table('quizsbs_additional_content', array(
+            'quizsbsid' => backup::VAR_PARENTID,
+        ));
+
+        $qestioncontent->set_source_table('quizsbs_question_content', array(
+           'additionalcontentid' => backup::VAR_PARENTID,
+        ));
 
         $section->set_source_table('quizsbs_sections',
                 array('quizsbsid' => backup::VAR_PARENTID));

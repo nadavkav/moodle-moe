@@ -77,15 +77,15 @@ class backup_quizsbs_activity_task extends backup_activity_task {
 
         // Link to the list of quizsbszes.
         $search="/(".$base."\/mod\/quizsbs\/index.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@quizsbsINDEX*$2@$', $content);
+        $content= preg_replace($search, '$@QUIZSBSINDEX*$2@$', $content);
 
         // Link to quizsbs view by moduleid.
         $search="/(".$base."\/mod\/quizsbs\/view.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@quizsbsVIEWBYID*$2@$', $content);
+        $content= preg_replace($search, '$@QUIZSBSVIEWBYID*$2@$', $content);
 
         // Link to quizsbs view by quizsbsid.
         $search="/(".$base."\/mod\/quizsbs\/view.php\?q\=)([0-9]+)/";
-        $content= preg_replace($search, '$@quizsbsVIEWBYQ*$2@$', $content);
+        $content= preg_replace($search, '$@QUIZSBSVIEWBYQ*$2@$', $content);
 
         return $content;
     }

@@ -143,29 +143,5 @@ class editcontent_renderer extends \plugin_renderer_base {
         }
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
     }
-
-    public function connect_question_page(\quizsbs $quizsbsobj, structure $structure,
-                                    additional_content $additionalcontent) {
-        global $DB;
-
-        $context = new \stdClass();
-        $context->contentid = $additionalcontent->get_id();
-        $context->contentname = $additionalcontent->get_name();
-        $context->cmid = $quizsbsobj->get_cmid();
-        $context->question = array();
-        foreach ($additionalcontent->get_avilable_questions() as $slot) {
-            $question = new \stdClass();
-            $dbquestion = $DB->get_record('question', array('id' => $slot->questionid));
-            $question->name = $dbquestion->name;
-            $question->id = $dbquestion->id;
-            $question->additionalcontentid = $slot->additionalcontentid;
-            $context->question[] = $question;
-        }
-        $this->page->requires->js_call_amd('mod_quizsbs/loadquestions', 'init');
-        $this->page->requires->strings_for_js(array(
-            'changessuccessfulsave'
-        ), 'mod_quizsbs');
-        return $this->render_from_template('mod_quizsbs/connectquestion', $context);
-    }
 }
 

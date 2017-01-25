@@ -592,7 +592,7 @@ class structure {
 
         $slots = $DB->get_records_sql("
                 SELECT slot.id AS slotid, slot.slot, slot.questionid, slot.page, slot.maxmark,
-                        slot.requireprevious, slot.additionalcontentid, q.*, qc.contextid
+                        slot.requireprevious, q.*, qc.contextid
                   FROM {quizsbs_slots} slot
                   LEFT JOIN {question} q ON q.id = slot.questionid
                   LEFT JOIN {question_categories} qc ON qc.id = q.category
@@ -615,7 +615,6 @@ class structure {
             $slot->questionid = $slotdata->questionid;
             $slot->maxmark = $slotdata->maxmark;
             $slot->requireprevious = $slotdata->requireprevious;
-            $slot->additionalcontentid = $slotdata->additionalcontentid;
 
             $this->slots[$slot->id] = $slot;
             $this->slotsinorder[$slot->slot] = $slot;

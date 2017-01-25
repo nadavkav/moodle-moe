@@ -72,11 +72,11 @@ class restore_quizsbs_activity_task extends restore_activity_task {
     public static function define_decode_rules() {
         $rules = array();
 
-        $rules[] = new restore_decode_rule('quizsbsVIEWBYID',
+        $rules[] = new restore_decode_rule('QUIZSBSVIEWBYID',
                 '/mod/quizsbs/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('quizsbsVIEWBYQ',
+        $rules[] = new restore_decode_rule('QUIZSBSVIEWBYQ',
                 '/mod/quizsbs/view.php?q=$1', 'quizsbs');
-        $rules[] = new restore_decode_rule('quizsbsINDEX',
+        $rules[] = new restore_decode_rule('QUIZSBSINDEX',
                 '/mod/quizsbs/index.php?id=$1', 'course');
 
         return $rules;

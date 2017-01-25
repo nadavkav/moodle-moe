@@ -54,17 +54,6 @@
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="quizsbs_subject" COMMENT="quiz subjects">
-        <FIELDS>
-            <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10" />
-            <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="quizsbsid" LENGTH="10" />
-            <FIELD SEQUENCE="false" TYPE="char" NOTNULL="true" NAME="name" LENGTH="255" />
-        </FIELDS>
-        <KEYS>
-            <KEY NAME="praimary" FIELDS="id" TYPE="primary"/>
-            <KEY NAME="quizsbs" FIELDS="quizsbsid" TYPE="foreign" REFTABLE="quizsbs" REFFIELDS="id"/>
-        </KEYS>
-    </TABLE>
     <TABLE NAME="quizsbs_additional_content" COMMENT="Table of all additionl question content">
         <FIELDS>
             <FIELD SEQUENCE="true" TYPE="int" NOTNULL="true" NAME="id" LENGTH="10"/>
@@ -80,6 +69,9 @@
             <KEY NAME="quizsbs" FIELDS="quizsbsid" TYPE="foreign" REFTABLE="quizsbs" REFFIELDS="id"/>
             <KEY NAME="subject" FIELDS="subjectid" TYPE="foreign" REFTABLE="quizsbs_subject" REFFIELDS="id"/>
         </KEYS>
+        <INDEXES>
+            <INDEX UNIQUE="true" NAME="pageinquiz" FIELDS="quizsbsid,subjectid"/>
+        </INDEXES>
     </TABLE>
     <TABLE NAME="quizsbs_slots" COMMENT="Stores the question used in a quizsbs, with the order, and for each question, which page it appears on, and the maximum mark (weight).">
       <FIELDS>
@@ -89,14 +81,12 @@
         <FIELD NAME="page" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The page number that this questions appears on. If the question in slot n appears on page p, then the question in slot n+1 must appear on page p or p+1. Well, except that when a quizsbs is being created, there may be empty pages, which would cause the page number to jump here."/>
         <FIELD NAME="requireprevious" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Set to 1 when current question requires previous one to be answered first."/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key references question.id."/>
-        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="additionalcontentid" LENGTH="10" />
         <FIELD NAME="maxmark" TYPE="number" LENGTH="12" NOTNULL="true" DEFAULT="0" SEQUENCE="false" DECIMALS="7" COMMENT="How many marks this question contributes to quizsbs.sumgrades."/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="quizsbsid" TYPE="foreign" FIELDS="quizsbsid" REFTABLE="quizsbs" REFFIELDS="id"/>
         <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="question" REFFIELDS="id"/>
-        <KEY NAME="additionalcontentid" FIELDS="additionalcontentid" TYPE="foreign" REFTABLE="quizsbs_additional_content" REFFIELDS="id"/>
       </KEYS>
       <INDEXES>
         <INDEX NAME="quizsbsid-slot" UNIQUE="true" FIELDS="quizsbsid, slot"/>

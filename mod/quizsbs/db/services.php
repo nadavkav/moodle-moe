@@ -219,24 +219,6 @@ $functions = array(
         'capabilities'  => 'mod/quizsbs:manage',
         'ajax'          => true
     ),
-    'mod_quizsbs_add_question_to_content' => array(
-        'classname'     => 'mod_quizsbs_external',
-        'methodname'    => 'add_question_to_content',
-        'classpath'     => 'mod/quizsbs/classes/external.php',
-        'descritption'  => 'add questions to content',
-        'type'          => 'write',
-        'capabilities'  => 'mod/quizsbs:manage',
-        'ajax'          => true
-    ),
-    'mod_quizsbs_load_connected_content' => array(
-        'classname'     => 'mod_quizsbs_external',
-        'methodname'    => 'load_connected_content',
-        'classpath'     => 'mod/quizsbs/classes/external.php',
-        'descritption'  => 'get connected questions and subject',
-        'type'          => 'read',
-        'capabilities'  => 'mod/quizsbs:manage',
-        'ajax'          => true
-    ),
     'mod_quizsbs_add_subject_to_content' => array(
         'classname'     => 'mod_quizsbs_external',
         'methodname'    => 'add_subject_to_content',
@@ -254,9 +236,7 @@ $services = array(
             'mod_quizsbs_get_content_preview',
             'mod_quizsbs_add_content_to_subject',
             'mod_quizsbs_get_question_preview',
-            'mod_quizsbs_add_question_to_content',
-            'mod_quizsbs_load_connected_content',
-            'mod_quizsbs_add_subject_to_content'
+            'mod_quizsbs_add_subject_to_content',
         ),
         'requiredcapability' => '',
         'restrictedusers' =>0,

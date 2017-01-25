@@ -52,17 +52,6 @@ class additional_content extends model{
         $this->type = (empty($this->type)) ? $type : $this->type;
     }
 
-
-
-    public function get_avilable_questions() {
-        global $DB;
-
-        return $DB->get_records_select('quizsbs_slots', '(additionalcontentid is NULL OR additionalcontentid = ?) AND quizsbsid = ?',
-                                        array(
-                                            $this->get_id(),
-                                            $this->get_quizsbsid(),
-                                        ));
-    }
     /**
      *
      * @return the $id

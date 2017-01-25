@@ -54,9 +54,6 @@ $PAGE->set_title(get_string('editingquizsbsx', 'quizsbs', format_string($quizsbs
 $PAGE->set_heading($course->fullname);
 
 switch ($action) {
-    case 'connect':
-        $content = $output->connect_question_page($quizsbsobj, $structure, $additionalcontent);
-        break;
     case 'edit':
     default:
         $content = $output->editcontent_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars, $additionalcontent);
