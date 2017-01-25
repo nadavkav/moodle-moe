@@ -20,16 +20,18 @@
     </header>
     <nav id="navigation" class="row-fluid">
             {{{navigation}}}
-             <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
-                {{{attemptnavigationbuttons}}}
-                <input type="hidden" name="attempt" value="{{attempteid}}" />
-                <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
-                <input type="hidden" name="nextpage" value="{{nextpage}}" />
-                <input type="hidden" name="timeup" value="0" id="timeup" />
-                <input type="hidden" name="sesskey" value="{{sesskey}}" />
-                <input type="hidden" name="scrollpos" value="" id="scrollpos" />
-                <input type="hidden" name="slots" value="{{questionid}}" /> 
-             </form>
+            <div class="span5">
+                <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
+                    {{{attemptnavigationbuttons}}}
+                    <input type="hidden" name="attempt" value="{{attempteid}}" />
+                    <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
+                    <input type="hidden" name="nextpage" value="{{nextpage}}" />
+                    <input type="hidden" name="timeup" value="0" id="timeup" />
+                    <input type="hidden" name="sesskey" value="{{sesskey}}" />
+                    <input type="hidden" name="scrollpos" value="" id="scrollpos" />
+                    <input type="hidden" name="slots" value="{{questionid}}" /> 
+                </form>
+            </div>
     </nav>
     <section id="questions" class="row-fluid">
         <section id="quizsbs_question" class="span6">

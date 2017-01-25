@@ -17,7 +17,7 @@
 * @package   mod_quizsbs
 * @module    mod_quizsbs/loadcintent
 **/
-define(['jquery', 'core/ajax', 'core/notification', 'core/templates'], function($, ajax, notification, templates){
+define(['jquery', 'core/ajax'], function($, ajax){
 	var Connect = function() {};
 	
 	Connect.prototype.init = function() {

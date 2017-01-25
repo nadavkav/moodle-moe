@@ -298,9 +298,14 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         }
 
         return html_writer::tag('div', get_string('timeleft', 'quizsbs') . ' ' .
-                html_writer::tag('span', '', array('id' => 'quizsbs-time-left')),
+                html_writer::tag('span', '', array('id' => 'quizsbs-time-left')) .
+                html_writer::span(html_writer::img($this->pix_url('clock', 'mod_quizsbs'),
+                                                get_string('timeleft', 'quizsbs'),
+                                                array('class' => 'clockimage'))
+                                            ),
                 array('id' => 'quizsbs-timer', 'role' => 'timer',
                     'aria-atomic' => 'true', 'aria-relevant' => 'text'));
+
     }
 
     /**
@@ -446,6 +451,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output .= $this->header();
         $output .= $this->quizsbs_notices($messages);
         $output .= $this->attempt_form($attemptobj, $page, $slots, $id, $nextpage);
+        $this->page->requires->js_call_amd('mod_quizsbs/navigation', 'init');
         $output .= $this->footer();
         return $output;
     }
@@ -546,17 +552,19 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $output = '';
 
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
-        if ($page > 0) {
-            $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
-                    'title' => get_string('navigateprevious', 'quizsbs'), 'value' => get_string('navigateprevious', 'quizsbs'), 'class' => 'mod_quizsbs-prev-nav'));
-        }
         if ($lastpage) {
             $nextlabel = get_string('endtest', 'quizsbs');
         } else {
             $nextlabel = get_string('navigatenext', 'quizsbs');
         }
         $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'next',
-                'title' => $nextlabel, 'value' =>$nextlabel, 'class' => 'mod_quizsbs-next-nav'));
+            'title' => $nextlabel, 'value' =>$nextlabel, 'class' => 'mod_quizsbs-next-nav'));
+        if ($page > 0) {
+            $output .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'previous',
+                    'title' => get_string('navigateprevious', 'quizsbs'), 'value' => get_string('navigateprevious', 'quizsbs'), 'class' => 'mod_quizsbs-prev-nav'));
+        }
+
+
         $output .= html_writer::end_tag('div');
 
         return $output;
