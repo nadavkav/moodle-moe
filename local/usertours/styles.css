@@ -121,3 +121,41 @@
     display: block;
     padding: 1em;
 }
+* User tours RTL fixes */
+#page-admin-local-usertours-configure td#tours_r0_c4 {
+    min-width: 155px;
+}
+
+#page-admin-local-usertours-configure .steptable .cell.c3 {
+    min-width: 100px;
+}
+
+#page-admin-local-usertours-configure .cell.c2 {
+direction:ltr;
+text-align:left;
+}
+
+#page-admin-local-usertours-configure input#id_pathmatch {
+    width: 40em;
+direction:ltr;
+text-align:left;
+}
+
+#page-admin-local-usertours-configure .moodle-dialogue-base .moodle-dialogue.moodle-dialogue-tooltip .moodle-dialogue-bd {
+    overflow: auto;
+    direction: ltr;
+    text-align: left;
+    padding-left: 25px;
+}
+
+#page-admin-local-usertours-configure #id_targetvalue {
+    direction: ltr;
+    text-align: left;
+    width: 30em;
+}
+.tour-backdrop {
+opacity:0.5;
+}
+.popover[class*="tour-"] {
+    min-width: 400px;
+}
