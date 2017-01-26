@@ -25,21 +25,32 @@ define(['jquery'], function($){
 	};
 	
 	Navigation.prototype.init = function(){
+		var scrollWidth = $('a.qnbutton').size() * $('a.qnbutton').width();
+		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
+		$('a.qnbutton').width();
+		$('.allbuttons').css('right', -initialoffset);
 		this.checkPosition();
-		this.scrollWidth = $('a.qnbutton').size() * $('a.qnbutton').width();
 		$('.fa-caret-left').click(function(){
-			$('.allbuttons').css('right', '-=324');
+			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -scrollWidth) {
+				$('.allbuttons').css('right', -scrollWidth);
+			} else {	
+				$('.allbuttons').css('right', '-=324');
+			}
 			Navigation.prototype.checkPosition();
 		});
 		$('.fa-caret-right').click(function(){
-			$('.allbuttons').css('right', '+=324');
+			if(parseInt($('.allbuttons').css('right').replace('px', '')) + 324 <= 0){
+				$('.allbuttons').css('right', '+=324');
+			} else {
+				$('.allbuttons').css('right', '0');
+			}
 			Navigation.prototype.checkPosition();
 		});
 	};
 	
 	Navigation.prototype.checkPosition = function(){
 		this.scrollWidth = $('a.qnbutton').size() * $('a.qnbutton').width();
-		if($('.allbuttons').css('right').replace('px', '') === 0){
+		if($('.allbuttons').css('right').replace('px', '') >= 0){
 			$('.fa-caret-right').css('visibility', 'hidden');
 		} else {
 			$('.fa-caret-right').css('visibility', 'visible');
