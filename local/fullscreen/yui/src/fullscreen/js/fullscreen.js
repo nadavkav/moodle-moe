@@ -36,6 +36,7 @@ Y.extend(FULLSCREEN, Y.Base, {
      * @returns void
      */
     initializer: function(config) { // 'config' contains the parameter values.
+        Y.log('Fullscreen button loading', 'debug', FULLSCREENNAME);
         this.mainnode = Y.one('#region-main'); // Get the main node.
         this.fullscreenmode = config.fullscreenmode; // Get the initial screen state from the database.
         this.bodynode = Y.one('body'); // The body node.
@@ -43,18 +44,22 @@ Y.extend(FULLSCREEN, Y.Base, {
 
         // Check which icon (fullscreen / restore screen) should be displayed intially.
         if (this.fullscreenmode === '1') {
+            Y.log('Display: fullscreen', 'debug', FULLSCREENNAME);
             this.icon_classes = 'fullscreen restore_fullscreen';
             this.fullscreenmode = true;
             this.bodynode.addClass('fullscreenmode');
         } else {
+            Y.log('Display: normal', 'debug', FULLSCREENNAME);
             this.fullscreenmode = false;
         }
+        Y.log('Creating button', 'debug', FULLSCREENNAME);
         // Create the full screen toggle icon.
         this.fullscreentoggle = this.createFullscreenToggle();
         // Create the floating full screen toggle icon.
         this.floatingfullscreentoggle = this.createFloatingFullscreenToggle();
         // Add the full screen toggle icon as the first child of mainnode.
         this.mainnode.prepend(this.fullscreentoggle);
+        Y.log('Button added to page', 'debug', FULLSCREENNAME);
         // Handle on click event of the fullscreen icon.
         this.fullscreentoggle.on("click", this.toggleFullScreen, this);
         // Handle on click event of the hovering fullscreen icon.
@@ -65,6 +70,7 @@ Y.extend(FULLSCREEN, Y.Base, {
         Y.one(document).on('keyup', this.toggleKeyPressed, this);
         // On scrolling down, show the hovering bubble with full screen / restore screen icon.
         Y.on('scroll', this.toggleFullscreenIcon, window, this);
+        Y.log('Button full loaded', 'debug', FULLSCREENNAME);
     },
     /**
      * Create the node object for the fullscreen toggle bubble
@@ -113,6 +119,7 @@ Y.extend(FULLSCREEN, Y.Base, {
      * @returns void
      */
     toggleFullScreen: function() {
+        Y.log('fullscreen mode toggled', 'debug', FULLSCREENNAME);
         if (this.fullscreenmode === true) {
             this.fullscreenmode = false;
             this.bodynode.removeClass('fullscreenmode');
@@ -144,6 +151,7 @@ Y.extend(FULLSCREEN, Y.Base, {
      */
     toggleFullscreenViaKeydown: function(e) {
         if (e.ctrlKey && e.altKey && e.keyCode === 66 && !this.keypressed) {
+            Y.log('fullscreen mode toggled', 'debug', FULLSCREENNAME);
             this.toggleFullScreen();
             this.keypressed = true;  // Prevent sustained keydown event of (cTRL + Alt + b) toggling fullscreen mode continuosly.
         }
