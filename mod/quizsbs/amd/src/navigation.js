@@ -20,19 +20,19 @@
 
 define(['jquery'], function($){
 	var Navigation = function(){
-		this.scrollWidth = ($('a.qnbutton').size()) * ($('a.qnbutton').width()+10);
+		this.scrollWidth = ($('a.qnbutton').size()) * ($('a.qnbutton').width()+5);
 		$('.allbuttons').width(this.scrollWidth);
 	};
 	
 	Navigation.prototype.init = function(){
-		var scrollWidth = $('a.qnbutton').size() * $('a.qnbutton').width();
+		var scrollWidth = $('a.qnbutton').size() * ($('a.qnbutton').width()+5);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
 		$('a.qnbutton').width();
 		$('.allbuttons').css('right', -initialoffset);
 		this.checkPosition();
 		$('.fa-caret-left').click(function(){
 			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -scrollWidth) {
-				$('.allbuttons').css('right', -scrollWidth);
+				$('.allbuttons').css('right', -scrollWidth + $('#scrollbar').width()*23/24);
 			} else {	
 				$('.allbuttons').css('right', '-=324');
 			}
@@ -49,16 +49,22 @@ define(['jquery'], function($){
 	};
 	
 	Navigation.prototype.checkPosition = function(){
-		this.scrollWidth = $('a.qnbutton').size() * $('a.qnbutton').width();
-		if($('.allbuttons').css('right').replace('px', '') >= 0){
-			$('.fa-caret-right').css('visibility', 'hidden');
-		} else {
-			$('.fa-caret-right').css('visibility', 'visible');
-			if($('.allbuttons').css('right').replace('px', '') <= -this.scrollWidth){
-				$('.fa-caret-left').css('visibility', 'hidden');
-			} else {
+		this.scrollWidth = $('a.qnbutton').size() * ($('a.qnbutton').width()+5);
+		if(this.scrollWidth > $('#scrollbar').width()){
+			if($('.allbuttons').css('right').replace('px', '') >= 0){
+				$('.fa-caret-right').css('visibility', 'hidden');
 				$('.fa-caret-left').css('visibility', 'visible');
+			} else {
+				$('.fa-caret-right').css('visibility', 'visible');
+				if($('.allbuttons').css('right').replace('px', '')  <= -this.scrollWidth + $('#scrollbar').width() * 23/24){
+					$('.fa-caret-left').css('visibility', 'hidden');
+				} else {
+					$('.fa-caret-left').css('visibility', 'visible');
+				}
 			}
+		} else {
+			$('.fa-caret-left').css('visibility', 'hidden');
+			$('.fa-caret-right').css('visibility', 'hidden');
 		}
 	};
 	
