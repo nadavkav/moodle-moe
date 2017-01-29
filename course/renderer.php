@@ -1855,9 +1855,13 @@ class core_course_renderer extends plugin_renderer_base {
             $courseslist = $this->coursecat_courses($chelper, $courses, $totalcount);
 
             if (!$totalcount) {
-                if (!empty($searchcriteria['search'])) {
+                if(!empty($searchcriteria['search']) && $searchcriteria['search'] == get_string('searchcourses')) {
+                    $content .= $this->heading(get_string('nocoursessearched'));
+                }
+                else if (!empty($searchcriteria['search'])) {
                     $content .= $this->heading(get_string('nocoursesfound', '', $searchcriteria['search']));
-                } else {
+                } 
+                else {
                     $content .= $this->heading(get_string('novalidcourses'));
                 }
             } else {

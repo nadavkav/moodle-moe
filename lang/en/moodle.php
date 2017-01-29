@@ -1285,6 +1285,7 @@ $string['noblockstoaddhere'] = 'There are no blocks that you can add to this pag
 $string['nobody'] = 'Nobody';
 $string['nocourses'] = 'No courses';
 $string['nocoursesfound'] = 'No courses were found with the words \'{$a}\'';
+$string['nocoursessearched'] = 'The were no parameters for the search';
 $string['nocoursesyet'] = 'No courses in this category';
 $string['nocomments'] = 'No comments';
 $string['nodstpresets'] = 'The administrator has not enabled Daylight Savings Time support.';
