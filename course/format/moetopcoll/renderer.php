@@ -61,7 +61,7 @@ class format_moetopcoll_renderer extends format_section_renderer_base {
      */
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
-        $this->togglelib = new topcoll_togglelib;
+        $this->togglelib = new moetopcoll_togglelib;
         $this->courseformat = course_get_format($page->course); // Needed for collapsed topics settings retrieval.
 
         /* Since format_moetopcoll_renderer::section_edit_control_items() only displays the 'Set current section' control when editing
@@ -634,7 +634,7 @@ class format_moetopcoll_renderer extends format_section_renderer_base {
     public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
         return $this->courserenderer->course_section_cm_list_item($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
     }
-    
+
     /**
      * Output the html for a multiple section page
      *

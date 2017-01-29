@@ -32,7 +32,7 @@
  *
  */
 
-class topcoll_togglelib {
+class moetopcoll_togglelib {
 
     // Digits used = ":;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxy";
     // Note: An ':' is 58 Ascii so to go between six digit base 2 and this then add / subtract 58.
