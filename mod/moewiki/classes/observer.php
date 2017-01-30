@@ -33,13 +33,12 @@ class observer {
         $modinfo = get_fast_modinfo($data['courseid']);
         $moewikiinstances = $modinfo->get_instances_of('moewiki');
         foreach ($moewikiinstances as $moewiki) {
-            list($cm, $context, $module, $mowikidata, $cw) = can_update_moduleinfo($moewiki);
-            $moewiki = $DB->get_record('moewiki', array('id' => $mowikidata->id));
-            $subwiki = moewiki_create_subwiki($moewiki, $moewiki->id, $COURSE, $data['relateduserid']);
+            $mowikidata = $DB->get_record('moewiki', array('id' => $moewiki->instance));
+            $subwiki = moewiki_create_subwiki($mowikidata, $mowikidata->id, $COURSE, $data['relateduserid']);
             if ($texttemplate = $mowikidata->template_text) {
                 $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
                 // Put the template text in the students main page.
-                moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
+                moewiki_save_new_version($COURSE, $moewiki, $mowikidata, $subwiki, '', $texttemplate);
             }
         }
     }
