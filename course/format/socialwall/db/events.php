@@ -41,10 +41,4 @@ $observers = array(
         'includefile' => '/course/format/socialwall/locallib.php',
         'internal' => true
     ),
-    array(
-        'eventname' => '\core\event\user_deleted',
-        'callback' => 'format_socialwall_user_deleted',
-        'includefile' => '/course/format/socialwall/locallib.php',
-        'internal' => true
-    )
 );
