@@ -5256,6 +5256,10 @@ input[type="submit"][disabled]:HOVER {
 	color: #000000 !important;
 }
 
+#accessibility_controls .access-button {
+    color: #292F38 !important;
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
