@@ -24,12 +24,20 @@
  */
 
 global $PAGE;
+
+/**
+ * Add a call back to extend the global navigation. This will cause the page to be loaded.
+ *
+ * @param global_navigation $navigation
+ */
+function local_fullscreen_extend_navigation(global_navigation $navigation) {
+    // Intentionally blank.
+}
+
 if (CLI_SCRIPT || AJAX_SCRIPT
         || $PAGE->pagelayout === 'login'
-        || $PAGE->pagelayout === 'mydashboard'
         || $PAGE->pagelayout === 'embedded'
         || $PAGE->pagelayout === 'popup'
-        || $PAGE->pagelayout === 'base'
         || $PAGE->pagelayout === 'redirect'
         || $PAGE->pagelayout === 'frametop') {
     return;
