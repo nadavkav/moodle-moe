@@ -28,3 +28,15 @@
 .tmicha{
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
+
+@media screen and (max-width: 1400px) and (orientation: landscape){
+	.block_rolespecifichtml_button {
+		font-size: 1.1em;
+	}	
+}
+
+@media screen and (max-width: 1150px) and (orientation: landscape){
+	.block_rolespecifichtml_button {
+		font-size: 0.9em;
+	}
+}
