@@ -115,8 +115,8 @@ class mod_oublog_external extends external_api {
                         'blogid' => new external_value(PARAM_INT, 'Blog id'),
                         'sort' => new external_value(PARAM_TEXT, 'sort sql'),
                         'username' => new external_value(PARAM_USERNAME, 'User username'),
-                        'page' => new external_value(PARAM_INT, 'results page', VALUE_OPTIONAL, 0),
-                        'tags' => new external_value(PARAM_SEQUENCE, 'tags to filter by', VALUE_OPTIONAL, null),
+                        'page' => new external_value(PARAM_INT, 'results page', VALUE_DEFAULT, 0),
+                        'tags' => new external_value(PARAM_SEQUENCE, 'tags to filter by', VALUE_DEFAULT, null),
                 )
         );
     }
@@ -184,7 +184,7 @@ class mod_oublog_external extends external_api {
                         'bcontextid' => new external_value(PARAM_INT, 'Blog module context id'),
                         'selected' => new external_value(PARAM_SEQUENCE, 'post ids'),
                         'inccomments' => new external_value(PARAM_BOOL, 'include comments',
-                                VALUE_OPTIONAL, false),
+                                VALUE_DEFAULT, false),
                         'username' => new external_value(PARAM_USERNAME, 'User username'),
                 )
         );
@@ -208,8 +208,13 @@ class mod_oublog_external extends external_api {
             return array();
         }
         $selected = explode(',', $params['selected']);
-        $return = oublog_import_getposts($params['blogid'], $params['bcontextid'],
+        if ($selected[0] == 0) {
+            $return = oublog_import_getposts($params['blogid'], $params['bcontextid'],
+                $selected, $params['inccomments'], $user, true);
+        } else {
+            $return = oublog_import_getposts($params['blogid'], $params['bcontextid'],
                 $selected, $params['inccomments'], $user);
+        }
         // Convert file objects into a custom known object to send.
         foreach ($return as &$post) {
             foreach ($post->images as &$file) {

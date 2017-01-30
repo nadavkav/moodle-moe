@@ -1056,11 +1056,13 @@ function oublog_get_tag_cloud($baseurl, $oublog, $groupid, $cm, $oubloginstancei
         return($cloud);
     }
 
+    $cloud .= html_writer::start_tag('div', array('class' => 'oublog-tag-items'));
     foreach ($tags as $tag) {
         $cloud .= '<a href="'.$baseurl.'&amp;tag='.urlencode($tag->tag).'" class="oublog-tag-cloud-'.
             $tag->weight.'"><span class="oublog-tagname">'.strtr(($tag->tag), array(' '=>'&nbsp;')).
             '</span><span class="oublog-tagcount">('.$tag->count.')</span></a> ';
     }
+    $cloud .= html_writer::end_tag('div');
 
     return($cloud);
 }
@@ -1079,7 +1081,7 @@ function oublog_get_tag_list($oublog, $groupid, $cm, $oubloginstanceid = null, $
 
     $tags = oublog_get_tags($oublog, $groupid, $cm, $oubloginstanceid, $individualid, 'alpha');
 
-    $blogtags = oublog_clarify_tags($oublog->tags);
+    $blogtags = oublog_clarify_tags($oublog->tagslist);
 
     // For each tag added to the blog check if it is already in use
     // in the post, if it is then the 'Official' label is added to it.
@@ -1312,7 +1314,6 @@ function oublog_get_links($oublog, $oubloginstance, $context) {
     }
 
     if ($canmanagelinks) {
-        $html .= '<br />';
         if ($oublog->global) {
             $html .= '<a href="editlink.php?blog='.$oublog->id.'&amp;bloginstance='.$oubloginstance->id.'" class="oublog-links">'.get_string('addlink', 'oublog').'</a>';
         } else {
@@ -1747,17 +1748,20 @@ function oublog_get_feedblock($oublog, $bloginstance, $groupid, $postid, $cm, $i
         $commentsurlrss = oublog_get_feedurl('rss',  $oublog, $bloginstance, $groupid, true, $postid, $cm, $individualid);
     }
 
-    $html  = '<div id="oublog-feedtext">' . get_string('subscribefeed', 'oublog',
-            oublog_get_displayname($oublog)) . '</div>';
+    $html  = '<div id="oublog-feedtext">' . get_string('subscribefeed', 'oublog', oublog_get_displayname($oublog));
     $html .= $OUTPUT->help_icon('feedhelp', 'oublog');
+    $html .= '</div>';
     $html .= '<div class="oublog-feedlinks">';
-    $html .= get_string('blogfeed', 'oublog', oublog_get_displayname($oublog, true)).': ';
-    $html .= '<a href="'.$blogurlatom.'">'.get_string('atom', 'oublog').'</a> ';
-    $html .= '<a href="'.$blogurlrss.'">'.get_string('rss', 'oublog').'</a>';
+    $html .= '<span class="oublog-feedlinks-feedtitle">' . get_string('blogfeed', 'oublog', oublog_get_displayname($oublog, true)) . ': </span>';
+    $html .= '<span class="oublog-feedlinks-feedtype">';
+    $html .= '<br/><a href="'.$blogurlatom.'">'.get_string('atom', 'oublog').'</a> ';
+    $html .= '<br/><a href="'.$blogurlrss.'">'.get_string('rss', 'oublog').'</a>';
+    $html .= '</span>';
 
     if ($oublog->allowcomments) {
         if (!is_string($bloginstance)) {
-            $html .= '<div class="oublog-links">'.get_string('commentsfeed', 'oublog').': ';
+            $html .= '<div class="oublog-links">';
+            $html .= '<span class="oublog-feedcommentlinks-feedtitle">'.get_string('commentsfeed', 'oublog') . ': </span>';
             $html .= '<br/><a href="'.$commentsurlatom.'">'.get_string('comments', 'oublog').' '.get_string('atom', 'oublog').'</a> ';
             $html .= '<br/><a href="'.$commentsurlrss.'">'.get_string('comments', 'oublog').' '.get_string('rss', 'oublog').'</a>';
             $html .= '</div>';
@@ -3047,7 +3051,7 @@ function oublog_can_grade($course, $oublog, $cm, $groupid=0) {
     global $USER;
 
     // Cannot grade if blog has grading turned off
-    if (!$oublog->grade) {
+    if ($oublog->grading == OUBLOG_NO_GRADING) {
         return false;
     }
 
@@ -3219,8 +3223,8 @@ function oublog_get_user_participation($oublog, $context,
             FROM {oublog_instances}
             WHERE oublogid = :oublogid AND userid = :userid
         )
-        AND timedeleted IS NULL ' . $groupcheck . $period . '
-        ORDER BY timeposted DESC';
+        AND timedeleted IS NULL ' . $groupcheck . $period;
+    $postsqlorder = ' ORDER BY timeposted DESC';
 
     if ($start) {
         $cperiod = 'AND c.timeposted > :timestart ';
@@ -3239,9 +3243,8 @@ function oublog_get_user_participation($oublog, $context,
             INNER JOIN {user} pa on bi.userid = pa.id
         WHERE bi.oublogid = :oublogid AND a.id = bi.userid
         AND p.timedeleted IS NULL ' . $groupcheck . $cperiod . '
-        AND c.userid = :userid AND c.timedeleted IS NULL
-            ORDER BY c.timeposted DESC';
-
+        AND c.userid = :userid AND c.timedeleted IS NULL';
+    $commentsqlorder = ' ORDER BY c.timeposted DESC';
     $params = array(
         'oublogid' => $oublog->id,
         'userid' => $userid,
@@ -3257,13 +3260,13 @@ function oublog_get_user_participation($oublog, $context,
     $participation->user = $user;
     $participation->numposts = $DB->get_field_sql("SELECT COUNT(1) FROM ($postssql) as p", $params);
     if ($getposts) {
-        $participation->posts = $DB->get_records_sql($postssql, $params, $limitfrom, $limitnum);
+        $participation->posts = $DB->get_records_sql($postssql . $postsqlorder, $params, $limitfrom, $limitnum);
     } else {
         $participation->posts = array();
     }
     $participation->numcomments = $DB->get_field_sql("SELECT COUNT(1) FROM ($commentssql) as p", $params);
     if ($getcomments) {
-        $participation->comments = $DB->get_records_sql($commentssql, $params, $limitfrom, $limitnum);
+        $participation->comments = $DB->get_records_sql($commentssql . $commentsqlorder, $params, $limitfrom, $limitnum);
     } else {
         $participation->comments = array();
     }
@@ -4461,8 +4464,8 @@ function oublog_get_participation_details($oublog, $groupid, $individual,
     INNER JOIN {user} u ON bi.userid = u.id ". $gminner ."
     WHERE p.deletedby IS NULL AND oublogid = :oublogid
     AND p.timedeleted IS NULL " . $groupcheck . $period . $thispostuser .
-    $postvisibility . "
-    ORDER BY p.timeposted DESC ";
+    $postvisibility;
+    $postssqlorder = ' ORDER BY p.timeposted DESC ';
     if ($start) {
         $cperiod = 'AND c.timeposted > :timestart ';
     }
@@ -4485,8 +4488,8 @@ function oublog_get_participation_details($oublog, $groupid, $individual,
     AND p.timedeleted IS NULL AND c.timedeleted IS NULL " . $groupcheck .
     $cperiod . $thiscommentuser .
     $postvisibility . $postallowcomments ."
-    AND c.postid = p.id
-    ORDER BY c.timeposted DESC ";
+    AND c.postid = p.id ";
+    $commentsqlorder = 'ORDER BY c.timeposted DESC ';
 
     $params = array(
             'oublogid' => $oublog->id,
@@ -4501,13 +4504,13 @@ function oublog_get_participation_details($oublog, $groupid, $individual,
     $participation = new stdClass();
     $participation->postscount = $DB->get_field_sql("SELECT COUNT(1) FROM ($postssql) as p", $params);
     if ($getposts) {
-        $participation->posts = $DB->get_records_sql($postssql, $params, $limitfrom, $limitnum);
+        $participation->posts = $DB->get_records_sql($postssql . $postssqlorder, $params, $limitfrom, $limitnum);
     } else {
         $participation->posts = array();
     }
     $participation->commentscount = $DB->get_field_sql("SELECT COUNT(1) FROM ($commentssql) as p", $params);
     if ($getcomments) {
-        $participation->comments = $DB->get_records_sql($commentssql, $params, $limitfrom, $limitnum);
+        $participation->comments = $DB->get_records_sql($commentssql . $commentsqlorder, $params, $limitfrom, $limitnum);
     } else {
         $participation->comments = array();
     }
@@ -5135,24 +5138,28 @@ function oublog_import_getallposts($blogid, $sort, $userid = 0, $page = 0, $tags
  * @param array $selected - array of selected post ids
  * @param bool $inccomments - include comments?
  * @param int $userid - user id (ensures user is post author)
+ * @param bool $importall - indicate whether or not get all posts
  * @return array posts
  */
-function oublog_import_getposts($blogid, $bcontextid, $selected, $inccomments = false, $userid = 0) {
+function oublog_import_getposts($blogid, $bcontextid, $selected, $inccomments = false, $userid = 0, $importall = false) {
     global $DB, $USER;
     if ($userid == 0) {
         $userid = $USER->id;
     }
-    list($inwhere, $sqlparams) = $DB->get_in_or_equal($selected);
+    $sqlwhere = "bi.userid = ? AND bi.oublogid = ?  AND p.deletedby IS NULL";
+    $sqlparams = array();
+    if ($importall) {
+        $sqlparams = array($userid, $blogid);
+    } else {
+        list($inwhere, $params) = $DB->get_in_or_equal($selected);
+        $sqlwhere .= " AND p.id $inwhere";
+        $sqlparams = array_merge(array($userid, $blogid), $params);
+    }
     $sql = "SELECT p.*
         FROM {oublog_posts} p
         INNER JOIN {oublog_instances} bi on bi.id = p.oubloginstancesid
-        WHERE bi.userid = ?
-        AND bi.oublogid = ?
-        AND p.deletedby IS NULL
-        AND p.id $inwhere
+        WHERE $sqlwhere
         ORDER BY p.id ASC";
-
-    $sqlparams = array_merge(array($userid, $blogid), $sqlparams);
     if (!$posts = $DB->get_records_sql($sql, $sqlparams)) {
         return array();
     }
