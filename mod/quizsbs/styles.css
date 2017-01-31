@@ -1286,6 +1286,10 @@ table#categoryquestions {
 }
 /** Print formatting for attempt and review pages **/
 
+#page-mod-quizsbs-summary div#mod_quizsbs_navblock {
+    display: none;
+}
+
 @media print {
 
     #page-mod-quizsbs-attempt header.navbar,
