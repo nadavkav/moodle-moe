@@ -1180,9 +1180,9 @@ table#categoryquestions {
 }
 #questionbox{
 	margin: 0px;
-}
-#questionbox {
-    margin-top: 7px;
+	margin-top: 7px;
+	height: 31em;
+	overflow-y: auto;
 }
 .que, .que .content {
 	margin: 0px !important;
