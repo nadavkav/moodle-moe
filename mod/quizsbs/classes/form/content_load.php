@@ -70,7 +70,6 @@ class content_load extends \moodleform {
         global $CFG, $DB;
 
         $mform =& $this->_form;
-        $quizsbjects = $DB->get_records('quizsbs_subject', array('quizsbsid' => $this->_customdata['structure']->get_quizsbsid()));
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
         $mform->setType('additionalcontentname', PARAM_TEXT);
