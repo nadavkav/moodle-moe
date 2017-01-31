@@ -27,7 +27,25 @@ define(['jquery'], function($){
 	Navigation.prototype.init = function(){
 		var scrollWidth = $('a.qnbutton').size() * ($('a.qnbutton').width()+5);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
-		$('a.qnbutton').width();
+								$('a.qnbutton').width();
+		var count = 0;
+		var passedthis = false;
+		$('.qnbutton').each(function(index){
+			if($(this).hasClass('thispage')) {
+				passedthis = true;
+			}
+			if(passedthis) {
+				count++;
+			}
+		});
+		if(count < 10) {
+			initialoffset -= (10-count)*$('a.qnbutton').width();
+			if(initialoffset < 0) {
+				initialoffset = 0;
+			}
+		}
+		
+		if(initialoffset)
 		$('.allbuttons').css('right', -initialoffset);
 		this.checkPosition();
 		$('.fa-caret-left').click(function(){
