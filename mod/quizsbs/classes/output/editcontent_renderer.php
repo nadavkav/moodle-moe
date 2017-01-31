@@ -73,26 +73,29 @@ class editcontent_renderer extends \plugin_renderer_base {
         $additaionalcontent->additionalcontentname = $additaional->get_name();
         $additaionalcontent->contenttype = $additaional->get_type();
         $additaionalcontent->createdate = $additaional->get_createdate();
-        $questioncontents = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additaional->get_id()));
-        foreach ($questioncontents as $questioncontent) {
-            switch ($questioncontent->type) {
-                case question_content::HTML_CONTENT:
-                    $additaionalcontent->htmleditor['text'] = $questioncontent->content;
-                    $questioncontenthtml->set_id($questioncontent->id);
+        if (! is_null($additaional->get_id())) {
+            $questioncontents = $DB->get_records('quizsbs_question_content', array(
+                'additionalcontentid' => $additaional->get_id()
+            ));
+            foreach ($questioncontents as $questioncontent) {
+                switch ($questioncontent->type) {
+                    case question_content::HTML_CONTENT:
+                        $additaionalcontent->htmleditor['text'] = $questioncontent->content;
+                        $questioncontenthtml->set_id($questioncontent->id);
+                        break;
+                    case question_content::CSS_CONTENT:
+                        $additaionalcontent->csseditor = $questioncontent->content;
+                        $questioncontentcss->set_id($questioncontent->id);
+                        break;
+                    case question_content::JAVASCRIPT_CONTENT:
+                    default:
+                        $additaionalcontent->javascripteditor = $questioncontent->content;
+                        $questioncontentjavascript->set_id($questioncontent->id);
                     break;
-                case question_content::CSS_CONTENT:
-                    $additaionalcontent->csseditor = $questioncontent->content;
-                    $questioncontentcss->set_id($questioncontent->id);
-                    break;
-                case question_content::JAVASCRIPT_CONTENT:
-                default:
-                    $additaionalcontent->javascripteditor = $questioncontent->content;
-                    $questioncontentjavascript->set_id($questioncontent->id);
-                    break;
+                }
             }
+            $contentloadform->set_data($additaionalcontent);
         }
-        $contentloadform->set_data($additaionalcontent);
-
         if ($contentdata = $contentloadform->get_data()) {
             $additionalcontent = new additional_content($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);

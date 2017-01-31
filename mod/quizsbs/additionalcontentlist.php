@@ -52,14 +52,16 @@ $output = $PAGE->get_renderer('mod_quizsbs', 'contentlist');
 
 $PAGE->set_title(get_string('editingquizsbsx', 'quizsbs', format_string($quizsbs->name)));
 $PAGE->set_heading($course->fullname);
-
-echo $OUTPUT->header();
 switch ($action) {
     case 'delete':
-        echo $output->delete_content_page($thispageurl, $quizsbsobj);
+        $content = $output->delete_content_page($thispageurl, $quizsbsobj);
         break;
     default:
-        echo $output->contentlist_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars);
+        $content = $output->contentlist_page($quizsbsobj, $structure, $contexts, $thispageurl, $pagevars);
         break;
 }
+echo $OUTPUT->header();
+
+echo $content;
+
 echo $OUTPUT->footer();
