@@ -531,8 +531,10 @@ class manager {
           ORDER BY sortorder ASC
 EOF;
 
+        $localurl = $pageurl->out_as_local_url();
+        $localurl .= '&amp;usertour='.$_GET['usertour'];
         $tours = $DB->get_records_sql($sql, array(
-            $pageurl->out_as_local_url(),
+            $localurl,
         ));
 
         foreach ($tours as $record) {
