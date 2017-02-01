@@ -7,6 +7,24 @@ body {
     background-repeat: repeat-x;
     background-color: #dbeede;
 }
+
+
+
+#page-enrol-index #fitem_id_submitbutton input[type="submit"] {
+	background-image: url([[pix:theme|Rishum]]);
+	background-color:transparent;
+    padding: 11px 63px;  
+    color: transparent !important;
+}
+
+
+#page-enrol-index #fitem_id_submitbutton input[type="submit"]:hover{
+	background-color: transparent !important;
+	transition: all 1000000s ease;	
+}
+
+
+
 .dir-ltr .loginbox .loginform .form-input
 {   margin: 0 auto;
 	float: none;
