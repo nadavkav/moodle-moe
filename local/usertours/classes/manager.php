@@ -530,9 +530,9 @@ class manager {
                AND ? LIKE pathmatch
           ORDER BY sortorder ASC
 EOF;
-
+        $usertour = optional_param('usertour', '', PARAM_TEXT);
         $localurl = $pageurl->out_as_local_url();
-        $localurl .= '&amp;usertour='.$_GET['usertour'];
+        $localurl .= '&amp;usertour=' . $usertour;
         $tours = $DB->get_records_sql($sql, array(
             $localurl,
         ));
