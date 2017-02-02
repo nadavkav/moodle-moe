@@ -53,6 +53,7 @@ define(['jquery'], function($){
 		if(this.scrollWidth > $('#scrollbar').width()){
 			if($('.allbuttons').css('right').replace('px', '') >= 0){
 				$('.fa-caret-right').css('visibility', 'hidden');
+				$('.fa-caret-right').css('margin-right', '-60px');
 				$('.fa-caret-left').css('visibility', 'visible');
 			} else {
 				$('.fa-caret-right').css('visibility', 'visible');
@@ -65,6 +66,8 @@ define(['jquery'], function($){
 		} else {
 			$('.fa-caret-left').css('visibility', 'hidden');
 			$('.fa-caret-right').css('visibility', 'hidden');
+		//	$('.fa-caret-right').css('margin-right', '12px')
+
 		}
 	};
 	

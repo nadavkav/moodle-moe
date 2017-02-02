@@ -1176,7 +1176,7 @@ table#categoryquestions {
 	padding: 1em;
 }
 #questions #addtional_content .wraper{
-	height: 95.6%;
+    height: 100%;
 }
 #questionbox{
 	margin: 0px;
@@ -1197,6 +1197,10 @@ table#categoryquestions {
 .que .content .formulation{
 	border: none;
 	margin: 0px;
+	border-top-color: #f9f1e4;
+    border-top-width: 7px;
+    border-top-style: solid;
+	
 }
 #quizsbs .que input.btn[type="submit"]{
 	border: 2px solid #9faeaa;
@@ -1226,6 +1230,7 @@ table#categoryquestions {
     overflow: hidden;
     margin-top: 1em;
 	position: relative;
+	margin-right: 35px;
 }
 
 .allbuttons {
@@ -1243,7 +1248,7 @@ table#categoryquestions {
 }
 #questions #quizsbs_question #questionbox,
 #addtional_content .wraper {
-	padding: 1em;
+/* 	padding: 1em; */
 }
 #questions #additional_content {
 	margin-left: 1.8em;
