@@ -28,7 +28,7 @@ global $DB, $PAGE,$OUTPUT;
 
 $results = new PerCourseScollLevel();
 $data = new stdClass();
-$data->results = $results->displayReportForTemplates();
+$data->results = $results->displayreportfortemplates();
 
 $renderer = $PAGE->get_renderer('core');
 

@@ -1,8 +1,8 @@
 <?php
 abstract class  moeReport{
     
-   abstract function  runReport(); 
-   abstract function  displayReportForTemplates();
+   abstract function  runreport(); 
+   abstract function  displayreportfortemplates();
    
    public function to_std():\stdClass {
        $obj = new \stdClass();
