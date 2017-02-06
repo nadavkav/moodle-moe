@@ -1,0 +1,44 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<table border="1" class="resultTable">
+   <tr>
+    <th>{{# str }} region, report_moereports {{/ str }}</th>
+    <th>{{# str }} cors, report_moereports {{/ str }}</th>
+    <th>{{# str }} makbila9, report_moereports {{/ str }}</th>
+    <th>{{# str }} percents9, report_moereports {{/ str }}</th>
+    <th>{{# str }} makbila10, report_moereports {{/ str }}</th>
+    <th>{{# str }} percents10, report_moereports {{/ str }}</th>
+    <th>{{# str }} makbila11, report_moereports {{/ str }}</th>
+    <th>{{# str }} percents11, report_moereports {{/ str }}</th>
+    <th>{{# str }} makbila12, report_moereports {{/ str }}</th>
+    <th>{{# str }} percents12, report_moereports {{/ str }}</th>
+   </tr>
+{{#results}}
+    <tr>
+        <td>{{region}}</td>       
+        <td>{{course}}</td>       
+        <td>{{ninthgradesum}}</td>       
+        <td>{{ninthgradetotal}}</td>       
+        <td>{{tenthgradesum}}</td>       
+        <td>{{tenthgradetotal}}</td>       
+        <td>{{eleventhgradesum}}</td>       
+        <td>{{eleventhgradetotal}}</td>       
+        <td>{{twelfthgradesum}}</td>       
+        <td>{{twelfthgradetotal}}</td>       
+    </tr>
+{{/results}}
+</table>

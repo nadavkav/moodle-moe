@@ -1,6 +1,8 @@
  /**
   * @module format_lm/addtask
   */
+
+
 define([ 'jquery'], function(){
  
     /**
@@ -16,7 +18,7 @@ define([ 'jquery'], function(){
  
     };
  
-    AddClock.prototype.init = function(hours, minutes, seconds) {
+    AddClock.prototype.init = function(serverTime, timeHours, timeMinutes, dorationHours, dorationMinutes) {
       	
     	function countdown( elementName, minutes, seconds )
     	{
@@ -32,6 +34,7 @@ define([ 'jquery'], function(){
     	    {
     	        msLeft = endTime - (+new Date());
     	        if ( msLeft < 1 ) {
+    	        	var hoursInMinuts = 
     	        countdown( "countdown",120, 0 );
     			   
     	        } else {

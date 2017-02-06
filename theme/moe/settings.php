@@ -28,10 +28,10 @@ $settings = null;
 defined('MOODLE_INTERNAL') || die;
 
 $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
-	
+
 	// "settings general" settingpage
 	$temp = new admin_settingpage('theme_moe_general',  get_string('settings_general', 'theme_moe'));
-		
+
 	// Logo file setting.
     $name = 'theme_moe/logo';
     $title = get_string('logo', 'theme_moe');
@@ -39,10 +39,10 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
-    
-    
-    
+
+
+
+
 	// Logo resolution.
 	$name = 'theme_moe/logo_res';
     $title = get_string('logo_res', 'theme_moe');
@@ -50,7 +50,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
     // add/remove downlclock
     $name = 'theme_moe/countdowntimer';
     $title = get_string('countdowntimer', 'theme_moe');
@@ -58,9 +58,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
-    
-    
+
 	// Fixed or Variable Width.
     $name = 'theme_moe/pagewidth';
     $title = get_string('pagewidth', 'theme_moe');
@@ -70,7 +68,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     // Custom or standard block layout.
     $name = 'theme_moe/layout';
     $title = get_string('layout', 'theme_moe');
@@ -79,7 +77,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	   
+
     // Footnote setting.
     $name = 'theme_moe/footnote';
     $title = get_string('footnote', 'theme_moe');
@@ -88,7 +86,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
     // Custom CSS file.
     $name = 'theme_moe/customcss';
     $title = get_string('customcss', 'theme_moe');
@@ -97,13 +95,13 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	$ADMIN->add('theme_moe', $temp);
-	
+
 	// "settings background" settingpage
 	$temp = new admin_settingpage('theme_moe_background',  get_string('settings_background', 'theme_moe'));
-	
-	// list with provides backgrounds 
+
+	// list with provides backgrounds
     $name = 'theme_moe/list_bg';
     $title = get_string('list_bg', 'theme_moe');
     $description = get_string('list_bg_desc', 'theme_moe');
@@ -133,7 +131,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'pagebackground');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// bg repeat.
 	$name = 'theme_moe/page_bg_repeat';
     $title = get_string('page_bg_repeat', 'theme_moe');
@@ -141,12 +139,12 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     $ADMIN->add('theme_moe', $temp);
-	
+
 	// "settings colors" settingpage
 	$temp = new admin_settingpage('theme_moe_colors',  get_string('settings_colors', 'theme_moe'));
-	
+
     // Main theme color setting.
     $name = 'theme_moe/maincolor';
     $title = get_string('maincolor', 'theme_moe');
@@ -166,7 +164,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Link color setting.
     $name = 'theme_moe/linkcolor';
     $title = get_string('linkcolor', 'theme_moe');
@@ -176,7 +174,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Default Button color setting.
     $name = 'theme_moe/def_buttoncolor';
     $title = get_string('def_buttoncolor', 'theme_moe');
@@ -186,7 +184,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Default Button Hover color setting.
     $name = 'theme_moe/def_buttonhovercolor';
     $title = get_string('def_buttonhovercolor', 'theme_moe');
@@ -196,7 +194,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Menu 1. Level color setting.
     $name = 'theme_moe/menufirstlevelcolor';
     $title = get_string('menufirstlevelcolor', 'theme_moe');
@@ -206,7 +204,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Menu 1. Level Links color setting.
     $name = 'theme_moe/menufirstlevel_linkcolor';
     $title = get_string('menufirstlevel_linkcolor', 'theme_moe');
@@ -216,7 +214,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Menu 2. Level color setting.
     $name = 'theme_moe/menusecondlevelcolor';
     $title = get_string('menusecondlevelcolor', 'theme_moe');
@@ -226,7 +224,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Menu 2. Level Links color.
     $name = 'theme_moe/menusecondlevel_linkcolor';
     $title = get_string('menusecondlevel_linkcolor', 'theme_moe');
@@ -236,7 +234,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Footer color setting.
     $name = 'theme_moe/footercolor';
     $title = get_string('footercolor', 'theme_moe');
@@ -246,7 +244,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Footer Headings color setting.
     $name = 'theme_moe/footerheadingcolor';
     $title = get_string('footerheadingcolor', 'theme_moe');
@@ -256,7 +254,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Footer Text color setting.
     $name = 'theme_moe/footertextcolor';
     $title = get_string('footertextcolor', 'theme_moe');
@@ -266,7 +264,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Copyright color setting.
     $name = 'theme_moe/copyrightcolor';
     $title = get_string('copyrightcolor', 'theme_moe');
@@ -276,7 +274,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Copyright color setting.
     $name = 'theme_moe/copyright_textcolor';
     $title = get_string('copyright_textcolor', 'theme_moe');
@@ -285,15 +283,15 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $previewconfig = null;
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);	
-	
-	$ADMIN->add('theme_moe', $temp); 
-	
+    $temp->add($setting);
+
+	$ADMIN->add('theme_moe', $temp);
+
 	// "settings socials" settingpage
 	$temp = new admin_settingpage('theme_moe_socials',  get_string('settings_socials', 'theme_moe'));
 	$temp->add(new admin_setting_heading('theme_moe_socials', get_string('socialsheadingsub', 'theme_moe'),
             format_text(get_string('socialsdesc' , 'theme_moe'), FORMAT_MARKDOWN)));
-    
+
     // Website url setting.
     $name = 'theme_moe/website';
     $title = get_string('website', 'theme_moe');
@@ -302,7 +300,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Mail setting.
     $name = 'theme_moe/socials_mail';
     $title = get_string('socials_mail', 'theme_moe');
@@ -311,7 +309,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     // Facebook url setting.
     $name = 'theme_moe/facebook';
     $title = get_string('facebook', 'theme_moe');
@@ -320,7 +318,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     // Flickr url setting.
     $name = 'theme_moe/flickr';
     $title = get_string('flickr', 'theme_moe');
@@ -356,7 +354,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     // Instagram url setting.
     $name = 'theme_moe/instagram';
     $title = get_string('instagram', 'theme_moe');
@@ -365,7 +363,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-    
+
     // YouTube url setting.
     $name = 'theme_moe/youtube';
     $title = get_string('youtube', 'theme_moe');
@@ -374,7 +372,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// social icons color setting.
     $name = 'theme_moe/socials_color';
     $title = get_string('socials_color', 'theme_moe');
@@ -384,8 +382,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, $previewconfig);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
-	// social icons position 
+
+	// social icons position
     $name = 'theme_moe/socials_position';
     $title = get_string('socials_position', 'theme_moe');
     $description = get_string('socials_position_desc', 'theme_moe');
@@ -396,12 +394,12 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
-	$ADMIN->add('theme_moe', $temp); 
-	
+
+	$ADMIN->add('theme_moe', $temp);
+
 	// "settings fonts" settingpage
 	$temp = new admin_settingpage('theme_moe_fonts',  get_string('settings_fonts', 'theme_moe'));
-	
+
 	$name = 'theme_moe/font_body';
     $title = get_string('fontselect_body' , 'theme_moe');
     $description = get_string('fontselectdesc_body', 'theme_moe');
@@ -424,24 +422,24 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 		'15'=>'Playfair Display',
 		'16'=>'Pontano Sans',
 		'17'=>'PT Sans',
-    	'18'=>'Raleway', 
+    	'18'=>'Raleway',
 		'19'=>'Ubuntu',
     	'20'=>'Vollkorn');
-	 			
+
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
     $name = 'theme_moe/font_heading';
     $title = get_string('fontselect_heading' , 'theme_moe');
     $description = get_string('fontselectdesc_heading', 'theme_moe');
     $default = '1';
-    $choices = array(			
+    $choices = array(
 		'1'=>'Open Sans',
 		'2'=>'Abril Fatface',
 		'3'=>'Arimo',
 		'4'=>'Arvo',
-		'5'=>'Bevan', 
+		'5'=>'Bevan',
 		'6'=>'Bree Serif',
 		'7'=>'Cabin',
 		'8'=>'Cantata One',
@@ -459,7 +457,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 		'20'=>'Playfair Display',
 		'21'=>'Pontano Sans',
 		'22'=>'PT Sans',
-    	'23'=>'Raleway', 
+    	'23'=>'Raleway',
 		'24'=>'Sansita One',
 		'25'=>'Ubuntu',
     	'26'=>'Vollkorn');
@@ -467,8 +465,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
-	$ADMIN->add('theme_moe', $temp); 
+
+	$ADMIN->add('theme_moe', $temp);
 
 	// "settings slider" settingpage
 	$temp = new admin_settingpage('theme_moe_slider',  get_string('settings_slider', 'theme_moe'));
@@ -477,9 +475,9 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 
     /*
      * Slide 1
-     */	
+     */
 	 $temp->add(new admin_setting_heading('theme_moe_slider_slide1', get_string('slideshow_slide1', 'theme_moe'),NULL));
-	
+
     // Image.
     $name = 'theme_moe/slide1image';
     $title = get_string('slideimage', 'theme_moe');
@@ -487,7 +485,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide1image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Title.
     $name = 'theme_moe/slide1';
     $title = get_string('slidetitle', 'theme_moe');
@@ -495,7 +493,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);    
+    $temp->add($setting);
 
     // Caption.
     $name = 'theme_moe/slide1caption';
@@ -504,7 +502,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// URL.
 	$name = 'theme_moe/slide1_url';
     $title = get_string('slide_url', 'theme_moe');
@@ -526,7 +524,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide2image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Title.
     $name = 'theme_moe/slide2';
     $title = get_string('slidetitle', 'theme_moe');
@@ -534,7 +532,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);    
+    $temp->add($setting);
 
     // Caption.
     $name = 'theme_moe/slide2caption';
@@ -543,7 +541,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// URL.
 	$name = 'theme_moe/slide2_url';
     $title = get_string('slide_url', 'theme_moe');
@@ -565,7 +563,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide3image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Title.
     $name = 'theme_moe/slide3';
     $title = get_string('slidetitle', 'theme_moe');
@@ -573,7 +571,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);    
+    $temp->add($setting);
 
     // Caption.
     $name = 'theme_moe/slide3caption';
@@ -582,7 +580,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// URL.
 	$name = 'theme_moe/slide3_url';
     $title = get_string('slide_url', 'theme_moe');
@@ -604,7 +602,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide4image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Title.
     $name = 'theme_moe/slide4';
     $title = get_string('slidetitle', 'theme_moe');
@@ -612,7 +610,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);    
+    $temp->add($setting);
 
     // Caption.
     $name = 'theme_moe/slide4caption';
@@ -621,7 +619,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// URL.
 	$name = 'theme_moe/slide4_url';
     $title = get_string('slide_url', 'theme_moe');
@@ -643,7 +641,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'slide5image');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Title.
     $name = 'theme_moe/slide5';
     $title = get_string('slidetitle', 'theme_moe');
@@ -651,7 +649,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, '');
     $default = '';
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);    
+    $temp->add($setting);
 
     // Caption.
     $name = 'theme_moe/slide5caption';
@@ -660,7 +658,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// URL.
 	$name = 'theme_moe/slide5_url';
     $title = get_string('slide_url', 'theme_moe');
@@ -669,13 +667,13 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	/*
      * Options
      */
 	 $temp->add(new admin_setting_heading('theme_moe_slider_options', get_string('slideshow_options', 'theme_moe'),NULL));
-	
-    // Slideshow Pattern 
+
+    // Slideshow Pattern
     $name = 'theme_moe/slideshowpattern';
     $title = get_string('slideshowpattern', 'theme_moe');
     $description = get_string('slideshowpatterndesc', 'theme_moe');
@@ -689,7 +687,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Slidshow AutoAdvance
 	$name = 'theme_moe/slideshow_advance';
     $title = get_string('slideshow_advance', 'theme_moe');
@@ -697,7 +695,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Slidshow Navigation
 	$name = 'theme_moe/slideshow_nav';
     $title = get_string('slideshow_nav', 'theme_moe');
@@ -705,8 +703,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
-	// Slideshow Loader 
+
+	// Slideshow Loader
     $name = 'theme_moe/slideshow_loader';
     $title = get_string('slideshow_loader', 'theme_moe');
     $description = get_string('slideshow_loader_desc', 'theme_moe');
@@ -718,28 +716,28 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Slideshow Image FX
 	$name = 'theme_moe/slideshow_imgfx';
 	$title = get_string('slideshow_imgfx','theme_moe');
 	$description = get_string('slideshow_imgfx_desc', 'theme_moe');
 	$setting = new admin_setting_configtext($name, $title, $description, 'random', PARAM_URL);
 	$temp->add($setting);
-	
+
 	// Slideshow Text FX
 	$name = 'theme_moe/slideshow_txtfx';
 	$title = get_string('slideshow_txtfx','theme_moe');
 	$description = get_string('slideshow_txtfx_desc', 'theme_moe');
 	$setting = new admin_setting_configtext($name, $title, $description, 'moveFromLeft', PARAM_URL);
 	$temp->add($setting);
-	
+
 	$ADMIN->add('theme_moe', $temp);
-	
-	// "frontpage carousel" settingpage 
+
+	// "frontpage carousel" settingpage
     $temp = new admin_settingpage('theme_moe_carousel', get_string('settings_carousel', 'theme_moe'));
     $temp->add(new admin_setting_heading('theme_moe_carousel', get_string('carouselheadingsub', 'theme_moe'),
             format_text(get_string('carouseldesc' , 'theme_moe'), FORMAT_MARKDOWN)));
-    
+
     // Position
     $name = 'theme_moe/carousel_position';
     $title = get_string('carousel_position', 'theme_moe');
@@ -751,7 +749,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Heading
     $name = 'theme_moe/carousel_h';
     $title = get_string('carousel_h', 'theme_moe');
@@ -760,7 +758,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Heading Style
     $name = 'theme_moe/carousel_hi';
     $title = get_string('carousel_hi', 'theme_moe');
@@ -776,7 +774,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Additional HTML
 	$name = 'theme_moe/carousel_add_html';
     $title = get_string('carousel_add_html', 'theme_moe');
@@ -785,7 +783,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Number of slides.
     $name = 'theme_moe/carousel_slides';
     $title = get_string('carousel_slides', 'theme_moe');
@@ -847,7 +845,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
         $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $temp->add($setting);
-		
+
 		// Button Text.
         $name = 'theme_moe/carousel_btntext_'.$i;
         $title = get_string('carousel_btntext', 'theme_moe');
@@ -874,10 +872,10 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
         $temp->add($setting);
     }
     $ADMIN->add('theme_moe', $temp);
-	
+
 	// "settings login and navigations" settingpage
 	$temp = new admin_settingpage('theme_moe_login',  get_string('settings_login', 'theme_moe'));
-	
+
 	// Additional Login Link
     $name = 'theme_moe/login_link';
     $title = get_string('login_link', 'theme_moe');
@@ -887,7 +885,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
     // Custom Login Link URL.
     $name = 'theme_moe/custom_login_link_url';
     $title = get_string('custom_login_link_url', 'theme_moe');
@@ -896,7 +894,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// Custom Login Link Text.
     $name = 'theme_moe/custom_login_link_txt';
     $title = get_string('custom_login_link_txt', 'theme_moe');
@@ -905,7 +903,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// customized login page.
 	$name = 'theme_moe/auth_googleoauth2';
     $title = get_string('auth_googleoauth2', 'theme_moe');
@@ -913,7 +911,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// customized login page.
 	$name = 'theme_moe/custom_login';
     $title = get_string('custom_login', 'theme_moe');
@@ -929,7 +927,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	// custom menu with shadow effect
 	$name = 'theme_moe/shadow_effect';
     $title = get_string('shadow_effect', 'theme_moe');
@@ -937,7 +935,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
     // Show MyCourses dropdown in custommenu.
     $name = 'theme_moe/mycourses_dropdown';
     $title = get_string('mycourses_dropdown', 'theme_moe');
@@ -946,5 +944,5 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
-	
+
 	$ADMIN->add('theme_moe', $temp);
