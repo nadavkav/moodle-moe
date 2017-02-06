@@ -53,8 +53,9 @@ class peractivityschoollevel extends moereport{
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
-                $semel = $DB->get_field("user_info_data", "data", array('userid' => "$user->id", 'fieldid' => '5'));
-                $makbila = $DB->get_field("user_info_data", "data", array('userid' => "$user->id", 'fieldid' => '6'));
+                $localuserinfo = get_complete_user_data('id', $user->id);
+                $semel = $localuserinfo->profile['StudentMosad'];
+                $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;

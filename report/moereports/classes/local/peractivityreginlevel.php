@@ -52,9 +52,10 @@ class peractivityreginlevel extends moeReport{
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
-                $semel = $DB->get_field("user_info_data", "data", array('userid' => "$user->id", 'fieldid' => '5'));
+                $localuserinfo = get_complete_user_data('id', $user->id);
+                $semel = $localuserinfo->profile['StudentMosad'];
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
-                $makbila = $DB->get_field("user_info_data", "data", array('userid' => "$user->id", 'fieldid' => '6'));
+                $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
