@@ -50,8 +50,8 @@ function oublog_add_instance($oublog) {
     if (!$oublog->id = $DB->insert_record('oublog', $oublog)) {
         return(false);
     }
-    if (!empty($oublog->tags)) {
-        $blogtags = oublog_clarify_tags($oublog->tags);
+    if (!empty($oublog->tagslist)) {
+        $blogtags = oublog_clarify_tags($oublog->tagslist);
         // For each tag added to the blog check if it exists in oublog_tags table,
         // if it does not a tag record is created.
         foreach ($blogtags as $tag) {
@@ -92,7 +92,7 @@ function oublog_update_instance($oublog) {
         return(false);
     }
 
-    $blogtags = oublog_clarify_tags($oublog->tags);
+    $blogtags = oublog_clarify_tags($oublog->tagslist);
     // For each tag in the blog check if it already exists in oublog_tags table,
     // if it does not a tag record is created.
     foreach ($blogtags as $tag) {
@@ -965,11 +965,13 @@ function oublog_get_ourecent_activity($course) {
  */
 function oublog_grade_item_update($oublog, $grades = null) {
     global $CFG;
-    require_once($CFG->libdir.'/gradelib.php');
-    require_once('locallib.php');
+    require_once($CFG->libdir . '/gradelib.php');
+    require_once($CFG->dirroot . '/mod/oublog/locallib.php');
     // Use 'grade' or 'scale' depends upon 'grading'.
     if ($oublog->grading == OUBLOG_USE_RATING) {
         $oublogscale = $oublog->scale;
+    } else if ($oublog->grading == OUBLOG_NO_GRADING) {
+        $oublogscale = 0;
     } else {
         $oublogscale = $oublog->grade;
     }
@@ -1320,6 +1322,51 @@ function oublog_rating_validate($params) {
         throw new rating_exception('invalidcontext');
     }
 
+    return true;
+}
+
+/**
+ * Can the current user see ratings for a given itemid?
+ *
+ * @param array $params submitted data
+ *            contextid => int contextid [required]
+ *            component => The component for this module - should always be mod_oublog [required]
+ *            ratingarea => object the context in which the rated items exists [required]
+ *            itemid => int the ID of the object being rated [required]
+ *            scaleid => int scale id [optional]
+ * @return bool
+ * @throws coding_exception
+ * @throws rating_exception
+ */
+function mod_oublog_rating_can_see_item_ratings($params) {
+    global $USER, $CFG;
+    require_once(dirname(__FILE__) . '/locallib.php');
+
+    // Check the component is mod_forum.
+    if (!isset($params['component']) || $params['component'] != 'mod_oublog') {
+        throw new rating_exception('invalidcomponent');
+    }
+
+    // Check the ratingarea is post (the only rating area in forum).
+    if (!isset($params['ratingarea']) || $params['ratingarea'] != 'post') {
+        throw new rating_exception('invalidratingarea');
+    }
+
+    if (!isset($params['itemid'])) {
+        throw new rating_exception('invaliditemid');
+    }
+    $context = context::instance_by_id($params['contextid']);
+
+    $blog = oublog_get_blog_from_postid($params['itemid']);
+    $post = oublog_get_post($params['itemid'], true);
+
+    if (!oublog_can_view_post($post, $USER, $context, $blog->global)) {
+        return false;
+    }
+
+    if (!has_capability('mod/oublog:viewallratings', $context)) {
+        return false;
+    }
     return true;
 }
 

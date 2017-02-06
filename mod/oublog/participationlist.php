@@ -178,11 +178,14 @@ if (!empty($warning)) {
 
 $pagingurl = new moodle_url('/mod/oublog/participationlist.php',
         array('id' => $cm->id, 'individual' => $curindividual,
-        'page' => $page, 'start' => $start, 'end' => $end, 'tab' => $tab));
+        'page' => $page, 'start' => $start, 'end' => $end, 'tab' => $tab, 'group' => $groupid));
 
 echo $oublogoutput->render_all_users_participation_table($cm, $course, $oublog,
         $page, $limitnum, $participation, $getposts, $getcomments,
         $start, $end, $pagingurl);
+
+echo $oublogoutput->get_link_back_to_oublog($cm->name, $cm->id);
+
 echo $OUTPUT->footer();
 
 // Log visit list event.

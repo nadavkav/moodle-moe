@@ -18,9 +18,9 @@ $string['attachments'] = "Attachments";
 $string['oublog'] = 'OU blog';
 $string['modulename'] = 'OU blog';
 $string['modulenameplural'] = 'OU blogs';
-$string['modulename_help'] = 'The blog activity module allows for creation of blogs within a course
- (these are separate to the core Moodle blog system). You can have course-wide blogs (everyone in
- the course posts to the same blog), group blogs, or individual blogs.';
+$string['modulename_help'] = 'This allows for the creation of blogs within a module (which are separate
+to the core Moodle blog system). You can have module-wide blogs (everyone in the module posts to the same
+blog), group blogs, or individual blogs. The blog activity can be renamed to reflect its purpose e.g. Learning Log.';
 
 $string['oublogintro'] = 'Intro';
 $string['lastmodified'] = 'Last post: {$a}';
@@ -149,7 +149,7 @@ $string['onepending'] = '{$a} comment awaiting approval';
 $string['npendingafter'] = ', {$a} awaiting approval';
 $string['onependingafter'] = ', {$a} awaiting approval';
 $string['comment'] = 'Add your comment';
-$string['lastcomment'] = '(latest by {$a->fullname}, {$a->timeposted})';
+$string['lastcomment'] = '(latest comment by {$a->fullname}, {$a->timeposted})';
 $string['addcomment'] = 'Add comment';
 
 $string['confirmdeletepost'] = 'Are you sure you want to delete this post?';
@@ -444,6 +444,7 @@ $string['nousergrade'] = 'User grade not available.';
 
 // Participation download strings.
 $string['downloadas'] = 'Download data as';
+$string['downloadcsv'] = 'Comma separated values text file';
 $string['postauthor'] = 'Post author';
 $string['postdate'] = 'Post date';
 $string['posttime'] = 'Post time';
@@ -534,11 +535,13 @@ $string['extra_emails_help'] = 'Enter one or more email address(es) separated by
 $string['allowimport'] = 'Enable post import';
 $string['allowimport_help'] = 'Allow any user to import pages from other blog activities they have access to.';
 $string['allowimport_invalid'] = 'Posts can only be imported when activity is set to individual mode.';
-$string['import'] = 'Import posts';
+$string['import'] = 'Import';
 $string['import_notallowed'] = 'Importing posts is disabled for this {$a}.';
 $string['import_step0_nonefound'] = 'You do not have access to any activities where posts can be imported from.';
-$string['import_step0_inst'] = 'Select an activity to import posts from:';
+$string['import_step0_inst'] = 'From the list of blogs below, you may either import the entire blog or import selected posts.';
 $string['import_step0_numposts'] = '({$a} posts)';
+$string['import_step0_blog'] = 'Import blog';
+$string['import_step0_selected_posts'] = 'Import selected posts';
 $string['import_step1_inst'] = 'Select posts to import:';
 $string['import_step1_from'] = 'Import from:';
 $string['import_step1_table_title'] = 'Title';
@@ -548,14 +551,14 @@ $string['import_step1_table_include'] = 'Include in import';
 $string['import_step1_addtag'] = 'Filter by tag - {$a}';
 $string['import_step1_removetag'] = 'Remove tag filter - {$a}';
 $string['import_step1_include_label'] = 'Import post - {$a}';
-$string['import_step1_submit'] = 'Import posts';
+$string['import_step1_submit'] = 'Import';
 $string['import_step1_all'] = 'Select all';
 $string['import_step1_none'] = 'Select none';
 $string['import_step2_inst'] = 'Importing posts:';
 $string['import_step2_none'] = 'No posts selected for import.';
 $string['import_step2_prog'] = 'Importing in progress';
-$string['import_step2_total'] = 'Imported {$a} posts.';
-$string['import_step2_conflicts'] = '{$a} posts to import were identified as conflicts with existing posts.';
+$string['import_step2_total'] = '{$a} post(s) imported successfully';
+$string['import_step2_conflicts'] = '{$a} post(s) to import were identified as conflicts with existing posts.';
 $string['import_step2_conflicts_submit'] = 'Import conflicting posts';
 
 // My Participation.
@@ -634,7 +637,7 @@ $string['grading_invalid'] = 'Posts can only be graded when either grade type or
 $string['nograde'] = 'No grade (default)';
 $string['teachergrading'] = 'Teacher grades students';
 $string['userrating'] = 'Use ratings';
-$string['share'] = 'Share this post';
+$string['share'] = 'Share post';
 $string['tweet'] = 'Tweet';
 $string['oublogcrontask'] = 'OU blog maintenance jobs';
 

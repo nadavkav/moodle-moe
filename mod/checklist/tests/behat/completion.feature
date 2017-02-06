@@ -19,7 +19,7 @@ Feature: Student checklist can track completion of other activities
     And I log out
     And I log in as "teacher1"
     And I follow "Course 1"
-    And I follow "Edit settings"
+    And I navigate to "Edit settings" node in "Course administration"
     And I expand all fieldsets
     And I set the field "Enable completion tracking" to "Yes"
     And I press "Save and display"
@@ -53,7 +53,7 @@ Feature: Student checklist can track completion of other activities
     # Check that changes to the course are tracked.
     When I follow "Course 1"
     And I follow "Test page 2"
-    And I follow "Edit settings"
+    And I navigate to "Edit settings" node in "Page module administration"
     And I set the field "Name" to "Updated name to page 5"
     And I press "Save and return to course"
     And I follow "Test checklist"
@@ -68,7 +68,7 @@ Feature: Student checklist can track completion of other activities
     And the following fields match these values:
       | Test page 1 | 0 |
       | Test page 2 | 0 |
-    When I click on "Link to this module" "link" in the "Test page 1" "list_item"
+    When I click on "Activity associated with this item" "link" in the "Test page 1" "list_item"
     And I should see "This page 1 should be complete when I view it"
     And I follow "Course 1"
     And I follow "Test checklist"
@@ -80,7 +80,7 @@ Feature: Student checklist can track completion of other activities
   Scenario: The checklist state should update based on logs, if completion is disabled.
     Given I log in as "teacher1"
     And I follow "Course 1"
-    And I follow "Edit settings"
+    And I navigate to "Edit settings" node in "Course administration"
     And I expand all fieldsets
     And I set the field "Enable completion tracking" to "No"
     And I press "Save and display"
@@ -91,7 +91,7 @@ Feature: Student checklist can track completion of other activities
     And the following fields match these values:
       | Test page 1 | 0 |
       | Test page 2 | 0 |
-    When I click on "Link to this module" "link" in the "Test page 1" "list_item"
+    When I click on "Activity associated with this item" "link" in the "Test page 1" "list_item"
     And I should see "This page 1 should be complete when I view it"
     And I follow "Course 1"
     And I follow "Test checklist"

@@ -12,6 +12,7 @@ node{
         sh 'composer config -g github-oauth.github.com ee71f264114584932339a01e0433ee0e15e82f12'
         sh 'composer install --prefer-source'
         sh 'psql -h postgres-server -U postgres -c \'CREATE DATABASE "\'$JOB_BASE_NAME\'\'$BUILD_ID\'" WITH OWNER = postgres;\' postgres'
+        sh 'chmod +x filter/tex/mimetex.darwin'
     }
     
     stage ('Run UnitTest') {
