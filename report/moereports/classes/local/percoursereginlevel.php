@@ -79,27 +79,31 @@ class percoursereginlevel extends moereport{
                     switch ($gradekey){
                         case 9:
                             $onerecord->ninthgradesum = $gradevalue;
-                            $onerecord->ninthgradetotal = ($gradevalue / $DB->get_field_sql
-                                ("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)",
-                                    array($gradekey, $reginkey)) * 100)."%";
+                            $onerecord->ninthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                            from {moereports_reports_classes} where class = ? AND symbol
+                                                            in (select symbol from mdl_moereports_reports where region = ?)",
+                                                            array($gradekey, $reginkey)) * 100)."%";
                             break;
                         case 10:
                             $onerecord->tenthgradesum = $gradevalue;
-                            $onerecord->tenthgradesum = ($gradevalue / $DB->get_field_sql
-                                ("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)",
-                                    array($gradekey, $reginkey)) * 100)."%";
+                            $onerecord->tenthgradesum = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                            from {moereports_reports_classes} where class = ? AND symbol
+                                                            in (select symbol from mdl_moereports_reports where region = ?)",
+                                                            array($gradekey, $reginkey)) * 100)."%";
                             break;
                         case 11:
                             $onerecord->eleventhgradesum = $gradevalue;
-                            $onerecord->eleventhgradetotal = ($gradevalue / $DB->get_field_sql
-                                ("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)",
-                                    array($gradekey, $reginkey)) * 100)."%";
+                            $onerecord->eleventhgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                            from {moereports_reports_classes} where class = ? AND symbol in
+                                                            (select symbol from mdl_moereports_reports where region = ?)",
+                                                            array($gradekey, $reginkey)) * 100)."%";
                             break;
                         case 12:
                             $onerecord->twelfthgradesum = $gradevalue;
-                            $onerecord->twelfthgradetotal = ($gradevalue / $DB->get_field_sql
-                                ("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)",
-                                    array($gradekey, $reginkey)) * 100)."%";
+                            $onerecord->twelfthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                            from {moereports_reports_classes} where class = ? AND symbol in
+                                                            (select symbol from mdl_moereports_reports where region = ?)",
+                                                            array($gradekey, $reginkey)) * 100)."%";
                             break;
                     }
                 }

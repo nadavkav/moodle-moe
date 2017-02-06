@@ -70,50 +70,62 @@ class peractivityreginlevel extends moeReport{
         return $results;
     }
 
-    public function displayreportfortemplates(){
+    public function displayreportfortemplates() {
         global $DB;
         $results = self::runreport();
         $resultintamplateformat = array();
         foreach ($results as $reginkey => $reginvalue) {
             foreach ($reginvalue as $corskey => $corsvalue) {
                 foreach ($corsvalue as $activitykey => $activityvalue) {
-                    $oneRecord = new peractivityreginlevel();
-                    $oneRecord->region = $reginkey;
-                    $oneRecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
-                    //geting the activity name through get_fast_modinfo
-                    $course = $DB->get_record('course', array('id'=> $corskey));
+                    $onerecord = new peractivityreginlevel();
+                    $onerecord->region = $reginkey;
+                    $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
+                    // Geting the activity name through get_fast_modinfo
+                    $course = $DB->get_record('course', array('id' => $corskey));
                     $insinfo = get_fast_modinfo($course);
-                    foreach ($insinfo->instances as $Cactivity) {
-                        foreach ($Cactivity as $acti) {
+                    foreach ($insinfo->instances as $cactivity) {
+                        foreach ($cactivity as $acti) {
                             if ($acti->id == $activitykey) {
-                                $oneRecord->activityname = $acti->name;
+                                $onerecord->activityname = $acti->name;
                             }
                         }
                     }
                     foreach ($activityvalue as $gradekey => $gradevalue) {
                         switch ($gradekey){
                             case 9:
-                                $oneRecord->ninthgradesum=$gradevalue;
-                                $oneRecord->ninthgradetotal=($gradevalue/$DB->get_field_sql("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)", array($gradekey, $reginkey))*100) . "%";
+                                $onerecord->ninthgradesum = $gradevalue;
+                                $onerecord->ninthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                                from {moereports_reports_classes} where class = ? AND symbol
+                                                                in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                array($gradekey, $reginkey)) * 100) . "%";
 
                                 break;
                             case 10:
-                                $oneRecord->tenthgradesum=$gradevalue;
-                                $oneRecord->tenthgradesum=($gradevalue/$DB->get_field_sql("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)", array($gradekey, $reginkey))*100) . "%";
+                                $onerecord->tenthgradesum = $gradevalue;
+                                $onerecord->tenthgradesum = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                                from {moereports_reports_classes} where class = ? AND symbol
+                                                                in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                array($gradekey, $reginkey)) * 100) . "%";
                                 break;
                             case 11:
-                                $oneRecord->eleventhgradesum=$gradevalue;
-                                $oneRecord->eleventhgradetotal=($gradevalue/$DB->get_field_sql("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)", array($gradekey, $reginkey))*100) . "%";
+                                $onerecord->eleventhgradesum = $gradevalue;
+                                $onerecord->eleventhgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                                from {moereports_reports_classes} where class = ? AND symbol
+                                                                in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                array($gradekey, $reginkey)) * 100) . "%";
                                 break;
                             case 12:
-                                $oneRecord->twelfthgradesum=$gradevalue;
-                                $oneRecord->twelfthgradetotal=($gradevalue/$DB->get_field_sql("select sum(studentsnumber) from {moereports_reports_classes} where class = ? AND symbol in (select symbol from mdl_moereports_reports where region = ?)", array($gradekey, $reginkey))*100)."%";
+                                $onerecord->twelfthgradesum = $gradevalue;
+                                $onerecord->twelfthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                                                from {moereports_reports_classes} where class = ? AND symbol
+                                                                in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                array($gradekey, $reginkey)) * 100)."%";
                                 break;
 
                         }
                     }
-                    $oneRecord = $oneRecord ->to_std();
-                    array_push($resultintamplateformat, $oneRecord);
+                    $onerecord = $onerecord->to_std();
+                    array_push($resultintamplateformat, $onerecord);
                 }
             }
         }
