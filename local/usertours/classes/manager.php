@@ -532,7 +532,9 @@ class manager {
 EOF;
         $usertour = optional_param('usertour', '', PARAM_TEXT);
         $localurl = $pageurl->out_as_local_url();
-        $localurl .= '&amp;usertour=' . $usertour;
+        if ($usertour != '') {
+            $localurl .= '&amp;usertour=' . $usertour;
+        }
         $tours = $DB->get_records_sql($sql, array(
             $localurl,
         ));
