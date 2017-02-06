@@ -33,6 +33,11 @@ require_once($CFG->dirroot . '/mod/quizsbs/locallib.php');
 $id = required_param('cmid', PARAM_INT); // Course module id
 $forcenew = optional_param('forcenew', false, PARAM_BOOL); // Used to force a new preview
 $page = optional_param('page', -1, PARAM_INT); // Page to jump to in the attempt.
+$additionalcontent = optional_param('additional', null, PARAM_INT);
+
+if($additionalcontent) {
+    $additionalcontent = "&additional=".$additionalcontent;
+}
 
 if (!$cm = get_coursemodule_from_id('quizsbs', $id)) {
     print_error('invalidcoursemodule');
@@ -104,11 +109,11 @@ if ($currentattemptid) {
     if ($lastattempt->state == quizsbs_attempt::OVERDUE) {
         redirect($quizsbsobj->summary_url($lastattempt->id));
     } else {
-        redirect($quizsbsobj->attempt_url($currentattemptid, $page));
+        redirect($quizsbsobj->attempt_url($currentattemptid, $page).$additionalcontent);
     }
 }
 
 $attempt = quizsbs_prepare_and_start_new_attempt($quizsbsobj, $attemptnumber, $lastattempt);
 
 // Redirect to the attempt page.
-redirect($quizsbsobj->attempt_url($attempt->id, $page));
+redirect($quizsbsobj->attempt_url($attempt->id, $page).$additionalcontent);

@@ -100,9 +100,12 @@ class content_load extends \moodleform {
         $mform->setType('javascripteditor', PARAM_RAW);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'savenshow', '0', null);
+        $mform->setType('savenshow', PARAM_INT);
         $mform->addElement('hidden', 'createdate', 'createdate', null);
         $mform->setType('createdate', PARAM_INT);
         $this->add_action_buttons();
+        
     }
 }
 

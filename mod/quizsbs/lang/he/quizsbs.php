@@ -1077,3 +1077,4 @@ $string['wronguse'] = 'לא ניתן להשתמש בעמוד זה בצורה ז�
 $string['xhtml'] = 'תסדיר XHTML';
 $string['youneedtoenrol'] = 'בכדי לגשת לבוחן יש להיות רשומים לקורס זה';
 $string['yourfinalgradeis'] = 'ציונך הסופי בבוחן זה הוא {$a}';
+$string['saveandpreview'] = 'שמור ופתח תצוגה מקדימה';

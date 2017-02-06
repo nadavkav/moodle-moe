@@ -59,7 +59,7 @@ class editcontent_renderer extends \plugin_renderer_base {
      */
 
     public function content_load_form($pageurl, $structure, additional_content $additaional) {
-        global $DB;
+        global $DB, $CFG, $USER;
 
         $contentloadform = new content_load($pageurl, array(
             'structure' => $structure,
@@ -139,11 +139,20 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $questioncontenthtml->add_entry();
                         break;
                 }
+            }              
+            if($contentdata->savenshow == 0) {
+                 redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
+                        'cmid' => $pageurl->get_param('cmid'),
+                        )), get_string('subjectsuccessfulsave', 'quizsbs'), 
+                        null, \core\output\notification::NOTIFY_SUCCESS);
+            } else {
+                $modid = $DB->get_field('modules', 'id', array("name" => "quizsbs"));
+                $cmid = $DB->get_field('course_modules', 'id', array('module' => $modid, 'instance' => $additionalcontent->get_quizsbsid()));
+                $this->page->requires->js_call_amd('mod_quizsbs/contentpreview', 'init', array($cmid, $CFG->wwwroot, $additaionalcontent->id, $USER->sesskey));
+                return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
             }
-            redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
-                'cmid' => $pageurl->get_param('cmid'),
-            )), get_string('subjectsuccessfulsave', 'quizsbs'), null, \core\output\notification::NOTIFY_SUCCESS);
         }
+        $this->page->requires->js_call_amd('mod_quizsbs/contentpreview', 'init', array(null, null, null, null));
         return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
     }
 }
