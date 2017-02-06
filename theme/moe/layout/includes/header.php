@@ -33,8 +33,17 @@ $countdowntimer = theme_moe_get_setting('countdowntimer');
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
 $context=getdate();
+$serverTime= date("H:i");
+echo $serverTime;
 if ($countdowntimer && isloggedin()) {
-    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
+    $times = get_config('theme_moe');
+    $a="theme_moe/countdowntimertime_minut";
+    $b="theme_moe/countdowntimerdoration_minut";
+    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($serverTime,
+        $times->countdowntimertime_hour,
+        $times->$a,
+        $times->countdowntimerdoration_hour,
+        $times->$b));
 }
 
 

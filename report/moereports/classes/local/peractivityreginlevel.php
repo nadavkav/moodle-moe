@@ -16,9 +16,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once('../../report/moereports/classes/local/reportsForMoe.php');
+require_once('../../report/moereports/classes/local/reportsformoe.php');
 
-class PerActivityReginLevel extends moeReport{
+class peractivityreginlevel extends moeReport{
 
     public $region;
     public $course;
@@ -76,7 +76,7 @@ class PerActivityReginLevel extends moeReport{
         foreach ($results as $reginkey => $reginvalue) {
             foreach ($reginvalue as $corskey => $corsvalue) {
                 foreach ($corsvalue as $activitykey => $activityvalue) {
-                    $oneRecord = new PerActivityReginLevel();
+                    $oneRecord = new peractivityreginlevel();
                     $oneRecord->region = $reginkey;
                     $oneRecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
                     //geting the activity name through get_fast_modinfo

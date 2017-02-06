@@ -43,6 +43,15 @@ $string['choosereadme'] = '
 <hr />
 <p style="text-align:center;"><img class="img-polaroid" src="moe/pix/redPIthemes.jpg" /></p>';
 
+// countdown clock
+$string['countdowntimerdesc'] = 'סימון תיבה זאת מאפשר שימוש בשעון הספירה';
+$string['countdowntimer'] = 'countdown timer';
+$string['countdowntimertime'] = 'שעת תחילת ספירת השעון';
+$string['countdowntimertimedesc'] = 'הגדר את השעה שבה השעון יתחיל את הספירה לאחור';
+
+$string['countdowntimerdoration'] = 'זמן לספירה לאחור';
+$string['countdowntimerdorationdesc'] = 'הגדר את משך זמן הספירה לאחור';
+
 /* Settings - General */
 $string['settings_general'] = 'כללי';
 $string['lemidadigit'] = 'למידה דיגיטלית';
