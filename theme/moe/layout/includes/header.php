@@ -33,17 +33,8 @@ $countdowntimer = theme_moe_get_setting('countdowntimer');
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
 $context=getdate();
-$serverTime= date("H:i");
-echo $serverTime;
 if ($countdowntimer && isloggedin()) {
-    $times = get_config('theme_moe');
-    $a="theme_moe/countdowntimertime_minut";
-    $b="theme_moe/countdowntimerdoration_minut";
-    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($serverTime,
-        $times->countdowntimertime_hour,
-        $times->$a,
-        $times->countdowntimerdoration_hour,
-        $times->$b));
+    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
 }
 
 
@@ -56,7 +47,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 ?>
 
 <?php if($PAGE->theme->settings->socials_position==1) { ?>
-    	<div class="container-fluid socials-header"> 
+    	<div class="container-fluid socials-header">
     	<?php require_once(dirname(__FILE__).'/socials.php');?>
         </div>
 <?php
@@ -65,21 +56,21 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
    		<div id="countdown" class="btn"></div>
    	<?php }?>
    <header id="page-header" class="clearfix">
-       
-    <div class="container-fluid">    
+
+    <div class="container-fluid">
     <div class="row-fluid">
     <!-- HEADER: LOGO AREA -->
         		<div id="lemidaDigit" class="hidden-phone span5">
                 	<span>
-                	<?php 
+                	<?php
 					   echo get_string('lemidadigit','theme_moe');
 					?>
 					</span>
                 </div>
                 <div class="span4 hidden-phone">
-              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>             		
+              		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>
                 </div>
- 
+
             <?php if (!$haslogo) { ?>
             	<div class="span6">
               		<h1 id="title" style="line-height: 2em"><?php echo $SITE->fullname; ?></h1>
@@ -87,18 +78,18 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
             <?php } else { ?>
                 <div class="span3 logo-header">
                 	<a class="logo" href="<?php echo $CFG->wwwroot; ?>" title="<?php print_string('home'); ?>">
-                    <?php 
+                    <?php
 					echo html_writer::empty_tag('img', array('src'=>$PAGE->theme->setting_file_url('logo', 'logo'), 'class'=>'logo img-responsive', 'alt'=>'logo'));
 					?>
                     </a>
                 </div>
-            <?php } ?>      	
-                
-                            
-            
+            <?php } ?>
 
-            
-            <?php 
+
+
+
+
+            <?php
 	function get_content () {
 	global $USER, $CFG, $SESSION, $COURSE;
 	$wwwroot = '';
@@ -108,7 +99,7 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
 		$wwwroot = $CFG->wwwroot;
 	} else {
 		$wwwroot = str_replace("http://", "https://", $CFG->wwwroot);
-	}?>        
+	}?>
     </div>
     </div>
 </header>
@@ -128,13 +119,13 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                     <li><?php echo $OUTPUT->user_menu()?></li>
                 </ul>
-                
+
                 <form id="search" action="<?php echo $CFG->wwwroot;?>/course/search.php" method="GET">
-                <div class="nav-divider-left"></div>							
+                <div class="nav-divider-left"></div>
 					<input id="coursesearchbox" type="text" onFocus="if(this.value =='<?php echo get_string('searchcourses'); ?>' ) this.value=''" onBlur="if(this.value=='') this.value='<?php echo get_string('searchcourses'); ?>'" value="<?php echo get_string('searchcourses'); ?>" name="search">
-					<input type="submit" value="">							
+					<input type="submit" value="">
 				</form>
-                
+
             </div>
         </div>
     </nav>
