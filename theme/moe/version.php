@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 
 $plugin->component = 'theme_moe'; // Full name of the plugin (used for diagnostics)
 $plugin->release   = '1.50';
-$plugin->version   = 2016052400; // The current module version (Date: YYYYMMDDXX)
+$plugin->version   = 2017020701; // The current module version (Date: YYYYMMDDXX)
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->requires  = 2013051401; // Requires this Moodle version
 $plugin->dependencies = array(

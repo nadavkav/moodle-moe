@@ -59,7 +59,22 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
     
+    //set time to start the countdown 
+    $name = 'theme_moe/countdowntimertime';
+    $title = get_string('countdowntimertime', 'theme_moe');
+    $description = get_string('countdowntimertimedesc', 'theme_moe');
+    $setting = new admin_setting_configtime('theme_moe/hourtostart', 'minuttostart', $title, $description, array('h' =>00, 'm'=>00));
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
     
+    
+    //set countdown duration    
+    $name = 'theme_moe/countdowntimerdoration';
+    $title = get_string('countdowntimerdoration', 'theme_moe');
+    $description = get_string('countdowntimerdorationdesc', 'theme_moe');
+    $setting = new admin_setting_configtime('theme_moe/hourstocountdown', 'minutestocountdown', $title, $description, array('h' =>00, 'm'=>00));
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
     
 	// Fixed or Variable Width.
     $name = 'theme_moe/pagewidth';

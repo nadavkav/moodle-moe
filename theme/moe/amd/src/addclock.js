@@ -15,60 +15,60 @@ define([ 'jquery'], function(){
         //this.publicThoughts = 'I like the colour orange';
  
     };
- 
-    AddClock.prototype.init = function(hours, minutes, seconds) {
-      	
-    	function countdown( elementName, minutes, seconds )
-    	{
-    	    var element, endTime, hours, mins, msLeft, time ;
-    		
-    	    function twoDigits( n )
-    	    {
-    	        return (n <= 9 ? "0" + n : n);
-    	    }
 
+    AddClock.prototype.init	= function(servertime, hourtostart, minuttostart, hourstocountdown, minutestocountdown){
+    
+    // All times in secunds.	
+    function setduration (){
+    	var counter = 0;
+    	time = new Date();
+	    var starttime = timetoseconds(hourtostart,minuttostart);
+	    var inteval = timetoseconds(hourstocountdown,minutestocountdown);
+	    var localservertime = timetoseconds(parseInt(servertime.substring(0,2)),parseInt(servertime.substring(3,5)))+(time.getUTCSeconds());
 
-    	    function updateTimer()
-    	    {
-    	        msLeft = endTime - (+new Date());
-    	        if ( msLeft < 1 ) {
-    	        countdown( "countdown",120, 0 );
-    			   
-    	        } else {
-    	            time = new Date( msLeft );
-    	            hours = time.getUTCHours();
-    	            mins = time.getUTCMinutes();
-    	            element.innerHTML =  twoDigits(hours) + ':' + twoDigits( mins ) +':' + twoDigits( time.getUTCSeconds() );
-    	            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-    	        }
-    	    }
-
-    	    element = document.getElementById( elementName );
-    	    endTime = (+new Date()) + 1000 * (60*minutes + seconds) + 500;
-          	updateTimer();
+    	
+    	for (var i = starttime; i<86400; i=i+inteval){
+    		if (localservertime < i){
+    			break;
     		}
+    		counter++;
+    	}
+    	
+    	return ((starttime + counter * inteval) - localservertime) ;
+    	
+    }	
+    
+    function timetoseconds (h,m){
+    	return parseInt (((h * (60 * 60)) + (m * 60)));
+    }
+    
+	function startTimer(duration, display) {
+    	    var timer = duration, hours,  minutes, seconds;
+    	    setInterval(function () {
+    	    	hours =  Math.floor(timer / 3600);
+    	        minutes = Math.floor((timer - (hours*3600)) / 60);
+    	        seconds = Math.floor(timer % 60);
+    	        
+    	        hours = hours < 10 ? "0" + hours : hours;
+    	        minutes = minutes < 10 ? "0" + minutes : minutes;
+    	        seconds = seconds < 10 ? "0" + seconds : seconds;
+    	        
+    	        display.text(hours + ":" + minutes + ":" + seconds);
+    	        display.innerHTML = (hours + ":" + minutes + ":" + seconds);
 
-    	var countminutes;
-	  	var countseconds;
-	  	if((seconds<1)&&(hours%2===0)&&(minutes===0))
-	  		{
-	  		countdown("countdown", 120, 0 );
-	  		}
-	  	else if(hours%2===0)
-	  	{ 
-	  		countminutes=60-minutes-1;
-	  		countminutes=countminutes+60;
-	  		countseconds=60-seconds;
-	  		countdown("countdown", countminutes,countseconds );
-	  	}	
-	  	else
-	    {
-	  		countminutes=60-minutes-1;
-	  		countseconds=60-seconds;
-	  		countdown("countdown", countminutes,countseconds );
-	    }
-	 
-    };
-       
+    	        if (--timer < 0) {
+    	        	duration = setduration(); 
+    	            timer = duration;
+    	        }
+    	    }, 1000);
+    	}
+
+    	jQuery(function ($) {
+    	    var duration = setduration();   	       	    
+    	    display = $('#countdown');
+    	    startTimer(duration, display);
+    	});
+    }
     return new AddClock();
-});
+    }); 	
+    	
