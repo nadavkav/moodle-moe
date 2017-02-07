@@ -66,8 +66,6 @@ define(['jquery'], function($){
 		} else {
 			$('.fa-caret-left').css('visibility', 'hidden');
 			$('.fa-caret-right').css('visibility', 'hidden');
-		//	$('.fa-caret-right').css('margin-right', '12px')
-
 		}
 	};
 	
