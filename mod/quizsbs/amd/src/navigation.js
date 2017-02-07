@@ -75,7 +75,10 @@ define(['jquery'], function($){
 				$('.fa-caret-right').css('margin-right', '-60px');
 				$('.fa-caret-left').css('visibility', 'visible');
 			} else {
-				$('.fa-caret-right').css('visibility', 'visible');
+				$('.fa-caret-right').css({
+					'visibility': 'visible',
+					'margin-right': '0px'
+				});
 				if($('.allbuttons').css('right').replace('px', '')  <= -this.scrollWidth + $('#scrollbar').width() * 23/24){
 					$('.fa-caret-left').css('visibility', 'hidden');
 				} else {
