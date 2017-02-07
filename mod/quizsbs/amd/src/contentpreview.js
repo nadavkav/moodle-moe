@@ -1,4 +1,4 @@
-define(['jquery', 'core/ajax'], function($, ajax){
+define(['jquery'], function($){
 	var ContentPreview = function() {};
 	
 	ContentPreview.prototype.init = function(cmid, url, additional, sess) {
@@ -7,8 +7,9 @@ define(['jquery', 'core/ajax'], function($, ajax){
 			$("#mform1").submit();
 		});
 		
-		if(cmid != null) {
-			var win = window.open(url + "/mod/quizsbs/startattempt.php?cmid=" + cmid + "&additional=" + additional + "&sesskey=" + sess, "_blank");
+		if(cmid !== null) {
+			var win = window.open(url + "/mod/quizsbs/startattempt.php?cmid=" 
+					+ cmid + "&additional=" + additional + "&sesskey=" + sess, "_blank");
 			win.focus();
 		}
 	};
