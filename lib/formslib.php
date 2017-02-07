@@ -1216,7 +1216,6 @@ abstract class moodleform {
             $buttonarray=array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', $submitlabel);
             $buttonarray[] = &$mform->createElement('cancel');
-            $buttonarray[] = &$mform->createElement('button', 'preview', get_string('saveandpreview', 'mod_quizsbs'));
             $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
             $mform->closeHeaderBefore('buttonar');
         } else {
