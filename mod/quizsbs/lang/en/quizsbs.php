@@ -971,3 +971,5 @@ $string['yourfinalgradeis'] = 'Your final grade for this quizsbs is {$a}.';
 
 $string['timelimitmin'] = 'Time limit (minutes)';
 $string['timelimitsec'] = 'Time limit (seconds)';
+$string['saveandpreview'] = 'Save and open preview';
+

@@ -39,6 +39,7 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
 // Get submitted parameters.
 $attemptid = required_param('attempt', PARAM_INT);
 $page = optional_param('page', 0, PARAM_INT);
+$additional = optional_param('additional', null, PARAM_INT);
 
 $attemptobj = quizsbs_attempt::create($attemptid);
 $page = $attemptobj->force_page_number_into_range($page);
@@ -46,6 +47,18 @@ $PAGE->set_url($attemptobj->attempt_url(null, $page));
 
 // Check login.
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
+
+//if there is additional content to be shown check that this user has editing perms
+$coursecontext = context_course::instance($COURSE->id);
+
+if($additional && has_capability('moodle/course:update', $coursecontext, $USER)) {
+    //get the student role and switch to it
+    $role = $DB->get_field("role", 'id', array("shortname" => "student"));
+    $modcontext = context_module::instance($attemptobj->get_cmid());
+    
+    role_switch($role, $modcontext);
+}
+
 
 // Check that this attempt belongs to this user.
 if ($attemptobj->get_userid() != $USER->id) {
@@ -126,3 +139,9 @@ if ($attemptobj->is_last_page($page)) {
 }
 
 echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id, $nextpage);
+
+if($additional && has_capability('moodle/course:update', $coursecontext, $USER)) {
+    $modcontext = context_module::instance($attemptobj->get_cmid());
+    
+    role_switch(0, $modcontext);
+}

@@ -100,9 +100,32 @@ class content_load extends \moodleform {
         $mform->setType('javascripteditor', PARAM_RAW);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'savenshow', '0', null);
+        $mform->setType('savenshow', PARAM_INT);
         $mform->addElement('hidden', 'createdate', 'createdate', null);
         $mform->setType('createdate', PARAM_INT);
         $this->add_action_buttons();
+        
+    }
+    
+    function add_action_buttons($cancel = true, $submitlabel=null){
+        if (is_null($submitlabel)){
+            $submitlabel = get_string('savechanges');
+        }
+        $mform =& $this->_form;
+        if ($cancel){
+            //when two elements we need a group
+            $buttonarray=array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', $submitlabel);
+            $buttonarray[] = &$mform->createElement('cancel');
+            $buttonarray[] = &$mform->createElement('button', 'preview', get_string('saveandpreview', 'mod_quizsbs'));
+            $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+            $mform->closeHeaderBefore('buttonar');
+        } else {
+            //no group needed
+            $mform->addElement('submit', 'submitbutton', $submitlabel);
+            $mform->closeHeaderBefore('submitbutton');
+        }
     }
 }
 

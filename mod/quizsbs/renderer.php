@@ -479,7 +479,9 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      * @param int $nextpage Next page number
      */
     public function attempt_form($attemptobj, $page, $slots, $id, $nextpage) {
-        global $DB;
+        $additional = optional_param('additional', null, PARAM_INT);
+        
+        global $DB, $USER, $COURSE;
 
         $output = '';
         $data = new stdClass();
@@ -494,10 +496,17 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
                 'slot' => $slot,
                 'quizsbsid' => $attemptobj->get_quizsbsid(),
             ));
-            $additionalcontent = new additional_content($DB->get_field('quizsbs_additional_content', 'id', array(
-                'quizsbsid' => $slot->quizsbsid,
-                'subjectid' => $page+1,
-            )));
+            $coursecontext = context_course::instance($COURSE->id);
+            if($additional && has_capability('moodle/course:update', $coursecontext, $USER)) {
+                $additionalcontent = new additional_content($DB->get_field('quizsbs_additional_content', 'id', array(
+                    'id' => $additional
+                )));
+            } else {
+                $additionalcontent = new additional_content($DB->get_field('quizsbs_additional_content', 'id', array(
+                    'quizsbsid' => $slot->quizsbsid,
+                    'subjectid' => $page+1,
+                )));
+            }
             $data->green = $additionalcontent->get_name();
             $subject = $DB->get_record('quizsbs_sections', array(
                 'firstslot' => $slot->slot,
