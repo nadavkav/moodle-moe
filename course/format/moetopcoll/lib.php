@@ -38,6 +38,69 @@ class format_moetopcoll extends format_base {
     private $settings;
 
     /**
+     * Deletes a section
+     *
+     * Do not call this function directly, instead call {@link course_delete_section()}
+     *
+     * @param int|stdClass|section_info $section
+     * @param bool $forcedeleteifnotempty if set to false section will not be deleted if it has modules in it.
+     * @return bool whether section was deleted
+     */
+    public function delete_section($section, $forcedeleteifnotempty = false) {
+        global $DB;
+        if (!$this->uses_sections()) {
+            // Not possible to delete section if sections are not used.
+            return false;
+        }
+        if (!is_object($section)) {
+            $section = $DB->get_record('course_sections', array('course' => $this->get_courseid(), 'section' => $section),
+                                            'id,section,sequence,summary');
+        }
+        if (!$section || !$section->section) {
+            // Not possible to delete 0-section.
+            return false;
+        }
+
+        if (!$forcedeleteifnotempty && (!empty($section->sequence) || !empty($section->summary))) {
+            return false;
+        }
+
+        $course = $this->get_course();
+
+        // Remove the marker if it points to this section.
+        if ($section->section == $course->marker) {
+            course_set_marker($course->id, 0);
+        }
+
+        $lastsection = $DB->get_field_sql('SELECT max(section) from {course_sections}
+                            WHERE course = ?', array($course->id));
+
+        // Find out if we need to descrease the 'numsections' property later.
+        $courseformathasnumsections = array_key_exists('numsections',
+                                        $this->get_format_options());
+        $decreasenumsections = $courseformathasnumsections && ($section->section <= $course->numsections);
+
+        // Move the section to the end.
+        move_section_to($course, $section->section, $lastsection, true);
+
+        // Delete all modules from the section.
+        foreach (preg_split('/,/', $section->sequence, -1, PREG_SPLIT_NO_EMPTY) as $cmid) {
+            course_delete_module($cmid);
+        }
+
+        // Delete section and it's format options.
+        $DB->delete_records('course_format_options', array('sectionid' => $section->id));
+        $DB->delete_records('course_sections', array('id' => $section->id));
+        rebuild_course_cache($course->id, true);
+
+        // Descrease 'numsections' if needed.
+        if ($decreasenumsections) {
+            $this->update_course_format_options(array('numsections' => $course->numsections - 1));
+        }
+
+        return true;
+    }
+    /**
      * Creates a new instance of class
      *
      * Please use {@link course_get_format($courseorid)} to get an instance of the format class
@@ -111,7 +174,7 @@ class format_moetopcoll extends format_base {
                                 'intro', 0, array('subdirs'=>true),
                                 $label );
                                 $data->introeditor = array('text'=>$currentintro, 'format'=>1, 'itemid'=>$draftid_editor);
-                        }             
+                        }
                         $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
                         if (file_exists($modmoodleform)) {
                             require_once($modmoodleform);
@@ -129,8 +192,8 @@ class format_moetopcoll extends format_base {
         if ($coursechanged) {
             rebuild_course_cache($courseorid, true);
         }
-        
-       
+
+
         return $coursechanged;
     }
     /**
@@ -1067,11 +1130,11 @@ class format_moetopcoll extends format_base {
             /* test if there is three lables in all section and add it if need */
             $renderer = $PAGE->get_renderer('format_moetopcoll');
             $modinfo = get_fast_modinfo($this->courseid);
+            $course = $this->get_course();
             $i=1;
-            if ($maxsection!=null && $oldcourse['format'] == 'moetopcoll'){
+            if (($maxsection!=null && $oldcourse['format'] == 'moetopcoll') || $maxsection == $numsections){
                 $i=$maxsection+1;
             }
-            $course = $DB->get_record('course', array('id' => $this->courseid));
             for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum++) {
                 $labels = array(
                     get_string('study', 'format_moetopcoll'),
