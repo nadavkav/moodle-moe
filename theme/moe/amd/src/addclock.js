@@ -1,7 +1,7 @@
  /**
   * @module format_lm/addtask
   */
-define([ 'jquery'], function(){
+define(['jquery'], function($){
  
     /**
      * @constructor
@@ -19,14 +19,20 @@ define([ 'jquery'], function(){
     AddClock.prototype.init	= function(servertime, hourtostart, minuttostart, hourstocountdown, minutestocountdown){
     
     // All times in secunds.	
-    function setduration (){
-    	var counter = 0;
-    	time = new Date();
-	    var starttime = timetoseconds(hourtostart,minuttostart);
+    function setduration(firsttimeflag){
+    	var counter = 0,localservertime;
+    	var time = new Date();
+	    
+    	var starttime = timetoseconds(hourtostart,minuttostart);
 	    var inteval = timetoseconds(hourstocountdown,minutestocountdown);
-	    var localservertime = timetoseconds(parseInt(servertime.substring(0,2)),parseInt(servertime.substring(3,5)))+(time.getUTCSeconds());
-
-    	
+	    
+	    if (!firsttimeflag){
+	    localservertime = timetoseconds(parseInt(servertime.substring(0,2)),parseInt(servertime.substring(3,5)))
+	    +(time.getUTCSeconds());
+	    } else {
+	    	localservertime = timetoseconds(time.getUTCHours(), time.getUTCMinutes()) + time.getUTCSeconds();
+	    } 
+	    
     	for (var i = starttime; i<86400; i=i+inteval){
     		if (localservertime < i){
     			break;
@@ -57,18 +63,18 @@ define([ 'jquery'], function(){
     	        display.innerHTML = (hours + ":" + minutes + ":" + seconds);
 
     	        if (--timer < 0) {
-    	        	duration = setduration(); 
+    	        	duration = setduration(true); 
     	            timer = duration;
     	        }
     	    }, 1000);
     	}
 
-    	jQuery(function ($) {
-    	    var duration = setduration();   	       	    
-    	    display = $('#countdown');
+    $(function () {
+    	    var duration = setduration(false);   	       	    
+    	    var display = $('#countdown');
     	    startTimer(duration, display);
     	});
-    }
+    };
     return new AddClock();
     }); 	
     	
