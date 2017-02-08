@@ -1,0 +1,14 @@
+{
+    "moodle-quizsbsaccess_offlinemode-download": {
+        "requires": [
+            "base",
+            "node",
+            "event",
+            "node-event-delegate",
+            "json",
+            "io-form",
+            "moodle-quizsbsaccess_offlinemode-jsencrypt",
+            "moodle-quizsbsaccess_offlinemode-sjcl"
+        ]
+    }
+}

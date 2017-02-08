@@ -1,0 +1,1364 @@
+/** Bits that can appear on any page. */
+.path-mod-quizsbs .statedetails {
+    display: block;
+    font-size: 0.7em;
+}
+
+#quizsbs-timer{
+	margin: auto;
+	padding: 1%;
+}
+
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns .mod_quizsbs-next-nav, #page-mod-quizsbs-review.dir-rtl .submitbtns .mod_quizsbs-next-nav {
+    margin-left: 9px;
+	
+}
+
+#page-mod-quizsbs-attempt #quizsbs .singlebutton{
+    margin:auto;
+}
+
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns, #page-mod-quizsbs-review.dir-rtl .submitbtns {
+	padding-top: 13px;
+}
+
+#page-mod-quizsbs-attempt  .singlebutton input[type="submit"]{
+    background: #faf7da ;
+	color:black !important;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	padding: 0px;	
+}
+
+
+#quizsbs #navigation .othernav {
+ 	margin-left:auto; 
+}
+
+.mod_quizsbs-prev-nav{
+	background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
+	background-color:#bfe3e2 !important;
+	background-position:5%;
+    padding: 12px 24px !important;	
+	color: #3e453e !important;
+}
+
+.mod_quizsbs-next-nav{
+	background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
+    background-color:#bfe3e2 !important;
+	background-position: center center; 
+	padding: 12px 24px !important;
+	color: #3e453e !important;
+	margin-right: 1.3em !important;	
+}
+
+/** Attempt and review pages **/
+#page-mod-quizsbs-attempt #page .controls,
+#page-mod-quizsbs-summary #page .controls,
+#page-mod-quizsbs-review #page .controls {
+    text-align: center;
+    margin: 8px auto;
+}
+
+#page-mod-quizsbs-attempt .submitbtns,
+#page-mod-quizsbs-review .submitbtns {
+    clear: left;
+    text-align: left;
+    padding-top: 1.5em;
+}
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns,
+#page-mod-quizsbs-review.dir-rtl .submitbtns {
+    text-align: right;
+	min-width: 325px;
+}
+
+#page-mod-quizsbs-attempt .submitbtns .mod_quizsbs-next-nav,
+#page-mod-quizsbs-review .submitbtns .mod_quizsbs-next-nav {
+    float: right;
+}
+#page-mod-quizsbs-attempt.dir-rtl .submitbtns .mod_quizsbs-next-nav,
+#page-mod-quizsbs-review.dir-rtl .submitbtns .mod_quizsbs-next-nav {
+    float: left;
+}
+
+.path-mod-quizsbs .mod_quizsbs-redo_question_button {
+    margin: 0;
+}
+.path-mod-quizsbs input[type="submit"].mod_quizsbs-redo_question_button {
+    padding: 2px 0.8em;
+    font-size: 1em;
+}
+
+#page-mod-quizsbs-attempt .mod_quizsbs-blocked_question_warning .que .formulation,
+#page-mod-quizsbs-review .mod_quizsbs-blocked_question_warning .que .formulation {
+    background: #eee;
+    border: 1px solid #dcdcdc;
+}
+
+body.jsenabled .questionflagcheckbox {
+    display: none;
+}
+
+#page-mod-quizsbs-attempt #connection-ok,
+#page-mod-quizsbs-attempt #connection-error {
+    position: fixed;
+    top: 0;
+    width: 80%;
+    left: 10%;
+    color: #555;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 5px 5px 20px 0 #666666;
+    padding: 1em 1em 0;
+    z-index: 10000;
+}
+
+#page-mod-quizsbs-attempt #connection-error {
+    background-color: #fcc;
+}
+#page-mod-quizsbs-attempt #connection-ok {
+    background-color: #cfb;
+    width: 60%;
+    left: 20%;
+}
+
+#page-mod-quizsbs-attempt #quizsbs header.row-fluid {
+	background-color: #f3e7d4;
+}
+/** Mod quizsbs attempt **/
+.generalbox#passwordbox {
+    /* Should probably match .generalbox#intro above */
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#passwordform {
+    margin: 1em 0;
+}
+
+/* Question navigation block. */
+#quizsbsnojswarning {
+    color: red;
+}
+#quizsbsnojswarning {
+    font-size: 0.7em;
+    line-height: 1.1;
+}
+.jsenabled #quizsbsnojswarning {
+    display: none;
+}
+
+.path-mod-quizsbs #user-picture {
+    margin: 0.5em 0;
+}
+.path-mod-quizsbs #user-picture img {
+    width: auto;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.path-mod-quizsbs #mod_quizsbs_navblock h3.mod_quizsbs-section-heading {
+    padding: 0.7em 0 0;
+    margin: 0;
+    clear: both;
+}
+.path-mod-quizsbs #mod_quizsbs_navblock h3.mod_quizsbs-section-heading:first-child {
+    padding-top: 0;
+}
+
+.path-mod-quizsbs .qnbutton {
+    display: block;
+    position: relative;
+    float: left;
+    width: 2em;
+	min-width: 2em;
+    height: 2em;
+    margin: 0.3em 0.3em 0.3em 0;
+    padding: 0;
+    border: 1px solid #8ebbb9;
+    background: #ddd;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+    font-weight: bold;
+    text-decoration: none;
+	border-radius: 100%;
+}
+.path-mod-quizsbs.dir-rtl  .qnbutton {
+    float: right;
+}
+.path-mod-quizsbs .qnbutton:visited:hover,
+.path-mod-quizsbs .qnbutton:link:hover {
+    text-decoration: underline;
+}
+
+.path-mod-quizsbs .qnbutton .trafficlight,
+.path-mod-quizsbs .qnbutton .thispageholder {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.path-mod-quizsbs .qnbutton.thispage .thispageholder {
+	border-radius: 100%;
+}
+
+.path-mod-quizsbs .qnbutton.flagged .trafficlight {
+    background: url([[pix:quizsbs|navflagged]]) no-repeat top right;
+}
+.path-mod-quizsbs .qnbutton.notyetanswered{
+	background-color: #e3f5f5;
+}
+.path-mod-quizsbs .qnbutton.thispage {
+    color: #d2d8d8;
+    background-color: #3d6362;
+}
+.path-mod-quizsbs .qnbutton.blocked,
+.path-mod-quizsbs .qnbutton.requiresgrading,
+.path-mod-quizsbs .qnbutton.invalidanswer {
+    background-color: white;
+}
+.path-mod-quizsbs .qnbutton.correct {
+    background-color: #cfc;
+}
+.path-mod-quizsbs .qnbutton.correct .trafficlight {
+    border-bottom: 3px solid #080;
+}
+.path-mod-quizsbs .qnbutton.partiallycorrect {
+    background-color: #ffa;
+}
+.path-mod-quizsbs .qnbutton.notanswered,
+.path-mod-quizsbs .qnbutton.incorrect {
+    background-color: #fcc;
+}
+.path-mod-quizsbs .qnbutton.blocked {
+    color: #999;
+}
+.path-mod-quizsbs .qnbutton.notanswered .trafficlight,
+.path-mod-quizsbs .qnbutton.incorrect .trafficlight {
+    border-top: 3px solid #800;
+}
+
+.path-mod-quizsbs .othernav {
+    
+}
+.path-mod-quizsbs .othernav a,
+.path-mod-quizsbs .othernav input {
+    display: block;
+    margin: 0.5em 0;
+}
+
+/* Countdown timer. */
+#quizsbs-timer {
+    display: none;
+    margin-top: 1em;
+}
+#quizsbs-time-left {
+    font-weight: bold;
+}
+#quizsbs-timer.timeleft15 {
+    background: #ffffff;
+}
+#quizsbs-timer.timeleft14 {
+    background: #ffeeee;
+}
+#quizsbs-timer.timeleft13 {
+    background: #ffdddd;
+}
+#quizsbs-timer.timeleft12 {
+    background: #ffcccc;
+}
+#quizsbs-timer.timeleft11 {
+    background: #ffbbbb;
+}
+#quizsbs-timer.timeleft10 {
+    background: #ffaaaa;
+}
+#quizsbs-timer.timeleft9 {
+    background: #ff9999;
+}
+#quizsbs-timer.timeleft8 {
+    background: #ff8888;
+}
+#quizsbs-timer.timeleft7 {
+    background: #ff7777;
+}
+#quizsbs-timer.timeleft6 {
+    background: #ff6666;
+}
+#quizsbs-timer.timeleft5 {
+    background: #ff5555;
+}
+#quizsbs-timer.timeleft4 {
+    background: #ff4444;
+}
+#quizsbs-timer.timeleft3 {
+    background: #ff3333;
+}
+#quizsbs-timer.timeleft2 {
+    background: #ff2222;
+}
+#quizsbs-timer.timeleft1 {
+    background: #ff1111;
+}
+#quizsbs-timer.timeleft0 {
+    background: #ff0000;
+}
+
+/** mod quizsbs mod **/
+#page-mod-quizsbs-mod #id_reviewoptionshdr .fitem {
+    width: 23%;
+    margin-left: 10px;
+}
+#page-mod-quizsbs-mod #id_reviewoptionshdr fieldset.fgroup {
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+}
+#page-mod-quizsbs-mod #id_reviewoptionshdr .fitem {
+    float: left;
+    width: 23%;
+    clear: none;
+}
+#page-mod-quizsbs-mod.dir-rtl #id_reviewoptionshdr .fitem {
+    float: right;
+}
+
+#page-mod-quizsbs-mod #id_reviewoptionshdr .fitemtitle {
+    width: 100%;
+    font-weight: bold;
+    text-align: left;
+    height: 2.5em;
+    margin-left: 0;
+}
+#page-mod-quizsbs-mod.dir-rtl #id_reviewoptionshdr .fitemtitle {
+    text-align: right;
+}
+
+#page-mod-quizsbs-mod #id_reviewoptionshdr fieldset.fgroup {
+    clear: left;
+    margin: 0 0 1em;
+}
+#page-mod-quizsbs-mod #id_reviewoptionshdr fieldset.fgroup > span {
+    float: left;
+    clear: left;
+    line-height: 1.7;
+}
+#page-mod-quizsbs-mod.dir-rtl #id_reviewoptionshdr fieldset.fgroup > span {
+    float: right;
+    clear: right;
+}
+#page-mod-quizsbs-mod #id_reviewoptionshdr fieldset.fgroup span label {
+    margin-left: 0.4em;
+}
+
+/** Mod quizsbs view **/
+#page-mod-quizsbs-view .quizsbsinfo,
+#page-mod-quizsbs-view #page .quizsbsgradefeedback,
+#page-mod-quizsbs-view #page .quizsbsattempt {
+    text-align: center;
+}
+#page-mod-quizsbs-view #page .quizsbsattemptsummary td p {
+    margin-top: 0;
+}
+#page-mod-quizsbs-view table.quizsbsattemptsummary tr.bestrow td {
+    border-color: #bce8f1;
+    background-color: #d9edf7;
+}
+table.quizsbsattemptsummary .noreviewmessage {
+    color: gray;
+}
+#page-mod-quizsbs-view .generaltable.quizsbsattemptsummary {
+    margin-left: auto;
+    margin-right: auto;
+}
+#page-mod-quizsbs-view .generalbox#feedback {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px;
+}
+#page-mod-quizsbs-view .generalbox#feedback h2 {
+    margin: 0;
+}
+#page-mod-quizsbs-view .generalbox#feedback h3 {
+    text-align: left;
+}
+#page-mod-quizsbs-view.dir-rtl .generalbox#feedback h3 {
+    text-align: center;
+}
+#page-mod-quizsbs-view .generalbox#feedback .overriddennotice {
+    text-align: center;
+    font-size: 0.7em;
+}
+.quizsbsstartbuttondiv.quizsbssecuremoderequired input {
+    display: none;
+}
+.jsenabled .quizsbsstartbuttondiv.quizsbssecuremoderequired input {
+    display: inline;
+}
+.quizsbsattempt #mod_quizsbs_preflight_form {
+    display: none;
+}
+
+#mod_quizsbs_preflight_form .femptylabel .fitemtitle {
+    display: none;
+}
+#mod_quizsbs_preflight_form .femptylabel .felement {
+    margin: 0;
+    padding: 0;
+}
+
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup {
+    width: 600px;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-wrap {
+    overflow: hidden;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-bd {
+    padding: 0;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-bd #mod_quizsbs_preflight_form legend {
+    padding: 0 10px;
+    margin: 0;
+    border: 0 none;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-bd #mod_quizsbs_preflight_form .fitem {
+    margin-left: 10px;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-bd #mod_quizsbs_preflight_form #fgroup_id_buttonar {
+    padding: 10px 0 0;
+    margin: 0;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_quizsbs_preflight_popup .moodle-dialogue-content .moodle-dialogue-ft {
+    margin: 0;
+}
+/* Standard Moodle rule that needs to be more specific here. */
+.moodle-dialogue-bd #mod_quizsbs_preflight_form fieldset.hidden {
+    display: inherit;
+    visibility: inherit;
+}
+
+body.path-mod-quizsbs .gradedattempt,
+body.path-mod-quizsbs table tbody tr.gradedattempt > td {
+    border-color: #bce8f1;
+    background-color: #d9edf7;
+}
+
+.quizsbsattemptcounts {
+    clear: left;
+    text-align: center;
+    display:inline;
+    margin-left:20%;
+}
+.dir-rtl .quizsbsattemptcounts {
+    margin-left:0;
+    margin-right: 20%;
+}
+#page-mod-quizsbs-view .quizsbsattemptcounts,
+.dir-rtl #page-mod-quizsbs-view .quizsbsattemptcounts {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/** Mod quizsbs summary **/
+#page-mod-quizsbs-summary #content {
+    text-align: center;
+}
+#page-mod-quizsbs-summary .questionflag {
+    vertical-align: text-bottom;
+}
+#page-mod-quizsbs-summary #quizsbs-timer {
+    text-align: center;
+    margin-top: 1em;
+}
+#page-mod-quizsbs-summary .submitbtns {
+    margin-top: 1.5em;
+}
+@media print {
+    .quizsbs-secure-window * {
+        display: none !important;
+    }
+}
+
+/** Mod quizsbs review **/
+table.quizsbsreviewsummary {
+    width: 100%;
+}
+table.quizsbsreviewsummary th.cell {
+    padding: 1px 0.5em 1px 1em;
+    font-weight: bold;
+    text-align: right;
+    width: 10em;
+    background: #f0f0f0;
+}
+table.quizsbsreviewsummary td.cell {
+    padding: 1px 1em 1px 0.5em;
+    text-align: left;
+    background: #fafafa;
+}
+.dir-rtl table.quizsbsreviewsummary td.cell {
+    text-align: right;
+}
+
+/** Mod quizsbs make comment or override grade popup. **/
+#page-mod-quizsbs-comment .mform {
+    width: 100%;
+}
+#page-mod-quizsbs-comment .mform fieldset {
+    margin: 0;
+}
+#page-mod-quizsbs-comment .que {
+    margin: 0;
+}
+
+/** Mod quizsbs report **/
+#page-mod-quizsbs-report h2.main {
+    clear: both;
+}
+#page-mod-quizsbs-report div#commands,
+#page-mod-quizsbs-report .controls {
+    text-align: center;
+}
+#page-mod-quizsbs-report .dubious {
+    background-color: #fcc;
+}
+#page-mod-quizsbs-report .highlight {
+    border: 1px solid #bce8f1;
+    background-color: #d9edf7;
+}
+#page-mod-quizsbs-report .negcovar {
+    border : medium solid pink;
+}
+#page-mod-quizsbs-report .toggleincludeauto {
+    text-align: center;
+}
+#page-mod-quizsbs-report .gradetheselink {
+    font-size: 0.8em;
+}
+#page-mod-quizsbs-report .mform fieldset.fgroup span label {
+    margin-right: 14px;
+}
+#page-mod-quizsbs-report table th {
+    white-space: normal;
+}
+#page-mod-quizsbs-report table#attempts td,
+#page-mod-quizsbs-report table.quizsbsresponseanalysis td {
+    word-wrap: break-word;
+    max-width: 20em;
+}
+#page-mod-quizsbs-report table.titlesleft td.c0 {
+    font-weight: bold;
+}
+#page-mod-quizsbs-report table .numcol {
+    text-align: center;
+    vertical-align : middle !important;
+}
+
+#page-mod-quizsbs-report table#attempts {
+    clear: both;
+    width: 80%;
+    margin: 0.2em auto;
+}
+#page-mod-quizsbs-report table#attempts .header,
+#page-mod-quizsbs-report table#attempts .cell {
+    padding: 4px;
+}
+#page-mod-quizsbs-report table#attempts .header .commands {
+    display: inline;
+}
+#page-mod-quizsbs-report table#attempts .picture {
+    width: 40px;
+}
+#page-mod-quizsbs-report table#attempts td {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-left-style: solid;
+    border-right-style: solid;
+    vertical-align: middle;
+}
+#page-mod-quizsbs-report table#attempts .header {
+    text-align: left;
+}
+#page-mod-quizsbs-report table#attempts .picture {
+    text-align: center !important;
+}
+#page-mod-quizsbs-report table#attempts.grades span.que,
+#page-mod-quizsbs-report table#attempts span.avgcell {
+    white-space: nowrap;
+}
+#page-mod-quizsbs-report table#attempts span.que .requiresgrading {
+    white-space: normal;
+}
+#page-mod-quizsbs-report table#attempts .questionflag {
+    vertical-align: text-bottom;
+    padding-left: 6px;
+}
+.dir-rtl#page-mod-quizsbs-report table#attempts .questionflag {
+    padding-right: 6px;
+    padding-left: 0;
+}
+
+#page-mod-quizsbs-report .graph.flexible-wrap {
+    text-align: center;
+    overflow: auto;
+}
+
+#page-mod-quizsbs-report #cachingnotice {
+    margin-bottom: 1em;
+    padding: 0.2em;
+}
+#page-mod-quizsbs-report #cachingnotice .singlebutton {
+    margin: 0.5em 0 0;
+}
+#page-mod-quizsbs-report .bold .reviewlink {
+    font-weight: normal;
+}
+
+#page-mod-quizsbs-report tr.lastrowforattempt {
+    border-bottom: lightgrey solid 0.2em;
+}
+
+/** Mod quizsbs edit **/
+#page-mod-quizsbs-edit .statusbar {
+    margin: 0.6em 0.4em;
+}
+#page-mod-quizsbs-edit .statusdisplay {
+    background-color: #ffc;
+    clear: both;
+    margin: 0.3em 0;
+    padding: 1px 10px;
+}
+#page-mod-quizsbs-edit .statusdisplay p {
+    margin: 4px 0;
+}
+#page-mod-quizsbs-edit .maxgrade,
+#page-mod-quizsbs-edit .totalpoints {
+    display: block;
+    float: right;
+    margin: -2.85em 0 0;
+    padding: .2em;
+}
+#page-mod-quizsbs-edit.dir-rtl .maxgrade,
+#page-mod-quizsbs-edit.dir-rtl .totalpoints {
+    float: left;
+}
+#page-mod-quizsbs-edit .maxgrade label {
+    display: inline;
+}
+
+#page-mod-quizsbs-edit li.activity > div,
+#page-mod-quizsbs-edit li.pagenumber {
+    position: relative;
+}
+
+#page-mod-quizsbs-edit ul.section li.pagenumber:first-child .add-menu-outer ul.menu li:first-child,
+#page-mod-quizsbs-edit .last-add-menu .add-menu-outer ul.menu li:first-child {
+    display: none;
+}
+
+#page-mod-quizsbs-edit .last-add-menu {
+    position: relative;
+    height: 1.5em;
+    margin: 0 20px;
+}
+#page-mod-quizsbs-edit .add-menu-outer {
+    position: absolute;
+    right: 0;
+}
+#page-mod-quizsbs-edit.dir-rtl .add-menu-outer {
+    right: auto;
+    left: 0;
+}
+
+#page-mod-quizsbs-edit .slotnumber {
+    background-color: #D3D3D3;
+    text-align: center;
+    margin: 0.1em 0.5em;
+    min-width: 2em;
+    display: inline-block;
+}
+
+#page-mod-quizsbs-edit .section-heading {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-bottom: 0;
+    height: 40px;
+}
+#page-mod-quizsbs-edit .section-heading .instancesectioncontainer {
+    display: inline;
+}
+#page-mod-quizsbs-edit .section-heading .instancesectioncontainer h3 {
+    display: inline;
+    color: #999;
+}
+#page-mod-quizsbs-edit .section-heading .editing_section,
+#page-mod-quizsbs-edit .section-heading .editing_delete {
+    margin-left: 10px;
+}
+#page-mod-quizsbs-edit .section-heading .sectioninstance {
+    position: relative;
+}
+#page-mod-quizsbs-edit .section-heading .instancesection {
+    white-space: nowrap;
+    max-width: 72%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+#page-mod-quizsbs-edit .section-heading form {
+    display: inline;
+    position: relative;
+    top: 3px;
+    left: -7px;
+}
+#page-mod-quizsbs-edit .section-heading form input {
+    font-size: 24px;
+    font-weight: bold;
+    width: 50%;
+}
+
+#page-mod-quizsbs-edit .section-heading .instanceshufflequestions {
+    float: right;
+    margin: 0.3em 20px 0 0;
+}
+
+#page-mod-quizsbs-edit ul.section {
+    margin: 0;
+    padding: 0 20px;
+}
+#page-mod-quizsbs-edit ul.slots {
+    margin: 0;
+}
+#page-mod-quizsbs-edit ul.slots li.section {
+    border: 0;
+}
+#page-mod-quizsbs-edit ul.slots li.section .content {
+    background-color:#FAFAFA;
+    padding: 1px 0;
+}
+#page-mod-quizsbs-edit ul.slots li.section {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity {
+    background: #E6E6E6;
+    margin: 3px 0;
+    padding: 0.2em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity.page {
+    background: transparent;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity.page h4 {
+    display: inline;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmarkcontainer {
+    background: white;
+    padding: 0.2em;
+    margin: 0.4em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmarkcontainer .editicon {
+    width: 13px;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmarkcontainer.infoitem {
+    background: transparent;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmarkcontainer form {
+    display: inline;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmarkcontainer form input {
+    margin: 0;
+    padding: 0.2em;
+    height: 1em;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark {
+    display: inline-block;
+    text-align: right;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .instancemaxmark {
+    text-align: left;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .page_split_join_wrapper {
+    position: absolute;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .page_split_join {
+    position: relative;
+    left: -20px;
+    top: -7px;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .page_split_join {
+    left: auto;
+    right: -20px;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_0 {
+    min-width: 1.3em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_1 {
+    min-width: 2em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_2 {
+    min-width: 2.6em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_3 {
+    min-width: 3.2em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_4 {
+    min-width: 3.7em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_5 {
+    min-width: 4.3em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_6 {
+    min-width: 4.8em;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_7 {
+    min-width: 5.45em;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .edit_icon,
+#page-mod-quizsbs-edit ul.slots li.section li.activity a.preview,
+#page-mod-quizsbs-edit ul.slots li.section li.activity .editing_delete,
+#page-mod-quizsbs-edit ul.slots li.section li.activity .editing_maxmark {
+    margin: 0 2px;
+}
+#page-mod-quizsbs-edit ul.slots li.section.only-has-one-slot li.activity .editing_move,
+#page-mod-quizsbs-edit ul.slots li.section.only-has-one-slot li.activity .editing_delete {
+    visibility: hidden;
+}
+#page-mod-quizsbs-edit ul.slots.only-one-section li.section.only-has-one-slot li.activity .editing_delete {
+    visibility: visible;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .question_dependency_wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper {
+    left: 0;
+    right: auto;
+}
+#page-mod-quizsbs-edit ul.slots li.section li.activity .question_dependency_wrapper.question_dependency_cannot_depend {
+    display: none;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .question_dependency_wrapper .currentlink,
+#page-mod-quizsbs-edit ul.slots li.section li.activity .question_dependency_wrapper .cm-edit-action {
+    position: relative;
+    left: 20px;
+    top: -1em;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper .currentlink,
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper .cm-edit-action {
+    right: 20px;
+    left: auto;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .activityinstance {
+    display: block;
+    min-height: 1.7em;
+    position: absolute;
+    top: 0;
+    left: 5em;
+    width: 100%;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .activityinstance {
+    left: auto;
+    right: 5em;
+}
+
+#page-mod-quizsbs-edit ul.slots li.section li.activity .mod-indent-outer {
+    padding-left: 22px;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots li.section li.activity .mod-indent-outer {
+    padding-left: 0;
+    padding-right: 22px;
+}
+
+#page-mod-quizsbs-edit ul.slots .activityinstance form {
+    display: inline;
+}
+#page-mod-quizsbs-edit span.editinstructions {
+    right: 0;
+}
+#page-mod-quizsbs-edit.dir-rtl span.editinstructions {
+    left: 0;
+    right: auto;
+}
+
+#page-mod-quizsbs-edit ul.slots .activityinstance span.instancename {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    width: 70%;
+    display: inline-block;
+    height: 20px;
+}
+
+#page-mod-quizsbs-edit ul.slots .activityinstance span.instancename img {
+    margin: 0 0.2em;
+}
+#page-mod-quizsbs-edit #categoryquestions .questionname,
+#page-mod-quizsbs-edit ul.slots li.activity div.activityinstance .questionname {
+  font-weight: bold;
+    color: #555;
+}
+#page-mod-quizsbs-edit ul.slots li.activity div.activityinstance .questiontext {
+    color: #555;
+}
+#page-mod-quizsbs-edit ul.slots li.activity div.activityinstance .mod_quizsbs_random_qbank_link {
+    font-size: 0.8em;
+}
+
+#page-mod-quizsbs-edit ul.slots .activityinstance img.activityicon {
+    float: left;
+    margin: .2em 0 0;
+    padding: 0;
+}
+#page-mod-quizsbs-edit.dir-rtl ul.slots .activityinstance img.activityicon {
+    float: right;
+}
+
+#page-mod-quizsbs-edit .section .activity .actions {
+    white-space: nowrap;
+    background: #e6e6e6;
+    padding: 0.1em 0;
+}
+
+#page-mod-quizsbs-edit .mod_quizsbs_edit_forms {
+    display: none;
+}
+
+#categoryquestions > tbody > tr:nth-of-type(even) {
+    background: #e4e4e4;
+}
+#categoryquestions > tbody > tr:nth-of-type(even).highlight {
+    background-color: #AAFFAA;
+}
+#categoryquestions .header {
+    text-align: center;
+    padding: 0 2px;
+    border: 0 none;
+}
+#categoryquestions th.modifiername .sorters,
+#categoryquestions th.creatorname .sorters {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+#categoryquestions td.modifiername,
+#categoryquestions td.creatorname {
+    line-height: 1em;
+}
+#categoryquestions td.modifiername span.date,
+#categoryquestions td.creatorname span.date {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+table#categoryquestions {
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+}
+#categoryquestions .iconcol {
+    width: 15px;
+    text-align: center;
+    padding: 0;
+}
+#categoryquestions .checkbox {
+    width: 19px;
+    text-align: center;
+    padding: 0;
+}
+#categoryquestions .qtype {
+    text-align: center;
+}
+#categoryquestions .qtype {
+    width: 28px;
+    padding: 0;
+}
+#categoryquestions .questiontext {
+    position: relative;
+    zoom: 1;
+    padding-left: 0.3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.dir-rtl #categoryquestions .questiontext {
+    padding-left: 0;
+    padding-right: 0.3em;
+}
+#categoryquestions .questionname {
+    white-space: nowrap;
+    overflow: hidden;
+    zoom: 1;
+    position: relative;
+}
+#categoryquestions .questiontext p {
+    margin: 0;
+}
+
+#page-mod-quizsbs-edit table#categoryquestions td,
+#page-mod-quizsbs-edit table#categoryquestions th {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.mod_quizsbs_qbank_dialogue {
+    width: 80%;
+    min-height: 200px;
+}
+.mod_quizsbs_qbank_dialogue.moodle-dialogue-fullscreen {
+    width: 100%;
+
+}
+.mod_quizsbs_qbank_dialogue .questionbankloading {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    text-align: center;
+    opacity: 0.5;
+    padding-top: 50px;
+}
+.mod_quizsbs_qbank_dialogue #advancedsearch label {
+    font-size: 100%;
+}
+
+.modulespecificbuttonscontainer {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+.quizsbsquestionlistcontrols {
+    text-align: center;
+}
+
+.categoryinfo {
+    padding: 0.3em;
+}
+
+.path-mod-quizsbs .gradingdetails {
+    font-size: small;
+}
+
+#page-mod-quizsbs-edit div#repaginatedialog .mform {
+    margin-left: auto;
+    margin-right: auto;
+}
+#page-mod-quizsbs-edit div.container div.generalbox {
+    position: relative;
+    display: block;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+#page-mod-quizsbs-edit .paging {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.1em 0.3em;
+    display: block;
+    background-color: #ddd;
+}
+
+#page-mod-quizsbs-edit #page-footer {
+    clear: both;
+    padding-top: 1em;
+}
+
+#page-mod-quizsbs-edit .categoryinfofield {
+    font-style: italic;
+}
+#page-mod-quizsbs-edit .categorynamefield {
+    font-weight: bold;
+}
+#page-mod-quizsbs-edit .questionsortoptions {
+    background-color: #ddd;
+}
+
+#page-mod-quizsbs-edit div.questionbank .categorysortopotionscontainer {
+    padding-top: 0.5em;
+    margin-top: 0.3em;
+}
+#page-mod-quizsbs-edit div.questionbank .categoryquestionscontainer,
+.questionbank .categorysortopotionscontainer,
+.questionbank .categorypagingbarcontainer,
+.questionbank .categoryselectallcontainer {
+    background-color: #FFF;
+}
+
+/* Base theme needs extra support. */
+#page-mod-quizsbs-edit ul.slots li.section ul.section {
+    list-style: none;
+}
+.path-mod-quizsbs #quizsbs_question{
+	float: right;
+	padding: 1em;
+}
+
+.path-mod-quizsbs #addtional_content{
+    float: right;
+}
+.dir-rtl #quizsbs .row-fluid [class*="span"]{
+	float:right;
+}
+#addtional_content , #subjectheader{
+	padding-right: 1em;
+	padding-left: 1em;
+}
+#addtional_content {
+	word-wrap: break-word;
+}
+#contentconnect #contentlist,
+#contentconnect #addtional_content,
+#questionconnect #question_preview,
+#questionconnect #questionlist,
+#contentslist #contents,
+#contentslist #addtional_content
+ {
+	float: right;
+}
+#questionlist,
+#subjectlist ul,
+#additionalcontentlist ul{
+	max-height: 15.5em;
+	overflow-y: auto; 
+}
+
+#questionlist li {
+	cursor: pointer;
+}
+#contentconnect #addtional_content,
+#question_preview,
+#contentslist #addtional_content {
+	width: 46%;
+}
+
+#contentslist{
+	min-height: 10em;
+}
+#quizsbs #navigation .othernav {
+	float: right;
+	margin-left: 3em
+}
+
+#id_csseditor, #id_javascripteditor {
+	direction: ltr;
+}
+
+#quizsbs {
+	background-color: #f9f1e4;
+}
+#questions {
+	display: flex;
+}
+#questions #quizsbs_question, 
+#questions #addtional_content{
+	flex: 1;
+}
+#questions #addtional_content {
+	padding: 1em;
+}
+#questions #addtional_content .wraper{
+    height: 100%;
+}
+#questionbox{
+	margin: 0px;
+	margin-top: 7px;
+	height: 31em;
+	overflow-y: auto;
+}
+.que, .que .content {
+	margin: 0px !important;
+}
+.que{
+	max-width: 100% !important;
+}
+.que .info{
+	display: none;
+}
+
+.que .content .formulation{
+	border: none;
+	margin: 0px;
+	border-top-color: #f9f1e4;
+    border-top-width: 7px;
+    border-top-style: solid;
+	
+}
+#quizsbs .que input.btn[type="submit"]{
+	border: 2px solid #9faeaa;
+	background-color: #e7f5f1;
+	color: #272525 !important;
+	border-radius: 0px;
+}
+#navigation{
+	display: flex;
+}
+#subjectheader,
+#questionbox,
+#quizsbs .que .formulation,
+#questions #addtional_content .wraper {
+	background-color: #ffffff;
+}
+#subjectlist i,
+#additionalcontentlist i{
+	color: #999999;
+}
+#subjectlist,
+#questionlist {
+	float: right;
+}
+#quizsbs #navigation  .qn_buttons  {
+    max-height: 36px;
+    overflow: hidden;
+    margin-top: 1em;
+	position: relative;
+	margin-right: 35px;
+}
+
+.allbuttons {
+    position: absolute;
+	width: 1000px;
+	height: 36px;
+}
+#scrollbar {
+	overflow: hidden;
+	position: relative;
+	height: 36px; 
+}
+#questions #quizsbs_question{
+	margin-right: 1.8em;
+}
+#questions #quizsbs_question #questionbox,
+#addtional_content .wraper {
+/* 	padding: 1em; */
+}
+#questions #additional_content {
+	margin-left: 1.8em;
+}
+.clockimage {
+	margin: 0 1em;
+}
+.qn_buttons .fa{
+	font-size: 3em;
+	cursor: pointer;
+}
+.qn_buttons .fa-caret-right{
+	float: right;
+}
+.qn_buttons .fa-caret-left{
+    float: left;
+}
+#navigation .submitbtns {
+	margin-left: 0.4em;
+}
+#navigation .submitbtns input[type="submit"] {
+    color: #3e453e !important;
+	background-size: auto 40% !important;
+}
+
+#navigation .submitbtns input[name="previous"] {
+    background-position-x: 95% !important;
+    padding-right: 29px !important;
+	float: left;
+}
+
+#navigation .submitbtns input[name="next"] {
+    background-position-x: 5% !important;
+    padding-left: 29px !important;
+}
+
+
+#page-mod-quizsbs-editcontent #region-main ul{
+    list-style-type: none;
+}
+/** Print formatting for attempt and review pages **/
+
+#page-mod-quizsbs-summary div#mod_quizsbs_navblock {
+    display: none;
+}
+
+@media print {
+
+    #page-mod-quizsbs-attempt header.navbar,
+    #page-mod-quizsbs-review header.navbar {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt #dock,
+    #page-mod-quizsbs-review #dock {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt #page #page-header h1,
+    #page-mod-quizsbs-review #page #page-header h1 {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt #region-main,
+    #page-mod-quizsbs-review #region-main {
+        width: 100%;
+    }
+
+    #page-mod-quizsbs-attempt #block-region-side-pre,
+    #page-mod-quizsbs-attempt #block-region-side-post,
+    #page-mod-quizsbs-review #block-region-side-pre,
+    #page-mod-quizsbs-review #block-region-side-post {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt #page-footer,
+    #page-mod-quizsbs-review #page-footer {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt .editquestion,
+    #page-mod-quizsbs-review .editquestion,
+    #page-mod-quizsbs-attempt .questionflag,
+    #page-mod-quizsbs-review .questionflag {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt .submitbtns,
+    #page-mod-quizsbs-review .submitbtns {
+        display: none;
+    }
+
+    #page-mod-quizsbs-review .que .commentlink {
+        display: none;
+    }
+
+    #page-mod-quizsbs-attempt .que,
+    #page-mod-quizsbs-review .que {
+        page-break-inside: avoid;
+    }
+}
+/* Ajustments for mobile devices */
+@media only screen and (max-width:565px) {
+    #page-mod-quizsbs-edit .rpcontainerclass {
+        margin-top: 3em;
+    }
+    #page-mod-quizsbs-edit .maxgrade {
+        margin-top: 0.1em;
+    }
+    #page-mod-quizsbs-edit .statusbar {
+        padding: 0;
+    }
+}

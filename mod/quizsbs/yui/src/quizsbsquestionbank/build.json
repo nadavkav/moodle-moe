@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_quizsbs-quizsbsquestionbank",
+    "builds": {
+        "moodle-mod_quizsbs-quizsbsquestionbank": {
+            "jsfiles": [
+                "quizsbsquestionbank.js"
+            ]
+        }
+    }
+}

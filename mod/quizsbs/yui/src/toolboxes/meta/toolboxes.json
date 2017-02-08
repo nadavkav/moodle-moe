@@ -1,0 +1,14 @@
+{
+    "moodle-mod_quizsbs-toolboxes": {
+        "requires": [
+            "base",
+            "node",
+            "event",
+            "event-key",
+            "io",
+            "moodle-mod_quizsbs-quizsbsbase",
+            "moodle-mod_quizsbs-util-slot",
+            "moodle-core-notification-ajaxexception"
+        ]
+    }
+}
