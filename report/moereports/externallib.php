@@ -214,7 +214,6 @@ class report_moereports_external extends external_api {
         return new external_multiple_structure(
             new external_single_structure(array (
                 new external_value(PARAM_NUMBER, 'School\'s ID'),
-                new external_value(PARAM_NUMBER, 'School\'s ID'),
                 new external_value(PARAM_NUMBER, 'School\'s symbol'),
                 new external_value(PARAM_TEXT, 'School\'s region'),
                 new external_value(PARAM_TEXT, 'School\'s name'),
