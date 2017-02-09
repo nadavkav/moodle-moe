@@ -30,7 +30,7 @@ require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->dirroot . '/mod/quizsbs/locallib.php');
 require_once($CFG->dirroot . '/mod/quizsbs/report/reportlib.php');
 
-class testable_all_calculated_for_qubaid_condition extends \core_question\statistics\questions\all_calculated_for_qubaid_condition {
+class testable_quizsbs_all_calculated_for_qubaid_condition extends \core_question\statistics\questions\all_calculated_for_qubaid_condition {
 
     /**
      * Disabling caching in tests so we are always sure to force the calculation of stats right then and there.
@@ -48,14 +48,14 @@ class testable_all_calculated_for_qubaid_condition extends \core_question\statis
  * @copyright 2010 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class testable_question_statistics extends \core_question\statistics\questions\calculator {
+class testable_quizsbs_question_statistics extends \core_question\statistics\questions\calculator {
 
     /**
      * @var object[]
      */
     protected $lateststeps;
 
-    protected $statscollectionclassname = 'testable_all_calculated_for_qubaid_condition';
+    protected $statscollectionclassname = 'testable_quizsbs_all_calculated_for_qubaid_condition';
 
     public function set_step_data($states) {
         $this->lateststeps = $states;
@@ -100,7 +100,7 @@ class testable_question_statistics extends \core_question\statistics\questions\c
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class quizsbs_statistics_question_stats_testcase extends basic_testcase {
-    /** @var testable_all_calculated_for_qubaid_condition object created to test class. */
+    /** @var testable_quizsbs_all_calculated_for_qubaid_condition object created to test class. */
     protected $qstats;
 
     public function test_qstats() {
