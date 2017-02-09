@@ -81,16 +81,7 @@ class content_load extends \moodleform {
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
         $mform->setDefault('contenttype', 0);
 
-        $mform->addElement('editor', 'htmleditor', get_string('editor', 'quizsbs'),null , array(
-            'subdirs' => true,
-            'maxbytes' => 0,
-            'maxfiles' => 99,
-            'changeformat' => 0,
-            'context' => null,
-            'noclean' => 0,
-            'trusttext' => 0,
-            'enable_filemanagement' => true
-        ));
+        $mform->addElement('editor', 'html_editor', get_string('editor', 'quizsbs'),null , $this->_customdata['htmleditoroption']);
         $mform->setType('htmleditor', PARAM_RAW);
         $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->setType('csseditor', PARAM_RAW);
@@ -105,9 +96,9 @@ class content_load extends \moodleform {
         $mform->addElement('hidden', 'createdate', 'createdate', null);
         $mform->setType('createdate', PARAM_INT);
         $this->add_action_buttons();
-        
+
     }
-    
+
     function add_action_buttons($cancel = true, $submitlabel=null){
         if (is_null($submitlabel)){
             $submitlabel = get_string('savechanges');

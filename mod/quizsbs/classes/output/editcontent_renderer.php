@@ -58,13 +58,11 @@ class editcontent_renderer extends \plugin_renderer_base {
      * @return string
      */
 
-    public function content_load_form($pageurl, $structure, additional_content $additaional) {
+    public function content_load_form($pageurl, structure $structure, additional_content $additaional) {
         global $DB, $CFG, $USER;
 
-        $contentloadform = new content_load($pageurl, array(
-            'structure' => $structure,
-            'additional' => $additaional,
-        ));
+
+        $context = \context_module::instance($structure->get_cmid());
         $questioncontenthtml = new question_content();
         $questioncontentcss = new question_content();
         $questioncontentjavascript = new question_content();
@@ -80,7 +78,19 @@ class editcontent_renderer extends \plugin_renderer_base {
             foreach ($questioncontents as $questioncontent) {
                 switch ($questioncontent->type) {
                     case question_content::HTML_CONTENT:
-                        $additaionalcontent->htmleditor['text'] = $questioncontent->content;
+                        $additaionalcontent->html = $questioncontent->content;
+                        $additaionalcontent->htmlformat = FORMAT_HTML;
+                        $htmleditoroption = array(
+                            'subdirs' => file_area_contains_subdirs($context, 'mod_quizsbs', 'content', $questioncontent->id),
+                            'maxbytes' => 0,
+                            'maxfiles' => 99,
+                            'changeformat' => 0,
+                            'context' => $context,
+                            'noclean' => 0,
+                            'trusttext' => 0,
+                            'enable_filemanagement' => true
+                        );
+                        $additaionalcontent = file_prepare_standard_editor($additaionalcontent, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontent->id);
                         $questioncontenthtml->set_id($questioncontent->id);
                         break;
                     case question_content::CSS_CONTENT:
@@ -94,6 +104,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                     break;
                 }
             }
+            $contentloadform = new content_load($pageurl, array(
+                'structure' => $structure,
+                'additional' => $additaional,
+                'htmleditoroption' => $htmleditoroption,
+            ));
             $contentloadform->set_data($additaionalcontent);
         }
         if ($contentdata = $contentloadform->get_data()) {
@@ -134,16 +149,17 @@ class editcontent_renderer extends \plugin_renderer_base {
                         )));
                         $questioncontenthtml->load_from_db();
                         $questioncontenthtml->set_type(question_content::HTML_CONTENT);
-                        $questioncontenthtml->set_content($contentdata->htmleditor['text']);
+                        $contentdata = file_postupdate_standard_editor($contentdata, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontenthtml->get_id());
+                        $questioncontenthtml->set_content($contentdata->html);
                         $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontenthtml->add_entry();
                         break;
                 }
-            }              
+            }
             if($contentdata->savenshow == 0) {
                  redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
                         'cmid' => $pageurl->get_param('cmid'),
-                        )), get_string('subjectsuccessfulsave', 'quizsbs'), 
+                        )), get_string('subjectsuccessfulsave', 'quizsbs'),
                         null, \core\output\notification::NOTIFY_SUCCESS);
             } else {
                 $modid = $DB->get_field('modules', 'id', array("name" => "quizsbs"));

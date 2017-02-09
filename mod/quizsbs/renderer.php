@@ -480,7 +480,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      */
     public function attempt_form($attemptobj, $page, $slots, $id, $nextpage) {
         $additional = optional_param('additional', null, PARAM_INT);
-        
+
         global $DB, $USER, $COURSE;
 
         $output = '';
@@ -526,7 +526,9 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
                         $data->content['css'] = $content->get_content();
                         break;
                     default:
-                        $data->content['html'] = $content->get_content();
+                        $context = context_module::instance($attemptobj->get_cmid());
+                        $data->content['html'] = file_rewrite_pluginfile_urls($content->get_content(),'pluginfile.php',
+                                                        $context->id, 'mod_quizsbs', 'content', $content->get_id());
                         break;
                 }
             }

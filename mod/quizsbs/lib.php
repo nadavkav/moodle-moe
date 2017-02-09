@@ -1762,13 +1762,13 @@ function quizsbs_pluginfile($course, $cm, $context, $filearea, $args, $forcedown
     }
 
     // The 'intro' area is served by pluginfile.php.
-    $fileareas = array('feedback');
+    $fileareas = array('feedback', 'content');
     if (!in_array($filearea, $fileareas)) {
         return false;
     }
 
     $feedbackid = (int)array_shift($args);
-    if (!$feedback = $DB->get_record('quizsbs_feedback', array('id'=>$feedbackid))) {
+    if (!$feedback = $DB->get_record('quizsbs_feedback', array('id'=>$feedbackid)) ||$filearea == 'content') {
         return false;
     }
 
