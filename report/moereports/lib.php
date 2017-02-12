@@ -37,11 +37,11 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         return;
     }
 
-    if (!$USER->profile['IsStudent']) {
+    if (!isset($USER->profile['IsStudent']) || $USER->profile['IsStudent'] == 'No') {
         $schoollevelaccess = $DB->get_field('config', 'value', array('name' => 'schools_level_access'));
         $reginlevelaccess = $DB->get_field('config', 'value', array('name' => 'regin_level_access'));
 
-        if (strpos($schoollevelaccess, $USER->profile['COMPLEXORGROLES']) !== false ||  is_siteadmin()) {
+        if ((isset($USER->profile['COMPLEXORGROLES']) && strpos($schoollevelaccess, $USER->profile['COMPLEXORGROLES']) !== false) ||  is_siteadmin()) {
             $node = new core_user\output\myprofile\node('reports', 'per_activity_school_level', get_string('per_activity_school_level', 'report_moereports'),
                 null, new moodle_url('/report/moereports/activity_scoole_level.php'));
             $tree->add_node($node);
@@ -49,7 +49,7 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
                 null, new moodle_url('/report/moereports/course_scoole_level.php'));
             $tree->add_node($node);
         }
-        if (strpos($reginlevelaccess, $USER->profile['COMPLEXORGROLES']) !== false || is_siteadmin()) {
+        if ((isset($USER->profile['COMPLEXORGROLES']) && strpos($reginlevelaccess, $USER->profile['COMPLEXORGROLES']) !== false )|| is_siteadmin()) {
                $node = new core_user\output\myprofile\node('reports', 'per_activity_regin_level', get_string('per_activity_regin_level', 'report_moereports'),
                    null, new moodle_url('/report/moereports/activity_regin_level.php'));
                $tree->add_node($node);

@@ -47,7 +47,7 @@ class peractivityschoollevel extends moereport{
     public function runreport() {
         global $DB;
 
-        $results;
+        $results = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         foreach ($courses as $course) {
             $completion = new completion_info($course);

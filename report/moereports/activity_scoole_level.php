@@ -19,6 +19,8 @@ require_once('../../report/moereports/classes/local/peractivityschoollevel.php')
 require_once($CFG->libdir.'/completionlib.php');
 require_once($CFG->libdir.'/modinfolib.php');
 
+global $OUTPUT;
+
 $url = new moodle_url('/report/moereports/activity_scoole_level.php');
 $PAGE->set_url($url);
 
@@ -33,11 +35,6 @@ require_capability('moodle/site:config', $context);
 $PAGE->set_title(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
-
-
-
-
-global $DB, $PAGE, $OUTPUT;
 
 $results = new peractivityschoollevel();
 $data = new stdClass();
