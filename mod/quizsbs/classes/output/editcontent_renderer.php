@@ -71,6 +71,16 @@ class editcontent_renderer extends \plugin_renderer_base {
         $additaionalcontent->additionalcontentname = $additaional->get_name();
         $additaionalcontent->contenttype = $additaional->get_type();
         $additaionalcontent->createdate = $additaional->get_createdate();
+        $htmleditoroption = array(
+            'subdirs' => file_area_contains_subdirs($context, 'mod_quizsbs', 'content', null),
+            'maxbytes' => 0,
+            'maxfiles' => 99,
+            'changeformat' => 0,
+            'context' => $context,
+            'noclean' => 0,
+            'trusttext' => 0,
+            'enable_filemanagement' => true
+        );
         if (! is_null($additaional->get_id())) {
             $questioncontents = $DB->get_records('quizsbs_question_content', array(
                 'additionalcontentid' => $additaional->get_id()
@@ -80,16 +90,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                     case question_content::HTML_CONTENT:
                         $additaionalcontent->html = $questioncontent->content;
                         $additaionalcontent->htmlformat = FORMAT_HTML;
-                        $htmleditoroption = array(
-                            'subdirs' => file_area_contains_subdirs($context, 'mod_quizsbs', 'content', $questioncontent->id),
-                            'maxbytes' => 0,
-                            'maxfiles' => 99,
-                            'changeformat' => 0,
-                            'context' => $context,
-                            'noclean' => 0,
-                            'trusttext' => 0,
-                            'enable_filemanagement' => true
-                        );
+                        $htmleditoroption['subdirs'] = file_area_contains_subdirs($context, 'mod_quizsbs', 'content', $questioncontent->id);
                         $additaionalcontent = file_prepare_standard_editor($additaionalcontent, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontent->id);
                         $questioncontenthtml->set_id($questioncontent->id);
                         break;
@@ -110,6 +111,13 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'htmleditoroption' => $htmleditoroption,
             ));
             $contentloadform->set_data($additaionalcontent);
+        }
+        if(!isset($contentloadform) || !($contentloadform instanceof content_load)) {
+            $contentloadform = new content_load($pageurl, array(
+                'structure' => $structure,
+                'additional' => $additaional,
+                'htmleditoroption' => $htmleditoroption,
+            ));
         }
         if ($contentdata = $contentloadform->get_data()) {
             $additionalcontent = new additional_content($contentdata->id);
