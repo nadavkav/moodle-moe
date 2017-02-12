@@ -39,19 +39,17 @@ class peractivityschoollevel extends moereport{
         global $DB, $USER;
         $results = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        $semels = $DB->get_records('moereports_reports',array(),'','symbol');
-        
-        foreach ($semels as $semelkey => $semelvalue){
-            foreach ($courses as $course){
-                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1',array($course->id));
-                foreach ( $allactivity as $acti){                    
+        $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
+        foreach ($semels as $semelkey => $semelvalue) {
+            foreach ($courses as $course) {
+                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
+                foreach ($allactivity as $acti) {
                     for ($i = 9; $i < 13; $i++) {
-                        $results[$semelkey][$course->id][$acti->id][$i]=0;
+                        $results[$semelkey][$course->id][$acti->id][$i] = 0;
                     }
                 }
             }
         }
-        
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
@@ -61,10 +59,10 @@ class peractivityschoollevel extends moereport{
                 $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
-                    $cors = $course->id;                 
-                    if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin()){
+                    $cors = $course->id;
+                    if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin()) {
                              $results[$semel][$cors][$activity][$makbila]++;
-                        }
+                    }
                 }
             }
         }

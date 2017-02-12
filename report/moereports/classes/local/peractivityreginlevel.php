@@ -37,20 +37,20 @@ class peractivityreginlevel extends moeReport{
     public function runreport() {
         global $DB;
         $results = array();
-        $courses = $DB->get_records('course', array('enablecompletion' => '1'));        
+        $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-        
-        foreach ($regions as $region){
-            foreach ($courses as $course){
-                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1',array($course->id));
-                foreach ( $allactivity as $acti){
+
+        foreach ($regions as $region) {
+            foreach ($courses as $course) {
+                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
+                foreach ($allactivity as $acti) {
                     for ($i = 9; $i < 13; $i++) {
-                        $results[$region->region][$course->id][$acti->id][$i]=0;
+                        $results[$region->region][$course->id][$acti->id][$i] = 0;
                     }
                 }
             }
         }
-        
+
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();

@@ -36,12 +36,11 @@ class percoursereginlevel extends moereport{
         $results;
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-        
-        
-        foreach ($regions as $region){
-            foreach ($courses as $course){
+
+        foreach ($regions as $region) {
+            foreach ($courses as $course) {
                 for ($i = 9; $i < 13; $i++) {
-                    $results[$region->region][$course->id][$i]=0;
+                    $results[$region->region][$course->id][$i] = 0;
                 }
             }
         }
