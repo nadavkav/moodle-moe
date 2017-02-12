@@ -37,7 +37,7 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         return;
     }
 
-    if (!isset($USER->profile['IsStudent']) || $USER->profile['IsStudent'] == 'No') {
+    if ($USER->profile['IsStudent'] == 'No' || is_siteadmin()) {
         $schoollevelaccess = $DB->get_field('config', 'value', array('name' => 'schools_level_access'));
         $reginlevelaccess = $DB->get_field('config', 'value', array('name' => 'regin_level_access'));
 

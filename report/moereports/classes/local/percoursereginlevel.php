@@ -29,22 +29,22 @@ class percoursereginlevel extends moereport{
     public $twelfthgradesum;
     public $twelfthgradetotal;
 
-    public function __construct() {
-        $this->ninthgradesum = 0;
-        $this->ninthgradetotal = "0%";
-        $this->tenthgradesum = 0;
-        $this->tenthgradetotal = "0%";
-        $this->eleventhgradesum = 0;
-        $this->eleventhgradetotal = "0%";
-        $this->twelfthgradesum = 0;
-        $this->twelfthgradetotal = "0%";
-    }
 
     public function runreport() {
         global $DB;
 
         $results;
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
+        $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+        
+        
+        foreach ($regions as $region){
+            foreach ($courses as $course){
+                for ($i = 9; $i < 13; $i++) {
+                    $results[$region->region][$course->id][$i]=0;
+                }
+            }
+        }
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
@@ -86,7 +86,7 @@ class percoursereginlevel extends moereport{
                             break;
                         case 10:
                             $onerecord->tenthgradesum = $gradevalue;
-                            $onerecord->tenthgradesum = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                            $onerecord->tenthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
                                                             from {moereports_reports_classes} where class = ? AND symbol
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey)) * 100)."%";

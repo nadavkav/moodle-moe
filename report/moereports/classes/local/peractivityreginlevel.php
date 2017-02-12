@@ -32,22 +32,25 @@ class peractivityreginlevel extends moeReport{
     public $twelfthgradesum;
     public $twelfthgradetotal;
 
-    public function __construct() {
-        $this->ninthgradesum = 0;
-        $this->ninthgradetotal = "0%";
-        $this->tenthgradesum = 0;
-        $this->tenthgradetotal = "0%";
-        $this->eleventhgradesum = 0;
-        $this->eleventhgradetotal = "0%";
-        $this->twelfthgradesum = 0;
-        $this->twelfthgradetotal = "0%";
-    }
+
 
     public function runreport() {
         global $DB;
-
-        $results;
-        $courses = $DB->get_records('course', array('enablecompletion' => '1'));
+        $results = array();
+        $courses = $DB->get_records('course', array('enablecompletion' => '1'));        
+        $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+        
+        foreach ($regions as $region){
+            foreach ($courses as $course){
+                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1',array($course->id));
+                foreach ( $allactivity as $acti){
+                    for ($i = 9; $i < 13; $i++) {
+                        $results[$region->region][$course->id][$acti->id][$i]=0;
+                    }
+                }
+            }
+        }
+        
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
@@ -59,11 +62,7 @@ class peractivityreginlevel extends moeReport{
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
-                    if (!isset($results[$regin][$cors][$activity][$makbila])) {
-                        $results[$regin][$cors][$activity][$makbila] = 1;
-                    } else {
                         $results[$regin][$cors][$activity][$makbila]++;
-                    }
                 }
             }
         }
@@ -102,7 +101,7 @@ class peractivityreginlevel extends moeReport{
                                 break;
                             case 10:
                                 $onerecord->tenthgradesum = $gradevalue;
-                                $onerecord->tenthgradesum = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
+                                $onerecord->tenthgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
                                                                 from {moereports_reports_classes} where class = ? AND symbol
                                                                 in (select symbol from mdl_moereports_reports where region = ?)",
                                                                 array($gradekey, $reginkey)) * 100) . "%";
