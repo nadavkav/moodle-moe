@@ -1295,7 +1295,7 @@ table#categoryquestions {
     display: none;
 }
 
-#app {
+#app, #frame iframe {
 	width: 100%;
 	height: 100%;
 }

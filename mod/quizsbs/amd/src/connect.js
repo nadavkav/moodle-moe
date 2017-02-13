@@ -40,6 +40,12 @@ define(['jquery', 'core/ajax'], function($, ajax){
 						case 0:
 							$('#htmlcontent').html(response[index].content);
 							break;
+						case 1:
+							$('#frame').html('<iframe src="' + response[index].content + '"></iframe>');
+							$('#htmlcontent').html('');
+							$('#csscontent').html('');
+							$('#javascriptcontent').html('');
+							return;
 						case 3:
 							$('#csscontent').html("<style>" + response[index].content + "</style>");
 							break;

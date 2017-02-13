@@ -66,6 +66,7 @@ class editcontent_renderer extends \plugin_renderer_base {
         $questioncontenthtml = new question_content();
         $questioncontentcss = new question_content();
         $questioncontentjavascript = new question_content();
+        $questioncontentapp = new question_content();
         $additaionalcontent = new \stdClass();
         $additaionalcontent->id = $additaional->get_id();
         $additaionalcontent->additionalcontentname = $additaional->get_name();
@@ -92,9 +93,6 @@ class editcontent_renderer extends \plugin_renderer_base {
             $questioncontents = $DB->get_records('quizsbs_question_content', array(
                 'additionalcontentid' => $additaional->get_id()
             ));
-            $draftitemid = file_get_submitted_draft_itemid('app');
-            file_prepare_draft_area($draftitemid, $context->id, 'mod_quizsbs', 'app', $additaional->get_id(), $appoption);
-            $additaionalcontent->app = $draftitemid;
             foreach ($questioncontents as $questioncontent) {
                 switch ($questioncontent->type) {
                     case question_content::HTML_CONTENT:
@@ -108,6 +106,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $additaionalcontent->csseditor = $questioncontent->content;
                         $questioncontentcss->set_id($questioncontent->id);
                         break;
+                    case question_content::APP_CONTENT:
+                        $draftitemid = file_get_submitted_draft_itemid('app');
+                        file_prepare_draft_area($draftitemid, $context->id, 'mod_quizsbs', 'app', $additaional->get_id(), $appoption);
+                        $questioncontentapp->set_id($questioncontent->id);
+                        $additaionalcontent->app = $draftitemid;
                     case question_content::JAVASCRIPT_CONTENT:
                     default:
                         $additaionalcontent->javascripteditor = $questioncontent->content;
@@ -141,9 +144,23 @@ class editcontent_renderer extends \plugin_renderer_base {
             $additionalcontent->set_quizsbsid($structure->get_quizsbsid());
             $additionalcontent->add_entry();
             file_save_draft_area_files($contentdata->app, $context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(), $appoption);
+            $fs = get_file_storage();
+            $files = $fs->get_area_files($context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(),
+                'sortorder DESC, id ASC', false);
+            $file = reset($files);
+            unset($files);
+            $filename = $file->get_filename();
+            $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
+                $file->get_itemid() . $file->get_filepath() . $filename);
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
                     case 2:
+                        if (!empty($file)){
+                            $questioncontentapp->set_content($url->out_as_local_url());
+                            $questioncontentapp->set_additionalcontentid($additionalcontent->get_id());
+                            $questioncontentapp->set_type(question_content::APP_CONTENT);
+                            $questioncontentapp->add_entry();
+                        }
                         $questioncontentcss->set_id($DB->get_field('quizsbs_question_content', 'id', array(
                             'additionalcontentid' => $additionalcontent->get_id(),
                             'type' => question_content::CSS_CONTENT,

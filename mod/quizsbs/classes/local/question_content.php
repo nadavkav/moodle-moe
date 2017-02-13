@@ -34,7 +34,7 @@ class question_content extends model{
      * Used for scorm package content
      * @var integer
      */
-    const SCORM_CONTENT = 1;
+    const APP_CONTENT = 1;
 
     /**
      * Used javascript content
