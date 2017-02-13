@@ -81,10 +81,20 @@ class editcontent_renderer extends \plugin_renderer_base {
             'trusttext' => 0,
             'enable_filemanagement' => true
         );
+        $appoption = array(
+            'subdirs'  => true,
+            'maxbytes' => 0,
+            'maxfiles' => -1,
+            'mainfile'       => true,
+            'accepted_types' => '*',
+        );
         if (! is_null($additaional->get_id())) {
             $questioncontents = $DB->get_records('quizsbs_question_content', array(
                 'additionalcontentid' => $additaional->get_id()
             ));
+            $draftitemid = file_get_submitted_draft_itemid('app');
+            file_prepare_draft_area($draftitemid, $context->id, 'mod_quizsbs', 'app', $additaional->get_id(), $appoption);
+            $additaionalcontent->app = $draftitemid;
             foreach ($questioncontents as $questioncontent) {
                 switch ($questioncontent->type) {
                     case question_content::HTML_CONTENT:
@@ -109,6 +119,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
+                'appoption' => $appoption,
             ));
             $contentloadform->set_data($additaionalcontent);
         }
@@ -117,6 +128,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
+                'appoption' => $appoption,
             ));
         }
         if ($contentdata = $contentloadform->get_data()) {
@@ -128,6 +140,7 @@ class editcontent_renderer extends \plugin_renderer_base {
             }
             $additionalcontent->set_quizsbsid($structure->get_quizsbsid());
             $additionalcontent->add_entry();
+            file_save_draft_area_files($contentdata->app, $context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(), $appoption);
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
                     case 2:

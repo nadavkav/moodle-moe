@@ -69,6 +69,7 @@ class content_load extends \moodleform {
     protected function definition() {
         global $CFG, $DB;
 
+
         $mform =& $this->_form;
         $mform->addElement('header', 'categoryheader', get_string('loadcontent', 'quizsbs'));
         $mform->addElement('text', 'additionalcontentname', get_string('additionalcontentname', 'quizsbs'));
@@ -81,7 +82,7 @@ class content_load extends \moodleform {
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
         $mform->setDefault('contenttype', 0);
 
-        $mform->addElement('editor', 'html_editor', get_string('editor', 'quizsbs'),null , $this->_customdata['htmleditoroption']);
+        $mform->addElement('editor', 'html_editor', get_string('editor', 'quizsbs'), null , $this->_customdata['htmleditoroption']);
         $mform->setType('htmleditor', PARAM_RAW);
         $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->setType('csseditor', PARAM_RAW);
@@ -89,6 +90,7 @@ class content_load extends \moodleform {
         $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
         $mform->setType('javascripteditor', PARAM_RAW);
+        $mform->addElement('filemanager', 'app', get_string('appzip', 'quizsbs'), null, $this->_customdata['appoption']);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);
         $mform->addElement('hidden', 'savenshow', '0', null);
@@ -99,21 +101,21 @@ class content_load extends \moodleform {
 
     }
 
-    function add_action_buttons($cancel = true, $submitlabel=null){
-        if (is_null($submitlabel)){
+    public function add_action_buttons($cancel = true, $submitlabel = null) {
+        if (is_null($submitlabel)) {
             $submitlabel = get_string('savechanges');
         }
         $mform =& $this->_form;
-        if ($cancel){
-            //when two elements we need a group
-            $buttonarray=array();
+        if ($cancel) {
+            // When two elements we need a group
+            $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', $submitlabel);
             $buttonarray[] = &$mform->createElement('cancel');
             $buttonarray[] = &$mform->createElement('button', 'preview', get_string('saveandpreview', 'mod_quizsbs'));
             $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
             $mform->closeHeaderBefore('buttonar');
         } else {
-            //no group needed
+            // No group needed
             $mform->addElement('submit', 'submitbutton', $submitlabel);
             $mform->closeHeaderBefore('submitbutton');
         }

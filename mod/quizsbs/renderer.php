@@ -488,6 +488,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $navbc = $attemptobj->get_navigation_panel($this, 'quizsbs_attempt_nav_panel', $page);
         $data->navigation = $navbc->content;
         $data->formacttion = $attemptobj->processattempt_url();
+        $context = context_module::instance($attemptobj->get_cmid());
         // Print all the questions.
         foreach ($slots as $slot) {
             $output .= $attemptobj->render_question($slot, false, $this,
@@ -508,6 +509,14 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
                 )));
             }
             $data->green = $additionalcontent->get_name();
+            $fs = get_file_storage();
+            $files = $fs->get_area_files($context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(), 'sortorder DESC, id ASC', false);
+            $file = reset($files);
+            unset($files);
+            $filename = $file->get_filename();
+            $url = moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
+                $file->get_itemid() . $file->get_filepath() . $filename);
+            $data->frame = $url->out_as_local_url();
             $subject = $DB->get_record('quizsbs_sections', array(
                 'firstslot' => $slot->slot,
                 'quizsbsid' => $attemptobj->get_quizsbsid(),
@@ -515,21 +524,22 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             if (empty($data->subject) && $subject) {
                 $data->subject = $subject->heading;
             }
-            $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
-            foreach ($questioncontent as  $value) {
-                $content = new question_content($value->id);
-                switch ($content->get_type()) {
-                    case question_content::JAVASCRIPT_CONTENT:
-                        $data->content['javascript'] = $content->get_content();
-                        break;
-                    case question_content::CSS_CONTENT:
-                        $data->content['css'] = $content->get_content();
-                        break;
-                    default:
-                        $context = context_module::instance($attemptobj->get_cmid());
-                        $data->content['html'] = file_rewrite_pluginfile_urls($content->get_content(),'pluginfile.php',
+            if(empty($data->frame)){
+                $questioncontent = $DB->get_records('quizsbs_question_content', array('additionalcontentid' => $additionalcontent->get_id()));
+                foreach ($questioncontent as  $value) {
+                    $content = new question_content($value->id);
+                    switch ($content->get_type()) {
+                        case question_content::JAVASCRIPT_CONTENT:
+                            $data->content['javascript'] = $content->get_content();
+                            break;
+                        case question_content::CSS_CONTENT:
+                            $data->content['css'] = $content->get_content();
+                            break;
+                        default:
+                            $data->content['html'] = file_rewrite_pluginfile_urls($content->get_content(),'pluginfile.php',
                                                         $context->id, 'mod_quizsbs', 'content', $content->get_id());
-                        break;
+                            break;
+                    }
                 }
             }
         }

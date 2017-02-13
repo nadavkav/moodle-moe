@@ -56,6 +56,9 @@
         </section>
         <section id="addtional_content" class="span6">
             <div class="wraper">
+            {{#frame}}
+                <iframe src="{{frame}}" id="app"></iframe>
+            {{/frame}}
             {{#content}}
                 {{#content.css}}
                 <style>
