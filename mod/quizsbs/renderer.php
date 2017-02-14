@@ -513,10 +513,12 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
             $files = $fs->get_area_files($context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(), 'sortorder DESC, id ASC', false);
             $file = reset($files);
             unset($files);
-            $filename = $file->get_filename();
-            $url = moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
-                $file->get_itemid() . $file->get_filepath() . $filename);
-            $data->frame = $url->out_as_local_url();
+            if ($file) {
+                $filename = $file->get_filename();
+                $url = moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
+                    $file->get_itemid() . $file->get_filepath() . $filename);
+                $data->frame = $url->out_as_local_url();
+            }
             $subject = $DB->get_record('quizsbs_sections', array(
                 'firstslot' => $slot->slot,
                 'quizsbsid' => $attemptobj->get_quizsbsid(),

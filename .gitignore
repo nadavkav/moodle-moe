@@ -39,3 +39,4 @@ atlassian-ide-plugin.xml
 /.dbeaver-data-sources.xml
 /Scripts/
 /dummy.php
+/npm-debug.log
