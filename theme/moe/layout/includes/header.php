@@ -1,4 +1,6 @@
 <?php
+use local_usertours\helper;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -29,7 +31,9 @@ $login_custom_txt = theme_lambda_get_setting('custom_login_link_txt');
 $shadow_effect = theme_lambda_get_setting('shadow_effect');
 $auth_googleoauth2 = theme_lambda_get_setting('auth_googleoauth2');
 $countdowntimer = theme_moe_get_setting('countdowntimer');
-
+if (class_exists('local_usertours\helper')) {
+    $usertour = new helper();
+}
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
 $context=getdate();
@@ -119,7 +123,11 @@ if (strpos($checkuseragent, 'MSIE 8')) {$username = str_replace("'", "&prime;", 
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                     <li><?php echo $OUTPUT->user_menu()?></li>
                 </ul>
-
+				<?php if(isset($usertour)):?>
+				<div id="resetusertour" class="nav">
+					<?php $usertour->bootstrap_reset()?>
+				</div>
+				<?php endif;?>
                 <form id="search" action="<?php echo $CFG->wwwroot;?>/course/search.php" method="GET">
                 <div class="nav-divider-left"></div>
 					<input id="coursesearchbox" type="text" onFocus="if(this.value =='<?php echo get_string('searchcourses'); ?>' ) this.value=''" onBlur="if(this.value=='') this.value='<?php echo get_string('searchcourses'); ?>'" value="<?php echo get_string('searchcourses'); ?>" name="search">
