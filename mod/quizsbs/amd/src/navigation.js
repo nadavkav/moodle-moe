@@ -20,14 +20,14 @@
 
 define(['jquery'], function($){
 	var Navigation = function(){
-		this.scrollWidth = ($('a.qnbutton').size()) * ($('a.qnbutton').width()+6);
+		this.scrollWidth = ($('.qnbutton').size()) * ($('.qnbutton').width()+6);
 		$('.allbuttons').width(this.scrollWidth);
 	};
 	
 	Navigation.prototype.init = function(){
-		var scrollWidth = $('a.qnbutton').size() * ($('a.qnbutton').width()+6);
+		var scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
-								$('a.qnbutton').width();
+								$('.qnbutton').width();
 		var count = 0;
 		var passedthis = false;
 		$('.qnbutton').each(function(){
@@ -39,7 +39,7 @@ define(['jquery'], function($){
 			}
 		});
 		if(count < 10) {
-			initialoffset -= (10-count)*$('a.qnbutton').width();
+			initialoffset -= (10-count)*$('.qnbutton').width();
 			if(initialoffset < 0) {
 				initialoffset = 0;
 			}
@@ -68,7 +68,7 @@ define(['jquery'], function($){
 	};
 	
 	Navigation.prototype.checkPosition = function(){
-		this.scrollWidth = $('a.qnbutton').size() * ($('a.qnbutton').width()+6);
+		this.scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		if(this.scrollWidth > $('#scrollbar').width()){
 			if($('.allbuttons').css('right').replace('px', '') >= 0){
 				$('.fa-caret-right').css('visibility', 'hidden');
