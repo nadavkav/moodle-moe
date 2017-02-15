@@ -98,21 +98,28 @@ class peractivityschoollevel extends moereport{
                                 $onerecord->ninthgradesum = $gradevalue;
                                 $onerecord->ninthgradetotal = (($gradevalue / $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey))) * 100). "%";
+                                if (strpos($onerecord->ninthgradetotal,"NAN")!== false)
+                                    $onerecord->ninthgradetotal = "אין מידע";
                                 break;
                             case 10:
                                 $onerecord->tenthgradesum = $gradevalue;
                                 $onerecord->tenthgradetotal = (($gradevalue / $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey))) * 100). "%";
+                                 if (strpos($onerecord->tenthgradetotal,"NAN")!== false)
+                                      $onerecord->tenthgradetotal = "אין מידע";
                                 break;
                             case 11:
                                 $onerecord->eleventhgradesum = $gradevalue;
                                 $onerecord->eleventhgradetotal = (($gradevalue / $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey))) * 100). "%";
+                                if (strpos($onerecord->eleventhgradetotal,"NAN")!== false)
+                                      $onerecord->eleventhgradetotal = "אין מידע";
                                 break;
                             case 12:
                                 $onerecord->twelfthgradesum = $gradevalue;
                                 $onerecord->twelfthgradetotal = (($gradevalue / $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey))) * 100). "%";
+                                if (strpos($onerecord->twelfthgradetotal,"NAN")!== false)
                                 break;
 
                         }

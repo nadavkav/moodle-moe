@@ -82,6 +82,8 @@ class percoursereginlevel extends moereport{
                                                             from {moereports_reports_classes} where class = ? AND symbol
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey)) * 100)."%";
+                            if (strpos($onerecord->ninthgradetotal,"NAN")!== false)
+                                 $onerecord->ninthgradetotal = "אין מידע";
                             break;
                         case 10:
                             $onerecord->tenthgradesum = $gradevalue;
@@ -89,13 +91,17 @@ class percoursereginlevel extends moereport{
                                                             from {moereports_reports_classes} where class = ? AND symbol
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey)) * 100)."%";
-                            break;
+                             if (strpos($onerecord->tenthgradetotal,"NAN")!== false)
+                                      $onerecord->tenthgradetotal = "אין מידע";
+                             break;
                         case 11:
                             $onerecord->eleventhgradesum = $gradevalue;
                             $onerecord->eleventhgradetotal = ($gradevalue / $DB->get_field_sql("select sum(studentsnumber)
                                                             from {moereports_reports_classes} where class = ? AND symbol in
                                                             (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey)) * 100)."%";
+                            if (strpos($onerecord->eleventhgradetotal,"NAN")!== false)
+                                      $onerecord->eleventhgradetotal = "אין מידע";
                             break;
                         case 12:
                             $onerecord->twelfthgradesum = $gradevalue;
@@ -103,7 +109,9 @@ class percoursereginlevel extends moereport{
                                                             from {moereports_reports_classes} where class = ? AND symbol in
                                                             (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey)) * 100)."%";
-                            break;
+                            if (strpos($onerecord->twelfthgradetotal,"NAN")!== false)
+                                      $onerecord->twelfthgradetotal = "אין מידע";
+                                break;
                     }
                 }
                 $onerecord = $onerecord->to_std();
