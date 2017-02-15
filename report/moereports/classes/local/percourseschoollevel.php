@@ -40,10 +40,12 @@ class percourseschoollevel extends moereport{
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         foreach ($semels as $semelkey => $semelvalue) {
+            if (strpos($USER->profile['Yeshuyot'], (string)$semelkey) !== false || is_siteadmin()) {
             foreach ($courses as $course) {
                 for ($i = 9; $i < 13; $i++) {
                     $results[$semelkey][$course->id][$i] = 0;
                 }
+            }
             }
         }
         foreach ($courses as $course) {

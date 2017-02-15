@@ -28,7 +28,6 @@ require_login();
 $context = context_system::instance();
 $PAGE->set_context($context);
 
-require_capability('moodle/site:config', $context);
 
 $PAGE->set_title(get_string('per_course_regin_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_course_regin_level', 'report_moereports'));
