@@ -50,6 +50,7 @@ class peractivityschoollevel extends moereport{
                     }
                 }
             }
+            }
         }
         foreach ($courses as $course) {
             $completion = new completion_info($course);
