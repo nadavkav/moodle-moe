@@ -120,6 +120,7 @@ class peractivityschoollevel extends moereport{
                                 $onerecord->twelfthgradetotal = (($gradevalue / $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey))) * 100). "%";
                                 if (strpos($onerecord->twelfthgradetotal,"NAN")!== false)
+                                    $onerecord->twelfthgradetotal = "אין מידע";
                                 break;
 
                         }
