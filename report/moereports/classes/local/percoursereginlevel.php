@@ -31,16 +31,31 @@ class percoursereginlevel extends moereport{
 
 
     public function runreport() {
-        global $DB;
-
-        $results;
+        global $DB, $USER;
+        $results = array();
+        $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+        if(is_siteadmin()){
+            $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+            foreach ($regionsobj as $obj){
+                array_push($regions, $obj->region);
+            }
+        } else {
+            $useryeshuyot= explode(',',$USER->profile['Yeshuyot']);
+            foreach ($useryeshuyot as $yeshut){
+                $regin = $DB->get_record_select('moereports_reports', 'region', array("symbol" => $yeshut));
+                if (!array_search($regin, $regions)){
+                    array_push($regions, $regin);
+                }
+            }
+        }          
+        
+        
 
         foreach ($regions as $region) {
             foreach ($courses as $course) {
                 for ($i = 9; $i < 13; $i++) {
-                    $results[$region->region][$course->id][$i] = 0;
+                    $results[$region][$course->id][$i] = 0;
                 }
             }
         }

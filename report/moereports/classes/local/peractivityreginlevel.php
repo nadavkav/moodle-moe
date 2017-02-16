@@ -35,17 +35,30 @@ class peractivityreginlevel extends moeReport{
 
 
     public function runreport() {
-        global $DB;
+        global $DB, $USER;
         $results = array();
+        $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        $regions = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-
+        if(is_siteadmin()){
+            $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+            foreach ($regionsobj as $obj){
+                array_push($regions, $obj->region);
+            }
+        } else {
+            $useryeshuyot= explode(',',$USER->profile['Yeshuyot']);
+            foreach ($useryeshuyot as $yeshut){
+                $regin = $DB->get_record_select('moereports_reports', 'region', array("symbol" => $yeshut));
+                if (!array_search($regin, $regions)){
+                    array_push($regions, $regin);
+                }
+            }
+        }
         foreach ($regions as $region) {
             foreach ($courses as $course) {
                 $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
                 foreach ($allactivity as $acti) {
                     for ($i = 9; $i < 13; $i++) {
-                        $results[$region->region][$course->id][$acti->id][$i] = 0;
+                        $results[$region][$course->id][$acti->id][$i] = 0;
                     }
                 }
             }
@@ -149,7 +162,6 @@ class peractivityreginlevel extends moeReport{
                 }
             }
         }
-      //  $test = Arrays::sort($resultintamplateformat, Comparator::compareBy('region'));
         return $resultintamplateformat;
         
     }
