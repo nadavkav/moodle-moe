@@ -47,10 +47,11 @@ class peractivityreginlevel extends moeReport{
         } else {
             $useryeshuyot= explode(',',$USER->profile['Yeshuyot']);
             foreach ($useryeshuyot as $yeshut){
-                $regin = $DB->get_record_select('moereports_reports', 'region', array("symbol" => $yeshut));
-                if (!array_search($regin, $regions)){
-                    array_push($regions, $regin);
+                $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
+                if (!array_search($region, $regions)){
+                    array_push($regions, $region);
                 }
+            
             }
         }
         foreach ($regions as $region) {
