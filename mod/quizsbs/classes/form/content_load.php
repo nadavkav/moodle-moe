@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quizsbs\form;
+use mod_quizsbs\local\question_content;
+
 require_once(__DIR__ . '/../../../../config.php');
 
 /**
@@ -76,19 +78,17 @@ class content_load extends \moodleform {
         $mform->setType('additionalcontentname', PARAM_TEXT);
         $mform->addRule('additionalcontentname', get_string('error'), 'required');
         $radioarray = array();
-        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('editor', 'quizsbs'), 0);
-        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('javascriptapp', 'quizsbs'), 2);
-
+        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('editor', 'quizsbs'), question_content::HTML_CONTENT);
+        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('javascriptapp', 'quizsbs'), question_content::JAVASCRIPT_CONTENT);
+        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('appzip', 'quizsbs'), question_content::APP_CONTENT);
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
         $mform->setDefault('contenttype', 0);
 
         $mform->addElement('editor', 'html_editor', get_string('editor', 'quizsbs'), null , $this->_customdata['htmleditoroption']);
-        $mform->setType('htmleditor', PARAM_RAW);
+        $mform->setType('html_editor', PARAM_RAW);
         $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
         $mform->setType('csseditor', PARAM_RAW);
-        $mform->disabledIf('csseditor', 'contenttype', 'neq', '2');
         $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'quizsbs'), 'wrap="virtual" rows="20" cols="50"');
-        $mform->disabledIf('javascripteditor', 'contenttype', 'neq', '2');
         $mform->setType('javascripteditor', PARAM_RAW);
         $mform->addElement('filemanager', 'app', get_string('appzip', 'quizsbs'), null, $this->_customdata['appoption']);
         $mform->addElement('hidden', 'id', 'id', null);
