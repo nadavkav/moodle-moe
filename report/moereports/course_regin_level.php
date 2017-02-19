@@ -49,5 +49,6 @@ $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);
 
 echo "$resulttable";
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
 echo $OUTPUT->footer();
 

@@ -45,6 +45,8 @@ $resulttable = $OUTPUT->render_from_template('report_moereports/scool_level', $d
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_activity_school_level', 'report_moereports'));
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
+
 echo $resulttable;
 echo $OUTPUT->footer();
 

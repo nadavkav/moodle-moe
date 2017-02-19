@@ -46,6 +46,7 @@ $data->results = $results->displayreportfortemplates();
 $renderer = $PAGE->get_renderer('core');
 
 $resulttable = $OUTPUT->render_from_template('report_moereports/course_scool_level', $data);
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
 
 echo "$resulttable";
 echo $OUTPUT->footer();
