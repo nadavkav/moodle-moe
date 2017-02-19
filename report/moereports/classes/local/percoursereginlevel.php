@@ -32,10 +32,12 @@ class percoursereginlevel extends moereport{
 
     public function runreport() {
         global $DB, $USER;
+        $usercontext = context_user::instance($USER->id);
+        
         $results = array();
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        if(is_siteadmin()){
+        if(is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)){
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
             foreach ($regionsobj as $obj){
                 array_push($regions, $obj->region);
@@ -100,7 +102,7 @@ class percoursereginlevel extends moereport{
                             if ($den == 0){
                                 $onerecord->ninthgradetotal = "אין מידע";
                             }else{
-                                $onerecord->ninthgradetotal = ($gradevalue / $den * 100)."%";
+                                $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 10:
@@ -112,7 +114,7 @@ class percoursereginlevel extends moereport{
                             if ($den == 0){
                                 $onerecord->tenthgradetotal = "אין מידע";
                             }else{
-                                $onerecord->tenthgradetotal = ($gradevalue / $den * 100)."%";
+                                $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 11:
@@ -124,7 +126,7 @@ class percoursereginlevel extends moereport{
                             if ($den == 0){
                                 $onerecord->eleventhgradetotal = "אין מידע";
                             }else{
-                                $onerecord->eleventhgradetotal = ($gradevalue / $den * 100)."%";
+                                $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 12:
@@ -136,7 +138,7 @@ class percoursereginlevel extends moereport{
                             if ($den == 0){
                                 $onerecord->twelfthgradetotal = "אין מידע";
                             }else{
-                                $onerecord->twelfthgradetotal = ($gradevalue / $den * 100)."%";
+                                $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                     }

@@ -35,12 +35,13 @@ class percourseschoollevel extends moereport{
 
     public function runreport() {
         global $DB, $USER;
-
+        $usercontext = context_user::instance($USER->id);
+        
         $results;
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         foreach ($semels as $semelkey => $semelvalue) {
-            if (strpos($USER->profile['Yeshuyot'], (string)$semelkey) !== false || is_siteadmin()) {
+            if (strpos($USER->profile['Yeshuyot'], (string)$semelkey) !== false || is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
             foreach ($courses as $course) {
                 for ($i = 9; $i < 13; $i++) {
                     $results[$semelkey][$course->id][$i] = 0;
@@ -55,7 +56,7 @@ class percourseschoollevel extends moereport{
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $makbila = $localuserinfo->profile['StudentKita'];
-                if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin()) {
+                if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
                     foreach ($user->progress as $act) {
                         $cors = $course->id;
                         if (!isset($results[$semel][$cors][$makbila])) {
@@ -91,7 +92,7 @@ class percourseschoollevel extends moereport{
                             if ($den == 0){
                                 $onerecord->ninthgradetotal = "אין מידע";
                             } else {
-                                $onerecord->ninthgradetotal = (($gradevalue / $den) * 100). "%";
+                                $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 10:
@@ -101,7 +102,7 @@ class percourseschoollevel extends moereport{
                             if ($den == 0){
                                 $onerecord->tenthgradetotal = "אין מידע";
                             } else {
-                                $onerecord->tenthgradetotal = (($gradevalue / $den) * 100). "%";
+                                $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 11:
@@ -111,7 +112,7 @@ class percourseschoollevel extends moereport{
                             if ($den == 0){
                                 $onerecord->eleventhgradetotal = "אין מידע";
                             } else {
-                                $onerecord->eleventhgradetotal = (($gradevalue / $den) * 100). "%";
+                                $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                         case 12:
@@ -121,7 +122,7 @@ class percourseschoollevel extends moereport{
                             if ($den == 0){
                                 $onerecord->twelfthgradetotal = "אין מידע";
                             } else {
-                                $onerecord->twelfthgradetotal = (($gradevalue / $den) * 100). "%";
+                                $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                     }
