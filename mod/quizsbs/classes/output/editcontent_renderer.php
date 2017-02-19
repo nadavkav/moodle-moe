@@ -149,9 +149,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'sortorder DESC, id ASC', false);
             $file = reset($files);
             unset($files);
-            $filename = $file->get_filename();
-            $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
-                $file->get_itemid() . $file->get_filepath() . $filename);
+            if ($file) {
+                $filename = $file->get_filename();
+                $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
+                    $file->get_itemid() . $file->get_filepath() . $filename);
+            }
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
                     case 2:
