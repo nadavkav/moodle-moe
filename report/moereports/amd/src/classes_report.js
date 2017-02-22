@@ -2,15 +2,15 @@
   * @module report_moereports/classes_report
   */
 
-define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handsontable, $, ajax){
+define(['report_moereports/handsontable', 'jquery', 'core/ajax', 'core/notification'],function(Handsontable, $, ajax, notification){
 	
 	var Report = function() {
 	};
 
 	Report.prototype.init = function(report,schools) {
-		var deleted = new Array();
+		var deleted = [];
 		
-		emptyValidator = function(value, callback) {
+		var emptyValidator = function(value, callback) {
 		    if (value === '' || value === null || value === ' ' || value === false) { 
 		    	// isEmpty is a function that determines emptiness, you should define it
 		        callback(false);
@@ -19,7 +19,7 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 		    }
 		};
 		
-		rowErased = function (changes) {
+		var rowErased = function (changes) {
 			var erased;
 			var colsnum = hot.countCols();
 			
@@ -40,7 +40,7 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 			return erased;
 		};
 		
-		eraseEmptyRows = function() {
+		var eraseEmptyRows = function() {
 			var rowsnum = hot.countRows();
 			hot.minSpareRows = 0;
 
@@ -69,7 +69,6 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 		            	  readOnly: true
 		              },
 		              {
-		            	  type: 'numeric',
 		            	  type: 'autocomplete', source: schools, strict: true
 		              },
 
@@ -82,7 +81,7 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 		            	  validator: emptyValidator
 		              },
 		    ],
-		    beforeChange: function (changes, source) {
+		    beforeChange: function (changes) {
 		    	var rowsToErase = rowErased(changes);
 		    	if(rowsToErase) {
 		    		for (var int = 0; int < rowsToErase.times; int++) {
@@ -90,15 +89,13 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 					}
 		    		return false;
 		    	}
-		    	hot.validateCells(function(valid){
-		    	});
 		    },
-		    afterChange: function (changes, source) {
+		    afterChange: function () {
 		        if(this.countEmptyRows(true) < 1) {
 		        	this.alter("insert_row");
 		        }
 		    },
-		    beforeRemoveRow: function(index, amount) {
+		    beforeRemoveRow: function(index) {
 		    	if(hot.getData()[index][0]) {
 		    		deleted.push(hot.getData()[index][0]);
 		    	}
@@ -106,7 +103,7 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 		});
 	
 	
-	$("#savereporttable").click(function (e) {
+	$("#savereporttable").click(function () {
 		eraseEmptyRows();
 		hot.validateCells(function (valid) {
 			if(valid) {
@@ -116,11 +113,12 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax'],function(Handso
 				
 				call[0].done(function (resp) {
 					hot.loadData(resp);
-				}).fail(function (ex) {
-					console.log(ex);
 				});
 			} else {
-				alert("NO!");
+				notification.addNotification({
+				       message: M.util.get_string('changesnotsave', 'report_moereports'),
+				       type: "error"
+				     });
 			}
 		});
 	});
