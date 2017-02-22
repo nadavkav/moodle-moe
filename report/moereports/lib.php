@@ -42,7 +42,14 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         $schoollevelaccess = $DB->get_field('config', 'value', array('name' => 'schools_level_access'));
         $reginlevelaccess = $DB->get_field('config', 'value', array('name' => 'regin_level_access'));
 
-        if ((isset($USER->profile['COMPLEXORGROLES']) && strpos($schoollevelaccess, $USER->profile['COMPLEXORGROLES']) !== false) ||  is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+        if(isset($USER->profile['SimpleRole'])){
+            $userrule = explode(",", $USER->profile['SimpleRole']);
+            $reginpermitrules = explode(",", $reginlevelaccess);
+            $schoolpermitrules = explode(",", $schoollevelaccess);
+        }
+        $schoollevelaccess = array_intersect($userrule,$schoolpermitrules);
+        $reginlevelaccess = array_intersect($userrule,$reginpermitrules);
+        if ( count ($schoollevelaccess)>0 ||  is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
             $node = new core_user\output\myprofile\node('reports', 'per_activity_school_level', get_string('per_activity_school_level', 'report_moereports'),
                 null, new moodle_url('/report/moereports/activity_scoole_level.php'));
             $tree->add_node($node);
@@ -50,7 +57,7 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
                 null, new moodle_url('/report/moereports/course_scoole_level.php'));
             $tree->add_node($node);
         }
-        if ((isset($USER->profile['COMPLEXORGROLES']) && strpos($reginlevelaccess, $USER->profile['COMPLEXORGROLES']) !== false )|| is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+        if (count ($reginlevelaccess)>0|| is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
                $node = new core_user\output\myprofile\node('reports', 'per_activity_regin_level', get_string('per_activity_regin_level', 'report_moereports'),
                    null, new moodle_url('/report/moereports/activity_regin_level.php'));
                $tree->add_node($node);
