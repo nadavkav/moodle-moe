@@ -21,7 +21,6 @@ class peractivityschoollevel extends moereport{
     public $region;
     public $scollsymbol;
     public $scollname;
-    public $city;
     public $course;
     public $activityname;
     public $ninthgradesum;
@@ -84,7 +83,6 @@ class peractivityschoollevel extends moereport{
                     $onerecord->region = $DB->get_field('moereports_reports', 'region', array('symbol' => $scoolkey));
                     $onerecord->scollSymbol = $scoolkey;
                     $onerecord->scollName = $DB->get_field('moereports_reports', 'name', array('symbol' => $scoolkey));
-                    $onerecord->city = $DB->get_field('moereports_reports', 'city', array('symbol' => $scoolkey));
                     $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
                     // Geting the activity name through get_fast_modinfo.
                     $course = $DB->get_record('course', array('id' => $corskey));

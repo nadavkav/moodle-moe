@@ -21,7 +21,6 @@ class percourseschoollevel extends moereport{
     public $region;
     public $scollsymbol;
     public $scollname;
-    public $city;
     public $course;
     public $ninthgradesum;
     public $ninthgradetotal;
@@ -81,7 +80,6 @@ class percourseschoollevel extends moereport{
                 $onerecord->region = $DB->get_field('moereports_reports', 'region', array('symbol' => $scoolkey));
                 $onerecord->scollSymbol = $scoolkey;
                 $onerecord->scollName = $DB->get_field('moereports_reports', 'name', array('symbol' => $scoolkey));
-                $onerecord->city = $DB->get_field('moereports_reports', 'city', array('symbol' => $scoolkey));
                 $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
