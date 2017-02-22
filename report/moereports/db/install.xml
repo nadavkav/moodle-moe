@@ -9,7 +9,6 @@
          <FIELD NAME="symbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="symbol of school "/>
 		  <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Region of school "/>
 	      <FIELD NAME="name" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="school name"/>
-	      <FIELD NAME="city" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="city of school "/>
 	    </FIELDS>
 	    <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

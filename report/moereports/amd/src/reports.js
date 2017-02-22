@@ -60,7 +60,6 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax', 'core/notificat
 		 		M.util.get_string('symbol', 'report_moereports'),
 		        M.util.get_string('region', 'report_moereports'),         
 		        M.util.get_string('name', 'report_moereports'),
-		        M.util.get_string('city', 'report_moereports'),
 		    ],
 		    contextMenu: true,
 		    columns: [
@@ -80,10 +79,7 @@ define(['report_moereports/handsontable', 'jquery', 'core/ajax', 'core/notificat
 		            	  type: 'text',
 		            	  validator: emptyValidator
 		              },
-		              {
-		            	  type: 'text',
-		            	  validator: emptyValidator
-		              }
+
 		    ],
 		    beforeChange: function (changes) {
 		    	var rowsToErase = rowErased(changes);

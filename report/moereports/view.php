@@ -49,10 +49,9 @@ foreach ($schools as $key => $school) {
     $tmp[] = $school->symbol;
     $tmp[] = $school->region;
     $tmp[] = $school->name;
-    $tmp[] = $school->city;
 
     $report[] = $tmp;
 }
 $PAGE->requires->js_call_amd('report_moereports/reports', 'init', array($report));
-$PAGE->requires->strings_for_js(array('symbol', 'name', 'region', 'city'), "report_moereports");
+$PAGE->requires->strings_for_js(array('symbol', 'name', 'region'), "report_moereports");
 echo $OUTPUT->footer();
