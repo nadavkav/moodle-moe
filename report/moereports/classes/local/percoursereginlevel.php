@@ -71,8 +71,9 @@ class percoursereginlevel extends moereport{
                 $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $cors = $course->id;
-                    if (!isset($results[$regin][$cors][$makbila])) {
-                        $results[$regin][$cors][$makbila] = 1;
+                    $localuser = get_complete_user_data('id', $user->id);
+                    if ($localuser->profile['StudentMosad'] != $USER->profile['Yeshuyot'] && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                        continue;
                     } else {
                             $results[$regin][$cors][$makbila]++;
                     }

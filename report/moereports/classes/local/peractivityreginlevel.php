@@ -79,8 +79,14 @@ class peractivityreginlevel extends moeReport{
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
-                        $results[$regin][$cors][$activity][$makbila]++;
+                    $localuserinfo = get_complete_user_data('id', $user->id);
+                if (($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot']) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                        continue;
+                    } else {
+                            $results[$regin][$cors][$activity][$makbila]++;
+                    } 
                 }
+                
             }
         }    
         return $results;
