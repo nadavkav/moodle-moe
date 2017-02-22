@@ -101,8 +101,8 @@ if ($download == "xls" ) {
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_course_scool_level', 'report_moereports'));
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
 
 echo "$resulttable";
 echo $OUTPUT->footer();
 
-$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
