@@ -148,6 +148,16 @@ class percoursereginlevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
+        function cmp($a, $b)
+        {
+            $res = strcmp($a->region, $b->region);
+            if ($res !== 0){
+                return $res;
+            }
+            
+            return strcmp($a->course, $b->course);
+        }
+        usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
     }
 }

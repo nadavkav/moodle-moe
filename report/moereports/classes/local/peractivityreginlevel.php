@@ -172,6 +172,19 @@ class peractivityreginlevel extends moeReport{
                 }
             }
         }
+        function cmp($a, $b)
+        {
+            $res = strcmp($a->region, $b->region);
+            if ($res !== 0){
+                return $res;
+            }
+            $res = strcmp($a->course, $b->course);
+            if ($res !== 0){
+                return $res;
+            }
+            return strcmp($a->activityname, $b->activityname);
+        }
+        usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
         
     }
