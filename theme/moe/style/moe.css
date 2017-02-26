@@ -5710,20 +5710,37 @@ a#choosetheme {
 .path-mod-chat #users-list li table tr > td a[href="###"] {
     color: #5e5d53;
     border: 1px solid #c2becf;
-    background-image: url(/theme/image.php?theme=moe&component=theme&image=chat%2Fbtnbg);
+    background-image: url([[pix:theme|chat/btnbg]]);
     background-size: cover;
     padding-right: 5px;
     margin-top: 5px;
     height: 25px;
     line-height: 22px;
     display: inline-block;
-    width: 80%;
     font-weight: bold;
     min-width: 70px;
 }
 
 .path-mod-chat #users-list li table tr > td a[href="###"] br {
     display: none;
+}
+
+.path-mod-chat #users-list li table tr > td a[href="###"]:first-of-type:after {
+    background-image: url([[pix:theme|chat/btnchat]]);
+}
+
+.path-mod-chat #users-list li table tr > td a[href="###"]:after {
+    content: '';
+    background-size: 78%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #e0ece6;
+    height: 100%;
+    width: 30px;
+    display: block;
+    float: left;
+    border-right: 1px solid #c2becf;
+	margin-right: 5px;
 }
 
 @media screen and (max-width: 480px) {
