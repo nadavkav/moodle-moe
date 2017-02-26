@@ -5364,7 +5364,7 @@ div#chatcurrentusers table td.chatuserdetails {
     color: #644977;
 }
 
-.path-mod-chat #users-list li table > tbody > tr > td:nth-of-type(2) div:nth-of-type(2) {
+.path-mod-chat #users-list li table > tbody > tr > td:nth-of-type(2) div:nth-of-type(2) a:nth-of-type(2) {
     display: none;
 }
 
