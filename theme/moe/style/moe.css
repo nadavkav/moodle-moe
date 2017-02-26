@@ -5707,6 +5707,25 @@ a#choosetheme {
     display: none;
 }
 
+.path-mod-chat #users-list li table tr > td a[href="###"] {
+    color: #5e5d53;
+    border: 1px solid #c2becf;
+    background-image: url(/theme/image.php?theme=moe&component=theme&image=chat%2Fbtnbg);
+    background-size: cover;
+    padding-right: 5px;
+    margin-top: 5px;
+    height: 25px;
+    line-height: 22px;
+    display: inline-block;
+    width: 80%;
+    font-weight: bold;
+    min-width: 70px;
+}
+
+.path-mod-chat #users-list li table tr > td a[href="###"] br {
+    display: none;
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
