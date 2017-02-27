@@ -101,10 +101,10 @@ class peractivityreginlevel extends moeReport{
                 foreach ($corsvalue as $activitykey => $activityvalue) {
                     $onerecord = new peractivityreginlevel();
                     $onerecord->region = $reginkey;
-                    $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
                     // Geting the activity name through get_fast_modinfo
                     $course = $DB->get_record('course', array('id' => $corskey));
                     $insinfo = get_fast_modinfo($course);
+                    $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
                     foreach ($insinfo->instances as $cactivity) {
                         foreach ($cactivity as $acti) {
                             if ($acti->id == $activitykey) {

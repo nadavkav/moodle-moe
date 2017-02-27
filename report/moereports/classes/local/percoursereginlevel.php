@@ -91,7 +91,8 @@ class percoursereginlevel extends moereport{
             foreach ($reginvalue as $corskey => $corsvalue) {
                 $onerecord = new percoursereginlevel();
                 $onerecord->region = $reginkey;
-                $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
+                $course = $DB->get_record('course', array('id' => $corskey));
+                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
                         case 9:
