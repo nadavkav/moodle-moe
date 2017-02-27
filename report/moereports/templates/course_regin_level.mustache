@@ -14,19 +14,23 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-<table border="1" class="resultTable">
-   <tr>
-    <th>{{# str }} region, report_moereports {{/ str }}</th>
-    <th>{{# str }} cors, report_moereports {{/ str }}</th>
-    <th>{{# str }} makbila9, report_moereports {{/ str }}</th>
-    <th>{{# str }} percents9, report_moereports {{/ str }}</th>
-    <th>{{# str }} makbila10, report_moereports {{/ str }}</th>
-    <th>{{# str }} percents10, report_moereports {{/ str }}</th>
-    <th>{{# str }} makbila11, report_moereports {{/ str }}</th>
-    <th>{{# str }} percents11, report_moereports {{/ str }}</th>
-    <th>{{# str }} makbila12, report_moereports {{/ str }}</th>
-    <th>{{# str }} percents12, report_moereports {{/ str }}</th>
-   </tr>
+<a href="{{url}}"><button>{{# str }} excelexp, report_moereports {{/ str }}</button></a>
+<table id="table_wrapper" border="1" class="resultTable persist-area">
+    <thead>
+      <tr  class="persist-header">
+        <th>{{# str }} region, report_moereports {{/ str }}</th>
+        <th>{{# str }} cors, report_moereports {{/ str }}</th>
+        <th>{{# str }} makbila9, report_moereports {{/ str }}</th>
+        <th>{{# str }} percents9, report_moereports {{/ str }}</th>
+        <th>{{# str }} makbila10, report_moereports {{/ str }}</th>
+        <th>{{# str }} percents10, report_moereports {{/ str }}</th>
+        <th>{{# str }} makbila11, report_moereports {{/ str }}</th>
+        <th>{{# str }} percents11, report_moereports {{/ str }}</th>
+        <th>{{# str }} makbila12, report_moereports {{/ str }}</th>
+        <th>{{# str }} percents12, report_moereports {{/ str }}</th>
+        </tr>
+    </thead>
+    <tbody>
 {{#results}}
     <tr>
         <td>{{region}}</td>       
@@ -41,4 +45,5 @@
         <td>{{twelfthgradetotal}}</td>       
     </tr>
 {{/results}}
+</tbody>
 </table>

@@ -15,40 +15,90 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 require_once('../../config.php');
 require_once('../../report/moereports/classes/local/percoursereginlevel.php');
-
 require_once($CFG->libdir.'/completionlib.php');
 require_once($CFG->libdir.'/modinfolib.php');
+$download   = optional_param('download', '', PARAM_ALPHA);
+global $DB, $PAGE, $OUTPUT;
 
 $url = new moodle_url('/report/moereports/course_regin_level.php');
 $PAGE->set_url($url);
 
-// Make sure that the user has permissions to manage moe.
+if ($download !== '') {
+    $url->param('download', $download);
+}
+
 require_login();
 
 $context = context_system::instance();
 $PAGE->set_context($context);
 
-require_capability('moodle/site:config', $context);
 
 $PAGE->set_title(get_string('per_course_regin_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_course_regin_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
 
+$results = new percoursereginlevel();
+$data = new stdClass();
+$data->results = $results->displayreportfortemplates();
+$data->url="$url" . "?download=xls";
+$renderer = $PAGE->get_renderer('core');
+$resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);
+
+//print spreadsheet if one is asked for:
+if ($download == "xls" ) {
+    require_once("$CFG->libdir/excellib.class.php");
+    $date= date("Ymd");
+    /// Calculate file name
+    $filename = "$date"."_report";
+    /// Creating a workbook
+    $workbook = new MoodleExcelWorkbook("-");
+    /// Send HTTP headers
+    $workbook->send($filename);
+    /// Creating the first worksheet
+    // assigning by reference gives this: Strict standards: Only variables should be assigned by reference in /data_1/www/html/moodle/moodle/mod/choicegroup/report.php on line 157
+    // removed the ampersand.
+    $myxls = $workbook->add_worksheet("one");
+    /// Print names of all the fields
+    $myxls->write_string(0,0,get_string("region", 'report_moereports'));
+    $myxls->write_string(0,1,get_string("cors", 'report_moereports'));
+    $myxls->write_string(0,2,get_string("makbila9", 'report_moereports'));
+    $myxls->write_string(0,3,get_string("percents9", 'report_moereports'));
+    $myxls->write_string(0,4,get_string("makbila10", 'report_moereports'));
+    $myxls->write_string(0,5,get_string("percents10", 'report_moereports'));
+    $myxls->write_string(0,4,get_string("makbila11", 'report_moereports'));
+    $myxls->write_string(0,5,get_string("percents11", 'report_moereports'));
+    $myxls->write_string(0,4,get_string("makbila12", 'report_moereports'));
+    $myxls->write_string(0,5,get_string("percents12", 'report_moereports'));
+    
+    
+    /// generate the data for the body of the spreadsheet
+    $i=0;
+    $row=1;
+    foreach ($data->results as $onerec){
+            $myxls->write_string($row, 0, $onerec->region);
+            $myxls->write_string($row, 1, $onerec->course);
+            $myxls->write_string($row, 2, $onerec->ninthgradesum);
+            $myxls->write_string($row, 3, $onerec->ninthgradetotal);
+            $myxls->write_string($row, 4, $onerec->tenthgradesum);
+            $myxls->write_string($row, 5, $onerec->tenthgradetotal);
+            $myxls->write_string($row, 6, $onerec->eleventhgradesum);
+            $myxls->write_string($row, 7, $onerec->eleventhgradetotal);
+            $myxls->write_string($row, 8, $onerec->twelfthgradesum);
+            $myxls->write_string($row, 9, $onerec->twelfthgradetotal);
+            $row++;
+            
+    }
+     
+    /// Close the workbook
+    $workbook->close();
+    exit;
+    }
+
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_course_regin_level', 'report_moereports'));
 
-
-global $DB, $PAGE, $OUTPUT;
-
-$results = new percoursereginlevel();
-
-$data = new stdClass();
-$data->results = $results->displayreportfortemplates();
-
-$renderer = $PAGE->get_renderer('core');
-
-$resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);
-
 echo "$resulttable";
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
+
 echo $OUTPUT->footer();
 

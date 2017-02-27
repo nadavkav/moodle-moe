@@ -5,20 +5,24 @@ body#page-report-moereports-view section[role="main-content"] nav a { margin: 14
 	min-height: 360px;
 }
 
-/* css for moe results table */
 
-.resultTable {
-	
+.resultTable {	
     text-align: center;
 }
 
 
+.floatingHeader {
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+}
 
 
+.persist-header{
+	background-color: white;
+}
 
-
-
-
+/* css for moe results table */
 
 
 .handsontable {

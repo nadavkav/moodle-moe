@@ -47,3 +47,5 @@ $string['schools_level_report'] = 'דוחות ברמת בתי ספר';
 $string['reportviewhelper'] = 'הכניסו את מספר התפקיד שיוכל לצפות בדו"ח. ניתן להכניס מספר תפקידים ע"י הפרדתם בפסיקים. ';
 $string['schools_info'] = 'פרטי בתי ספר';
 $string['classesinfo'] = 'פרטי כיתות';
+$string['excelexp'] = 'ייצוא לאקסל';
+
