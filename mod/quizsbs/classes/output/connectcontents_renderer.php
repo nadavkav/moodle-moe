@@ -47,6 +47,13 @@ class connectcontents_renderer extends \plugin_renderer_base {
             if(!empty($data)){
                 if($data->contents != 0){
                     $additionalcontent = new additional_content($data->contents);
+                    $oldadditionalcontent = $DB->get_record('quizsbs_additional_content', array(
+                        'subjectid' => $page,
+                        'quizsbsid' => $quizsbsobj->get_quizsbsid(),
+                    ));
+                    $oldadditionalcontent = new additional_content($oldadditionalcontent->id);
+                    $oldadditionalcontent->set_subjectid(null);
+                    $oldadditionalcontent->add_entry();
                     $additionalcontent->set_subjectid($page);
                 } else {
                     $additionalcontentid = $DB->get_field('quizsbs_additional_content', 'id', array(
