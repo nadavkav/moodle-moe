@@ -37,20 +37,35 @@
 }
 
 .mod_quizsbs-prev-nav{
-	background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
-	background-color:#bfe3e2 !important;
-	background-position:5%;
-    padding: 12px 24px !important;	
-	color: #3e453e !important;
+
+	visibility: hidden; 
+	
 }
 
 .mod_quizsbs-next-nav{
-	background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
+	visibility: hidden;	
+}
+
+.mod_quizsbs-prev-nav-show{
+    background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
     background-color:#bfe3e2 !important;
-	background-position: center center; 
-	padding: 12px 24px !important;
-	color: #3e453e !important;
-	margin-right: 1.3em !important;	
+    background-position:5%;
+    padding: 12px 24px !important;  
+    color: #3e453e !important;
+    
+}
+
+.mod_quizsbs-next-nav-show{
+    background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
+    background-color:#bfe3e2 !important;
+    background-position: center center; 
+    padding: 12px 24px !important;
+    color: #3e453e !important;
+    margin-right: 1.3em !important;
+}
+
+.span9 .row-fluid .span5 {
+	padding-top: 1%
 }
 
 /** Attempt and review pages **/
