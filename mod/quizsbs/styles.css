@@ -709,7 +709,6 @@ table.quizsbsreviewsummary td.cell {
     max-width: 72%;
     display: inline-block;
     text-overflow: ellipsis;
-    overflow: hidden;
     vertical-align: bottom;
 }
 #page-mod-quizsbs-edit .section-heading form {
