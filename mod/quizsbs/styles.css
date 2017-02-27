@@ -37,13 +37,11 @@
 }
 
 .mod_quizsbs-prev-nav{
-
-	visibility: hidden; 
-	
+	display: none !important; 
 }
 
 .mod_quizsbs-next-nav{
-	visibility: hidden;	
+    display: none !important; 
 }
 
 .mod_quizsbs-prev-nav-show{
