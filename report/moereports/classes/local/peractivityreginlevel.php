@@ -80,7 +80,7 @@ class peractivityreginlevel extends moeReport{
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
                     $localuserinfo = get_complete_user_data('id', $user->id);
-                if (($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot']) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                if ((isset($USER->profile['Yeshuyot'])) && ($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot']) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
                         continue;
                     } else {
                             $results[$regin][$cors][$activity][$makbila]++;
