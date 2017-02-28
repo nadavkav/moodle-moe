@@ -46,24 +46,29 @@
 
 .mod_quizsbs-prev-nav-show{
     background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
-    background-color:#bfe3e2 !important;
+    background-color:#bcbcd0 !important;
     background-position:5%;
     padding: 12px 24px !important;  
-    color: #3e453e !important;
+    color: #bcbcd0 !important;
+    float:left;
+    
     
 }
 
 .mod_quizsbs-next-nav-show{
     background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
-    background-color:#bfe3e2 !important;
+    background-color:#bcbcd0 !important;
     background-position: center center; 
     padding: 12px 24px !important;
-    color: #3e453e !important;
+    color: #bcbcd0 !important;
     margin-right: 1.3em !important;
+    float:left;
+    
 }
 
 .span9 .row-fluid .span5 {
-	padding-top: 1%
+    padding-top: 1%;
+    padding-left: 0.8%
 }
 
 /** Attempt and review pages **/
