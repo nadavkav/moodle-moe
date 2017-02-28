@@ -126,7 +126,6 @@ if (!$attemptobj->set_currentpage($page)) {
 // Initialise the JavaScript.
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->requires->js_init_call('M.mod_quizsbs.init_attempt_form', null, false, quizsbs_get_js_module());
-
 $title = get_string('attempt', 'quizsbs', $attemptobj->get_attempt_number());
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->set_title($attemptobj->get_quizsbs_name());
