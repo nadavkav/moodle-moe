@@ -39,9 +39,17 @@ function xmldb_report_moereports_upgrade($oldversion) {
         $dbman->change_field_precision($table, $field);
         $field = new xmldb_field('region', XMLDB_TYPE_CHAR, '32', true, true, false, 'none');
         $dbman->change_field_precision($table, $field);
-        $field = new xmldb_field('city', XMLDB_TYPE_CHAR, '32', true, true, false, 'none');
-        $dbman->change_field_precision($table, $field);
         upgrade_plugin_savepoint(true, 2017020800, 'report', 'moereports');
     }
+    
+    if ($oldversion < 2017022202){
+        $table = new xmldb_table('moereports_reports');
+        $field = new xmldb_field('city');
+        $dbman->drop_field($table, $field, $continue=true, $feedback=true);
+        upgrade_plugin_savepoint(true, 2017022203, 'report', 'moereports');
+        
+    }
+    
+    
     return true;
 }

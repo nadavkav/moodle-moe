@@ -79,8 +79,14 @@ class peractivityreginlevel extends moeReport{
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
-                        $results[$regin][$cors][$activity][$makbila]++;
+                    $localuserinfo = get_complete_user_data('id', $user->id);
+                if (($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot']) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                        continue;
+                    } else {
+                            $results[$regin][$cors][$activity][$makbila]++;
+                    } 
                 }
+                
             }
         }    
         return $results;
@@ -95,10 +101,10 @@ class peractivityreginlevel extends moeReport{
                 foreach ($corsvalue as $activitykey => $activityvalue) {
                     $onerecord = new peractivityreginlevel();
                     $onerecord->region = $reginkey;
-                    $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
                     // Geting the activity name through get_fast_modinfo
                     $course = $DB->get_record('course', array('id' => $corskey));
                     $insinfo = get_fast_modinfo($course);
+                    $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
                     foreach ($insinfo->instances as $cactivity) {
                         foreach ($cactivity as $acti) {
                             if ($acti->id == $activitykey) {
@@ -166,6 +172,19 @@ class peractivityreginlevel extends moeReport{
                 }
             }
         }
+        function cmp($a, $b)
+        {
+            $res = strcmp($a->region, $b->region);
+            if ($res !== 0){
+                return $res;
+            }
+            $res = strcmp($a->course, $b->course);
+            if ($res !== 0){
+                return $res;
+            }
+            return strcmp($a->activityname, $b->activityname);
+        }
+        usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
         
     }

@@ -71,8 +71,9 @@ class percoursereginlevel extends moereport{
                 $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $cors = $course->id;
-                    if (!isset($results[$regin][$cors][$makbila])) {
-                        $results[$regin][$cors][$makbila] = 1;
+                    $localuser = get_complete_user_data('id', $user->id);
+                    if ($localuser->profile['StudentMosad'] != $USER->profile['Yeshuyot'] && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                        continue;
                     } else {
                             $results[$regin][$cors][$makbila]++;
                     }
@@ -90,7 +91,8 @@ class percoursereginlevel extends moereport{
             foreach ($reginvalue as $corskey => $corsvalue) {
                 $onerecord = new percoursereginlevel();
                 $onerecord->region = $reginkey;
-                $onerecord->course = $DB->get_field('course', 'fullname', array('id' => $corskey));
+                $course = $DB->get_record('course', array('id' => $corskey));
+                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
                         case 9:
@@ -147,6 +149,16 @@ class percoursereginlevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
+        function cmp($a, $b)
+        {
+            $res = strcmp($a->region, $b->region);
+            if ($res !== 0){
+                return $res;
+            }
+            
+            return strcmp($a->course, $b->course);
+        }
+        usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
     }
 }
