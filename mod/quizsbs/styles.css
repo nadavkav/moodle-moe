@@ -45,7 +45,9 @@
 }
 
 .mod_quizsbs-prev-nav-show{
-    background: url([[pix:quizsbs|Page_right]]) no-repeat center !important;
+    background: url([[pix:quizsbs|Page_right]]) no-repeat right !important;
+	background-position-x: 95% !important;
+	background-size: auto 40% !important;
     background-color:#bfe3e2 !important;
     background-position:5%;
     padding: 12px 24px !important;  
@@ -54,7 +56,9 @@
 }
 
 .mod_quizsbs-next-nav-show{
-    background: url([[pix:quizsbs|Page_left]]) no-repeat center !important;
+    background: url([[pix:quizsbs|Page_left]]) no-repeat left !important;
+	background-position-x: 5% !important;
+	background-size: auto 40% !important;
     background-color:#bfe3e2 !important;
     background-position: center center; 
     padding: 12px 24px !important;
@@ -1377,4 +1381,7 @@ table#categoryquestions {
     #page-mod-quizsbs-edit .statusbar {
         padding: 0;
     }
+}
+#navigation input{
+	color:#000000 !important;
 }
