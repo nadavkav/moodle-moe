@@ -1378,3 +1378,6 @@ table#categoryquestions {
         padding: 0;
     }
 }
+.formulation .ddarea .dropzones .dropzone,#questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .drags.notreadonly{
+	position: relative !important ;
+}
