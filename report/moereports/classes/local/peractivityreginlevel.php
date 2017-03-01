@@ -37,11 +37,12 @@ class peractivityreginlevel extends moeReport{
     public function runreport() {
         global $DB, $USER;
         $usercontext = context_user::instance($USER->id);
-        
+
         $results = array();
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        
+
+        // Get all regins for current user
         if(is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)){
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
             foreach ($regionsobj as $obj){
@@ -54,14 +55,16 @@ class peractivityreginlevel extends moeReport{
                 if (!array_search($region, $regions)){
                     array_push($regions, $region);
                 }
-            
+
             }
         }
+
+        // Create zero array for report view for all activitys in all courses for each region
         foreach ($regions as $region) {
             foreach ($courses as $course) {
                 $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
                 foreach ($allactivity as $acti) {
-                    for ($i = 9; $i < 13; $i++) {
+                    for ($i = 8; $i < 13; $i++) {
                         $results[$region][$course->id][$acti->id][$i] = 0;
                     }
                 }
@@ -73,22 +76,32 @@ class peractivityreginlevel extends moeReport{
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                $semel = $localuserinfo->profile['StudentMosad'];
+                $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
-                $makbila = $localuserinfo->profile['StudentKita'];
+                if($regin == false){
+                    continue;
+                }
+                $kita = $localuserinfo->profile['StudentKita'];
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
                     $cors = $course->id;
                     $localuserinfo = get_complete_user_data('id', $user->id);
-                if (($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot']) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
+                    if ((isset($localuserinfo->profile['StudentMosad']) && isset($USER->profile['Yeshuyot']) && ($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot'])) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
                         continue;
                     } else {
-                            $results[$regin][$cors][$activity][$makbila]++;
-                    } 
+                        if(!isset($results[$regin][$cors][$activity][$kita])){
+                            for ($i = 8; $i < 13; $i++) {
+                                if(!isset($results[$regin][$cors][$activity][$i])){
+                                    $results[$regin][$cors][$activity][$i] = 0;
+                                }
+                            }
+                        }
+                        $results[$regin][$cors][$activity][$kita]++;
+                    }
                 }
-                
+
             }
-        }    
+        }
         return $results;
     }
 
@@ -112,6 +125,9 @@ class peractivityreginlevel extends moeReport{
                             }
                         }
                     }
+                    if($onerecord->activityname == null){
+                        continue;
+                    }
                     foreach ($activityvalue as $gradekey => $gradevalue) {
                         switch ($gradekey){
                             case 9:
@@ -124,7 +140,7 @@ class peractivityreginlevel extends moeReport{
                                     $onerecord->ninthgradetotal = "אין מידע";
                                 } else {
                                     $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                                }                                                            
+                                }
                                 break;
                             case 10:
                                 $onerecord->tenthgradesum = $gradevalue;
@@ -162,7 +178,7 @@ class peractivityreginlevel extends moeReport{
                                 } else {
                                     $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                                 }
-  
+
                                 break;
 
                         }
@@ -186,7 +202,7 @@ class peractivityreginlevel extends moeReport{
         }
         usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
-        
+
     }
 
 
