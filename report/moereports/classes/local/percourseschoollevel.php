@@ -35,7 +35,7 @@ class percourseschoollevel extends moereport{
     public function runreport() {
         global $DB, $USER;
         $usercontext = context_user::instance($USER->id);
-        
+
         $results;
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
@@ -55,13 +55,15 @@ class percourseschoollevel extends moereport{
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $makbila = $localuserinfo->profile['StudentKita'];
-                if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
-                    foreach ($user->progress as $act) {
-                        $cors = $course->id;
-                        if (!isset($results[$semel][$cors][$makbila])) {
-                            $results[$semel][$cors][$makbila] = 1;
-                        } else {
-                                $results[$semel][$cors][$makbila]++;
+                if (! empty($semel) && ! empty($makbila)) {
+                    if (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) {
+                        foreach ($user->progress as $act) {
+                            $cors = $course->id;
+                            if (! isset($results[$semel][$cors][$makbila])) {
+                                $results[$semel][$cors][$makbila] = 1;
+                            } else {
+                                $results[$semel][$cors][$makbila] ++;
+                            }
                         }
                     }
                 }
@@ -78,6 +80,9 @@ class percourseschoollevel extends moereport{
             foreach ($scoolvalue as $corskey => $corsvalue) {
                 $onerecord = new percourseschoollevel();
                 $onerecord->region = $DB->get_field('moereports_reports', 'region', array('symbol' => $scoolkey));
+                if(empty($onerecord->region)) {
+                    continue;
+                }
                 $onerecord->scollSymbol = $scoolkey;
                 $onerecord->scollName = $DB->get_field('moereports_reports', 'name', array('symbol' => $scoolkey));
                 $course = $DB->get_record('course', array('id' => $corskey));
@@ -130,21 +135,18 @@ class percourseschoollevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
-      
-    function cmp($a, $b)
-        {
-            $res = strcmp($a->region, $b->region);
-            if ($res !== 0){
-                return $res;
-            }
-            $res = strcmp($a->scollName, $b->scollName);
-            if ($res !== 0){
-                return $res;
-            }
-            return strcmp($a->course, $b->course);
-        }        
         return $resultintamplateformat;
-        
+    }
 
+    private function cmp($a, $b) {
+        $res = strcmp($a->region, $b->region);
+        if ($res !== 0){
+            return $res;
+        }
+        $res = strcmp($a->scollName, $b->scollName);
+        if ($res !== 0){
+            return $res;
+        }
+        return strcmp($a->course, $b->course);
     }
 }
