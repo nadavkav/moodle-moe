@@ -52,3 +52,8 @@ $string['schools_info'] = 'schools info';
 $string['reportviewhelper'] = 'Enter the role symbol how can watch the report. you can add more the one by separate them with comma.';
 $string['moeviewpermission'] = 'View permission';
 $string['excelexp'] = 'Export to excel';
+$string['usersinfo'] = 'users info';
+$string['teachingstuff'] = 'teaching stuff';
+$string['students'] = 'students';
+$string['numofusers'] = 'number of users:';
+
