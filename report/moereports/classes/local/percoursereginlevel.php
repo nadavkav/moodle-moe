@@ -33,7 +33,7 @@ class percoursereginlevel extends moereport{
     public function runreport() {
         global $DB, $USER;
         $usercontext = context_user::instance($USER->id);
-        
+
         $results = array();
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
@@ -50,9 +50,9 @@ class percoursereginlevel extends moereport{
                     array_push($regions, $region);
                 }
             }
-        }          
-        
-        
+        }
+
+
 
         foreach ($regions as $region) {
             foreach ($courses as $course) {
@@ -69,12 +69,18 @@ class percoursereginlevel extends moereport{
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
                 $makbila = $localuserinfo->profile['StudentKita'];
+                if(!isset($semel) || $regin == false){
+                    continue;
+                }
                 foreach ($user->progress as $act) {
                     $cors = $course->id;
                     $localuser = get_complete_user_data('id', $user->id);
                     if ($localuser->profile['StudentMosad'] != $USER->profile['Yeshuyot'] && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
                         continue;
                     } else {
+                            if(!isset($results[$regin][$cors][$makbila])){
+                                $results[$regin][$cors][$makbila] = 0;
+                            }
                             $results[$regin][$cors][$makbila]++;
                     }
                 }
@@ -155,7 +161,7 @@ class percoursereginlevel extends moereport{
             if ($res !== 0){
                 return $res;
             }
-            
+
             return strcmp($a->course, $b->course);
         }
         usort($resultintamplateformat, "cmp");
