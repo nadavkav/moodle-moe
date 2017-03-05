@@ -17,7 +17,6 @@ namespace report_moereports\local;
 
 defined('MOODLE_INTERNAL') || die();
 
-use report_moereport\local\model;
 
 /**
  *
@@ -34,11 +33,8 @@ class school extends model
 
     /**
      */
-    public function __construct(int $id = null, string $table = 'moereports_reports') {
+    public function __construct(int $symbol = null, int $id = null, string $table = 'moereports_reports') {
         parent::__construct($id, $table);
-        if (!empty($this->get_id())) {
-            $this->load_from_db();
-        }
         $this->levels = array(
             '8' => 0,
             '9' => 0,
@@ -46,6 +42,13 @@ class school extends model
             '11' => 0,
             '12' => 0,
         );
+        if(!empty($symbol)){
+            $this->set_symbol($symbol);
+        }
+        if (!empty($this->get_symbol())) {
+            $this->load_from_db();
+            $this->update_levels_from_db();
+        }
     }
 
     /**
@@ -98,6 +101,35 @@ class school extends model
         }
     }
 
+    public function load_from_db() {
+        global $DB;
+
+        if (!empty($this->symbol)) {
+            $vars = get_object_vars($this);
+            $obj = $DB->get_record($this->get_table(), array('symbol' => $this->symbol));
+            if ($obj){
+                foreach ($obj as $key => $value) {
+                    if (key_exists($key, $vars)) {
+                        $this->{$key} = $value;
+                    }
+                }
+            }
+        }
+    }
+
+    public function get_students(){
+        global $DB;
+
+        $isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'IsStudent'));
+        $studentmosadid = $DB->get_field('user_info_field', 'id', array('shortname' => 'StudentMosad'));
+        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
+            array('isstudent' => $isstudentfieldid,
+                  'studentmosad' => $studentmosadid,
+                  'mosad' => $this->get_symbol(),
+
+            ));
+        return $users;
+    }
     /**
      * (non-PHPdoc)
      *
