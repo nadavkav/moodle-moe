@@ -35,19 +35,25 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('usersinfo', 'report_moereports'));
 
 global $DB;
-$sumusers = $DB->get_record_sql("SELECT COUNT(*) as count FROM mdl_user WHERE NOT(username = 'guest')");
-$sumstudents = $DB->get_record_sql("SELECT COUNT(*) as count FROM mdl_user_info_data WHERE fieldid = 4 and data ='Yes'");
-$sumstuff = $DB->get_record_sql("SELECT COUNT(*) as count FROM mdl_user_info_data WHERE fieldid = 4 and NOT(data ='Yes')");;
-echo '<div>'.get_string('numofusers','report_moereports').' '.$sumusers->count.'</div>
-    <table style="width:50%"> 
+$isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'IsStudent'));
+if (!$isstudentfieldid) {
+    throw new coding_exception('IsStudent filed is missing');
+}
+$sumusers = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user} WHERE NOT(username = 'guest')");
+$sumstudents = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} WHERE fieldid = ? and data ='Yes'",
+    array($isstudentfieldid));
+$sumstuff = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} WHERE fieldid = ? and NOT(data ='Yes')",
+    array($isstudentfieldid));
+echo '<div>'.get_string('numofusers', 'report_moereports') . ' ' . $sumusers->count . '</div>
+    <table style="width:50%">
     <tr>
-    <th>'.get_string('teachingstuff','report_moereports').'</th>
-    <th>'.get_string('students','report_moereports').'</th> 
+    <th>'.get_string('teachingstuff', 'report_moereports') . '</th>
+    <th>'.get_string('students', 'report_moereports') . '</th>
   </tr>
    <tr>
     <th>'.$sumstuff->count.'</th>
-    <th>'.$sumstudents->count.'</th> 
+    <th>'.$sumstudents->count.'</th>
   </tr>
         </table>';
 
-echo $OUTPUT->footer(); 
+echo $OUTPUT->footer();
