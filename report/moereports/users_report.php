@@ -42,8 +42,7 @@ if (!$isstudentfieldid) {
 $sumusers = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user} WHERE NOT(username = 'guest')");
 $sumstudents = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} WHERE fieldid = ? and data ='Yes'",
     array($isstudentfieldid));
-$sumstuff = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} WHERE fieldid = ? and NOT(data ='Yes')",
-    array($isstudentfieldid));
+$sumstuff = $sumusers->count - $sumstudents->count;
 echo '<div>'.get_string('numofusers', 'report_moereports') . ' ' . $sumusers->count . '</div>
     <table style="width:50%">
     <tr>
@@ -51,8 +50,8 @@ echo '<div>'.get_string('numofusers', 'report_moereports') . ' ' . $sumusers->co
     <th>'.get_string('students', 'report_moereports') . '</th>
   </tr>
    <tr>
-    <th>'.$sumstuff->count.'</th>
-    <th>'.$sumstudents->count.'</th>
+    <th>' . $sumstuff .'</th>
+    <th>' . $sumstudents->count . '</th>
   </tr>
         </table>';
 
