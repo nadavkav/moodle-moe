@@ -1,4 +1,6 @@
 <?php
+use report_moereports\local\region;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -14,7 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die;
+
 require_once('../../report/moereports/classes/local/reportsformoe.php');
+require_once('../../report/moereports/classes/local/region.php');
 
 class percoursereginlevel extends moereport{
 
@@ -57,32 +61,28 @@ class percoursereginlevel extends moereport{
         foreach ($regions as $region) {
             foreach ($courses as $course) {
                 for ($i = 9; $i < 13; $i++) {
-                    $results[$region][$course->id][$i] = 0;
+                    $results[$region][$course->category][$i] = 0;
                 }
             }
         }
+        
+        
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
+                if (isset($localuserinfo->profile['StudentMosad']) && !in_array(region::get_name_by_scool_symbol($localuserinfo->profile['StudentMosad']), $regions)){
+                    continue;
+                }
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                $semel = $localuserinfo->profile['StudentMosad'];
+                $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
                 $makbila = $localuserinfo->profile['StudentKita'];
                 if(!isset($semel) || $regin == false){
                     continue;
                 }
                 foreach ($user->progress as $act) {
-                    $cors = $course->id;
-                    $localuser = get_complete_user_data('id', $user->id);
-                    if ($localuser->profile['StudentMosad'] != $USER->profile['Yeshuyot'] && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
-                        continue;
-                    } else {
-                            if(!isset($results[$regin][$cors][$makbila])){
-                                $results[$regin][$cors][$makbila] = 0;
-                            }
-                            $results[$regin][$cors][$makbila]++;
-                    }
+                            $results[$regin][$course->category][$makbila]++;
                 }
             }
         }
@@ -97,8 +97,7 @@ class percoursereginlevel extends moereport{
             foreach ($reginvalue as $corskey => $corsvalue) {
                 $onerecord = new percoursereginlevel();
                 $onerecord->region = $reginkey;
-                $course = $DB->get_record('course', array('id' => $corskey));
-                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
+                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $corskey));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
                         case 9:
