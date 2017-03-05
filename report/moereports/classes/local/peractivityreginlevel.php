@@ -63,7 +63,7 @@ class peractivityreginlevel extends moeReport{
         // Create zero array for report view for all activitys in all courses for each region
         foreach ($regions as $region) {
             foreach ($courses as $course) {
-                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
+                $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ?', array($course->id));
                 foreach ($allactivity as $acti) {
                     for ($i = 8; $i < 13; $i++) {
                         $results[$region][$course->category][$acti->id][$i] = 0;

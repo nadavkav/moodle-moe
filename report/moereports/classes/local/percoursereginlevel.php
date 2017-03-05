@@ -71,10 +71,10 @@ class percoursereginlevel extends moereport{
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
+                $localuserinfo = get_complete_user_data('id', $user->id);
                 if (isset($localuserinfo->profile['StudentMosad']) && !in_array(region::get_name_by_scool_symbol($localuserinfo->profile['StudentMosad']), $regions)){
                     continue;
                 }
-                $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
                 $makbila = $localuserinfo->profile['StudentKita'];
