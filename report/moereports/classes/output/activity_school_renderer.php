@@ -16,6 +16,7 @@
 namespace report_moereports\output;
 
 use report_moereports\local\region;
+use report_moereports\local\school;
 
 /**
  *
@@ -27,18 +28,38 @@ class activity_school_renderer extends \plugin_renderer_base
     public function display_report($context){
         global $DB, $USER;
 
+        $schoollevelaccess = $DB->get_field('config', 'value', array('name' => 'schools_level_access'));
+        $schoollevelaccess = explode(',', $schoollevelaccess);
+        $schools = array();
+        if (!isset($USER->profile['Yeshuyot']) || !isset($USER->profile['SimpleRole'])){
+            return ;
+        }
+        $roles = explode(',', $USER->profile['SimpleRole']);
+        $mosdot = explode(',', $USER->profile['Yeshuyot']);
+        $rolesinschools = array();
+        foreach ($roles as $key => $role) {
+            $rolesinschools[$role][] = $mosdot[$key];
+        }
         $allcourses = $DB->get_records('course', array('enablecompletion' => '1'));
         if(is_siteadmin($USER->id) || has_capability('report/moereport:viewall', $context)){
             $regions = $DB->get_records_sql('select region from {moereports_reports} group by region');
         } else {
-            if(isset($USER->profile['Yeshuyot'])){
-                $regions = $DB->get_records_sql('select region from {moereports_reports} where symbol in (?) group by region',
-                    array($USER->profile['Yeshuyot']));
+            foreach ($rolesinschools as $role => $symboles) {
+                if(in_array($role, $schoollevelaccess)){
+                    foreach ($symboles as $symbole){
+                        $schools[] = new school($symbole);
+                    }
+                }
             }
         }
 
-        foreach ($regions as $region) {
-           $region = new region($region);
+        foreach ($schools as $school) {
+            $region = new region($school->get_region());
+            foreach ($allcourses as $course) {
+                ;
+            }
+
+
            $data[$region->get_name()] = array();
         }
         $data = new stdClass();

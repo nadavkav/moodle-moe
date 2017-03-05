@@ -17,7 +17,6 @@ namespace report_moereports\local;
 
 defined('MOODLE_INTERNAL') || die();
 
-use report_moereport\local\model;
 
 /**
  *
@@ -34,11 +33,8 @@ class school extends model
 
     /**
      */
-    public function __construct(int $id = null, string $table = 'moereports_reports') {
+    public function __construct(int $symbol = null, int $id = null, string $table = 'moereports_reports') {
         parent::__construct($id, $table);
-        if (!empty($this->get_id())) {
-            $this->load_from_db();
-        }
         $this->levels = array(
             '8' => 0,
             '9' => 0,
@@ -46,6 +42,13 @@ class school extends model
             '11' => 0,
             '12' => 0,
         );
+        if(!empty($symbol)){
+            $this->set_symbol($symbol);
+        }
+        if (!empty($this->get_symbol())) {
+            $this->load_from_db();
+            $this->update_levels_from_db();
+        }
     }
 
     /**
@@ -95,6 +98,22 @@ class school extends model
         $levels = $DB->get_records('moereports_reports_classes', array('symbol' => $this->get_symbol()));
         foreach ($levels as $level) {
             $this->levels[$level->class] = $level->studentsnumber;
+        }
+    }
+
+    public function load_from_db() {
+        global $DB;
+
+        if (!empty($this->symbol)) {
+            $vars = get_object_vars($this);
+            $obj = $DB->get_record($this->get_table(), array('symbol' => $this->symbol));
+            if ($obj){
+                foreach ($obj as $key => $value) {
+                    if (key_exists($key, $vars)) {
+                        $this->{$key} = $value;
+                    }
+                }
+            }
         }
     }
 
