@@ -48,4 +48,7 @@ $string['reportviewhelper'] = 'הכניסו את מספר התפקיד שיוכ�
 $string['schools_info'] = 'פרטי בתי ספר';
 $string['classesinfo'] = 'פרטי כיתות';
 $string['excelexp'] = 'ייצוא לאקסל';
-
+$string['usersinfo'] = 'פרטי משתמשים';
+$string['teachingstuff'] = 'עובדי הוראה';
+$string['students'] = 'תלמידים';
+$string['numofusers'] = 'מספר יוזרים סה"כ:';

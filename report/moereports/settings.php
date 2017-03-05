@@ -21,6 +21,8 @@ defined('MOODLE_INTERNAL') || die;
     $CFG->wwwroot.'/report/moereports/view.php'));
     $ADMIN->add('report_moereports', new admin_externalpage('classes info', get_string('classesinfo', 'report_moereports'),
     $CFG->wwwroot.'/report/moereports/classes_report.php'));
+    $ADMIN->add('report_moereports', new admin_externalpage('users info', get_string('usersinfo', 'report_moereports'),
+        $CFG->wwwroot.'/report/moereports/users_report.php'));
 
     $settings = new admin_settingpage('viewpermission', get_string('moeviewpermission', 'report_moereports'));
 
