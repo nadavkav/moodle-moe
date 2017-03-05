@@ -56,5 +56,11 @@ class region
     public function get_schools() {
         return $this->schools;
     }
+    
+    public static function get_name_by_scool_symbol($symbol) {
+        global $DB;
+        return $DB->get_field('moereports_reports', 'region', array("symbol" => $symbol));
+    }
+    
 }
 

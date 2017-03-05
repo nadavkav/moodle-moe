@@ -15,8 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 defined('MOODLE_INTERNAL') || die;
-
+use report_moereports\local\region;
 require_once('../../report/moereports/classes/local/reportsformoe.php');
+
 
 class peractivityreginlevel extends moeReport{
 
@@ -43,16 +44,16 @@ class peractivityreginlevel extends moeReport{
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
 
         // Get all regins for current user
-        if(is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)){
+        if (is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) {
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-            foreach ($regionsobj as $obj){
+            foreach ($regionsobj as $obj) {
                 array_push($regions, $obj->region);
             }
         } else {
-            $useryeshuyot= explode(',',$USER->profile['Yeshuyot']);
-            foreach ($useryeshuyot as $yeshut){
+            $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
+            foreach ($useryeshuyot as $yeshut) {
                 $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-                if (!array_search($region, $regions)){
+                if (!array_search($region, $regions)) {
                     array_push($regions, $region);
                 }
 
@@ -65,7 +66,7 @@ class peractivityreginlevel extends moeReport{
                 $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array($course->id));
                 foreach ($allactivity as $acti) {
                     for ($i = 8; $i < 13; $i++) {
-                        $results[$region][$course->id][$acti->id][$i] = 0;
+                        $results[$region][$course->category][$acti->id][$i] = 0;
                     }
                 }
             }
@@ -76,28 +77,21 @@ class peractivityreginlevel extends moeReport{
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
-                $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
-                if($regin == false){
+                if (isset($localuserinfo->profile['StudentMosad']) &&
+                    !in_array(region::get_name_by_scool_symbol($localuserinfo->profile['StudentMosad']), $regions)) {
                     continue;
                 }
-                $kita = $localuserinfo->profile['StudentKita'];
+                $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
+                $kita = isset($localuserinfo->profile['StudentKita']) ? $localuserinfo->profile['StudentKita'] : null;
+                $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
+                if ($regin == false || $kita == null) {
+                    continue;
+                }
                 foreach ($user->progress as $act) {
                     $activity = $act->coursemoduleid;
-                    $cors = $course->id;
+                    $cors = $course->category;
                     $localuserinfo = get_complete_user_data('id', $user->id);
-                    if ((isset($localuserinfo->profile['StudentMosad']) && isset($USER->profile['Yeshuyot']) && ($localuserinfo->profile['StudentMosad'] != $USER->profile['Yeshuyot'])) && !(is_siteadmin()||has_capability('report/moereport:viewall', $usercontext))) {
-                        continue;
-                    } else {
-                        if(!isset($results[$regin][$cors][$activity][$kita])){
-                            for ($i = 8; $i < 13; $i++) {
-                                if(!isset($results[$regin][$cors][$activity][$i])){
-                                    $results[$regin][$cors][$activity][$i] = 0;
-                                }
-                            }
-                        }
                         $results[$regin][$cors][$activity][$kita]++;
-                    }
                 }
 
             }
@@ -110,92 +104,90 @@ class peractivityreginlevel extends moeReport{
         $results = self::runreport();
         $resultintamplateformat = array();
         foreach ($results as $reginkey => $reginvalue) {
-            foreach ($reginvalue as $corskey => $corsvalue) {
-                foreach ($corsvalue as $activitykey => $activityvalue) {
-                    $onerecord = new peractivityreginlevel();
-                    $onerecord->region = $reginkey;
-                    // Geting the activity name through get_fast_modinfo
-                    $course = $DB->get_record('course', array('id' => $corskey));
-                    $insinfo = get_fast_modinfo($course);
-                    $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
-                    foreach ($insinfo->instances as $cactivity) {
-                        foreach ($cactivity as $acti) {
-                            if ($acti->id == $activitykey) {
-                                $onerecord->activityname = $acti->name;
+            foreach ($reginvalue as $categorykey => $categoryvalue) {
+                $corsesincat = $DB->get_records_sql("select * from mdl_course where category =?", array($categorykey));
+                foreach ($corsesincat as $corskey) {
+                    foreach ($categoryvalue as $activitykey => $activityvalue) {
+                        $onerecord = new peractivityreginlevel();
+                        $onerecord->region = $reginkey;
+                        // Geting the activity name through get_fast_modinfo
+                        $insinfo = get_fast_modinfo($corskey);
+                        $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $categorykey));
+                        foreach ($insinfo->instances as $cactivity) {
+                            foreach ($cactivity as $acti) {
+                                if ($acti->id == $activitykey) {
+                                    $onerecord->activityname = $acti->name;
+                                }
                             }
                         }
-                    }
-                    if($onerecord->activityname == null){
-                        continue;
-                    }
-                    foreach ($activityvalue as $gradekey => $gradevalue) {
-                        switch ($gradekey){
-                            case 9:
-                                $onerecord->ninthgradesum = $gradevalue;
-                                $den = $DB->get_field_sql("select sum(studentsnumber)
-                                                                from {moereports_reports_classes} where class = ? AND symbol
-                                                                in (select symbol from mdl_moereports_reports where region = ?)",
-                                                                array($gradekey, $reginkey));
-                                if ($den == 0){
-                                    $onerecord->ninthgradetotal = "אין מידע";
-                                } else {
-                                    $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                                }
-                                break;
-                            case 10:
-                                $onerecord->tenthgradesum = $gradevalue;
-                                $den = $DB->get_field_sql("select sum(studentsnumber)
-                                                                from {moereports_reports_classes} where class = ? AND symbol
-                                                                in (select symbol from mdl_moereports_reports where region = ?)",
-                                                                array($gradekey, $reginkey));
-                                if ($den == 0){
-                                    $onerecord->tenthgradetotal = "אין מידע";
-                                } else {
-                                    $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                                }
-                                break;
-
-                            case 11:
-                                $onerecord->eleventhgradesum = $gradevalue;
-                                $den = $DB->get_field_sql("select sum(studentsnumber)
-                                                                from {moereports_reports_classes} where class = ? AND symbol
-                                                                in (select symbol from mdl_moereports_reports where region = ?)",
-                                                                array($gradekey, $reginkey));
-                                if ($den == 0){
-                                    $onerecord->eleventhgradetotal = "אין מידע";
-                                } else {
-                                    $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                                }
-                                break;
-                            case 12:
-                                $onerecord->twelfthgradesum = $gradevalue;
-                                $den = $DB->get_field_sql("select sum(studentsnumber)
-                                                                from {moereports_reports_classes} where class = ? AND symbol
-                                                                in (select symbol from mdl_moereports_reports where region = ?)",
-                                    array($gradekey, $reginkey));
-                                if ($den == 0){
-                                    $onerecord->twelfthgradetotal = "אין מידע";
-                                } else {
-                                    $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                                }
-
-                                break;
-
+                        if ($onerecord->activityname == null) {
+                             continue;
                         }
+                        foreach ($activityvalue as $gradekey => $gradevalue) {
+                            switch ($gradekey){
+                                case 9:
+                                    $onerecord->ninthgradesum = $gradevalue;
+                                    $den = $DB->get_field_sql("select sum(studentsnumber)
+                                                                from {moereports_reports_classes} where class = ? AND symbol
+                                                                in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                array($gradekey, $reginkey));
+                                    if ($den == 0) {
+                                        $onerecord->ninthgradetotal = "אין מידע";
+                                    } else {
+                                        $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
+                                    }
+                                    break;
+                                case 10:
+                                    $onerecord->tenthgradesum = $gradevalue;
+                                    $den = $DB->get_field_sql("select sum(studentsnumber)
+                                                                    from {moereports_reports_classes} where class = ? AND symbol
+                                                                    in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                    array($gradekey, $reginkey));
+                                    if ($den == 0) {
+                                        $onerecord->tenthgradetotal = "אין מידע";
+                                    } else {
+                                        $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
+                                    }
+                                    break;
+                                case 11:
+                                    $onerecord->eleventhgradesum = $gradevalue;
+                                    $den = $DB->get_field_sql("select sum(studentsnumber)
+                                                                    from {moereports_reports_classes} where class = ? AND symbol
+                                                                    in (select symbol from mdl_moereports_reports where region = ?)",
+                                                                    array($gradekey, $reginkey));
+                                    if ($den == 0) {
+                                        $onerecord->eleventhgradetotal = "אין מידע";
+                                    } else {
+                                        $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100), 2) . "%";
+                                    }
+                                    break;
+                                case 12:
+                                    $onerecord->twelfthgradesum = $gradevalue;
+                                    $den = $DB->get_field_sql("select sum(studentsnumber)
+                                                                    from {moereports_reports_classes} where class = ? AND symbol
+                                                                    in (select symbol from mdl_moereports_reports where region = ?)",
+                                        array($gradekey, $reginkey));
+                                    if ($den == 0) {
+                                        $onerecord->twelfthgradetotal = "אין מידע";
+                                    } else {
+                                        $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
+                                    }
+                                    break;
+                            }
+                        }
+                        $onerecord = $onerecord->to_std();
+                        array_push($resultintamplateformat, $onerecord);
                     }
-                    $onerecord = $onerecord->to_std();
-                    array_push($resultintamplateformat, $onerecord);
                 }
             }
         }
-        function cmp($a, $b)
-        {
+        function cmp($a, $b) {
             $res = strcmp($a->region, $b->region);
-            if ($res !== 0){
+            if ($res !== 0) {
                 return $res;
             }
             $res = strcmp($a->course, $b->course);
-            if ($res !== 0){
+            if ($res !== 0) {
                 return $res;
             }
             return strcmp($a->activityname, $b->activityname);
