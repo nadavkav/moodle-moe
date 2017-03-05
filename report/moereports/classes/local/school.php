@@ -117,6 +117,19 @@ class school extends model
         }
     }
 
+    public function get_students(){
+        global $DB;
+
+        $isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'IsStudent'));
+        $studentmosadid = $DB->get_field('user_info_field', 'id', array('shortname' => 'StudentMosad'));
+        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
+            array('isstudent' => $isstudentfieldid,
+                  'studentmosad' => $studentmosadid,
+                  'mosad' => $this->get_symbol(),
+
+            ));
+        return $users;
+    }
     /**
      * (non-PHPdoc)
      *
