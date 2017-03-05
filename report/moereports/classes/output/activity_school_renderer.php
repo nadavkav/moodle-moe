@@ -55,14 +55,20 @@ class activity_school_renderer extends \plugin_renderer_base
 
         foreach ($schools as $school) {
             $region = new region($school->get_region());
+            $students = $school->get_students();
             foreach ($allcourses as $course) {
-                ;
+                $category = $DB->get_field('course_categories', 'name', array('id' => $course->id));
+                $completion = new \completion_info($course);
+                foreach ($students as $student) {
+                    $studentcomplete = $completion->get_completions($student);
+                }
+                $data[$region->get_name()][$school->get_symbol()][$school->get_name()][$category][] = 0;
             }
 
 
-           $data[$region->get_name()] = array();
+
         }
-        $data = new stdClass();
+        $data = new \stdClass();
         return $this->render_from_template('report_moereports/scool_level', $data);
     }
 }
