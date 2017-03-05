@@ -33,7 +33,7 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         return;
     }
 
-    if (\core\session\manager::is_loggedinas() or $USER->id != $user->id) {
+    if ($USER->id != $user->id) {
         // No peeking at somebody else's sessions!
         return;
     }
@@ -49,15 +49,15 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         }
         $schoollevelaccess = array_intersect($userrule,$schoolpermitrules);
         $reginlevelaccess = array_intersect($userrule,$reginpermitrules);
-        if ( count ($schoollevelaccess)>0 ||  is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+        if (count($schoollevelaccess)>0 ||  is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
             $node = new core_user\output\myprofile\node('reports', 'per_activity_school_level', get_string('per_activity_school_level', 'report_moereports'),
-                null, new moodle_url('/report/moereports/activity_scoole_level.php'));
+                null, new moodle_url('/report/moereports/activity_school_level.php'));
             $tree->add_node($node);
             $node = new core_user\output\myprofile\node('reports', 'per_course_scool_level', get_string('per_course_scool_level', 'report_moereports'),
                 null, new moodle_url('/report/moereports/course_scoole_level.php'));
             $tree->add_node($node);
         }
-        if (count ($reginlevelaccess)>0|| is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+        if (count($reginlevelaccess)>0|| is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
                $node = new core_user\output\myprofile\node('reports', 'per_activity_regin_level', get_string('per_activity_regin_level', 'report_moereports'),
                    null, new moodle_url('/report/moereports/activity_regin_level.php'));
                $tree->add_node($node);

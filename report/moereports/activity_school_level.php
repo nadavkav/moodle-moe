@@ -20,7 +20,7 @@ require_once($CFG->libdir.'/modinfolib.php');
 $download   = optional_param('download', '', PARAM_ALPHA);
 global $OUTPUT;
 
-$url = new moodle_url('/report/moereports/activity_scoole_level.php');
+$url = new moodle_url('/report/moereports/activity_school_level.php');
 $PAGE->set_url($url);
 
 if ($download !== '') {
@@ -34,13 +34,14 @@ $PAGE->set_context($context);
 $PAGE->set_title(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
+$output = $PAGE->get_renderer('report_moereports', 'activity_school');
 
 $results = new peractivityschoollevel();
-$data = new stdClass();
+
 $data->results = $results->displayreportfortemplates();
 $data->url="$url" . "?download=xls";
 $renderer = $PAGE->get_renderer('core');
-$resulttable = $OUTPUT->render_from_template('report_moereports/scool_level', $data);
+$content = $output->display_report($context);
 //print spreadsheet if one is asked for:
 if ($download == "xls" ) {
     require_once("$CFG->libdir/excellib.class.php");
@@ -91,7 +92,7 @@ if ($download == "xls" ) {
         $row++;
 
     }
-     
+
     /// Close the workbook
     $workbook->close();
     exit;
@@ -102,6 +103,6 @@ $PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
 $PAGE->requires->js_call_amd('report_moereports/ecxelexport','init');
 
 
-echo $resulttable;
+echo $content;
 echo $OUTPUT->footer();
 
