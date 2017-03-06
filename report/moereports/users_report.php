@@ -39,8 +39,8 @@ $isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' =>
 if (!$isstudentfieldid) {
     throw new coding_exception('IsStudent filed is missing');
 }
-$sumusers = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user} WHERE NOT(username = 'guest')");
-$sumstudents = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} WHERE fieldid = ? and data ='Yes'",
+$sumusers = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user} WHERE NOT(username = 'guest') and deleted=0");
+$sumstudents = $DB->get_record_sql("SELECT COUNT(*) as count FROM {user_info_data} uid join {user} u on uid.userid=u.id WHERE uid.fieldid = ? and uid.data ='Yes' and u.deleted=0",
     array($isstudentfieldid));
 $sumstuff = $sumusers->count - $sumstudents->count;
 echo '<div>'.get_string('numofusers', 'report_moereports') . ' ' . $sumusers->count . '</div>
