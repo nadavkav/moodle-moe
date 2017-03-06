@@ -30,11 +30,18 @@ class school extends model
     protected $region;
     protected $name;
     protected $levels;
+    protected $isstudentfieldid;
+    protected $studentmosadid;
+
 
     /**
      */
     public function __construct(int $symbol = null, int $id = null, string $table = 'moereports_reports') {
+        global $DB;
+
         parent::__construct($id, $table);
+        $this->isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'IsStudent'));
+        $this->studentmosadid = $DB->get_field('user_info_field', 'id', array('shortname' => 'StudentMosad'));
         $this->levels = array(
             '8' => 0,
             '9' => 0,
@@ -86,6 +93,10 @@ class school extends model
         $this->region = $region;
     }
 
+    public function get_levels() {
+        return $this->levels;
+    }
+
     /**
      * @param field_type $name
      */
@@ -120,13 +131,12 @@ class school extends model
     public function get_students(){
         global $DB;
 
-        $isstudentfieldid = $DB->get_field('user_info_field', 'id', array('shortname' => 'IsStudent'));
-        $studentmosadid = $DB->get_field('user_info_field', 'id', array('shortname' => 'StudentMosad'));
-        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
-            array('isstudent' => $isstudentfieldid,
-                  'studentmosad' => $studentmosadid,
-                  'mosad' => $this->get_symbol(),
 
+        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
+            array(
+                'isstudent' => $this->isstudentfieldid,
+                'studentmosad' => $this->studentmosadid,
+                'mosad' => $this->get_symbol(),
             ));
         return $users;
     }
