@@ -94,6 +94,12 @@ class activity_school_renderer extends \plugin_renderer_base
         }
 
         $rows = new \stdClass();
+        $rows->url = new \moodle_url($this->page->url);
+        $rows->url->params(array(
+            'region' => $region->get_name(),
+            'download' => $download,
+        ));
+        $rows->url = $rows->url->raw_out();
         foreach ($schools as $school) {
             foreach ($allcourses as $course) {
                 $insinfo = get_fast_modinfo($course->id);
