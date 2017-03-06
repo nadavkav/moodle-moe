@@ -25,7 +25,7 @@ use report_moereports\local\school;
  */
 class activity_school_renderer extends \plugin_renderer_base
 {
-    public function display_report($context, $region){
+    public function display_report($context, $region, $download){
         global $DB, $USER;
         ini_set('memory_limit', '8192M');
 
@@ -92,6 +92,7 @@ class activity_school_renderer extends \plugin_renderer_base
                 }
             }
         }
+
         $rows = new \stdClass();
         foreach ($schools as $school) {
             foreach ($allcourses as $course) {
@@ -126,6 +127,55 @@ class activity_school_renderer extends \plugin_renderer_base
                     }
                 }
             }
+        }
+        //print spreadsheet if one is asked for:
+        if ($download == "xls" ) {
+            require_once("$CFG->libdir/excellib.class.php");
+            $date= date("Ymd");
+            /// Calculate file name
+            $filename = "$date"."_report";
+            /// Creating a workbook
+            $workbook = new \MoodleExcelWorkbook("-");
+            /// Send HTTP headers
+            $workbook->send($filename);
+            /// Creating the first worksheet
+            // assigning by reference gives this: Strict standards: Only variables should be assigned by reference in /data_1/www/html/moodle/moodle/mod/choicegroup/report.php on line 157
+            // removed the ampersand.
+            $myxls = $workbook->add_worksheet("one");
+            /// Print names of all the fields
+            $myxls->write_string(0,0,get_string("region", 'report_moereports'));
+            $myxls->write_string(0,1,get_string("symbol", 'report_moereports'));
+            $myxls->write_string(0,2,get_string("name", 'report_moereports'));
+            $myxls->write_string(0,3,get_string("cors", 'report_moereports'));
+            $myxls->write_string(0,4,get_string("activity", 'report_moereports'));
+            $myxls->write_string(0,5,get_string("makbila8", 'report_moereports'));
+            $myxls->write_string(0,6,get_string("percents8", 'report_moereports'));
+            $myxls->write_string(0,7,get_string("makbila9", 'report_moereports'));
+            $myxls->write_string(0,8,get_string("percents9", 'report_moereports'));
+            $myxls->write_string(0,9,get_string("makbila10", 'report_moereports'));
+            $myxls->write_string(0,10,get_string("percents10", 'report_moereports'));
+
+            /// generate the data for the body of the spreadsheet
+            $i=0;
+            $row=1;
+            foreach ($rows as $onerec){
+                $myxls->write_string($row, 0, $onerec->region);
+                $myxls->write_string($row, 1, $onerec->symbol);
+                $myxls->write_string($row, 2, $onerec->name);
+                $myxls->write_string($row, 3, $onerec->category);
+                $myxls->write_string($row, 4, $onerec->activity);
+                $myxls->write_string($row, 5, $onerec->count8);
+                $myxls->write_string($row, 6, $onerec->counterprcent8);
+                $myxls->write_string($row, 7, $onerec->count9);
+                $myxls->write_string($row, 8, $onerec->counterprcent9);
+                $myxls->write_string($row, 9, $onerec->count10);
+                $myxls->write_string($row, 10, $onerec->counterprcent10);
+                $row++;
+            }
+
+            /// Close the workbook
+            $workbook->close();
+            exit;
         }
         return $this->render_from_template('report_moereports/scool_level', $rows);
     }

@@ -46,8 +46,6 @@ class school extends model
             '8' => 0,
             '9' => 0,
             '10' => 0,
-            '11' => 0,
-            '12' => 0,
         );
         if(!empty($symbol)){
             $this->set_symbol($symbol);
