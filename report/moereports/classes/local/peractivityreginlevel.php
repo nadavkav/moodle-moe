@@ -72,25 +72,38 @@ class peractivityreginlevel extends moeReport{
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
+            $activities=  $completion->get_activities();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                if (isset($localuserinfo->profile['StudentMosad']) &&
-                    !in_array(region::get_name_by_scool_symbol($localuserinfo->profile['StudentMosad']), $regions)) {
-                    continue;
-                }
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $kita = isset($localuserinfo->profile['StudentKita']) ? $localuserinfo->profile['StudentKita'] : null;
-                $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
+                $regin = $DB->get_field('moereports_reports', 'region', array(
+                    'symbol' => $semel
+                ));
                 if ($regin == false || $kita == null) {
                     continue;
                 }
-                foreach ($user->progress as $act) {
-                    $activity = $act->coursemoduleid;
-                    $cors = $course->category;
-                    $localuserinfo = get_complete_user_data('id', $user->id);
-                        $results[$regin][$cors][$activity][$kita]++;
+                if ((isset($localuserinfo->profile['IsStudent']) && $localuserinfo->profile['IsStudent'] == "No") || array_search($regin, array_keys($regions)) === false) {
+                    continue;
                 }
-
+                foreach ($activities as $activity) {
+                    if (array_key_exists($activity->id, $user->progress)) {
+                        $thisprogress = $user->progress[$activity->id];
+                        $state = $thisprogress->completionstate;
+                    } else {
+                        $state = COMPLETION_INCOMPLETE;
+                    }
+                    
+                    switch ($state) {
+                        case COMPLETION_COMPLETE:
+                        case COMPLETION_COMPLETE_PASS:
+                            $results[$regin][$course->category][$activity->id][$kita] ++;
+                            break;
+                        case COMPLETION_INCOMPLETE:
+                        case COMPLETION_COMPLETE_FAIL:
+                            break;
+                    }
+                }
             }
         }
         return $results;
