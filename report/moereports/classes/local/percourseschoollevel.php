@@ -22,14 +22,13 @@ class percourseschoollevel extends moereport{
     public $scollsymbol;
     public $scollname;
     public $course;
+    public $eighthgradesum;
+    public $eighthgradetotal;
     public $ninthgradesum;
     public $ninthgradetotal;
     public $tenthgradesum;
     public $tenthgradetotal;
-    public $eleventhgradesum;
-    public $eleventhgradetotal;
-    public $twelfthgradesum;
-    public $twelfthgradetotal;
+
 
 
     public function runreport() {
@@ -48,7 +47,7 @@ class percourseschoollevel extends moereport{
         
         foreach ($semels as $semelkey => $semelvalue) {
             foreach ($courses as $course) {
-                for ($i = 9; $i < 13; $i++) {
+                for ($i = 8; $i < 11; $i++) {
                     $results[$semelkey][$course->category][$i] = 0;
                 }
             }
@@ -89,6 +88,16 @@ class percourseschoollevel extends moereport{
                 $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $corskey));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
+                        case 8:
+                            $onerecord->eighthgradesum = $gradevalue;
+                            $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
+                                array('class' => $gradekey, 'symbol' => $scoolkey));
+                            if ($den == 0){
+                                $onerecord->eighthgradetotal = "אין מידע";
+                            } else {
+                                $onerecord->eighthgradetotal = round(($gradevalue / $den * 100),2) . "%";
+                            }
+                            break;
                         case 9:
                             $onerecord->ninthgradesum = $gradevalue;
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
@@ -107,26 +116,6 @@ class percourseschoollevel extends moereport{
                                 $onerecord->tenthgradetotal = "אין מידע";
                             } else {
                                 $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                            }
-                            break;
-                        case 11:
-                            $onerecord->eleventhgradesum = $gradevalue;
-                            $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
-                                array('class' => $gradekey, 'symbol' => $scoolkey));
-                            if ($den == 0){
-                                $onerecord->eleventhgradetotal = "אין מידע";
-                            } else {
-                                $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100),2) . "%";
-                            }
-                            break;
-                        case 12:
-                            $onerecord->twelfthgradesum = $gradevalue;
-                            $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
-                                array('class' => $gradekey, 'symbol' => $scoolkey));
-                            if ($den == 0){
-                                $onerecord->twelfthgradetotal = "אין מידע";
-                            } else {
-                                $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
                             break;
                     }
