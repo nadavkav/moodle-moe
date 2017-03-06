@@ -25,7 +25,7 @@ use report_moereports\local\school;
  */
 class activity_school_renderer extends \plugin_renderer_base
 {
-    public function display_report($context){
+    public function display_report($context, $region){
         global $DB, $USER;
         ini_set('memory_limit', '8192M');
 
@@ -43,9 +43,17 @@ class activity_school_renderer extends \plugin_renderer_base
         }
         $allcourses = $DB->get_records('course', array('enablecompletion' => '1'));
         if(is_siteadmin($USER->id) || has_capability('report/moereport:viewall', $context)){
-            $symboles = $DB->get_records_sql('select symbol from {moereports_reports} group by symbol');
-            foreach ($symboles as $symbol){
-                $schools[] = new school($symbol->symbol);
+            if(empty($region)){
+                 $regions = new \stdClass();
+                 $regions->name = array();
+                 $regionsnames = $DB->get_records_sql('select region from {moereports_reports} group by region');
+                 foreach ($regionsnames as $name) {
+                     $regions->name[] = $name->region;
+                 }
+                 return $this->render_from_template('report_moereports/regionslist', $regions);
+            }else {
+                $region = new region($region);
+                $schools = $region->get_schools();
             }
         } else {
             foreach ($rolesinschools as $role => $symboles) {
@@ -89,29 +97,32 @@ class activity_school_renderer extends \plugin_renderer_base
             foreach ($allcourses as $course) {
                 $insinfo = get_fast_modinfo($course->id);
                 foreach ($insinfo->instances as $cactivity) {
-                    foreach ($cactivity as $activity) {
-                        foreach ($school->get_levels() as $level => $students) {
-                            $row = new \stdClass();
-                            $category = $DB->get_field('course_categories', 'name', array('id' => $course->category));
-                            $row->region = $school->get_region();
-                            $row->symbol = $school->get_symbol();
-                            $row->name = $school->get_name();
-                            $row->category = $category;
-                            $row->activity = $activity->name;
-                            foreach ($school->get_levels() as $level => $value){
-                                if(isset($data[$row->region][$row->symbol][$course->category][$activity->id][$level])) {
-                                    $row->{'count'.$level} = $data[$row->region][$row->symbol][$course->category][$activity->id][$level];
-                                 } else {
-                                    $row->{'count'.$level} = 0;
-                                }
-                                if($value != 0){
-                                    $row->{'countprcent'.$level} = round($row->{'count'.$level}/$value*100,2) . '%';
-                                } else {
-                                    $row->{'countprcent'.$level} = get_string('noinformation', 'report_moereports');
-                                }
-                            }
-                            $rows->results[] = $row;
+                    foreach ($cactivity as $key => $activity) {
+                        if($activity->completion == 0){
+                            continue;
                         }
+                        $row = new \stdClass();
+                        $category = $DB->get_field('course_categories', 'name', array(
+                            'id' => $course->category
+                        ));
+                        $row->region = $school->get_region();
+                        $row->symbol = $school->get_symbol();
+                        $row->name = $school->get_name();
+                        $row->category = $category;
+                        $row->activity = $activity->name;
+                        foreach ($school->get_levels() as $level => $value) {
+                            if (isset($data[$row->region][$row->symbol][$course->category][$key][$level])) {
+                                $row->{'count' . $level} = $data[$row->region][$row->symbol][$course->category][$key][$level];
+                            } else {
+                                $row->{'count' . $level} = 0;
+                            }
+                            if ($value != 0) {
+                                $row->{'counterprcent' . $level} = round($row->{'count' . $level} / $value * 100, 2) . '%';
+                            } else {
+                                $row->{'counterprcent' . $level} = get_string('noinformation', 'report_moereports');
+                            }
+                        }
+                        $rows->results[] = $row;
                     }
                 }
             }
