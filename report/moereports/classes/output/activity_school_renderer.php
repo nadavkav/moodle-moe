@@ -69,24 +69,41 @@ class activity_school_renderer extends \plugin_renderer_base
             $region = new region($school->get_region());
             $students = $school->get_students();
             foreach ($allcourses as $course) {
-                $category = $DB->get_field('course_categories', 'name', array('id' => $course->category));
                 $completion = new \completion_info($course);
+                $activities=  $completion->get_activities();
                 if(!empty($students)){
                     $studentcomplete = $completion->get_progress_all('u.id in ('. implode(',', array_keys($students)) . ')');
-                    foreach ($studentcomplete as $comp) {
-                        $userinfo = get_complete_user_data('id', $comp->id);
-                        foreach ($comp->progress as $progrs) {
-                            $activity = $DB->get_record_sql("SELECT cm.*, md.name as modname
-                               FROM {course_modules} cm,
-                                    {modules} md
-                               WHERE cm.id = ? AND
-                                     md.id = cm.module", array($progrs->coursemoduleid));
-                            $activity = $DB->get_record($activity->modname, array('id' => $activity->instance));
-                            if(!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])){
-                                $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']] = 0;
+                    foreach ($studentcomplete as $user) {
+                        $userinfo = get_complete_user_data('id', $user->id);
+                        foreach ($activities as $activity) {
+                            if (array_key_exists($activity->id,$user->progress)) {
+                                $thisprogress=$user->progress[$activity->id];
+                                $state=$thisprogress->completionstate;
                             } else {
-                                $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']]++;
+                                $state=COMPLETION_INCOMPLETE;
+                                if(!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])){
+                                    $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']] = 0;
+                                }
                             }
+                            switch($state) {
+                                case COMPLETION_COMPLETE :
+                                case COMPLETION_COMPLETE_PASS :
+                                    if(!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])){
+                                        $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']] = 1;
+                                    } else {
+                                        $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']]++;
+                                    }
+                                    break;
+                                case COMPLETION_INCOMPLETE :
+                                case COMPLETION_COMPLETE_FAIL :
+                                    break;
+                            }
+                        }
+                    }
+                } else {
+                    foreach ($activities as $activity){
+                        foreach ($school->get_levels() as $level => $value){
+                            $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$level] = 0;
                         }
                     }
                 }
@@ -102,9 +119,10 @@ class activity_school_renderer extends \plugin_renderer_base
         $rows->url = $rows->url->raw_out();
         foreach ($schools as $school) {
             foreach ($allcourses as $course) {
+                $completion = new \completion_info($course);
+                $activities=  $completion->get_activities();
                 $insinfo = get_fast_modinfo($course->id);
-                foreach ($insinfo->instances as $cactivity) {
-                    foreach ($cactivity as $key => $activity) {
+                    foreach ($activities as $key => $activity) {
                         if($activity->completion == 0){
                             continue;
                         }
@@ -119,7 +137,7 @@ class activity_school_renderer extends \plugin_renderer_base
                         $row->activity = $activity->name;
                         foreach ($school->get_levels() as $level => $value) {
                             if (isset($data[$row->region][$row->symbol][$course->category][$key][$level])) {
-                                $row->{'count' . $level} = $data[$row->region][$row->symbol][$course->category][$key][$level];
+                                $row->{'count' . $level} = $data[$row->region][$row->symbol][$course->category][$activity->id][$level];
                             } else {
                                 $row->{'count' . $level} = 0;
                             }
@@ -131,7 +149,6 @@ class activity_school_renderer extends \plugin_renderer_base
                         }
                         $rows->results[] = $row;
                     }
-                }
             }
         }
         //print spreadsheet if one is asked for:
