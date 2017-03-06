@@ -44,7 +44,7 @@ class percourseschoollevel extends moereport{
             $semels = explode(',',$USER->profile['Yeshuyot']);
         }
         
-        
+        //Set 0 to all cat in all schools
         foreach ($semels as $semelkey => $semelvalue) {
             foreach ($courses as $course) {
                 for ($i = 8; $i < 11; $i++) {
@@ -52,19 +52,38 @@ class percourseschoollevel extends moereport{
                 }
             }
         }
+        
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
+            $activities=  $completion->get_activities();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                if (isset($localuserinfo->profile['StudentMosad']) && array_search($localuserinfo->profile['StudentMosad'], $semels)){
+                if ((isset($localuserinfo->profile['IsStudent']) && $localuserinfo->profile['IsStudent'] == "No") ||
+                    isset($localuserinfo->profile['StudentMosad']) && array_search($localuserinfo->profile['StudentMosad'], array_keys($semels)) === false){
                     continue;
                 }
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $makbila = $localuserinfo->profile['StudentKita'];
-                
-                if (! empty($semel) && ! empty($makbila)) {
-                          $results[$semel][$course->category][$makbila] ++; 
+                foreach ($activities as $activity) {
+                    if (array_key_exists($activity->id,$user->progress)) {
+                        $thisprogress=$user->progress[$activity->id];
+                        $state=$thisprogress->completionstate;
+                    } else {
+                        $state=COMPLETION_INCOMPLETE;
+                    }
+                    
+                    switch($state) {
+                        case COMPLETION_COMPLETE :
+                        case COMPLETION_COMPLETE_PASS :
+                            if (! empty($semel) && ! empty($makbila)) {
+                                $results[$semel][$course->category][$makbila] ++;
+                            }
+                            break;
+                        case COMPLETION_INCOMPLETE :
+                        case COMPLETION_COMPLETE_FAIL :
+                            break;
+                    }      
                 }
             }
         }
@@ -93,7 +112,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0){
-                                $onerecord->eighthgradetotal = "אין מידע";
+                                $onerecord->eighthgradetotal = get_string('noinformation', 'report_moereports');
                             } else {
                                 $onerecord->eighthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
@@ -103,7 +122,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0){
-                                $onerecord->ninthgradetotal = "אין מידע";
+                                $onerecord->ninthgradetotal = get_string('noinformation', 'report_moereports');
                             } else {
                                 $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
@@ -113,7 +132,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0){
-                                $onerecord->tenthgradetotal = "אין מידע";
+                                $onerecord->tenthgradetotal = get_string('noinformation', 'report_moereports');
                             } else {
                                 $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
                             }
