@@ -114,7 +114,7 @@ class activity_school_renderer extends \plugin_renderer_base
         $rows->url = new \moodle_url($this->page->url);
         $rows->url->params(array(
             'region' => $region->get_name(),
-            'download' => $download,
+            'download' => 'xls',
         ));
         $rows->url = $rows->url->raw_out();
         foreach ($schools as $school) {
