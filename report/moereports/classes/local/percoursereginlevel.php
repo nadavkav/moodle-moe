@@ -72,20 +72,40 @@ class percoursereginlevel extends moereport{
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
+            $activities=  $completion->get_activities();            
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                if (isset($localuserinfo->profile['StudentMosad']) && !in_array(region::get_name_by_scool_symbol($localuserinfo->profile['StudentMosad']), $regions)){
-                    continue;
-                }
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
+                if ((isset($localuserinfo->profile['IsStudent']) && $localuserinfo->profile['IsStudent'] == "No") ||
+                    array_search($regin, array_keys($regions)) === false){
+                    continue;
+                }
+                
+
                 $makbila = $localuserinfo->profile['StudentKita'];
                 if(!isset($semel) || $regin == false){
                     continue;
                 }
-                foreach ($user->progress as $act) {
-                            $results[$regin][$course->category][$makbila]++;
+                foreach ($activities as $activity) {
+                    if (array_key_exists($activity->id,$user->progress)) {
+                        $thisprogress=$user->progress[$activity->id];
+                        $state=$thisprogress->completionstate;
+                    } else {
+                        $state=COMPLETION_INCOMPLETE;
+                    }
+                
+                    switch($state) {
+                        case COMPLETION_COMPLETE :
+                        case COMPLETION_COMPLETE_PASS :
+                                $results[$regin][$course->category][$makbila]++;
+                            break;
+                        case COMPLETION_INCOMPLETE :
+                        case COMPLETION_COMPLETE_FAIL :
+                            break;
+                    }
                 }
+
             }
         }
         return $results;
