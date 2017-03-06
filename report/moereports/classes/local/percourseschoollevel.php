@@ -58,13 +58,14 @@ class percourseschoollevel extends moereport{
             $participances = $completion->get_progress_all();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
-                if (isset($localuserinfo->profile['StudentMosad']) && !in_array($localuserinfo->profile['StudentMosad'], $semels)){
+                if (isset($localuserinfo->profile['StudentMosad']) && array_search($localuserinfo->profile['StudentMosad'], $semels)){
                     continue;
                 }
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $makbila = $localuserinfo->profile['StudentKita'];
+                
                 if (! empty($semel) && ! empty($makbila)) {
-                          $results[$semel][$cors->category][$makbila] ++; 
+                          $results[$semel][$course->category][$makbila] ++; 
                 }
             }
         }
@@ -85,8 +86,7 @@ class percourseschoollevel extends moereport{
                 }
                 $onerecord->scollSymbol = $scoolkey;
                 $onerecord->scollName = $DB->get_field('moereports_reports', 'name', array('symbol' => $scoolkey));
-                $course = $DB->get_record('course', array('id' => $corskey));
-                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $course->category));
+                $onerecord->course = $DB->get_field('course_categories', 'name', array('id' => $corskey));
                 foreach ($corsvalue as $gradekey => $gradevalue) {
                     switch ($gradekey){
                         case 9:
@@ -135,18 +135,20 @@ class percourseschoollevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
+         function cmp($a, $b) {
+            $res = strcmp($a->region, $b->region);
+            if ($res !== 0){
+                return $res;
+            }
+            $res = strcmp($a->scollName, $b->scollName);
+            if ($res !== 0){
+                return $res;
+            }
+            return strcmp($a->course, $b->course);
+        }
+        usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
     }
 
-    private function cmp($a, $b) {
-        $res = strcmp($a->region, $b->region);
-        if ($res !== 0){
-            return $res;
-        }
-        $res = strcmp($a->scollName, $b->scollName);
-        if ($res !== 0){
-            return $res;
-        }
-        return strcmp($a->course, $b->course);
-    }
+    
 }

@@ -38,7 +38,7 @@ class region
     public function set_name($name) {
         global $DB;
 
-        $this->name = $DB->get_field('moereports_reports', 'region', array('region' => $name));
+        $this->name = $DB->get_field('moereports_reports', 'region', array('region' => $name), IGNORE_MULTIPLE);
     }
 
     public function set_schools($schools) {
@@ -56,11 +56,11 @@ class region
     public function get_schools() {
         return $this->schools;
     }
-    
+
     public static function get_name_by_scool_symbol($symbol) {
         global $DB;
         return $DB->get_field('moereports_reports', 'region', array("symbol" => $symbol));
     }
-    
+
 }
 
