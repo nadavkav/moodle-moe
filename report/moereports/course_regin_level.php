@@ -61,14 +61,12 @@ if ($download == "xls" ) {
     /// Print names of all the fields
     $myxls->write_string(0,0,get_string("region", 'report_moereports'));
     $myxls->write_string(0,1,get_string("cors", 'report_moereports'));
-    $myxls->write_string(0,2,get_string("makbila9", 'report_moereports'));
-    $myxls->write_string(0,3,get_string("percents9", 'report_moereports'));
-    $myxls->write_string(0,4,get_string("makbila10", 'report_moereports'));
-    $myxls->write_string(0,5,get_string("percents10", 'report_moereports'));
-    $myxls->write_string(0,4,get_string("makbila11", 'report_moereports'));
-    $myxls->write_string(0,5,get_string("percents11", 'report_moereports'));
-    $myxls->write_string(0,4,get_string("makbila12", 'report_moereports'));
-    $myxls->write_string(0,5,get_string("percents12", 'report_moereports'));
+    $myxls->write_string(0,2,get_string("makbila8", 'report_moereports'));
+    $myxls->write_string(0,3,get_string("percents8", 'report_moereports'));
+    $myxls->write_string(0,4,get_string("makbila9", 'report_moereports'));
+    $myxls->write_string(0,5,get_string("percents9", 'report_moereports'));
+    $myxls->write_string(0,6,get_string("makbila10", 'report_moereports'));
+    $myxls->write_string(0,7,get_string("percents10", 'report_moereports'));
     
     
     /// generate the data for the body of the spreadsheet
@@ -77,14 +75,12 @@ if ($download == "xls" ) {
     foreach ($data->results as $onerec){
             $myxls->write_string($row, 0, $onerec->region);
             $myxls->write_string($row, 1, $onerec->course);
-            $myxls->write_string($row, 2, $onerec->ninthgradesum);
-            $myxls->write_string($row, 3, $onerec->ninthgradetotal);
-            $myxls->write_string($row, 4, $onerec->tenthgradesum);
-            $myxls->write_string($row, 5, $onerec->tenthgradetotal);
-            $myxls->write_string($row, 6, $onerec->eleventhgradesum);
-            $myxls->write_string($row, 7, $onerec->eleventhgradetotal);
-            $myxls->write_string($row, 8, $onerec->twelfthgradesum);
-            $myxls->write_string($row, 9, $onerec->twelfthgradetotal);
+            $myxls->write_string($row, 2, $onerec->eighthgradesum);
+            $myxls->write_string($row, 3, $onerec->eighthgradetotal);
+            $myxls->write_string($row, 4, $onerec->ninthgradesum);
+            $myxls->write_string($row, 5, $onerec->ninthgradetotal);
+            $myxls->write_string($row, 6, $onerec->tenthgradesum);
+            $myxls->write_string($row, 7, $onerec->tenthgradetotal);
             $row++;
             
     }

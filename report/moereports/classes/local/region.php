@@ -32,6 +32,9 @@ class region
             global $DB;
             $this->set_name($name);
             $schools = $DB->get_records('moereports_reports', array('region' => $name), '', 'symbol, name');
+            foreach ($schools as $school) {
+                $this->schools[] = new school($school->symbol);
+            }
         }
     }
 
@@ -40,6 +43,7 @@ class region
 
         $this->name = $DB->get_field('moereports_reports', 'region', array('region' => $name), IGNORE_MULTIPLE);
     }
+
 
     public function set_schools($schools) {
         if (is_array($schools)) {
