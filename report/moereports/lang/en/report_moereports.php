@@ -41,6 +41,7 @@ $string['percents10'] = 'Percentage of tenth graders students that have done the
 $string['makbila11'] = 'Number of eleventh graders who committed tasks';
 $string['percents11'] = 'Percentage of eleventh graders students that have done the tasks ';
 $string['makbila12'] = 'Number of Twelfth graders who committed tasks';
+$string['noinformation'] = 'No information';
 $string['percents12'] = 'Percentage of Twelfth graders students that have done the tasks ';
 $string['per_activity_school_level'] = 'tasks completion in each school';
 $string['per_course_scool_level'] = 'course tasks completion in each school';

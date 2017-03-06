@@ -18,6 +18,7 @@ require_once('../../report/moereports/classes/local/peractivityschoollevel.php')
 require_once($CFG->libdir.'/completionlib.php');
 require_once($CFG->libdir.'/modinfolib.php');
 $download   = optional_param('download', '', PARAM_ALPHA);
+$region = optional_param('region', '', PARAM_TEXT);
 global $OUTPUT;
 
 $url = new moodle_url('/report/moereports/activity_school_level.php');
@@ -36,12 +37,8 @@ $PAGE->set_heading(get_string('per_activity_school_level', 'report_moereports'))
 $PAGE->set_pagelayout('standard');
 $output = $PAGE->get_renderer('report_moereports', 'activity_school');
 
-$results = new peractivityschoollevel();
-
-$data->results = $results->displayreportfortemplates();
-$data->url="$url" . "?download=xls";
 $renderer = $PAGE->get_renderer('core');
-$content = $output->display_report($context);
+$content = $output->display_report($context, $region);
 //print spreadsheet if one is asked for:
 if ($download == "xls" ) {
     require_once("$CFG->libdir/excellib.class.php");

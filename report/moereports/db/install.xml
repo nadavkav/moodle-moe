@@ -4,11 +4,11 @@
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
     <TABLE NAME="moereports_reports" COMMENT="Report order by region">
-         <FIELDS>
-         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-         <FIELD NAME="symbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="symbol of school "/>
-		  <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Region of school "/>
-	      <FIELD NAME="name" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="school name"/>
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="symbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="symbol of school "/>
+		    <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="Region of school "/>
+	        <FIELD NAME="name" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="school name"/>
 	    </FIELDS>
 	    <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
