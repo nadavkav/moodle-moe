@@ -67,7 +67,6 @@ class report_moereports_external extends external_api {
             $tmp->symbol = $schools[$i][1];
             $tmp->region = $schools[$i][2];
             $tmp->name = $schools[$i][3];
-            $tmp->city = $schools[$i][4];
 
             $records[] = $tmp;
         }
@@ -99,7 +98,6 @@ class report_moereports_external extends external_api {
                     $rec->symbol = $record->symbol;
                     $rec->name = $record->name;
                     $rec->region = $record->region;
-                    $rec->city = $record->city;
 
                     $DB->update_record('moereports_reports', $rec);
 
@@ -112,7 +110,6 @@ class report_moereports_external extends external_api {
                 $school->region = $record->region;
                 $school->id = $record->id;
                 $school->name = $record->name;
-                $school->city = $record->city;
 
                 $DB->insert_record('moereports_reports', $school);
                 $return->inserted ++;
@@ -128,7 +125,6 @@ class report_moereports_external extends external_api {
             $tmp[] = $report->symbol;
             $tmp[] = $report->region;
             $tmp[] = $report->name;
-            $tmp[] = $report->city;
 
             // Add the current group to the groups array.
             $schools[] = $tmp;
