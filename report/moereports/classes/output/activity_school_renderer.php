@@ -153,6 +153,7 @@ class activity_school_renderer extends \plugin_renderer_base
         }
         //print spreadsheet if one is asked for:
         if ($download == "xls" ) {
+            global $CFG;
             require_once("$CFG->libdir/excellib.class.php");
             $date= date("Ymd");
             /// Calculate file name
@@ -181,7 +182,7 @@ class activity_school_renderer extends \plugin_renderer_base
             /// generate the data for the body of the spreadsheet
             $i=0;
             $row=1;
-            foreach ($rows as $onerec){
+            foreach ($rows->results as $onerec){
                 $myxls->write_string($row, 0, $onerec->region);
                 $myxls->write_string($row, 1, $onerec->symbol);
                 $myxls->write_string($row, 2, $onerec->name);
