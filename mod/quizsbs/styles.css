@@ -1301,7 +1301,15 @@ table#categoryquestions {
     padding-left: 29px !important;
 }
 
-
+#navigation input{
+    color:#000000 !important;
+}
+#navigation .questionnavbutton{
+	text-align: left;
+}
+#navigation .questionnavbutton .mod_quizsbs-next-nav-show {
+	margin-left: 1.1em;
+}
 #page-mod-quizsbs-editcontent #region-main ul{
     list-style-type: none;
 }
@@ -1381,7 +1389,4 @@ table#categoryquestions {
     #page-mod-quizsbs-edit .statusbar {
         padding: 0;
     }
-}
-#navigation input{
-	color:#000000 !important;
 }
