@@ -46,7 +46,6 @@ class report_moereports_external extends external_api {
                     new external_value(PARAM_NUMBER, 'School\'s symbol'),
                     new external_value(PARAM_TEXT, 'School\'s region'),
                     new external_value(PARAM_TEXT, 'School\'s Name'),
-                    new external_value(PARAM_TEXT, 'School\'s city'),
                 ), 'School\'s fields'),
                 'the schools to be saved', VALUE_REQUIRED),
                 'del' => new external_multiple_structure(
@@ -217,7 +216,6 @@ class report_moereports_external extends external_api {
                 new external_value(PARAM_NUMBER, 'School\'s symbol'),
                 new external_value(PARAM_TEXT, 'School\'s region'),
                 new external_value(PARAM_TEXT, 'School\'s name'),
-                new external_value(PARAM_TEXT, 'School\'s city'),
             ), 'region\'s fields'),
             'the saveschools to be saved', VALUE_REQUIRED);
     }
