@@ -538,15 +538,30 @@ EOF;
         $tours = $DB->get_records_sql($sql, array(
             $localurl,
         ));
-
+        switch (sizeof($tours)){
+        case 0:
+            return null;
+            break;
+        case 1:
         foreach ($tours as $record) {
             $tour = tour::load_from_record($record);
             if ($tour->is_enabled()) {
                 return $tour;
             }
+            return null;
         }
-
-        return null;
+        break;
+        default:
+            $results = array();
+            foreach ($tours as $record) {
+                $tour = tour::load_from_record($record);
+                if ($tour->is_enabled()) {
+                    array_push($results, $tour);
+                }
+            }
+            return (sizeof($results) == 0 ) ?  null : $results;
+            break;
+        }
     }
 
     /**
