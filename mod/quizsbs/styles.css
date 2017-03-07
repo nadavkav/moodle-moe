@@ -1323,6 +1323,9 @@ table#categoryquestions {
 	width: 100%;
 	height: 100%;
 }
+.formulation .ddarea .dropzones .dropzone,#questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .drags.notreadonly{
+    position: relative !important ;
+}
 @media print {
 
     #page-mod-quizsbs-attempt header.navbar,
