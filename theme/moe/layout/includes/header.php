@@ -36,11 +36,17 @@ if (class_exists('local_usertours\helper')) {
 }
 $haslogo = (!empty($PAGE->theme->settings->logo));
 $hasheaderprofilepic = (empty($PAGE->theme->settings->headerprofilepic)) ? false : $PAGE->theme->settings->headerprofilepic;
-$context=getdate();
 if ($countdowntimer && isloggedin()) {
-    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array($context['hours'],$context['minutes'],$context['seconds']));
+    $servertime = date("H:i");
+    $times = get_config('theme_moe');
+    $this->page->requires->js_call_amd('theme_moe/addclock', 'init', array(
+        $servertime,
+        $times->hourtostart,
+        $times->minuttostart,
+        $times->hourstocountdown,
+        $times->minutestocountdown,
+    ));
 }
-
 
 $checkuseragent = '';
 if (!empty($_SERVER['HTTP_USER_AGENT'])) {

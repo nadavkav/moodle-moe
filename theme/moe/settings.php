@@ -29,10 +29,11 @@ defined('MOODLE_INTERNAL') || die;
 
 $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 
-	// "settings general" settingpage
-	$temp = new admin_settingpage('theme_moe_general',  get_string('settings_general', 'theme_moe'));
 
-	// Logo file setting.
+    // "settings general" settingpage
+    $temp = new admin_settingpage('theme_moe_general',  get_string('settings_general', 'theme_moe'));
+
+    // Logo file setting.
     $name = 'theme_moe/logo';
     $title = get_string('logo', 'theme_moe');
     $description = get_string('logodesc', 'theme_moe');
@@ -43,8 +44,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 
 
 
-	// Logo resolution.
-	$name = 'theme_moe/logo_res';
+    // Logo resolution.
+    $name = 'theme_moe/logo_res';
     $title = get_string('logo_res', 'theme_moe');
     $description = get_string('logo_res_desc', 'theme_moe');
     $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
@@ -59,12 +60,40 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
+    // Set time to start the countdown
+    $name = 'theme_moe/countdowntimertime';
+    $title = get_string('countdowntimertime', 'theme_moe');
+    $description = get_string('countdowntimertimedesc', 'theme_moe');
+    $setting = new admin_setting_configtime('theme_moe/hourtostart', 'minuttostart', $title, $description, array(
+        'h' => 00,
+        'm' => 00,
+    ));
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
+
+    // Set countdown duration
+    $name = 'theme_moe/countdowntimerdoration';
+    $title = get_string('countdowntimerdoration', 'theme_moe');
+    $description = get_string('countdowntimerdorationdesc', 'theme_moe');
+    $setting = new admin_setting_configtime('theme_moe/hourstocountdown', 'minutestocountdown', $title, $description, array(
+        'h' => 00,
+        'm' => 00,
+    ));
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+
 	// Fixed or Variable Width.
     $name = 'theme_moe/pagewidth';
     $title = get_string('pagewidth', 'theme_moe');
     $description = get_string('pagewidthdesc', 'theme_moe');
     $default = 1600;
-    $choices = array(1600=>get_string('boxed_wide','theme_moe'), 1000=>get_string('boxed_narrow','theme_moe'), 90=>get_string('boxed_variable','theme_moe'), 100=>get_string('full_wide','theme_moe'));
+    $choices = array(
+        1600 => get_string('boxed_wide', 'theme_moe'),
+        1000 => get_string('boxed_narrow', 'theme_moe'),
+        90 => get_string('boxed_variable', 'theme_moe'),
+        100 => get_string('full_wide', 'theme_moe')
+    );
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -96,9 +125,9 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
-	$ADMIN->add('theme_moe', $temp);
+    $ADMIN->add('theme_moe', $temp);
 
-	// "settings background" settingpage
+    // "settings background" settingpage
 	$temp = new admin_settingpage('theme_moe_background',  get_string('settings_background', 'theme_moe'));
 
 	// list with provides backgrounds
@@ -107,19 +136,19 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('list_bg_desc', 'theme_moe');
     $default = '0';
     $choices = array(
-		'0'=>'Country Road',
-		'1'=>'Bokeh Background',
-		'2'=>'Blurred Background I',
-		'3'=>'Blurred Background II',
-		'4'=>'Blurred Background III',
-		'5'=>'Cream Pixels (Pattern)',
-		'6'=>'MochaGrunge (Pattern)',
-		'7'=>'Skulls (Pattern)',
-		'8'=>'SOS (Pattern)',
-		'9'=>'Squairy Light (Pattern)',
-		'10'=>'Subtle White Feathers (Pattern)',
-		'11'=>'Tweed (Pattern)',
-		'12'=>'Wet Snow (Pattern)');
+		'0' => 'Country Road',
+		'1' => 'Bokeh Background',
+		'2' => 'Blurred Background I',
+		'3' => 'Blurred Background II',
+		'4' => 'Blurred Background III',
+		'5' => 'Cream Pixels (Pattern)',
+		'6' => 'MochaGrunge (Pattern)',
+		'7' => 'Skulls (Pattern)',
+		'8' => 'SOS (Pattern)',
+		'9' => 'Squairy Light (Pattern)',
+		'10' => 'Subtle White Feathers (Pattern)',
+		'11' => 'Tweed (Pattern)',
+		'12' => 'Wet Snow (Pattern)');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -389,8 +418,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('socials_position_desc', 'theme_moe');
     $default = '0';
     $choices = array(
-		'0'=>'footer',
-		'1'=>'header');
+		'0' => 'footer',
+		'1' => 'header');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -405,26 +434,26 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('fontselectdesc_body', 'theme_moe');
     $default = '1';
     $choices = array(
-    	'1'=>'Open Sans',
-		'2'=>'Arimo',
-		'3'=>'Arvo',
-		'4'=>'Bree Serif',
-		'5'=>'Cabin',
-		'6'=>'Cantata One',
-		'7'=>'Crimson Text',
-		'8'=>'Droid Sans',
-		'9'=>'Droid Serif',
-		'10'=>'Gudea',
-		'11'=>'Imprima',
-		'12'=>'Lekton',
-		'13'=>'Nixie One',
-		'14'=>'Montserrat',
-		'15'=>'Playfair Display',
-		'16'=>'Pontano Sans',
-		'17'=>'PT Sans',
-    	'18'=>'Raleway',
-		'19'=>'Ubuntu',
-    	'20'=>'Vollkorn');
+    	'1' => 'Open Sans',
+		'2' => 'Arimo',
+		'3' => 'Arvo',
+		'4' => 'Bree Serif',
+		'5' => 'Cabin',
+		'6' => 'Cantata One',
+		'7' => 'Crimson Text',
+		'8' => 'Droid Sans',
+		'9' => 'Droid Serif',
+		'10' => 'Gudea',
+		'11' => 'Imprima',
+		'12' => 'Lekton',
+		'13' => 'Nixie One',
+		'14' => 'Montserrat',
+		'15' => 'Playfair Display',
+		'16' => 'Pontano Sans',
+		'17' => 'PT Sans',
+    	'18' => 'Raleway',
+		'19' => 'Ubuntu',
+    	'20' => 'Vollkorn');
 
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -435,32 +464,32 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('fontselectdesc_heading', 'theme_moe');
     $default = '1';
     $choices = array(
-		'1'=>'Open Sans',
-		'2'=>'Abril Fatface',
-		'3'=>'Arimo',
-		'4'=>'Arvo',
-		'5'=>'Bevan',
-		'6'=>'Bree Serif',
-		'7'=>'Cabin',
-		'8'=>'Cantata One',
-		'9'=>'Crimson Text',
-		'10'=>'Droid Sans',
-		'11'=>'Droid Serif',
-		'12'=>'Gudea',
-		'13'=>'Imprima',
-		'14'=>'Josefin Sans',
-		'15'=>'Lekton',
-		'16'=>'Lobster',
-		'17'=>'Nixie One',
-		'18'=>'Montserrat',
-		'19'=>'Pacifico',
-		'20'=>'Playfair Display',
-		'21'=>'Pontano Sans',
-		'22'=>'PT Sans',
-    	'23'=>'Raleway',
-		'24'=>'Sansita One',
-		'25'=>'Ubuntu',
-    	'26'=>'Vollkorn');
+		'1' => 'Open Sans',
+		'2' => 'Abril Fatface',
+		'3' => 'Arimo',
+		'4' => 'Arvo',
+		'5' => 'Bevan',
+		'6' => 'Bree Serif',
+		'7' => 'Cabin',
+		'8' => 'Cantata One',
+		'9' => 'Crimson Text',
+		'10' => 'Droid Sans',
+		'11' => 'Droid Serif',
+		'12' => 'Gudea',
+		'13' => 'Imprima',
+		'14' => 'Josefin Sans',
+		'15' => 'Lekton',
+		'16' => 'Lobster',
+		'17' => 'Nixie One',
+		'18' => 'Montserrat',
+		'19' => 'Pacifico',
+		'20' => 'Playfair Display',
+		'21' => 'Pontano Sans',
+		'22' => 'PT Sans',
+    	'23' => 'Raleway',
+		'24' => 'Sansita One',
+		'25' => 'Ubuntu',
+    	'26' => 'Vollkorn');
 
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -476,7 +505,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     /*
      * Slide 1
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_slide1', get_string('slideshow_slide1', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_slide1', get_string('slideshow_slide1', 'theme_moe'), NULL));
 
     // Image.
     $name = 'theme_moe/slide1image';
@@ -515,7 +544,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     /*
      * Slide 2
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_slide2', get_string('slideshow_slide2', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_slide2', get_string('slideshow_slide2', 'theme_moe'), NULL));
 
     // Image.
     $name = 'theme_moe/slide2image';
@@ -554,7 +583,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     /*
      * Slide 3
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_slide3', get_string('slideshow_slide3', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_slide3', get_string('slideshow_slide3', 'theme_moe'), NULL));
 
     // Image.
     $name = 'theme_moe/slide3image';
@@ -593,7 +622,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     /*
      * Slide 4
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_slide4', get_string('slideshow_slide4', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_slide4', get_string('slideshow_slide4', 'theme_moe'), NULL));
 
     // Image.
     $name = 'theme_moe/slide4image';
@@ -632,7 +661,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     /*
      * Slide 5
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_slide5', get_string('slideshow_slide5', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_slide5', get_string('slideshow_slide5', 'theme_moe'), NULL));
 
     // Image.
     $name = 'theme_moe/slide5image';
@@ -671,7 +700,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
 	/*
      * Options
      */
-	 $temp->add(new admin_setting_heading('theme_moe_slider_options', get_string('slideshow_options', 'theme_moe'),NULL));
+	 $temp->add(new admin_setting_heading('theme_moe_slider_options', get_string('slideshow_options', 'theme_moe'), NULL));
 
     // Slideshow Pattern
     $name = 'theme_moe/slideshowpattern';
@@ -679,11 +708,11 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('slideshowpatterndesc', 'theme_moe');
     $default = '0';
     $choices = array(
-		'0'=>'none',
-		'1'=>'pattern1',
-		'2'=>'pattern2',
-		'3'=>'pattern3',
-		'4'=>'pattern4');
+		'0' => 'none',
+		'1' => 'pattern1',
+		'2' => 'pattern2',
+		'3' => 'pattern3',
+		'4' => 'pattern4');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -710,23 +739,24 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('slideshow_loader_desc', 'theme_moe');
     $default = '0';
     $choices = array(
-		'0'=>'bar',
-		'1'=>'pie',
-		'2'=>'none');
+		'0' => 'bar',
+		'1' => 'pie',
+		'2' => 'none');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
 	// Slideshow Image FX
+
 	$name = 'theme_moe/slideshow_imgfx';
-	$title = get_string('slideshow_imgfx','theme_moe');
+	$title = get_string('slideshow_imgfx', 'theme_moe');
 	$description = get_string('slideshow_imgfx_desc', 'theme_moe');
 	$setting = new admin_setting_configtext($name, $title, $description, 'random', PARAM_URL);
 	$temp->add($setting);
 
 	// Slideshow Text FX
 	$name = 'theme_moe/slideshow_txtfx';
-	$title = get_string('slideshow_txtfx','theme_moe');
+	$title = get_string('slideshow_txtfx', 'theme_moe');
 	$description = get_string('slideshow_txtfx_desc', 'theme_moe');
 	$setting = new admin_setting_configtext($name, $title, $description, 'moveFromLeft', PARAM_URL);
 	$temp->add($setting);
@@ -744,8 +774,8 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('carousel_positiondesc', 'theme_moe');
 	$default = '1';
     $choices = array(
-		'0'=>'top',
-		'1'=>'bottom');
+		'0' => 'top',
+		'1' => 'bottom');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -765,12 +795,12 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $description = get_string('carousel_hi_desc', 'theme_moe');
 	$default = '3';
     $choices = array(
-		'1'=>'Heading h1',
-		'2'=>'Heading h2',
-		'3'=>'Heading h3',
-		'4'=>'Heading h4',
-		'5'=>'Heading h5',
-		'6'=>'Heading h6');
+		'1' => 'Heading h1',
+		'2' => 'Heading h2',
+		'3' => 'Heading h3',
+		'4' => 'Heading h4',
+		'5' => 'Heading h5',
+		'6' => 'Heading h6');
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
@@ -861,12 +891,12 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
         $description = get_string('carousel_colordesc', 'theme_moe');
 		$default = '0';
     	$choices = array(
-			'0'=>'green',
-			'1'=>'purple',
-			'2'=>'orange',
-			'3'=>'lightblue',
-			'4'=>'yellow',
-			'5'=>'turquoise');
+			'0' => 'green',
+			'1' => 'purple',
+			'2' => 'orange',
+			'3' => 'lightblue',
+			'4' => 'yellow',
+			'5' => 'turquoise');
     	$setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $temp->add($setting);
@@ -881,7 +911,7 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     $title = get_string('login_link', 'theme_moe');
     $description = get_string('login_link_desc', 'theme_moe');
     $default = 2;
-    $choices = array(0=>get_string('none'), 1=>get_string('startsignup'), 2=>get_string('forgotten'), 3=>get_string('moodle_login_page','theme_moe'));
+    $choices = array(0 => get_string('none'), 1 => get_string('startsignup'), 2 => get_string('forgotten'), 3 => get_string('moodle_login_page', 'theme_moe'));
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);

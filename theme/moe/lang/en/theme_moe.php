@@ -49,11 +49,10 @@ $string['choosereadme'] = '
 $string['countdowntimerdesc'] = 'check for countdown timer reset every even hour';
 $string['countdowntimer'] = 'countdown timer';
 $string['countdowntimertime'] = 'countdown timer hour to start';
-$string['countdowntimertimedesc'] = 'set the  time to start the countdown';
+$string['countdowntimertimedesc'] = 'set the hour time to start the countdown';
 
 $string['countdowntimerdoration'] = 'time doration to countdown';
 $string['countdowntimerdorationdesc'] = 'set the time doration for the countdown clock';
-
 
 
 $string['settings_general'] = 'General';
