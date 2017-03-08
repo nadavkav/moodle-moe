@@ -1371,6 +1371,24 @@ table#categoryquestions {
         page-break-inside: avoid;
     }
 }
+
+
+.path-mod-quizsbs .qnbutton{
+	border: 1px solid #C2BBC0;
+}
+.path-mod-quizsbs .qnbutton.notyetanswered{
+	background-color: #FFFEFF;
+}
+
+.path-mod-quizsbs .qnbutton.thispage {
+    color: #d6B696C;
+    background-color: #645D65;
+}
+.path-mod-quizsbs a, .path-mod-quizsbs a:visited,.path-mod-quizsbs a.active,
+ .path-mod-quizsbs a:focus, .path-mod-quizsbs #page-mod-scorm-player .breadcrumb-button a{
+color: #676566;	
+}
+
 /* Ajustments for mobile devices */
 @media only screen and (max-width:565px) {
     #page-mod-quizsbs-edit .rpcontainerclass {
@@ -1383,3 +1401,5 @@ table#categoryquestions {
         padding: 0;
     }
 }
+
+
