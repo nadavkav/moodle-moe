@@ -33,7 +33,23 @@ list ($options, $unrecognized) = cli_get_params(array(
     't' => 'category',
     'n' => 'copies',
 ));
+if ($options['help'] || !($options['course'])) {
+    $help = <<<EOL
+Perform duplicate of course into category n times.
 
+Options:
+--course=INTEGER          Course ID for backup.
+--category=INTEGER        Categroy to restore corse into.
+--copies=INTEGER          The number of copies to make from the course.
+-h, --help                Print out this help.
+
+Example:
+\$sudo -u www-data /usr/bin/php admin/cli/duplicatecourse.php --course=2 --category=3 --copies=10\n
+EOL;
+
+    echo $help;
+    die;
+}
 // Check that the course exists.
 if ($options['course']) {
     $course = $DB->get_record('course', array('id' => $options['course']), '*', MUST_EXIST);
