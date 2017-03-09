@@ -1400,6 +1400,9 @@ table#categoryquestions {
  .path-mod-quizsbs a:focus, .path-mod-quizsbs #page-mod-scorm-player .breadcrumb-button a{
 color: #676566;	
 }
+.path-mod-quizsbs #questionbox {
+	min-height:403px;
+}
 
 /* Ajustments for mobile devices */
 @media only screen and (max-width:565px) {

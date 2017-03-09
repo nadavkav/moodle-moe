@@ -78,6 +78,10 @@ define(['jquery'], function($){
 			$( '.mod_quizsbs-prev-nav-show' ).hide();
 		}
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
+		
+			if ($('.wraper').css("height") > $('#questionbox').css("height")){
+				$('#questionbox').css("height",$('.wraper').css("height"));
+			}
 	};
 	
 	Navigation.prototype.checkPosition = function(){
