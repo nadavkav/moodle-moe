@@ -16,3 +16,6 @@
 
 $string['pluginname'] = 'קישורים שימושיים למרצים בקורס חלופות בהערכה';
 $string['links_for_moetopcoll'] = 'קישורים שימושיים';
+$string['userguid'] = 'מדריכים למשתמש';
+$string['viewtemp'] = 'צפייה בתבניות';
+$string['technicalsup'] = 'תמיכה פדגוגית וטכנית';
