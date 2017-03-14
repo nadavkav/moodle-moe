@@ -85,16 +85,15 @@ $file = $results['backup_destination'];
 
 // Extract to a temp folder.
 $context = context_course::instance($course->id);
-$filepath = md5(time() . '-' . $context->id . '-'. $USER->id . '-'. random_string(20));
+$filepath = md5(time() . '-' . $context->id . '-'. $admin->id . '-'. random_string(20));
 $fb = get_file_packer('application/vnd.moodle.backup');
 $extracttopath = $CFG->tempdir . '/backup/' . $filepath . '/';
-$extractedbackup = $fb->extract_to_pathname($file, $extracttopath);
 
 cli_heading('Performing restore...');
 for ($counter = 1; $counter <= $options['copies']; $counter++) {
+    $extractedbackup = $fb->extract_to_pathname($file, $extracttopath);
     list($fullname, $shortname) = restore_dbops::calculate_course_names(0, $course->fullname, $course->shortname);
     $courseid = restore_dbops::create_new_course($fullname, $shortname, $options['category']);
-    $DB->record_exists('course', array('id' => $courseid));
     $rc = new restore_controller($filepath, $courseid, backup::INTERACTIVE_NO,
             backup::MODE_GENERAL, $admin->id, backup::TARGET_NEW_COURSE);
     // Check if the format conversion must happen first.
