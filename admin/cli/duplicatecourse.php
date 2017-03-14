@@ -109,4 +109,5 @@ for ($counter = 1; $counter <= $options['copies']; $counter++) {
     }
     $rc->destroy();
     unset($rc);
+    mtrace("End backup course copy $counter");
 }
