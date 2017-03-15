@@ -82,6 +82,11 @@ define(['jquery'], function($){
 			if ($('.wraper').css("height") > $('#questionbox').css("height")){
 				$('#questionbox').css("height",$('.wraper').css("height"));
 			}
+			if (! $('.dropbackground').length){
+			$('.ddarea').css("weight",$('.dropbackground').css("weight"));			
+			$('.droparea').css("weight",$('.dropbackground').css("weight"));
+			}
+
 	};
 	
 	Navigation.prototype.checkPosition = function(){
