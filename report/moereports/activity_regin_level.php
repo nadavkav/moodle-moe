@@ -65,10 +65,10 @@ if ($download == "xls" ) {
     $myxls->write_string(0,2,get_string("activity", 'report_moereports'));
     $myxls->write_string(0,3,get_string("makbila8", 'report_moereports'));
     $myxls->write_string(0,4,get_string("percents8", 'report_moereports'));
-    $myxls->write_string(0,4,get_string("makbila9", 'report_moereports'));
-    $myxls->write_string(0,5,get_string("percents9", 'report_moereports'));
-    $myxls->write_string(0,6,get_string("makbila10", 'report_moereports'));
-    $myxls->write_string(0,7,get_string("percents10", 'report_moereports'));
+    $myxls->write_string(0,5,get_string("makbila9", 'report_moereports'));
+    $myxls->write_string(0,6,get_string("percents9", 'report_moereports'));
+    $myxls->write_string(0,7,get_string("makbila10", 'report_moereports'));
+    $myxls->write_string(0,8,get_string("percents10", 'report_moereports'));
 
 
     /// generate the data for the body of the spreadsheet
