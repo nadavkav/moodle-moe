@@ -49,23 +49,24 @@ class tour extends external_api {
         // $tour = tourinstance::instance($params['tourid']);
     
         $returntours = [];
-        $touravailable = false;
         foreach ($tours as $tour) {
             $t = tourinstance::instance($tour);
             $ret = new \stdClass();
             $ret->tourid = $tour;
             $ret->title = $t->get_name();
-            $touravailable = $touravailable & $t->should_show_for_user();
-            $returntours[] = $ret;
+            if( $t->should_show_for_user()){
+                $returntours[] = $ret;
+            }
         }
-    
-        if(!$touravailable) {
-            $returntours = [];
-        }
+        if (sizeof($returntours) > 0){
         return [
             'tours' => $returntours,
             'context' => $context->id
         ];
+        } else{
+            return null;
+        }
+        
     }
     
     /**

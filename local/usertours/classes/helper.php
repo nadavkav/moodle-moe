@@ -470,12 +470,13 @@ class helper {
                 $ids = $tour->get_id();
                 $views = $tour->should_show_for_user();
             }
-            
             $PAGE->requires->js_call_amd('local_usertours/usertours', 'init', [
                     $ids,
                     $views,
                     $PAGE->context->id,
                 ]);
+            $PAGE->requires->string_for_js('tourchois', 'local_usertours');
+            
         }
     }
 

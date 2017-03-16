@@ -187,7 +187,7 @@ function(ajax, BootstrapTour, $, templates, str) {
         				orphan: true,
         				placement: "top",
         				reflex: false,
-        				title: "בוא תבחר"
+        				title: M.util.get_string('tourchois', 'local_usertours'),
         			})
 	        	 });
 	        	 
@@ -199,6 +199,10 @@ function(ajax, BootstrapTour, $, templates, str) {
 	 	           
 	        	 });
     		});
+        	
+        	if ($('.disabled').length){
+        		$('.disabled').attr("display","none");
+        	}
         	
         	$('body').on('click', '[data-action="local_usertours/resetpagetour"]', function(e) {
                 e.preventDefault();
