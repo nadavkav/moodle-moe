@@ -38,6 +38,66 @@ use \local_usertours\tour as tourinstance;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tour extends external_api {
+    
+    
+    public static function fetch_tours_for_list($tours, $context) {
+        global $PAGE;
+    
+        $context = \context_helper::instance_by_id($context);
+        self::validate_context($context);
+    
+        // $tour = tourinstance::instance($params['tourid']);
+    
+        $returntours = [];
+        $touravailable = false;
+        foreach ($tours as $tour) {
+            $t = tourinstance::instance($tour);
+            $ret = new \stdClass();
+            $ret->tourid = $tour;
+            $ret->title = $t->get_name();
+            $touravailable = $touravailable & $t->should_show_for_user();
+            $returntours[] = $ret;
+        }
+    
+        if(!$touravailable) {
+            $returntours = [];
+        }
+        return [
+            'tours' => $returntours,
+            'context' => $context->id
+        ];
+    }
+    
+    /**
+     * The parameters for fetch_tour.
+     *
+     * @return external_function_parameters
+     */
+    public static function fetch_tours_for_list_parameters() {
+        return new external_function_parameters([
+            'tours'      => new external_multiple_structure(
+                new external_value(PARAM_RAW, 'Tours'), "list of tours", false, array()),
+            'context'   => new \external_value(PARAM_RAW, 'context')
+        ]);
+    }
+    
+    /**
+     * The return configuration for fetch_tour.
+     *
+     * @return external_single_structure
+     */
+    public static function fetch_tours_for_list_returns() {
+        return new external_single_structure([
+            'tours' => new external_multiple_structure(
+                new external_single_structure([
+                    "tourid" => new external_value(PARAM_RAW, 'Tour ID'),
+                    "title" => new external_value(PARAM_RAW, 'Tour Title')
+                ])
+                , "list of tours with names", false, array()),
+            'context' => new external_value(PARAM_RAW, 'Context ID'),
+        ]);
+    }
+    
     /**
      * Fetch the tour configuration for the specified tour.
      *
@@ -134,7 +194,7 @@ class tour extends external_api {
             if ($tour->get_id() === $tourinstance->get_id()) {
                 $result['startTour'] = $tour->get_id();
             }
-        }
+       }
 
         return $result;
     }

@@ -11,32 +11,39 @@ define(
 function(ajax, BootstrapTour, $, templates, str) {
     var usertours = {
         tourId: null,
+        tourList: null,
 
         currentTour: null,
 
         context: null,
 
         init: function(tourId, startTour, context) {
-            // Only one tour per page is allowed.
-            usertours.tourId = tourId;
-
             usertours.context = context;
-
-            if (typeof startTour === 'undefined') {
-                startTour = true;
-            }
-
-            if (startTour) {
-                // Fetch the tour configuration.
-                usertours.fetchTour(tourId);
-            }
-
-            usertours.addResetLink();
-            // Watch for the reset link.
-            $('body').on('click', '[data-action="local_usertours/resetpagetour"]', function(e) {
-                e.preventDefault();
-                usertours.resetTourState(usertours.tourId);
-            });
+            // Only one tour per page is allowed.
+        	
+        	if(Array.isArray(tourId)) {
+        		
+        		usertours.showTourList(tourId, context);
+        	}
+        	else {
+	            usertours.tourId = tourId;
+	
+	            if (typeof startTour === 'undefined') {
+	                startTour = true;
+	            }
+	
+	            if (startTour) {
+	                // Fetch the tour configuration.
+	                usertours.fetchTour(tourId);
+	            }
+	
+	            usertours.addResetLink();
+	            // Watch for the reset link.
+	            $('body').on('click', '[data-action="local_usertours/resetpagetour"]', function(e) {
+	                e.preventDefault();
+	                usertours.resetTourState(usertours.tourId);
+	            });
+        	}
         },
 
         /**
@@ -132,11 +139,73 @@ function(ajax, BootstrapTour, $, templates, str) {
                     },
                     done: function(response) {
                         if (response.startTour) {
-                            usertours.fetchTour(response.startTour);
+                        	if(tourList !== null) {
+                        		usertours.showTourList(usertours.tourList, usertours.context);
+                        	} else {
+                        		usertours.fetchTour(response.startTour);
+                        	}
                         }
                     }
                 }
             ]);
+        },
+        
+        /**
+         * Show all the available tours on this page
+         */
+        showTourList: function(tourId, context) {
+        	usertours.tourList = tourId;
+        	//fetch the tours name in order to list them and fetch the template
+        	$.when(ajax.call([
+    		   {
+    		        methodname: 'local_usertours_fetch_tours_for_list',
+    		        args: {
+    		              tours: tourId,
+    		              context: context,
+    		              }
+    		        }
+    		   ])[0],
+    		   templates.render('local_usertours/tourstep', {}) )
+    		   .then(function (resp, template) {
+    			 //if the list is empty and there are no new tours, do nothing
+    	        	if(resp.tours.length == 0) {
+    	        		return ;
+    	        	}
+    			   
+	        	 //create an html list of all the contents of the list
+	        	 var content = "";
+	        	 for(var i = 0; i < resp.tours.length; i++){
+	        		 content = content + '<div class="select-tour" id="tour_' + resp.tours[i].tourid + '">' + resp.tours[i].title + "</div>";
+	        	 }
+	        	 //pop the tour box with the list of available tours
+	        	 usertours.startBootstrapTour(0, template[0], { 
+        			name: "local_usertours_choice",
+        			steps: new Array({
+        				backdrop: false,
+        				content: content,
+        				element: "",
+        				orphan: true,
+        				placement: "top",
+        				reflex: false,
+        				title: "בוא תבחר"
+        			})
+	        	 });
+	        	 
+	        	 //when a tour is selected restart this tour plugin with the selected tour details
+	        	 $(".select-tour").click(function(e) {
+	        		 var id = $(this).attr('id');
+	        		 id = id.split('_');
+	        		 usertours.init(id[1], true, context);
+	 	           
+	        	 });
+    		});
+        	
+        	$('body').on('click', '[data-action="local_usertours/resetpagetour"]', function(e) {
+                e.preventDefault();
+                for(var i = 0; i < tourId.length; i++) {
+                	usertours.resetTourState(tourId[i]);
+                }
+            });
         }
     };
 
