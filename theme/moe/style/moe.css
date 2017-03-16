@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
-body {
-	background-image: url([[pix:theme|bg/bg_pix]]);
+body ,body#page-login-index{
+	background-image: url([[pix:theme|bg/bg_pix]]) !important ;
 	background-position: 0 0;
     background-size: 6px 596px;
     background-repeat: repeat-x;
