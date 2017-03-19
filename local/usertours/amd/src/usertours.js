@@ -114,6 +114,14 @@ function(ajax, BootstrapTour, $, templates, str) {
         	if ($('.select-tour').length){
         		$('.btn-group').css("visibility","hidden");
         	}
+
+        	$('.select-tour').click(function(){
+        		setTimeout(
+      				  function() 
+      				  {
+      	        		$('.btn-group').removeAttr("style");
+      				  }, 500);
+        	});
         },
 
         /**
@@ -126,7 +134,8 @@ function(ajax, BootstrapTour, $, templates, str) {
                 {
                     methodname: 'local_usertours_complete_tour',
                     args: {
-                        tourid: usertours.tourId
+                        tourid: usertours.tourId,
+                        currentpage: window.location.href 
                     }
                 }
             ]);
@@ -154,6 +163,8 @@ function(ajax, BootstrapTour, $, templates, str) {
                     }
                 }
             ]);
+
+        	location.reload();
         },
         
         /**

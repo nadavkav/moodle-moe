@@ -229,16 +229,29 @@ class tour extends external_api {
      * @param   int     $tourid     The ID of the tour.
      * @return  array               As described in complete_tour_returns
      */
-    public static function complete_tour($tourid) {
+    public static function complete_tour($tourid, $currentpage) {
         global $PAGE;
         $PAGE->set_context(\context_system::instance());
+        
+        if($tourid != null){
         self::validate_context($PAGE->context);
         require_login();
 
         $tour = tourinstance::instance($tourid);
         $tour->mark_user_completed();
 
+        } else {
+//             $currentpage = preg_replace('#^https?://#', '', $currentpage);
+            self::validate_context($PAGE->context);
+            $currentpage = new \moodle_url($currentpage);
+            $tourstomark = \local_usertours\manager::get_matching_tours($currentpage);
+            foreach ($tourstomark as $tt){
+                $tour = tourinstance::instance($tt->get_id());
+                $tour->mark_user_completed();
+            }
+        }
         return [];
+        
     }
 
     /**
@@ -249,6 +262,7 @@ class tour extends external_api {
     public static function complete_tour_parameters() {
         return new external_function_parameters([
             'tourid' => new external_value(PARAM_INT, 'Tour ID'),
+            'currentpage' => new \external_value(PARAM_URL, 'the current user page', false, '', true),
         ]);
     }
 
