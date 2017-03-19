@@ -21,6 +21,8 @@ function(ajax, BootstrapTour, $, templates, str) {
             usertours.context = context;
             // Only one tour per page is allowed.
         	
+
+            
         	if(Array.isArray(tourId)) {
         		
         		usertours.showTourList(tourId, context);
@@ -108,6 +110,10 @@ function(ajax, BootstrapTour, $, templates, str) {
 
             usertours.currentTour.init(true);
             usertours.currentTour.start(true);
+            
+        	if ($('.select-tour').length){
+        		$('.btn-group').css("visibility","hidden");
+        	}
         },
 
         /**
@@ -200,9 +206,7 @@ function(ajax, BootstrapTour, $, templates, str) {
 	        	 });
     		});
         	
-        	if ($('.disabled').length){
-        		$('.disabled').attr("display","none");
-        	}
+
         	
         	$('body').on('click', '[data-action="local_usertours/resetpagetour"]', function(e) {
                 e.preventDefault();
