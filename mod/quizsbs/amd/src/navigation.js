@@ -24,7 +24,7 @@ define(['jquery'], function($){
 		$('.allbuttons').width(this.scrollWidth);
 	};
 	
-	Navigation.prototype.init = function(){
+	Navigation.prototype.init = function() {
 		var scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
 								$('.qnbutton').width();
@@ -79,13 +79,15 @@ define(['jquery'], function($){
 		}
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
 		
-			if ($('.wraper').css("height") > $('#questionbox').css("height")){
-				$('#questionbox').css("height",$('.wraper').css("height"));
-			}
-			if (! $('.dropbackground').length){
-			$('.ddarea').css("weight",$('.dropbackground').css("weight"));			
-			$('.droparea').css("weight",$('.dropbackground').css("weight"));
-			}
+		if ($('.wraper').css("height") > $('#questionbox').css("height")){
+			$('#questionbox').css("height",$('.wraper').css("height"));
+		}
+		if (!$('.dropbackground').length) {
+			$('.ddarea').css("weight",
+					$('.dropbackground').css("weight"));
+			$('.droparea').css("weight",
+					$('.dropbackground').css("weight"));
+		}
 
 	};
 	
