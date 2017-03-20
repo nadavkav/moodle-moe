@@ -1328,6 +1328,10 @@ table#categoryquestions {
 .formulation .ddarea .dropzones .dropzone,#questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .drags.notreadonly{
     position: relative !important ;
 }
+
+#page-mod-quizsbs-review .block.block_fake{
+	display: none;
+}
 @media print {
 
     #page-mod-quizsbs-attempt header.navbar,
