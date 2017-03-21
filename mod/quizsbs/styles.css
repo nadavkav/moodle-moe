@@ -1195,6 +1195,8 @@ table#categoryquestions {
 }
 #questions #addtional_content .wraper{
     height: 100%;
+	padding: 1em;
+	overflow-x: auto; 
 }
 #questionbox{
 	margin: 0px;
