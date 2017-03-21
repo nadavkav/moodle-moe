@@ -1208,7 +1208,7 @@ table#categoryquestions {
 .que{
 	max-width: 100% !important;
 }
-.que .info{
+.path-mod-quizsbs .que .info{
 	display: none;
 }
 

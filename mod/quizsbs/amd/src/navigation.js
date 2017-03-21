@@ -24,6 +24,10 @@ define(['jquery'], function($){
 		$('.allbuttons').width(this.scrollWidth);
 	};
 	
+	Navigation.prototype.pix2int = function(pix) {
+		return parseInt(pix.replace('px', ''));
+	};
+	
 	Navigation.prototype.init = function() {
 		var scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
@@ -79,14 +83,14 @@ define(['jquery'], function($){
 		}
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
 		
-		if ($('.wraper').css("height") > $('#questionbox').css("height")){
-			$('#questionbox').css("height",$('.wraper').css("height"));
+		if (this.pix2int($('.wraper').css("height")) > this.pix2int($('#questionbox').css("height"))) {
+			$('#questionbox').css("height",this.pix2int($('.wraper').css("height")));
 		}
-		if (!$('.dropbackground').length) {
-			$('.ddarea').css("weight",
-					$('.dropbackground').css("weight"));
-			$('.droparea').css("weight",
-					$('.dropbackground').css("weight"));
+		if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
+			$('.ddarea').css('width',
+					this.pix2int($('.dropbackground').css("width")));
+			$('.droparea').css("width",
+					this.pix2int($('.dropbackground').css("width")));
 		}
 
 	};
