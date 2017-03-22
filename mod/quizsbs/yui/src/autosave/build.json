@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_quizsbs-autosave",
+    "builds": {
+        "moodle-mod_quizsbs-autosave": {
+            "jsfiles": [
+                "autosave.js"
+            ]
+        }
+    }
+}

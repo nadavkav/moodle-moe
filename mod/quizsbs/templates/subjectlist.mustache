@@ -1,0 +1,29 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<div id="subjectlist" class="row-fluid">
+    <h2>{{#str}}listsubject, quizsbs{{/str}}</h2>
+    <ul>
+        {{#subjects}}
+            <li>
+                {{name}}
+                <a href="/mod/quizsbs/editsubject.php?cmid={{cmid}}&id={{id}}&action=edit">{{# pix }} t/edit, moodle, Edit context {{/ pix }}</a>
+                <a href="/mod/quizsbs/editsubject.php?cmid={{cmid}}&id={{id}}&action=delete">{{# pix }} t/delete, moodle, Delete context{{/ pix }}</a>
+            </li>
+        {{/subjects}}
+    </ul>
+    <a href="/mod/quizsbs/editsubject.php?cmid={{cmid}}&action=edit" class="btn">{{#str}}editsubject, quizsbs{{/str}}</a>
+</div>

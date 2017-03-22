@@ -24,6 +24,8 @@
  */
 
 $left = (!right_to_left());
+$hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
+$hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
 $standardlayout = (empty($PAGE->theme->settings->layout)) ? false : $PAGE->theme->settings->layout;
 
 echo $OUTPUT->doctype() ?>
@@ -111,7 +113,7 @@ jQuery(document).ready(function() {
             jQuery('.back-to-top').fadeOut(duration);
         }
     });
-    
+
     jQuery('.back-to-top').click(function(event) {
         event.preventDefault();
         jQuery('html, body').animate({scrollTop: 0}, duration);

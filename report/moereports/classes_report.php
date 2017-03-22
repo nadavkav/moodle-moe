@@ -52,5 +52,11 @@ foreach ($classes as $key => $class) {
 }
 
 $PAGE->requires->js_call_amd('report_moereports/classes_report', 'init', array($report, $schools));
-$PAGE->requires->strings_for_js(array('symbol', 'class', 'studentsnumber'), "report_moereports");
+$PAGE->requires->strings_for_js(array(
+        'symbol',
+        'class',
+        'studentsnumber',
+        'changessuccessfulsave',
+        'changesnotsave',
+    ), "report_moereports");
 echo $OUTPUT->footer();

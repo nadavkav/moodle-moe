@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<section id="quizsbs" class="row-fluid">
+    <header class="row-fluid">
+        <h2 class="span8">{{quizname}}</h2>
+    </header>
+    <nav id="navigation" class="row-fluid">
+            {{{navigation}}}
+            <div class="span5 questionnavbutton">
+                <input type="button" title="העמוד הקודם" value="העמוד הקודם" class="mod_quizsbs-prev-nav-show" />
+                <input type="button" title="העמוד הבא" value="העמוד הבא" class="mod_quizsbs-next-nav-show" />
+            </div>
+    </nav>
+    <section id="questions" class="row-fluid">
+        <section id="quizsbs_question" class="span6">
+            <section id="subjectheader" class=span12">
+                <h2>{{subject}}</h2>
+            </section>
+            <section id="questionbox" class="span12"> 
+                <form action="{{formacttion}}" method="post" enctype="multipart/form-data" accept-charset="utf-8" id="responseform">
+                    <div>
+                        {{{slots}}}
+                        <input type="hidden" name="attempt" value="{{attempteid}}" />
+                        <input type="hidden" name="thispage" value="{{page}}" id="followingpage" />
+                        <input type="hidden" name="nextpage" value="{{nextpage}}" />
+                        <input type="hidden" name="timeup" value="0" id="timeup" />
+                        <input type="hidden" name="sesskey" value="{{sesskey}}" />
+                        <input type="hidden" name="scrollpos" value="" id="scrollpos" />
+                        <input type="hidden" name="slots" value="{{questionid}}" /> 
+                        {{{attemptnavigationbuttons}}}
+                        
+                    </div>
+                </form>
+                {{{connectionwarning}}}
+            </section>
+        </section>
+        <section id="addtional_content" class="span6">
+            <div class="wraper">
+            {{#frame}}
+                <iframe src="{{frame}}" id="app"></iframe>
+            {{/frame}}
+            {{#content}}
+                {{#content.css}}
+                <style>
+                    {{.}}               
+                </style>
+               {{/content.css}}
+               {{#content.html}}
+                    {{{.}}}
+               {{/content.html}}
+               {{#content.javascript}}
+                    <script>
+                        {{{content.javascript}}}
+                    </script>
+               {{/content.javascript}}
+            {{/content}}
+            </div>
+        </section>
+    </section>
+</section>

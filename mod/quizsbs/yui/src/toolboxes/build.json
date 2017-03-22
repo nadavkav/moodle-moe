@@ -1,0 +1,12 @@
+{
+    "name": "moodle-mod_quizsbs-toolboxes",
+    "builds": {
+        "moodle-mod_quizsbs-toolboxes": {
+            "jsfiles": [
+                "toolbox.js",
+                "resource.js",
+                "section.js"
+            ]
+        }
+    }
+}

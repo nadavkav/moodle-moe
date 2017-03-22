@@ -1,0 +1,14 @@
+{
+    "name": "moodle-quizsbsaccess_offlinemode-jsencrypt",
+    "builds": {
+        "moodle-quizsbsaccess_offlinemode-jsencrypt": {
+            "jsfiles": [
+                "jsencrypt.js",
+                "package.js"
+            ]
+        }
+    },
+    "shifter": {
+        "lint": false
+    }
+}

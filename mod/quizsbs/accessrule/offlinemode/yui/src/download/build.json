@@ -1,0 +1,10 @@
+{
+    "name": "moodle-quizsbsaccess_offlinemode-download",
+    "builds": {
+        "moodle-quizsbsaccess_offlinemode-download": {
+            "jsfiles": [
+                "download.js"
+            ]
+        }
+    }
+}
