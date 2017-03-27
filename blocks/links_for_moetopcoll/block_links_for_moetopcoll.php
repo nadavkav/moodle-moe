@@ -27,7 +27,7 @@ class block_links_for_moetopcoll extends block_base {
             return $this->content;
         }
         $isstudent = !has_capability('block/links_for_moetopcoll:canSeeLinks', $this->context) ? true : false;
-        if (($COURSE->format == "moetopcoll")&&(!$isstudent)) {
+        if (!$isstudent) {
             $this->content         = new stdClass;
             $this->content->text   = $renderer->render_from_template('block_links_for_moetopcoll/main', $context);
             return $this->content;
