@@ -89,7 +89,7 @@ class block_import_remote_course extends block_base {
                 'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
         } else {
             $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
-                'onclick="Y.one(\'form#restoreremotecourse\').append(\''. get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
+                'onclick="Y.one(\'form#restoreremotecourse\').append(\''."<br>" . get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
         }
         $form .= '</form>';
         $form .= '<a id="importsite" target="_blank" href="' . get_config('block_import_remote_course', 'testenv') . '" class="btn">' . get_string('trytemplates', 'block_import_remote_course') . '</a>';
