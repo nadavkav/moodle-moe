@@ -151,19 +151,9 @@ function(ajax, BootstrapTour, $, templates, str) {
                     args: {
                         path:   window.location.href,
                         tourid: tourId
-                    },
-                    done: function(response) {
-                        if (response.startTour) {
-                        	if(tourList !== null) {
-                        		usertours.showTourList(usertours.tourList, usertours.context);
-                        	} else {
-                        		usertours.fetchTour(response.startTour);
-                        	}
-                        }
                     }
                 }
             ]);
-
         	location.reload();
         },
         
@@ -185,14 +175,15 @@ function(ajax, BootstrapTour, $, templates, str) {
     		   templates.render('local_usertours/tourstep', {}) )
     		   .then(function (resp, template) {
     			 //if the list is empty and there are no new tours, do nothing
-    	        	if(resp.tours.length == 0) {
+    	        	if(resp.tours.length === 0) {
     	        		return ;
     	        	}
     			   
 	        	 //create an html list of all the contents of the list
 	        	 var content = "";
 	        	 for(var i = 0; i < resp.tours.length; i++){
-	        		 content = content + '<div class="select-tour" id="tour_' + resp.tours[i].tourid + '">' + resp.tours[i].title + "</div>";
+	        		 content = content + '<div class="select-tour" id="tour_' +
+	        		 resp.tours[i].tourid + '">' + resp.tours[i].title + "</div>";
 	        	 }
 	        	 //pop the tour box with the list of available tours
 	        	 usertours.startBootstrapTour(0, template[0], { 
@@ -209,7 +200,7 @@ function(ajax, BootstrapTour, $, templates, str) {
 	        	 });
 	        	 
 	        	 //when a tour is selected restart this tour plugin with the selected tour details
-	        	 $(".select-tour").click(function(e) {
+	        	 $(".select-tour").click(function() {
 	        		 var id = $(this).attr('id');
 	        		 id = id.split('_');
 	        		 usertours.init(id[1], true, context);
