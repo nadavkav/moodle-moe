@@ -17,7 +17,18 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
+    'block/links_for_moetopcoll:addinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
 
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
     'block/links_for_moetopcoll:canSeeLinks' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
@@ -28,7 +39,6 @@ $capabilities = array(
             'manager' => CAP_ALLOW,
             'student' => CAP_PROHIBIT
         ),
-
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 );
