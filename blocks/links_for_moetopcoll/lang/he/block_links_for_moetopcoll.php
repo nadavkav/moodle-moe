@@ -16,3 +16,4 @@
 
 $string['pluginname'] = 'קישורים שימושיים למרצים בקורס חלופות בהערכה';
 $string['links_for_moetopcoll'] = 'קישורים שימושיים';
+$string['links_for_moetopcoll:canseelinks'] = 'יכולת הצגת לינקים שימושיים';
