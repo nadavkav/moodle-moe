@@ -39,6 +39,5 @@ $capabilities = array(
             'manager' => CAP_ALLOW,
             'student' => CAP_PROHIBIT
         ),
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 );
