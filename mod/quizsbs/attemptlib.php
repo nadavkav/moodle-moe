@@ -2434,25 +2434,24 @@ abstract class quizsbs_nav_panel_base {
         $pages = array();
         $infoflag = false;
         foreach ($buttons as $button) {
-            if(isset($button->heading)){
+            if (isset($button->heading)) {
                 $pages[] = $button;
-                $infoflag=true;
-            }
-            else if (sizeof($pages) == 0 || $infoflag) {
+                $infoflag = true;
+            } else if (count($pages) == 0 || $infoflag) {
                 $pages[] = $button;
                 $infoflag = false;
-            } else if(isset($button->page) && ($button->page != $pages[sizeof($pages)-1]->page)) {
+            } else if (isset($button->page) && ($button->page != $pages[count($pages) - 1]->page)) {
                  $pages[] = $button;
             }
         }
-        $i=1;
-        foreach ($pages as $page){
-            if(isset($page->number)){
-                $page->number=$i;
+        $i = 1;
+        foreach ($pages as $page) {
+            if (isset($page->number)) {
+                $page->number = $i;
                 $i++;
             }
         }
-        
+
         return $pages;
     }
 
