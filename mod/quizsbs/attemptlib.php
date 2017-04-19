@@ -2431,8 +2431,29 @@ abstract class quizsbs_nav_panel_base {
             }
             $buttons[] = $button;
         }
-
-        return $buttons;
+        $pages = array();
+        $infoflag = false;
+        foreach ($buttons as $button) {
+            if(isset($button->heading)){
+                $pages[] = $button;
+                $infoflag=true;
+            }
+            else if (sizeof($pages) == 0 || $infoflag) {
+                $pages[] = $button;
+                $infoflag = false;
+            } else if(isset($button->page) && ($button->page != $pages[sizeof($pages)-1]->page)) {
+                 $pages[] = $button;
+            }
+        }
+        $i=1;
+        foreach ($pages as $page){
+            if(isset($page->number)){
+                $page->number=$i;
+                $i++;
+            }
+        }
+        
+        return $pages;
     }
 
     protected function get_state_string(question_attempt $qa, $showcorrectness) {

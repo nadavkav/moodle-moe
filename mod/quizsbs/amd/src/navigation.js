@@ -43,10 +43,7 @@ define(['jquery'], function($){
 			}
 		});
 		if(count < 10) {
-			initialoffset -= (10-count)*$('.qnbutton').width();
-			if(initialoffset < 0) {
 				initialoffset = 0;
-			}
 		}
 		
 		if(initialoffset) {
@@ -99,7 +96,7 @@ define(['jquery'], function($){
 		this.scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		if(this.scrollWidth > $('#scrollbar').width()){
 			if($('.allbuttons').css('right').replace('px', '') >= 0){
-				$('.fa-caret-right').css('visibility', 'hidden');
+				$('.fa-caret-right').css('display', 'none');
 				$('.fa-caret-right').css('margin-right', '-60px');
 				$('.fa-caret-left').css('visibility', 'visible');
 			} else {
@@ -115,7 +112,7 @@ define(['jquery'], function($){
 			}
 		} else {
 			$('.fa-caret-left').css('visibility', 'hidden');
-			$('.fa-caret-right').css('visibility', 'hidden');
+			$('.fa-caret-right').css('display', 'none');
 		}
 	};
 	
