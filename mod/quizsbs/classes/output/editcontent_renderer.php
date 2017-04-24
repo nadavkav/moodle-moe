@@ -134,6 +134,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'appoption' => $appoption,
             ));
         }
+        if ($contentloadform->is_cancelled()){
+            redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
+                'cmid' => $pageurl->get_param('cmid'),
+            )));
+        }
         if ($contentdata = $contentloadform->get_data()) {
             $additionalcontent = new additional_content($contentdata->id);
             $additionalcontent->set_name($contentdata->additionalcontentname);
@@ -156,12 +161,14 @@ class editcontent_renderer extends \plugin_renderer_base {
             }
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
+                    case 1:
                     case 2:
                         if (!empty($file)){
                             $questioncontentapp->set_content($url->out_as_local_url());
                             $questioncontentapp->set_additionalcontentid($additionalcontent->get_id());
                             $questioncontentapp->set_type(question_content::APP_CONTENT);
                             $questioncontentapp->add_entry();
+                            break;
                         }
                         $questioncontentcss->set_id($DB->get_field('quizsbs_question_content', 'id', array(
                             'additionalcontentid' => $additionalcontent->get_id(),
@@ -182,10 +189,9 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $questioncontentjavascript->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontentjavascript->add_entry();
                     case 0:
-                    default:
                         $questioncontenthtml->set_id($DB->get_field('quizsbs_question_content', 'id', array(
-                            'additionalcontentid' => $additionalcontent->get_id(),
-                            'type' => question_content::HTML_CONTENT,
+                        'additionalcontentid' => $additionalcontent->get_id(),
+                        'type' => question_content::HTML_CONTENT,
                         )));
                         $questioncontenthtml->load_from_db();
                         $questioncontenthtml->set_type(question_content::HTML_CONTENT);
