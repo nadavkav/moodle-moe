@@ -33,7 +33,7 @@ if ($action) {
     $thispageurl->param('action', $action);
 }
 if ($id) {
-    $thispageurl->param('additionalcontentid', $id);
+    $thispageurl->param('id', $id);
 }
 $PAGE->set_url($thispageurl);
 

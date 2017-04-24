@@ -55,8 +55,8 @@ class contentlist_renderer extends \plugin_renderer_base{
         $deleteform = new delete_content($pageurl);
 
         if ($contentdata = $deleteform->get_data()) {
-            $DB->delete_records('quizsbs_question_content', array('additionalcontentid' => $pageurl->get_param('additionalcontentid')));
-            $DB->delete_records('quizsbs_additional_content', array('id' => $pageurl->get_param('additionalcontentid')));
+            $DB->delete_records('quizsbs_question_content', array('additionalcontentid' => $pageurl->get_param('id')));
+            $DB->delete_records('quizsbs_additional_content', array('id' => $pageurl->get_param('id')));
             redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array('cmid' => $pageurl->get_param('cmid'))));
         }
         return $deleteform->render();
