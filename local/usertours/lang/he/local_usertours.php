@@ -15,17 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information.
+ * Strings for local_usertours.
  *
  * @package   local_usertours
  * @copyright 2016 Andrew Nicols <andrew@nicols.co.uk>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2017031201;            // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016052300;            // Requires this Moodle version
-$plugin->component = 'local_usertours';      // Full name of the plugin (used for diagnostics)
-$plugin->release = '3.1 (Build: 2016052306)';
-$plugin->maturity = MATURITY_STABLE;
+$string['tourchois'] = 'אנא בחר סיור';

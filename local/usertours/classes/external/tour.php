@@ -38,6 +38,67 @@ use \local_usertours\tour as tourinstance;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tour extends external_api {
+    
+    
+    public static function fetch_tours_for_list($tours, $context) {
+        global $PAGE;
+    
+        $context = \context_helper::instance_by_id($context);
+        self::validate_context($context);
+    
+        // $tour = tourinstance::instance($params['tourid']);
+    
+        $returntours = [];
+        foreach ($tours as $tour) {
+            $t = tourinstance::instance($tour);
+            $ret = new \stdClass();
+            $ret->tourid = $tour;
+            $ret->title = $t->get_name();
+            if( $t->should_show_for_user()){
+                $returntours[] = $ret;
+            }
+        }
+        if (sizeof($returntours) > 0){
+        return [
+            'tours' => $returntours,
+            'context' => $context->id
+        ];
+        } else{
+            return null;
+        }
+        
+    }
+    
+    /**
+     * The parameters for fetch_tour.
+     *
+     * @return external_function_parameters
+     */
+    public static function fetch_tours_for_list_parameters() {
+        return new external_function_parameters([
+            'tours'      => new external_multiple_structure(
+                new external_value(PARAM_RAW, 'Tours'), "list of tours", false, array()),
+            'context'   => new \external_value(PARAM_RAW, 'context')
+        ]);
+    }
+    
+    /**
+     * The return configuration for fetch_tour.
+     *
+     * @return external_single_structure
+     */
+    public static function fetch_tours_for_list_returns() {
+        return new external_single_structure([
+            'tours' => new external_multiple_structure(
+                new external_single_structure([
+                    "tourid" => new external_value(PARAM_RAW, 'Tour ID'),
+                    "title" => new external_value(PARAM_RAW, 'Tour Title')
+                ])
+                , "list of tours with names", false, array()),
+            'context' => new external_value(PARAM_RAW, 'Context ID'),
+        ]);
+    }
+    
     /**
      * Fetch the tour configuration for the specified tour.
      *
@@ -134,7 +195,7 @@ class tour extends external_api {
             if ($tour->get_id() === $tourinstance->get_id()) {
                 $result['startTour'] = $tour->get_id();
             }
-        }
+       }
 
         return $result;
     }
@@ -168,16 +229,29 @@ class tour extends external_api {
      * @param   int     $tourid     The ID of the tour.
      * @return  array               As described in complete_tour_returns
      */
-    public static function complete_tour($tourid) {
+    public static function complete_tour($tourid, $currentpage) {
         global $PAGE;
         $PAGE->set_context(\context_system::instance());
+        
+        if($tourid != null){
         self::validate_context($PAGE->context);
         require_login();
 
         $tour = tourinstance::instance($tourid);
         $tour->mark_user_completed();
 
+        } else {
+//             $currentpage = preg_replace('#^https?://#', '', $currentpage);
+            self::validate_context($PAGE->context);
+            $currentpage = new \moodle_url($currentpage);
+            $tourstomark = \local_usertours\manager::get_matching_tours($currentpage);
+            foreach ($tourstomark as $tt){
+                $tour = tourinstance::instance($tt->get_id());
+                $tour->mark_user_completed();
+            }
+        }
         return [];
+        
     }
 
     /**
@@ -188,6 +262,7 @@ class tour extends external_api {
     public static function complete_tour_parameters() {
         return new external_function_parameters([
             'tourid' => new external_value(PARAM_INT, 'Tour ID'),
+            'currentpage' => new \external_value(PARAM_URL, 'the current user page', false, '', true),
         ]);
     }
 

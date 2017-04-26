@@ -458,11 +458,25 @@ class helper {
         global $PAGE;
 
         if ($tour = manager::get_current_tour()) {
+            
+            if(is_array($tour)) {
+                $ids = [];
+                $views = [];
+                foreach ($tour as $t) {
+                        array_push($ids, $t->get_id());
+                        array_push($views, $t->should_show_for_user());
+                } 
+            } else {
+                $ids = $tour->get_id();
+                $views = $tour->should_show_for_user();
+            }
             $PAGE->requires->js_call_amd('local_usertours/usertours', 'init', [
-                    $tour->get_id(),
-                    $tour->should_show_for_user(),
+                    $ids,
+                    $views,
                     $PAGE->context->id,
                 ]);
+            $PAGE->requires->string_for_js('tourchois', 'local_usertours');
+            
         }
     }
 

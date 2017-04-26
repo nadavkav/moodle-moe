@@ -64,4 +64,12 @@ $functions = array(
         'capabilities'    => '',
         'ajax'            => true,
     ),
+    'local_usertours_fetch_tours_for_list' => array(
+        'classname'       => 'local_usertours\external\tour',
+        'methodname'      => 'fetch_tours_for_list',
+        'description'     => 'Fetch the list of tours for specified page',
+        'type'            => 'write',
+        'capabilities'    => '',
+        'ajax'            => true,
+    ),
 );

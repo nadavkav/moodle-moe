@@ -159,3 +159,15 @@ opacity:0.5;
 .popover[class*="tour-"] {
     min-width: 400px;
 }
+
+div.select-tour:first-of-type {
+    border-top: 1px solid #cecece;
+}
+div.select-tour {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 1px solid #cecece;
+    padding: 5px;
+    cursor: pointer;
+}
