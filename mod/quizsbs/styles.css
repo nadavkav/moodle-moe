@@ -67,7 +67,7 @@
     margin-right: 1.3em !important;
 }
 
-.span9 .row-fluid .span5 {
+.path-mod-quizsbs .span9 .row-fluid .span5 {
     padding-top: 1%;
     padding-left: 0.8%
 }
@@ -115,7 +115,7 @@
     border: 1px solid #dcdcdc;
 }
 
-body.jsenabled .questionflagcheckbox {
+body.jsenabled.path-mod-quizsbs .questionflagcheckbox {
     display: none;
 }
 
@@ -145,13 +145,13 @@ body.jsenabled .questionflagcheckbox {
 	background-color: #f3e7d4;
 }
 /** Mod quizsbs attempt **/
-.generalbox#passwordbox {
+.path-mod-quizsbs .generalbox#passwordbox {
     /* Should probably match .generalbox#intro above */
     width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
-#passwordform {
+.path-mod-quizsbs #passwordform {
     margin: 1em 0;
 }
 
@@ -961,54 +961,54 @@ table.quizsbsreviewsummary td.cell {
     display: none;
 }
 
-#categoryquestions > tbody > tr:nth-of-type(even) {
+.path-mod-quizsbs #categoryquestions > tbody > tr:nth-of-type(even) {
     background: #e4e4e4;
 }
-#categoryquestions > tbody > tr:nth-of-type(even).highlight {
+.path-mod-quizsbs #categoryquestions > tbody > tr:nth-of-type(even).highlight {
     background-color: #AAFFAA;
 }
-#categoryquestions .header {
+.path-mod-quizsbs #categoryquestions .header {
     text-align: center;
     padding: 0 2px;
     border: 0 none;
 }
-#categoryquestions th.modifiername .sorters,
-#categoryquestions th.creatorname .sorters {
+.path-mod-quizsbs #categoryquestions th.modifiername .sorters,
+.path-mod-quizsbs #categoryquestions th.creatorname .sorters {
     font-weight: normal;
     font-size: 0.8em;
 }
-#categoryquestions td.modifiername,
-#categoryquestions td.creatorname {
+.path-mod-quizsbs #categoryquestions td.modifiername,
+.path-mod-quizsbs #categoryquestions td.creatorname {
     line-height: 1em;
 }
-#categoryquestions td.modifiername span.date,
-#categoryquestions td.creatorname span.date {
+.path-mod-quizsbs #categoryquestions td.modifiername span.date,
+.path-mod-quizsbs #categoryquestions td.creatorname span.date {
     font-weight: normal;
     font-size: 0.8em;
 }
-table#categoryquestions {
+.path-mod-quizsbs table#categoryquestions {
     width: 100%;
     overflow: hidden;
     table-layout: fixed;
 }
-#categoryquestions .iconcol {
+.path-mod-quizsbs #categoryquestions .iconcol {
     width: 15px;
     text-align: center;
     padding: 0;
 }
-#categoryquestions .checkbox {
+.path-mod-quizsbs #categoryquestions .checkbox {
     width: 19px;
     text-align: center;
     padding: 0;
 }
-#categoryquestions .qtype {
+.path-mod-quizsbs #categoryquestions .qtype {
     text-align: center;
 }
-#categoryquestions .qtype {
+.path-mod-quizsbs #categoryquestions .qtype {
     width: 28px;
     padding: 0;
 }
-#categoryquestions .questiontext {
+.path-mod-quizsbs #categoryquestions .questiontext {
     position: relative;
     zoom: 1;
     padding-left: 0.3em;
@@ -1016,17 +1016,17 @@ table#categoryquestions {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.dir-rtl #categoryquestions .questiontext {
+.path-mod-quizsbs .dir-rtl #categoryquestions .questiontext {
     padding-left: 0;
     padding-right: 0.3em;
 }
-#categoryquestions .questionname {
+.path-mod-quizsbs #categoryquestions .questionname {
     white-space: nowrap;
     overflow: hidden;
     zoom: 1;
     position: relative;
 }
-#categoryquestions .questiontext p {
+.path-mod-quizsbs #categoryquestions .questiontext p {
     margin: 0;
 }
 
@@ -1058,7 +1058,7 @@ table#categoryquestions {
     font-size: 100%;
 }
 
-.modulespecificbuttonscontainer {
+.path-mod-quizsbs .modulespecificbuttonscontainer {
     padding-left: 0.3em;
     padding-right: 0.3em;
 }
@@ -1067,7 +1067,7 @@ table#categoryquestions {
     text-align: center;
 }
 
-.categoryinfo {
+.path-mod-quizsbs .categoryinfo {
     padding: 0.3em;
 }
 
@@ -1115,9 +1115,9 @@ table#categoryquestions {
     margin-top: 0.3em;
 }
 #page-mod-quizsbs-edit div.questionbank .categoryquestionscontainer,
-.questionbank .categorysortopotionscontainer,
-.questionbank .categorypagingbarcontainer,
-.questionbank .categoryselectallcontainer {
+.path-mod-quizsbs .questionbank .categorysortopotionscontainer,
+.path-mod-quizsbs .questionbank .categorypagingbarcontainer,
+.path-mod-quizsbs .questionbank .categoryselectallcontainer {
     background-color: #FFF;
 }
 
@@ -1136,39 +1136,39 @@ table#categoryquestions {
 .dir-rtl #quizsbs .row-fluid [class*="span"]{
 	float:right;
 }
-#addtional_content , #subjectheader{
+.path-mod-quizsbs #addtional_content , .path-mod-quizsbs #subjectheader{
 	padding-right: 1em;
 	padding-left: 1em;
 }
-#addtional_content {
+.path-mod-quizsbs #addtional_content {
 	word-wrap: break-word;
 }
-#contentconnect #contentlist,
-#contentconnect #addtional_content,
-#questionconnect #question_preview,
-#questionconnect #questionlist,
-#contentslist #contents,
-#contentslist #addtional_content
+.path-mod-quizsbs #contentconnect #contentlist,
+.path-mod-quizsbs #contentconnect #addtional_content,
+.path-mod-quizsbs#questionconnect #question_preview,
+.path-mod-quizsbs #questionconnect #questionlist,
+.path-mod-quizsbs #contentslist #contents,
+.path-mod-quizsbs #contentslist #addtional_content
  {
 	float: right;
 }
-#questionlist,
-#subjectlist ul,
-#additionalcontentlist ul{
+.path-mod-quizsbs #questionlist,
+.path-mod-quizsbs #subjectlist ul,
+.path-mod-quizsbs #additionalcontentlist ul{
 	max-height: 15.5em;
 	overflow-y: auto; 
 }
 
-#questionlist li {
+.path-mod-quizsbs #questionlist li {
 	cursor: pointer;
 }
-#contentconnect #addtional_content,
-#question_preview,
-#contentslist #addtional_content {
+.path-mod-quizsbs #contentconnect #addtional_content,
+.path-mod-quizsbs #question_preview,
+.path-mod-quizsbs #contentslist #addtional_content {
 	width: 46%;
 }
 
-#contentslist{
+.path-mod-quizsbs #contentslist{
 	min-height: 10em;
 }
 #quizsbs #navigation .othernav {
@@ -1176,45 +1176,45 @@ table#categoryquestions {
 	margin-left: 3em
 }
 
-#id_csseditor, #id_javascripteditor {
+.path-mod-quizsbs #id_csseditor, .path-mod-quizsbs #id_javascripteditor {
 	direction: ltr;
 }
 
 #quizsbs {
 	background-color: #f9f1e4;
 }
-#questions {
+.path-mod-quizsbs #questions {
 	display: flex;
 }
 #questions #quizsbs_question, 
-#questions #addtional_content{
+.path-mod-quizsbs #questions #addtional_content{
 	flex: 1;
 }
-#questions #addtional_content {
+.path-mod-quizsbs #questions #addtional_content {
 	padding: 1em;
 }
-#questions #addtional_content .wraper{
+.path-mod-quizsbs #questions #addtional_content .wraper{
     height: 100%;
 	padding: 1em;
 	overflow-x: auto; 
 }
-#questionbox{
+.path-mod-quizsbs #questionbox{
 	margin: 0px;
 	margin-top: 7px;
 	height: 31em;
 	overflow-y: auto;
 }
-.que, .que .content {
+.path-mod-quizsbs .que, .path-mod-quizsbs .que .content {
 	margin: 0px !important;
 }
-.que{
+.path-mod-quizsbs .que{
 	max-width: 100% !important;
 }
-.path-mod-quizsbs .que .info{
+.path-mod-quizsbs .path-mod-quizsbs .que .info{
 	display: none;
 }
 
-.que .content .formulation{
+.path-mod-quizsbs .que .content .formulation{
 	border: none;
 	margin: 0px;
 	border-top-color: #f9f1e4;
@@ -1228,21 +1228,21 @@ table#categoryquestions {
 	color: #272525 !important;
 	border-radius: 0px;
 }
-#navigation{
+.path-mod-quizsbs #navigation{
 	display: flex;
 }
-#subjectheader,
-#questionbox,
+.path-mod-quizsbs #subjectheader,
+.path-mod-quizsbs #questionbox,
 #quizsbs .que .formulation,
-#questions #addtional_content .wraper {
+.path-mod-quizsbs #questions #addtional_content .wraper {
 	background-color: #ffffff;
 }
-#subjectlist i,
+.path-mod-quizsbs #subjectlist i,
 #additionalcontentlist i{
 	color: #999999;
 }
-#subjectlist,
-#questionlist {
+.path-mod-quizsbs #subjectlist,
+.path-mod-quizsbs #questionlist {
 	float: right;
 }
 #quizsbs #navigation  .qn_buttons  {
@@ -1253,12 +1253,12 @@ table#categoryquestions {
 	margin-right: 35px;
 }
 
-.allbuttons {
+.path-mod-quizsbs .allbuttons {
     position: absolute;
 	width: 1000px;
 	height: 36px;
 }
-#scrollbar {
+.path-mod-quizsbs #scrollbar {
 	overflow: hidden;
 	position: relative;
 	height: 36px; 
@@ -1267,48 +1267,48 @@ table#categoryquestions {
 	margin-right: 1.8em;
 }
 #questions #quizsbs_question #questionbox,
-#addtional_content .wraper {
+.path-mod-quizsbs #addtional_content .wraper {
 /* 	padding: 1em; */
 }
-#questions #additional_content {
+.path-mod-quizsbs #questions #additional_content {
 	margin-left: 1.8em;
 }
-.clockimage {
+.path-mod-quizsbs .clockimage {
 	margin: 0 1em;
 }
-.qn_buttons .fa{
+.path-mod-quizsbs .qn_buttons .fa{
 	font-size: 3em;
 	cursor: pointer;
 }
-.qn_buttons .fa-caret-right{
+.path-mod-quizsbs .qn_buttons .fa-caret-right{
 	float: right;
 }
-.qn_buttons .fa-caret-left{
+.path-mod-quizsbs .qn_buttons .fa-caret-left{
     float: left;
 }
-#navigation .submitbtns {
+.path-mod-quizsbs #navigation .submitbtns {
 	margin-left: 0.4em;
 }
-#navigation .submitbtns input[type="submit"] {
+.path-mod-quizsbs #navigation .submitbtns input[type="submit"] {
     color: #3e453e !important;
 	background-size: auto 40% !important;
 }
 
-#navigation .submitbtns input[name="previous"] {
+.path-mod-quizsbs #navigation .submitbtns input[name="previous"] {
     background-position-x: 95% !important;
     padding-right: 29px !important;
 	float: left;
 }
 
-#navigation .submitbtns input[name="next"] {
+.path-mod-quizsbs #navigation .submitbtns input[name="next"] {
     background-position-x: 5% !important;
     padding-left: 29px !important;
 }
 
-#navigation input{
+.path-mod-quizsbs #navigation input{
     color:#000000 !important;
 }
-#navigation .questionnavbutton{
+.path-mod-quizsbs #navigation .questionnavbutton{
 	text-align: left;
 }
 #navigation .questionnavbutton .mod_quizsbs-next-nav-show {
@@ -1323,11 +1323,11 @@ table#categoryquestions {
     display: none;
 }
 
-#app, #frame iframe {
+.path-mod-quizsbs #app, .path-mod-quizsbs #frame iframe {
 	width: 100%;
 	height: 100%;
 }
-.formulation .ddarea .dropzones .dropzone,#questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .drags.notreadonly{
+.path-mod-quizsbs .formulation .ddarea .dropzones .dropzone, .path-mod-quizsbs #questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .path-mod-quizsbs .drags.notreadonly{
     position: relative !important ;
 }
 
