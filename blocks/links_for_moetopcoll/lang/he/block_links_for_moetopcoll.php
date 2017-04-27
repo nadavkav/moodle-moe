@@ -19,3 +19,4 @@ $string['links_for_moetopcoll'] = 'קישורים שימושיים';
 $string['userguid'] = 'מדריכים למשתמש';
 $string['viewtemp'] = 'צפייה בתבניות';
 $string['technicalsup'] = 'תמיכה פדגוגית וטכנית';
+$string['links_for_moetopcoll:canseelinks'] = 'הרשאת צפיה בקישורים שימושיים למרצים';
