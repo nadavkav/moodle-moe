@@ -16,8 +16,10 @@
 
 class block_links_for_moetopcoll extends block_base {
     public function init() {
+        global $CFG;
         $this->title = get_string('links_for_moetopcoll', 'block_links_for_moetopcoll');
     }
+
 
     public function get_content() {
         global  $PAGE, $COURSE, $USER;
