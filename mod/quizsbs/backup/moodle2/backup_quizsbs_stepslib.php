@@ -54,6 +54,11 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
         // Define elements for access rule subplugin settings.
         $this->add_subplugin_structure('quizsbsaccess', $quizsbs, true);
 
+        $qinstances = new backup_nested_element('question_instances');
+
+        $qinstance = new backup_nested_element('question_instance', array('id'), array(
+            'slot', 'page', 'requireprevious', 'questionid', 'maxmark'));
+
         $additionalcontents = new backup_nested_element('additional_contents');
         $additionalcontent = new backup_nested_element('additional_content', array('id'), array(
             'name',
@@ -68,10 +73,6 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
             'content',
             'type',
         ));
-        $qinstances = new backup_nested_element('question_instances');
-
-        $qinstance = new backup_nested_element('question_instance', array('id'), array(
-            'slot', 'page', 'requireprevious', 'questionid', 'maxmark'));
 
         $sections = new backup_nested_element('sections');
 
@@ -185,6 +186,8 @@ class backup_quizsbs_activity_structure_step extends backup_questions_activity_s
         // Define file annotations.
         $quizsbs->annotate_files('mod_quizsbs', 'intro', null); // This file area hasn't itemid.
         $feedback->annotate_files('mod_quizsbs', 'feedback', 'id');
+        $additionalcontent->annotate_files('mod_quizsbs', 'app', 'id');
+        $qestioncontent->annotate_files('mod_quizsbs', 'content', 'id');
 
         // Return the root element (quizsbs), wrapped into standard activity structure.
         return $this->prepare_activity_structure($quizsbs);
