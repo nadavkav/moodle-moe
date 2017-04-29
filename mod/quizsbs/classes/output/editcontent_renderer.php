@@ -31,6 +31,7 @@ require_once("$CFG->libdir/formslib.php");
  */
 class editcontent_renderer extends \plugin_renderer_base {
 
+
     /**
      *
      * @param \quizsbs $quizsbsobj

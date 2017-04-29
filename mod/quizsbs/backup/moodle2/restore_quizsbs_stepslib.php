@@ -299,15 +299,17 @@ class restore_quizsbs_activity_structure_step extends restore_questions_activity
         $oldid = $data->id;
         $data->quizsbsid = $this->get_new_parentid('quizsbs');
         $newid = $DB->insert_record('quizsbs_additional_content', $data);
-        $this->set_mapping('quizsbs_additional_content', $oldid, $newid);
+        $this->set_mapping('quizsbs_additional_content', $oldid, $newid, true);
     }
 
     protected function process_quizsbs_question_content($data) {
         global $DB;
 
         $data = (object) $data;
+        $oldid = $data->id;
         $data->additionalcontentid = $this->get_new_parentid('quizsbs_additional_content');
         $newitemid = $DB->insert_record('quizsbs_question_content', $data);
+        $this->set_mapping('quizsbs_question_content', $oldid, $newitemid, true);
     }
 
     protected function process_quizsbs_section($data) {
@@ -442,6 +444,10 @@ class restore_quizsbs_activity_structure_step extends restore_questions_activity
         $this->add_related_files('mod_quizsbs', 'intro', null);
         // Add feedback related files, matching by itemname = 'quizsbs_feedback'.
         $this->add_related_files('mod_quizsbs', 'feedback', 'quizsbs_feedback');
+
+        $this->add_related_files('mod_quizsbs', 'app', 'quizsbs_additional_content');
+
+        $this->add_related_files('mod_quizsbs', 'content', 'quizsbs_question_content');
 
         if (!$this->sectioncreated) {
             $DB->insert_record('quizsbs_sections', array(

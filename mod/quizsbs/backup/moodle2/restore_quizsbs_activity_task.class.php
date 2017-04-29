@@ -61,6 +61,7 @@ class restore_quizsbs_activity_task extends restore_activity_task {
         $contents[] = new restore_decode_content('quizsbs', array('intro'), 'quizsbs');
         $contents[] = new restore_decode_content('quizsbs_feedback',
                 array('feedbacktext'), 'quizsbs_feedback');
+        $contents[] = new restore_decode_content('quizsbs_question_content', array('content'),'quizsbs_question_content');
 
         return $contents;
     }
