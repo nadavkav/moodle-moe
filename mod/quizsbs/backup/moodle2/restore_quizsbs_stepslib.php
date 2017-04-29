@@ -447,7 +447,7 @@ class restore_quizsbs_activity_structure_step extends restore_questions_activity
 
         $this->add_related_files('mod_quizsbs', 'app', 'quizsbs_additional_content');
 
-        $this->add_related_files('mod_quizsbs', 'content', 'quizsbs_additional_content');
+        $this->add_related_files('mod_quizsbs', 'content', 'quizsbs_question_content');
 
         if (!$this->sectioncreated) {
             $DB->insert_record('quizsbs_sections', array(
