@@ -36,7 +36,6 @@ $capabilities = array(
             'manager' => CAP_ALLOW,
             'student' => CAP_PROHIBIT
         ),
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
     'block/links_for_moetopcoll:addinstance' => array(
         'captype' => 'read',

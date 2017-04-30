@@ -23,7 +23,7 @@ class block_links_for_moetopcoll extends block_base {
 
     public function get_content() {
         global  $PAGE, $COURSE, $USER;
-        $context ="";
+        $context = "";
         $renderer = $PAGE->get_renderer('core');
         if ($this->content !== null) {
             return $this->content;
