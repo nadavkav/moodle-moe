@@ -2,7 +2,7 @@
 .block_rolespecifichtml_main_block {
     text-align: center;
 }
-.block_rolespecifichtml_button{
+.block_rolespecifichtml_main_block .block_rolespecifichtml_button{
     background-position: 5% 50%, 0 0;
     background-size: 13%, cover;
     background-repeat: no-repeat, no-repeat;
@@ -27,7 +27,7 @@
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
-.inlinetext {
+.block_rolespecifichtml_main_block .inlinetext {
     position: relative;
     right: 5px;
     top: 5px;
