@@ -144,7 +144,7 @@ class structure {
             'subjectid' => $pagenumber,
             'quizsbsid' => $this->get_quizsbsid(),
         ));
-        return ($additional)? $additional->name : '';
+        return ($additional) ? $additional->name : '';
     }
     /**
      * Get the slot id of a given slot slot.
@@ -358,8 +358,7 @@ class structure {
      * @return bool whether this slot the only one on its section.
      */
     public function is_only_slot_in_section($slotnumber) {
-        return $this->slotsinorder[$slotnumber]->section->firstslot ==
-                $this->slotsinorder[$slotnumber]->section->lastslot;
+        return $this->slotsinorder[$slotnumber]->section->firstslot == $this->slotsinorder[$slotnumber]->section->lastslot;
     }
 
     /**
@@ -809,9 +808,9 @@ class structure {
             $DB->set_field('quizsbs_slots', 'page', $page,
                     array('id' => $movingslot->id));
         }
-
         // Update section fist slots.
-        $DB->execute("
+        if ($headingmovedirection == -1) {
+            $DB->execute("
                 UPDATE {quizsbs_sections}
                    SET firstslot = firstslot + ?
                  WHERE quizsbsid = ?
@@ -819,7 +818,18 @@ class structure {
                    AND firstslot < ?
                 ORDER BY firstslot DESC
                 ", array($headingmovedirection, $this->get_quizsbsid(),
-                        $headingmoveafter, $headingmovebefore));
+                    $headingmoveafter, $headingmovebefore));
+        } else {
+            $DB->execute("
+                UPDATE {quizsbs_sections}
+                   SET firstslot = firstslot + ?
+                 WHERE quizsbsid = ?
+                   AND firstslot > ?
+                   AND firstslot < ?
+                ORDER BY firstslot ASC
+                ", array($headingmovedirection, $this->get_quizsbsid(),
+                    $headingmoveafter, $headingmovebefore));
+        }
 
         // If any pages are now empty, remove them.
         $emptypages = $DB->get_fieldset_sql("
