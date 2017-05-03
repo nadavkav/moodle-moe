@@ -817,6 +817,7 @@ class structure {
                  WHERE quizsbsid = ?
                    AND firstslot > ?
                    AND firstslot < ?
+                ORDER BY firstslot DESC
                 ", array($headingmovedirection, $this->get_quizsbsid(),
                         $headingmoveafter, $headingmovebefore));
 

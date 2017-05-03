@@ -2062,6 +2062,7 @@ function quizsbs_add_quizsbs_question($questionid, $quizsbs, $page = 0, $maxmark
                    SET firstslot = firstslot + 1
                  WHERE quizsbsid = ?
                    AND firstslot > ?
+                 ORDER BY firstslot DESC
                 ", array($quizsbs->id, max($lastslotbefore, 1)));
 
     } else {
