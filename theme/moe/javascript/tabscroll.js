@@ -15,16 +15,16 @@ $(function () {
 		$(".nav-tabs").first().width($(".tabs-container").parent().width() - 91);
 		
 		//order the tabs
-//		$('.nav-tabs').first().children('li').each(function (index) {
-//			
-//			$(this).css('position', 'absolute');
-//			$(this).css('right', right);
-//			$(this).css('top', 0);
-//			$(this).css('width', $(this).outerWidth());
-//			$(this).css('display', 'block');
-//			
-//			right = right + 3 + $(this).outerWidth();
-//		});
+		$('.nav-tabs').first().children('li').each(function (index) {
+			
+			$(this).css('position', 'absolute');
+			$(this).css('right', right);
+			$(this).css('top', 0);
+			$(this).css('width', $(this).outerWidth());
+			$(this).css('display', 'block');
+			
+			right = right + 3 + $(this).outerWidth();
+		});
 		if(right > $(".nav-tabs").first().width()){
 			$('#tabmoveleft').css('display','block');
 			$('#tabmoveright').css('display','block');
