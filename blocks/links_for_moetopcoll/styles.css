@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
-.block_rolespecifichtml_main_block {
+.block_moe_links_main_block {
     text-align: center;
 }
-.block_rolespecifichtml_main_block .block_rolespecifichtml_button{
+.block_moe_links_main_block .block_moe_links_button{
     background-position: 5% 50%, 0 0;
     background-size: 13%, cover;
     background-repeat: no-repeat, no-repeat;
@@ -15,32 +15,32 @@
     display: inline-table;
     width: auto;
 }
-.Madrich{
+.block_moe_links_Madrich{
     background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
     
 }
-.eye{
+.block_moe_links_eye{
     background-image:  url([[pix:block_links_for_moetopcoll|Eye]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
-.tmicha{
+.block_moe_links_tmicha{
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
-.block_rolespecifichtml_main_block .inlinetext {
+.block_moe_links_main_block .block_moe_links_inlinetext {
     position: relative;
     right: 5px;
     top: 5px;
     padding-left: 33px;
 
 @media screen and (max-width: 1400px) and (orientation: landscape){
-    .block_rolespecifichtml_button {
+    .block_moe_links_button {
         font-size: 1.1em;
     }   
 }
 
 @media screen and (max-width: 1150px) and (orientation: landscape){
-    .block_rolespecifichtml_button {
+    .block_moe_links_button {
         font-size: 0.9em;
     }
 }
