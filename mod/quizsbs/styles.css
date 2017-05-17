@@ -1132,6 +1132,7 @@ table#categoryquestions {
 
 .path-mod-quizsbs #addtional_content{
     float: right;
+	margin-left: 0;
 }
 .dir-rtl #quizsbs .row-fluid [class*="span"]{
 	float:right;
@@ -1186,9 +1187,11 @@ table#categoryquestions {
 #questions {
 	display: flex;
 }
-#questions #quizsbs_question, 
+#questions #quizsbs_question{
+	flex: 6;
+}
 #questions #addtional_content{
-	flex: 1;
+	flex: 11;
 }
 #questions #addtional_content {
 	padding: 1em;
@@ -1263,9 +1266,6 @@ table#categoryquestions {
 	position: relative;
 	height: 36px; 
 }
-#questions #quizsbs_question{
-	margin-right: 1.8em;
-}
 #questions #quizsbs_question #questionbox,
 #addtional_content .wraper {
 /* 	padding: 1em; */
@@ -1333,6 +1333,15 @@ table#categoryquestions {
 
 #page-mod-quizsbs-review .block.block_fake{
 	display: none;
+}
+
+.pagelayout-quizsbs-attempt #wrapper{
+	width: 98%;
+}
+.pagelayout-quizsbs-attempt #wrapper #page{
+	padding: 10px 0 0 0;
+	margin: 0;
+	width: 100%;
 }
 @media print {
 

@@ -55,7 +55,7 @@ if($additional && has_capability('moodle/course:update', $coursecontext, $USER))
     //get the student role and switch to it
     $role = $DB->get_field("role", 'id', array("shortname" => "student"));
     $modcontext = context_module::instance($attemptobj->get_cmid());
-    
+
     role_switch($role, $modcontext);
 }
 
@@ -130,6 +130,7 @@ $title = get_string('attempt', 'quizsbs', $attemptobj->get_attempt_number());
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->set_title($attemptobj->get_quizsbs_name());
 $PAGE->set_heading($attemptobj->get_course()->fullname);
+$PAGE->set_pagelayout('quizsbs-attempt');
 
 if ($attemptobj->is_last_page($page)) {
     $nextpage = -1;
@@ -141,6 +142,6 @@ echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots
 
 if($additional && has_capability('moodle/course:update', $coursecontext, $USER)) {
     $modcontext = context_module::instance($attemptobj->get_cmid());
-    
+
     role_switch(0, $modcontext);
 }
