@@ -57,3 +57,5 @@ $string['usersinfo'] = 'פרטי משתמשים';
 $string['teachingstuff'] = 'עובדי הוראה';
 $string['students'] = 'תלמידים';
 $string['numofusers'] = 'מספר יוזרים סה"כ:';
+$string['cron_name'] = 'יצירת הדאטא עבור דוחות משרד החינוך';
+

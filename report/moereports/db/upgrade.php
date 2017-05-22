@@ -51,6 +51,31 @@ function xmldb_report_moereports_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017022203, 'report', 'moereports');
 
     }
+    if ($oldversion < 2017052201) {
+
+        $table = new xmldb_table('moereports_courseschool');
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_courseschool');
+        }
+
+        $table = new xmldb_table('moereports_acactivityschool');
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_acactivityschool');
+        }
+
+        $table = new xmldb_table('moereports_courseregin');
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_courseregin');
+        }
+
+        $table = new xmldb_table('moereports_activityregin');
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_activityregin');
+        }
+
+
+        upgrade_plugin_savepoint(true, 2017052201, 'report', 'moereports');
+    }
 
 
     return true;

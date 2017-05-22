@@ -27,5 +27,87 @@
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
 	    </KEYS>
     </TABLE>
+    <TABLE NAME="moereports_activityregin" COMMENT="per activity regin level data for the reports made by cron">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>            
+            <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
+            <FIELD NAME="activityname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="activity name"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+      <INDEXES>
+        <INDEX NAME="region" UNIQUE="false" FIELDS="region"/>
+      </INDEXES>
+    </TABLE>
+        <TABLE NAME="moereports_courseregin" COMMENT="per course regin level data for the reports made by cron">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>            
+            <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+      <INDEXES>
+        <INDEX NAME="region" UNIQUE="false" FIELDS="region"/>
+      </INDEXES>
+    </TABLE>
+            <TABLE NAME="moereports_courseschool" COMMENT="per course school level data for the reports made by cron">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>    
+            <FIELD NAME="scollsymbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/> 
+            <FIELD NAME="scollname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>         
+            <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+      <INDEXES>
+        <INDEX NAME="region" UNIQUE="false" FIELDS="region,scollsymbol"/>
+      </INDEXES>
+    </TABLE>
+                <TABLE NAME="moereports_acactivityschool" COMMENT="per course per activity school level data for the reports made by cron">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>    
+            <FIELD NAME="symbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/> 
+            <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>         
+            <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
+            <FIELD NAME="activity" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="course name"/>
+            <FIELD NAME="count8" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="counterprcent8" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="count9" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="counterprcent9" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="count10" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="counterprcent10" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+        </FIELDS>
+        <KEYS>
+              <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        </KEYS>
+      <INDEXES>
+        <INDEX NAME="region" UNIQUE="false" FIELDS="region,symbol,category"/>
+      </INDEXES>
+    </TABLE>
   </TABLES>
 </XMLDB>

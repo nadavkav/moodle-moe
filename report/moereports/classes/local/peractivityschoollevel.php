@@ -35,8 +35,7 @@ class peractivityschoollevel extends moereport{
 
 
     public function runreport() {
-        global $DB, $USER;
-        $usercontext = context_user::instance($USER->id);
+        global $DB;
 
         $results = array();
         $courses = $DB->get_records('course', array(
@@ -44,7 +43,6 @@ class peractivityschoollevel extends moereport{
         ));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         foreach ($semels as $semelkey => $semelvalue) {
-            if (strpos($USER->profile['Yeshuyot'], (string) $semelkey) !== false || is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) {
                 foreach ($courses as $course) {
                     $allactivity = $DB->get_records_sql('select * from mdl_course_modules where course = ? and completion = 1', array(
                         $course->id
@@ -55,7 +53,6 @@ class peractivityschoollevel extends moereport{
                         }
                     }
                 }
-            }
         }
         foreach ($courses as $course) {
             $completion = new completion_info($course);
@@ -66,7 +63,7 @@ class peractivityschoollevel extends moereport{
                 $makbila = $localuserinfo->profile['StudentKita'];
                 if (! empty($semel) && ! empty($makbila)) {
                     foreach ($user->progress as $act) {
-                        if (isset($results[$semel][$course->id][$act->coursemoduleid][$makbila]) && (strpos($USER->profile['Yeshuyot'], $semel) !== false || is_siteadmin() || has_capability('report/moereport:viewall', $usercontext))) {
+                        if (isset($results[$semel][$course->id][$act->coursemoduleid][$makbila])) {
                             $results[$semel][$course->id][$act->coursemoduleid][$makbila] ++;
                         }
                     }

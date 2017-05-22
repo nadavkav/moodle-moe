@@ -61,4 +61,5 @@ $string['usersinfo'] = 'users info';
 $string['teachingstuff'] = 'teaching stuff';
 $string['students'] = 'students';
 $string['numofusers'] = 'number of users:';
+$string['cron_name'] = 'Data generation for MOE reports';
 

@@ -16,7 +16,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 use report_moereports\local\region;
-require_once('../../report/moereports/classes/local/reportsformoe.php');
+require_once("$CFG->dirroot/report/moereports/classes/local/reportsformoe.php");
 
 
 class peractivityreginlevel extends moeReport{
@@ -33,29 +33,18 @@ class peractivityreginlevel extends moeReport{
 
 
     public function runreport() {
-        global $DB, $USER;
-        $usercontext = context_user::instance($USER->id);
+        global $DB;
 
         $results = array();
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
 
-        // Get all regins for current user
-        if (is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) {
+        // Get all regins
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
             foreach ($regionsobj as $obj) {
                 array_push($regions, $obj->region);
             }
-        } else {
-            $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
-            foreach ($useryeshuyot as $yeshut) {
-                $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-                if (!array_search($region, $regions)) {
-                    array_push($regions, $region);
-                }
 
-            }
-        }
 
         // Create zero array for report view for all activitys in all courses for each region
         foreach ($regions as $region) {
@@ -93,7 +82,7 @@ class peractivityreginlevel extends moeReport{
                     } else {
                         $state = COMPLETION_INCOMPLETE;
                     }
-                    
+
                     switch ($state) {
                         case COMPLETION_COMPLETE:
                         case COMPLETION_COMPLETE_PASS:

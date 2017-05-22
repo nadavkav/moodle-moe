@@ -37,28 +37,15 @@ class percoursereginlevel extends moereport{
 
 
     public function runreport() {
-        global $DB, $USER;
-        $usercontext = context_user::instance($USER->id);
+        global $DB;
 
         $results = array();
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
-        if(is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)){
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
             foreach ($regionsobj as $obj){
                 array_push($regions, $obj->region);
             }
-        } else {
-            $useryeshuyot= explode(',',$USER->profile['Yeshuyot']);
-            foreach ($useryeshuyot as $yeshut){
-                $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-                if (!array_search($region, $regions)){
-                    array_push($regions, $region);
-                }
-            }
-        }
-
-
 
         foreach ($regions as $region) {
             foreach ($courses as $course) {
@@ -67,12 +54,12 @@ class percoursereginlevel extends moereport{
                 }
             }
         }
-        
-        
+
+
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
-            $activities=  $completion->get_activities();            
+            $activities=  $completion->get_activities();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
@@ -81,7 +68,7 @@ class percoursereginlevel extends moereport{
                     array_search($regin, array_keys($regions)) === false){
                     continue;
                 }
-                
+
 
                 $makbila = $localuserinfo->profile['StudentKita'];
                 if(!isset($semel) || $regin == false){
@@ -94,7 +81,7 @@ class percoursereginlevel extends moereport{
                     } else {
                         $state=COMPLETION_INCOMPLETE;
                     }
-                
+
                     switch($state) {
                         case COMPLETION_COMPLETE :
                         case COMPLETION_COMPLETE_PASS :
