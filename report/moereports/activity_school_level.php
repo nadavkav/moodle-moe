@@ -14,19 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 require_once('../../config.php');
-require_once('../../report/moereports/classes/local/peractivityschoollevel.php');
-require_once($CFG->libdir.'/completionlib.php');
-require_once($CFG->libdir.'/modinfolib.php');
-$download   = optional_param('download', '', PARAM_ALPHA);
-$region = optional_param('region', '', PARAM_TEXT);
-global $OUTPUT;
+require_once($CFG->dirroot . '/lib/dataformatlib.php');
+
+global $DB, $PAGE, $OUTPUT;
 
 $url = new moodle_url('/report/moereports/activity_school_level.php');
 $PAGE->set_url($url);
 
-if ($download !== '') {
-    $url->param('download', $download);
-}
 // Make sure that the user has permissions to manage moe.
 require_login();
 
@@ -35,14 +29,41 @@ $PAGE->set_context($context);
 $PAGE->set_title(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_activity_school_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
-$output = $PAGE->get_renderer('report_moereports', 'activity_school');
+
+$data = new stdClass();
+$data->results = array();
+
+if(is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)){
+    $data->results = $DB->get_records_sql('select * from mdl_moereports_acactivityschool');
+    $data->results = array_values($data->results);
+    foreach ($data->results as $rec){
+        unset($rec->id);
+    }
+} else {
+    $cond='where  scollsymbol in (';
+    $scollsymbols = explode(',',$USER->profile['Yeshuyot']);
+    foreach ($scollsymbols as $scollsymbol) {
+        $cond = "$cond" . "$scollsymbol" . ",";
+    }
+    $cond = "$cond" . ")";
+    $data->results = $DB->get_records_sql("select * from mdl_moereports_acactivityschool" . "$cond");
+    $data->results = array_values($data->results);
+    foreach ($data->results as $rec){
+        unset($rec->id);
+    }
+}
+
+
 
 $renderer = $PAGE->get_renderer('core');
-$content = $output->display_report($context, $region, $download);
+$resulttable = $OUTPUT->render_from_template('report_moereports/scool_level', $data);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_activity_school_level', 'report_moereports'));
-echo $content;
+echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_scoole_level.php', 'dataformat', array());
+
+
+echo $resulttable;
 $PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
 $PAGE->requires->js_call_amd('report_moereports/ecxelexport','init');
 echo $OUTPUT->footer();
