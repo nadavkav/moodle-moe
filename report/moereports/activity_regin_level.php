@@ -25,7 +25,7 @@ $PAGE->set_url($url);
 
 // Make sure that the user has permissions to manage moe.
 require_login();
-
+$usercontext = context_user::instance($USER->id);
 $context = context_system::instance();
 $PAGE->set_context($context);
 $data = new stdClass();
@@ -54,9 +54,12 @@ if (is_siteadmin() || has_capability('report/moereport:viewall', $context)) {
 
     }
     $cond = "$cond" . ")";
-    $data = $DB->get_records_sql("select * from mdl_moereports_activityregin" . "$cond");
+    $data->results = $DB->get_records_sql("select * from mdl_moereports_activityregin" . "$cond");
+    $data->results = array_values($data->results);
+    foreach ($data->results as $rec){
+        unset($rec->id);
+    }
 }
-$data->url='';
 $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/activity_regin_level', $data);
 
