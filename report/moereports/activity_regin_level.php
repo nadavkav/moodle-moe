@@ -35,15 +35,15 @@ $PAGE->set_title(get_string('per_activity_regin_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_activity_regin_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
 
-//set the user privilege
+// set the user privilege
 if (is_siteadmin() || has_capability('report/moereport:viewall', $context)) {
      $data->results = $DB->get_records_sql('select * from mdl_moereports_activityregin');
      $data->results = array_values($data->results);
-    foreach ($data->results as $rec){
+    foreach ($data->results as $rec) {
         unset($rec->id);
     }
 } else {
-    $cond='where region in (';
+    $cond = 'where region in (';
     $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
     foreach ($useryeshuyot as $yeshut) {
         $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
@@ -56,24 +56,24 @@ if (is_siteadmin() || has_capability('report/moereport:viewall', $context)) {
     $cond = "$cond" . ")";
     $data->results = $DB->get_records_sql("select * from mdl_moereports_activityregin" . "$cond");
     $data->results = array_values($data->results);
-    foreach ($data->results as $rec){
+    foreach ($data->results as $rec) {
         unset($rec->id);
     }
 }
 $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/activity_regin_level', $data);
 
-if ($dataformat != null){
+if ($dataformat != null) {
     $columns = array(
-        'region' => get_string('region','report_moereports'),
-        'cors' => get_string('cors','report_moereports'),
-        'activity' => get_string('activity','report_moereports'),
-        'makbila8' => get_string('makbila8','report_moereports'),
-        'percents8' => get_string('percents8','report_moereports'),
-        'makbila9' => get_string('makbila9','report_moereports'),
-        'percents9' => get_string('percents9','report_moereports'),
-        'makbila10' => get_string('makbila10','report_moereports'),
-        'percents10' => get_string('percents10','report_moereports'),
+        'region' => get_string('region', 'report_moereports'),
+        'cors' => get_string('cors', 'report_moereports'),
+        'activity' => get_string('activity', 'report_moereports'),
+        'makbila8' => get_string('makbila8', 'report_moereports'),
+        'percents8' => get_string('percents8', 'report_moereports'),
+        'makbila9' => get_string('makbila9', 'report_moereports'),
+        'percents9' => get_string('percents9', 'report_moereports'),
+        'makbila10' => get_string('makbila10', 'report_moereports'),
+        'percents10' => get_string('percents10', 'report_moereports'),
     );
     download_as_dataformat('activity_in_region' . date('c') , $dataformat, $columns, $data->results);
 }
@@ -85,6 +85,6 @@ echo $OUTPUT->heading(get_string('per_activity_regin_level', 'report_moereports'
 echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/activity_regin_level.php', 'dataformat', array());
 echo $resulttable;
 
-$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
 echo $OUTPUT->footer();
 

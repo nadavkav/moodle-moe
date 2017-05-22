@@ -47,7 +47,7 @@ class school extends model
             '9' => 0,
             '10' => 0,
         );
-        if(!empty($symbol)){
+        if (!empty($symbol)) {
             $this->set_symbol($symbol);
         }
         if (!empty($this->get_symbol())) {
@@ -116,7 +116,7 @@ class school extends model
         if (!empty($this->symbol)) {
             $vars = get_object_vars($this);
             $obj = $DB->get_record($this->get_table(), array('symbol' => $this->symbol));
-            if ($obj){
+            if ($obj) {
                 foreach ($obj as $key => $value) {
                     if (key_exists($key, $vars)) {
                         $this->{$key} = $value;
@@ -126,11 +126,11 @@ class school extends model
         }
     }
 
-    public function get_students(){
+    public function get_students() {
         global $DB;
-
-
-        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
+        $users = $DB->get_records_sql("select u.id as id from {user} u join {user_info_data}
+        uid on u.id=uid.userid where uid.fieldid=:studentmosad and uid.data=:mosad and u.id in
+        (select u.id from {user} u join {user_info_data} uid on u.id=uid.userid where uid.fieldid=:isstudent and uid.data='Yes')",
             array(
                 'isstudent' => $this->isstudentfieldid,
                 'studentmosad' => $this->studentmosadid,
@@ -144,6 +144,7 @@ class school extends model
      * @see \report_moereport\local\model::add_entry()
      *
      */
-    public function add_entry() {}
+    public function add_entry() {
+    }
 }
 

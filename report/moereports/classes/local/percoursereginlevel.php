@@ -1,6 +1,4 @@
 <?php
-use report_moereports\local\region;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,7 +14,7 @@ use report_moereports\local\region;
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die;
-
+use report_moereports\local\region;
 require_once('../../report/moereports/classes/local/reportsformoe.php');
 require_once('../../report/moereports/classes/local/region.php');
 
@@ -43,9 +41,9 @@ class percoursereginlevel extends moereport{
         $regions = array();
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-            foreach ($regionsobj as $obj){
+        foreach ($regionsobj as $obj) {
                 array_push($regions, $obj->region);
-            }
+        }
 
         foreach ($regions as $region) {
             foreach ($courses as $course) {
@@ -54,32 +52,28 @@ class percoursereginlevel extends moereport{
                 }
             }
         }
-
-
         foreach ($courses as $course) {
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
-            $activities=  $completion->get_activities();
+            $activities = $completion->get_activities();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
                 $regin = $DB->get_field('moereports_reports', 'region', array('symbol' => $semel));
                 if ((isset($localuserinfo->profile['IsStudent']) && $localuserinfo->profile['IsStudent'] == "No") ||
-                    array_search($regin, array_keys($regions)) === false){
+                    array_search($regin, array_keys($regions)) === false) {
                     continue;
                 }
-
-
                 $makbila = $localuserinfo->profile['StudentKita'];
-                if(!isset($semel) || $regin == false){
+                if (!isset($semel) || $regin == false) {
                     continue;
                 }
                 foreach ($activities as $activity) {
-                    if (array_key_exists($activity->id,$user->progress)) {
-                        $thisprogress=$user->progress[$activity->id];
-                        $state=$thisprogress->completionstate;
+                    if (array_key_exists($activity->id, $user->progress)) {
+                        $thisprogress = $user->progress[$activity->id];
+                        $state = $thisprogress->completionstate;
                     } else {
-                        $state=COMPLETION_INCOMPLETE;
+                        $state = COMPLETION_INCOMPLETE;
                     }
 
                     switch($state) {
@@ -115,10 +109,10 @@ class percoursereginlevel extends moereport{
                                                               from {moereports_reports_classes} where class = ? AND symbol
                                                               in (select symbol from mdl_moereports_reports where region = ?)",
                                                               array($gradekey, $reginkey));
-                            if ($den == 0){
+                            if ($den == 0) {
                                  $onerecord->eighthgradetotal = "אין מידע";
-                            }else{
-                                 $onerecord->eighthgradetotal = round(($gradevalue / $den * 100),2) . "%";
+                            } else {
+                                 $onerecord->eighthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                   }
                              break;
                         case 9:
@@ -127,10 +121,10 @@ class percoursereginlevel extends moereport{
                                                             from {moereports_reports_classes} where class = ? AND symbol
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey));
-                            if ($den == 0){
+                            if ($den == 0) {
                                 $onerecord->ninthgradetotal = "אין מידע";
-                            }else{
-                                $onerecord->ninthgradetotal = round(($gradevalue / $den * 100),2) . "%";
+                            } else {
+                                $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
                             break;
                         case 10:
@@ -139,10 +133,10 @@ class percoursereginlevel extends moereport{
                                                             from {moereports_reports_classes} where class = ? AND symbol
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                 array($gradekey, $reginkey));
-                            if ($den == 0){
+                            if ($den == 0) {
                                 $onerecord->tenthgradetotal = "אין מידע";
-                            }else{
-                                $onerecord->tenthgradetotal = round(($gradevalue / $den * 100),2) . "%";
+                            } else {
+                                $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
                             break;
                     }
@@ -151,10 +145,9 @@ class percoursereginlevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
-        function cmp($a, $b)
-        {
+        function cmp($a, $b) {
             $res = strcmp($a->region, $b->region);
-            if ($res !== 0){
+            if ($res !== 0) {
                 return $res;
             }
 

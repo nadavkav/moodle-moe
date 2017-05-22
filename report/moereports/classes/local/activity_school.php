@@ -32,44 +32,40 @@ class activity_school {
         return $obj;
     }
 
-    public function display_report(){
+    public function display_report() {
         global $DB;
         ini_set('memory_limit', '8192M');
         $schools = array();
         $allcourses = $DB->get_records('course', array('enablecompletion' => '1'));
-
-
-            $regions = $DB->get_records_sql('select region from {moereports_reports} group by region');
-            foreach ($regions as $name) {
+        $regions = $DB->get_records_sql('select region from {moereports_reports} group by region');
+        foreach ($regions as $name) {
                 $region = new region($name->region);
-                $schools=array_merge($schools, $region->get_schools());
-            }
-
-
+                $schools = array_merge($schools, $region->get_schools());
+        }
         foreach ($schools as $school) {
             $region = new region($school->get_region());
             $students = $school->get_students();
             foreach ($allcourses as $course) {
                 $completion = new \completion_info($course);
-                $activities=  $completion->get_activities();
-                if(!empty($students)){
+                $activities = $completion->get_activities();
+                if (!empty($students)) {
                     $studentcomplete = $completion->get_progress_all('u.id in ('. implode(',', array_keys($students)) . ')');
                     foreach ($studentcomplete as $user) {
                         $userinfo = get_complete_user_data('id', $user->id);
                         foreach ($activities as $activity) {
-                            if (array_key_exists($activity->id,$user->progress)) {
-                                $thisprogress=$user->progress[$activity->id];
-                                $state=$thisprogress->completionstate;
+                            if (array_key_exists($activity->id, $user->progress)) {
+                                $thisprogress = $user->progress[$activity->id];
+                                $state = $thisprogress->completionstate;
                             } else {
-                                $state=COMPLETION_INCOMPLETE;
-                                if(!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])){
+                                $state = COMPLETION_INCOMPLETE;
+                                if (!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])) {
                                     $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']] = 0;
                                 }
                             }
                             switch($state) {
                                 case COMPLETION_COMPLETE :
                                 case COMPLETION_COMPLETE_PASS :
-                                    if(!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])){
+                                    if (!isset($data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']])) {
                                         $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']] = 1;
                                     } else {
                                         $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$userinfo->profile['StudentKita']]++;
@@ -82,8 +78,8 @@ class activity_school {
                         }
                     }
                 } else {
-                    foreach ($activities as $activity){
-                        foreach ($school->get_levels() as $level => $value){
+                    foreach ($activities as $activity) {
+                        foreach ($school->get_levels() as $level => $value) {
                             $data[$region->get_name()][$school->get_symbol()][$course->category][$activity->id][$level] = 0;
                         }
                     }
@@ -92,15 +88,15 @@ class activity_school {
         }
 
         $rows = new \stdClass();
-          foreach ($schools as $school) {
+        foreach ($schools as $school) {
             foreach ($allcourses as $course) {
                 $completion = new \completion_info($course);
-                $activities=  $completion->get_activities();
+                $activities = $completion->get_activities();
                 $insinfo = get_fast_modinfo($course->id);
-                    foreach ($activities as $key => $activity) {
-                        if($activity->completion == 0){
+                foreach ($activities as $key => $activity) {
+                    if ($activity->completion == 0) {
                             continue;
-                        }
+                    }
                         $row = new \stdClass();
                         $category = $DB->get_field('course_categories', 'name', array(
                             'id' => $course->category
@@ -122,9 +118,9 @@ class activity_school {
                                 $row->{'counterprcent' . $level} = get_string('noinformation', 'report_moereports');
                             }
                         }
-                        $row=$this->to_std($row);
+                        $row = $this->to_std($row);
                         $rows->results[] = $row;
-                    }
+                }
             }
         }
 

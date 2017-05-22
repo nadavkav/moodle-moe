@@ -42,11 +42,11 @@ function xmldb_report_moereports_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017020800, 'report', 'moereports');
     }
 
-    if ($oldversion < 2017022202){
+    if ($oldversion < 2017022202) {
         $table = new xmldb_table('moereports_reports');
         $field = new xmldb_field('city');
-        if($dbman->field_exists($table, $field)) {
-            $dbman->drop_field($table, $field, $continue=true, $feedback=true);
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field, $continue = true, $feedback = true);
         }
         upgrade_plugin_savepoint(true, 2017022203, 'report', 'moereports');
 
@@ -72,11 +72,7 @@ function xmldb_report_moereports_upgrade($oldversion) {
         if (!$dbman->table_exists($table)) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_activityregin');
         }
-
-
         upgrade_plugin_savepoint(true, 2017052201, 'report', 'moereports');
     }
-
-
     return true;
 }

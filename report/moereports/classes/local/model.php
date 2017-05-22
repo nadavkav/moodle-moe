@@ -70,7 +70,7 @@ abstract class model {
         if (!empty($this->id)) {
             $vars = get_object_vars($this);
             $obj = $DB->get_record($this->get_table(), array('id' => $this->id));
-            if ($obj){
+            if ($obj) {
                 foreach ($obj as $key => $value) {
                     if (key_exists($key, $vars)) {
                         $this->{$key} = $value;

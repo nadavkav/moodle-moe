@@ -14,12 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 namespace report_moereports\task;
+defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir.'/completionlib.php');
 require_once($CFG->libdir.'/modinfolib.php');
-require_once "$CFG->dirroot/report/moereports/classes/local/peractivityreginlevel.php";
-require_once "$CFG->dirroot/report/moereports/classes/local/percoursereginlevel.php";
-require_once "$CFG->dirroot/report/moereports/classes/local/percourseschoollevel.php";
-require_once "$CFG->dirroot/report/moereports/classes/local/activity_school.php";
+require_once("$CFG->dirroot/report/moereports/classes/local/peractivityreginlevel.php");
+require_once("$CFG->dirroot/report/moereports/classes/local/percoursereginlevel.php");
+require_once("$CFG->dirroot/report/moereports/classes/local/percourseschoollevel.php");
+require_once("$CFG->dirroot/report/moereports/classes/local/activity_school.php");
 
 
 use core\task\scheduled_task;
@@ -34,8 +35,7 @@ class report_data_generate extends \core\task\scheduled_task {
      * {@inheritDoc}
      * @see \core\task\scheduled_task::get_name()
      */
-    public function get_name()
-    {
+    public function get_name() {
         return get_string('cron_name', 'report_moereports');
 
     }
@@ -44,8 +44,7 @@ class report_data_generate extends \core\task\scheduled_task {
      * {@inheritDoc}
      * @see \core\task\task_base::execute()
      */
-    public function execute()
-    {
+    public function execute() {
         global $DB;
 
         // activity_regin_level:
@@ -55,20 +54,20 @@ class report_data_generate extends \core\task\scheduled_task {
         $DB->delete_records_select('moereports_activityregin', "id='%'");
         $DB->insert_records('moereports_activityregin', $data->results);
 
-        //activity_school_level:
+        // activity_school_level:
         $rep = new \activity_school();
         $results = $rep->display_report();
         $DB->delete_records_select('moereports_acactivityschool', "id='%'");
         $DB->insert_records('moereports_acactivityschool', $results->results);
 
-        //course_regin_level:
+        // course_regin_level:
         $results = new \percoursereginlevel();
         $data = new \stdClass();
         $data->results = $results->displayreportfortemplates();
         $DB->delete_records_select('moereports_courseregin', "id='%'");
         $DB->insert_records('moereports_courseregin', $data->results);
 
-        //course_scoole_level:
+        // course_scoole_level:
         $results = new \percourseschoollevel();
         $data = new \stdClass();
         $data->results = $results->displayreportfortemplates();

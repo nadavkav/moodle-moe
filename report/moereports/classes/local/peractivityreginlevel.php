@@ -40,12 +40,10 @@ class peractivityreginlevel extends moeReport{
         $courses = $DB->get_records('course', array('enablecompletion' => '1'));
 
         // Get all regins
-            $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
-            foreach ($regionsobj as $obj) {
+        $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
+        foreach ($regionsobj as $obj) {
                 array_push($regions, $obj->region);
-            }
-
-
+        }
         // Create zero array for report view for all activitys in all courses for each region
         foreach ($regions as $region) {
             foreach ($courses as $course) {

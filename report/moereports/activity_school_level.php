@@ -33,22 +33,22 @@ $PAGE->set_pagelayout('standard');
 $data = new stdClass();
 $data->results = array();
 
-if(is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)){
+if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
     $data->results = $DB->get_records_sql('select * from mdl_moereports_acactivityschool');
     $data->results = array_values($data->results);
-    foreach ($data->results as $rec){
+    foreach ($data->results as $rec) {
         unset($rec->id);
     }
 } else {
-    $cond='where  scollsymbol in (';
-    $scollsymbols = explode(',',$USER->profile['Yeshuyot']);
+    $cond = 'where  scollsymbol in (';
+    $scollsymbols = explode(',', $USER->profile['Yeshuyot']);
     foreach ($scollsymbols as $scollsymbol) {
         $cond = "$cond" . "$scollsymbol" . ",";
     }
     $cond = "$cond" . ")";
     $data->results = $DB->get_records_sql("select * from mdl_moereports_acactivityschool" . "$cond");
     $data->results = array_values($data->results);
-    foreach ($data->results as $rec){
+    foreach ($data->results as $rec) {
         unset($rec->id);
     }
 }
@@ -64,7 +64,7 @@ echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moerep
 
 
 echo $resulttable;
-$PAGE->requires->js_call_amd('report_moereports/persistent_headers','init');
-$PAGE->requires->js_call_amd('report_moereports/ecxelexport','init');
+$PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
+$PAGE->requires->js_call_amd('report_moereports/ecxelexport', 'init');
 echo $OUTPUT->footer();
 
