@@ -50,7 +50,7 @@ if(is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)){
         $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
         if (!array_search($region, $regions)) {
             array_push($regions, $region);
-            $cond = "$cond" . "$region . ,";
+            $cond = "$cond" . "$region" . ",";
         }
 
     }
