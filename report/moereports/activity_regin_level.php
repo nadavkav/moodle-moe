@@ -60,8 +60,7 @@ if (is_siteadmin() || has_capability('report/moereport:viewall', $context)) {
         unset($rec->id);
     }
 }
-$renderer = $PAGE->get_renderer('core');
-$resulttable = $OUTPUT->render_from_template('report_moereports/activity_regin_level', $data);
+
 
 if ($dataformat != null) {
     $columns = array(
@@ -78,7 +77,8 @@ if ($dataformat != null) {
     download_as_dataformat('activity_in_region' . date('c') , $dataformat, $columns, $data->results);
 }
 
-
+$renderer = $PAGE->get_renderer('core');
+$resulttable = $OUTPUT->render_from_template('report_moereports/activity_regin_level', $data);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_activity_regin_level', 'report_moereports'));

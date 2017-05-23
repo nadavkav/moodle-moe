@@ -92,6 +92,15 @@ class percoursereginlevel extends moereport{
         return $results;
     }
 
+    public function cmp($a, $b) {
+        $res = strcmp($a->region, $b->region);
+        if ($res !== 0) {
+            return $res;
+        }
+
+        return strcmp($a->course, $b->course);
+    }
+
     public function displayreportfortemplates() {
         global $DB;
         $results = self::runreport();
@@ -113,7 +122,7 @@ class percoursereginlevel extends moereport{
                                  $onerecord->eighthgradetotal = "אין מידע";
                             } else {
                                  $onerecord->eighthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
-                                  }
+                            }
                              break;
                         case 9:
                             $onerecord->ninthgradesum = $gradevalue;
@@ -145,14 +154,7 @@ class percoursereginlevel extends moereport{
                 array_push($resultintamplateformat, $onerecord);
             }
         }
-        function cmp($a, $b) {
-            $res = strcmp($a->region, $b->region);
-            if ($res !== 0) {
-                return $res;
-            }
 
-            return strcmp($a->course, $b->course);
-        }
         usort($resultintamplateformat, "cmp");
         return $resultintamplateformat;
     }
