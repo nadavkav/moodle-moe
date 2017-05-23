@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die;
-require_once('../../report/moereports/classes/local/reportsformoe.php');
+require_once("$CFG->dirroot/report/moereports/classes/local/reportsformoe.php");
 
 class peractivityschoollevel extends moereport{
 

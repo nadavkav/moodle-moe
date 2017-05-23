@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 defined('MOODLE_INTERNAL') || die;
 use report_moereports\local\region;
-require_once('../../report/moereports/classes/local/reportsformoe.php');
-require_once('../../report/moereports/classes/local/region.php');
+require_once("$CFG->dirroot/report/moereports/classes/local/reportsformoe.php");
+require_once("$CFG->dirroot/report/moereports/classes/local/region.php");
 
 class percoursereginlevel extends moereport{
 
