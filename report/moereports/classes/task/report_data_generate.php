@@ -47,19 +47,6 @@ class report_data_generate extends \core\task\scheduled_task {
     public function execute() {
         global $DB;
 
-        // activity_regin_level:
-        $results = new \peractivityreginlevel();
-        $data = new \stdClass();
-        $data->results = $results->displayreportfortemplates();
-        $DB->delete_records_select('moereports_activityregin', "id='%'");
-        $DB->insert_records('moereports_activityregin', $data->results);
-
-        // activity_school_level:
-        $rep = new \activity_school();
-        $results = $rep->display_report();
-        $DB->delete_records_select('moereports_acactivityschool', "id='%'");
-        $DB->insert_records('moereports_acactivityschool', $results->results);
-
         // course_regin_level:
         $results = new \percoursereginlevel();
         $data = new \stdClass();
@@ -73,6 +60,19 @@ class report_data_generate extends \core\task\scheduled_task {
         $data->results = $results->displayreportfortemplates();
         $DB->delete_records_select('moereports_courseschool', "id='%'");
         $DB->insert_records('moereports_courseschool', $data->results);
+
+        // activity_regin_level:
+        $results = new \peractivityreginlevel();
+        $data = new \stdClass();
+        $data->results = $results->displayreportfortemplates();
+        $DB->delete_records_select('moereports_activityregin', "id='%'");
+        $DB->insert_records('moereports_activityregin', $data->results);
+
+        // activity_school_level:
+        $rep = new \activity_school();
+        $results = $rep->display_report();
+        $DB->delete_records_select('moereports_acactivityschool', "id='%'");
+        $DB->insert_records('moereports_acactivityschool', $results->results);
 
     }
 }
