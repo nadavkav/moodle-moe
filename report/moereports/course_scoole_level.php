@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 require_once('../../config.php');
 require_once($CFG->dirroot . '/lib/dataformatlib.php');
+ini_set("memory_limit", "-1");
+
 global $DB, $PAGE, $OUTPUT;
 
 $dataformat = optional_param('dataformat', null, PARAM_ALPHA);
