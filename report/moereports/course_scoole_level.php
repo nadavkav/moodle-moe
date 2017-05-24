@@ -46,10 +46,14 @@ if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
     $cond = 'where  scollsymbol in (';
     $scollsymbols = explode(',', $USER->profile['Yeshuyot']);
     foreach ($scollsymbols as $scollsymbol) {
-        $cond = "$cond" . "$scollsymbol" . ",";
+        if (!next($scollsymbols)){
+            $cond = "$cond"  . "$scollsymbol";
+        } else {
+            $cond = "$cond"  . "$scollsymbol" . ",";
+        }
     }
     $cond = "$cond" . ")";
-    $data->results = $DB->get_records_sql("select * from mdl_moereports_courseschool" . "$cond");
+    $data->results = $DB->get_records_sql("select * from mdl_moereports_courseschool " . "$cond");
     $data->results = array_values($data->results);
     foreach ($data->results as $rec) {
         unset($rec->id);

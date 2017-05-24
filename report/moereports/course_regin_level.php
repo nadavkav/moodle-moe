@@ -48,14 +48,18 @@ if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
     $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
     foreach ($useryeshuyot as $yeshut) {
         $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-        if (!array_search($region, $regions)) {
+        if ($region !=false && !array_search($region, $regions)) {
             array_push($regions, $region);
-            $cond = "$cond" . "$region" . ",";
+            if ($yeshut == end($useryeshuyot)){
+                $cond = "$cond"  ."'$region'";
+            } else {
+                $cond = "$cond"  . "'$region'". ",";
+            }
         }
 
     }
     $cond = "$cond" . ")";
-    $data->results = $DB->get_records_sql("select * from mdl_moereports_courseregin" . "$cond");
+    $data->results = $DB->get_records_sql("select * from mdl_moereports_courseregin " . "$cond");
     $data->results = array_values($data->results);
     foreach ($data->results as $rec) {
         unset($rec->id);
