@@ -31,19 +31,19 @@ class admin_setting_configtext_mod_tincanlaunch extends admin_setting_configtext
      * @param array $data An array of data, if not array returns empty str
      * @return mixed empty string on useless data or success, error string if failed
      */
-    public function write_setting($data)
-    {
+    public function write_setting($data) {
         if ($this->paramtype === PARAM_INT and $data === '') {
-            // do not complain if '' used instead of 0
+            // Do not complain if '' used instead of 0.
             $data = 0;
         }
-        // $data is a string
+
         $validated = $this->validate($data);
         if ($validated !== true) {
             return $validated;
         }
-        //make sure there is always a trailing slash on endpoint URLs
-        if($this->name=='tincanlaunchlrsendpoint'){
+
+        // Make sure there is always a trailing slash on endpoint URLs.
+        if ($this->name == 'tincanlaunchlrsendpoint') {
             $data = rtrim($data, '/') . '/';
         }
         return ($this->config_write($this->name, $data) ? '' : get_string('errorsetting', 'admin'));

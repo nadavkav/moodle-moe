@@ -26,21 +26,8 @@ class Watershed {
     protected $endpoint;
     protected $auth;
     protected $orgId;
-    protected $dashboard;
+    protected $dashboard = null;
     protected $dashboardId;
-
-    //look-up for card template ids
-    public $cardTemplateList = array (
-        "accomplishment" => 311,
-        "activity detail" => 161,
-        "activity stream" => 282,
-        "correlation" => 261,
-        "leaderboard" => 332,
-        "skills" => 301,
-        "group" => 281,
-        "barchart" => 571,
-        "linechart" => 781
-    );
 
     /*
     @constructor
@@ -126,7 +113,7 @@ class Watershed {
     @param {String} [$value] dashboard name
     */
     public function setDashboard($value) {
-        //if (!$this->dashboard == $value){
+        if (!$this->dashboard == $value){
             $this->dashboard = $value;
             $response = $this->getCardGroup($this->orgId, $value);
             if ($response["status"] == 200) {
@@ -135,7 +122,7 @@ class Watershed {
             else {
                 throw new Exception('Unable to set dashboard id.');
             }
-        //}
+        }
         return $this;
     }
 
@@ -150,7 +137,7 @@ class Watershed {
         @return {String} [content] Raw content of the response
         @return {Integer} [status] HTTP status code of the response e.g. 201
     */
-    protected function sendRequest($method, $path) {
+    public function sendRequest($method, $path) {
         $options = func_num_args() === 3 ? func_get_arg(2) : array();
 
         $url = $this->endpoint."api/".$path;
@@ -445,6 +432,124 @@ class Watershed {
         return $return;
     }
 
+        /*
+    @method getOrganizations Gets a list of all organizations 
+    @param {String} [$search] partial org name to search for
+    @return {Array} Details of the result of the request
+        @return {Boolean} [success] Was the request was a success?
+        @return {String} [content] Raw content of the response
+        @return {Integer} [status] HTTP status code of the response e.g. 201
+        @return {Integer} [orgId] Id of the organization created. 
+    */
+    public function getOrganizations($search = null) {
+        $url = "organizations";
+        if (!is_null($search)){
+            $url = $url . '?in_name=' . urlencode($search);
+        }
+        $response = $this->sendRequest("GET", $url, array());
+
+        $success = FALSE;
+        if ($response["status"] === 200) {
+            $success = TRUE ;
+        }
+
+        $return = array (
+            "success" => $success, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        return $return;
+    }
+
+    /*
+    @method updateOrganization Calls the API to update an organization. 
+    @param {Object} [$org] Updated Org
+    @return {Array} Details of the result of the request
+        @return {Boolean} [success] Was the request was a success?
+        @return {String} [content] Raw content of the response
+        @return {Integer} [status] HTTP status code of the response e.g. 201
+        @return {Integer} [orgId] Id of the organization created. 
+    */
+    public function updateOrganization($org) {
+        $response = $this->sendRequest("PUT", "organizations/".$org->id, array(
+                "content" => json_encode($org)
+            )
+        );
+
+        $success = FALSE;
+        if ($response["status"] === 204) {
+            $success = TRUE ;
+        }
+
+        $return = array (
+            "success" => $success, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        return $return;
+    }
+
+    /*
+    @method getOrganizationSettings gets the settings for an org
+    @param {String} [$orgid] id of org to get settings for
+    @return {Array} Details of the result of the request
+        @return {Boolean} [success] Was the request was a success?
+        @return {String} [content] Raw content of the response
+        @return {Integer} [status] HTTP status code of the response e.g. 201
+        @return {Integer} [orgId] Id of the organization created. 
+    */
+    public function getOrganizationSettings($orgId) {
+        $url = "organizations/".$orgId."/settings";
+
+        $response = $this->sendRequest("GET", $url, array());
+
+        $success = FALSE;
+        if ($response["status"] === 200) {
+            $success = TRUE ;
+        }
+
+        $return = array (
+            "success" => $success, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        return $return;
+    }
+
+    /*
+    @method getOrganizationSettings gets the settings for an org
+    @param {String} [$orgid] id of org to set settings for
+    @param {Object} [$settings] new settings for the org
+    @return {Array} Details of the result of the request
+        @return {Boolean} [success] Was the request was a success?
+        @return {String} [content] Raw content of the response
+        @return {Integer} [status] HTTP status code of the response e.g. 201
+        @return {Integer} [orgId] Id of the organization created. 
+    */
+    public function updateOrganizationSettings($orgId, $settings) {
+        $url = "organizations/".$orgId."/settings";
+
+        $response = $this->sendRequest("PUT", $url, array(
+            "content" => json_encode($settings)
+        ));
+
+        $success = FALSE;
+        if ($response["status"] === 204) {
+            $success = TRUE ;
+        }
+
+        $return = array (
+            "success" => $success, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        return $return;
+    }
+
     /*
     @method createActivityProvider Calls the API to create new actvity provider credentials. 
     @param {String} [$name] Name of the activity to create. 
@@ -563,53 +668,46 @@ class Watershed {
         return $return;
     }
 
-    /*
-    @method createInvitation Calls the API to create a skill. Prerequisite for creating a skill card. 
-    @param {String} [$activityName] xAPI activity name to use in the skill.
-    @param {String} [$xAPIActivityId] xAPI activity id to use in the skill.
-    @param {String} [$orgId] Id of the organization to create the skill on.
-    @return {Array} Details of the result of the request.
+
+
+     /*
+    @method deleteMembershipByUsername Calls the API to from a user from an org. 
+    @param {String} [$email] Email address of the person to invite.
+    @param {String} [$orgId] Id of the organization to create the invite on.
+    @return {Array} Details of the result of the request
         @return {Boolean} [success] Was the request was a success? 
-        @return {String} [content] Raw content of the response.
-        @return {Integer} [status] HTTP status code of the response e.g. 201.
-        @return {Integer} [skillId] Id of the skill created.
+        @return {String} [content] Raw content of the response
+        @return {Integer} [status] HTTP status code of the response e.g. 201
     */
-    public function createSkill($activityName, $xAPIActivityId, $orgId) {
+    public function deleteMembershipByUsername($email, $orgId) {
 
-        $skillConfigObj = array (
-            "name" => $activityName,
-            "components" => array (
-                array (
-                    "name" => "object.id",
-                    "value" => $xAPIActivityId
-                )
-            )
-        );
-
-        $response = $this->sendRequest("POST", "organizations/{$orgId}/skills", array(
-                "content" => json_encode($skillConfigObj)
-            )
-        );
+        $response = $this->sendRequest("GET", "organizations/".$orgId."/memberships", array());
 
         $success = FALSE;
-        if ($response["status"] === 201) {
-            $success = TRUE ;
+        if ($response["status"] !== 200) {
+            return array (
+                "success" => $success, 
+                "status" => $response["status"],
+                "content" => $response["content"],
+            );
+        }
+
+        $memberships = json_decode($response["content"])->results;
+
+        foreach ($memberships as $membership) {
+            if ($membership->user->username === $email) {
+                $response = $this->sendRequest("DELETE", "memberships/".$membership->id, array());
+                if ($response["status"] === 200) {
+                    $success = TRUE;
+                }
+            } 
         }
 
         $return = array (
             "success" => $success, 
             "status" => $response["status"],
-            "content" => $response["content"]
+            "content" => $response["content"],
         );
-
-        $content = json_decode($response["content"]);
-
-        if (isset ($content->id)) {
-            $return["skillId"] = $content->id;
-        }
-        else {
-            $return["skillId"] = NULL;
-        }
 
         return $return;
     }
@@ -658,7 +756,7 @@ class Watershed {
     /*
     @method createCard Calls the API to create a card. use helper functions for specific card types. 
     @param {Array} [$configuration] Card configuration "object" (do not JSON encode!).
-    @param {String} [$template] name of card template to use e.g. "leaderboard" or "Activity Detail".
+    @param {String} [$template] name of card template to use e.g. "leaderboard" or "activity".
     @param {Array} [$cardText] array of card test values
         @param {String} [$title] Card title
         @param {String} [$description] Card description
@@ -682,7 +780,7 @@ class Watershed {
                             "id" => $orgId
                         ),
                         "template" => array (
-                            "id" => $this->cardTemplateList[strtolower($template)]
+                            "name" => strtolower($template)
                         ),
                         "title" => $cardText["title"],
                         "description" => $cardText["description"],
@@ -704,7 +802,7 @@ class Watershed {
         );
 
         $content = json_decode($response["content"]);
-        
+
         if (isset ($content->id)) {
             $return["cardId"] = $content->id;
         }
@@ -718,7 +816,7 @@ class Watershed {
     /*
     @method createCard Calls the API to create a card within a group 
     @param {Array} [$configuration] Card configuration "object" (do not JSON encode!).
-    @param {String} [$template] name of card template to use e.g. "leaderboard" or "Activity Detail".
+    @param {String} [$template] name of card template to use e.g. "leaderboard" or "activity".
     @param {Array} [$cardText] array of card test values
         @param {String} [$title] Card title
         @param {String} [$description] Card description
@@ -832,59 +930,7 @@ class Watershed {
     }
 
     /*
-    @method createSkillCard Calls the API to create a skill, then create a card for that skill
-    @param {String} [$activityName] xAPI activity name to use in the skill.
-    @param {String} [$xAPIActivityId] xAPI activity id to use in the skill.
-    @param {Integer} [$orgId] Id of the organization to create the skill and card on.
-    @param {Integer} [$groupId] Id of the group to create the card in.
-    @param {String} [$groupName] Name of the group to create the card in.
-    @param {Array} [$cardText] array of card test values
-        @param {String} [$title] Card title
-        @param {String} [$description] Card description
-        @param {String} [$summary] Card summary
-    @return {Array} Details of the result of the request.
-        @return {Boolean} [success] Was the request was a success? 
-        @return {String} [content] Raw content of the response.
-        @return {Integer} [status] HTTP status code of the response e.g. 201.
-        @return {Integer} [cardId] Id of the card created.
-        @return {Integer} [skillId] Id of the skill created. 
-    */
-    public function createSkillCard($activityName, $xAPIActivityId, $orgId, $groupId = null, $groupName = null, $cardText = array()) {
-
-        $defaultCardText = array(
-            "title" => "Practicing {$activityName}",
-            "description" => "The Skills report card tells you how often learners practice.",
-            "summary" => "The Skills report card tells you how often learners practice."
-        );
-        $cardText = array_merge($defaultCardText, $cardText);
-
-        $response = $this->createSkill($activityName, $xAPIActivityId, $orgId);
-        if ($response["success"]) {
-            $skillId = $response["skillId"];
-
-            $configuration = array(
-                "filter" => array(
-                    "skillIds" => array ($skillId)
-                )
-            );
-
-            $response = $this->createCardInGroup(
-                $configuration, 
-                "skills", 
-                $cardText,
-                $orgId,
-                $groupId, 
-                $groupName
-            );
-
-            $response["skillId"] = $skillId;
-
-        } 
-        return $response;
-    }
-
-    /*
-    @method createActivityStreamCard Calls the API to create an activity stream card filtered by a base activity id URL.
+    @method createActivityStreamCard Calls the API to create an interactions card filtered by a base activity id URL.
     Uses regex to filter all activity ids starting with the activity id provided. 
     @param {String} [$activityName] xAPI activity name 
     @param {String} [$xAPIActivityId] xAPI activity id (or start of activity id)
@@ -904,8 +950,8 @@ class Watershed {
     public function createActivityStreamCard($activityName, $xAPIActivityId, $orgId, $groupId = null, $groupName = null, $cardText = array()) {
         $defaultCardText = array(
             "title" => "{$activityName} Activity",
-            "description" => "The Activity Stream report card tells you what's happening now.",
-            "summary" => "The Activity Stream report card tells you what's happening now."
+            "description" => "The Interactions report card tells you what's happening now.",
+            "summary" => "The Interactions report card tells you what's happening now."
         );
         $cardText = array_merge($defaultCardText, $cardText);
 
@@ -920,7 +966,7 @@ class Watershed {
 
         $response = $this->createCardInGroup(
             $configuration, 
-            "activity stream", 
+            "interactions", 
             $cardText,
             $orgId,
             $groupId
@@ -930,7 +976,7 @@ class Watershed {
     }
 
     /*
-    @method createActivityDetailCard Calls the API to create an activity detail card for a given activity id.
+    @method createActivityDetailCard Calls the API to create an activity card for a given activity id.
     @param {String} [$activityName] xAPI activity name 
     @param {String} [$xAPIActivityId] xAPI activity id
     @param {Integer} [$orgId] Id of the organization to create the skill and card on.
@@ -949,8 +995,8 @@ class Watershed {
     public function createActivityDetailCard($activityName, $xAPIActivityId, $orgId, $groupId = null, $groupName = null, $cardText = array()) {
         $defaultCardText = array(
             "title" => "{$activityName} Detail",
-            "description" => "The Activity Detail report card enables you to explore an activity in detail.",
-            "summary" => "The Activity Detail report card enables you to explore an activity in detail."
+            "description" => "The Activity report card enables you to explore an activity in detail.",
+            "summary" => "The Activity report card enables you to explore an activity in detail."
         );
         $cardText = array_merge($defaultCardText, $cardText);
 
@@ -965,7 +1011,7 @@ class Watershed {
 
         $response = $this->createCardInGroup(
             $configuration, 
-            "activity detail", 
+            "activity", 
             $cardText, 
             $orgId,
             $groupId,
@@ -1122,7 +1168,7 @@ class Watershed {
 
         $response = $this->createCardInGroup(
             $configuration, 
-            "barchart", 
+            "bar", 
             $cardText,
             $orgId,
             $groupId,
@@ -1133,7 +1179,7 @@ class Watershed {
 
 
     /*
-    @method createBarchartCard Calls the API to create a barchart card for a given activity id.
+    @method createLinechartCard Calls the API to create a barchart card for a given activity id.
     @param {Array} [$measureList] List measures to use in the barchart. Contains an array of measure config arrays. 
         Each measure config array has a name key, and optional match and title keys. See getMeasure above for details. 
     @param {Array} [$dimensionName] xAPI activity name 
@@ -1204,7 +1250,7 @@ class Watershed {
 
         $response = $this->createCardInGroup(
             $configuration, 
-            "linechart", 
+            "line", 
             $cardText,
             $orgId,
             $groupId,
@@ -1382,7 +1428,7 @@ class Watershed {
             array (
                 "cardGroupId"=> $groupId
             ), 
-            "group", 
+            "card-group", 
             $cardText, 
             $orgId, 
             $parentGroupId,
@@ -1783,21 +1829,35 @@ class Watershed {
         );
     }
 
-    public function getCardData($orgId, $cardId, $cardType, $requireCached) {
+    public function getCardData($orgId, $cardId, $cardType, $requireCached, $orderType = "-", $orderBy = '0', $limit = null) {
         if ($orgId == null) {
             $orgId = $this->orgId;
         }
 
+        if ($orderType  == '+') {
+            $orderType = '';
+        }
+
         $requireCachedStr = ($requireCached) ? 'true' : 'false';
 
-        $path = 'organizations/'.$orgId.'/cartridges/builtin/'.$cardType.'/data';
-        $queryString = "order_by=-agg:0:value&cardId=".$cardId."&requireCached=".$requireCachedStr;
+        $limitstr = "";
+        if (!is_null($limit)) {
+           $limitstr = '&_limit='.$limit;
+        }
+
+        $path = 'organizations/'.$orgId.'/'.$cardType.'/data';
+        $orderby = urlencode($orderType."measure[".$orderBy."].value");
+        $queryString = "order_by=".$orderby."&cardId=".$cardId."&requireCached=".$requireCachedStr.$limitstr;
 
         $response = $this->sendRequest(
             "GET", 
             $path.'?'.$queryString,
             array ()
         );
+
+        if ($response["status"] === 404 && $requireCached === true) {
+            $response = $this->getCardData($orgId, $cardId, $cardType, false, $orderType, $orderBy, $limit);
+        }
 
         $return = array (
             "success" => FALSE, 
@@ -1808,7 +1868,7 @@ class Watershed {
         if ($response["status"] === 200) {
             $return["success"] = TRUE;
             $return["content"] = $this->processCardDataContent($requireCached, $response["content"]);
-        }
+        } 
 
         return $return;
     }
@@ -1832,7 +1892,7 @@ class Watershed {
 
     /*
     @method getPersonByPersona Fetches a person by persona, if it exists. 
-    @param {String} [$orgId] Id of the organization to create the card on.
+    @param {String} [$orgId] Id of the organization.
     @param {Object} [$persona] Persona object.
     @return {Array} Details of the result of the series of requests.
         @return {Boolean} [success] Was the request was a success? (false if group does not exist)
@@ -1870,7 +1930,7 @@ class Watershed {
 
     /*
     @method createPerson Creates a person 
-    @param {String} [$orgId] Id of the organization to create the card on.
+    @param {String} [$orgId] Id of the organization.
     @param {Object} [$person] Person object.
     @return {Array} Details of the result of the series of requests.
         @return {Boolean} [success] Was the request was a success? (false if group does not exist)
@@ -1907,7 +1967,7 @@ class Watershed {
 
     /*
     @method updatePerson Creates a person 
-    @param {String} [$orgId] Id of the organization to create the card on.
+    @param {String} [$orgId] Id of the organization.
     @param {Object} [$person] Person object.
     @param {Integer} [personId] Person's id
     @return {Array} Details of the result of the series of requests.
@@ -1942,7 +2002,7 @@ class Watershed {
 
     /*
     @method createPerson Creates a person 
-    @param {String} [$orgId] Id of the organization to create the card on.
+    @param {String} [$orgId] Id of the organization
     @param {Object} [$permission] Permission object.
     @return {Array} Details of the result of the series of requests.
         @return {Boolean} [success] Was the request was a success? (false if group does not exist)
@@ -1972,6 +2032,416 @@ class Watershed {
             $return["success"] = TRUE;
         }
 
+        return $return;
+    }
+
+    /*
+    @method getGroupTypes Fetches a list of all Group Types in an org.
+    @param {String} [$orgId] Id of the organization to search.
+    @param {String} [$name] Partial name to search for. 
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+        @return {Array} [groupTypes] List of group types
+    */
+    public function getGroupTypes($orgId, $name) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+        $namestr = "";
+        if (!is_null($name)) {
+           $namestr = '?in_name='.$name;
+        }
+
+        $response = $this->sendRequest(
+            "GET", 
+            'organizations/'.$orgId.'/group-types'.$namestr
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $content = json_decode($response["content"]);
+            $return["success"] = TRUE;
+            $return["groupTypes"] = $content->results;
+        }
+        return $return;
+    }
+
+    /*
+    @method deleteGroupType Deletes a Group Type. 
+    @param {String} [$orgId] Id of the organization to search.
+    @param {Int} [$groupTypeId] Id of the group type to delete
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function deleteGroupType($orgId, $groupTypeId) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+        $response = $this->sendRequest(
+            'DELETE', 
+            'organizations/'.$orgId.'/group-types/'.$groupTypeId
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 204) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method createGroupType Creates a Group Type. 
+    @param {String} [$orgId] Id of the organization to search.
+    @param {string} [$name] The display name of the Group Type
+    @param {string} [$plural] The plural display name of the Group Type
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function createGroupType($orgId, $name, $plural) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+        if ($plural == null) {
+            $plural = $name.'s';
+        }
+
+        $content = array(
+            'name' => $name,
+            'pluralName' => $plural
+        );
+
+        $opts = array(
+            'content' => json_encode($content)
+        );
+
+        $response = $this->sendRequest(
+            'POST', 
+            'organizations/'.$orgId.'/group-types/',
+            $opts
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method getGroups Fetches a list of all Group in an org.
+    @param {String} [$orgId] Id of the organization to search.
+    @param {String} [$customId] Partial customId to search for. 
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+        @return {Array} [groupTypes] List of group types
+    */
+    public function getGroups($orgId, $customId) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+        $customIdStr = "";
+        if (!is_null($customId)) {
+           $customIdStr = '?in_customId='.$customId;
+        }
+
+        $response = $this->sendRequest(
+            "GET", 
+            'organizations/'.$orgId.'/groups'.$customIdStr
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $content = json_decode($response["content"]);
+            $return["success"] = TRUE;
+            $return["groups"] = $content->results;
+        }
+        return $return;
+    }
+
+    /*
+    @method getGroupsByName Fetches a list of all Group in an org.
+    @param {String} [$orgId] Id of the organization to search.
+    @param {String} [$name] name to search for. 
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+        @return {Array} [groupTypes] List of group types
+    */
+    public function getGroupsByName($orgId, $name) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+        $nameStr = "";
+        if (!is_null($name)) {
+
+           $nameStr = '?name='.urlencode($name);
+        }
+
+        $response = $this->sendRequest(
+            "GET", 
+            'organizations/'.$orgId.'/groups'.$nameStr
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $content = json_decode($response["content"]);
+            $return["success"] = TRUE;
+            $return["groups"] = $content->results;
+        }
+        return $return;
+    }
+
+    /*
+    @method createGroup Creates a Group. 
+    @param {String} [$orgId] Id of the organization to search.
+    @param {Obj} [$group] Group to create
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function createGroup($orgId, $group) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $opts = array(
+            'content' => json_encode($group)
+        );
+
+        $response = $this->sendRequest(
+            'POST', 
+            'organizations/'.$orgId.'/groups/',
+            $opts
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method updateGroup Updates a Group. 
+    @param {String} [$orgId] Id of the organization to search.
+    @param {Int} [$groupId] Id of the organization to search.
+    @param {Obj} [$group] Group to create
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function updateGroup($orgId, $groupId, $group) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $opts = array(
+            'content' => json_encode($group)
+        );
+
+        $response = $this->sendRequest(
+            'PUT', 
+            'organizations/'.$orgId.'/groups/'.$groupId,
+            $opts
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method deleteGroup deletes a Group. 
+    @param {String} [$orgId] Id of the organization to search.
+    @param {Int} [$groupId] Id of the organization to search.
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function deleteGroup($orgId, $groupId) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $response = $this->sendRequest(
+            'DELETE', 
+            'organizations/'.$orgId.'/groups/'.$groupId
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method setMeasures sets the measures for an org
+    @param {String} [$orgId] Id of the organization .
+    @param {Array} [$measures] measures to set
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function setMeasures($orgId, $measures) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $response;
+
+        foreach ($measures as $measure) {
+            $config = (object)[
+                'name' => $measure->name,
+                'config' => json_encode($measure)
+            ];
+
+            $opts = array(
+            'content' => json_encode($config)
+            );
+            
+            $response = $this->sendRequest(
+                'POST', 
+                'organizations/'.$orgId.'/measures/',
+                $opts
+            );
+
+            if ($response["status"] !== 201) {
+                break;
+            }
+        }
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 201) {
+            $return["success"] = TRUE;
+        }
+        return $return;
+    }
+
+    /*
+    @method getMeasures gets the measures for an org
+    @param {String} [$orgId] Id of the organization .
+    @param {Array} [$measures] measures to set
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Array} [measures] fetched measures.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function getMeasures($orgId) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $response = $this->sendRequest(
+            'GET', 
+            'organizations/'.$orgId.'/measures/',
+            null
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+            $content = json_decode($response["content"]);
+            $return["measures"] = $content->results;
+        }
+        return $return;
+    }
+
+    /*
+    @method deleteMeasure deletes a measure
+    @param {String} [$orgId] Id of the organization .
+    @param {Array} [$measures] measures to set
+    @return {Array} Details of the result of the series of requests.
+        @return {Boolean} [success] Was the request was a success? 
+        @return {String} [content] Raw content of the response.
+        @return {Integer} [status] HTTP status code of the response
+    */
+    public function deleteMeasure($orgId, $measureId) {
+        if ($orgId == null) {
+            $orgId = $this->orgId;
+        }
+
+        $response = $this->sendRequest(
+            'DELETE', 
+            'organizations/'.$orgId.'/measures/'.$measureId,
+            null
+        );
+
+        $return = array (
+            "success" => FALSE, 
+            "status" => $response["status"],
+            "content" => $response["content"]
+        );
+
+        if ($response["status"] === 200) {
+            $return["success"] = TRUE;
+        }
         return $return;
     }
 

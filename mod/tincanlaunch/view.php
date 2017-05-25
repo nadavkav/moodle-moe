@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,28 +21,8 @@
  * @copyright  2013 Andrew Downes
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(__FILE__).'/lib.php');
-include 'locallib.php';
-
-$id = optional_param('id', 0, PARAM_INT); // course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // tincanlaunch instance ID
-
-if ($id) {
-    $cm         = get_coursemodule_from_id('tincanlaunch', $id, 0, false, MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $tincanlaunch  = $DB->get_record('tincanlaunch', array('id' => $cm->instance), '*', MUST_EXIST);
-} elseif ($n) {
-    $tincanlaunch  = $DB->get_record('tincanlaunch', array('id' => $n), '*', MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $tincanlaunch->course), '*', MUST_EXIST);
-    $cm         = get_coursemodule_from_instance('tincanlaunch', $tincanlaunch->id, $course->id, false, MUST_EXIST);
-} else {
-    error(get_string('idmissing', 'report_tincan'));
-}
-
-require_login($course, true, $cm);
-$context = context_module::instance($cm->id);
+require('header.php');
 
 // Trigger module viewed event.
 $event = \mod_tincanlaunch\event\course_module_viewed::create(array(
@@ -55,7 +34,7 @@ $event->add_record_snapshot('tincanlaunch', $tincanlaunch);
 $event->add_record_snapshot('course_modules', $cm);
 $event->trigger();
 
-/// Print the page header
+// Print the page header.
 
 $PAGE->set_url('/mod/tincanlaunch/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($tincanlaunch->name));
@@ -64,10 +43,10 @@ $PAGE->set_context($context);
 
 $PAGE->requires->jquery();
 
-// Output starts here
+// Output starts here.
 echo $OUTPUT->header();
 
-if ($tincanlaunch->intro) { // Conditions to show the intro can change to look for own settings or whatever
+if ($tincanlaunch->intro) { // Conditions to show the intro can change to look for own settings or whatever.
     echo $OUTPUT->box(
         format_module_intro('tincanlaunch', $tincanlaunch, $cm->id),
         'generalbox mod_introbox',
@@ -75,19 +54,19 @@ if ($tincanlaunch->intro) { // Conditions to show the intro can change to look f
     );
 }
 
-//TODO: Put all the php inserted data as parameters on the functions and put the functions in a separate JS file
+// TODO: Put all the php inserted data as parameters on the functions and put the functions in a separate JS file.
 ?> 
 <script>
-    //Function to run when the experience is launched
+    // Function to run when the experience is launched.
     function mod_tincanlaunch_launchexperience(registration) {
-        //Set the form paramters
-        $('#launchform_registration').val(registration);            
-        //post it
+        // Set the form paramters.
+        $('#launchform_registration').val(registration);
+        // Post it.
         $('#launchform').submit();
-        //remove the launch links
+        // Remove the launch links.
         $('#tincanlaunch_newattempt').remove(); 
         $('#tincanlaunch_attempttable').remove();
-        //Add some new content              
+        //A dd some new content.
         if (!$('#tincanlaunch_status').length) {
             var message = "<?php echo get_string('tincanlaunch_progress', 'tincanlaunch'); ?>";
             $('#region-main').append('\
@@ -103,27 +82,27 @@ if ($tincanlaunch->intro) { // Conditions to show the intro can change to look f
         }
         $('#tincanlaunch_attemptprogress').load('completion_check.php?id=<?php echo $id ?>&n=<?php echo $n ?>');
     }
-    
-    //TODO: there may be a better way to check completion. Out of scope for current project. 
+
+    // TODO: there may be a better way to check completion. Out of scope for current project.
     $(document).ready(function() {
         setInterval(function() { 
             $('#tincanlaunch_attemptprogress').load('completion_check.php?id=<?php echo $id ?>&n=<?php echo $n ?>');
-        }, 30000); //TODO: make this interval a configuration setting
+        }, 30000); // TODO: make this interval a configuration setting.
     });
 </script>
 <?php
 
-//generate a registration id for any new attempt
-$tinCanPHPUtil = new \TinCan\Util();
-$registrationid = $tinCanPHPUtil->getUUID();
+// Generate a registration id for any new attempt.
+$tincanphputil = new \TinCan\Util();
+$registrationid = $tincanphputil->getUUID();
 $getregistrationdatafromlrsstate = tincanlaunch_get_global_parameters_and_get_state(
     "http://tincanapi.co.uk/stateapikeys/registrations"
 );
 $lrsrespond = $getregistrationdatafromlrsstate->httpResponse['status'];
 
 
-if ($lrsrespond!= 200 && $lrsrespond != 404) {
-    //On clicking new attempt, save the registration details to the LRS State and launch a new attempt
+if ($lrsrespond != 200 && $lrsrespond != 404) {
+    // On clicking new attempt, save the registration details to the LRS State and launch a new attempt.
     echo "<div class='alert alert-error'>".get_string('tincanlaunch_notavailable', 'tincanlaunch')."</div>";
 
     if ($CFG->debug == 32767) {
@@ -146,9 +125,9 @@ if ($lrsrespond == 200) {
     }
     foreach ($registrationdatafromlrs as $key => $item) {
 
-        if (!is_array($registrationdatafromlrs[$key])){
+        if (!is_array($registrationdatafromlrs[$key])) {
             $reason = "Excepted array, found ". $registrationdatafromlrs[$key];
-            throw new moodle_exception($reason, 'tincanlaunch', '', $warnings[$reason]); 
+            throw new moodle_exception($reason, 'tincanlaunch', '', $warnings[$reason]);
         }
         array_push(
             $registrationdatafromlrs[$key],
@@ -165,7 +144,7 @@ if ($lrsrespond == 200) {
         );
     }
     $table = new html_table();
-    $table->id ='tincanlaunch_attempttable';
+    $table->id = 'tincanlaunch_attempttable';
     $table->head = array(
         get_string('tincanlaunchviewfirstlaunched', 'tincanlaunch'),
         get_string('tincanlaunchviewlastlaunched', 'tincanlaunch'),
@@ -181,7 +160,7 @@ if ($lrsrespond == 200) {
         ."</a></p>";
 }
 
-//Add a form to be posted based on the attempt selected
+// Add a form to be posted based on the attempt selected.
 ?>
 <form id="launchform" action="launch.php" method="get" target="_blank">
     <input id="launchform_registration" name="launchform_registration" type="hidden" value="default">
