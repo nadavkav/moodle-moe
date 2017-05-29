@@ -92,7 +92,16 @@ define(['jquery'], function($){
 			$('.droparea').css("width",
 					this.pix2int($('.dropbackground').css("width")));
 		}
+		
+		//fix iframe size
+		$( document ).ready(function() {
+			var x  = $('iframe')[0].scrollWidth;
+			x = x * 1.3;
+		    $('#addtional_content').css('height', x+'px');
+		    $('#questionbox').css('height', x+'px');
 
+		    
+		});
 	};
 	
 	Navigation.prototype.checkPosition = function(){
