@@ -163,7 +163,10 @@ abstract class qtype_multichoice_renderer_base extends qtype_with_combined_feedb
                 $number = chr(ord('a') + $num);
                 break;
             case 'ABCD':
-                $number = chr(ord('A') + $num);
+                $letters = explode(',', get_string('alphabet', 'langconfig'));
+                $number = $letters[$num];//chr(ord('A') + $num);
+
+                //$number = chr(ord('A') + $num);
                 break;
             case '123':
                 $number = $num + 1;
