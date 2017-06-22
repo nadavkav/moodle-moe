@@ -792,7 +792,9 @@ div.coursebox .content>ul.teachers {
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 4px
 		4px 6px #a0a0a0;
 }
-
+.dir-ltr #frontpage-course-list .paging-morelink{
+	background-position: 95% 0%, 0% 0%;
+}
 .coursebox.clearfix.odd {
 	background: #dff8f4;
 }
