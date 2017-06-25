@@ -187,6 +187,7 @@ body.pagelayout-embedded {
 
 .dir-ltr #wrapper>#page-header {
 	background-image: url([[pix:theme|bg/Header_ananim_Eng]]);
+	background-position-x: left;
 }
 
 #wrapper>#page-header {
