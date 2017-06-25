@@ -185,6 +185,10 @@ body.pagelayout-embedded {
 	background-size: cover;
 }
 
+.dir-ltr #wrapper>#page-header {
+	background-image: url([[pix:theme|bg/Header_ananim_Eng]]);
+}
+
 #wrapper>#page-header {
 	background-image: url([[pix:theme|bg/header_bg]]);
 	background-repeat: no-repeat;
