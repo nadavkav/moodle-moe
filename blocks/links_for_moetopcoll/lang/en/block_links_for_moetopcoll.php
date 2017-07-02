@@ -17,3 +17,6 @@
 $string['pluginname'] = 'links for moetopcoll';
 $string['links_for_moetopcoll'] = 'links for moetopcoll';
 $string['links_for_moetopcoll:canseelinks'] = 'capability can see useful link for meetupcall';
+$string['userguid'] = 'user guid';
+$string['viewtemp'] = 'view templates';
+$string['technicalsup'] = 'technichal suporrt and Pedagogical';

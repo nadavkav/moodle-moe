@@ -17,19 +17,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
-    'block/links_for_moetopcoll:addinstance' => array(
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
-
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+    'block/links_for_moetopcoll:canseelinks' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
+            'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
+            'coursecreator' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+            'student' => CAP_PROHIBIT
         ),
-
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
-    'block/links_for_moetopcoll:canSeeLinks' => array(
+    'block/links_for_moetopcoll:addinstance' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
