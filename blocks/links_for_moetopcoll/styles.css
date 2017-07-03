@@ -32,14 +32,14 @@
     right: 5px;
     top: 5px;
     padding-left: 33px;
-
-@media screen and (max-width: 1400px) and (orientation: landscape){
+}
+@media screen and (max-width:1400px) and (orientation:landscape){
     .block_moe_links_button {
         font-size: 1.1em;
-    }   
+    }
 }
 
-@media screen and (max-width: 1150px) and (orientation: landscape){
+@media screen and (max-width:1150px) and (orientation:landscape){
     .block_moe_links_button {
         font-size: 0.9em;
     }
