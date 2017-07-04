@@ -83,8 +83,21 @@ define(['jquery'], function($){
 		}
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
 		
-		if (this.pix2int($('.wraper').css("height")) > this.pix2int($('#questionbox').css("height"))) {
-			$('#questionbox').css("height",this.pix2int($('.wraper').css("height")));
+		//fix iframe size
+		$( document ).ready(function() {
+			if ($('#app').length > 0){
+			var x  = $('#app')[0].scrollWidth;
+			x = x * 1.3;
+		    $('#addtional_content').css('height', x+'px');
+		    $('#questionbox').css('height', x+'px');
+			}
+		});
+		
+		//adjust question side to the content side
+		self = this;
+		$( document ).ready(function() {
+		if (self.pix2int($('.wraper').css("height")) > self.pix2int($('#questionbox').css("height"))) {
+			$('#questionbox').css("height",self.pix2int($('.wraper').css("height")));
 		}
 		if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
 			$('.ddarea').css('width',
@@ -92,16 +105,8 @@ define(['jquery'], function($){
 			$('.droparea').css("width",
 					this.pix2int($('.dropbackground').css("width")));
 		}
-		
-		//fix iframe size
-		$( document ).ready(function() {
-			var x  = $('iframe')[0].scrollWidth;
-			x = x * 1.3;
-		    $('#addtional_content').css('height', x+'px');
-		    $('#questionbox').css('height', x+'px');
-
-		    
 		});
+		
 	};
 	
 	Navigation.prototype.checkPosition = function(){
