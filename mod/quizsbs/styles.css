@@ -1265,6 +1265,14 @@ table.quizsbsreviewsummary td.cell {
     position: relative;
     height: 36px; 
 }
+.path-mod-quizsbs .singlebutton div{
+	display: inline-block;
+    margin-top: 18px;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
 #questions #quizsbs_question #questionbox,
 .path-mod-quizsbs #addtional_content .wraper {
 /*  padding: 1em; */
