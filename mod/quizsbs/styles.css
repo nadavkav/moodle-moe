@@ -1213,7 +1213,7 @@ table.quizsbsreviewsummary td.cell {
 .path-mod-quizsbs .que{
 	max-width: 100% !important;
 }
-.path-mod-quizsbs .path-mod-quizsbs .que .info{
+.path-mod-quizsbs .que .info{
 	display: none;
 }
 
