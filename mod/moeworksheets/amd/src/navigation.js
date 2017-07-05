@@ -95,11 +95,12 @@ define(['jquery'], function($){
 		
 		//fix iframe size
 		$( document ).ready(function() {
-			var x  = $('iframe')[0].scrollWidth;
+			if ($('#app').length > 0){
+			var x  = $('#app')[0].scrollWidth;
 			x = x * 1.3;
 		    $('#addtional_content').css('height', x+'px');
 		    $('#questionbox').css('height', x+'px');
-
+			}
 		    
 		});
 	};
