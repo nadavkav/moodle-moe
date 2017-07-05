@@ -87,20 +87,20 @@ class moeworksheetsaccess_offlinemode extends moeworksheets_access_rule_base {
     public static function save_settings($moeworksheets) {
         global $DB;
         if (empty($moeworksheets->offlinemode_enabled)) {
-            $DB->delete_records('moeworksheetsaccess_offlinemode', array('moeworksheetsid' => $moeworksheets->id));
+            $DB->delete_records('moeworksheetsaccess_offlinmo', array('moeworksheetsid' => $moeworksheets->id));
         } else {
-            if (!$DB->record_exists('moeworksheetsaccess_offlinemode', array('moeworksheetsid' => $moeworksheets->id))) {
+            if (!$DB->record_exists('moeworksheetsaccess_offlinmo', array('moeworksheetsid' => $moeworksheets->id))) {
                 $record = new stdClass();
                 $record->moeworksheetsid = $moeworksheets->id;
                 $record->enabled = 1;
-                $DB->insert_record('moeworksheetsaccess_offlinemode', $record);
+                $DB->insert_record('moeworksheetsaccess_offlinmo', $record);
             }
         }
     }
 
     public static function delete_settings($moeworksheets) {
         global $DB;
-        $DB->delete_records('moeworksheetsaccess_offlinemode', array('moeworksheetsid' => $moeworksheets->id));
+        $DB->delete_records('moeworksheetsaccess_offlinmo', array('moeworksheetsid' => $moeworksheets->id));
     }
 
     public static function get_settings_sql($moeworksheetsid) {

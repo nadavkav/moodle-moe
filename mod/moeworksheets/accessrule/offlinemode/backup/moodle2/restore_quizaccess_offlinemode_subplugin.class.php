@@ -61,6 +61,6 @@ class restore_moeworksheetsaccess_offlinemode_subplugin extends restore_mod_moew
 
         $data = (object)$data;
         $data->moeworksheetsid = $this->get_new_parentid('moeworksheets');
-        $DB->insert_record('moeworksheetsaccess_offlinemode', $data);
+        $DB->insert_record('moeworksheetsaccess_offlinmo', $data);
     }
 }
