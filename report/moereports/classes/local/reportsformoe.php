@@ -20,7 +20,7 @@ abstract class  moereport{
     abstract public function  runreport();
     abstract public function  displayreportfortemplates();
 
-    public function to_std():\stdClass {
+    public function to_std() {
         $obj = new \stdClass();
         $vars = get_object_vars($this);
         foreach ($vars as $key => $value) {
