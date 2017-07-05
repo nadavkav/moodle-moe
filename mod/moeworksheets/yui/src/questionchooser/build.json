@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_moeworksheets-questionchooser",
+    "builds": {
+        "moodle-mod_moeworksheets-questionchooser": {
+            "jsfiles": [
+                "questionchooser.js"
+            ]
+        }
+    }
+}

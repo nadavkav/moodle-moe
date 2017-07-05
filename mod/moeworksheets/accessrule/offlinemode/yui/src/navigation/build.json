@@ -1,0 +1,10 @@
+{
+    "name": "moodle-moeworksheetsaccess_offlinemode-navigation",
+    "builds": {
+        "moodle-moeworksheetsaccess_offlinemode-navigation": {
+            "jsfiles": [
+                "navigation.js"
+            ]
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "moodle-mod_moeworksheets-moeworksheetsbase": {
+        "requires": [
+            "base",
+            "node"
+        ]
+    }
+}

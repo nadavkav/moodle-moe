@@ -1,0 +1,10 @@
+{
+    "name": "moodle-moeworksheetsaccess_offlinemode-download",
+    "builds": {
+        "moodle-moeworksheetsaccess_offlinemode-download": {
+            "jsfiles": [
+                "download.js"
+            ]
+        }
+    }
+}

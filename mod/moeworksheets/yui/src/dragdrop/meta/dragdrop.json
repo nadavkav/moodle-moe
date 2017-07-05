@@ -1,0 +1,19 @@
+{
+    "moodle-mod_moeworksheets-dragdrop": {
+        "requires": [
+            "base",
+            "node",
+            "io",
+            "dom",
+            "dd",
+            "dd-scroll",
+            "moodle-core-dragdrop",
+            "moodle-core-notification",
+            "moodle-mod_moeworksheets-moeworksheetsbase",
+            "moodle-mod_moeworksheets-util-base",
+            "moodle-mod_moeworksheets-util-page",
+            "moodle-mod_moeworksheets-util-slot",
+            "moodle-course-util"
+        ]
+    }
+}
