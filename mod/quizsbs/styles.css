@@ -1173,8 +1173,7 @@ table.quizsbsreviewsummary td.cell {
     min-height: 10em;
 }
 #quizsbs #navigation .othernav {
-    float: right;
-    margin-left: 3em
+	float: right;
 }
 
 .path-mod-quizsbs #id_csseditor, .path-mod-quizsbs #id_javascripteditor {
@@ -1251,8 +1250,9 @@ table.quizsbsreviewsummary td.cell {
     max-height: 36px;
     overflow: hidden;
     margin-top: 1em;
-    position: relative;
-    margin-right: 35px;
+	position: relative;
+	margin-right: 13px;
+	width: 100%;
 }
 
 .path-mod-quizsbs .allbuttons {
@@ -1261,10 +1261,19 @@ table.quizsbsreviewsummary td.cell {
     height: 36px;
 }
 .path-mod-quizsbs #scrollbar {
-    overflow: hidden;
-    position: relative;
-    height: 36px; 
+	overflow: hidden;
+	position: relative;
+	height: 36px; 
+	width: 640px;
 }
+.path-mod-quizsbs .singlebutton div{
+	display: inline-block;
+    margin-top: 18px;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
 #questions #quizsbs_question #questionbox,
 .path-mod-quizsbs #addtional_content .wraper {
 /*  padding: 1em; */
@@ -1308,10 +1317,9 @@ table.quizsbsreviewsummary td.cell {
     color:#000000 !important;
 }
 .path-mod-quizsbs #navigation .questionnavbutton{
-    text-align: left;
-}
-#navigation .questionnavbutton .mod_quizsbs-next-nav-show {
-    margin-left: 1.1em;
+
+	text-align: left;
+	margin-left: 0;
 }
 #page-mod-quizsbs-editcontent #region-main ul{
     list-style-type: none;
