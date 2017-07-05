@@ -1,0 +1,9 @@
+{
+    "moodle-mod_moeworksheets-questionchooser": {
+        "requires": [
+            "moodle-core-chooserdialogue",
+            "moodle-mod_moeworksheets-util",
+            "querystring-parse"
+        ]
+    }
+}

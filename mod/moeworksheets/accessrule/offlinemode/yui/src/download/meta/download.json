@@ -1,0 +1,14 @@
+{
+    "moodle-moeworksheetsaccess_offlinemode-download": {
+        "requires": [
+            "base",
+            "node",
+            "event",
+            "node-event-delegate",
+            "json",
+            "io-form",
+            "moodle-moeworksheetsaccess_offlinemode-jsencrypt",
+            "moodle-moeworksheetsaccess_offlinemode-sjcl"
+        ]
+    }
+}

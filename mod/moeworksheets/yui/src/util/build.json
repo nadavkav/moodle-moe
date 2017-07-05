@@ -1,0 +1,21 @@
+{
+  "name": "moodle-mod_moeworksheets-util",
+  "builds": {
+    "moodle-mod_moeworksheets-util-base": {
+      "jsfiles": [
+        "base.js"
+      ]
+    },
+    "moodle-mod_moeworksheets-util-slot": {
+      "jsfiles": [
+        "slot.js"
+      ]
+    }
+    ,
+    "moodle-mod_moeworksheets-util-page": {
+      "jsfiles": [
+        "page.js"
+      ]
+    }
+  }
+}

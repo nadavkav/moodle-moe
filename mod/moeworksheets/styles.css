@@ -1,0 +1,1435 @@
+/** Bits that can appear on any page. */
+.path-mod-moeworksheets .statedetails {
+    display: block;
+    font-size: 0.7em;
+}
+
+#moeworksheets-timer{
+	margin: auto;
+	padding: 1%;
+}
+
+#page-mod-moeworksheets-attempt.dir-rtl .submitbtns .mod_moeworksheets-next-nav, #page-mod-moeworksheets-review.dir-rtl .submitbtns .mod_moeworksheets-next-nav {
+    margin-left: 9px;
+	
+}
+
+#page-mod-moeworksheets-attempt #moeworksheets .singlebutton{
+    margin:auto;
+}
+
+#page-mod-moeworksheets-attempt.dir-rtl .submitbtns, #page-mod-moeworksheets-review.dir-rtl .submitbtns {
+	padding-top: 13px;
+}
+
+#page-mod-moeworksheets-attempt  .singlebutton input[type="submit"]{
+    background: #faf7da ;
+	color:black !important;
+	border-style: solid;
+    border-width: 1.5px;
+    border-color: #989ca5;
+	padding: 0px;	
+}
+
+
+#moeworksheets #navigation .othernav {
+ 	margin-left:auto; 
+}
+
+.mod_moeworksheets-prev-nav{
+	display: none !important; 
+}
+
+.mod_moeworksheets-next-nav{
+    display: none !important; 
+}
+
+.mod_moeworksheets-prev-nav-show{
+    background: url([[pix:moeworksheets|Page_right]]) no-repeat center !important;
+    background-color:#bcbcd0 !important;
+    background-position-x: 95% !important;
+    background-size: auto 40% !important;
+    background-position:5%;
+    padding: 12px 24px !important;  
+    color: #bcbcd0 !important;
+    
+    
+}
+
+.mod_moeworksheets-next-nav-show{
+    background: url([[pix:moeworksheets|Page_left]]) no-repeat left !important;
+	background-position-x: 5% !important;
+	background-size: auto 40% !important;
+    background-color:#bcbcd0 !important;
+    background-position: center center; 
+    padding: 12px 24px !important;
+    color: #bcbcd0 !important;
+    margin-right: 1.3em !important;
+}
+
+.path-mod-moeworksheets .span9 .row-fluid .span5 {
+    padding-top: 1%;
+    padding-left: 0.8%
+}
+
+/** Attempt and review pages **/
+#page-mod-moeworksheets-attempt #page .controls,
+#page-mod-moeworksheets-summary #page .controls,
+#page-mod-moeworksheets-review #page .controls {
+    text-align: center;
+    margin: 8px auto;
+}
+
+#page-mod-moeworksheets-attempt .submitbtns,
+#page-mod-moeworksheets-review .submitbtns {
+    clear: left;
+    text-align: left;
+    padding-top: 1.5em;
+}
+#page-mod-moeworksheets-attempt.dir-rtl .submitbtns,
+#page-mod-moeworksheets-review.dir-rtl .submitbtns {
+    text-align: right;
+	min-width: 325px;
+}
+
+#page-mod-moeworksheets-attempt .submitbtns .mod_moeworksheets-next-nav,
+#page-mod-moeworksheets-review .submitbtns .mod_moeworksheets-next-nav {
+    float: right;
+}
+#page-mod-moeworksheets-attempt.dir-rtl .submitbtns .mod_moeworksheets-next-nav,
+#page-mod-moeworksheets-review.dir-rtl .submitbtns .mod_moeworksheets-next-nav {
+    float: left;
+}
+
+.path-mod-moeworksheets .mod_moeworksheets-redo_question_button {
+    margin: 0;
+}
+.path-mod-moeworksheets input[type="submit"].mod_moeworksheets-redo_question_button {
+    padding: 2px 0.8em;
+    font-size: 1em;
+}
+
+#page-mod-moeworksheets-attempt .mod_moeworksheets-blocked_question_warning .que .formulation,
+#page-mod-moeworksheets-review .mod_moeworksheets-blocked_question_warning .que .formulation {
+    background: #eee;
+    border: 1px solid #dcdcdc;
+}
+
+body.jsenabled.path-mod-moeworksheets .questionflagcheckbox {
+    display: none;
+}
+
+#page-mod-moeworksheets-attempt #connection-ok,
+#page-mod-moeworksheets-attempt #connection-error {
+    position: fixed;
+    top: 0;
+    width: 80%;
+    left: 10%;
+    color: #555;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 5px 5px 20px 0 #666666;
+    padding: 1em 1em 0;
+    z-index: 10000;
+}
+
+#page-mod-moeworksheets-attempt #connection-error {
+    background-color: #fcc;
+}
+#page-mod-moeworksheets-attempt #connection-ok {
+    background-color: #cfb;
+    width: 60%;
+    left: 20%;
+}
+
+#page-mod-moeworksheets-attempt #moeworksheets header.row-fluid {
+	background-color: #f3e7d4;
+}
+/** Mod moeworksheets attempt **/
+.path-mod-moeworksheets .generalbox#passwordbox {
+    /* Should probably match .generalbox#intro above */
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.path-mod-moeworksheets #passwordform {
+    margin: 1em 0;
+}
+
+/* Question navigation block. */
+#moeworksheetsnojswarning {
+    color: red;
+}
+#moeworksheetsnojswarning {
+    font-size: 0.7em;
+    line-height: 1.1;
+}
+.jsenabled #moeworksheetsnojswarning {
+    display: none;
+}
+
+.path-mod-moeworksheets #user-picture {
+    margin: 0.5em 0;
+}
+.path-mod-moeworksheets #user-picture img {
+    width: auto;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.path-mod-moeworksheets #mod_moeworksheets_navblock h3.mod_moeworksheets-section-heading {
+    padding: 0.7em 0 0;
+    margin: 0;
+    clear: both;
+}
+.path-mod-moeworksheets #mod_moeworksheets_navblock h3.mod_moeworksheets-section-heading:first-child {
+    padding-top: 0;
+}
+
+.path-mod-moeworksheets .qnbutton {
+    display: block;
+    position: relative;
+    float: left;
+    width: 2em;
+	min-width: 2em;
+    height: 2em;
+    margin: 0.3em 0.3em 0.3em 0;
+    padding: 0;
+    border: 1px solid #8ebbb9;
+    background: #ddd;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+    font-weight: bold;
+    text-decoration: none;
+	border-radius: 100%;
+}
+.path-mod-moeworksheets.dir-rtl  .qnbutton {
+    float: right;
+}
+.path-mod-moeworksheets .qnbutton:visited:hover,
+.path-mod-moeworksheets .qnbutton:link:hover {
+    text-decoration: underline;
+}
+
+.path-mod-moeworksheets .qnbutton .trafficlight,
+.path-mod-moeworksheets .qnbutton .thispageholder {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.path-mod-moeworksheets .qnbutton.thispage .thispageholder {
+	border-radius: 100%;
+}
+
+.path-mod-moeworksheets .qnbutton.flagged .trafficlight {
+    background: url([[pix:moeworksheets|navflagged]]) no-repeat top right;
+}
+.path-mod-moeworksheets .qnbutton.notyetanswered{
+	background-color: #e3f5f5;
+}
+.path-mod-moeworksheets .qnbutton.thispage {
+    color: #d2d8d8;
+    background-color: #3d6362;
+}
+.path-mod-moeworksheets .qnbutton.blocked,
+.path-mod-moeworksheets .qnbutton.requiresgrading,
+.path-mod-moeworksheets .qnbutton.invalidanswer {
+    background-color: white;
+}
+.path-mod-moeworksheets .qnbutton.correct {
+    background-color: #cfc;
+}
+.path-mod-moeworksheets .qnbutton.correct .trafficlight {
+    border-bottom: 3px solid #080;
+}
+.path-mod-moeworksheets .qnbutton.partiallycorrect {
+    background-color: #ffa;
+}
+.path-mod-moeworksheets .qnbutton.notanswered,
+.path-mod-moeworksheets .qnbutton.incorrect {
+    background-color: #fcc;
+}
+.path-mod-moeworksheets .qnbutton.blocked {
+    color: #999;
+}
+.path-mod-moeworksheets .qnbutton.notanswered .trafficlight,
+.path-mod-moeworksheets .qnbutton.incorrect .trafficlight {
+    border-top: 3px solid #800;
+}
+
+.path-mod-moeworksheets .othernav {
+    
+}
+.path-mod-moeworksheets .othernav a,
+.path-mod-moeworksheets .othernav input {
+    display: block;
+    margin: 0.5em 0;
+}
+
+/* Countdown timer. */
+#moeworksheets-timer {
+    display: none;
+    margin-top: 1em;
+}
+#moeworksheets-time-left {
+    font-weight: bold;
+}
+#moeworksheets-timer.timeleft15 {
+    background: #ffffff;
+}
+#moeworksheets-timer.timeleft14 {
+    background: #ffeeee;
+}
+#moeworksheets-timer.timeleft13 {
+    background: #ffdddd;
+}
+#moeworksheets-timer.timeleft12 {
+    background: #ffcccc;
+}
+#moeworksheets-timer.timeleft11 {
+    background: #ffbbbb;
+}
+#moeworksheets-timer.timeleft10 {
+    background: #ffaaaa;
+}
+#moeworksheets-timer.timeleft9 {
+    background: #ff9999;
+}
+#moeworksheets-timer.timeleft8 {
+    background: #ff8888;
+}
+#moeworksheets-timer.timeleft7 {
+    background: #ff7777;
+}
+#moeworksheets-timer.timeleft6 {
+    background: #ff6666;
+}
+#moeworksheets-timer.timeleft5 {
+    background: #ff5555;
+}
+#moeworksheets-timer.timeleft4 {
+    background: #ff4444;
+}
+#moeworksheets-timer.timeleft3 {
+    background: #ff3333;
+}
+#moeworksheets-timer.timeleft2 {
+    background: #ff2222;
+}
+#moeworksheets-timer.timeleft1 {
+    background: #ff1111;
+}
+#moeworksheets-timer.timeleft0 {
+    background: #ff0000;
+}
+
+/** mod moeworksheets mod **/
+#page-mod-moeworksheets-mod #id_reviewoptionshdr .fitem {
+    width: 23%;
+    margin-left: 10px;
+}
+#page-mod-moeworksheets-mod #id_reviewoptionshdr fieldset.fgroup {
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+}
+#page-mod-moeworksheets-mod #id_reviewoptionshdr .fitem {
+    float: left;
+    width: 23%;
+    clear: none;
+}
+#page-mod-moeworksheets-mod.dir-rtl #id_reviewoptionshdr .fitem {
+    float: right;
+}
+
+#page-mod-moeworksheets-mod #id_reviewoptionshdr .fitemtitle {
+    width: 100%;
+    font-weight: bold;
+    text-align: left;
+    height: 2.5em;
+    margin-left: 0;
+}
+#page-mod-moeworksheets-mod.dir-rtl #id_reviewoptionshdr .fitemtitle {
+    text-align: right;
+}
+
+#page-mod-moeworksheets-mod #id_reviewoptionshdr fieldset.fgroup {
+    clear: left;
+    margin: 0 0 1em;
+}
+#page-mod-moeworksheets-mod #id_reviewoptionshdr fieldset.fgroup > span {
+    float: left;
+    clear: left;
+    line-height: 1.7;
+}
+#page-mod-moeworksheets-mod.dir-rtl #id_reviewoptionshdr fieldset.fgroup > span {
+    float: right;
+    clear: right;
+}
+#page-mod-moeworksheets-mod #id_reviewoptionshdr fieldset.fgroup span label {
+    margin-left: 0.4em;
+}
+
+/** Mod moeworksheets view **/
+#page-mod-moeworksheets-view .moeworksheetsinfo,
+#page-mod-moeworksheets-view #page .moeworksheetsgradefeedback,
+#page-mod-moeworksheets-view #page .moeworksheetsattempt {
+    text-align: center;
+}
+#page-mod-moeworksheets-view #page .moeworksheetsattemptsummary td p {
+    margin-top: 0;
+}
+#page-mod-moeworksheets-view table.moeworksheetsattemptsummary tr.bestrow td {
+    border-color: #bce8f1;
+    background-color: #d9edf7;
+}
+table.moeworksheetsattemptsummary .noreviewmessage {
+    color: gray;
+}
+#page-mod-moeworksheets-view .generaltable.moeworksheetsattemptsummary {
+    margin-left: auto;
+    margin-right: auto;
+}
+#page-mod-moeworksheets-view .generalbox#feedback {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px;
+}
+#page-mod-moeworksheets-view .generalbox#feedback h2 {
+    margin: 0;
+}
+#page-mod-moeworksheets-view .generalbox#feedback h3 {
+    text-align: left;
+}
+#page-mod-moeworksheets-view.dir-rtl .generalbox#feedback h3 {
+    text-align: center;
+}
+#page-mod-moeworksheets-view .generalbox#feedback .overriddennotice {
+    text-align: center;
+    font-size: 0.7em;
+}
+.moeworksheetsstartbuttondiv.moeworksheetssecuremoderequired input {
+    display: none;
+}
+.jsenabled .moeworksheetsstartbuttondiv.moeworksheetssecuremoderequired input {
+    display: inline;
+}
+.moeworksheetsattempt #mod_moeworksheets_preflight_form {
+    display: none;
+}
+
+#mod_moeworksheets_preflight_form .femptylabel .fitemtitle {
+    display: none;
+}
+#mod_moeworksheets_preflight_form .femptylabel .felement {
+    margin: 0;
+    padding: 0;
+}
+
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup {
+    width: 600px;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-wrap {
+    overflow: hidden;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-bd {
+    padding: 0;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-bd #mod_moeworksheets_preflight_form legend {
+    padding: 0 10px;
+    margin: 0;
+    border: 0 none;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-bd #mod_moeworksheets_preflight_form .fitem {
+    margin-left: 10px;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-bd #mod_moeworksheets_preflight_form #fgroup_id_buttonar {
+    padding: 10px 0 0;
+    margin: 0;
+}
+.moodle-dialogue-base .moodle-dialogue.mod_moeworksheets_preflight_popup .moodle-dialogue-content .moodle-dialogue-ft {
+    margin: 0;
+}
+/* Standard Moodle rule that needs to be more specific here. */
+.moodle-dialogue-bd #mod_moeworksheets_preflight_form fieldset.hidden {
+    display: inherit;
+    visibility: inherit;
+}
+
+body.path-mod-moeworksheets .gradedattempt,
+body.path-mod-moeworksheets table tbody tr.gradedattempt > td {
+    border-color: #bce8f1;
+    background-color: #d9edf7;
+}
+
+.moeworksheetsattemptcounts {
+    clear: left;
+    text-align: center;
+    display:inline;
+    margin-left:20%;
+}
+.dir-rtl .moeworksheetsattemptcounts {
+    margin-left:0;
+    margin-right: 20%;
+}
+#page-mod-moeworksheets-view .moeworksheetsattemptcounts,
+.dir-rtl #page-mod-moeworksheets-view .moeworksheetsattemptcounts {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/** Mod moeworksheets summary **/
+#page-mod-moeworksheets-summary #content {
+    text-align: center;
+}
+#page-mod-moeworksheets-summary .questionflag {
+    vertical-align: text-bottom;
+}
+#page-mod-moeworksheets-summary #moeworksheets-timer {
+    text-align: center;
+    margin-top: 1em;
+}
+#page-mod-moeworksheets-summary .submitbtns {
+    margin-top: 1.5em;
+}
+@media print {
+    .moeworksheets-secure-window * {
+        display: none !important;
+    }
+}
+
+/** Mod moeworksheets review **/
+table.moeworksheetsreviewsummary {
+    width: 100%;
+}
+table.moeworksheetsreviewsummary th.cell {
+    padding: 1px 0.5em 1px 1em;
+    font-weight: bold;
+    text-align: right;
+    width: 10em;
+    background: #f0f0f0;
+}
+table.moeworksheetsreviewsummary td.cell {
+    padding: 1px 1em 1px 0.5em;
+    text-align: left;
+    background: #fafafa;
+}
+.dir-rtl table.moeworksheetsreviewsummary td.cell {
+    text-align: right;
+}
+
+/** Mod moeworksheets make comment or override grade popup. **/
+#page-mod-moeworksheets-comment .mform {
+    width: 100%;
+}
+#page-mod-moeworksheets-comment .mform fieldset {
+    margin: 0;
+}
+#page-mod-moeworksheets-comment .que {
+    margin: 0;
+}
+
+/** Mod moeworksheets report **/
+#page-mod-moeworksheets-report h2.main {
+    clear: both;
+}
+#page-mod-moeworksheets-report div#commands,
+#page-mod-moeworksheets-report .controls {
+    text-align: center;
+}
+#page-mod-moeworksheets-report .dubious {
+    background-color: #fcc;
+}
+#page-mod-moeworksheets-report .highlight {
+    border: 1px solid #bce8f1;
+    background-color: #d9edf7;
+}
+#page-mod-moeworksheets-report .negcovar {
+    border : medium solid pink;
+}
+#page-mod-moeworksheets-report .toggleincludeauto {
+    text-align: center;
+}
+#page-mod-moeworksheets-report .gradetheselink {
+    font-size: 0.8em;
+}
+#page-mod-moeworksheets-report .mform fieldset.fgroup span label {
+    margin-right: 14px;
+}
+#page-mod-moeworksheets-report table th {
+    white-space: normal;
+}
+#page-mod-moeworksheets-report table#attempts td,
+#page-mod-moeworksheets-report table.moeworksheetsresponseanalysis td {
+    word-wrap: break-word;
+    max-width: 20em;
+}
+#page-mod-moeworksheets-report table.titlesleft td.c0 {
+    font-weight: bold;
+}
+#page-mod-moeworksheets-report table .numcol {
+    text-align: center;
+    vertical-align : middle !important;
+}
+
+#page-mod-moeworksheets-report table#attempts {
+    clear: both;
+    width: 80%;
+    margin: 0.2em auto;
+}
+#page-mod-moeworksheets-report table#attempts .header,
+#page-mod-moeworksheets-report table#attempts .cell {
+    padding: 4px;
+}
+#page-mod-moeworksheets-report table#attempts .header .commands {
+    display: inline;
+}
+#page-mod-moeworksheets-report table#attempts .picture {
+    width: 40px;
+}
+#page-mod-moeworksheets-report table#attempts td {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-left-style: solid;
+    border-right-style: solid;
+    vertical-align: middle;
+}
+#page-mod-moeworksheets-report table#attempts .header {
+    text-align: left;
+}
+#page-mod-moeworksheets-report table#attempts .picture {
+    text-align: center !important;
+}
+#page-mod-moeworksheets-report table#attempts.grades span.que,
+#page-mod-moeworksheets-report table#attempts span.avgcell {
+    white-space: nowrap;
+}
+#page-mod-moeworksheets-report table#attempts span.que .requiresgrading {
+    white-space: normal;
+}
+#page-mod-moeworksheets-report table#attempts .questionflag {
+    vertical-align: text-bottom;
+    padding-left: 6px;
+}
+.dir-rtl#page-mod-moeworksheets-report table#attempts .questionflag {
+    padding-right: 6px;
+    padding-left: 0;
+}
+
+#page-mod-moeworksheets-report .graph.flexible-wrap {
+    text-align: center;
+    overflow: auto;
+}
+
+#page-mod-moeworksheets-report #cachingnotice {
+    margin-bottom: 1em;
+    padding: 0.2em;
+}
+#page-mod-moeworksheets-report #cachingnotice .singlebutton {
+    margin: 0.5em 0 0;
+}
+#page-mod-moeworksheets-report .bold .reviewlink {
+    font-weight: normal;
+}
+
+#page-mod-moeworksheets-report tr.lastrowforattempt {
+    border-bottom: lightgrey solid 0.2em;
+}
+
+/** Mod moeworksheets edit **/
+#page-mod-moeworksheets-edit .statusbar {
+    margin: 0.6em 0.4em;
+}
+#page-mod-moeworksheets-edit .statusdisplay {
+    background-color: #ffc;
+    clear: both;
+    margin: 0.3em 0;
+    padding: 1px 10px;
+}
+#page-mod-moeworksheets-edit .statusdisplay p {
+    margin: 4px 0;
+}
+#page-mod-moeworksheets-edit .maxgrade,
+#page-mod-moeworksheets-edit .totalpoints {
+    display: block;
+    float: right;
+    margin: -2.85em 0 0;
+    padding: .2em;
+}
+#page-mod-moeworksheets-edit.dir-rtl .maxgrade,
+#page-mod-moeworksheets-edit.dir-rtl .totalpoints {
+    float: left;
+}
+#page-mod-moeworksheets-edit .maxgrade label {
+    display: inline;
+}
+
+#page-mod-moeworksheets-edit li.activity > div,
+#page-mod-moeworksheets-edit li.pagenumber {
+    position: relative;
+}
+
+#page-mod-moeworksheets-edit ul.section li.pagenumber:first-child .add-menu-outer ul.menu li:first-child,
+#page-mod-moeworksheets-edit .last-add-menu .add-menu-outer ul.menu li:first-child {
+    display: none;
+}
+
+#page-mod-moeworksheets-edit .last-add-menu {
+    position: relative;
+    height: 1.5em;
+    margin: 0 20px;
+}
+#page-mod-moeworksheets-edit .add-menu-outer {
+    position: absolute;
+    right: 0;
+}
+#page-mod-moeworksheets-edit.dir-rtl .add-menu-outer {
+    right: auto;
+    left: 0;
+}
+
+#page-mod-moeworksheets-edit .slotnumber {
+    background-color: #D3D3D3;
+    text-align: center;
+    margin: 0.1em 0.5em;
+    min-width: 2em;
+    display: inline-block;
+}
+
+#page-mod-moeworksheets-edit .section-heading {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-bottom: 0;
+    height: 40px;
+}
+#page-mod-moeworksheets-edit .section-heading .instancesectioncontainer {
+    display: inline;
+}
+#page-mod-moeworksheets-edit .section-heading .instancesectioncontainer h3 {
+    display: inline;
+    color: #999;
+}
+#page-mod-moeworksheets-edit .section-heading .editing_section,
+#page-mod-moeworksheets-edit .section-heading .editing_delete {
+    margin-left: 10px;
+}
+#page-mod-moeworksheets-edit .section-heading .sectioninstance {
+    position: relative;
+}
+#page-mod-moeworksheets-edit .section-heading .instancesection {
+    white-space: nowrap;
+    max-width: 72%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+#page-mod-moeworksheets-edit .section-heading form {
+    display: inline;
+    position: relative;
+    top: 3px;
+    left: -7px;
+}
+#page-mod-moeworksheets-edit .section-heading form input {
+    font-size: 24px;
+    font-weight: bold;
+    width: 50%;
+}
+
+#page-mod-moeworksheets-edit .section-heading .instanceshufflequestions {
+    float: right;
+    margin: 0.3em 20px 0 0;
+}
+
+#page-mod-moeworksheets-edit ul.section {
+    margin: 0;
+    padding: 0 20px;
+}
+#page-mod-moeworksheets-edit ul.slots {
+    margin: 0;
+}
+#page-mod-moeworksheets-edit ul.slots li.section {
+    border: 0;
+}
+#page-mod-moeworksheets-edit ul.slots li.section .content {
+    background-color:#FAFAFA;
+    padding: 1px 0;
+}
+#page-mod-moeworksheets-edit ul.slots li.section {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity {
+    background: #E6E6E6;
+    margin: 3px 0;
+    padding: 0.2em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity.page {
+    background: transparent;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity.page h4 {
+    display: inline;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmarkcontainer {
+    background: white;
+    padding: 0.2em;
+    margin: 0.4em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmarkcontainer .editicon {
+    width: 13px;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmarkcontainer.infoitem {
+    background: transparent;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmarkcontainer form {
+    display: inline;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmarkcontainer form input {
+    margin: 0;
+    padding: 0.2em;
+    height: 1em;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark {
+    display: inline-block;
+    text-align: right;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .instancemaxmark {
+    text-align: left;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .page_split_join_wrapper {
+    position: absolute;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .page_split_join {
+    position: relative;
+    left: -20px;
+    top: -7px;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .page_split_join {
+    left: auto;
+    right: -20px;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_0 {
+    min-width: 1.3em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_1 {
+    min-width: 2em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_2 {
+    min-width: 2.6em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_3 {
+    min-width: 3.2em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_4 {
+    min-width: 3.7em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_5 {
+    min-width: 4.3em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_6 {
+    min-width: 4.8em;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_7 {
+    min-width: 5.45em;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .edit_icon,
+#page-mod-moeworksheets-edit ul.slots li.section li.activity a.preview,
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .editing_delete,
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .editing_maxmark {
+    margin: 0 2px;
+}
+#page-mod-moeworksheets-edit ul.slots li.section.only-has-one-slot li.activity .editing_move,
+#page-mod-moeworksheets-edit ul.slots li.section.only-has-one-slot li.activity .editing_delete {
+    visibility: hidden;
+}
+#page-mod-moeworksheets-edit ul.slots.only-one-section li.section.only-has-one-slot li.activity .editing_delete {
+    visibility: visible;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .question_dependency_wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper {
+    left: 0;
+    right: auto;
+}
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .question_dependency_wrapper.question_dependency_cannot_depend {
+    display: none;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .question_dependency_wrapper .currentlink,
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .question_dependency_wrapper .cm-edit-action {
+    position: relative;
+    left: 20px;
+    top: -1em;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper .currentlink,
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .question_dependency_wrapper .cm-edit-action {
+    right: 20px;
+    left: auto;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .activityinstance {
+    display: block;
+    min-height: 1.7em;
+    position: absolute;
+    top: 0;
+    left: 5em;
+    width: 100%;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .activityinstance {
+    left: auto;
+    right: 5em;
+}
+
+#page-mod-moeworksheets-edit ul.slots li.section li.activity .mod-indent-outer {
+    padding-left: 22px;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots li.section li.activity .mod-indent-outer {
+    padding-left: 0;
+    padding-right: 22px;
+}
+
+#page-mod-moeworksheets-edit ul.slots .activityinstance form {
+    display: inline;
+}
+#page-mod-moeworksheets-edit span.editinstructions {
+    right: 0;
+}
+#page-mod-moeworksheets-edit.dir-rtl span.editinstructions {
+    left: 0;
+    right: auto;
+}
+
+#page-mod-moeworksheets-edit ul.slots .activityinstance span.instancename {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    width: 70%;
+    display: inline-block;
+    height: 20px;
+}
+
+#page-mod-moeworksheets-edit ul.slots .activityinstance span.instancename img {
+    margin: 0 0.2em;
+}
+#page-mod-moeworksheets-edit #categoryquestions .questionname,
+#page-mod-moeworksheets-edit ul.slots li.activity div.activityinstance .questionname {
+  font-weight: bold;
+    color: #555;
+}
+#page-mod-moeworksheets-edit ul.slots li.activity div.activityinstance .questiontext {
+    color: #555;
+}
+#page-mod-moeworksheets-edit ul.slots li.activity div.activityinstance .mod_moeworksheets_random_qbank_link {
+    font-size: 0.8em;
+}
+
+#page-mod-moeworksheets-edit ul.slots .activityinstance img.activityicon {
+    float: left;
+    margin: .2em 0 0;
+    padding: 0;
+}
+#page-mod-moeworksheets-edit.dir-rtl ul.slots .activityinstance img.activityicon {
+    float: right;
+}
+
+#page-mod-moeworksheets-edit .section .activity .actions {
+    white-space: nowrap;
+    background: #e6e6e6;
+    padding: 0.1em 0;
+}
+
+#page-mod-moeworksheets-edit .mod_moeworksheets_edit_forms {
+    display: none;
+}
+
+.path-mod-moeworksheets #categoryquestions > tbody > tr:nth-of-type(even) {
+    background: #e4e4e4;
+}
+.path-mod-moeworksheets #categoryquestions > tbody > tr:nth-of-type(even).highlight {
+    background-color: #AAFFAA;
+}
+.path-mod-moeworksheets #categoryquestions .header {
+    text-align: center;
+    padding: 0 2px;
+    border: 0 none;
+}
+.path-mod-moeworksheets #categoryquestions th.modifiername .sorters,
+.path-mod-moeworksheets #categoryquestions th.creatorname .sorters {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+.path-mod-moeworksheets #categoryquestions td.modifiername,
+.path-mod-moeworksheets #categoryquestions td.creatorname {
+    line-height: 1em;
+}
+.path-mod-moeworksheets #categoryquestions td.modifiername span.date,
+.path-mod-moeworksheets #categoryquestions td.creatorname span.date {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+.path-mod-moeworksheets table#categoryquestions {
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+}
+.path-mod-moeworksheets #categoryquestions .iconcol {
+    width: 15px;
+    text-align: center;
+    padding: 0;
+}
+.path-mod-moeworksheets #categoryquestions .checkbox {
+    width: 19px;
+    text-align: center;
+    padding: 0;
+}
+.path-mod-moeworksheets #categoryquestions .qtype {
+    text-align: center;
+}
+.path-mod-moeworksheets #categoryquestions .qtype {
+    width: 28px;
+    padding: 0;
+}
+.path-mod-moeworksheets #categoryquestions .questiontext {
+    position: relative;
+    zoom: 1;
+    padding-left: 0.3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.path-mod-moeworksheets .dir-rtl #categoryquestions .questiontext {
+    padding-left: 0;
+    padding-right: 0.3em;
+}
+.path-mod-moeworksheets #categoryquestions .questionname {
+    white-space: nowrap;
+    overflow: hidden;
+    zoom: 1;
+    position: relative;
+}
+.path-mod-moeworksheets #categoryquestions .questiontext p {
+    margin: 0;
+}
+
+#page-mod-moeworksheets-edit table#categoryquestions td,
+#page-mod-moeworksheets-edit table#categoryquestions th {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.mod_moeworksheets_qbank_dialogue {
+    width: 80%;
+    min-height: 200px;
+}
+.mod_moeworksheets_qbank_dialogue.moodle-dialogue-fullscreen {
+    width: 100%;
+
+}
+.mod_moeworksheets_qbank_dialogue .questionbankloading {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    text-align: center;
+    opacity: 0.5;
+    padding-top: 50px;
+}
+.mod_moeworksheets_qbank_dialogue #advancedsearch label {
+    font-size: 100%;
+}
+
+.path-mod-moeworksheets .modulespecificbuttonscontainer {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+.moeworksheetsquestionlistcontrols {
+    text-align: center;
+}
+
+.path-mod-moeworksheets .categoryinfo {
+    padding: 0.3em;
+}
+
+.path-mod-moeworksheets .gradingdetails {
+    font-size: small;
+}
+
+#page-mod-moeworksheets-edit div#repaginatedialog .mform {
+    margin-left: auto;
+    margin-right: auto;
+}
+#page-mod-moeworksheets-edit div.container div.generalbox {
+    position: relative;
+    display: block;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+#page-mod-moeworksheets-edit .paging {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.1em 0.3em;
+    display: block;
+    background-color: #ddd;
+}
+
+#page-mod-moeworksheets-edit #page-footer {
+    clear: both;
+    padding-top: 1em;
+}
+
+#page-mod-moeworksheets-edit .categoryinfofield {
+    font-style: italic;
+}
+#page-mod-moeworksheets-edit .categorynamefield {
+    font-weight: bold;
+}
+#page-mod-moeworksheets-edit .questionsortoptions {
+    background-color: #ddd;
+}
+
+#page-mod-moeworksheets-edit div.questionbank .categorysortopotionscontainer {
+    padding-top: 0.5em;
+    margin-top: 0.3em;
+}
+#page-mod-moeworksheets-edit div.questionbank .categoryquestionscontainer,
+.path-mod-moeworksheets .questionbank .categorysortopotionscontainer,
+.path-mod-moeworksheets .questionbank .categorypagingbarcontainer,
+.path-mod-moeworksheets .questionbank .categoryselectallcontainer {
+    background-color: #FFF;
+}
+
+/* Base theme needs extra support. */
+#page-mod-moeworksheets-edit ul.slots li.section ul.section {
+    list-style: none;
+}
+.path-mod-moeworksheets #moeworksheets_question{
+	float: right;
+	padding: 1em;
+}
+
+.path-mod-moeworksheets #addtional_content{
+    float: right;
+	margin-left: 0;
+}
+.dir-rtl #moeworksheets .row-fluid [class*="span"]{
+	float:right;
+}
+.path-mod-moeworksheets #addtional_content , .path-mod-moeworksheets #subjectheader{
+	padding-right: 1em;
+	padding-left: 1em;
+}
+.path-mod-moeworksheets #addtional_content {
+	word-wrap: break-word;
+}
+.path-mod-moeworksheets #contentconnect #contentlist,
+.path-mod-moeworksheets #contentconnect #addtional_content,
+.path-mod-moeworksheets#questionconnect #question_preview,
+.path-mod-moeworksheets #questionconnect #questionlist,
+.path-mod-moeworksheets #contentslist #contents,
+.path-mod-moeworksheets #contentslist #addtional_content
+ {
+	float: right;
+}
+.path-mod-moeworksheets #questionlist,
+.path-mod-moeworksheets #subjectlist ul,
+.path-mod-moeworksheets #additionalcontentlist ul{
+	max-height: 15.5em;
+	overflow-y: auto; 
+}
+
+.path-mod-moeworksheets #questionlist li {
+	cursor: pointer;
+}
+.path-mod-moeworksheets #contentconnect #addtional_content,
+.path-mod-moeworksheets #question_preview,
+.path-mod-moeworksheets #contentslist #addtional_content {
+	width: 46%;
+}
+
+.path-mod-moeworksheets #contentslist{
+	min-height: 10em;
+}
+#moeworksheets #navigation .othernav {
+	float: right;
+	margin-left: 3em
+}
+
+.path-mod-moeworksheets #id_csseditor, .path-mod-moeworksheets #id_javascripteditor {
+	direction: ltr;
+}
+
+#moeworksheets {
+	background-color: #f9f1e4;
+}
+.path-mod-moeworksheets #questions {
+	display: flex;
+}
+#questions #moeworksheets_question{
+	flex: 6;
+}
+#questions #addtional_content{
+	flex: 11;
+}
+.path-mod-moeworksheets #questions #addtional_content {
+	padding: 1em;
+}
+.path-mod-moeworksheets #questions #addtional_content .wraper{
+    height: 100%;
+	padding: 1em;
+	overflow-x: auto; 
+}
+.path-mod-moeworksheets #questionbox{
+	margin: 0px;
+	margin-top: 7px;
+	height: 31em;
+	overflow-y: auto;
+}
+.path-mod-moeworksheets .que, .path-mod-moeworksheets .que .content {
+	margin: 0px !important;
+}
+.path-mod-moeworksheets .que{
+	max-width: 100% !important;
+}
+.path-mod-moeworksheets .que .info{
+	display: none;
+}
+
+.path-mod-moeworksheets .que .content .formulation{
+	border: none;
+	margin: 0px;
+	border-top-color: #f9f1e4;
+    border-top-width: 7px;
+    border-top-style: solid;
+	
+}
+#moeworksheets .que input.btn[type="submit"]{
+	border: 2px solid #9faeaa;
+	background-color: #e7f5f1;
+	color: #272525 !important;
+	border-radius: 0px;
+}
+.path-mod-moeworksheets #navigation{
+	display: flex;
+}
+.path-mod-moeworksheets #subjectheader,
+.path-mod-moeworksheets #questionbox,
+#moeworksheets .que .formulation,
+.path-mod-moeworksheets #questions #addtional_content .wraper {
+	background-color: #ffffff;
+}
+.path-mod-moeworksheets #subjectlist i,
+#additionalcontentlist i{
+	color: #999999;
+}
+.path-mod-moeworksheets #subjectlist,
+.path-mod-moeworksheets #questionlist {
+	float: right;
+}
+#moeworksheets #navigation  .qn_buttons  {
+    max-height: 36px;
+    overflow: hidden;
+    margin-top: 1em;
+	position: relative;
+	margin-right: 35px;
+}
+
+.path-mod-moeworksheets .allbuttons {
+    position: absolute;
+	width: 1000px;
+	height: 36px;
+}
+.path-mod-moeworksheets #scrollbar {
+	overflow: hidden;
+	position: relative;
+	height: 36px; 
+}
+#questions #moeworksheets_question #questionbox,
+.path-mod-moeworksheets #addtional_content .wraper {
+/* 	padding: 1em; */
+}
+.path-mod-moeworksheets #questions #additional_content {
+	margin-left: 1.8em;
+}
+.path-mod-moeworksheets .clockimage {
+	margin: 0 1em;
+}
+.path-mod-moeworksheets .qn_buttons .fa{
+	font-size: 3em;
+	cursor: pointer;
+}
+.path-mod-moeworksheets .qn_buttons .fa-caret-right{
+	float: right;
+}
+.path-mod-moeworksheets .qn_buttons .fa-caret-left{
+    float: left;
+}
+.path-mod-moeworksheets #navigation .submitbtns {
+	margin-left: 0.4em;
+}
+.path-mod-moeworksheets #navigation .submitbtns input[type="submit"] {
+    color: #3e453e !important;
+	background-size: auto 40% !important;
+}
+
+.path-mod-moeworksheets #navigation .submitbtns input[name="previous"] {
+    background-position-x: 95% !important;
+    padding-right: 29px !important;
+	float: left;
+}
+
+.path-mod-moeworksheets #navigation .submitbtns input[name="next"] {
+    background-position-x: 5% !important;
+    padding-left: 29px !important;
+}
+
+.path-mod-moeworksheets #navigation input{
+    color:#000000 !important;
+}
+.path-mod-moeworksheets #navigation .questionnavbutton{
+	text-align: left;
+}
+#navigation .questionnavbutton .mod_moeworksheets-next-nav-show {
+	margin-left: 1.1em;
+}
+#page-mod-moeworksheets-editcontent #region-main ul{
+    list-style-type: none;
+}
+/** Print formatting for attempt and review pages **/
+
+#page-mod-moeworksheets-summary div#mod_moeworksheets_navblock {
+    display: none;
+}
+
+.path-mod-moeworksheets #app, .path-mod-moeworksheets #frame iframe {
+	width: 100%;
+	height: 100%;
+}
+.path-mod-moeworksheets .formulation .ddarea .dropzones .dropzone, .path-mod-moeworksheets #questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .path-mod-moeworksheets .drags.notreadonly{
+    position: relative !important ;
+}
+
+#page-mod-moeworksheets-review .block.block_fake{
+	display: none;
+}
+
+.pagelayout-moeworksheets-attempt #wrapper{
+	width: 98%;
+}
+.pagelayout-moeworksheets-attempt #wrapper #page{
+	padding: 10px 0 0 0;
+	margin: 0;
+	width: 100%;
+}
+@media print {
+
+    #page-mod-moeworksheets-attempt header.navbar,
+    #page-mod-moeworksheets-review header.navbar {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt #dock,
+    #page-mod-moeworksheets-review #dock {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt #page #page-header h1,
+    #page-mod-moeworksheets-review #page #page-header h1 {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt #region-main,
+    #page-mod-moeworksheets-review #region-main {
+        width: 100%;
+    }
+
+    #page-mod-moeworksheets-attempt #block-region-side-pre,
+    #page-mod-moeworksheets-attempt #block-region-side-post,
+    #page-mod-moeworksheets-review #block-region-side-pre,
+    #page-mod-moeworksheets-review #block-region-side-post {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt #page-footer,
+    #page-mod-moeworksheets-review #page-footer {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt .editquestion,
+    #page-mod-moeworksheets-review .editquestion,
+    #page-mod-moeworksheets-attempt .questionflag,
+    #page-mod-moeworksheets-review .questionflag {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt .submitbtns,
+    #page-mod-moeworksheets-review .submitbtns {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-review .que .commentlink {
+        display: none;
+    }
+
+    #page-mod-moeworksheets-attempt .que,
+    #page-mod-moeworksheets-review .que {
+        page-break-inside: avoid;
+    }
+}
+
+
+.path-mod-moeworksheets .qnbutton{
+	border: 1px solid #C2BBC0;
+}
+.path-mod-moeworksheets .qnbutton.notyetanswered{
+	background-color: #FFFEFF;
+}
+
+.path-mod-moeworksheets .qnbutton.thispage {
+    color: #d6B696C;
+    background-color: #645D65;
+}
+.path-mod-moeworksheets a, .path-mod-moeworksheets a:visited,.path-mod-moeworksheets a.active,
+ .path-mod-moeworksheets a:focus, .path-mod-moeworksheets #page-mod-scorm-player .breadcrumb-button a{
+color: #676566;	
+}
+.path-mod-moeworksheets #questionbox {
+	min-height:403px;
+}
+
+/* Ajustments for mobile devices */
+@media only screen and (max-width:565px) {
+    #page-mod-moeworksheets-edit .rpcontainerclass {
+        margin-top: 3em;
+    }
+    #page-mod-moeworksheets-edit .maxgrade {
+        margin-top: 0.1em;
+    }
+    #page-mod-moeworksheets-edit .statusbar {
+        padding: 0;
+    }
+}
+
+

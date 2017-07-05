@@ -1,0 +1,10 @@
+{
+    "name": "moodle-moeworksheetsaccess_offlinemode-autosave",
+    "builds": {
+        "moodle-moeworksheetsaccess_offlinemode-autosave": {
+            "jsfiles": [
+                "autosave.js"
+            ]
+        }
+    }
+}

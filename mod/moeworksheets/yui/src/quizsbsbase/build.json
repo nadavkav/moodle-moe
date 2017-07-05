@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_moeworksheets-moeworksheetsbase",
+    "builds": {
+        "moodle-mod_moeworksheets-moeworksheetsbase": {
+            "jsfiles": [
+                "moeworksheetsbase.js"
+            ]
+        }
+    }
+}

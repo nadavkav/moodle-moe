@@ -1,0 +1,14 @@
+{
+    "moodle-mod_moeworksheets-toolboxes": {
+        "requires": [
+            "base",
+            "node",
+            "event",
+            "event-key",
+            "io",
+            "moodle-mod_moeworksheets-moeworksheetsbase",
+            "moodle-mod_moeworksheets-util-slot",
+            "moodle-core-notification-ajaxexception"
+        ]
+    }
+}

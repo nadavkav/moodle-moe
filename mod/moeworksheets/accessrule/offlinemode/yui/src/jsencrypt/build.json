@@ -1,0 +1,14 @@
+{
+    "name": "moodle-moeworksheetsaccess_offlinemode-jsencrypt",
+    "builds": {
+        "moodle-moeworksheetsaccess_offlinemode-jsencrypt": {
+            "jsfiles": [
+                "jsencrypt.js",
+                "package.js"
+            ]
+        }
+    },
+    "shifter": {
+        "lint": false
+    }
+}
