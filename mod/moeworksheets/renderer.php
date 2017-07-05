@@ -527,7 +527,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
                 $data->subject = $subject->heading;
             }
             if(empty($data->frame)){
-                $questioncontent = $DB->get_records('moeworksheets_additionalcont', array('additionalcontentid' => $additionalcontent->get_id()));
+                $questioncontent = $DB->get_records('moeworksheets_questionconten', array('additionalcontentid' => $additionalcontent->get_id()));
                 foreach ($questioncontent as  $value) {
                     $content = new question_content($value->id);
                     switch ($content->get_type()) {

@@ -167,6 +167,12 @@ $THEME->layouts = array(
         'regions' => array('side-pre', 'footer-left', 'footer-middle', 'footer-right'),
         'defaultregion' => 'side-pre',
     ),
+    // part of course, typical for modules - default page layout if $cm specified in require_login().
+    'moeworksheets-attempt' => array(
+        'file' => 'quizsbs.php',
+        'regions' => array('side-pre', 'footer-left', 'footer-middle', 'footer-right'),
+        'defaultregion' => 'side-pre',
+    ),
 );
 
 $THEME->javascripts = array('dragscroll', 'tabscroll');
