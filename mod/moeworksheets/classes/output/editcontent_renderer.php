@@ -65,9 +65,6 @@ class editcontent_renderer extends \plugin_renderer_base {
 
         $context = \context_module::instance($structure->get_cmid());
         $questioncontenthtml = new question_content();
-        $questioncontentcss = new question_content();
-        $questioncontentjavascript = new question_content();
-        $questioncontentapp = new question_content();
         $additaionalcontent = new \stdClass();
         $additaionalcontent->id = $additaional->get_id();
         $additaionalcontent->additionalcontentname = $additaional->get_name();
@@ -91,7 +88,7 @@ class editcontent_renderer extends \plugin_renderer_base {
             'accepted_types' => '*',
         );
         if (! is_null($additaional->get_id())) {
-            $questioncontents = $DB->get_records('moeworksheets_additionalcont', array(
+            $questioncontents = $DB->get_records('moeworksheets_questionconten', array(
                 'additionalcontentid' => $additaional->get_id()
             ));
             foreach ($questioncontents as $questioncontent) {
@@ -103,19 +100,8 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $additaionalcontent = file_prepare_standard_editor($additaionalcontent, 'html', $htmleditoroption, $context, 'mod_moeworksheets', 'content', $questioncontent->id);
                         $questioncontenthtml->set_id($questioncontent->id);
                         break;
-                    case question_content::CSS_CONTENT:
-                        $additaionalcontent->csseditor = $questioncontent->content;
-                        $questioncontentcss->set_id($questioncontent->id);
-                        break;
-                    case question_content::APP_CONTENT:
-                        $draftitemid = file_get_submitted_draft_itemid('app');
-                        file_prepare_draft_area($draftitemid, $context->id, 'mod_moeworksheets', 'app', $additaional->get_id(), $appoption);
-                        $questioncontentapp->set_id($questioncontent->id);
-                        $additaionalcontent->app = $draftitemid;
-                    case question_content::JAVASCRIPT_CONTENT:
                     default:
                         $additaionalcontent->javascripteditor = $questioncontent->content;
-                        $questioncontentjavascript->set_id($questioncontent->id);
                     break;
                 }
             }
@@ -123,7 +109,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
-                'appoption' => $appoption,
+            //   'appoption' => $appoption,
             ));
             $contentloadform->set_data($additaionalcontent);
         }
@@ -132,7 +118,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
-                'appoption' => $appoption,
+            //    'appoption' => $appoption,
             ));
         }
         if ($contentloadform->is_cancelled()){
@@ -149,48 +135,10 @@ class editcontent_renderer extends \plugin_renderer_base {
             }
             $additionalcontent->set_moeworksheetsid($structure->get_moeworksheetsid());
             $additionalcontent->add_entry();
-            file_save_draft_area_files($contentdata->app, $context->id, 'mod_moeworksheets', 'app', $additionalcontent->get_id(), $appoption);
-            $fs = get_file_storage();
-            $files = $fs->get_area_files($context->id, 'mod_moeworksheets', 'app', $additionalcontent->get_id(),
-                'sortorder DESC, id ASC', false);
-            $file = reset($files);
-            unset($files);
-            if ($file) {
-                $filename = $file->get_filename();
-                $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_moeworksheets/app/' .
-                    $file->get_itemid() . $file->get_filepath() . $filename);
-            }
             if ($additionalcontent->get_id()) {
                 switch ($additionalcontent->get_type()) {
-                    case 1:
-                    case 2:
-                        if (!empty($file)){
-                            $questioncontentapp->set_content($url->out_as_local_url());
-                            $questioncontentapp->set_additionalcontentid($additionalcontent->get_id());
-                            $questioncontentapp->set_type(question_content::APP_CONTENT);
-                            $questioncontentapp->add_entry();
-                            break;
-                        }
-                        $questioncontentcss->set_id($DB->get_field('moeworksheets_additionalcont', 'id', array(
-                            'additionalcontentid' => $additionalcontent->get_id(),
-                            'type' => question_content::CSS_CONTENT,
-                        )));
-                        $questioncontentcss->load_from_db();
-                        $questioncontentcss->set_type(question_content::CSS_CONTENT);
-                        $questioncontentcss->set_content($contentdata->csseditor);
-                        $questioncontentcss->set_additionalcontentid($additionalcontent->get_id());
-                        $questioncontentcss->add_entry();
-                        $questioncontentjavascript->set_id($DB->get_field('moeworksheets_additionalcont', 'id', array(
-                            'additionalcontentid' => $additionalcontent->get_id(),
-                            'type' => question_content::JAVASCRIPT_CONTENT,
-                        )));
-                        $questioncontentjavascript->load_from_db();
-                        $questioncontentjavascript->set_type(question_content::JAVASCRIPT_CONTENT);
-                        $questioncontentjavascript->set_content($contentdata->javascripteditor);
-                        $questioncontentjavascript->set_additionalcontentid($additionalcontent->get_id());
-                        $questioncontentjavascript->add_entry();
                     case 0:
-                        $questioncontenthtml->set_id($DB->get_field('moeworksheets_additionalcont', 'id', array(
+                        $questioncontenthtml->set_id($DB->get_field('moeworksheets_questionconten', 'id', array(
                         'additionalcontentid' => $additionalcontent->get_id(),
                         'type' => question_content::HTML_CONTENT,
                         )));

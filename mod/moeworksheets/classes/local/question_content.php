@@ -53,7 +53,7 @@ class question_content extends model{
     protected $type;
     protected $additionalcontentid;
 
-    public function __construct($id = null, $table = 'moeworksheets_additionalcont') {
+    public function __construct($id = null, $table = 'moeworksheets_questionconten') {
         $this->set_id($id);
         $this->set_table($table);
         if(!is_null($this->get_id())) {
