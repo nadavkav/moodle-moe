@@ -1188,10 +1188,10 @@ table.moeworksheetsreviewsummary td.cell {
 	display: flex;
 }
 #questions #moeworksheets_question{
-	flex: 6;
+	width: 36%
 }
 #questions #addtional_content{
-	flex: 11;
+	width: 64%
 }
 .path-mod-moeworksheets #questions #addtional_content {
 	padding: 1em;
