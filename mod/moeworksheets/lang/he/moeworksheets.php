@@ -1081,3 +1081,5 @@ $string['xhtml'] = 'תסדיר XHTML';
 $string['youneedtoenrol'] = 'בכדי לגשת לבוחן יש להיות רשומים לקורס זה';
 $string['yourfinalgradeis'] = 'ציונך הסופי בבוחן זה הוא {$a}';
 $string['saveandpreview'] = 'שמור ופתח תצוגה מקדימה';
+//darfts engen
+$string['draftbutton'] = 'דף טיוטה';

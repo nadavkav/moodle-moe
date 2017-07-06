@@ -976,3 +976,5 @@ $string['timelimitmin'] = 'Time limit (minutes)';
 $string['timelimitsec'] = 'Time limit (seconds)';
 $string['saveandpreview'] = 'Save and open preview';
 
+//darfts engen
+$string['draftbutton'] = 'Draft page';
