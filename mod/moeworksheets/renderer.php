@@ -1,7 +1,4 @@
 <?php
-use mod_moeworksheets\local\additional_content;
-use mod_moeworksheets\local\question_content;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -17,6 +14,9 @@ use mod_moeworksheets\local\question_content;
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+use mod_moeworksheets\local\additional_content;
+use mod_moeworksheets\local\question_content;
+use mod_moeworksheets\local\draft;
 /**
  * Defines the renderer for the moeworksheets module.
  *
@@ -27,7 +27,6 @@ use mod_moeworksheets\local\question_content;
 
 
 defined('MOODLE_INTERNAL') || die();
-
 
 /**
  * The renderer for the moeworksheets module.
@@ -552,6 +551,17 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
             ), 'firstslot DESC', '*', 0, 1);
            $data->subject = reset($section)->heading;
         }
+
+        if (true || $attemptobj->get_draft){
+            $draft = new draft();
+            $draft = $draft->getMform()->render();
+        }
+
+
+
+
+
+
         $data->slots = $output;
         $data->attempteid = $attemptobj->get_attemptid();
         $data->page = $page;
@@ -561,6 +571,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
         $data->connectionwarning = $this->connection_warning();
         $data->quizname = $attemptobj->get_moeworksheets_name();
+        $data->draft=$draft;
         return $this->render_from_template('mod_moeworksheets/attempt_form', $data);
     }
 
