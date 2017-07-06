@@ -18,7 +18,7 @@
 * @module    mod_moeworksheets/navigation
 **/
 
-define(['jquery'], function($){
+define(['jquery','jqueryui'], function($, jqui){
 	var Navigation = function(){
 		this.scrollWidth = ($('.qnbutton').size()) * ($('.qnbutton').width()+6);
 		$('.allbuttons').width(this.scrollWidth);
@@ -103,6 +103,16 @@ define(['jquery'], function($){
 			}
 		    
 		});
+		
+		//add draggable and resizable for draft
+		$(document).ready(function(event){
+			$("#draft_warp").draggable({cancel: '.editor_atto_content_wrap'}); 
+			$("#draft_warp").resizable();
+			});
+		//hide show draft
+		$("#draft_page_button").click(function(){
+			$('#draft_warp').toggle();
+			});
 	};
 	
 	Navigation.prototype.checkPosition = function(){
