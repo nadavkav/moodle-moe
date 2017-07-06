@@ -79,18 +79,11 @@ class content_load extends \moodleform {
         $mform->addRule('additionalcontentname', get_string('error'), 'required');
         $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('editor', 'moeworksheets'), question_content::HTML_CONTENT);
-        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('javascriptapp', 'moeworksheets'), question_content::JAVASCRIPT_CONTENT);
-        $radioarray[] = $mform->createElement('radio', 'contenttype', '', get_string('appzip', 'moeworksheets'), question_content::APP_CONTENT);
         $mform->addGroup($radioarray, 'contentradio', '', array(' '), false);
         $mform->setDefault('contenttype', 0);
 
         $mform->addElement('editor', 'html_editor', get_string('editor', 'moeworksheets'), null , $this->_customdata['htmleditoroption']);
         $mform->setType('html_editor', PARAM_RAW);
-        $mform->addElement('textarea', 'csseditor', get_string('csseditor', 'moeworksheets'), 'wrap="virtual" rows="20" cols="50"');
-        $mform->setType('csseditor', PARAM_RAW);
-        $mform->addElement('textarea', 'javascripteditor', get_string('javascripteditor', 'moeworksheets'), 'wrap="virtual" rows="20" cols="50"');
-        $mform->setType('javascripteditor', PARAM_RAW);
-        $mform->addElement('filemanager', 'app', get_string('appzip', 'moeworksheets'), null, $this->_customdata['appoption']);
         $mform->addElement('hidden', 'id', 'id', null);
         $mform->setType('id', PARAM_INT);
         $mform->addElement('hidden', 'savenshow', '0', null);

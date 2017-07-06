@@ -55,7 +55,7 @@ class contentlist_renderer extends \plugin_renderer_base{
         $deleteform = new delete_content($pageurl);
 
         if ($contentdata = $deleteform->get_data()) {
-            $DB->delete_records('moeworksheets_additionalcont', array('additionalcontentid' => $pageurl->get_param('id')));
+            $DB->delete_records('moeworksheets_questionconten', array('additionalcontentid' => $pageurl->get_param('id')));
             $DB->delete_records('moeworksheets_additionalcont', array('id' => $pageurl->get_param('id')));
             redirect(new \moodle_url('/mod/moeworksheets/additionalcontentlist.php', array('cmid' => $pageurl->get_param('cmid'))));
         }
