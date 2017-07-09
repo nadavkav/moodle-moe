@@ -17,12 +17,20 @@
 	display: inline;
 }
 
+#draft .felement{
+	margin-left: 0;
+    text-align: right;
+    padding-top: 1px;
+}
+
 #draft_warp{
 	display: none;
-	border: 1px solid #000000;
+    background-color: #f3e7d4;
+	position: relative;
+	top: 25px;
 }
-#test {
-	border: 1px solid #000000;
+#draft_warp .felement {
+	margin-right:92px;
 }
 #page-mod-moeworksheets-attempt.dir-rtl .submitbtns .mod_moeworksheets-next-nav, #page-mod-moeworksheets-review.dir-rtl .submitbtns .mod_moeworksheets-next-nav {
     margin-left: 9px;

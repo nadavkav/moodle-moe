@@ -104,15 +104,24 @@ define(['jquery','jqueryui'], function($, jqui){
 		    
 		});
 		
+
 		//add draggable and resizable for draft
 		$(document).ready(function(event){
 			$("#draft_warp").draggable({cancel: '.editor_atto_content_wrap'}); 
 			$("#draft_warp").resizable();
+			$("#id_submitbutton").val("סגור");
+
 			});
 		//hide show draft
 		$("#draft_page_button").click(function(){
 			$('#draft_warp').toggle();
 			});
+		//prevent submit form
+		$("#id_submitbutton").click(function(event){
+		    event.preventDefault();
+		    $('#draft_warp').toggle();
+		});
+		
 	};
 	
 	Navigation.prototype.checkPosition = function(){

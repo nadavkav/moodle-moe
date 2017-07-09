@@ -556,12 +556,6 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
             $draft = new draft();
             $draft = $draft->getMform()->render();
         }
-
-
-
-
-
-
         $data->slots = $output;
         $data->attempteid = $attemptobj->get_attemptid();
         $data->page = $page;
