@@ -8,6 +8,7 @@ class draft_form extends \moodleform {
         $draft = $this->_form; // Don't forget the underscore!
         $draft->addElement('editor', 'fieldname', get_string('draftbutton', 'moeworksheets'));
         $draft->setType('fieldname', PARAM_RAW);
+        $this->add_action_buttons(false,false);
     }
 }
 
