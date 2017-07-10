@@ -1,4 +1,6 @@
 <?php
+use local_notes\local\notes;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -539,8 +541,12 @@ class moeworksheets_attempt {
     /** @var array slot => page number for this slot. */
     protected $questionpages;
 
+    /** @var mod_moeworksheets_draft draft for the corrent attemp. */
+    protected $draft;
+
     /** @var mod_moeworksheets_display_options cache for the appropriate review options. */
     protected $reviewoptions = null;
+
 
     // Constructor =============================================================
     /**
@@ -573,6 +579,7 @@ class moeworksheets_attempt {
         $this->link_sections_and_slots();
         $this->determine_layout();
         $this->number_questions();
+        $this->draft = new notes('mod/moeworksheets/attempt', $attempt->id);
     }
 
     /**
@@ -813,6 +820,11 @@ class moeworksheets_attempt {
     public function get_sum_marks() {
         return $this->attempt->sumgrades;
     }
+
+    public function  get_draft(){
+        return $this->draft;
+    }
+
 
     /**
      * @return bool whether this attempt has been finished (true) or is still

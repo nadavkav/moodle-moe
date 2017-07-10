@@ -13,27 +13,19 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-namespace mod_moeworksheets\local;
-use mod_moeworksheets\local\draft_form;
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Local plugin "localnotes" - Version file
+ *
+ * @package    notes
+ * @copyright  2017 Meir ifrach, sysBind
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-class draft {
+defined('MOODLE_INTERNAL') || die;
 
-    protected $mform;
-
-    public function __construct() {
-        $this->mform = new draft_form();
-    }
-    /**
-     * @return the $mform
-     */
-    public function getMform()
-    {
-        return $this->mform;
-    }
-
-
-
-
-}
+$plugin->component = 'local_notes';
+$plugin->version = 2017070900;
+$plugin->release = 'v1';
+$plugin->requires = 2016052300;
+$plugin->maturity = MATURITY_STABLE;

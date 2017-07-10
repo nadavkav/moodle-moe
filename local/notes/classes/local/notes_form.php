@@ -1,12 +1,13 @@
 <?php
-namespace mod_moeworksheets\local;
+namespace local_notes\local;
 require_once("$CFG->libdir/formslib.php");
 
-class draft_form extends \moodleform {
+class notes_form extends \moodleform {
+
     function definition() {
         global $CFG;
         $draft = $this->_form; // Don't forget the underscore!
-        $draft->addElement('editor', 'fieldname', get_string('draftbutton', 'moeworksheets'));
+        $draft->addElement('editor', 'content', get_string('draftbutton', 'moeworksheets'));
         $draft->setType('fieldname', PARAM_RAW);
         $this->add_action_buttons(false,false);
     }
