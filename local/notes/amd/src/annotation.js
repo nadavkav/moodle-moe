@@ -27,7 +27,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			}
 			var app = new annotator.App();
 			app.include(annotator.ui.main, {
-			    element: document.querySelector('.notes_content'),
+			    element: document.querySelector('.editor_atto_content'),
 			});
 			
 			
@@ -69,7 +69,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 		    };
 		    function savenewversion (){
 				var args = {
-					    'text': $('.notes_content').html(),
+					    'text': $('.editor_atto_content').html(),
 					    'noteid': noteid,
 					    'pagename': pagename,
 					    'userid': userid,
@@ -85,7 +85,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 					create : function(annotation) {
 						var result = this.ajaxcall('create', annotation);
 						result.then(function(annotation){
-							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.notes_content'));
+							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.editor_atto_content'));
 							Highlighter.drawnewannotation(annotation);
 							savenewversion();
 						});
@@ -136,9 +136,45 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 		            notify = app.notify;
 		        }
 		    };
+		    
 		}
+		
 	};
 	
+	$( document ).ready(function() {
+		globalcontent = '';
+		
+	});
+	
+	function is_editor_content_chenge(){
+		var content = $('.editor_atto_content').html();
+		if (content != globalcontent){
+			globalcontent = content;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+    function savenewversion (){
+		var args = {
+			    'text': $('.editor_atto_content').html(),
+			    'noteid': noteid,
+			    'pagename': pagename,
+			    'userid': userid,
+			    'groupid': groupid,
+			    'id': moduleid
+		};
+		ajax.call([{
+			'methodname': 'notes_create_ver',
+			'args':args
+		}]);
+    }
+	$( '#draft_page_button, #id_submitbutton').click(function() {
+		if (is_editor_content_chenge()){
+			savenewversion()
+		    }
+		});
 	
 	return annotation;
 });

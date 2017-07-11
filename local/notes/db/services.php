@@ -15,58 +15,58 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $functions = array(
-    'moe_wiki_search' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_search' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'search',
-        'classpath'   => 'mod/moewiki/externallib.php',
-        'description' => 'Get all annotaioin for wiki page',
+        'classpath'   => 'local/notes/externallib.php',
+        'description' => 'Get all annotaioin for note',
         'type'        => 'read',
         'ajax'        => true
-    ), 
-    'moe_wiki_create' => array(
-        'classname'   => 'mod_moewiki_external',
+    ),
+    'notes_create' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'create',
-        'classpath'   => 'mod/moewiki/externallib.php',
+        'classpath'   => 'local/notes/externallib.php',
         'description' => 'Save anotaion to the DB',
         'type'        => 'write',
         'ajax'        => true
     ),
-    'moe_wiki_create_ver' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_create_ver' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'create_version',
-        'classpath'   => 'mod/moewiki/externallib.php',
-        'description' => 'create new wiki version when add new annotation',
+        'classpath'   => 'local/notes/externallib.php',
+        'description' => 'create new note version when add new annotation',
         'type'        => 'write',
         'ajax'        => true
     ),
-    'moe_wiki_delete' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_delete' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'delete',
-        'classpath'   => 'mod/moewiki/externallib.php',
+        'classpath'   => 'local/notes/externallib.php',
         'description' => 'Delete single annotation',
         'type'        => 'write',
         'ajax'        => 'true',
     ),
-    'moe_wiki_update' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_update' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'update',
-        'classpath'   => 'mod/moewiki/externallib.php',
+        'classpath'   => 'local/notes/externallib.php',
         'description' => 'Update annotation',
         'type'        => 'write',
         'ajax'        => 'true',
     ),
-    'moe_wiki_resolved' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_resolved' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'resolved',
-        'classpath'   => 'mod/moewiki/externallib.php',
+        'classpath'   => 'local/notes/externallib.php',
         'description' => 'Resolved annotation',
         'type'        => 'write',
         'ajax'        => 'true',
     ),
-    'moe_wiki_reopen' => array(
-        'classname'   => 'mod_moewiki_external',
+    'notes_reopen' => array(
+        'classname'   => 'local_notes_external',
         'methodname'  => 'reopen',
-        'classpath'   => 'mod/moewiki/externallib.php',
+        'classpath'   => 'local/notes/externallib.php',
         'description' => 'Reopen resolved annotation',
         'type'        => 'write',
         'ajax'        => 'true',
@@ -74,15 +74,15 @@ $functions = array(
 );
 
 $services = array(
-    'MOE_wiki annotaions' => array(
+    'notes annotaions' => array(
         'functions' => array(
-            'moe_wiki_search',
-            'moe_wiki_create',
-            'moe_wiki_create_ver',
-            'moe_wiki_delete',
-            'moe_wiki_update',
-            'moe_wiki_resolved',
-            'moe_wiki_reopen',
+            'notes_search',
+            'notes_create',
+            'notes_create_ver',
+            'notes_delete',
+            'notes_update',
+            'notes_resolved',
+            'notes_reopen',
         ),
         'restrictedusers' => 0,
         'enabled'=>1,

@@ -18,7 +18,7 @@
 * @module    mod_moeworksheets/navigation
 **/
 
-define(['jquery','jqueryui'], function($, jqui){
+define(['jquery','jqueryui','local_notes/annotator','local_notes/annotation'], function($, jqui){
 	var Navigation = function(){
 		this.scrollWidth = ($('.qnbutton').size()) * ($('.qnbutton').width()+6);
 		$('.allbuttons').width(this.scrollWidth);
