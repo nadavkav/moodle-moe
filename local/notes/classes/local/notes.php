@@ -25,9 +25,10 @@ class notes {
 
     public function __construct($namespace, $id) {
         global $DB;
-        $rec = $DB->get_record('notes', array("namespace"=>$namespace,"namespace_id"=>$id));
+        $sql = 'select * from {notes} where ' . $DB->sql_compare_text('namespace') . ' = ? AND namespace_id = ?';
+        $rec = $DB->get_record_sql($sql, array("namespace"=>$namespace,"namespace_id"=>$id));
         if ($rec){
-            $note_content = $DB->get_field('notes_version','content', array("parent"=>$rec->id));
+            $note_content = $DB->get_field('notes_versions','content', array("parent"=>$rec->id));
             $this->id = $rec->id;
         } else {
             $rec = new \stdClass();
