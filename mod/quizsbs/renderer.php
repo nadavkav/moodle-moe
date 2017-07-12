@@ -322,7 +322,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
      *
      * @param quizsbs_nav_panel_base $panel instance of quizsbs_nav_panel_base
      */
-    public function navigation_panel(quizsbs_nav_panel_base $panel, $attemptobj, $page) {
+    public function navigation_panel(quizsbs_nav_panel_base $panel, quizsbs_attempt $attemptobj, $page) {
 
         $data = new stdClass();
         $data->bcc = $panel->get_button_container_class();
@@ -342,6 +342,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $data->restartpreview = $panel->render_end_bits($this);
         $data->page = $page;
         $data->nextpage = $nextpage;
+        $data->courseid = ($attemptobj->is_own_preview()) ? $attemptobj->get_courseid() : '';
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
         return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;

@@ -29,7 +29,10 @@
 <div class="othernav span3">
     <div class="row-fluid">
         {{{countdowntimer}}}
-        {{{restartpreview}}}    
+        {{{restartpreview}}}
+        {{# courseid}}
+        <a href="/course/view.php?id={{courseid}}" class="btn">{{# str}}backtocourse, theme_moe{{/ str}}</a>
+        {{/ courseid}}    
     </div>
    </form>
 </div>
