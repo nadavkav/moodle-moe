@@ -16,8 +16,8 @@
 }}
 <section id="moeworksheets" class="row-fluid">
     <header class="row-fluid">
-        <span class="span8 draft_page_head"><h2>{{quizname}}</h2>
-        <button id="draft_page_button" type="button">{{# str }} draftbutton, mod_moeworksheets {{/ str }}</button></span>
+        <span class="span8 page_head"><h2>{{quizname}}</h2>
+        <button id="note_toggle_button" type="button">{{# str }} draftbutton, mod_moeworksheets {{/ str }}</button></span>
     </header>
     <nav id="navigation" class="row-fluid">
             {{{navigation}}}
@@ -71,9 +71,7 @@
             {{/content}}
             </div>
             <div id = "draft_warp">
-                <div id = "draft">
-                    {{{draft}}}
-            </div>
+                    {{> local_notes/note_view}}
             </div>
         </section>
     </section>

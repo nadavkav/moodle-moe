@@ -450,7 +450,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $output .= $this->header();
         $output .= $this->moeworksheets_notices($messages);
         $output .= $this->attempt_form($attemptobj, $page, $slots, $id, $nextpage);
-        $this->page->requires->js_call_amd('mod_moeworksheets/navigation', 'init');
+        $this->page->requires->js_call_amd('mod_moeworksheets/navigation', 'init', array('id' => $attemptobj->get_attemptid(), 'namespace' => 'mod/moeworksheets/attempt'));
         $output .= $this->footer();
         return $output;
     }
@@ -552,7 +552,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
            $data->subject = reset($section)->heading;
         }
 
-        $draft = $attemptobj->get_draft()->getMform()->render();
+        $draft = $attemptobj->get_draft();
 
         $data->slots = $output;
         $data->attempteid = $attemptobj->get_attemptid();
@@ -563,7 +563,10 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $data->attemptnavigationbuttons = $this->attempt_navigation_buttons($page, $attemptobj->is_last_page($page));
         $data->connectionwarning = $this->connection_warning();
         $data->quizname = $attemptobj->get_moeworksheets_name();
-        $data->draft=$draft;
+        $data->note=$draft;
+        $data->namespace = 'mod/moeworksheets/attempt';
+        $data->namespaceid = $attemptobj->get_attemptid();
+        $data->content = $attemptobj ->get_draft_content();
         return $this->render_from_template('mod_moeworksheets/attempt_form', $data);
     }
 

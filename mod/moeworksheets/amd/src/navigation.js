@@ -18,7 +18,7 @@
 * @module    mod_moeworksheets/navigation
 **/
 
-define(['jquery','jqueryui','local_notes/annotator','local_notes/annotation'], function($, jqui){
+define(['jquery','jqueryui'], function($, jqui){
 	var Navigation = function(){
 		this.scrollWidth = ($('.qnbutton').size()) * ($('.qnbutton').width()+6);
 		$('.allbuttons').width(this.scrollWidth);
@@ -28,7 +28,7 @@ define(['jquery','jqueryui','local_notes/annotator','local_notes/annotation'], f
 		return parseInt(pix.replace('px', ''));
 	};
 	
-	Navigation.prototype.init = function() {
+	Navigation.prototype.init = function(parms) {
 		var scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
 		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('moeworksheetsnavbutton', '')) -1) *
 								$('.qnbutton').width();
@@ -102,26 +102,7 @@ define(['jquery','jqueryui','local_notes/annotator','local_notes/annotation'], f
 		    $('#questionbox').css('height', x+'px');
 			}
 		    
-		});
-		
-
-		//add draggable and resizable for draft
-		$(document).ready(function(event){
-			$("#draft_warp").draggable({cancel: '.editor_atto_content_wrap'}); 
-			$("#draft_warp").resizable();
-			$("#id_submitbutton").val("סגור");
-
-			});
-		//hide show draft
-		$("#draft_page_button").click(function(){
-			$('#draft_warp').toggle();
-			});
-		//prevent submit form
-		$("#id_submitbutton").click(function(event){
-		    event.preventDefault();
-		    $('#draft_warp').toggle();
-		});
-		
+		});		
 	};
 	
 	Navigation.prototype.checkPosition = function(){

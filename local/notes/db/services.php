@@ -71,6 +71,14 @@ $functions = array(
         'type'        => 'write',
         'ajax'        => 'true',
     ),
+    'insert_notes' => array(
+        'classname'   => 'local_notes_external',
+        'methodname'  => 'insert_notes',
+        'classpath'   => 'local/notes/externallib.php',
+        'description' => 'insert note new version',
+        'type'        => 'write',
+        'ajax'        => 'true',
+    ),
 );
 
 $services = array(
@@ -83,6 +91,7 @@ $services = array(
             'notes_update',
             'notes_resolved',
             'notes_reopen',
+            'insert_notes'
         ),
         'restrictedusers' => 0,
         'enabled'=>1,

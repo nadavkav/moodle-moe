@@ -23,4 +23,26 @@
  */
 
 $string['pluginname'] = 'פתקים';
-
+$string['annotate'] = 'כתיבת הערה';
+$string['annotation'] = 'הערה';
+$string['annotationmarker'] = 'מדגיש ערות בגוף הטקסט';
+$string['annotations'] = 'ערות בגוף הטקסט';
+$string['annotationsystem'] = 'מנגנון הערות בגוף הטקסט';
+$string['annotatingpage'] = 'ערות בגוף הטקסט';
+$string['attachments'] = 'קבצים מצורפים';
+$string['cancel'] = 'ביטול';
+$string['cannotlockpage'] = 'The page could not be locked, your changes have not been saved.';
+$string['changebutton'] = 'שינוי';
+$string['changedby'] = 'עודכן על ידי';
+$string['changedifferences'] = 'שינויים';
+$string['changes'] = 'שינוים';
+$string['changesnav'] = 'שינוים';
+$string['clear'] = 'ניקוי';
+$string['collapseallannotations'] = 'הסתרת הערות בגוף הטקסט';
+$string['collapseannotation'] = 'הסתרת הערות בגוף הטקסט';
+$string['comments'] = 'הערה';
+$string['compare'] = 'השוואה';
+$string['create'] = 'צרו דף חדש';
+$string['createdbyon'] = 'נוצר על ידי {$a->name} בתאריך {$a->date}';
+$string['delete'] = 'מחיקה';
+$string['edit'] = 'עריכה';

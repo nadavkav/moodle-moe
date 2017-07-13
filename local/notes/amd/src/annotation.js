@@ -140,41 +140,5 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 		}
 		
 	};
-	
-	$( document ).ready(function() {
-		globalcontent = '';
-		
-	});
-	
-	function is_editor_content_chenge(){
-		var content = $('.editor_atto_content').html();
-		if (content != globalcontent){
-			globalcontent = content;
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-    function savenewversion (){
-		var args = {
-			    'text': $('.editor_atto_content').html(),
-			    'noteid': noteid,
-			    'pagename': pagename,
-			    'userid': userid,
-			    'groupid': groupid,
-			    'id': moduleid
-		};
-		ajax.call([{
-			'methodname': 'notes_create_ver',
-			'args':args
-		}]);
-    }
-	$( '#draft_page_button, #id_submitbutton').click(function() {
-		if (is_editor_content_chenge()){
-			savenewversion()
-		    }
-		});
-	
 	return annotation;
 });
