@@ -139,7 +139,6 @@ if ($attemptobj->is_last_page($page)) {
 }
 
 echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id, $nextpage);
-
 if($additional && has_capability('moodle/course:update', $coursecontext, $USER)) {
     $modcontext = context_module::instance($attemptobj->get_cmid());
 

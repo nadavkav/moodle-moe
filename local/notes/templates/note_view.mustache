@@ -1,0 +1,44 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<style>
+#note .felement{
+    margin-left: 0;
+    text-align: right;
+    padding-top: 1px;
+}
+
+#note_warp{
+    display: none;
+    background-color: #f3e7d4;
+    position: relative;
+    top: 25px;
+}
+#note_warp .felement {
+    margin-right:92px;
+}
+</style>
+<div id = "note_warp">
+    <div id = "note">
+          {{{note}}}
+    </div>
+</div>
+{{#js}}
+require(['local_notes/notes'], function(note) {
+    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}'};
+    note.init(params);
+});
+{{/js}}

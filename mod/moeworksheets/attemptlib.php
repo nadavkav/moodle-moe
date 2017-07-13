@@ -822,7 +822,11 @@ class moeworksheets_attempt {
     }
 
     public function  get_draft(){
-        return $this->draft;
+        return $this->draft->getnote();
+    }
+
+    public function  get_draft_content(){
+        return $this->draft->getcontent();
     }
 
 

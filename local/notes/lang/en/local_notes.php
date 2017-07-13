@@ -24,3 +24,11 @@
 
 $string['pluginname'] = 'notes';
 
+$string['clear'] = 'Clear';
+$string['comments'] = 'Comments';
+$string['delete'] = 'Delete';
+$string['edit'] = 'Edit';
+$string['annotation'] = 'Annotation';
+$string['attachments'] = 'Attachments';
+$string['annotate'] = 'Annotate';
+$string['cancel']='Cancel';

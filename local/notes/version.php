@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->component = 'local_notes';
-$plugin->version = 2017070900;
+$plugin->version = 2017070904;
 $plugin->release = 'v1';
 $plugin->requires = 2016052300;
 $plugin->maturity = MATURITY_STABLE;
