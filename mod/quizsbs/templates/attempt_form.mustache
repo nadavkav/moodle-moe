@@ -51,7 +51,12 @@
         <section id="addtional_content" class="span6">
             <div class="wraper">
             {{#frame}}
-                <iframe src="{{frame}}" id="app"></iframe>
+                <script>
+                    function resizeIframe(obj) {
+                        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+                    }
+                </script>
+                <iframe src="{{frame}}" id="app" onload="resizeIframe(this)"></iframe>
             {{/frame}}
             {{#content}}
                 {{#content.css}}

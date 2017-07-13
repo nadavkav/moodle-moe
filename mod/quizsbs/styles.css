@@ -31,7 +31,9 @@
     padding: 0px;   
 }
 
-
+#page-mod-quizsbs-attempt .que .formulation{
+	padding: 8px;
+}
 #quizsbs #navigation .othernav {
     margin-left:auto; 
 }
@@ -1195,6 +1197,7 @@ table.quizsbsreviewsummary td.cell {
 
 #questions #quizsbs_question{
     flex: 6;
+	padding-left: 0px;
 }
 #questions #addtional_content{
     flex: 11;
@@ -1346,7 +1349,7 @@ table.quizsbsreviewsummary td.cell {
     width: 98%;
 }
 .pagelayout-quizsbs-attempt #wrapper #page{
-    padding: 10px 0 0 0;
+    padding: 0px;
     margin: 0;
     width: 100%;
 }
