@@ -39,15 +39,15 @@ class notes {
             $rec = new \stdClass();
             $rec->namespace = $namespace;
             $rec->namespace_id = $namespaceid;
-            $rec = $DB->insert_record('notes', $rec);
-            if ($rec){
-                $this->id = $rec->id;
-                $this->$note_content = '';
+            $father = $DB->insert_record('notes', $rec);
+            if ($father){
+                $this->note_content = '';
                 unset($rec);
-                $rec->parent = $this->id;
+                $rec = new \stdClass();
+                $rec->parent = $father;
                 $rec->content = '';
                 $rec->created_time = time();
-                $DB->insert_record('mdl_notes_versions', $rec);
+                $this->id = $DB->insert_record('notes_versions', $rec);
             }
         }
         $this->namespace = $namespace;
@@ -58,8 +58,7 @@ class notes {
      * @return the $mform
      */
     public function getnote() {
-        $mform = new notes_form();
-        //$mform->definition();
+        $mform = new notes_form(null, array('content' => $this->note_content));
         return $mform->render();
     }
 
