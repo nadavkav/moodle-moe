@@ -51,27 +51,27 @@ class report_data_generate extends \core\task\scheduled_task {
         $results = new \percoursereginlevel();
         $data = new \stdClass();
         $data->results = $results->displayreportfortemplates();
-        $DB->delete_records_select('moereports_courseregin', "id='%'");
+        $DB->delete_records('moereports_courseregin');
         $DB->insert_records('moereports_courseregin', $data->results);
 
         // course_scoole_level:
         $results = new \percourseschoollevel();
         $data = new \stdClass();
         $data->results = $results->displayreportfortemplates();
-        $DB->delete_records_select('moereports_courseschool', "id='%'");
+        $DB->delete_records('moereports_courseschool');
         $DB->insert_records('moereports_courseschool', $data->results);
 
         // activity_regin_level:
         $results = new \peractivityreginlevel();
         $data = new \stdClass();
         $data->results = $results->displayreportfortemplates();
-        $DB->delete_records_select('moereports_activityregin', "id='%'");
+        $DB->delete_records('moereports_activityregin');
         $DB->insert_records('moereports_activityregin', $data->results);
 
         // activity_school_level:
         $rep = new \activity_school();
         $results = $rep->display_report();
-        $DB->delete_records_select('moereports_acactivityschool', "id='%'");
+        $DB->delete_records('moereports_acactivityschool');
         $DB->insert_records('moereports_acactivityschool', $results->results);
 
     }
