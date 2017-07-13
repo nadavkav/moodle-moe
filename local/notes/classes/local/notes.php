@@ -82,7 +82,38 @@ class notes {
         return $this->note_content;
     }
 
+    /**
+     * @param $namespace
+     * @param $namespaceid
+     * @return the note id or false if none found
+     */
+    public static function getnoteid ($namespace, $namespaceid){
+        global $DB;
+        $sql = 'select * from {notes} where ' . $DB->sql_compare_text('namespace') . ' = ? AND namespace_id = ? ';
+        $rec = $DB->get_field_sql($sql, array("namespace"=>$namespace,"namespace_id"=>$namespaceid));
+        return $rec;
+        //return $DB->get_field('notes', 'id', array('namespace' => $namespace, 'nsamespaceid' => $namespaceid));
+    }
+    /**
+     * @param id of the note (you can use getnoteid() function if you dont know it).
+     * @return array - An array of Objects (all the note version) indexed by first column
+     */
+    public static function getallnoteversions ($id){
+        global $DB;
 
+        return $DB->get_records('note_versions', array('parent' => $id));
+    }
+
+    /**
+     * @param id of the note (you can use getnoteid() function if you dont know it).
+     * @return array - An array of Objects (all the note version) indexed by first column
+     */
+    public static function getlastnoteversion ($id){
+        global $DB;
+        $sql = 'select * from {notes_versions} where parent = ' . $id . ' ORDER BY created_time DESC limit 1';
+        $rec = $DB->get_record_sql($sql);
+        return $rec;
+    }
 
 
 }

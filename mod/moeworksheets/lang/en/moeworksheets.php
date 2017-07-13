@@ -21,7 +21,9 @@
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+$string['ahowdrafthistort'] = 'Draft history';
+$string['showdraft'] = 'Show draft';
+$string['draftview'] = 'Draft view ';
 $string['accessnoticesheader'] = 'You can preview this moeworksheets, but if this were a real attempt, you would be blocked because:';
 $string['action'] = 'Action';
 $string['activityoverview'] = 'You have moeworksheetszes that are due';
