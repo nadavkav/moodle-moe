@@ -75,15 +75,18 @@ define(['jquery'], function($){
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
 				
 		//adjust question side to the content side
+		
 		self = this;
 		$( document ).ready(function() {
 			//fix iframe size
+			
 			if ($('#app').length > 0){
-				var x  = $('#app')[0].scrollWidth;
+				var x  = $('#app')[0].offsetHeight;
 				if (x < 600 ) {
 					x = 600;
+					$('#app').height(x);
 				}
-				xwithpadding = x * 1.3;
+				xwithpadding = x * 1.1;
 			    $('#addtional_content').css('height', xwithpadding+'px');
 			    $('#addtional_content .wraper').css('height', '97%');
 			    $('#quizsbs_question').css('height', xwithpadding+'px');
