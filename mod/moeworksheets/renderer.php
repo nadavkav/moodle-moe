@@ -17,6 +17,7 @@
 use mod_moeworksheets\local\additional_content;
 use mod_moeworksheets\local\question_content;
 use mod_moeworksheets\local\draft;
+use local_notes\local\notes;
 /**
  * Defines the renderer for the moeworksheets module.
  *
@@ -51,8 +52,13 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
                                 $lastpage, mod_moeworksheets_display_options $displayoptions,
                                 $summarydata) {
 
+        $context = new stdClass();
+        $draftid = notes::getnoteid('mod/moeworksheets/attempt', $attemptobj->get_attemptid());
+        $draft = notes::getlastnoteversion($draftid);
+        $context->content = $draft->content;
         $output = '';
         $output .= $this->header();
+        $output .= $this->render_from_template('mod_moeworksheets/review_note_buttons', $context);
         $output .= $this->review_summary_table($summarydata, $page);
         $output .= $this->review_form($page, $showall, $displayoptions,
                 $this->questions($attemptobj, true, $slots, $page, $showall, $displayoptions),

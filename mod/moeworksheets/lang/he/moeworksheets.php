@@ -25,6 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['ahowdrafthistort'] = 'הצג היסטורית דף עזר';
+$string['showdraft'] = 'הצג דף עזר ';
+$string['draftview'] = 'הצגת תוכן דף עזר ';
+
 $string['accessnoticesheader'] = 'באפשרותך לצפות בבוחן זה בתצוגה מקדימה, אך אם היה זה ניסיון מענה אמיתי, היית נחסם מכיוון ש:';
 $string['action'] = 'פעולה';
 $string['activityoverview'] = 'ישנם בחנים שעליך לבצע';
