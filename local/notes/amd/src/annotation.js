@@ -29,8 +29,6 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			app.include(annotator.ui.main, {
 			    element: document.querySelector('.editor_atto_content'),
 			});
-			
-			
 			app.include(annotator.identity.simple);
 			app.include(annotator.authz.acl);
 			app.include(Remarks);
