@@ -18,7 +18,7 @@
     #note_review_buttons {
         float:left;
     }
-    .drafview {
+    .draftview {
         border-style: solid;
         background: antiquewhite;
         position : fixed;
@@ -30,23 +30,24 @@
     <button id="showdraft_button" type="button">{{# str }} showdraft, mod_moeworksheets {{/ str }}</button>
 </div>
 {{#js}}
-require(['jquery','jqueryui'], function($, jqui) {
+require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
         // add draggable and resizable for note
     $(document).ready(function(event){
-        $(".drafview").draggable({cancel: '#content'}); 
-        $(".drafview").resizable();
+        $(".draftview").draggable({cancel: '.editor_atto_content'});
+        $(".draftview").resizable({containment: "#draftview"});
 
         });
     // hide show note
     $("#showdraft_button").click(function(){
-        $('.drafview').toggle();
+        $('.draftview').toggle();
         });
+        
 });
 {{/js}}
-<div class = 'drafview' style = "display:none">
+<div class = 'draftview' style = "display:none">
 <h2>{{# str }} draftview, mod_moeworksheets {{/ str }}</h2>
     <p>____________________________________________________________</p>
-    <section id = 'content'>
+    <section class = 'editor_atto_content'>
         {{{content}}}
     </section>
 </div>
