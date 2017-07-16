@@ -27,7 +27,7 @@
 </style>
 <div id = "note_review_buttons">
     <button id="ahowdrafthistort_button" type="button">{{# str }} ahowdrafthistort, mod_moeworksheets {{/ str }}</button>
-    <button id="showdraft_button" type="button">{{# str }} showdraft, mod_moeworksheets {{/ str }}</button>
+    <button class="showdraft_button" type="button">{{# str }} showdraft, mod_moeworksheets {{/ str }}</button>
 </div>
 {{#js}}
 require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
@@ -38,9 +38,13 @@ require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
 
         });
     // hide show note
-    $("#showdraft_button").click(function(){
+    $(".showdraft_button").click(function(){
         $('.draftview').toggle();
         });
+    // open new tabe
+    $("#ahowdrafthistort_button").click(function(){
+        window.open('{{link}}', '_blank');
+        });    
         
 });
 {{/js}}
@@ -50,4 +54,5 @@ require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
     <section class = 'editor_atto_content'>
         {{{content}}}
     </section>
+    <button class="showdraft_button" type="button">{{# str }} close, mod_moeworksheets {{/ str }}</button>
 </div>

@@ -4,6 +4,16 @@
     font-size: 0.7em;
 }
 
+.drafthistory {
+	width: 100%;
+	text-align: center;
+}
+
+
+#draftcontiner{
+    position: absolute;
+	background: antiquewhite; 
+}​
 #moeworksheets-timer{
 	margin: auto;
 	padding: 1%;

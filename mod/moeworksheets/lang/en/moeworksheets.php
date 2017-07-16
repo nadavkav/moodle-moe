@@ -21,6 +21,13 @@
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['id'] = 'ID';
+$string['timesaved'] = 'Save time';
+$string['content'] = 'Draft content';
+$string['newwin'] = '-';
+$string['newwinbutton'] = 'show';
+
+
 $string['ahowdrafthistort'] = 'Draft history';
 $string['showdraft'] = 'Show draft';
 $string['draftview'] = 'Draft view ';

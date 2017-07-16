@@ -51,11 +51,12 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
     public function review_page(moeworksheets_attempt $attemptobj, $slots, $page, $showall,
                                 $lastpage, mod_moeworksheets_display_options $displayoptions,
                                 $summarydata) {
-
+        global $CFG;
         $context = new stdClass();
         $draftid = notes::getnoteid('mod/moeworksheets/attempt', $attemptobj->get_attemptid());
         $draft = notes::getlastnoteversion($draftid);
         $context->content = $draft->content;
+        $context->link = "$CFG->wwwroot" . "/mod/moeworksheets/viewdrafthistory.php?attempt=" . $attemptobj->get_attemptid();
         $output = '';
         $output .= $this->header();
         $output .= $this->render_from_template('mod_moeworksheets/review_note_buttons', $context);
