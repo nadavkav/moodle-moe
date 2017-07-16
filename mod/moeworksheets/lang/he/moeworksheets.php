@@ -25,6 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['id'] = 'ID';
+$string['timesaved'] = 'זמן שמירה';
+$string['content'] = 'תוכן';
+$string['newwin'] = '-';
+$string['newwinbutton'] = 'הצג';
+
+
 $string['ahowdrafthistort'] = 'הצג היסטורית דף עזר';
 $string['showdraft'] = 'הצג דף עזר ';
 $string['draftview'] = 'הצגת תוכן דף עזר ';

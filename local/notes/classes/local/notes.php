@@ -101,7 +101,7 @@ class notes {
     public static function getallnoteversions ($id){
         global $DB;
 
-        return $DB->get_records('note_versions', array('parent' => $id));
+        return $DB->get_records('notes_versions', array('parent' => $id));
     }
 
     /**

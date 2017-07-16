@@ -33,7 +33,7 @@ class local_notes_external extends external_api {
         return new external_function_parameters(array(
             'namespace' => new external_value(PARAM_TEXT),
             'id' => new external_value(PARAM_INT),
-            'content' => new external_value(PARAM_CLEANHTML)
+            'content' => new external_value(PARAM_RAW)
 
         ));
     }
