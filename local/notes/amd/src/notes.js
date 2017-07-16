@@ -63,10 +63,10 @@ define([ 'jquery', 'local_notes/annotation','jqueryui','core/ajax'], function($,
 	    event.preventDefault();
 	    $('#note_warp').toggle();
 	});
-	
+	annotation.merkannotaion(params);
 	};
 		
-	annotation.merkannotaion();
+	
 	
 	return new note;
 });

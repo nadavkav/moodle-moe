@@ -29,7 +29,8 @@
     <TABLE NAME="notes_annotations" COMMENT="Holds the inline comments for the commenting system called Annotations.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="who created the annotation"/>
+        <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="created" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The created date"/>
         <FIELD NAME="quote" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="text" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
@@ -39,6 +40,7 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="parent_fk_id" TYPE="foreign" FIELDS="parent" REFTABLE="notes" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+        <KEY NAME="notes_annotations_fk_userid" FIELDS="userid" TYPE="foreign" REFTABLE="user" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="notes_annotations_permiss" PREVIOUS="notes_annotations" COMMENT="permissions for each annotation">

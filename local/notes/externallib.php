@@ -76,7 +76,6 @@ class local_notes_external extends external_api {
                 'endOffset' => new external_value(PARAM_INT, "The end offset position of the annotaion in the element")
             ))),
             'quote' => new external_value(PARAM_TEXT),
-            'page' => new external_value(PARAM_INT),
             'permissions' => new external_single_structure(array(
                 'read' => new external_single_structure(array(
                     new external_value(PARAM_TEXT, '', false, 'null', true)
@@ -92,22 +91,19 @@ class local_notes_external extends external_api {
                 ), '', false, array()),
             ), "annotaion permissino", false, array()),
             'text' => new external_value(PARAM_TEXT),
-            'userpage' => new external_value(PARAM_INT),
             'parent' => new external_value(PARAM_INT, 'parent annotation', false, null, true)
         ));
     }
 
-    public static function create($ranges, $quote, $page, $permissions, $text, $userpage, $parent = null) {
+    public static function create($ranges, $quote, $permissions, $text, $parent = null) {
         global $DB, $USER, $PAGE;
 
         $annotation = new stdClass();
-        $annotation->pageid = $page;
         $annotation->userid = $USER->id;
         $annotation->created = time();
         $annotation->quote = $quote;
         $annotation->text = $text;
         $annotation->updated = $annotation->created;
-        $annotation->userpage = $userpage;
         $annotation->resolved = 0;
         $annotation->parent = $parent;
         $annotation->id = $DB->insert_record('notes_annotations', $annotation);
@@ -480,21 +476,21 @@ class local_notes_external extends external_api {
     public static function create_version($text, $wikiid, $userid, $pagename = null, $groupid = 0, $id){
         global $DB;
 
-        if (!$cm = get_coursemodule_from_id('moewiki', $id)) {
+        if (!$cm = get_coursemodule_from_id('notes', $id)) {
             print_error('invalidcoursemodule');
         }
         $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-        if (!$moewiki = $DB->get_record('moewiki', array('id' => $cm->instance))) {
+        if (!$notes = $DB->get_record('notes', array('id' => $cm->instance))) {
             print_error('invalidcoursemodule');
         }
         $context = context_module::instance($cm->id);
-        $subwiki = moewiki_get_subwiki($course, $moewiki, $cm, $context, $groupid, $userid, true);
+        $subwiki = notes_get_subwiki($course, $notes, $cm, $context, $groupid, $userid, true);
         if (!$subwiki->canedit) {
             print_error('You do not have permission to edit this wiki');
         }
-        $pageversion = moewiki_get_current_page($subwiki, $pagename, MOEWIKI_GETPAGE_CREATE);
+        $pageversion = notes_get_current_page($subwiki, $pagename, notes_GETPAGE_CREATE);
 
-        moewiki_save_new_version($course, $cm, $moewiki, $subwiki, $pagename, $text, -1, -1, -1, null, null);
+        notes_save_new_version($course, $cm, $notes, $subwiki, $pagename, $text, -1, -1, -1, null, null);
         return [true];
     }
 

@@ -8,18 +8,11 @@
 
 define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize'], function($, annotator, ajax, autosize) {
 	var noteid;
-	var pagename;
 	var userid;
-	var groupid;
-	var moduleid;
 	var annotation = {
 		merkannotaion : function(params) {
 			function Remarks() {
 				return {
-					beforeAnnotationCreated: function(annotation) {
-						annotation.page = params.noteid;
-						annotation.userpage = params.userpage;
-					},
 					annotationEditorShown : function(annotation){
 						return '<img src="'+ annotation.userpicture +'" />';
 					}
@@ -69,9 +62,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 				var args = {
 					    'text': $('.editor_atto_content').html(),
 					    'noteid': noteid,
-					    'pagename': pagename,
 					    'userid': userid,
-					    'groupid': groupid,
 					    'id': moduleid
 				};
 				ajax.call([{
