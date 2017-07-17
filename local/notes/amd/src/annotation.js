@@ -10,7 +10,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 	var noteid;
 	var userid;
 	var annotation = {
-		merkannotaion : function(params) {
+		merkannotaion : function(params, note) {
 			function Remarks() {
 				return {
 					annotationEditorShown : function(annotation){
@@ -29,10 +29,8 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.noteid);
 			     noteid = params.noteid;
-			     pagename = params.pagename;
+			     parent = params.parent;
 			     userid = params.userpage;
-			     groupid = params.groupid;
-			     moduleid = params.id;
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -63,8 +61,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 					    'text': $('.editor_atto_content').html(),
 					    'noteid': noteid,
 					    'userid': userid,
-					    'id': moduleid
-				};
+					    };
 				ajax.call([{
 					'methodname': 'notes_create_ver',
 					'args':args
@@ -76,7 +73,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						result.then(function(annotation){
 							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.editor_atto_content'));
 							Highlighter.drawnewannotation(annotation);
-							savenewversion();
+							insert_new_notes_version ();
 						});
 						
 						return result;
@@ -93,7 +90,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						$('[data-annotation-id=' + annotation.id + ']').contents().unwrap();
 						var result = this.ajaxcall('delete',{'id' : annotation.id});
 						result.then(function(){
-							savenewversion();
+							insert_new_notes_version ();
 						});
 						return result;
 					},
@@ -106,7 +103,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						this.ajaxcall('resolved',{'id' : annotation.id});
 						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl')
 						.addClass('annotator-hl-resolved');
-						savenewversion();
+						insert_new_notes_version ();
 					},
 					ajaxcall: function(action,obj){
 						var data = {};
