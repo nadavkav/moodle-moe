@@ -136,8 +136,8 @@ class local_notes_external extends external_api {
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $cm = notes_get_cm($page);
-        $PAGE->set_cm($cm);
+        $context = context_course::instance(SITEID);
+        $PAGE->set_context($context);
         $annotation->username = $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();
         return $annotation;
@@ -179,15 +179,14 @@ class local_notes_external extends external_api {
 
     public static function search_parameters() {
         return new external_function_parameters(array(
-            'wikiid' => new external_value(PARAM_INT, "The wiki ID"),
+            'noteid' => new external_value(PARAM_INT, "The noteid ID"),
         ));
     }
 
-    public static function search($wikiid) {
+    public static function search($noteid) {
         global $DB, $PAGE, $USER;
 
-        $annotations = $DB->get_records('notes_annotations', array(
-            'pageid' => $wikiid,
+        $annotations = $DB->get_records('notes_annotations', array('parent' => $noteid,
             'resolved' => 0,
         ));
         $annotationsreturn = array();
@@ -225,8 +224,8 @@ class local_notes_external extends external_api {
             $user->id = $annotation->userid;
             $user = $DB->get_record('user', array('id' => $user->id));
             $userpicture = new user_picture($user);
-            $cm = notes_get_cm($wikiid);
-            $PAGE->set_cm($cm);
+            $context = context_course::instance(SITEID);
+            $PAGE->set_context($context);
             $annotationsreturn[$key]->username = $user->firstname . ' ' . $user->lastname;
             $annotationsreturn[$key]->userpicture = $userpicture->get_url($PAGE)->out();
             $total++;
@@ -279,24 +278,11 @@ class local_notes_external extends external_api {
 
     public static function reopen_parameters () {
         return new external_function_parameters(array(
-            'id'        => new external_value(PARAM_INT,'annotation_id'),
-            'subwiki' => new external_single_structure(array(
-                'annotation'  => new external_value(PARAM_INT),
-                'canannotate' => new external_value(PARAM_BOOL),
-                'canedit'     => new external_value(PARAM_BOOL),
-                'defaultwiki' => new external_value(PARAM_BOOL),
-                'groupid'     => new external_value(PARAM_INT),
-                'id'          => new external_value(PARAM_INT),
-                'magic'       => new external_value(PARAM_FLOAT),
-                'userid'      => new external_value(PARAM_INT),
-                'wikiid'      => new external_value(PARAM_INT),
-            )),
-            'pagename'  => new external_value(PARAM_RAW),
-            'moduleid'  => new external_value(PARAM_INT),
+            'id'        => new external_value(PARAM_INT,'annotation_id')
         ));
     }
-    public static function reopen($id, $subwikiid, $pagename, $moduleid) {
-        return array('success' => notes_reopen_annotation($id, $subwikiid, $pagename, $moduleid));
+    public static function reopen($id, $pagename, $moduleid) {
+        return array('success' => notes_reopen_annotation($id, $pagename, $moduleid));
     }
 
     public static function reopen_returns() {
@@ -422,8 +408,8 @@ class local_notes_external extends external_api {
         $user->id = $annotation->userid;
         $user = $DB->get_record('user', array('id' => $user->id));
         $userpicture = new user_picture($user);
-        $cm = notes_get_cm($annotation->pageid);
-        $PAGE->set_cm($cm);
+        $context = context_course::instance(SITEID);
+        $PAGE->set_context($context);
         $annotation->username = $user->firstname . ' ' . $user->lastname;
         $annotation->userpicture = $userpicture->get_url($PAGE)->out();
         return $annotation;
@@ -465,32 +451,15 @@ class local_notes_external extends external_api {
     public static function create_version_parameters(){
         return new external_function_parameters(array(
             'text'     => new external_value(PARAM_RAW),
-            'wikiid'   => new external_value(PARAM_INT),
+            'noteid'   => new external_value(PARAM_INT),
             'userid'   => new external_value(PARAM_INT),
-            'pagename' => new external_value(PARAM_TEXT),
-            'groupid'  => new external_value(PARAM_INT),
             'id'       => new external_value(PARAM_INT),
         ));
     }
 
-    public static function create_version($text, $wikiid, $userid, $pagename = null, $groupid = 0, $id){
+    public static function create_version($text, $noteid, $userid, $id){
         global $DB;
-
-        if (!$cm = get_coursemodule_from_id('notes', $id)) {
-            print_error('invalidcoursemodule');
-        }
-        $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-        if (!$notes = $DB->get_record('notes', array('id' => $cm->instance))) {
-            print_error('invalidcoursemodule');
-        }
-        $context = context_module::instance($cm->id);
-        $subwiki = notes_get_subwiki($course, $notes, $cm, $context, $groupid, $userid, true);
-        if (!$subwiki->canedit) {
-            print_error('You do not have permission to edit this wiki');
-        }
-        $pageversion = notes_get_current_page($subwiki, $pagename, notes_GETPAGE_CREATE);
-
-        notes_save_new_version($course, $cm, $notes, $subwiki, $pagename, $text, -1, -1, -1, null, null);
+        insert_notes($namespace, $id, $content);
         return [true];
     }
 

@@ -30,6 +30,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="who created the annotation"/>
+        <FIELD NAME="noteid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="used to get all all annotations on a note"/>
         <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="created" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The created date"/>
         <FIELD NAME="quote" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
