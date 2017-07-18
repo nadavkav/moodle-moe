@@ -26,7 +26,7 @@ define(['jquery', 'jqueryui'], function($){
 			var id = this.className;
 			id = id.replace("newwin_","long")
 			var middleman = $ ('#'+id).html();
-			$ ('#draftcontent').html( middleman);
+			$ ('#id_contenteditable').html( middleman);
 			$ ('#draftcontiner').show();
 		});
 		
