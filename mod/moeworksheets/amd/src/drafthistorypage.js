@@ -24,7 +24,7 @@ define(['jquery', 'jqueryui'], function($){
 	
 		$( 'table button' ).click(function() {
 			var id = this.className;
-			id = id.replace("newwin_","long")
+			id = id.replace("newwin_","long");
 			var middleman = $ ('#'+id).html();
 			$ ('#id_contenteditable').html( middleman);
 			$ ('#draftcontiner').show();
@@ -34,7 +34,7 @@ define(['jquery', 'jqueryui'], function($){
 			$ ('#draftcontiner').hide();
 		});
 		
-	    $(document).ready(function(event){
+	    $(document).ready(function(){
 	        $("#draftcontiner").draggable({cancel: '.editor_atto_content'});
 	        $("#draftcontiner").resizable({containment: "#draftview"});
 
