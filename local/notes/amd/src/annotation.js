@@ -8,7 +8,6 @@
 
 define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize'], function($, annotator, ajax, autosize) {
 	var noteid;
-	var userid;
 	var globalnote;
 	var globalparams;
 	var annotation = {
@@ -32,7 +31,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			     var promise = app.annotations.store.query(params.noteid);
 			     noteid = params.noteid;
 			     globalnote = Note;
-			     globalparams = params
+			     globalparams = params;
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -83,7 +82,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						$('[data-annotation-id=' + annotation.id + ']').contents().unwrap();
 						var result = this.ajaxcall('delete',{'id' : annotation.id});
 						result.then(function(){
-							globalnote.insert_new_notes_version(params);
+							globalnote.insert_new_notes_version(globalparams);
 						});
 						return result;
 					},
@@ -96,7 +95,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						this.ajaxcall('resolved',{'id' : annotation.id});
 						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl')
 						.addClass('annotator-hl-resolved');
-						globalnote.insert_new_notes_version(params);
+						globalnote.insert_new_notes_version(globalparams);
 					},
 					ajaxcall: function(action,obj){
 						var data = {};
