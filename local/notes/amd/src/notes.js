@@ -48,7 +48,7 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 				});
 
 				// add draggable and resizable for note
-				$(document).ready(function(event) {
+				$(document).ready(function() {
 					$("#note_warp").draggable({
 						cancel : '.editor_atto_content_wrap'
 					});
@@ -61,13 +61,13 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 					$('#note_warp').toggle();
 				});
 				// prevent submit note
-				$("#id_submitbutton").click(function(event) {
+				$("#id_submitbutton").click(function() {
 					event.preventDefault();
 					$('#note_warp').toggle();
 				});
 				annotation.merkannotaion(params, Note);
 			};
 			
-			var Note = new note;
+			var Note = new note();
 			return Note;
 		});
