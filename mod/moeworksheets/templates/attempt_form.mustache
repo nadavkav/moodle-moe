@@ -50,6 +50,9 @@
             </section>
         </section>
         <section id="addtional_content" class="span6">
+                    <div id = "draft_warp">
+                    {{> local_notes/note_view}}
+            </div>
             <div class="wraper">
             {{#frame}}
                 <iframe src="{{frame}}" id="app"></iframe>
@@ -69,9 +72,6 @@
                     </script>
                {{/content.javascript}}
             {{/content}}
-            </div>
-            <div id = "draft_warp">
-                    {{> local_notes/note_view}}
             </div>
         </section>
     </section>

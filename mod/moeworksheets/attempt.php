@@ -131,7 +131,25 @@ $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->set_title($attemptobj->get_moeworksheets_name());
 $PAGE->set_heading($attemptobj->get_course()->fullname);
 $PAGE->set_pagelayout('moeworksheets-attempt');
-
+$PAGE->requires->strings_for_js(array(
+    'alloweveryoneedit',
+    'alloweveryoneview',
+    'annotation',
+    'annotate',
+    'cancel',
+    'clear',
+    'comments',
+    'delete',
+    'edit',
+    'filterby',
+    'navigate',
+    'next',
+    'nocomment',
+    'previous',
+    'repaly',
+    'resolved',
+    'save',
+),'local_notes');
 if ($attemptobj->is_last_page($page)) {
     $nextpage = -1;
 } else {

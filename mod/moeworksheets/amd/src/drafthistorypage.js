@@ -29,6 +29,11 @@ define(['jquery', 'jqueryui'], function($){
 			$ ('#draftcontent').html( middleman);
 			$ ('#draftcontiner').show();
 		});
+		
+		$( '.showdraft_button').click(function() {
+			$ ('#draftcontiner').hide();
+		});
+		
 	    $(document).ready(function(event){
 	        $("#draftcontiner").draggable({cancel: '.editor_atto_content'});
 	        $("#draftcontiner").resizable({containment: "#draftview"});

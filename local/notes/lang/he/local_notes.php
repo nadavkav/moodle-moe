@@ -46,3 +46,15 @@ $string['create'] = 'צרו דף חדש';
 $string['createdbyon'] = 'נוצר על ידי {$a->name} בתאריך {$a->date}';
 $string['delete'] = 'מחיקה';
 $string['edit'] = 'עריכה';
+$string['save'] = 'שמירה';
+$string['savedat'] = 'נשמר ב {$a}';
+$string['savedby'] = 'נשמר על־ידי {$a}';
+$string['reopen'] = 'שחזור';
+$string['repaly'] = 'תגובה';
+$string['resolved'] = 'פתור';
+$string['filterby'] = 'סינון לפי ';
+$string['navigate'] = 'ניווט: ';
+$string['next'] = 'שינויים ישנים יותר';
+$string['nocomment'] = 'אין הערות';
+$string['previous'] = 'שינויים חדשים יותר';
+

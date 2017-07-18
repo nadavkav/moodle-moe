@@ -91,11 +91,12 @@ class local_notes_external extends external_api {
                 ), '', false, array()),
             ), "annotaion permissino", false, array()),
             'text' => new external_value(PARAM_TEXT),
-            'parent' => new external_value(PARAM_INT, 'parent annotation', false, null, true)
+            'parent' => new external_value(PARAM_INT, 'parent annotation', false, null, true),
+            'noteid' => new external_value(PARAM_INT)
         ));
     }
 
-    public static function create($ranges, $quote, $permissions, $text, $parent = null) {
+    public static function create($ranges, $quote, $permissions, $text, $parent = null, $noteid) {
         global $DB, $USER, $PAGE;
 
         $annotation = new stdClass();
@@ -106,6 +107,7 @@ class local_notes_external extends external_api {
         $annotation->updated = $annotation->created;
         $annotation->resolved = 0;
         $annotation->parent = $parent;
+        $annotation->noteid = $noteid;
         $annotation->id = $DB->insert_record('notes_annotations', $annotation);
 
         foreach ($ranges as $range) {
@@ -186,7 +188,7 @@ class local_notes_external extends external_api {
     public static function search($noteid) {
         global $DB, $PAGE, $USER;
 
-        $annotations = $DB->get_records('notes_annotations', array('parent' => $noteid,
+        $annotations = $DB->get_records('notes_annotations', array('noteid' => $noteid,
             'resolved' => 0,
         ));
         $annotationsreturn = array();
@@ -230,6 +232,7 @@ class local_notes_external extends external_api {
             $annotationsreturn[$key]->userpicture = $userpicture->get_url($PAGE)->out();
             $total++;
         }
+        sleep(2);
         return array(
             'total' => $total,
             'rows'  => $annotationsreturn);

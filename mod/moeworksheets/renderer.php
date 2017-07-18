@@ -55,10 +55,14 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $context = new stdClass();
         $draftid = notes::getnoteid('mod/moeworksheets/attempt', $attemptobj->get_attemptid());
         $draft = notes::getlastnoteversion($draftid);
-        $context->content = $draft->content;
+        $context->content = trim($draft->content);
+//         $context->content = addcslashes($context->content, '\n \r');
         $context->link = "$CFG->wwwroot" . "/mod/moeworksheets/viewdrafthistory.php?attempt=" . $attemptobj->get_attemptid();
         $output = '';
         $output .= $this->header();
+        $context->namespace = 'mod/moeworksheets/attempt';
+        $context->namespaceid = $attemptobj->get_attemptid();
+        $context->noteid = $attemptobj->get_draft_parent_id();
         $output .= $this->render_from_template('mod_moeworksheets/review_note_buttons', $context);
         $output .= $this->review_summary_table($summarydata, $page);
         $output .= $this->review_form($page, $showall, $displayoptions,
@@ -573,6 +577,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $data->note=$draft;
         $data->namespace = 'mod/moeworksheets/attempt';
         $data->namespaceid = $attemptobj->get_attemptid();
+        $data->noteid = $attemptobj->get_draft_parent_id();
         $data->content = $attemptobj ->get_draft_content();
         return $this->render_from_template('mod_moeworksheets/attempt_form', $data);
     }

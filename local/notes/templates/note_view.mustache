@@ -38,7 +38,7 @@
 </div>
 {{#js}}
 require(['local_notes/notes'], function(note) {
-    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}'};
+    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}', noteid:'{{noteid}}'};
     note.init(params);
 });
 {{/js}}

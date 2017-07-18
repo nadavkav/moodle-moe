@@ -9,8 +9,10 @@
 define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize'], function($, annotator, ajax, autosize) {
 	var noteid;
 	var userid;
+	var globalnote;
+	var globalparams;
 	var annotation = {
-		merkannotaion : function(params, note) {
+		merkannotaion : function(params, Note) {
 			function Remarks() {
 				return {
 					annotationEditorShown : function(annotation){
@@ -20,7 +22,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			}
 			var app = new annotator.App();
 			app.include(annotator.ui.main, {
-			    element: document.querySelector('.editor_atto_content'),
+			    element: document.querySelector('#note'),
 			});
 			app.include(annotator.identity.simple);
 			app.include(annotator.authz.acl);
@@ -29,8 +31,8 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 			app.start().then(function () {
 			     var promise = app.annotations.store.query(params.noteid);
 			     noteid = params.noteid;
-			     parent = params.parent;
-			     userid = params.userpage;
+			     globalnote = Note;
+			     globalparams = params
 			     promise.then(function(data){
 			    	 if(params.admin){
 			    		 for (var index in data.rows){
@@ -56,24 +58,15 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 		    options.onError = options.onError || function (msg) {
 		        notify(msg, 'error');
 		    };
-		    function savenewversion (){
-				var args = {
-					    'text': $('.editor_atto_content').html(),
-					    'noteid': noteid,
-					    'userid': userid,
-					    };
-				ajax.call([{
-					'methodname': 'notes_create_ver',
-					'args':args
-				}]);
-		    }
 		    var storage = {
 					create : function(annotation) {
+						annotation.noteid = noteid;
 						var result = this.ajaxcall('create', annotation);
 						result.then(function(annotation){
-							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('.editor_atto_content'));
+							var Highlighter = new annotator.ui.highlighter.Highlighter(document.querySelector('#note'));
 							Highlighter.drawnewannotation(annotation);
-							insert_new_notes_version ();
+							globalparams.noteid = noteid;
+							globalnote.insert_new_notes_version(globalparams);
 						});
 						
 						return result;
@@ -90,7 +83,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						$('[data-annotation-id=' + annotation.id + ']').contents().unwrap();
 						var result = this.ajaxcall('delete',{'id' : annotation.id});
 						result.then(function(){
-							insert_new_notes_version ();
+							globalnote.insert_new_notes_version(params);
 						});
 						return result;
 					},
@@ -103,7 +96,7 @@ define([ 'jquery', 'local_notes/annotator', 'core/ajax', 'local_notes/autosize']
 						this.ajaxcall('resolved',{'id' : annotation.id});
 						$("[data-annotation-id=" + annotation.id +"]").removeClass('annotator-hl')
 						.addClass('annotator-hl-resolved');
-						insert_new_notes_version ();
+						globalnote.insert_new_notes_version(params);
 					},
 					ajaxcall: function(action,obj){
 						var data = {};

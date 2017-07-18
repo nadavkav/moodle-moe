@@ -9,7 +9,17 @@
 	text-align: center;
 }
 
+.annotator-widget.annotator-listing{
+	margin-right: 0px;
+}
 
+#draft_warp{
+    position: fixed;	
+}
+
+#draftcontiner .showdraft_button{
+	float: left;
+}
 #draftcontiner{
     position: absolute;
 	background: antiquewhite; 
