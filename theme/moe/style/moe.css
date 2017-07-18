@@ -4018,7 +4018,7 @@ body.dir-rtl .block_course_list .content {
 }
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary{
-	width: 45%;
+	width: 42%;
 }
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow {
