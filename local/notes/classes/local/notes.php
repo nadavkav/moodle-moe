@@ -23,6 +23,7 @@ class notes {
     protected $note_content;
     protected $namespace;
     protected $namespaceid;
+    protected $parent;
     protected $id;
 
     public function __construct($namespace, $namespaceid) {
@@ -34,6 +35,7 @@ class notes {
             $rec = $DB->get_record_sql($sql);
             $this->id = $rec->id;
             $this->note_content = $rec->content;
+            $this->parent = $rec->parent;
 
         } else {
             $rec = new \stdClass();
@@ -48,6 +50,8 @@ class notes {
                 $rec->content = '';
                 $rec->created_time = time();
                 $this->id = $DB->insert_record('notes_versions', $rec);
+                $this->parent = $father;
+                $this->note_content = '';
             }
         }
         $this->namespace = $namespace;
@@ -81,7 +85,18 @@ class notes {
     public function getcontent() {
         return $this->note_content;
     }
-
+    /**
+     * @return the note id by this
+     */
+    public function getnoteidbythis(){
+        return $this->id;
+    }
+    /**
+     * @return the note parent
+     */
+    public function getparent(){
+        return $this->parent;
+    }
     /**
      * @param $namespace
      * @param $namespaceid

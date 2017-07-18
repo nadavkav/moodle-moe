@@ -25,17 +25,12 @@
 
     }
 </style>
-<div id = "note_review_buttons">
-    <button id="ahowdrafthistort_button" type="button">{{# str }} ahowdrafthistort, mod_moeworksheets {{/ str }}</button>
-    <button class="showdraft_button" type="button">{{# str }} showdraft, mod_moeworksheets {{/ str }}</button>
-</div>
 {{#js}}
-require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
-        // add draggable and resizable for note
+require(['jquery','jqueryui', 'local_notes/notes', 'local_notes/annotation'], function($, jqui, note) {
+     // add draggable and resizable for note
     $(document).ready(function(event){
-        $(".draftview").draggable({cancel: '.editor_atto_content'});
         $(".draftview").resizable({containment: "#draftview"});
-
+        $(".draftview").draggable({cancel: '#id_contenteditable'});
         });
     // hide show note
     $(".showdraft_button").click(function(){
@@ -45,13 +40,18 @@ require(['jquery','jqueryui', 'local_notes/notes'], function($, jqui) {
     $("#ahowdrafthistort_button").click(function(){
         window.open('{{link}}', '_blank');
         });    
-        
+    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}', noteid:'{{noteid}}'};
+    note.init(params);     
 });
 {{/js}}
+<div id = "note_review_buttons">
+    <button id="ahowdrafthistort_button" type="button">{{# str }} ahowdrafthistort, mod_moeworksheets {{/ str }}</button>
+    <button class="showdraft_button" type="button">{{# str }} showdraft, mod_moeworksheets {{/ str }}</button>
+</div>
 <div class = 'draftview' style = "display:none">
 <h2>{{# str }} draftview, mod_moeworksheets {{/ str }}</h2>
     <p>____________________________________________________________</p>
-    <section class = 'editor_atto_content'>
+    <section id = 'note'>
         {{{content}}}
     </section>
     <button class="showdraft_button" type="button">{{# str }} close, mod_moeworksheets {{/ str }}</button>

@@ -833,6 +833,10 @@ class moeworksheets_attempt {
         return $this->draft->getcontent();
     }
 
+    public function get_draft_parent_id(){
+        return  $this->draft->getparent();
+    }
+
 
     /**
      * @return bool whether this attempt has been finished (true) or is still

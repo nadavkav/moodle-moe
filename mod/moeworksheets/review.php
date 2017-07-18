@@ -255,7 +255,25 @@ $output = $PAGE->get_renderer('mod_moeworksheets');
 $navbc = $attemptobj->get_navigation_panel($output, 'moeworksheets_review_nav_panel', $page, $showall);
 $regions = $PAGE->blocks->get_regions();
 $PAGE->blocks->add_fake_block($navbc, reset($regions));
-
+$PAGE->requires->strings_for_js(array(
+    'alloweveryoneedit',
+    'alloweveryoneview',
+    'annotation',
+    'annotate',
+    'cancel',
+    'clear',
+    'comments',
+    'delete',
+    'edit',
+    'filterby',
+    'navigate',
+    'next',
+    'nocomment',
+    'previous',
+    'repaly',
+    'resolved',
+    'save',
+),'local_notes');
 echo $output->review_page($attemptobj, $slots, $page, $showall, $lastpage, $options, $summarydata);
 
 // Trigger an event for this review.
