@@ -34,7 +34,7 @@ class local_notes_external extends external_api {
             'namespace' => new external_value(PARAM_TEXT),
             'id' => new external_value(PARAM_INT),
             'content' => new external_value(PARAM_RAW),
-            'show' => new external_value(param_INT, '', VALUE_OPTIONAL)
+            'show' => new external_value(PARAM_INT, '', VALUE_OPTIONAL)
 
         ));
     }
@@ -50,10 +50,10 @@ class local_notes_external extends external_api {
         $perentid = $DB->get_field_sql($sql, array("namespace" => $namespace, "namespace_id" => $id));
 
         $dataobject = new stdClass();
-        $dataobject->parent= $perentid;
+        $dataobject->parent= intval($perentid);
         $dataobject->content = $content;
         $dataobject->created_time = time();
-        $dataobject->show = $show;
+        $dataobject->toshow = $show;
 
         $results = $DB->insert_record('notes_versions', $dataobject);
         return $results? $results: -1;
