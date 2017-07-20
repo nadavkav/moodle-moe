@@ -26,11 +26,11 @@
     }
 </style>
 {{#js}}
-require(['jquery','jqueryui', 'local_notes/notes', 'local_notes/annotation'], function($, jqui, note) {
+require(['jquery','jqueryui', 'local_notes/notes', 'local_notes/annotation','local_notes/autosize'], function($, jqui, note) {
      // add draggable and resizable for note
     $(document).ready(function(event){
         $(".draftview").resizable({containment: "#draftview"});
-        $(".draftview").draggable({cancel: '#id_contenteditable'});
+        $(".draftview").draggable({cancel: '#note'});
         });
     // hide show note
     $(".showdraft_button").click(function(){
@@ -40,7 +40,7 @@ require(['jquery','jqueryui', 'local_notes/notes', 'local_notes/annotation'], fu
     $("#ahowdrafthistort_button").click(function(){
         window.open('{{link}}', '_blank');
         });    
-    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}', noteid:'{{noteid}}'};
+    var params = {namespace:'{{namespace}}', namespaceid:{{namespaceid}}, content:'{{{content}}}', noteid:'{{noteid}}', admin:{{admin}}, userid:{{userid}}};
     note.init(params);     
 });
 {{/js}}
@@ -51,8 +51,30 @@ require(['jquery','jqueryui', 'local_notes/notes', 'local_notes/annotation'], fu
 <div class = 'draftview' style = "display:none">
 <h2>{{# str }} draftview, mod_moeworksheets {{/ str }}</h2>
     <p>____________________________________________________________</p>
-    <section id = 'id_contenteditable'>
-        {{{content}}}
-    </section>
+        <div id = 'note'>
+        <form>
+            <fieldset>
+                <div>
+                    <div>
+                        <div></div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div>
+                                        <div></div>
+                                        <div>
+                                            <div id = 'note_content'>
+                                            {{{content}}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        </div>
     <button class="showdraft_button" type="button">{{# str }} close, mod_moeworksheets {{/ str }}</button>
 </div>
