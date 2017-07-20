@@ -13,8 +13,14 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 			
 			note.prototype.insert_new_notes_version = function(params) {
 				globalcontent = $('.editor_atto_content').html();
+				if (globalcontent == '' || globalcontent == undefined){
+					globalcontent = $('#note').html();
+					if (globalcontent.indexOf("form") !== -1) {
+						globalcontent = $('#note_content').html();
+					}
+				}
 				var args = {
-					'content' : $('#id_contenteditable').html(),
+					'content' : globalcontent,
 					'namespace' : params.namespace,
 					'id' : params.namespaceid,
 				};
