@@ -33,7 +33,8 @@ class local_notes_external extends external_api {
         return new external_function_parameters(array(
             'namespace' => new external_value(PARAM_TEXT),
             'id' => new external_value(PARAM_INT),
-            'content' => new external_value(PARAM_RAW)
+            'content' => new external_value(PARAM_RAW),
+            'show' => new external_value(param_INT, '', VALUE_OPTIONAL)
 
         ));
     }
@@ -42,7 +43,7 @@ class local_notes_external extends external_api {
      * The function itself
      * @return string welcome message
      */
-    public static function insert_notes($namespace, $id, $content) {
+    public static function insert_notes($namespace, $id, $content, $show = null) {
 
         global $DB;
         $sql = 'select id from {notes} where ' . $DB->sql_compare_text('namespace') . ' = ? AND namespace_id = ?';
@@ -52,6 +53,7 @@ class local_notes_external extends external_api {
         $dataobject->parent= $perentid;
         $dataobject->content = $content;
         $dataobject->created_time = time();
+        $dataobject->show = $show;
 
         $results = $DB->insert_record('notes_versions', $dataobject);
         return $results? $results: -1;

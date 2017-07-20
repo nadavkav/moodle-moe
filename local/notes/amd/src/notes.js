@@ -23,6 +23,7 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 					'content' : globalcontent,
 					'namespace' : params.namespace,
 					'id' : params.namespaceid,
+					'show' : params.show,
 				};
 				ajax.call([ {
 					'methodname' : 'insert_notes',
@@ -49,6 +50,7 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 
 				$('#note_toggle_button, #id_submitbutton').click(function() {
 					if (is_editor_content_chenge()) {
+						params.show = 1;
 						note.prototype.insert_new_notes_version(params);
 					}
 				});
