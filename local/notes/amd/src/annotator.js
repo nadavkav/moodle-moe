@@ -13069,7 +13069,9 @@ AclAuthzPolicy = exports.AclAuthzPolicy = function AclAuthzPolicy() {
 AclAuthzPolicy.prototype.permits = function (action, context, identity) {
     var userid = this.authorizedUserId(identity);
     var permissions = context.permissions;
-
+    if (typeof userid === "number") {
+    	userid = identity.toString();
+    }
     if (permissions) {
         // Fine-grained authorization on permissions field
         var tokens = permissions[action];
