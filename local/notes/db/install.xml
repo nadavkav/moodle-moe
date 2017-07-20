@@ -20,7 +20,7 @@
         <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="content" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="content of nots at the save point"/>
         <FIELD NAME="created_time" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="creat time"/>
-        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="show"/>
+        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="toshow" LENGTH="1"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
