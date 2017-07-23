@@ -28,3 +28,6 @@ $plugin->version   = 2017012600;
 $plugin->requires  = 2016051900;
 $plugin->component = 'mod_moeworksheets';
 $plugin->cron      = 60;
+$plugin->dependencies = array(
+    'local_notes' => ANY_VERSION,
+);
