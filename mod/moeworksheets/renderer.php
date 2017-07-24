@@ -580,7 +580,7 @@ class mod_moeworksheets_renderer extends plugin_renderer_base {
         $data->namespace = 'mod/moeworksheets/attempt';
         $data->namespaceid = $attemptobj->get_attemptid();
         $data->noteid = $attemptobj->get_draft_parent_id();
-        $data->content = trim($attemptobj ->get_draft_content());
+        $data->draftcontent = trim($attemptobj ->get_draft_content());
         $data->userid = $USER->id;
         $context2 = context_module::instance($this->page->cm->id);
         $data->admin =  has_capability('mod/moewiki:grade', $context2);

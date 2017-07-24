@@ -122,7 +122,7 @@ class question_content extends model{
         if (is_null($id)) {
             return false;
         }
-        $content = $DB->get_record('moeworksheets_additionalcont', array('id' => $id));
+        $content = $DB->get_record('moeworksheets_questionconten', array('id' => $id));
         if ($content) {
             $this->id = $content->id;
             $this->content = $content->content;

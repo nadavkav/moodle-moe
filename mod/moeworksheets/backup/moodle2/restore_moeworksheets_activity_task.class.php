@@ -61,7 +61,7 @@ class restore_moeworksheets_activity_task extends restore_activity_task {
         $contents[] = new restore_decode_content('moeworksheets', array('intro'), 'moeworksheets');
         $contents[] = new restore_decode_content('moeworksheets_feedback',
                 array('feedbacktext'), 'moeworksheets_feedback');
-        $contents[] = new restore_decode_content('moeworksheets_additionalcont', array('content'),'moeworksheets_additionalcont');
+        $contents[] = new restore_decode_content('moeworksheets_questionconten', array('content'),'moeworksheets_questionconten');
 
         return $contents;
     }

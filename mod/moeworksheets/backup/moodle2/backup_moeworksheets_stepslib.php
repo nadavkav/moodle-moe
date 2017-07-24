@@ -143,7 +143,7 @@ class backup_moeworksheets_activity_structure_step extends backup_questions_acti
             'moeworksheetsid' => backup::VAR_PARENTID,
         ));
 
-        $qestioncontent->set_source_table('moeworksheets_additionalcont', array(
+        $qestioncontent->set_source_table('moeworksheets_questionconten', array(
            'additionalcontentid' => backup::VAR_PARENTID,
         ));
 
