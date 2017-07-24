@@ -14,14 +14,17 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
+<div id="quizsbsnojswarning">{{# str }} navnojswarning, quizsbs {{/ str }}</div>
 <div class="span4 qn_buttons clearfix {{bcc}}">
-    <div id="scrollbar" class="span20">
+    <i class="fa fa-caret-right span1" aria-hidden="true" title="{{# str }}prevquestiongroup, quizsbs{{/ str }}"></i>
+    <div id="scrollbar" class="span10">
     <div class="allbuttons">   
     {{# buttons}}
         {{{button}}}
     {{/buttons}}       
     </div>
     </div>
+    <i class="fa fa-caret-left span1" aria-hidden="true" title="{{# str }}nextquestiongroup, quizsbs{{/ str }}"></i>
 </div>
 <div class="othernav span3">
     <div class="row-fluid">
