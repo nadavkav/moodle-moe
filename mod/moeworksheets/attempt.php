@@ -149,6 +149,7 @@ $PAGE->requires->strings_for_js(array(
     'repaly',
     'resolved',
     'save',
+    'close'
 ),'local_notes');
 if ($attemptobj->is_last_page($page)) {
     $nextpage = -1;

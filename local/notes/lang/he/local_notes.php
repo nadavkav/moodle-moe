@@ -57,4 +57,5 @@ $string['navigate'] = 'ניווט: ';
 $string['next'] = 'שינויים ישנים יותר';
 $string['nocomment'] = 'אין הערות';
 $string['previous'] = 'שינויים חדשים יותר';
+$string['close'] = 'סגור חלון';
 

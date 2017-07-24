@@ -198,12 +198,12 @@ function xmldb_moeworksheets_upgrade($oldversion) {
             $table = new xmldb_table('moeworksheets_additionalcont');
             $dbman->drop_table($table);
         }
-        if ($dbman->table_exists('moeworksheets_additionalcont')) {
-            $table = new xmldb_table('moeworksheets_additionalcont');
+        if ($dbman->table_exists('moeworksheets_questionconten')) {
+            $table = new xmldb_table('moeworksheets_questionconten');
             $dbman->drop_table($table);
         }
         $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'moeworksheets_additionalcont');
-        $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'moeworksheets_additionalcont');
+        $dbman->install_one_table_from_xmldb_file(__DIR__ . '/install.xml', 'moeworksheets_questionconten');
         $table = new xmldb_table('moeworksheets_slots');
         $field = new xmldb_field('additionalcontentid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, false, null, null);
         $key = new xmldb_key('additionalcontentid', XMLDB_KEY_FOREIGN, array('additionalcontentid'), 'moeworksheets_additionalcont', array('id'));

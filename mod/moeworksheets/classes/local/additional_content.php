@@ -199,7 +199,7 @@ class additional_content extends model{
         global $DB;
 
         $contents = array();
-        $dbcontents = $DB->get_records('moeworksheets_additionalcont', array(
+        $dbcontents = $DB->get_records('moeworksheets_questionconten', array(
             'additionalcontentid' => $this->get_id(),
         ));
         foreach ($dbcontents as $content) {

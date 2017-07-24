@@ -61,7 +61,7 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 						cancel : '.editor_atto_content_wrap'
 					}).resizable();
 //					$("#note_warp").resizable();
-					$("#id_submitbutton").val("סגור");
+					$("#id_submitbutton").val(M.util.get_string('close', 'local_notes'));
 				});
 				// hide show note
 				$("#note_toggle_button").click(function() {

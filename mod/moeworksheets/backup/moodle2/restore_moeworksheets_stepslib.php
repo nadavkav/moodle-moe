@@ -60,7 +60,7 @@ class restore_moeworksheets_activity_structure_step extends restore_questions_ac
         $paths[] = new restore_path_element('moeworksheets_question_instance',
                 '/activity/moeworksheets/question_instances/question_instance');
         $paths[] = new restore_path_element('moeworksheets_additionalcont', '/activity/moeworksheets/additional_contents/additional_content');
-        $paths[] = new restore_path_element('moeworksheets_additionalcont', '/activity/moeworksheets/additional_contents/additional_content/questioncontents/questioncontent');
+        $paths[] = new restore_path_element('moeworksheets_questionconten', '/activity/moeworksheets/additional_contents/additional_content/questioncontents/questioncontent');
         $paths[] = new restore_path_element('moeworksheets_section', '/activity/moeworksheets/sections/section');
         $paths[] = new restore_path_element('moeworksheets_feedback', '/activity/moeworksheets/feedbacks/feedback');
         $paths[] = new restore_path_element('moeworksheets_override', '/activity/moeworksheets/overrides/override');
@@ -302,14 +302,14 @@ class restore_moeworksheets_activity_structure_step extends restore_questions_ac
         $this->set_mapping('moeworksheets_additionalcont', $oldid, $newid, true);
     }
 
-    protected function process_moeworksheets_additionalcont($data) {
+    protected function process_moeworksheets_questionconten($data) {
         global $DB;
 
         $data = (object) $data;
         $oldid = $data->id;
         $data->additionalcontentid = $this->get_new_parentid('moeworksheets_additionalcont');
-        $newitemid = $DB->insert_record('moeworksheets_additionalcont', $data);
-        $this->set_mapping('moeworksheets_additionalcont', $oldid, $newitemid, true);
+        $newitemid = $DB->insert_record('moeworksheets_questionconten', $data);
+        $this->set_mapping('moeworksheets_questionconten', $oldid, $newitemid, true);
     }
 
     protected function process_moeworksheets_section($data) {
@@ -447,7 +447,7 @@ class restore_moeworksheets_activity_structure_step extends restore_questions_ac
 
         $this->add_related_files('mod_moeworksheets', 'app', 'moeworksheets_additionalcont');
 
-        $this->add_related_files('mod_moeworksheets', 'content', 'moeworksheets_additionalcont');
+        $this->add_related_files('mod_moeworksheets', 'content', 'moeworksheets_questionconten');
 
         if (!$this->sectioncreated) {
             $DB->insert_record('moeworksheets_sections', array(

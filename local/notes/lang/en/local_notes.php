@@ -38,6 +38,7 @@ $string['annotate'] = 'Annotate';
 $string['repaly'] = 'Reply';
 $string['resolved'] = 'Resolved';
 $string['save'] = 'Save';
+$string['close'] = 'סגור חלון';
 
 $string['savedat'] = 'נשמר ב {$a}';
 $string['savedby'] = 'נשמר על־ידי {$a}';
