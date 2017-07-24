@@ -13,20 +13,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die;
 
-abstract class  moereport{
+/**
+ * Version number.
+ *
+ * @package mod_subpage
+ * @copyright 2014 The Open University
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-    abstract public function  runreport();
-    abstract public function  displayreportfortemplates();
-
-    public function to_std() {
-        $obj = new \stdClass();
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            $obj->{$key} = $value;
-        }
-        return $obj;
-    }
-}
-
+$plugin->version = 2015081800;
+$plugin->requires = 2011120100;
+$plugin->cron = 60*60*4; // 4 hours.
+$plugin->outestssufficient = true;
+$plugin->component = 'mod_subpage';

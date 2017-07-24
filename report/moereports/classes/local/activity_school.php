@@ -23,7 +23,7 @@ use report_moereports\local\school;
  */
 class activity_school {
 
-    public function to_std($data):\stdClass {
+    public function to_std($data) {
         $obj = new \stdClass();
         $vars = get_object_vars($data);
         foreach ($vars as $key => $value) {

@@ -13,20 +13,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die;
 
-abstract class  moereport{
+/**
+ * Definition of log events
+ *
+ *
+ * @package    mod_subpage
+ * @copyright  2012 The Open University
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-    abstract public function  runreport();
-    abstract public function  displayreportfortemplates();
+defined('MOODLE_INTERNAL') || die();
 
-    public function to_std() {
-        $obj = new \stdClass();
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            $obj->{$key} = $value;
-        }
-        return $obj;
-    }
-}
+global $DB;
 
+$logs = array(
+    array('module' => 'subpage', 'action' => 'add', 'mtable' => 'subpage', 'field' => 'name'),
+    array('module' => 'subpage', 'action' => 'update', 'mtable' => 'subpage', 'field' => 'name'),
+    array('module' => 'subpage', 'action' => 'view', 'mtable' => 'subpage', 'field' => 'name')
+);

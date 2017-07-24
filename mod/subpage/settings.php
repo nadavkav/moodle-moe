@@ -13,20 +13,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die;
 
-abstract class  moereport{
+/**
+ * Settings page.
+ *
+ * @package mod_subpage
+ * @copyright 2012 The Open University
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-    abstract public function  runreport();
-    abstract public function  displayreportfortemplates();
-
-    public function to_std() {
-        $obj = new \stdClass();
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            $obj->{$key} = $value;
-        }
-        return $obj;
-    }
-}
-
+// Minimum section number per course (see mod_subpage::get_min_section_number).
+$settings->add(new admin_setting_configtext('mod_subpage/courseminsection',
+        get_string('courseminsection', 'subpage'),
+        get_string('courseminsection_desc', 'subpage'), '', PARAM_RAW));

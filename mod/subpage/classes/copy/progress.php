@@ -13,20 +13,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die;
 
-abstract class  moereport{
+/**
+ * Custom progress class for subpage copy functionality.
+ *
+ * @package    mod_subpage
+ * @copyright  2015 The Open University
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-    abstract public function  runreport();
-    abstract public function  displayreportfortemplates();
+namespace mod_subpage\copy;
 
-    public function to_std() {
-        $obj = new \stdClass();
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            $obj->{$key} = $value;
-        }
-        return $obj;
+/**
+ * Custom progress reporting that just prints dots.
+ */
+class progress extends \core\progress\base {
+    protected function update_progress() {
+        \mod_subpage\copy\lib::$currentlogger->potential_dot();
     }
 }
-

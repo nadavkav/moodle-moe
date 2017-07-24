@@ -13,20 +13,20 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die;
 
-abstract class  moereport{
+/**
+ * Custom restore serach class to change restriction capabilities.
+ *
+ * @package    mod_subpage
+ * @copyright  2015 The Open University
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-    abstract public function  runreport();
-    abstract public function  displayreportfortemplates();
+namespace mod_subpage\copy;
 
-    public function to_std() {
-        $obj = new \stdClass();
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            $obj->{$key} = $value;
-        }
-        return $obj;
+class restore_course_search extends \restore_course_search {
+    protected function setup_restrictions() {
+        $this->require_capability('moodle/restore:restoreactivity');
+        $this->require_capability('moodle/restore:restoresection');
     }
 }
-
