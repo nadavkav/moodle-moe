@@ -57,12 +57,10 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 
 				// add draggable and resizable for note
 				$(document).ready(function() {
-					$("#note_warp").draggable({
-						cancel : '.editor_atto_content_wrap'
-					});
-					$("#note_warp").resizable();
 					$("#id_submitbutton").val("סגור");
-
+					/*$('#page').on('drop',function(event){
+						event.preventDefault();
+					});*/
 				});
 				// hide show note
 				$("#note_toggle_button").click(function() {
