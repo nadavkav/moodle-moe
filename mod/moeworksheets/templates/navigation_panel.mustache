@@ -15,8 +15,10 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 <div id="moeworksheetsnojswarning">{{# str }} navnojswarning, moeworksheets {{/ str }}</div>
+<div id="quizsbsnojswarning">{{# str }} navnojswarning, moeworksheets {{/ str }}</div>
 <div class="span4 qn_buttons clearfix {{bcc}}">
     <i class="fa fa-caret-right span1" aria-hidden="true" title="{{# str }}prevquestiongroup, moeworksheets{{/ str }}"></i>
+    <i class="fa fa-caret-right span1" aria-hidden="true" title="{{# str }}prevquestiongroup, quizsbs{{/ str }}"></i>
     <div id="scrollbar" class="span10">
     <div class="allbuttons">   
     {{# buttons}}
@@ -29,7 +31,10 @@
 <div class="othernav span3">
     <div class="row-fluid">
         {{{countdowntimer}}}
-        {{{restartpreview}}}    
+        {{{restartpreview}}}
+        {{# courseid}}
+        <a id = "backtocourse" href="/course/view.php?id={{courseid}}" class="btn">{{# str}}backtocourse, theme_moe{{/ str}}</a>
+        {{/ courseid}}     
     </div>
    </form>
 </div>

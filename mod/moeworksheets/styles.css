@@ -14,7 +14,8 @@
 }
 
 #draft_warp{
-    position: fixed;	
+    position: fixed;
+	width: 50%	
 }
 
 #draftcontiner .showdraft_button{
@@ -30,6 +31,9 @@
 }
 #note_toggle_button{
     float: left;
+}
+#page-mod-moeworksheets-attempt .que .formulation{
+    padding: 8px;
 }
 .page_head h2{
     display: inline;
@@ -1184,7 +1188,10 @@ table.moeworksheetsreviewsummary td.cell {
 	max-height: 15.5em;
 	overflow-y: auto; 
 }
-
+#questions #moeworksheets_question,
+#questions #addtional_content {
+    min-height: 600px;
+}
 .path-mod-moeworksheets #questionlist li {
 	cursor: pointer;
 }
@@ -1203,28 +1210,33 @@ table.moeworksheetsreviewsummary td.cell {
 }
 
 .path-mod-moeworksheets #id_csseditor, .path-mod-moeworksheets #id_javascripteditor {
-	direction: ltr;
+	overflow: hidden;
+    margin-top: 1em;
+    position: relative;
+	margin-right: 35px;
 }
 
 #moeworksheets {
 	background-color: #f9f1e4;
 }
-.path-mod-moeworksheets #questions {
+.path-mod-moeworksheets  {
 	display: flex;
 }
 #questions #moeworksheets_question{
-	width: 36%
+	width: 36%;
+	padding-left: 0px;
 }
 #questions #addtional_content{
-	width: 64%
+	width: 64%;
 }
 .path-mod-moeworksheets #questions #addtional_content {
 	padding: 1em;
 }
 .path-mod-moeworksheets #questions #addtional_content .wraper{
-    height: 100%;
-	padding: 1em;
-	overflow-x: auto; 
+    padding: 1%;
+    overflow-x: auto;
+    overflow-y: hidden; 
+    height: 97%;
 }
 .path-mod-moeworksheets #questionbox{
 	margin: 0px;
@@ -1282,9 +1294,9 @@ table.moeworksheetsreviewsummary td.cell {
 }
 
 .path-mod-moeworksheets .allbuttons {
-    position: absolute;
-	width: 1000px;
-	height: 36px;
+    overflow: hidden;
+    position: relative;
+    height: 36px; 
 }
 .path-mod-moeworksheets #scrollbar {
 	overflow: hidden;
@@ -1364,7 +1376,7 @@ table.moeworksheetsreviewsummary td.cell {
 	width: 98%;
 }
 .pagelayout-moeworksheets-attempt #wrapper #page{
-	padding: 10px 0 0 0;
+    padding: 0px;
 	margin: 0;
 	width: 100%;
 }
@@ -1443,7 +1455,9 @@ color: #676566;
 .path-mod-moeworksheets #questionbox {
 	min-height:403px;
 }
-
+.path-mod-moeworksheets .formulation .ablock .prompt {
+    font-family: Arial, Helvetica, sans-serif;
+}
 /* Ajustments for mobile devices */
 @media only screen and (max-width:565px) {
     #page-mod-moeworksheets-edit .rpcontainerclass {
