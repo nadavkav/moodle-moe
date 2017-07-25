@@ -73,11 +73,11 @@ class restore_moeworksheets_activity_task extends restore_activity_task {
     public static function define_decode_rules() {
         $rules = array();
 
-        $rules[] = new restore_decode_rule('moeworksheetsVIEWBYID',
+        $rules[] = new restore_decode_rule('MOEWORKSHEETSVIEWBYID',
                 '/mod/moeworksheets/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('moeworksheetsVIEWBYQ',
+        $rules[] = new restore_decode_rule('MOEWORKSHEETSVIEWBYQ',
                 '/mod/moeworksheets/view.php?q=$1', 'moeworksheets');
-        $rules[] = new restore_decode_rule('moeworksheetsINDEX',
+        $rules[] = new restore_decode_rule('MOEWORKSHEETSINDEX',
                 '/mod/moeworksheets/index.php?id=$1', 'course');
 
         return $rules;
