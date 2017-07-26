@@ -62,7 +62,12 @@ class notes {
      * @return the $mform
      */
     public function getnote() {
-        $mform = new notes_form(null, array('content' => $this->note_content));
+         $mform = new notes_form(null, array('content' => $this->note_content));
+//         $mform = new notes_form();
+//         $default_values = new \stdClass();
+//         $default_values->content_editor = $this->note_content;
+//         $default_values->htmlformat = FORMAT_HTML;
+//         $mform->set_data($default_values);
         return $mform->render();
     }
 
