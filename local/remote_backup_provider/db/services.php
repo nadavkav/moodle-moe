@@ -44,4 +44,20 @@ $functions = array(
          'type' => 'read',
          'capabilities' => 'moodle/backup:backupcourse',
     ),
+    'local_remote_backup_provider_subscribe' => array(
+        'classname' => 'local_remote_backup_provider_external',
+        'methodname' => 'subscribe',
+        'classpath' => 'local/remote_backup_provider/externallib.php',
+        'description' => 'subscribe to the server.',
+        'type' => 'write',
+        'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
+    'local_remote_backup_provider_unsubscribe' => array(
+        'classname' => 'local_remote_backup_provider_external',
+        'methodname' => 'unsubscribe',
+        'classpath' => 'local/remote_backup_provider/externallib.php',
+        'description' => 'unsubscribe to the server.',
+        'type' => 'write',
+        'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
 );

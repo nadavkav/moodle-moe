@@ -29,3 +29,7 @@ $string['wstoken_desc'] = 'Add the web service token from the remote site.';
 $string['remote_backup_provider:access'] = 'Access';
 $string['selfsignssl_label'] = 'הרשמה תעודות חתומות עצמית';
 $string['selfsignssl_desc'] = 'האם האתר המרוחק משתמש בתעודה חתומה עצמית';
+
+$string['remoteusername_label'] = ' שם משתמש מרוחק';
+$string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיבויים לקורסים המקוריים במערכת מוודל המרוחקת.';
+

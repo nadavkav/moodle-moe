@@ -72,7 +72,7 @@ if ($CFG->debug) {
 }
 
 // Get import_remote_course system-level config settings.
-$remoteusername = get_config('block_import_remote_course', 'remoteusername');
+$remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
 if (empty($remoteusername)) {
     print_error('missingremoteusername', 'block_import_remote_course', $returnurl);
 }

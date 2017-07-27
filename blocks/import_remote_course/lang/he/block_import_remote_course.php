@@ -39,10 +39,12 @@ $string['noavailablecourses'] = 'טרם הוזנה רשימת תבניות פד�
 $string['restoreinprogress'] = 'תהליך היבוא מתבצע...';
 
 // Global system settings
+$string['wstoken'] = 'Web service token';
+$string['wstoken_desc'] = 'טוקן לספק למערכת המרוחקת ע"מ להתחבר למערכת המקומית.';
 $string['config_header'] = 'תבניות חלופות בהערכה';
 $string['config_desc'] = 'הגדרות מערכת עבור תבניות חלופות בהערכה.';
-$string['remoteusername_label'] = 'שם משתמש';
-$string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיבויים לקורסים המקוריים במערכת מוודל המרוחקת.';
+$string['localusername_label'] = 'שם משתמש מקומי';
+$string['localusername_desc'] = 'שם המשתמש המקומי שיוספק לשרת המרוחק כדי לשלוח עדכונים.';
 $string['remotecourselist_label'] = 'רשימת קורסים לשיחזור';
 $string['remotecourselist_desc'] = 'רשימת התפניות הפדגוגיות אשר יהיו זמינות בקורסים ריקים לשיחזור  <br> each course in a seperate line, Format: "CourseID=Course title,"';
 $string['restore'] = 'יבוא תבנית';

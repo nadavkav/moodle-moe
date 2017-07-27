@@ -1,4 +1,6 @@
 <?php
+use mod_questionnaire\response\boolean;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -227,5 +229,96 @@ class local_remote_backup_provider_external extends external_api {
                 'url' => new external_value(PARAM_RAW, 'url of the backup file'),
             )
         );
+    }
+
+    //pub sub function
+
+    /**
+     * Returns description of subscribe method parameters
+     * @return external_function_parameters
+     */
+    public static function subscribe_parameters() {
+
+        return new external_function_parameters(
+            array('name' => new external_value(PARAM_ALPHAEXT, 'name of subscriber'),
+                  'url'  => new external_value(PARAM_URL),
+                  'user' => new external_value(PARAM_ALPHANUMEXT),
+                  'token'=> new external_value(PARAM_ALPHANUMEXT)
+            )
+            );
+    }
+
+    /**
+     * subscribe to the server
+     * @return array of all courses and tags.
+     */
+    public static function subscribe($name, $url, $user, $token) {
+
+        $subscribedata = self::validate_parameters(self::register_parameters(),
+            array('name' => $name,
+                  'url'  => $url,
+                  'user' => $user,
+                  'token'=> $token
+            ));
+
+        if (publisher::subscribe($name, $url, $user, $token)){
+            $sql = 'select CO.id, CA.idnumber as tag, CO.fullname as course_name from {course} as CO inner join mdl_course_categories as CA on CA.id = CO.category';
+            return  $DB->get_records_sql($sql);
+        }
+        return null;
+    }
+
+    /**
+     * Returns description of subscribe method result value
+     * @return external_description
+     */
+    public static function subscribe_returns() {
+        return new external_multiple_structure(
+            new external_single_structure(
+                array(
+                    'id'          => new external_value(PARAM_INT, 'id of course'),
+                    'tag'         => new external_value(PARAM_RAW, 'idnumber of course'),
+                    'course_name' => new external_value(PARAM_RAW, 'short name of course'),
+                    )
+                )
+            );
+    }
+
+    /**
+     * Returns description of subscribe method parameters
+     * @return external_function_parameters
+     */
+    public static function unsubscribe_parameters() {
+
+        return new external_function_parameters(
+            array('name' => new external_value(PARAM_ALPHAEXT, 'name of subscriber'),
+                  'url'  => new external_value(PARAM_URL)
+            )
+            );
+    }
+
+    /**
+     * unsubscribe to the server
+     * @return boolean.
+     */
+    public static function unsubscribe($name, $url) {
+
+        $subscribedata = self::validate_parameters(self::register_parameters(), array(
+            'name' => $name,
+            'url' => $url,
+        ));
+
+        if (publisher::unsubscribe(publisher::get_id($name))){
+            return  true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns description of subscribe method result value
+     * @return external_description
+     */
+    public static function subscribe_returns() {
+        return new external_function_parameters( array (new external_value(PARAM_BOOL)));
     }
 }
