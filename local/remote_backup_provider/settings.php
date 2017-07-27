@@ -23,6 +23,11 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage('local_remote_backup_provider', get_string('pluginname', 'local_remote_backup_provider'));
     $ADMIN->add('localplugins', $settings);
 
+    $settings->add(new admin_setting_configtext('local_remote_backup_provider/remoteusername',
+        get_string('remoteusername_label', 'local_remote_backup_provider'),
+        get_string('remoteusername_desc', 'local_remote_backup_provider'),
+        ''));
+
     $adminsetting = new admin_setting_configtext('remotesite', get_string('remotesite', 'local_remote_backup_provider'),
         get_string('remotesite_desc', 'local_remote_backup_provider'), '');
     $adminsetting->plugin = 'local_remote_backup_provider';
@@ -32,7 +37,7 @@ if ($hassiteconfig) {
         get_string('wstoken_desc', 'local_remote_backup_provider'), '');
     $adminsetting->plugin = 'local_remote_backup_provider';
     $settings->add($adminsetting);
-    
+
     $settings->add(new admin_setting_configcheckbox('local_remote_backup_provider/selfsignssl',
         get_string('selfsignssl_label', 'local_remote_backup_provider'),
         get_string('selfsignssl_desc', 'local_remote_backup_provider'), true));

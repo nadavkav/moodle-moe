@@ -29,3 +29,6 @@ $string['wstoken_desc'] = 'Add the web service token from the remote site.';
 $string['remote_backup_provider:access'] = 'Access';
 $string['selfsignssl_label'] = 'allow self sign certification';
 $string['selfsignssl_desc'] = 'If in the remote site the ssl is self sign';
+
+$string['remoteusername_label'] = 'Remote Username';
+$string['remoteusername_desc'] = 'Username used to backup the original courses on the remote system.';

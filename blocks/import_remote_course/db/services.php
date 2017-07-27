@@ -13,19 +13,20 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version details
- *
  * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+$functions = array(
 
-$plugin->version   = 2017072700;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
-//$plugin->cron = 300;
+    'block_import_remote_course_update' => array(
+        'classname' => 'block_import_remote_course_external',
+        'methodname' => 'update',
+        'classpath' => 'block/import_remote_course/externallib.php',
+        'description' => 'get updates from the server.',
+        'type' => 'write',
+        'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
+);
