@@ -27,6 +27,17 @@ $functions = array(
         'classpath' => 'block/import_remote_course/externallib.php',
         'description' => 'get updates from the server.',
         'type' => 'write',
-        'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+  //      'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
+);
+
+$services = array(
+    'import_remote_course' => array(
+        'functions' => array(
+            'block_import_remote_course_update',
+        ),
+        'requiredcapability' => '',
+        'restrictedusers' =>0,
+        'enabled'=>1,
     ),
 );
