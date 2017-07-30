@@ -43,8 +43,8 @@ class subscriber {
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
 
         if ($skipcertverify){
-            $options['curl_verify_ssl_host'] = false;
-            $options['curl_verify_ssl_peer'] = false;
+            $options['curlopt_ssl_verifypeer'] = false;
+            $options['curlopt_ssl_verifyhost'] = false;
         }
         // build the curl.
         $url_to_send = $remotesite . $prefixurl . $token . $postfixurl;
