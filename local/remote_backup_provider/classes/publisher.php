@@ -50,10 +50,9 @@ class publisher {
     */
     public static function  subscribe ($name, $url, $user, $token){
         global $DB;
-        if (sizeof($DB->get_records_list('remote_backup_provider_subsc', 'id', array('subscriber_name' => $name, 'base_url' => $url))) > 0) {
-            return false;
+        if (sizeof($DB->get_records_list('remote_backup_provider_subsc', 'id', array('base_url' => $url))) > 0) {
+            $DB->delete_records('remote_backup_provider_subsc', array('id' => $this->get_id($name, $url)));
         }
-
 
         $data = array('subscriber_name' => $name,
                       'base_url'        => $url,

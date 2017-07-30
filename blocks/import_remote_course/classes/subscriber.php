@@ -46,8 +46,12 @@ class subscriber {
             $options['curl_verify_ssl_host'] = false;
             $options['curl_verify_ssl_peer'] = false;
         }
+        // build the curl.
+        $url_to_send = $remotesite . $prefixurl . $token . $postfixurl;
+        $params = array('username'=>$remoteusername, 'name'=>$name, 'url'=>$url, 'user'=>$local_user, 'token'=>$local_token );
+
         $curl = new curl;
-        $resp = json_decode($curl->post($url, $params, $options));
+        $resp = json_decode($curl->post($url_to_send, $params, $options));
 
     }
 
