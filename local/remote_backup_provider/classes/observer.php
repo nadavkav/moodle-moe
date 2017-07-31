@@ -1,4 +1,6 @@
 <?php
+use local_remote_backup_provider\publisher;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -42,7 +44,7 @@ class local_remote_backup_provider_observer {
         $postfixurl = '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
 
         //course info to update
-        $local_course = $DB->get_record('course', array('id' => $event->courseid));
+        $local_course = $DB->get_record('course', array('id' => $event->data['courseid']));
         $params       = array(
             'type'        => $type,
             'course_id'   => $local_course->id,

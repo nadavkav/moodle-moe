@@ -24,4 +24,4 @@ $plugin->cron      = 300;
 $plugin->maturity  = MATURITY_ALPHA;
 $plugin->release   = 'Alpha for 2.8+';
 $plugin->requires  = 2014111000;
-$plugin->version   = 2017073100;
+$plugin->version   = 2017073101;
