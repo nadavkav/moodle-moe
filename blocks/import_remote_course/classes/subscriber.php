@@ -27,8 +27,8 @@ class subscriber {
         global $CFG, $DB;
 
         //parameters for the remote function
-        $name           = $DB->get_field('course', 'fullname', array('id' => 1));
-        $url            = $CFG->wwwroot;
+        $name          = str_replace(' ', '',$DB->get_field('course', 'fullname', array('id' => 1)));
+        $url           = $CFG->wwwroot;
         $local_user    = get_config('block_import_remote_course', 'localusername');
         $local_token   = get_config('block_import_remote_course', 'wstoken');;
 
@@ -51,7 +51,8 @@ class subscriber {
         $params = array('username'=>$remoteusername, 'name'=>$name, 'url'=>$url, 'user'=>$local_user, 'token'=>$local_token );
 
         $curl = new curl;
-        $resp = json_decode($curl->post($url_to_send, $params, $options));
+         $resp = json_decode($curl->post($url_to_send, $params, $options));
+         return $resp;
 
     }
 
