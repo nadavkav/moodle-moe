@@ -1,6 +1,6 @@
 <?php
 use mod_questionnaire\response\boolean;
-
+use local_remote_backup_provider\publisher;
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -243,7 +243,8 @@ class local_remote_backup_provider_external extends external_api {
             array('name' => new external_value(PARAM_ALPHAEXT, 'name of subscriber'),
                   'url'  => new external_value(PARAM_URL),
                   'user' => new external_value(PARAM_ALPHANUMEXT),
-                  'token'=> new external_value(PARAM_ALPHANUMEXT)
+                  'token'=> new external_value(PARAM_ALPHANUMEXT),
+                  'username' => new external_value(PARAM_ALPHANUMEXT)
             )
             );
     }
@@ -252,15 +253,15 @@ class local_remote_backup_provider_external extends external_api {
      * subscribe to the server
      * @return array of all courses and tags.
      */
-    public static function subscribe($name, $url, $user, $token) {
-
-        $subscribedata = self::validate_parameters(self::register_parameters(),
+    public static function subscribe($name, $url, $user, $token, $username) {
+        global $DB;
+        $subscribedata = self::validate_parameters(self::subscribe_parameters(),
             array('name' => $name,
                   'url'  => $url,
                   'user' => $user,
-                  'token'=> $token
+                  'token'=> $token,
+                  'username' =>$usename
             ));
-
         if (publisher::subscribe($name, $url, $user, $token)){
             $sql = 'select CO.id, CA.idnumber as tag, CO.fullname as course_name from {course} as CO inner join mdl_course_categories as CA on CA.id = CO.category';
             return  $DB->get_records_sql($sql);
@@ -318,7 +319,7 @@ class local_remote_backup_provider_external extends external_api {
      * Returns description of subscribe method result value
      * @return external_description
      */
-    public static function subscribe_returns() {
+    public static function unsubscribe_returns() {
         return new external_function_parameters( array (new external_value(PARAM_BOOL)));
     }
 }

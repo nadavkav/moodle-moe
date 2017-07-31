@@ -1,7 +1,4 @@
 <?php
-use mod_questionnaire\response\boolean;
-use mod_assign\event\extension_granted;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -62,7 +59,7 @@ class block_import_remote_course_external extends external_api {
      *
      * @return external_description
      */
-    public static function subscribe_returns() {
+    public static function update_returns() {
         return new external_function_parameters( array (new external_value(PARAM_BOOL)));
     }
 }
