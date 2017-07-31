@@ -51,7 +51,12 @@ class subscriber {
         $params = array('username'=>$remoteusername, 'name'=>$name, 'url'=>$url, 'user'=>$local_user, 'token'=>$local_token );
 
         $curl = new curl;
-         $resp = json_decode($curl->post($url_to_send, $params, $options));
+        $resp = json_decode($curl->post($url_to_send, $params, $options));
+
+        //insert the courses to DB
+        $DB->delete_records('import_remote_course_list');
+        $DB->insert_records('import_remote_course_list', $resp);
+
          return $resp;
 
     }
