@@ -13,8 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-defined('MOODLE_INTERNAL') || die();
+namespace local_remote_backup_provider;
 
+defined('MOODLE_INTERNAL') || die();
 class publisher {
 
     /**
@@ -32,11 +33,11 @@ class publisher {
         if ($name == null && $url == null){
             return -1;
         } else if ($name != null){
-            $conditions = array('name' => $name);
-            return $DB->get_field($table, $return, $conditions);
+            $sql = "select id from {remote_backup_provider_subsc} where " . $DB->sql_compare_text('name') . "=$name";
+            return $DB->get_field_sql($sql);
         } else {
-            $conditions = array('url' => $url);
-            return $DB->get_field($table, $return, $conditions);
+            $sql = "select id from {remote_backup_provider_subsc} where " . $DB->sql_compare_text('base_url') . '=' ." '" .$url ." '";
+            return $DB->get_field_sql($sql);
         }
     }
 
@@ -50,8 +51,9 @@ class publisher {
     */
     public static function  subscribe ($name, $url, $user, $token){
         global $DB;
-        if (sizeof($DB->get_records_list('remote_backup_provider_subsc', 'id', array('base_url' => $url))) > 0) {
-            $DB->delete_records('remote_backup_provider_subsc', array('id' => $this->get_id($name, $url)));
+
+        if ($id = self::get_id(null, $url)) {
+            $DB->delete_records('remote_backup_provider_subsc', array( 'id' =>$id));
         }
 
         $data = array('subscriber_name' => $name,
