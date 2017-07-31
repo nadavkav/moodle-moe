@@ -32,7 +32,7 @@ class block_import_remote_course_external extends external_api {
     public static function update_parameters() {
         return new external_function_parameters(array(
             'type'       => new external_value(PARAM_ALPHANUMEXT),
-            'course_id'  => new external_value(PARAM_int),
+            'course_id'  => new external_value(PARAM_INT),
             'course_tag' => new external_value(PARAM_ALPHANUMEXT),
             'course_name'=> new external_value(PARAM_ALPHANUMEXT)
         ));

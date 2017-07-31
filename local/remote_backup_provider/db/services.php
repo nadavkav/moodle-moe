@@ -62,14 +62,14 @@ $functions = array(
     ),
 );
 
-$services = array(
-    'remote_backup_provider' => array(
-        'functions' => array(
-            'local_remote_backup_provider_subscribe',
-            'local_remote_backup_provider_unsubscribe'
-        ),
-        'requiredcapability' => '',
-        'restrictedusers' =>0,
-        'enabled'=>1,
-    ),
-);
+// $services = array(
+//     'remote_backup_provider' => array(
+//         'functions' => array(
+//             'local_remote_backup_provider_subscribe',
+//             'local_remote_backup_provider_unsubscribe'
+//         ),
+//         'requiredcapability' => '',
+//         'restrictedusers' =>0,
+//         'enabled'=>1,
+//     ),
+// );
