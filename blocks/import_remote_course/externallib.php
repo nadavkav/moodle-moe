@@ -46,7 +46,7 @@ class block_import_remote_course_external extends external_api {
      */
     public static function update($type, $course_id, $course_tag, $course_name, $username) {
 
-        $subscribedata = self::validate_parameters(self::register_parameters(), array(
+        $subscribedata = self::validate_parameters(self::update_parameters(), array(
             'type'        => $type,
             'course_id'   => $course_id,
             'course_tag'  => $course_tag,
