@@ -67,7 +67,6 @@ class local_remote_backup_provider_observer {
             //subscriber info
             $token        = $sub->remote_token;
             $remotesite   = $sub->base_url;
-
             $local_params = $params;
             $local_params ['username'] =  $sub->remote_user;
 
@@ -75,6 +74,14 @@ class local_remote_backup_provider_observer {
 
             $curl = new curl();
             $resp = json_decode($curl->post($url, $local_params, $options));
+
+            if (!isset($resp['result']) || $resp['result'] != true){
+                $dataobject               = new stdClass();
+                $dataobject->url          = serialize($url);
+                $dataobject->local_params = serialize($local_params);
+                $dataobject->options      = serialize($options);
+                $DB->insert_record('remote_backup_provider_fails', $dataobject);
+            }
         }
     }
 

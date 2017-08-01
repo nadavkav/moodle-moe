@@ -43,3 +43,5 @@ $string['remove_remote'] = 'remove subscriber';
 $string['confirm'] = "are you sure you want to unsubscribe the remote server?";
 $string['yes'] = 'Yes';
 $string['no'] = 'No';
+$string['cronjub'] = "Send fails update to remote servers";
+$string['cronjub_desc'] = "in case the remote server not respond with OK we want to send him the update again";
