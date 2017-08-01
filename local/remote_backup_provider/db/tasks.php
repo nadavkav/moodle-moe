@@ -19,7 +19,7 @@
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+//use local_remote_backup_provider\event\fails_updates;
 defined('MOODLE_INTERNAL') || die();
 
 $tasks = array(

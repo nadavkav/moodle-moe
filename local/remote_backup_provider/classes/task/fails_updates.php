@@ -13,7 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-namespace local_remote_backup_provider\event;
+namespace local_remote_backup_provider\task;
+
+use core\task\scheduled_task;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -22,7 +24,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class fails_updates extends \core\event\base {
+class fails_updates extends scheduled_task {
 
 
     /**
