@@ -99,9 +99,9 @@ class subscriber {
                 $DB->update_record($table, $dataobject);
                 break;
             default:
-                return array(false);
+                return array('result' => false);
         }
-        return array(true);
+        return array('result' => true);
 
     }
 

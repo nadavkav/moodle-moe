@@ -13,15 +13,23 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    local_remote_backup_provider
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->component = 'local_remote_backup_provider';
-$plugin->cron      = 300;
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = 'Alpha for 2.8+';
-$plugin->requires  = 2014111000;
-$plugin->version   = 2017073103;
+defined('MOODLE_INTERNAL') || die();
+
+$tasks = array(
+    array(
+        'classname' => 'local_remote_backup_provider\task\fails_updates',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '*/1',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*',
+    ),
+);

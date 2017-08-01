@@ -1,0 +1,62 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+namespace local_remote_backup_provider\event;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * @package    local_remote_backup_provider
+ * @copyright  2015 Lafayette College ITS
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class fails_updates extends \core\event\base {
+
+
+    /**
+     * Return localised event name.
+     *
+     * @return string
+     */
+    public static function get_name() {
+        return get_string('cronjub', 'local_remote_backup_provider');
+    }
+
+    /**
+     * Returns description of what happened.
+     *
+     * @return string
+     */
+    public function get_description() {
+        return get_string('cronjub_desc', 'local_remote_backup_provider');
+    }
+
+    /**
+     * send nottification to all fails subscribers
+     *
+     * @return \moodle_url
+     */
+    public function get_url() {
+        global $DB;
+        $fails = $DB->get_records('remote_backup_provider_fails');
+        foreach ($fails as $fail) {
+            $curl = new curl();
+            $resp = json_decode($curl->post($fail->url, $fail->local_params, $fail->options));
+            if (isset($resp['result']) && $resp['result'] == true) {
+                $DB->delete_records('remote_backup_provider_fails', array('id' => $fail->id));
+            }
+        }
+    }
+}

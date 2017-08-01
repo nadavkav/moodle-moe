@@ -47,6 +47,18 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         // Savepoint reached.
         upgrade_plugin_savepoint(true, 2017073001, 'local', 'remote_backup_provider');
     }
+    if ($oldversion < 2017073103) {
+        // Define field sortorder to be added to usertours_tours.
+        $table = new xmldb_table('remote_backup_provider_fails');
+
+        // Conditionally launch add field sortorder.
+        if (!$dbman->table_exists($table)) {
+            $dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/local/remote_backup_provider/db/install.xml', 'remote_backup_provider_fails');
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2017073103, 'local', 'remote_backup_provider');
+    }
 
     return true;
 }

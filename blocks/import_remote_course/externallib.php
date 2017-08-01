@@ -61,6 +61,6 @@ class block_import_remote_course_external extends external_api {
      * @return external_description
      */
     public static function update_returns() {
-        return new external_function_parameters( array (new external_value(PARAM_BOOL)));
+        return new external_function_parameters(array( 'result' =>  (new external_value(PARAM_BOOL))));
     }
 }
