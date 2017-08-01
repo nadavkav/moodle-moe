@@ -82,8 +82,8 @@ $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
     '&wsfunction=local_remote_backup_provider_get_manual_course_backup_by_id&moodlewsrestformat=json';
 $options = [];
 if ($skipcertverify){
-    $options['curl_verify_ssl_host'] = false;
-    $options['curl_verify_ssl_peer'] = false;
+    $options['curlopt_ssl_verifypeer'] = false;
+    $options['curlopt_ssl_verifyhost'] = false;
 }
 $params = array('id' => $remote, 'username' => $remoteusername);
 //print_r($params);
