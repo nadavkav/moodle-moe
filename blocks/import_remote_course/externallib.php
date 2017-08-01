@@ -19,9 +19,8 @@
  * @copyright 2015 Lafayette College ITS
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require_once ($CFG->dirroot . '/lib/externallib.php');
-
+require_once ($CFG->dirroot . '/blocks/import_remote_course/classes/subscriber.php');
 class block_import_remote_course_external extends external_api {
 
     /**
