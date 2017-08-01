@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017073102;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2017073103;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2012112900;        // Requires this Moodle version
 $plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
 $plugin->dependencies = array('local_remote_backup_provider' => 2015080800);

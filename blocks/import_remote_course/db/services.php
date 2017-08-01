@@ -31,13 +31,13 @@ $functions = array(
     ),
 );
 
-$services = array(
-    'import_remote_course' => array(
-        'functions' => array(
-            'block_import_remote_course_update',
-        ),
-        'requiredcapability' => '',
-        'restrictedusers' =>0,
-        'enabled'=>1,
-    ),
-);
+// $services = array(
+//     'import_remote_course' => array(
+//         'functions' => array(
+//             'block_import_remote_course_update',
+//         ),
+//         'requiredcapability' => '',
+//         'restrictedusers' =>0,
+//         'enabled'=>1,
+//     ),
+// );
