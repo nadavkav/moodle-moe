@@ -42,16 +42,27 @@ class local_remote_backup_provider_observer {
         //url strings parts
         $prefixurl  = '/webservice/rest/server.php?wstoken=';
         $postfixurl = '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
-
+        $local_event = $event->get_data();
         //course info to update
-        $local_course = $DB->get_record('course', array('id' => $event->data['courseid']));
+        $local_course = $DB->get_record('course', array('id' => $local_event['courseid']));
+
+        //check that the course have category with tag
+        $sql = 'select * from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
+        if($DB->get_record_sql($sql, array('id' => $local_course->id)) == false){
+            return ;
+        }
+
         $params       = array(
             'type'        => $type,
             'course_id'   => $local_course->id,
             'course_tag'  => $local_course->idnumber,
             'course_name' => $local_course->fullname
         );
-
+        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+        if ($skipcertverify){
+            $options['curlopt_ssl_verifypeer'] = false;
+            $options['curlopt_ssl_verifyhost'] = false;
+        }
         foreach ($pub->get_all_subscribers() as $sub){
             //subscriber info
             $token        = $sub->remote_token;
@@ -63,7 +74,7 @@ class local_remote_backup_provider_observer {
             $url = $remotesite . $prefixurl . $token . $postfixurl;
 
             $curl = new curl();
-            $resp = json_decode($curl->post($url, $local_params));
+            $resp = json_decode($curl->post($url, $local_params, $options));
         }
     }
 

@@ -263,7 +263,7 @@ class local_remote_backup_provider_external extends external_api {
                   'username' =>$usename
             ));
         if (publisher::subscribe($name, $url, $user, $token)){
-            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname as course_name from {course} as CO inner join mdl_course_categories as CA on CA.id = CO.category where CA.idnumber<>''";
+            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname as course_name from {course} as CO inner join {course_categories} as CA on CA.id = CO.category where CA.idnumber<>''";
             return  $DB->get_records_sql($sql);
         }
         return null;
