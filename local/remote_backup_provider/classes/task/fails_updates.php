@@ -32,25 +32,17 @@ class fails_updates extends scheduled_task {
      *
      * @return string
      */
-    public static function get_name() {
+    public function get_name() {
         return get_string('cronjub', 'local_remote_backup_provider');
     }
 
-    /**
-     * Returns description of what happened.
-     *
-     * @return string
-     */
-    public function get_description() {
-        return get_string('cronjub_desc', 'local_remote_backup_provider');
-    }
 
     /**
      * send nottification to all fails subscribers
      *
      * @return \moodle_url
      */
-    public function get_url() {
+    public function execute() {
         global $DB;
         $fails = $DB->get_records('remote_backup_provider_fails');
         foreach ($fails as $fail) {
