@@ -40,3 +40,5 @@ atlassian-ide-plugin.xml
 /Scripts/
 /dummy.php
 /npm-debug.log
+/deployment.properties
+/deployment.xml
