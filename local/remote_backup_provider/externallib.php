@@ -244,7 +244,7 @@ class local_remote_backup_provider_external extends external_api {
                   'url'  => new external_value(PARAM_URL),
                   'user' => new external_value(PARAM_ALPHANUMEXT),
                   'token'=> new external_value(PARAM_ALPHANUMEXT),
-                  'username' => new external_value(PARAM_ALPHANUMEXT)
+                  'username' => new external_value(PARAM_RAW)
             )
             );
     }
