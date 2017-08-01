@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-namespace blocks_import_remote_course;
 class subscriber {
 
     /**
@@ -97,9 +96,12 @@ class subscriber {
                 $dataobject->course_id   = $course_id;
                 $dataobject->course_tag  = $course_tag;
                 $dataobject->course_name = $course_name;
+                $DB->update_record($table, $dataobject);
                 break;
+            default:
+                return array(false);
         }
-        return true;
+        return array(true);
 
     }
 
