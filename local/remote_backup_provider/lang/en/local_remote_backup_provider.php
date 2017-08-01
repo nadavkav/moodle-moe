@@ -32,3 +32,14 @@ $string['selfsignssl_desc'] = 'If in the remote site the ssl is self sign';
 
 $string['remoteusername_label'] = 'Remote Username';
 $string['remoteusername_desc'] = 'Username used to backup the original courses on the remote system.';
+$string['listofsubs'] = 'list of remote servers';
+$string['subscribermanager'] = 'subscribers management';
+
+$string['subscriber_name'] = 'Subscriber name';
+$string['base_url'] = 'Subscriber url';
+$string['remote_user'] = 'user name in remote sys';
+$string['remote_token'] = 'token for remote user';
+$string['remove_remote'] = 'remove subscriber';
+$string['confirm'] = "are you sure you want to unsubscribe the remote server?";
+$string['yes'] = 'Yes';
+$string['no'] = 'No';

@@ -41,4 +41,9 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_configcheckbox('local_remote_backup_provider/selfsignssl',
         get_string('selfsignssl_label', 'local_remote_backup_provider'),
         get_string('selfsignssl_desc', 'local_remote_backup_provider'), true));
+
+    $ADMIN->add('localplugins',new admin_externalpage('local_remote_backup_provider/listsubs',
+                                          get_string('listofsubs', 'local_remote_backup_provider'),
+                                          new moodle_url('/local/remote_backup_provider/subscribermanager.php')));
+
 }
