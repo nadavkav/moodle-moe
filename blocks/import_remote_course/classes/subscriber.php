@@ -83,11 +83,7 @@ class subscriber {
                 $DB->insert_record($table, $dataobject);
                 break;
             case 'd':
-                $DB->delete_records($table, array(
-                    'course_id'   => $course_id,
-                    'course_tag'  => $course_tag,
-                    'course_name' => $course_name
-                ));
+                $DB->delete_records($table, array('course_id' => $course_id));
                 break;
             case 'u':
                 $id = $DB->get_field($table, 'id', array('course_id' => $course_id,));
@@ -100,7 +96,7 @@ class subscriber {
                 break;
             case 'cu':
                 //course tag remove - delete course
-                if ($course_id == ''){
+                if ($course_tag == ''){
                     if ($DB->get_record($table, array('course_id' => $course_id))){
                         $DB->delete_records($table, array('course_id' => $course_id));
                     }
