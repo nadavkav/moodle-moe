@@ -44,14 +44,15 @@ class local_remote_backup_provider_observer {
 
         //check that the course have category with tag
         $sql = 'select * from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
-        if($DB->get_record_sql($sql, array('id' => $local_course->id)) == false){
+        $tag = $DB->get_record_sql($sql, array('id' => $local_course->id));
+        if($tag == false){
             return ;
         }
 
         $params       = array(
             'type'        => $type,
             'course_id'   => $local_course->id,
-            'course_tag'  => $local_course->idnumber,
+            'course_tag'  => $tag,
             'course_name' => $local_course->fullname
         );
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
@@ -104,10 +105,12 @@ class local_remote_backup_provider_observer {
         //get all cources in cat
         $corcestoupdate = $DB->get_record('cource', array('category' => $local_data['objectid']));
         foreach ($corcestoupdate as $local_course){
+            $sql = 'select * from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
+            $tag = $DB->get_record_sql($sql, array('id' => $local_course->id));
             $params       = array(
                 'type'        => $type,
                 'course_id'   => $local_course->id,
-                'course_tag'  => $local_course->idnumber,
+                'course_tag'  => $tag,
                 'course_name' => $local_course->fullname
             );
 
