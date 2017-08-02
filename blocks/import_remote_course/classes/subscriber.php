@@ -98,6 +98,33 @@ class subscriber {
                 $dataobject->course_name = $course_name;
                 $DB->update_record($table, $dataobject);
                 break;
+            case 'cu':
+                //course tag remove - delete course
+                if ($course_id == ''){
+                    if ($DB->get_record($table, array('course_id' => $course_id))){
+                        $DB->delete_records($table, array('course_id' => $course_id));
+                    }
+                } else {
+                    //have course tag - update as need
+                    $id = $DB->get_field($table, 'id', array('course_id' => $course_id,));
+                    //a new tag to existing course
+                    if($id){
+                        $dataobject = new stdClass();
+                        $dataobject->id          = $id;
+                        $dataobject->course_id   = $course_id;
+                        $dataobject->course_tag  = $course_tag;
+                        $dataobject->course_name = $course_name;
+                        $DB->update_record($table, $dataobject);
+                    } else{
+                        //a new course
+                        $dataobject = new stdClass();
+                        $dataobject->course_id   = $course_id;
+                        $dataobject->course_tag  = $course_tag;
+                        $dataobject->course_name = $course_name;
+                        $DB->insert_record($table, $dataobject);
+                    }
+                }
+                break;
             default:
                 return array('result' => false);
         }
