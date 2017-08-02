@@ -45,5 +45,11 @@ $observers = array(
         'callback'    => 'local_remote_backup_provider_observer::send_cat_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
+    ),
+    array(
+        'eventname'   => 'core\event\course_category_deleted',
+        'callback'    => 'local_remote_backup_provider_observer::send_cat_update',
+        'internal'  => false, // This means that we get events only after transaction commit.
+        'priority'  => 1000,
     )
 );
