@@ -43,8 +43,8 @@ class local_remote_backup_provider_observer {
         $local_course = $DB->get_record('course', array('id' => $local_event['courseid']));
 
         //check that the course have category with tag
-        $sql = 'select * from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
-        $tag = $DB->get_record_sql($sql, array('id' => $local_course->id));
+        $sql = 'select CA.idnumber from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
+        $tag = $DB->get_field_sql($sql, array('id' => $local_course->id));
         if($tag == false){
             return ;
         }
