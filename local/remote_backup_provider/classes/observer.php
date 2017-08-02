@@ -71,7 +71,7 @@ class local_remote_backup_provider_observer {
             $curl = new curl();
             $resp = json_decode($curl->post($url, $local_params, $options));
 
-            if (!isset($resp['result']) || $resp['result'] != true){
+            if (!isset($resp->result) || $resp->result != true){
                 $dataobject               = new stdClass();
                 $dataobject->url          = serialize($url);
                 $dataobject->local_params = serialize($local_params);
@@ -123,7 +123,7 @@ class local_remote_backup_provider_observer {
                 $curl = new curl();
                 $resp = json_decode($curl->post($url, $local_params, $options));
 
-                if (!isset($resp['result']) || $resp['result'] != true){
+                if (!isset($resp->result) || $resp->result != true){
                     $dataobject               = new stdClass();
                     $dataobject->url          = serialize($url);
                     $dataobject->local_params = serialize($local_params);
