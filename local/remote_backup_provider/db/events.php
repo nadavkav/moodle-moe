@@ -42,7 +42,7 @@ $observers = array(
     ),
     array(
         'eventname'   => 'core\event\course_category_updated',
-        'callback'    => 'local_remote_backup_provider_observer::send_update',
+        'callback'    => 'local_remote_backup_provider_observer::send_cat_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     )

@@ -19,7 +19,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Event observer.
- * send update to all subscribers about the course change
  *
  * @package    local_remote_backup_provider
  * @copyright  2017 SysBind LTD
@@ -27,18 +26,15 @@ defined('MOODLE_INTERNAL') || die();
  */
 class local_remote_backup_provider_observer {
 
-
     /**
-     * notify to all subsribers about the chenges in course.
-     *
-     * @param \core\event\base $event
+     * Event observer.
+     * send update to all subscribers about the course change
      */
-    public static function send_update(\core\event\base $event) {
+        public static function send_update(\core\event\base $event) {
         global $DB;
 
         $pub = new publisher();
         $type       = $event->crud;
-
         //url strings parts
         $prefixurl  = '/webservice/rest/server.php?wstoken=';
         $postfixurl = '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
@@ -81,6 +77,59 @@ class local_remote_backup_provider_observer {
                 $dataobject->local_params = serialize($local_params);
                 $dataobject->options      = serialize($options);
                 $DB->insert_record('remote_backup_provider_fails', $dataobject);
+            }
+        }
+    }
+
+    /**
+     * Event observer.
+     * send update to all subscribers about the course cate change
+     */
+    public static function send_cat_update(\core\event\base $event) {
+        global $DB;
+
+        $pub = new publisher();
+        $type       = 'cu';
+        //url strings parts
+        $prefixurl  = '/webservice/rest/server.php?wstoken=';
+        $postfixurl = '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
+
+        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+        if ($skipcertverify){
+            $options['curlopt_ssl_verifypeer'] = false;
+            $options['curlopt_ssl_verifyhost'] = false;
+        }
+
+        $local_data = $event->get_data();
+        //get all cources in cat
+        $corcestoupdate = $DB->get_record('cource', array('category' => $local_data['objectid']));
+        foreach ($corcestoupdate as $local_course){
+            $params       = array(
+                'type'        => $type,
+                'course_id'   => $local_course->id,
+                'course_tag'  => $local_course->idnumber,
+                'course_name' => $local_course->fullname
+            );
+
+            foreach ($pub->get_all_subscribers() as $sub){
+                //subscriber info
+                $token        = $sub->remote_token;
+                $remotesite   = $sub->base_url;
+                $local_params = $params;
+                $local_params ['username'] =  $sub->remote_user;
+
+                $url = $remotesite . $prefixurl . $token . $postfixurl;
+
+                $curl = new curl();
+                $resp = json_decode($curl->post($url, $local_params, $options));
+
+                if (!isset($resp['result']) || $resp['result'] != true){
+                    $dataobject               = new stdClass();
+                    $dataobject->url          = serialize($url);
+                    $dataobject->local_params = serialize($local_params);
+                    $dataobject->options      = serialize($options);
+                    $DB->insert_record('remote_backup_provider_fails', $dataobject);
+                }
             }
         }
     }
