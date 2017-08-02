@@ -240,7 +240,7 @@ class local_remote_backup_provider_external extends external_api {
     public static function subscribe_parameters() {
 
         return new external_function_parameters(
-            array('name' => new external_value(PARAM_ALPHAEXT, 'name of subscriber'),
+            array('name' => new external_value(PARAM_TEXT, 'name of subscriber'),
                   'url'  => new external_value(PARAM_URL),
                   'user' => new external_value(PARAM_ALPHANUMEXT),
                   'token'=> new external_value(PARAM_ALPHANUMEXT),
