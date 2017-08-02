@@ -114,10 +114,10 @@ class local_remote_backup_provider_observer {
 
         $local_data = $event->get_data();
         //get all cources in cat
-        $corcestoupdate = $DB->get_record('cource', array('category' => $local_data['objectid']));
+        $corcestoupdate = $DB->get_records('course', array('category' => $local_data['objectid']));
         foreach ($corcestoupdate as $local_course){
-            $sql = 'select * from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
-            $tag = $DB->get_record_sql($sql, array('id' => $local_course->id));
+            $sql = 'select CA.idnumber from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
+            $tag = $DB->get_field_sql($sql, array('id' => $local_course->id));
             $params       = array(
                 'type'        => $type,
                 'course_id'   => $local_course->id,
