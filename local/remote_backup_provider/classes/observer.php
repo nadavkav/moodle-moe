@@ -39,22 +39,33 @@ class local_remote_backup_provider_observer {
         $prefixurl  = '/webservice/rest/server.php?wstoken=';
         $postfixurl = '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
         $local_event = $event->get_data();
-        //course info to update
-        $local_course = $DB->get_record('course', array('id' => $local_event['courseid']));
 
-        //check that the course have category with tag
-        $sql = 'select CA.idnumber from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
-        $tag = $DB->get_field_sql($sql, array('id' => $local_course->id));
-        if($tag == false){
-            return ;
+        //if delete dont need course data
+        if ($type == "d") {
+            $params       = array(
+                'type'        => $type,
+                'course_id'   => $local_event['objectid'],
+                'course_tag'  => 'stab',
+                'course_name' => 'stab'
+            );
+        } else {
+            //course info to update
+            $local_course = $DB->get_record('course', array('id' => $local_event['courseid']));
+
+            //check that the course have category with tag
+            $sql = 'select CA.idnumber from {course} as C inner join {course_categories} as CA on C.category = CA.id where C.id=:id';
+            $tag = $DB->get_field_sql($sql, array('id' => $local_course->id));
+            if($tag == false){
+                return ;
+            }
+            $params       = array(
+                'type'        => $type,
+                'course_id'   => $local_course->id,
+                'course_tag'  => $tag,
+                'course_name' => $local_course->fullname
+            );
         }
 
-        $params       = array(
-            'type'        => $type,
-            'course_id'   => $local_course->id,
-            'course_tag'  => $tag,
-            'course_name' => $local_course->fullname
-        );
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
         if ($skipcertverify){
             $options['curlopt_ssl_verifypeer'] = false;
