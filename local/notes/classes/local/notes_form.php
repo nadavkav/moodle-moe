@@ -17,7 +17,7 @@ class notes_form extends \moodleform {
                 'enable_filemanagement' => true);
             $note = $this->_form; // Don't forget the underscore!
             $note->addElement('static', 'heading','<h1>'.get_string('draftbutton', 'moeworksheets').'</h1>','',$editoropstion);
-            $note->addElement('editor', 'content');
+            $note->addElement('editor', 'content',array('autosave' => false));
             $note->setType('content', PARAM_RAW);
             $note->setDefault('content', array('text' => $this->_customdata['content'], 'format' => FORMAT_HTML));
             $note->disable_form_change_checker();

@@ -35,11 +35,17 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 				globalcontent = params.content;
 
 				$(document).ready(function() {
-					$('#note .editor_atto_content').text(globalcontent);
+					var refreshId = setInterval(function() {
+						  if ($('#note .editor_atto_content').length > 0) {
+							  $('#note .editor_atto_content').html(globalcontent);
+							  clearInterval(refreshId);
+						  }
+						}, 1000);	
+					
 				});
 
 				function is_editor_content_chenge() {
-					var content = $('#note .editor_atto_content').html();
+					var content = $('#note #id_contenteditable').html();
 					if (content != globalcontent) {
 						globalcontent = content;
 						return true;
