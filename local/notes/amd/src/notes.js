@@ -12,11 +12,11 @@ define([ 'jquery', 'local_notes/annotation', 'jqueryui', 'core/ajax' ],
 			var note = function() {};
 			
 			note.prototype.insert_new_notes_version = function(params) {
-				globalcontent =  Y.one('#note .editor_atto_content').getHTML();
+				globalcontent = $('#note .editor_atto_content').html();
 				if (globalcontent == '' || globalcontent == undefined){
-					globalcontent =  Y.one('#note .editor_atto_content').getHTML();
+					globalcontent = $('#note .editor_atto_content').html();
 					if (globalcontent.indexOf("form") !== -1) {
-						globalcontent =  Y.one('#note .editor_atto_content').getHTML();
+						globalcontent = $('#note_content').html();
 					}
 				}
 				var args = {
