@@ -41,6 +41,7 @@ class connectcontents_renderer extends \plugin_renderer_base {
             'moeworksheetsid' => $moeworksheetsobj->get_moeworksheetsid(),
             'subjectid' => $page,
         ));
+        $firstcontentflag = $data->contents;
         $connectcontentform->set_data($data);
         if($connectcontentform->is_submitted()) {
             $data = $connectcontentform->get_data();
@@ -51,7 +52,12 @@ class connectcontents_renderer extends \plugin_renderer_base {
                         'subjectid' => $page,
                         'moeworksheetsid' => $moeworksheetsobj->get_moeworksheetsid(),
                     ));
-                    $oldadditionalcontent = new additional_content($oldadditionalcontent->id);
+                    if (is_bool($firstcontentflag)){
+                        $oldadditionalcontent = new additional_content();
+                    } else {
+                        $oldadditionalcontent = new additional_content($oldadditionalcontent->id);
+                    }
+
                     $oldadditionalcontent->set_subjectid(null);
                     $oldadditionalcontent->add_entry();
                     $additionalcontent->set_subjectid($page);
