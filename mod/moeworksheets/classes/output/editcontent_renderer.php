@@ -100,16 +100,13 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $additaionalcontent = file_prepare_standard_editor($additaionalcontent, 'html', $htmleditoroption, $context, 'mod_moeworksheets', 'content', $questioncontent->id);
                         $questioncontenthtml->set_id($questioncontent->id);
                         break;
-                    default:
-                        $additaionalcontent->javascripteditor = $questioncontent->content;
-                    break;
                 }
             }
             $contentloadform = new content_load($pageurl, array(
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
-            //   'appoption' => $appoption,
+                'appoption' => $appoption,
             ));
             $contentloadform->set_data($additaionalcontent);
         }
@@ -118,7 +115,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
-            //    'appoption' => $appoption,
+                'appoption' => $appoption,
             ));
         }
         if ($contentloadform->is_cancelled()){
@@ -136,8 +133,6 @@ class editcontent_renderer extends \plugin_renderer_base {
             $additionalcontent->set_moeworksheetsid($structure->get_moeworksheetsid());
             $additionalcontent->add_entry();
             if ($additionalcontent->get_id()) {
-                switch ($additionalcontent->get_type()) {
-                    case 0:
                         $questioncontenthtml->set_id($DB->get_field('moeworksheets_questionconten', 'id', array(
                         'additionalcontentid' => $additionalcontent->get_id(),
                         'type' => question_content::HTML_CONTENT,
@@ -148,8 +143,7 @@ class editcontent_renderer extends \plugin_renderer_base {
                         $questioncontenthtml->set_content($contentdata->html);
                         $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontenthtml->add_entry();
-                        break;
-                }
+
             }
             if($contentdata->savenshow == 0) {
                  redirect(new \moodle_url('/mod/moeworksheets/additionalcontentlist.php', array(
