@@ -88,17 +88,12 @@ div#gridmiddle-column > ul {
 
 /* @group Topic Icons */
 #gridiconcontainer {
-    width: auto;
+    width: 100%;
     margin: 0 auto;
     padding: 0px;
     text-align: center;
     height: auto;
 }
-
-html[lang="en"] #gridiconcontainer {
-    margin-left: 25px;
-}
-
 #gridiconcontainer ul.gridicons {
     width: 100%;
     margin: 0 auto;
