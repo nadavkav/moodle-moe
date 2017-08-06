@@ -219,72 +219,15 @@ class format_moetabs_renderer extends format_section_renderer_base {
         $move_list_html = '';
         $count_move_sections = 0;
 
+        //Init custom tabs
+        $section = 0;
+
         $sectionmenu = array();
         $tabs = array();
         $inactive_tabs = array();
 
         $default_topic = -1;
 
-        // Create section 0 area
-
-        $thissection = $sections[0];
-        $sectionname = get_section_name($course, $thissection);
-
-        // create section 0 title
-        echo html_writer::start_tag('h1', array('class' => 'title'));
-        echo $sectionname;
-        echo html_writer::end_tag('h1');
-
-        // create section zero area
-        echo $this->start_section_list();
-        $thissection = $sections[0];
-        echo $this->section_header($thissection, $course, true);
-        //add section zero edite control button
-        echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
-        echo $this->end_section_list();
-
-        // create section zero botton to show its activities
-        echo html_writer::start_tag('div', array('class' => 'sectionzerobtn noselect'));
-        echo get_string('zerosectionbtn', 'format_moetabs');
-        echo html_writer::start_tag('div', array('class' => 'littlesquare'));
-        echo html_writer::tag('img', '', array(
-            'class' => 'double-left-arrows',
-            'src' => $this->output->pix_url('double-left-chevron', 'format_moetabs')));
-        echo html_writer::end_tag('div');
-        echo html_writer::end_tag('div');
-
-        // load jqurey function (for button click events)
-        $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
-
-        // create section 0 hidden activities list area
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
-        echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay'));
-        $gridshadeboxcontentclasses[] =  'hide_content';
-        echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => implode(' ', $gridshadeboxcontentclasses),
-            'role' => 'region',
-            'aria-label' => get_string('shadeboxcontent', 'format_moetabs')));
-
-        // create the list of activities for section 0 hidden area
-        echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
-
-        $deviceextra = ' gridshadebox_tablet';
-
-        // section 0 close button for hidden activities list area
-        echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display: none;',
-            'class' => $deviceextra,
-            'src' => $this->output->pix_url('close', 'format_moetabs'),
-            'role' => 'link',
-            'aria-label' => get_string('closeshadebox', 'format_moetabs')));
-
-        echo html_writer::end_tag('div');
-        echo html_writer::end_tag('div');
-
-        // End creation of sction zero
-
-        // Init custom tabs
-        $section = 1;
-
-        // create the tabs area for all sections without section 0
         while ($section <= $course->numsections) {
 
             if ($course->realcoursedisplay == COURSE_DISPLAY_MULTIPAGE && $section == 0) {
@@ -404,8 +347,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                         $tabs[] = $new_tab;
                     }
 
-
-                    // Init move section list
+                    //Init move section list***************************************************************************
                     if ($can_move) {
                         if ($section > 0) { // Move section
                             $baseurl = course_get_url($course, $displaysection);
@@ -414,6 +356,22 @@ class format_moetabs_renderer extends format_section_renderer_base {
                             $url = clone($baseurl);
 
                             $url->param('move', $section - $displaysection);
+
+                            //ToDo: For new feature: subtabs. It is not implemented yet
+                            /*
+                            $strsubtopictoright = get_string('subtopictoright', 'format_moetabs');
+                            $url = new moodle_url('/course/view.php', array('id' => $course->id, 'subtopicmove' => 'right', 'subtopic' => $section));
+                            $icon = $this->output->pix_icon('t/right', $strsubtopictoright);
+                            $subtopic_move = html_writer::link($url, $icon.get_accesshide($strsubtopictoright), array('class' => 'subtopic-increase-sections'));
+
+
+                            if ($displaysection != $section) {
+                                $move_list_html .= html_writer::tag('li', $subtopic_move . html_writer::link($url, $sectionname));
+                               }
+                            else {
+                                $move_list_html .= html_writer::tag('li', $subtopic_move . $sectionname);
+                            }
+                            */
 
                             //Define class from sublevels in order to move a margen in the left. Not apply if it is the first element (condition !empty($move_list_html)) because the first element can't be a sublevel
                             $li_class = '';
@@ -429,7 +387,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                             }
                         }
                     }
-                    //End move section list
+                    //End move section list***************************************************************************
                 }
             }
 
@@ -465,7 +423,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                 }
             }
 
-            $sectiontitle .= $OUTPUT->tabtree($tabs, "tab_topic_" . $displaysection, $inactive_tabs);
+            $sectiontitle .= $OUTPUT->tabtree($tabs, "tab_topic_" . $displaysection, $inactive_tabs);//print_tabs($tabs, "tab_topic_" . $displaysection, $inactive_tabs, $active_tabs, true);
         }
 
         echo $sectiontitle;
@@ -511,6 +469,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
             echo '<br class="utilities-separator" />';
             print_collapsible_region_start('move-list-box clearfix collapsible mform', 'course_format_moetabs_config_movesection', get_string('utilities', 'format_moetabs'), '', true);
+
 
             //Move controls
             if ($can_move && !empty($move_list_html)) {
