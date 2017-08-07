@@ -5794,7 +5794,7 @@ a#choosetheme {
     width: auto;
 }
 
-html[lang="en"] #gridiconcontainer {
+.dir-ltr #gridiconcontainer, .dir-ltr #gridshadebox{
     margin-left: 25px;
 }
 
