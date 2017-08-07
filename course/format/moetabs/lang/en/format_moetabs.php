@@ -74,3 +74,5 @@ $string['coursedisplay'] = 'Visualization mode of section 0';
 $string['coursedisplay_help'] = 'This define as display the section 0: as a first tab or as section before the tabs bar.';
 $string['coursedisplay_single'] = 'As tab';
 $string['coursedisplay_multi'] = 'Before the tabs';
+
+$string['zerosectionbtn'] = 'tool box...';
