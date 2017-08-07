@@ -219,8 +219,6 @@ class format_moetabs_renderer extends format_section_renderer_base {
         $move_list_html = '';
         $count_move_sections = 0;
 
-
-
         $sectionmenu = array();
         $tabs = array();
         $inactive_tabs = array();
@@ -231,8 +229,12 @@ class format_moetabs_renderer extends format_section_renderer_base {
         // print section 0 separate from other sections
 
         $url = new moodle_url('/course/view.php', array('id' => $course->id, 'section' => 0));
-        $thissection = $sections[$section];
+        $thissection = $sections[0];
         $sectionname = get_section_name($course, $thissection);
+
+        echo html_writer::start_tag('h1', array('class' => 'title'));
+        echo s($sectionname);
+        echo html_writer::end_tag('h1');
 
         $new_tab = new tabobject("tab_topic_" . $section, $url,
             '<div style="' . $custom_styles . '" class="tab_content ' . $special_style . '">' . s($sectionname) . "</div>", s($sectionname));
@@ -270,6 +272,14 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
             $sectiontitle .= $OUTPUT->tabtree($tabs2, "tab_topic_" . $displaysection, $inactive_tabs);//print_tabs($tabs, "tab_topic_" . $displaysection, $inactive_tabs, $active_tabs, true);
         }
+
+        // print
+        echo $this->start_section_list();
+        // The requested section page.
+        $thissection = $sections[0];
+        echo $this->section_header($thissection, $course, true);
+        echo $this->section_footer();
+        echo $this->end_section_list();
 
         echo $sectiontitle;
 
@@ -395,6 +405,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                     else {
                         $tabs[] = $new_tab;
                     }
+
 
                     //Init move section list***************************************************************************
                     if ($can_move) {
