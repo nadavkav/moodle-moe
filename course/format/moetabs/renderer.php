@@ -219,8 +219,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
         $move_list_html = '';
         $count_move_sections = 0;
 
-        //Init custom tabs
-        $section = 0;
+
 
         $sectionmenu = array();
         $tabs = array();
@@ -228,6 +227,56 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         $default_topic = -1;
 
+        //_____________________________________________________________
+        // print section 0 separate from other sections
+
+        $url = new moodle_url('/course/view.php', array('id' => $course->id, 'section' => 0));
+        $thissection = $sections[$section];
+        $sectionname = get_section_name($course, $thissection);
+
+        $new_tab = new tabobject("tab_topic_" . $section, $url,
+            '<div style="' . $custom_styles . '" class="tab_content ' . $special_style . '">' . s($sectionname) . "</div>", s($sectionname));
+        $tabs2 = array();
+        $new_tab->level = 1;
+        $tabs2[] = $new_tab;
+
+        // Title with section navigation links.
+        $sectionnavlinks = $this->get_nav_links($course, $sections, $displaysection);
+        $sectiontitle = '';
+
+        if (!$course->hidetabsbar && count($tabs2[0]) > 0) {
+
+            if ($PAGE->user_is_editing() && has_capability('moodle/course:update', $context)) {
+                // Increase number of sections.
+                $straddsection = get_string('increasesections', 'moodle');
+                $url = new moodle_url('/course/changenumsections.php',
+                    array('courseid' => $course->id,
+                        'increase' => true,
+                        'sesskey' => sesskey()));
+                    $icon = $this->output->pix_icon('t/switch_plus', $straddsection);
+                    $tabs2[] = new tabobject("tab_topic_add", $url, $icon, s($straddsection));
+
+                    if ($course->numsections > 0) {
+                        // Reduce number of sections.
+                        $strremovesection = get_string('reducesections', 'moodle');
+                        $url = new moodle_url('/course/changenumsections.php',
+                            array('courseid' => $course->id,
+                                'increase' => false,
+                                'sesskey' => sesskey()));
+                            $icon = $this->output->pix_icon('t/switch_minus', $strremovesection);
+                            $tabs2[] = new tabobject("tab_topic_remove", $url, $icon, s($strremovesection));
+                    }
+            }
+
+            $sectiontitle .= $OUTPUT->tabtree($tabs2, "tab_topic_" . $displaysection, $inactive_tabs);//print_tabs($tabs, "tab_topic_" . $displaysection, $inactive_tabs, $active_tabs, true);
+        }
+
+        echo $sectiontitle;
+
+        //_____________________________________________________________
+
+        //Init custom tabs
+        $section = 1;
         while ($section <= $course->numsections) {
 
             if ($course->realcoursedisplay == COURSE_DISPLAY_MULTIPAGE && $section == 0) {
