@@ -11,7 +11,7 @@
 .block_import_remote_course #restorebutton{
 	background-image:  url([[pix:block_import_remote_course|downloadicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
 	background-position: 5% 50%, 0 0;
-	background-size: 15%, cover;
+	background-size: 10%, cover;
 	background-repeat: no-repeat, no-repeat;
 	color: #3c4845 !important;
 	font-weight: bolder;
@@ -19,16 +19,19 @@
 	display: inline-block;
 	border: 1px solid #89b2ab;
 	min-width: 50%;
+	width: 100%;
+	padding-left: 40px;
 }
 .block_import_remote_course #importsite{
     background-image:  url([[pix:block_import_remote_course|mouseicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
     background-position: 5% 50%, 0 0;
-    background-size: 15%, cover;
+    background-size: 12%, cover;
     background-repeat: no-repeat, no-repeat;
     color: #3c4845 !important;
     font-weight: bolder;
     text-align:right;
-    display: inline-block;
+    display: block;
     border: 1px solid #89b2ab;
     min-width: 50%;
+	padding-left: 40px;
 }
