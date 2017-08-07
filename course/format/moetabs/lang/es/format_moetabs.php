@@ -73,3 +73,5 @@ $string['coursedisplay'] = 'Modo de visualización de la sección 0';
 $string['coursedisplay_help'] = 'Define como se muestra la sección 0: como la primera pestaña o como una sección encima de las demás pestañas.';
 $string['coursedisplay_single'] = 'Como pestaña';
 $string['coursedisplay_multi'] = 'Arriba de las pestañas';
+
+$string['zerosectionbtn'] = 'tool box...';
