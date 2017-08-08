@@ -4025,7 +4025,16 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 	padding: 0 2em 0 2em;
 	word-break: break-all;
 }
-
+body.format-topcoll .course-content ul.ctopics li.section .right{
+	display: none;
+}
+body.format-topcoll .course-content ul.ctopics li.section .left{
+	position: relative;
+}
+.dir-rtl .ctopics .section.main .left.side{
+	right: 4em;
+	bottom: 0.5em;
+}
 .path-mod-forum .discussionsubscription>a>img {
 	width: 33px;
 	padding: 11px 4px;
