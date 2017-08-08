@@ -5790,6 +5790,14 @@ a#choosetheme {
 	margin-right: 5px;
 }
 
+#gridiconcontainer {
+    width: auto;
+}
+
+.dir-ltr #gridiconcontainer, .dir-ltr #gridshadebox{
+    margin-left: 25px;
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
