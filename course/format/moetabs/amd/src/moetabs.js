@@ -7,21 +7,27 @@
   * @module format_moetabs/moetabs
   */
 
-define(['jquery'], function($) {
-	
-	/**
-	 * @constructor
-	 */
-	var moetabs = function(){
-		this.ruler = $('.format-moetabs ul.nav.nav-tabs');		
-	};
-	
-	moetabs.prototype.init = function(){
-		if(this.ruler.width() >= $('.format-moetabs .course-content .single-section').width()){
-			var error;
-			error = 'need arrow';
-		}
-	};
-	
-	return moetabs;
+
+define(['jquery'], function() {
+
+    var moetabs = function() {
+
+    	moetabs.prototype.init = function() {
+
+    		$( '.sectionzerobtn' ).click(function() {
+    			$( '#gridshadebox_content' ).removeClass( 'hide_content');
+    			$( '#gridshadebox_close' ).css("display", "inline");
+    			$( '#gridshadebox_content' ).addClass( 'absolute' );
+    		});
+    		
+    		$( '#gridshadebox_close' ).click(function() {
+    			$( '#gridshadebox_content' ).addClass( 'hide_content' );
+    			$( '#gridshadebox_content' ).removeClass( 'absolute');
+    		});
+    		
+        };
+
+    };
+
+    return new moetabs();
 });
