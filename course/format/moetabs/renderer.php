@@ -247,7 +247,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo html_writer::start_tag('div', array('class' => 'sectionzerobtn'));
         echo get_string('zerosectionbtn', 'format_moetabs');
         echo html_writer::end_tag('div');
-
+        $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
         // -------------------
 
         echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
