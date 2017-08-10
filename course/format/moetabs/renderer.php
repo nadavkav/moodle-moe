@@ -226,6 +226,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
         $default_topic = -1;
 
         // ----  create section 0 area ----
+
         $thissection = $sections[0];
         $sectionname = get_section_name($course, $thissection);
 
@@ -256,7 +257,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
         $gridshadeboxcontentclasses[] =  'hide_content';
         echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => implode(' ', $gridshadeboxcontentclasses),
             'role' => 'region',
-            'aria-label' => get_string('shadeboxcontent', 'format_grid')));
+            'aria-label' => get_string('shadeboxcontent', 'format_moetabs')));
 
         // create the list of activities for section 0 hidden area
         echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
@@ -266,9 +267,9 @@ class format_moetabs_renderer extends format_section_renderer_base {
         // section 0 close button for hidden activities list area
         echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display: none;',
             'class' => $deviceextra,
-            'src' => $this->output->pix_url('close', 'format_grid'),
+            'src' => $this->output->pix_url('close', 'format_moetabs'),
             'role' => 'link',
-            'aria-label' => get_string('closeshadebox', 'format_grid')));
+            'aria-label' => get_string('closeshadebox', 'format_moetabs')));
 
         // Only show the arrows if there is more than one box shown.
         if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0_at_top))) {
@@ -276,17 +277,17 @@ class format_moetabs_renderer extends format_section_renderer_base {
                 'class' => 'gridshadebox_area gridshadebox_left_area',
                 'style' => 'display: none;',
                 'role' => 'link',
-                'aria-label' => get_string('previoussection', 'format_grid')));
+                'aria-label' => get_string('previoussection', 'format_moetabs')));
             echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
-                'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_grid')));
+                'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_moetabs')));
             echo html_writer::end_tag('div');
             echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
                 'class' => 'gridshadebox_area gridshadebox_right_area',
                 'style' => 'display: none;',
                 'role' => 'link',
-                'aria-label' => get_string('nextsection', 'format_grid')));
+                'aria-label' => get_string('nextsection', 'format_moetabs')));
             echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
-                'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_grid')));
+                'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_moetabs')));
             echo html_writer::end_tag('div');
         }
 
