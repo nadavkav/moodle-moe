@@ -39,8 +39,7 @@ padding: 25px 2px 25px 2px;
 border: 1px;
 border-style: solid;
 border-color: #66cc99;
-font-size: 20px;
-font-weight: bold;
+font-size: 30px;
 background-color: #d6f5d6;
 width: 766px;
 text-align: center;
@@ -50,15 +49,21 @@ top: 456px;
 box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 }
 
-.format-moetabs .content { border: 1px;}
+.format-moetabs .content { 
+border: 1px;
+}
 
-.sectionzeroimg { float: right; margin-left: 25px; }
+.sectionzeroimg { 
+float: right; margin-left: 25px; 
+}
 
 .format-moetabs .sectionzerotext {  font-size: 17px; }
 
 / *  */
 
-.format-moetabs #section-0 { list-style: none;}
+.format-moetabs #section-0 {
+	list-style: none;
+}
 
 .format-moetabs div#gridshadebox_overlay {
 	display: none;
@@ -73,7 +78,7 @@ box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
     /* CSS3 standard */
     opacity: 0.7;
     z-index: 1;
-    cursor: url('[[pix:format_grid|fa-times-circle-o-f]]'), auto;
+    cursor: url('[[pix:format_moetabs|fa-times-circle-o-f]]'), auto;
 }
 .format-moetabs #gridshadebox_content {
     border-color: #fcf3e6;
@@ -144,7 +149,7 @@ box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
     position: absolute;
     top: -10px;
     right: -10px;
-    cursor: url('[[pix:format_grid|fa-hand-o-up-f]]'), auto;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-up-f]]'), auto;
     z-index: 2;
 }
 
@@ -172,11 +177,66 @@ box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 
 .format-moetabs .gridshadebox_left_area {
     left: -55px;
-    cursor: url('[[pix:format_grid|fa-hand-o-left-f]]'), auto;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-left-f]]'), auto;
 }
 
 .format-moetabs .gridshadebox_right_area {
     right: -55px;
-    cursor: url('[[pix:format_grid|fa-hand-o-right-f]]'), auto;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-right-f]]'), auto;
 }
+
+/* tabs style */
+
+.format-moetabs #tabspage li {	
+	list-style: none;
+}
+
+.format-moetabs #tabspage p {
+  font-size: 17px;
+}
+
+.format-moetabs #tabspage h1 {
+	color: rgb(122, 91, 154);
+    font-size: 25px;
+}
+
+.format-moetabs #tabspage h2 {
+	font-size: 18px;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	color: black;
+}
+
+.format-moetabs #tabspage img {
+   float: left;
+}
+
+.format-moetabs #tabspage div {
+   padding: 0px 10px 10px 10px;
+   display: inline-block;
+}
+
+.format-moetabs #tabspage .endblock {
+	background-color: #d6f5d6;
+	height: 400px;
+	padding: 3px 20px 0 0;
+	display: block;
+}
+
+.format-moetabs #tabspage .firstblock {
+	font-size: 17px;
+	width: 90%;
+    height: 220px;
+	background: #f0e6ff;
+}
+
+
+
+
+
+
+
+
+
 
