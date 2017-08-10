@@ -225,17 +225,16 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         $default_topic = -1;
 
-        // section 0
+        // ----  create section 0 area ----
         $thissection = $sections[0];
         $sectionname = get_section_name($course, $thissection);
 
-        // print page title
-
+        // create section 0 title
         echo html_writer::start_tag('h1', array('class' => 'title'));
         echo $sectionname;
         echo html_writer::end_tag('h1');
 
-        // print section zero text page
+        // create section zero text page
         echo $this->start_section_list();
         $thissection = $sections[0];
         echo $this->section_header($thissection, $course, true);
@@ -243,34 +242,28 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         echo $this->courserenderer->course_section_add_cm_control($course, $default_topic, $default_topic);
 
-        // print section zero botton
+        // create section zero botton
         echo html_writer::start_tag('div', array('class' => 'sectionzerobtn'));
         echo get_string('zerosectionbtn', 'format_moetabs');
         echo html_writer::end_tag('div');
+
+        // load jqurey function
         $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
-        // -------------------
 
+        // create section 0 hidden activities list area
         echo html_writer::start_tag('div', array('id' => 'gridshadebox'));
-        echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay', 'style' => 'display: none;'));
-
+        echo html_writer::tag('div', '', array('id' => 'gridshadebox_overlay'));
         $gridshadeboxcontentclasses[] =  'hide_content';
-
-        if (!$editing) {
-            if ($this->settings['fitsectioncontainertowindow'] == 2) {
-                $gridshadeboxcontentclasses[] = 'fit_to_window';
-            } else {
-                $gridshadeboxcontentclasses[] = 'absolute';
-            }
-        }
-
         echo html_writer::start_tag('div', array('id' => 'gridshadebox_content', 'class' => implode(' ', $gridshadeboxcontentclasses),
             'role' => 'region',
             'aria-label' => get_string('shadeboxcontent', 'format_grid')));
 
+        // create the list of activities for section 0 hidden area
         echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
 
         $deviceextra = ' gridshadebox_tablet';
 
+        // section 0 close button for hidden activities list area
         echo html_writer::tag('img', '', array('id' => 'gridshadebox_close', 'style' => 'display: none;',
             'class' => $deviceextra,
             'src' => $this->output->pix_url('close', 'format_grid'),
@@ -304,6 +297,8 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         //Init custom tabs
         $section = 1;
+
+        // create the tabs area for all sections without section 0
         while ($section <= $course->numsections) {
 
             if ($course->realcoursedisplay == COURSE_DISPLAY_MULTIPAGE && $section == 0) {
