@@ -185,11 +185,7 @@ float: right; margin-left: 25px;
     cursor: url('[[pix:format_moetabs|fa-hand-o-right-f]]'), auto;
 }
 
-/* tabs style */
-
-.format-moetabs #tabspage li {	
-	list-style: none;
-}
+/* tabs page style */
 
 .format-moetabs #tabspage p {
   font-size: 17px;
@@ -198,41 +194,55 @@ float: right; margin-left: 25px;
 .format-moetabs #tabspage h1 {
 	color: rgb(122, 91, 154);
     font-size: 25px;
+	margin: 0px;
+    padding: 0px;
+}
+
+.format-moetabs #tabspage td {
+    margin: 0px;
+    padding: 0px;
+    vertical-align: top;
+}
+
+.format-moetabs #tabspage img {
+    margin-left: 15px;
+    padding: 0px;
+}
+
+#triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 100px solid transparent;
+    border-right: 100px solid rgba(122, 91, 154, 0.5);;
+    border-bottom: 100px solid transparent;
+}
+
+.format-moetabs #feedback img {
+    margin-top: 25%;
+}
+
+.format-moetabs #tabspage #imglefttextright h2, .format-moetabs #tabspage #fourm h2, .format-moetabs #tabspage #feedback h2{
+	line-height: 20px; 
 }
 
 .format-moetabs #tabspage h2 {
 	font-size: 18px;
 	margin: 0px;
 	padding: 0px;
-	float: left;
 	color: black;
-}
-
-.format-moetabs #tabspage img {
-   float: left;
-}
-
-.format-moetabs #tabspage div {
-   padding: 0px 10px 10px 10px;
-   display: inline-block;
-}
-
-.format-moetabs #tabspage .endblock {
-	background-color: #d6f5d6;
-	height: 400px;
-	padding: 3px 20px 0 0;
-	display: block;
 }
 
 .format-moetabs #tabspage .firstblock {
 	font-size: 17px;
-	width: 90%;
-    height: 220px;
+	width: 100%;
 	background: #f0e6ff;
 }
 
-
-
+.format-moetabs #tabspage .firstblock p {
+  margin: 30px 140px 0px 0px;
+  float: right;
+  color: black;
+}
 
 
 
