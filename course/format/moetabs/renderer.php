@@ -225,7 +225,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         $default_topic = -1;
 
-        // ----  create section 0 area ----
+        // Create section 0 area
 
         $thissection = $sections[0];
         $sectionname = get_section_name($course, $thissection);
@@ -235,20 +235,23 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo $sectionname;
         echo html_writer::end_tag('h1');
 
-        // create section zero text page
+        // create section zero area
         echo $this->start_section_list();
         $thissection = $sections[0];
         echo $this->section_header($thissection, $course, true);
         echo $this->end_section_list();
 
+        //add section zero edite control button
         echo $this->courserenderer->course_section_add_cm_control($course, $default_topic, $default_topic);
 
-        // create section zero botton
+        // create section zero botton to show its activities
         echo html_writer::start_tag('div', array('class' => 'sectionzerobtn'));
         echo get_string('zerosectionbtn', 'format_moetabs');
+        echo html_writer::start_tag('div', array('class' => 'littlesquare'));
+        echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
 
-        // load jqurey function
+        // load jqurey function (for button click events)
         $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
 
         // create section 0 hidden activities list area
@@ -271,32 +274,12 @@ class format_moetabs_renderer extends format_section_renderer_base {
             'role' => 'link',
             'aria-label' => get_string('closeshadebox', 'format_moetabs')));
 
-        // Only show the arrows if there is more than one box shown.
-        if (($course->numsections > 1) || (($course->numsections == 1) && (!$this->topic0_at_top))) {
-            echo html_writer::start_tag('div', array('id' => 'gridshadebox_left',
-                'class' => 'gridshadebox_area gridshadebox_left_area',
-                'style' => 'display: none;',
-                'role' => 'link',
-                'aria-label' => get_string('previoussection', 'format_moetabs')));
-            echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_left'.$deviceextra,
-                'src' => $this->output->pix_url('fa-arrow-circle-left-w', 'format_moetabs')));
-            echo html_writer::end_tag('div');
-            echo html_writer::start_tag('div', array('id' => 'gridshadebox_right',
-                'class' => 'gridshadebox_area gridshadebox_right_area',
-                'style' => 'display: none;',
-                'role' => 'link',
-                'aria-label' => get_string('nextsection', 'format_moetabs')));
-            echo html_writer::tag('img', '', array('class' => 'gridshadebox_arrow gridshadebox_right'.$deviceextra,
-                'src' => $this->output->pix_url('fa-arrow-circle-right-w', 'format_moetabs')));
-            echo html_writer::end_tag('div');
-        }
-
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
 
-        // -------------------
+        // End creation of sction zero
 
-        //Init custom tabs
+        // Init custom tabs
         $section = 1;
 
         // create the tabs area for all sections without section 0
@@ -496,7 +479,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                 }
             }
 
-            $sectiontitle .= $OUTPUT->tabtree($tabs, "tab_topic_" . $displaysection, $inactive_tabs);//print_tabs($tabs, "tab_topic_" . $displaysection, $inactive_tabs, $active_tabs, true);
+            $sectiontitle .= $OUTPUT->tabtree($tabs, "tab_topic_" . $displaysection, $inactive_tabs);
         }
 
         echo $sectiontitle;

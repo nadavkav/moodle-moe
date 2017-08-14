@@ -49,6 +49,15 @@ top: 456px;
 box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 }
 
+.format-moetabs .littlesquare {
+	width: 40px;
+	height: 40px;
+	background-color: grey;
+	position: absolute;
+    left: 20px;
+	top: 20px;
+}
+
 .format-moetabs .content { 
 border: 1px;
 }
@@ -63,6 +72,28 @@ float: right; margin-left: 25px;
 
 .format-moetabs #section-0 {
 	list-style: none;
+}
+
+.format-moetabs .nav-tabs {
+      margin-right: 0px;
+}
+
+.format-moetabs #tabmoveright i, .format-moetabs #tabmoveleft i {
+    display: inline-block;
+    line-height: 60px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+}
+
+.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft {
+    font-size: 4em;
+    width: 45px;
+    height: 60px;
+    cursor: pointer;
+    display: none;
+    background-color: #f0e6ff;
+    color: rgb(122, 91, 154);
 }
 
 .format-moetabs div#gridshadebox_overlay {
@@ -213,7 +244,7 @@ float: right; margin-left: 25px;
     width: 0;
     height: 0;
     border-top: 100px solid transparent;
-    border-right: 100px solid rgba(122, 91, 154, 0.5);;
+    border-right: 100px solid rgba(122, 91, 154, 0.5);
     border-bottom: 100px solid transparent;
 }
 
