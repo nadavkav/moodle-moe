@@ -242,12 +242,15 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo $this->end_section_list();
 
         //add section zero edite control button
-        echo $this->courserenderer->course_section_add_cm_control($course, $default_topic, $default_topic);
+        echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
 
         // create section zero botton to show its activities
         echo html_writer::start_tag('div', array('class' => 'sectionzerobtn'));
         echo get_string('zerosectionbtn', 'format_moetabs');
         echo html_writer::start_tag('div', array('class' => 'littlesquare'));
+        echo html_writer::tag('img', '', array(
+            'class' => 'double-left-arrows',
+            'src' => $this->output->pix_url('double-left-chevron', 'format_moetabs')));
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
 
