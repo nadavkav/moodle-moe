@@ -1,69 +1,142 @@
-.course-content ul.topics {margin:0;}
-.course-content ul.topics li.section {list-style: none;margin:5px 0 0 0;padding:0;}
-.course-content ul.topics li.section .content {margin:0 40px;}
-.course-content ul.topics li.section .left {width:40px;float:left;text-align:center;}
-.course-content ul.topics li.section .right {width:40px;float:right;text-align:center;}
-.jumpmenu {text-align:center;}
 
-.course-content div.single-section .tabtree .tabrow0 li {line-height: 28px; display: inline-block; }
-/*.course-content div.single-section .tabtree .tabrow0 li {line-height: 26px; }*/
-.course-content div.single-section .tabtree .tabrow0 li.here .empty { bottom: 3px; display: block; height: 1px; left: 0; right: 0;  }
-.course-content div.single-section .tabtree { margin-bottom: 0px; }
+.course-content ul.topics {
+    margin:0;
+}
 
-.format-moetabs .nav-tabs>li.active .tab_content { border-bottom: 0px; background-color: rgb(122, 91, 154); color: black; background: rgba(122, 91, 154, 0.5);}
+.course-content ul.topics li.section {
+	list-style: none;
+	margin:5px 0 0 0;
+	padding:0;
+}
 
-.format-moetabs .tab_content { white-space: nowrap; }
-.format-moetabs .tab_content.marker { font-style: italic; }
+.course-content ul.topics li.section .content {
+    margin:0 40px;
+}
 
-.format-moetabs .utilities-separator { clear: both; margin-top: 15px; }
+.course-content ul.topics li.section .left {
+	width:40px;
+	float:left;
+	text-align:center;
+}
 
-.format-moetabs ul.nav-tabs li a .tab_content.dimmed { color: #999; opactity: 0.5; }
+.course-content ul.topics li.section .right {
+	width:40px;
+	float:right;
+	text-align:center;
+}
 
-.format-moetabs .subtopic-increase-sections { margin-right: 10px; }
+.jumpmenu {
+	text-align:center;
+}
 
-.format-moetabs li.sublevel { padding-left: 20px; }
+.course-content div.single-section .tabtree .tabrow0 li {
+	line-height: 28px; display: inline-block; 
+}
 
-.format-moetabs .nav-tabs > li > a { padding: 0; }
+.course-content div.single-section .tabtree .tabrow0 li.here .empty { 
+	bottom: 3px;
+	display: block;
+    height: 1px;
+	left: 0; 
+	right: 0;  
+}
 
-.format-moetabs .nav-tabs > li > div { padding: 0; }
+.course-content div.single-section .tabtree { 
+	margin-bottom: 0px; 
+}
 
-.format-moetabs .tab_content { padding: 20px 20px 20px 20px; background-color: #f0e6ff; text-align: center; font-size: 17px; }
+.format-moetabs .nav-tabs>li.active .tab_content { 
+	border-bottom: 0px;
+	background-color: rgb(122, 91, 154);
+	color: black; 
+	background: rgba(122, 91, 154, 0.5);
+}
+
+.format-moetabs .tab_content { 
+	white-space: nowrap; 
+}
+
+.format-moetabs .tab_content.marker {
+	font-style: italic;
+ }
+
+.format-moetabs .utilities-separator {
+ 	clear: both; margin-top: 15px;
+}
+
+.format-moetabs ul.nav-tabs li a .tab_content.dimmed { 
+	color: #999; opactity: 0.5; 
+}
+
+.format-moetabs .subtopic-increase-sections { 
+	margin-right: 10px; 
+}
+
+.format-moetabs li.sublevel { 
+	padding-left: 20px;
+}
+
+.format-moetabs .nav-tabs > li > a {
+	padding: 0; 
+}
+
+.format-moetabs .nav-tabs > li > div { 
+	padding: 0; 
+}
+
+.format-moetabs .tab_content { 
+	padding: 20px 20px 20px 20px;
+	background-color: #eeebf2;
+    color: black; 
+    text-align: center;
+	font-size: 17px;
+}
 
 /* section zero */
-.format-moetabs .title { color: #7a5b9a; }
+.format-moetabs .title {
+	color: #7a5b9a; 
+}
 
-.format-moetabs .nav-tabs { height: 80px; }
+.format-moetabs .nav-tabs {
+	height: 80px;
+}
 
 .format-moetabs .sectionzerobtn {
-padding: 25px 2px 25px 2px;
-border: 1px;
-border-style: solid;
-border-color: #66cc99;
-font-size: 30px;
-background-color: #d6f5d6;
-width: 766px;
-text-align: center;
-left: 185px;
-position: absolute;
-top: 456px;
-box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
+	padding: 25px 2px 25px 2px;
+	border: 1px;
+	border-style: solid;
+	border-color: #b2d0c0;
+	font-size: 30px;
+	background-color: #e0f6df;
+	width: 766px;
+	text-align: center;
+	left: 185px;
+	position: absolute;
+	top: 456px;
+	box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 }
 
 .format-moetabs .littlesquare {
 	width: 40px;
 	height: 40px;
-	background-color: grey;
+	background-color: #a1c0b1;
 	position: absolute;
     left: 20px;
 	top: 20px;
 }
 
+.format-moetabs .littlesquare img {
+	width: 20px;
+    height: 20px;
+	padding-top: 10px;
+}
+
 .format-moetabs .content { 
-border: 1px;
+	border: 1px;
 }
 
 .sectionzeroimg { 
-float: right; margin-left: 25px; 
+    float: right; margin-left: 25px; 
 }
 
 .format-moetabs .sectionzerotext {  font-size: 17px; }
@@ -92,8 +165,8 @@ float: right; margin-left: 25px;
     height: 60px;
     cursor: pointer;
     display: none;
-    background-color: #f0e6ff;
-    color: rgb(122, 91, 154);
+    background-color: #eeebf2;
+    color: #572f71;
 }
 
 .format-moetabs div#gridshadebox_overlay {
@@ -223,7 +296,7 @@ float: right; margin-left: 25px;
 }
 
 .format-moetabs #tabspage h1 {
-	color: rgb(122, 91, 154);
+	color: #572f71;
     font-size: 25px;
 	margin: 0px;
     padding: 0px;
@@ -244,7 +317,7 @@ float: right; margin-left: 25px;
     width: 0;
     height: 0;
     border-top: 100px solid transparent;
-    border-right: 100px solid rgba(122, 91, 154, 0.5);
+    border-right: 100px solid #cac1d6;
     border-bottom: 100px solid transparent;
 }
 
@@ -266,13 +339,13 @@ float: right; margin-left: 25px;
 .format-moetabs #tabspage .firstblock {
 	font-size: 17px;
 	width: 100%;
-	background: #f0e6ff;
+	background: #e4deea;
 }
 
 .format-moetabs #tabspage .firstblock p {
-  margin: 30px 140px 0px 0px;
-  float: right;
-  color: black;
+	 margin: 30px 140px 0px 0px;
+	 float: right;
+	 color: black;
 }
 
 
