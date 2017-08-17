@@ -27,7 +27,7 @@ class subscriber {
         $name          = str_replace(' ', '',$DB->get_field('course', 'fullname', array('id' => 1)));
         $url           = $CFG->wwwroot;
         $local_user    = get_config('block_import_remote_course', 'localusername');
-        $local_token   = get_config('block_import_remote_course', 'wstoken');;
+        $local_token   = get_config('block_import_remote_course', 'wstoken');
 
         //parameters for the webservice url
         $prefixurl      = '/webservice/rest/server.php?wstoken=';
@@ -47,14 +47,19 @@ class subscriber {
         $url_to_send = $remotesite . $prefixurl . $token . $postfixurl;
         $params = array('username'=>$remoteusername, 'name'=>$name, 'url'=>$url, 'user'=>$local_user, 'token'=>$local_token );
 
-        $curl = new curl;
+        $curl = new curl();
         $resp = json_decode($curl->post($url_to_send, $params, $options));
 
         //insert the courses to DB
         $DB->delete_records('import_remote_course_list');
-        $DB->insert_records('import_remote_course_list', $resp);
+        if (!empty($resp)){
+            foreach ($resp as $remotecourse){
+                $remotecourse->course_tag = trim($remotecourse->course_tag);
+            }
+            $DB->insert_records('import_remote_course_list', $resp);
+        }
 
-         return $resp;
+        return $resp;
 
     }
 

@@ -87,7 +87,7 @@ if ($skipcertverify){
 }
 $params = array('id' => $remote, 'username' => $remoteusername);
 //print_r($params);
-$curl = new curl;
+$curl = new curl();
 // todo: Use HTTPS?
 $resp = json_decode($curl->post($url, $params, $options));
 

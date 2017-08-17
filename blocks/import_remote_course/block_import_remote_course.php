@@ -65,8 +65,12 @@ class block_import_remote_course extends block_base {
 //        if (!empty($this->config->text)) {
 //            $courselist = explode(',',$this->config->text);
 //        }
-        $select = $DB->sql_compare_text('course_tag') . " = '" . $COURSE->idnumber ."'";
-        $remotecourselist = $DB->get_records_select('import_remote_course_list', $select);
+        $remotecourselist = array();
+        $tags = core_tag_tag::get_item_tags_array('core', 'course', $COURSE->id);
+        foreach ($tags as $tag) {
+            $select = $DB->sql_compare_text('course_tag') . " = '" . $tag ."'";
+            $remotecourselist = array_merge($remotecourselist,$DB->get_records_select('import_remote_course_list', $select));
+        }
         if (empty($remotecourselist)) {
             $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
             return $this->content;
