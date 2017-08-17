@@ -1108,7 +1108,22 @@ function validate_email($address) {
 function get_file_argument() {
     global $SCRIPT;
 
-    $relativepath = optional_param('file', false, PARAM_PATH);
+    $relativepath = false;
+    $hasforcedslashargs = false;
+
+    if (isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI'])) {
+        // Checks whether $_SERVER['REQUEST_URI'] contains '/pluginfile.php/'
+        // instead of '/pluginfile.php?', when serving a file from e.g. mod_imscp or mod_scorm.
+        if ((strpos($_SERVER['REQUEST_URI'], '/pluginfile.php/') !== false)
+                && isset($_SERVER['PATH_INFO']) && !empty($_SERVER['PATH_INFO'])) {
+            // Exclude edge cases like '/pluginfile.php/?file='.
+            $args = explode('/', ltrim($_SERVER['PATH_INFO'], '/'));
+            $hasforcedslashargs = (count($args) > 2); // Always at least: context, component and filearea.
+        }
+    }
+    if (!$hasforcedslashargs) {
+        $relativepath = optional_param('file', false, PARAM_PATH);
+    }
 
     if ($relativepath !== false and $relativepath !== '') {
         return $relativepath;
@@ -1321,7 +1336,9 @@ function format_text($text, $format = FORMAT_MOODLE, $options = null, $courseidd
 
     if ($options['blanktarget']) {
         $domdoc = new DOMDocument();
+        libxml_use_internal_errors(true);
         $domdoc->loadHTML('<?xml version="1.0" encoding="UTF-8" ?>' . $text);
+        libxml_clear_errors();
         foreach ($domdoc->getElementsByTagName('a') as $link) {
             if ($link->hasAttribute('target') && strpos($link->getAttribute('target'), '_blank') === false) {
                 continue;
@@ -1583,6 +1600,10 @@ function strip_pluginfile_content($source) {
  * @return string text without legacy TRUSTTEXT marker
  */
 function trusttext_strip($text) {
+    if (!is_string($text)) {
+        // This avoids the potential for an endless loop below.
+        throw new coding_exception('trusttext_strip parameter must be a string');
+    }
     while (true) { // Removing nested TRUSTTEXT.
         $orig = $text;
         $text = str_replace('#####TRUSTTEXT#####', '', $text);
@@ -1822,7 +1843,7 @@ function purify_html($text, $options = array()) {
 
             // Media elements.
             // https://html.spec.whatwg.org/#the-video-element
-            $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', [
+            $def->addElement('video', 'Block', 'Optional: #PCDATA | Flow | source | track', 'Common', [
                 'src' => 'URI',
                 'crossorigin' => 'Enum#anonymous,use-credentials',
                 'poster' => 'URI',
@@ -1836,7 +1857,7 @@ function purify_html($text, $options = array()) {
                 'height' => 'Length',
             ]);
             // https://html.spec.whatwg.org/#the-audio-element
-            $def->addElement('audio', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', [
+            $def->addElement('audio', 'Block', 'Optional: #PCDATA | Flow | source | track', 'Common', [
                 'src' => 'URI',
                 'crossorigin' => 'Enum#anonymous,use-credentials',
                 'preload' => 'Enum#auto,metadata,none',
@@ -1846,9 +1867,17 @@ function purify_html($text, $options = array()) {
                 'controls' => 'Bool'
             ]);
             // https://html.spec.whatwg.org/#the-source-element
-            $def->addElement('source', 'Block', 'Flow', 'Common', [
+            $def->addElement('source', false, 'Empty', null, [
                 'src' => 'URI',
                 'type' => 'Text'
+            ]);
+            // https://html.spec.whatwg.org/#the-track-element
+            $def->addElement('track', false, 'Empty', null, [
+                'src' => 'URI',
+                'kind' => 'Enum#subtitles,captions,descriptions,chapters,metadata',
+                'srclang' => 'Text',
+                'label' => 'Text',
+                'default' => 'Bool',
             ]);
 
             // Use the built-in Ruby module to add annotation support.
@@ -2627,7 +2656,7 @@ function mdie($msg='', $errorcode=1) {
  * Print a message and exit.
  *
  * @param string $message The message to print in the notice
- * @param string $link The link to use for the continue button
+ * @param moodle_url|string $link The link to use for the continue button
  * @param object $course A course object. Unused.
  * @return void This function simply exits
  */

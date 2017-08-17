@@ -221,7 +221,7 @@ class behat_forms extends behat_base {
     /**
      * Sets the specified value to the field.
      *
-     * @Given /^I set the field "(?P<field_string>(?:[^"]|\\")*)" to multiline$/
+     * @Given /^I set the field "(?P<field_string>(?:[^"]|\\")*)" to multiline:?$/
      * @throws ElementNotFoundException Thrown by behat_base::find
      * @param string $field
      * @param PyStringNode $value
@@ -241,8 +241,9 @@ class behat_forms extends behat_base {
      * @return void
      */
     public function i_set_the_field_with_xpath_to($fieldxpath, $value) {
-        $fieldNode = $this->find('xpath', $fieldxpath);
-        $field = behat_field_manager::get_form_field($fieldNode, $this->getSession());
+        $fieldnode = $this->find('xpath', $fieldxpath);
+        $this->ensure_node_is_visible($fieldnode);
+        $field = behat_field_manager::get_form_field($fieldnode, $this->getSession());
         $field->set_value($value);
     }
 

@@ -287,6 +287,8 @@ class assign_feedback_status implements renderable {
     public $returnaction = '';
     /** @var array returnparams */
     public $returnparams = array();
+    /** @var bool canviewfullnames */
+    public $canviewfullnames = false;
 
     /**
      * Constructor
@@ -298,6 +300,7 @@ class assign_feedback_status implements renderable {
      * @param int $coursemoduleid
      * @param string $returnaction The action required to return to this page
      * @param array $returnparams The list of params required to return to this page
+     * @param bool $canviewfullnames
      */
     public function __construct($gradefordisplay,
                                 $gradeddate,
@@ -306,7 +309,8 @@ class assign_feedback_status implements renderable {
                                 $grade,
                                 $coursemoduleid,
                                 $returnaction,
-                                $returnparams) {
+                                $returnparams,
+                                $canviewfullnames) {
         $this->gradefordisplay = $gradefordisplay;
         $this->gradeddate = $gradeddate;
         $this->grader = $grader;
@@ -315,6 +319,7 @@ class assign_feedback_status implements renderable {
         $this->coursemoduleid = $coursemoduleid;
         $this->returnaction = $returnaction;
         $this->returnparams = $returnparams;
+        $this->canviewfullnames = $canviewfullnames;
     }
 }
 
@@ -935,7 +940,9 @@ class assign_files implements renderable {
                     $file->get_filename();
             $url = file_encode_url("$CFG->wwwroot/pluginfile.php", $path, true);
             $filename = $file->get_filename();
-            $file->fileurl = html_writer::link($url, $filename);
+            $file->fileurl = html_writer::link($url, $filename, [
+                    'target' => '_blank',
+                ]);
         }
     }
 }

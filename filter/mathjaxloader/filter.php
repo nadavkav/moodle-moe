@@ -115,6 +115,9 @@ class filter_mathjaxloader extends moodle_text_filter {
             $page->requires->js_module($moduleconfig);
 
             $config = get_config('filter_mathjaxloader', 'mathjaxconfig');
+            $wwwroot = new moodle_url('/');
+
+            $config = str_replace('{wwwroot}', $wwwroot->out(true), $config);
 
             $params = array('mathjaxconfig' => $config, 'lang' => $lang);
 
@@ -165,7 +168,7 @@ class filter_mathjaxloader extends moodle_text_filter {
             $PAGE->requires->yui_module('moodle-filter_mathjaxloader-loader', 'M.filter_mathjaxloader.typeset');
             if ($hasextra) {
                 // If custom dilimeters are used, wrap whole text to prevent autolinking.
-                $text = '<span class="nolink">' + $text + '</span>';
+                $text = '<span class="nolink">' . $text . '</span>';
             } else {
                 if ($hasinline) {
                     // If the default inline TeX delimiters \( \) are present, wrap each pair in nolink.

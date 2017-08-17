@@ -680,7 +680,8 @@ class grade_item extends grade_object {
     }
 
     /**
-     * Mark regrading as finished successfully.
+     * Mark regrading as finished successfully. This will also be called when subsequent regrading will not change any grades.
+     * Situations such as an error being found will still result in the regrading being finished.
      */
     public function regrading_finished() {
         global $DB;
@@ -766,7 +767,7 @@ class grade_item extends grade_object {
                     // If successful trigger a user_graded event.
                     if ($success) {
                         $grade->load_grade_item();
-                        \core\event\user_graded::create_from_grade($grade)->trigger();
+                        \core\event\user_graded::create_from_grade($grade, \core\event\base::USER_OTHER)->trigger();
                     } else {
                         $result = "Internal error updating final grade";
                     }
@@ -1392,7 +1393,8 @@ class grade_item extends grade_object {
     public function get_name($fulltotal=false) {
         if (strval($this->itemname) !== '') {
             // MDL-10557
-            return format_string($this->itemname);
+            $options = ['context' => context_course::instance($this->courseid)];
+            return format_string($this->itemname, true, $options);
 
         } else if ($this->is_course_item()) {
             return get_string('coursetotal', 'grades');

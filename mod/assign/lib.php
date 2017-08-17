@@ -118,16 +118,10 @@ function assign_refresh_events($courseid = 0) {
         }
     }
     foreach ($assigns as $assign) {
-        // Use assignment's course column if courseid parameter is not given.
-        if (!$courseid) {
-            $courseid = $assign->course;
-            if (!$course = $DB->get_record('course', array('id' => $courseid), '*')) {
-                continue;
-            }
-        }
-        if (!$cm = get_coursemodule_from_instance('assign', $assign->id, $courseid, false)) {
-            continue;
-        }
+        // Get course and course module for the assignment.
+        list($course, $cm) = get_course_and_cm_from_instance($assign->id, 'assign', $assign->course);
+
+        // Refresh the assignment's calendar events.
         $context = context_module::instance($cm->id);
         $assignment = new assign($context, $cm, $course);
         $assignment->update_calendar($cm->id);
@@ -408,7 +402,7 @@ function assign_print_overview($courses, &$htmlarray) {
         $context = context_module::instance($assignment->coursemodule);
 
         // Does the submission status of the assignment require notification?
-        if (has_capability('mod/assign:submit', $context)) {
+        if (has_capability('mod/assign:submit', $context, null, false)) {
             // Does the submission status of the assignment require notification?
             $submitdetails = assign_get_mysubmission_details_for_print_overview($mysubmissions, $sqlassignmentids,
                     $assignmentidparams, $assignment);
@@ -416,7 +410,7 @@ function assign_print_overview($courses, &$htmlarray) {
             $submitdetails = false;
         }
 
-        if (has_capability('mod/assign:grade', $context)) {
+        if (has_capability('mod/assign:grade', $context, null, false)) {
             // Does the grading status of the assignment require notification ?
             $gradedetails = assign_get_grade_details_for_print_overview($unmarkedsubmissions, $sqlassignmentids,
                     $assignmentidparams, $assignment, $context);
@@ -592,10 +586,14 @@ function assign_get_grade_details_for_print_overview(&$unmarkedsubmissions, $sql
                                              s.userid = g.userid AND
                                              s.assignment = g.assignment AND
                                              g.attemptnumber = s.attemptnumber
+                                   LEFT JOIN {assign} a ON
+                                             a.id = s.assignment
                                        WHERE
                                              ( g.timemodified is NULL OR
-                                             s.timemodified > g.timemodified OR
-                                             g.grade IS NULL ) AND
+                                             s.timemodified >= g.timemodified OR
+                                             g.grade IS NULL OR
+                                             (g.grade = -1 AND
+                                             a.grade < 0)) AND
                                              s.timemodified IS NOT NULL AND
                                              s.status = ? AND
                                              s.latest = 1 AND
@@ -649,13 +647,14 @@ function assign_print_recent_activity($course, $viewfullnames, $timestart) {
 
     $dbparams = array($timestart, $course->id, 'assign', ASSIGN_SUBMISSION_STATUS_SUBMITTED);
     $namefields = user_picture::fields('u', null, 'userid');
-    if (!$submissions = $DB->get_records_sql("SELECT asb.id, asb.timemodified, cm.id AS cmid,
+    if (!$submissions = $DB->get_records_sql("SELECT asb.id, asb.timemodified, cm.id AS cmid, um.id as recordid,
                                                      $namefields
                                                 FROM {assign_submission} asb
                                                      JOIN {assign} a      ON a.id = asb.assignment
                                                      JOIN {course_modules} cm ON cm.instance = a.id
                                                      JOIN {modules} md        ON md.id = cm.module
                                                      JOIN {user} u            ON u.id = asb.userid
+                                                LEFT JOIN {assign_user_mapping} um ON um.userid = u.id AND um.assignment = a.id
                                                WHERE asb.timemodified > ? AND
                                                      asb.latest = 1 AND
                                                      a.course = ? AND
@@ -735,7 +734,10 @@ function assign_print_recent_activity($course, $viewfullnames, $timestart) {
         // Obscure first and last name if blind marking enabled.
         if ($assign->is_blind_marking()) {
             $submission->firstname = get_string('participant', 'mod_assign');
-            $submission->lastname = $assign->get_uniqueid_for_user($submission->userid);
+            if (empty($submission->recordid)) {
+                $submission->recordid = $assign->get_uniqueid_for_user($submission->userid);
+            }
+            $submission->lastname = $submission->recordid;
         }
         print_recent_activity_note($submission->timemodified,
                                    $submission,

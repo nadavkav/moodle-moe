@@ -2167,8 +2167,28 @@ class global_navigation extends navigation_node {
             return false;
         }
         // Add a branch for the current user.
-        $canseefullname = has_capability('moodle/site:viewfullnames', $coursecontext);
-        $usernode = $usersnode->add(fullname($user, $canseefullname), $userviewurl, self::TYPE_USER, null, 'user' . $user->id);
+        // Only reveal user details if $user is the current user, or a user to which the current user has access.
+        $viewprofile = true;
+        if (!$iscurrentuser) {
+            require_once($CFG->dirroot . '/user/lib.php');
+            if ($this->page->context->contextlevel == CONTEXT_USER && !has_capability('moodle/user:viewdetails', $usercontext) ) {
+                $viewprofile = false;
+            } else if ($this->page->context->contextlevel != CONTEXT_USER && !user_can_view_profile($user, $course, $usercontext)) {
+                $viewprofile = false;
+            }
+            if (!$viewprofile) {
+                $viewprofile = user_can_view_profile($user, null, $usercontext);
+            }
+        }
+
+        // Now, conditionally add the user node.
+        if ($viewprofile) {
+            $canseefullname = has_capability('moodle/site:viewfullnames', $coursecontext);
+            $usernode = $usersnode->add(fullname($user, $canseefullname), $userviewurl, self::TYPE_USER, null, 'user' . $user->id);
+        } else {
+            $usernode = $usersnode->add(get_string('user'));
+        }
+
         if ($this->page->context->contextlevel == CONTEXT_USER && $user->id == $this->page->context->instanceid) {
             $usernode->make_active();
         }
@@ -2600,6 +2620,7 @@ class global_navigation extends navigation_node {
         }
 
         $sitecontext = context_system::instance();
+        $isfrontpage = ($course->id == SITEID);
 
         // Hidden node that we use to determine if the front page navigation is loaded.
         // This required as there are not other guaranteed nodes that may be loaded.
@@ -2608,8 +2629,8 @@ class global_navigation extends navigation_node {
         // Participants.
         // If this is the site course, they need to have moodle/site:viewparticipants at the site level.
         // If no, then they need to have moodle/course:viewparticipants at the course level.
-        if ((($course->id == SITEID) && has_capability('moodle/site:viewparticipants', $sitecontext)) ||
-                has_capability('moodle/course:viewparticipants', context_course::instance($course->id))) {
+        if (($isfrontpage && has_capability('moodle/site:viewparticipants', $sitecontext)) ||
+                (!$isfrontpage && has_capability('moodle/course:viewparticipants', context_course::instance($course->id)))) {
             $coursenode->add(get_string('participants'), new moodle_url('/user/index.php?id='.$course->id), self::TYPE_CUSTOM, get_string('participants'), 'participants');
         }
 

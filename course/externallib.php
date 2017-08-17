@@ -427,12 +427,14 @@ class core_course_external extends external_api {
                 $exceptionparam->courseid = $course->id;
                 throw new moodle_exception('errorcoursecontextnotvalid', 'webservice', '', $exceptionparam);
             }
-            require_capability('moodle/course:view', $context);
+            if ($course->id != SITEID) {
+                require_capability('moodle/course:view', $context);
+            }
 
             $courseinfo = array();
             $courseinfo['id'] = $course->id;
-            $courseinfo['fullname'] = $course->fullname;
-            $courseinfo['shortname'] = $course->shortname;
+            $courseinfo['fullname'] = external_format_string($course->fullname, $context->id);
+            $courseinfo['shortname'] = external_format_string($course->shortname, $context->id);
             $courseinfo['displayname'] = external_format_string(get_course_display_name_for_list($course), $context->id);
             $courseinfo['categoryid'] = $course->category;
             list($courseinfo['summary'], $courseinfo['summaryformat']) =
@@ -1615,12 +1617,6 @@ class core_course_external extends external_api {
                 }
             }
 
-            // Check category depth is <= maxdepth (do not check for user who can manage categories).
-            if ((!empty($CFG->maxcategorydepth) && count($parents) > $CFG->maxcategorydepth)
-                    and !has_capability('moodle/category:manage', $context)) {
-                $excludedcats[$category->id] = 'depth';
-            }
-
             // Check the user can use the category context.
             $context = context_coursecat::instance($category->id);
             try {
@@ -2235,8 +2231,8 @@ class core_course_external extends external_api {
             $coursecontext = context_course::instance($course->id);
 
             // Category information.
-            if (!isset($categoriescache[$course->category])) {
-                $categoriescache[$course->category] = coursecat::get($course->category);
+            if (!array_key_exists($course->category, $categoriescache)) {
+                $categoriescache[$course->category] = coursecat::get($course->category, IGNORE_MISSING);
             }
             $category = $categoriescache[$course->category];
 
@@ -2281,7 +2277,7 @@ class core_course_external extends external_api {
             $coursereturns['displayname']       = external_format_string($displayname, $coursecontext->id);
             $coursereturns['shortname']         = external_format_string($course->shortname, $coursecontext->id);
             $coursereturns['categoryid']        = $course->category;
-            $coursereturns['categoryname']      = $category->name;
+            $coursereturns['categoryname']      = $category == null ? '' : $category->name;
             $coursereturns['summary']           = $summary;
             $coursereturns['summaryformat']     = $summaryformat;
             $coursereturns['overviewfiles']     = $files;
