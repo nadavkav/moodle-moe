@@ -91,45 +91,7 @@ define(['jquery','jqueryui'], function($, jqui){
 		    	    });
 		        window.location.replace($(this).attr("href"));
 		    });
-		});
-		
-		
-		//adjust question side to the content side
-		
-		var self = this;
-		$( document ).ready(function() {
-			//fix iframe size
-			var questionbixhight;
-			if ($('#app').length > 0){
-				var x  = $('#app')[0].offsetHeight;
-				if (x < 600 ) {
-					x = 600;
-					$('#app').height(x);
-				}
-				var xwithpadding = x * 1.1;
-			    $('#addtional_content').css('height', xwithpadding+'px');
-			    $('#addtional_content .wraper').css('height', '97%');
-			    $('#quizsbs_question').css('height', xwithpadding+'px');
-			    if (self.pix2int($('.wraper').css("height")) > self.pix2int($('#questionbox').css("height"))) {
-					questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
-					$('#questionbox').
-					css("height",questionbixhight - questionbixhight*0.03 - self.pix2int($('#subjectheader').css("height"))-14);
-				}
-			} else {
-				questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
-				$('#questionbox').
-				css("height",self.pix2int($('#addtional_content').css('height')) 
-						- self.pix2int($('#subjectheader').css("height"))-14);
-			}
-			
-			if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
-				$('.ddarea').css('width',
-					this.pix2int($('.dropbackground').css("width")));
-				$('.droparea').css("width",
-					this.pix2int($('.dropbackground').css("width")));
-			}
-		    
-		});		
+		});	
 	};
 	
 	Navigation.prototype.checkPosition = function(){
