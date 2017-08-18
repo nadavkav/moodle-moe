@@ -208,6 +208,8 @@ $string['pluginname'] = 'Progress Bar';
 $string['selectitemstobeadded'] = 'Select activities/resources';
 $string['showallinfo'] = 'Show all info';
 $string['time_expected'] = 'Expected';
+$string['tick'] = 'Tick';
+$string['cross'] = 'Cross';
 
 // Global setting strings
 // Default colours that may have different cultural meanings.
@@ -248,3 +250,4 @@ $string['cachedef_cachedlogs'] = 'Progress Bar log query caching';
 
 // For My home page.
 $string['no_blocks'] = "No Progress Bar blocks are set up for your courses.";
+$string['no_courses'] = "You are not enrolled in any courses. Only bars from enrolled courses will be shown.";
