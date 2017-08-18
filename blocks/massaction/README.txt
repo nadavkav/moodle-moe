@@ -1,10 +1,10 @@
-This is the Mass Actions block for Moodle 2.4 and up. Its appearance and behaviors
+This is the Mass Actions block for Moodle 2.4 to 2.7. Its appearance and behaviors
 are largely the same as the version for Moodle 1.9.
 
 Created at University of Minnesota by the Custom Solutions team.
 
 To install using git, type this command in the root of your Moodle install
-    git clone git@github.com:at-tools/moodle-block_massaction.git 
+    git clone git@github.com:at-tools/moodle-block_massaction.git
 
 Alternatively, download the zip from
     https://github.com/at-tools/moodle-block_massaction/zipball/master
@@ -16,6 +16,44 @@ Once installed, capability "block/massaction:use" needs to be added to the roles
 
 
 RELEASE NOTE
+[2017013000]
+- Removed one of the non-Javascript deletion confirmation steps
+- Corrected call to redirect() when attempting to delete activities to prevent errors being
+  thrown on deletion confirmation page
+
+[2016101701]
+- Re-enables the duplication funtionality and refactors it to work with Moodle 2.7 and earlier.
+
+[2016101700]
+- Properly fixes compatibility with OneTopic course format
+
+[2016101401]
+- Properly fixes compatibility with Flexible course format
+
+[2016101400]
+- Integrate with Travis CI and fix errors and warnings
+
+[2016101000]
+- Removed 'Duplicate to' functionality due to compatibility issues with Moodle 2.7 and earlier.
+
+[2016052401]
+- Moved the string displayed when Javascript is disabled into the language file.
+
+[2016052400]
+- Enabled the block to inform the user, when Javascript is disabled, that Javascript
+  is required in order to use the block
+
+[2016052300]
+- Fix bug with Topics/Weekly formats when Course Layout is set to 'Show one section
+  per page' from Matt Davidson (syxton)
+
+[2016030400]
+- Fix bug with Flexible Sections course format where multiple checkboxes would be
+  displayed for each activity in a sub-section
+
+[2016022400]
+- Add 'Duplicate to' functionality from Matt Davidson (syxton)
+
 [2015120100]
 - Merge a deletion confirmation prompt from Rex Lorenzo (rlorenzo)
 
@@ -42,7 +80,7 @@ RELEASE NOTE
 - Cosmetic change to move drop-down to new line
 
 [2013112101]
-- merge Hebrew translation from Nadav Kavalerchik (nadavkav) 
+- merge Hebrew translation from Nadav Kavalerchik (nadavkav)
 
 [2013112100]
 - initialize $this->content properly to avoid strict warning

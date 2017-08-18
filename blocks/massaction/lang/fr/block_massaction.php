@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 $string['pluginname'] = 'Bloc Actions en Lot';
 $string['massaction:use'] = 'Utiliser le bloc Actions en Lot';
 $string['blockname'] = 'Actions en Lot';
@@ -19,7 +34,9 @@ $string['action_hide'] = 'Masquer';
 $string['action_show'] = 'Montrer';
 $string['action_delete'] = 'Supprimer';
 $string['action_moveto'] = 'Déplacer';
+$string['action_dupto'] = 'Dupliquer';
 $string['action_movetosection'] = 'Déplacer dans la section :';
+$string['action_duptosection'] = 'Dupliquer dans la section :';
 
 $string['week'] = 'S';
 $string['topic'] = 'Section';
@@ -41,16 +58,15 @@ $string['deletecheckconfirm'] = 'Etes-vous VRAIMENT sûr de vouloir supprimer le
 $string['sectionnotexist'] = 'La section cible n\'existe pas';
 $string['missingparam'] = 'Erreur de code : il manque le paramètre JSON "{$a}"';
 
-$string['usage_help'] = <<< EOB
-<p></p>
-<p> Ce bloc permet aux enseignants d'effectuer des actions sur les ressources multiples ou des activités dans l'espace de cours, plutôt que d'avoir à effectuer des actions répétées sur des éléments individuels. </p>
-<p> Pour utiliser ce bloc, Javascript doit être activé dans votre navigateur, vous devez être en mode édition dans la page d'accueil du cours. Seuls les cours au format HEBDOMADAIRE ou THEMATIQUE sont pris en charge. </p>
+$string['usage_help'] = '<p>Ce bloc permet aux enseignants d\'effectuer des actions sur les ressources multiples ou des activités dans l\'espace de cours, plutôt que d\'avoir à effectuer des actions répétées sur des éléments individuels.</p>
+<p>Pour utiliser ce bloc, Javascript doit être activé dans votre navigateur, vous devez être en mode édition dans la page d\'accueil du cours. Seuls les cours au format HEBDOMADAIRE ou THEMATIQUE sont pris en charge. </p>
 <p>Les actions prises en charge sont : <br>
 <ul>
 <li>la suppression en lot</li>
 <li>le masquage en lot</li>
-<li>l'affichage en lot</li>
+<li>l\'affichage en lot</li>
 <li>le déplacement en lot</li>
 </ul>
-Pour sélectionner un élément pour y effectuer une action, il suffit de cliquer sur la case à droite de celui-ci sur la page du cours, ou vous pouvez sélectionner tous les éléments, ou sélectionner tous les éléments dans une section à l'aide du bloc. Pour effectuer une action, cliquez sur l'action que vous souhaitez effectuer à l'intérieur du bloc. </p>
-EOB;
+Pour sélectionner un élément pour y effectuer une action, il suffit de cliquer sur la case à droite de celui-ci sur la page du cours, ou vous pouvez sélectionner tous les éléments, ou sélectionner tous les éléments dans une section à l\'aide du bloc. Pour effectuer une action, cliquez sur l\'action que vous souhaitez effectuer à l\'intérieur du bloc.</p>';
+
+$string['jsdisabled'] = 'Vous devez activer JavaScript pour utiliser ce bloc.';

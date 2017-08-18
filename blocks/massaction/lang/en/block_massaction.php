@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 $string['pluginname'] = 'Mass action block';
 $string['massaction:addinstance'] = 'Add a new Mass Actions block';
 $string['massaction:use'] = 'Use the Mass Actions block';
@@ -20,7 +35,9 @@ $string['action_hide'] = 'Hide';
 $string['action_show'] = 'Show';
 $string['action_delete'] = 'Delete';
 $string['action_moveto'] = 'Move to';
+$string['action_dupto'] = 'Duplicate to';
 $string['action_movetosection'] = 'Move to section';
+$string['action_duptosection'] = 'Duplicate to section';
 
 $string['week'] = 'W';
 $string['topic'] = 'Topic';
@@ -41,8 +58,8 @@ $string['deletecheckconfirm'] = 'Are you REALLY sure you want to delete the foll
 $string['sectionnotexist'] = 'Target section does not exist';
 $string['missingparam'] = 'Error coding: missing required JSON param "{$a}"';
 
-$string['usage_help'] = <<< EOB
-<p>This block allows instructors to perform actions upon multiple resources or activities in the class view, rather than having to perform repeated actions on individual items.</p>
+$string['usage_help'] = '<p>This block allows instructors to perform actions upon multiple resources or activities in the class view, rather than having to perform repeated actions on individual items.</p>
 <p>To use this block, Javascript must be enabled in your browser, you must be in editing mode in the course home page, and AJAX must be disabled. Only the courses in the Week or Topics formats are supported.</p>
-<p>Supported actions include mass deletion, mass hiding, mass showing, and mass moving. To select items to perform actions on, simply click the checkbox to the right of it in the course home page, or you may select all items, or select all items in a section using the block. To perform actions, click the action you would like to perform inside the block.</p>
-EOB;
+<p>Supported actions include mass deletion, mass hiding, mass showing, and mass moving. To select items to perform actions on, simply click the checkbox to the right of it in the course home page, or you may select all items, or select all items in a section using the block. To perform actions, click the action you would like to perform inside the block.</p>';
+
+$string['jsdisabled'] = 'You must enable Javascript to use this block.';
