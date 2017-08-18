@@ -34,8 +34,6 @@ YUI.add('block_sharing_cart', function (Y)
             'dir-open'   : { pix: 'f/folder-open'   },
             'dir-closed' : { pix: 'f/folder' }
         };
-        /** @var {Object}  The shortcut to the strings */
-        var str = Y.merge(M.str.moodle, M.str.block_sharing_cart);
 
         /** @var {Node}  The Sharing Cart block container node */
         var $block = Y.Node.one('.block_sharing_cart');
@@ -48,6 +46,18 @@ YUI.add('block_sharing_cart', function (Y)
         }
 
         /**
+         *  Returns a localized string
+         *  
+         *  @param {String} identifier
+         *  @return {String}
+         */
+        function str(identifier)
+        {
+            return M.str.block_sharing_cart[identifier]
+                || M.str.moodle[identifier];
+        }
+
+        /**
          *  Shows an error message with given Ajax error
          *  
          *  @param {Object} response  The Ajax response
@@ -57,7 +67,7 @@ YUI.add('block_sharing_cart', function (Y)
             try {
                 var ex = Y.JSON.parse(response.responseText);
                 new M.core.exception({
-                    name: str['pluginname'] + " - " + str['error'],
+                    name: str('pluginname') + " - " + str('error'),
                     message: ex.message,
                     fileName: ex.file,
                     lineNumber: ex.line,
@@ -65,7 +75,7 @@ YUI.add('block_sharing_cart', function (Y)
                 });
             } catch (e) {
                 new M.core.exception({
-                    name: str['pluginname'] + " - " + str['error'],
+                    name: str('pluginname') + " - " + str('error'),
                     message: response.responseText
                 });
             }
@@ -100,10 +110,10 @@ YUI.add('block_sharing_cart', function (Y)
         {
             return Y.Node.create('<a href="javascript:void(0)"/>')
                 .addClass(icon[name].css)
-                .set('title', str[name])
+                .set('title', str(name))
                 .append(
                     Y.Node.create('<img class="iconsmall"/>')
-                        .set('alt', str[name])
+                        .set('alt', str(name))
                         .set('src', M.util.image_url(pix || icon[name].pix))
                     );
         }
@@ -210,10 +220,10 @@ YUI.add('block_sharing_cart', function (Y)
                 {
                     var $anchor = Y.Node.create('<a href="javascript:void(0)"/>')
                         .addClass('move-' + id + '-to-' + to)
-                        .set('title', str['movehere'])
+                        .set('title', str('movehere'))
                         .append(
                             Y.Node.create('<img class="movetarget"/>')
-                                .set('alt', str['movehere'])
+                                .set('alt', str('movehere'))
                                 .set('src', M.util.image_url('movehere'))
                             );
                     var $target = Y.Node.create('<li class="activity"/>')
@@ -262,10 +272,10 @@ YUI.add('block_sharing_cart', function (Y)
                 });
                 var $target = Y.Node.create('<a/>')
                     .set('href', href)
-                    .set('title', str['copyhere'])
+                    .set('title', str('copyhere'))
                     .append(
                         Y.Node.create('<img class="movetarget"/>')
-                            .set('alt', str['copyhere'])
+                            .set('alt', str('copyhere'))
                             .set('src', M.util.image_url('movehere'))
                         );
                 targets.push($target);
@@ -301,7 +311,7 @@ YUI.add('block_sharing_cart', function (Y)
                 $view.set('className', $view.get('className').replace(/mod-indent-\d+/, ''));
                 $view.one('.commands').remove();
                 $cancel.on('click', this.hide, this);
-                $clipboard.append(str['clipboard'] + ":").append($view).append($cancel);
+                $clipboard.append(str('clipboard') + ":").append($view).append($cancel);
                 
                 if (course.is_frontpage) {
                     var $sitetopic = Y.Node.one('.sitetopic');
@@ -392,7 +402,7 @@ YUI.add('block_sharing_cart', function (Y)
          */
         this.init = function ()
         {
-            str['pluginname'] = $block.one('h2').get('text');
+            M.str.block_sharing_cart['pluginname'] = $block.one('h2').get('text');
             
             // arrange header icons (bulkdelete, help)
             $block.one('.header-commands').get('children').each(function ()
@@ -446,9 +456,9 @@ YUI.add('block_sharing_cart', function (Y)
                 var copyable = response.responseText == '1';
                 if (copyable) {
                     var $yesnocancel = new M.block_sharing_cart.yesnocancel({
-                        title: str['backup'],
-                        question: str['confirm_userdata'] + embed_cmid(cmid),
-                        yesLabel: str['yes'], noLabel: str['no'], cancelLabel: str['cancel']
+                        title: str('backup'),
+                        question: str('confirm_userdata') + embed_cmid(cmid),
+                        yesLabel: str('yes'), noLabel: str('no'), cancelLabel: str('cancel')
                     });
                     $yesnocancel.on('complete-yes', function (e)
                     {
@@ -460,12 +470,12 @@ YUI.add('block_sharing_cart', function (Y)
                     });
                     $yesnocancel.show();
                 } else {
-                    //if (confirm(str['confirm_backup']))
+                    //if (confirm(str('confirm_backup')))
                     //    backup(cmid, false);
                     var $okcancel = new M.core.confirm({
-                        title: str['backup'],
-                        question: str['confirm_backup'] + embed_cmid(cmid),
-                        yesLabel: str['ok'], noLabel: str['cancel']
+                        title: str('backup'),
+                        question: str('confirm_backup') + embed_cmid(cmid),
+                        yesLabel: str('ok'), noLabel: str('cancel')
                     });
                     $okcancel.on('complete-yes', function (e)
                     {
@@ -569,7 +579,7 @@ YUI.add('block_sharing_cart', function (Y)
          */
         this.on_delete = function (e)
         {
-            if (!confirm(str['confirm_delete']))
+            if (!confirm(str('confirm_delete')))
                 return;
             
             var $item = e.target.ancestor('li.activity');
@@ -640,7 +650,10 @@ YUI.add('block_sharing_cart', function (Y)
                 if ($menu) {
                     $menu.append(Y.Node.create('<li role="presentation"/>').append($backup.set('role', 'menuitem')));
                     if ($menu.getStyle('display') == 'none') {
-                        $backup.append($backup.get('title'));
+                        $backup.append(Y.Node.create('<span class="menu-action-text"/>').append($backup.get('title')));
+                    }
+                    if ($menu.one('i.fa')) { // Essential theme
+                        $backup.one('img').replace(Y.Node.create('<i class="fa fa-cloud-download icon"/>'));
                     }
                 } else {
                     $activity.one('.commands').append($backup);
@@ -717,7 +730,7 @@ YUI.add('block_sharing_cart', function (Y)
 
     M.block_sharing_cart.yesnocancel = YESNOCANCEL;
 },
-'2.6, release 1 patch 6',
+'2.6, release 1 patch 7',
 {
     requires: [ 'base', 'node', 'io', 'dom', 'cookie', 'dd', 'moodle-course-dragdrop' ]
 });

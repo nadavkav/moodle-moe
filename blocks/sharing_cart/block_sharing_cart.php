@@ -13,7 +13,7 @@ class block_sharing_cart extends block_base
 	public function init()
 	{
 		$this->title   = get_string('pluginname', __CLASS__);
-		$this->version = 2014091200;
+		$this->version = 2015012700;
 	}
 
 	public function applicable_formats()
@@ -107,8 +107,8 @@ class block_sharing_cart extends block_base
 		$alt = get_string('bulkdelete', __CLASS__);
 		$src = $OUTPUT->pix_url('bulkdelete', __CLASS__);
 		$url = new moodle_url('/blocks/sharing_cart/bulkdelete.php', array('course' => $this->page->course->id));
-		$bulkdelete = '<a class="icon editing_bulkdelete" title="' . $alt . '" href="' . $url . '">'
-		            . '<img src="' . $src . '" alt="' . $alt . '" />'
+		$bulkdelete = '<a class="icon editing_bulkdelete" title="' . s($alt) . '" href="' . s($url) . '">'
+		            . '<img src="' . s($src) . '" alt="' . s($alt) . '" />'
 		            . '</a>';
 		
 		// help for Sharing Cart
@@ -130,7 +130,7 @@ class block_sharing_cart extends block_base
 		$html = '<div class="error">' . get_string('requireajax', __CLASS__) . '</div>';
 		if (has_capability('moodle/site:config', context_system::instance())) {
 			$url = new moodle_url('/admin/settings.php?section=ajax');
-			$link = '<a href="' . $url . '">' . get_string('ajaxuse') . '</a>';
+			$link = '<a href="' . s($url) . '">' . get_string('ajaxuse') . '</a>';
 			$html .= '<div>' . $OUTPUT->rarrow() . ' ' . $link . '</div>';
 		}
 		return $html;
