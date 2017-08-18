@@ -125,3 +125,7 @@ body.jsdisabled #block_accessibility_launchtoolbar {
     display:none;
 
 }
+#sbar{
+    top:42px !important;
+    z-index: 999 !important; /* one less than profile menu */
+}

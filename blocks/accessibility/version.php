@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Define metadata for Accessibility block
  *
@@ -31,9 +30,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2015011600;
+$plugin->version = 2017051700;
 $plugin->cron = 3600;
-$plugin->requires = 2011120500;
+$plugin->requires = 2016051900;
 $plugin->component = 'block_accessibility';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.2.3';
+$plugin->release = '2.2.4';
