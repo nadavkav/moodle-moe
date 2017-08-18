@@ -21,13 +21,13 @@
  * @copyright  2012 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once($CFG->dirroot . '/question/type/edit_question_form.php');
-
 defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/question/type/edit_question_form.php');
 
 /**
  * gapfill editing form definition.
- * 
+ *
  * See http://docs.moodle.org/en/Development:lib/formslib.php for information
  * about the Moodle forms library, which is based on the HTML Quickform PEAR library.
  */
@@ -37,6 +37,11 @@ class qtype_gapfill_edit_form extends question_edit_form {
     public $answerdisplay;
     public $delimitchars;
 
+    /**
+     * Add gapfill specific form fields.
+     *
+     * @param object $mform the form being built.
+     */
     protected function definition_inner($mform) {
         $mform->addElement('hidden', 'reload', 1);
         $mform->setType('reload', PARAM_RAW);
@@ -45,8 +50,8 @@ class qtype_gapfill_edit_form extends question_edit_form {
         // Default mark will be set to 1 * number of fields.
         $mform->removeelement('defaultmark');
 
-        $mform->addElement('editor', 'wronganswers', get_string('wronganswers', 'qtype_gapfill'), array('size' => 70, 'rows' => 1),
-                $this->editoroptions);
+        $mform->addElement('editor', 'wronganswers', get_string('wronganswers', 'qtype_gapfill'),
+                array('size' => 70, 'rows' => 1), $this->editoroptions);
         $mform->addHelpButton('wronganswers', 'wronganswers', 'qtype_gapfill');
 
         /* Only allow plain text in for the comma delimited set of wrong answer values
@@ -88,24 +93,30 @@ class qtype_gapfill_edit_form extends question_edit_form {
         $mform->addElement('select', 'answerdisplay', get_string('answerdisplay', 'qtype_gapfill'), $answerdisplaytypes);
         $mform->addHelpButton('answerdisplay', 'answerdisplay', 'qtype_gapfill');
 
-        /* use plain string matching instead of regular expressions */
-        $mform->addElement('advcheckbox', 'disableregex', get_string('disableregex', 'qtype_gapfill'));
-        $mform->addHelpButton('disableregex', 'disableregex', 'qtype_gapfill');
-        $mform->setDefault('disableregex', $config->disableregex);
-
         /* sets all gaps to the size of the largest gap, avoids giving clues to the correct answer */
         $mform->addElement('advcheckbox', 'fixedgapsize', get_string('fixedgapsize', 'qtype_gapfill'));
         $mform->setDefault('disableregex', $config->fixedgapsize);
         $mform->addHelpButton('fixedgapsize', 'fixedgapsize', 'qtype_gapfill');
 
-        /* Discards duplicates before processing answers, useful for tables with gaps like [cat|dog][cat|dog] */
+        /* put draggable answer options after the text. They don't have to be dragged as far, handy on small screens */
+        $mform->addElement('advcheckbox', 'optionsaftertext', get_string('optionsaftertext', 'qtype_gapfill'));
+        $mform->setDefault('optionsaftertext', $config->optionsaftertext);
+        $mform->addHelpButton('optionsaftertext', 'optionsaftertext', 'qtype_gapfill');
+
+         /* use plain string matching instead of regular expressions */
+        $mform->addElement('advcheckbox', 'disableregex', get_string('disableregex', 'qtype_gapfill'));
+        $mform->addHelpButton('disableregex', 'disableregex', 'qtype_gapfill');
+        $mform->setDefault('disableregex', $config->disableregex);
+        $mform->setAdvanced('disableregex');
+
+         /* Discards duplicates before processing answers, useful for tables with gaps like [cat|dog][cat|dog] */
         $mform->addElement('advcheckbox', 'noduplicates', get_string('noduplicates', 'qtype_gapfill'));
         $mform->addHelpButton('noduplicates', 'noduplicates', 'qtype_gapfill');
         $mform->setAdvanced('noduplicates');
 
+        /* Makes marking case sensitive so Cat is not the same as cat */
         $mform->addElement('advcheckbox', 'casesensitive', get_string('casesensitive', 'qtype_gapfill'));
         $mform->setDefault('casesensitive', $config->casesensitive);
-
         $mform->addHelpButton('casesensitive', 'casesensitive', 'qtype_gapfill');
         $mform->setAdvanced('casesensitive');
 
@@ -124,7 +135,7 @@ class qtype_gapfill_edit_form extends question_edit_form {
     }
 
     /**
-     * Pull out a comma delimited string with the 
+     * Pull out a comma delimited string with the
      * wrong answers (distractors) in it from question->options->answers
      * @param type $question
      * @return type string
@@ -142,6 +153,12 @@ class qtype_gapfill_edit_form extends question_edit_form {
         return $wronganswers = rtrim($wronganswers, ',');
     }
 
+    /**
+     * Perform any preprocessing needed on the data passed to {@link set_data()}
+     * before it is used to initialise the form.
+     * @param object $question the data being passed to the form.
+     * @return object $question the modified data.
+     */
     protected function data_preprocessing($question) {
         $question = parent::data_preprocessing($question);
         $question = $this->data_preprocessing_combined_feedback($question);

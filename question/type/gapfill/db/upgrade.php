@@ -17,9 +17,8 @@
 /**
  * Multi-answer question type upgrade code.
  *
- * @package    qtype
- * @subpackage gapfill
- * @copyright  2912 Marcus Green 
+ * @package    qtype_gapfill
+ * @copyright  2017 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -29,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param int $oldversion the version we are upgrading from.
  */
 function xmldb_qtype_gapfill_upgrade($oldversion = 0) {
-    global $CFG, $DB;
+    global $DB;
 
     $dbman = $DB->get_manager();
     if ($oldversion < 2006082505) {
@@ -76,8 +75,13 @@ function xmldb_qtype_gapfill_upgrade($oldversion = 0) {
         $table = new xmldb_table('question_gapfill');
         $dbman->add_field($table, $field);
     }
+      if (!$dbman->field_exists('question_gapfill', 'optionsaftertext')) {
+        $field = new xmldb_field('optionsaftertext', XMLDB_TYPE_INTEGER, '1', null, true, null, 0, 'fixedgapsize');
+        $table = new xmldb_table('question_gapfill');
+        $dbman->add_field($table, $field);
+    }
     // Gapfill savepoint reached.
-    upgrade_plugin_savepoint(true, 2006082518, 'qtype', 'gapfill');
+    upgrade_plugin_savepoint(true, 2017070201, 'qtype', 'gapfill');
 
     return;
 }

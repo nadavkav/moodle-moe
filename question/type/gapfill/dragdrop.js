@@ -22,30 +22,31 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 /* This should be called script.js and go through the Moodle minify process but that seems to break it */
-$(function() {
+/*global $ */
+/*jshint unused:false*/
+$(function () {
     $(".draggable").draggable({
         revert: false,
         helper: 'clone',
         cursor: 'pointer',
-
-        start: function(event, ui) {
+        scroll: 'false',
+        start: function (event, ui) {
             $(this).fadeTo('fast', 0.5);
         },
-        stop: function(event, ui) {
-
+        stop: function (event, ui) {
             $(this).fadeTo(0, 1);
-           /*  $(this).css("text-decoration","line-through"); */
         }
+
     });
 
     $(".droptarget").droppable({
         hoverClass: 'active',
-        drop: function(event, ui) {
+        drop: function (event,ui) {
+            if ($(ui.draggable).hasClass('readonly')) {
+                return;
+            }
             this.value = $(ui.draggable).text();
-           /* $(ui.draggable).css("display","none");*/
-            $(this).css("background-color","white");
-            
-            
+            $(this).css("background-color", "white");
         }
     });
 });
