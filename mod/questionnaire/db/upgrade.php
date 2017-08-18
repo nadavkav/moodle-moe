@@ -530,6 +530,41 @@ function xmldb_questionnaire_upgrade($oldversion=0) {
         upgrade_mod_savepoint(true, 2015051102, 'questionnaire');
     }
 
+    // Ensuring database matches XML state for some known anomalies.
+    if ($oldversion < 2016020204) {
+        // Ensure the feedbackscores field can be null (CONTRIB-6445).
+        $table = new xmldb_table('questionnaire_survey');
+        $field = new xmldb_field('feedbackscores', XMLDB_TYPE_INTEGER, '1', null, null, null, '0');
+        $dbman->change_field_notnull($table, $field);
+
+        // Ensure the feddbacklabel field is 50 characters (CONTRIB-6445).
+        $table = new xmldb_table('questionnaire_feedback');
+        $field = new xmldb_field('feedbacklabel', XMLDB_TYPE_CHAR, '50', null, null, null, null);
+        $dbman->change_field_precision($table, $field);
+
+        // Ensure the response field is text.
+        $table = new xmldb_table('questionnaire_response_date');
+        $field = new xmldb_field('response', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $dbman->change_field_precision($table, $field);
+
+        // Questionnaire savepoint reached.
+         upgrade_mod_savepoint(true, 2016020204, 'questionnaire');
+    }
+
+    // Add the field for notifications from CONTRIB-6136.
+    if ($oldversion < 2016071101) {
+        $table = new xmldb_table('questionnaire');
+        $field = new xmldb_field('notifications', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'resp_view');
+
+        // Conditionally launch add field.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Questionnaire savepoint reached.
+         upgrade_mod_savepoint(true, 2016071101, 'questionnaire');
+    }
+
     return $result;
 }
 

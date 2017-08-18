@@ -42,7 +42,7 @@ class single extends base {
         if (!empty($val)) {
             foreach ($this->question->choices as $cid => $choice) {
                 if (strpos($choice->content, '!other') === 0) {
-                    $other = optional_param('q'.$this->question->id.'_'.$cid, null, PARAM_CLEAN);
+                    $other = optional_param('q'.$this->question->id.'_'.$cid, null, PARAM_TEXT);
                     if (!isset($other)) {
                         continue;
                     }
@@ -62,7 +62,7 @@ class single extends base {
         if (preg_match("/other_q([0-9]+)/", (isset($val) ? $val : ''), $regs)) {
             $cid = $regs[1];
             if (!isset($other)) {
-                $other = optional_param('q'.$this->question->id.'_'.$cid, null, PARAM_CLEAN);
+                $other = optional_param('q'.$this->question->id.'_'.$cid, null, PARAM_TEXT);
             }
             if (preg_match("/[^ \t\n]/", $other)) {
                 $record = new \stdClass();
@@ -85,7 +85,7 @@ class single extends base {
         }
     }
 
-    protected function get_results($rids=false) {
+    protected function get_results($rids=false, $anonymous=false) {
         global $DB;
 
         $rsql = '';
@@ -125,26 +125,8 @@ class single extends base {
         return $rows;
     }
 
-    public function display_results($rids=false, $sort='') {
-        $this->display_response_choice_results($this->get_results($rids), $rids, $sort);
-    }
-
-    /**
-     * Return all the fields to be used for users in bulk questionnaire sql.
-     *
-     * @author: Guy Thomas
-     * @return string
-     */
-    protected function user_fields_sql() {
-        $userfieldsarr = get_all_user_name_fields();
-        $userfieldsarr = array_merge($userfieldsarr, ['username', 'department', 'institution']);
-        $userfields = '';
-        foreach ($userfieldsarr as $field) {
-            $userfields .= $userfields === '' ? '' : ', ';
-            $userfields .= 'u.'.$field;
-        }
-        $userfields .= ', u.id as userid';
-        return $userfields;
+    public function display_results($rids=false, $sort='', $anonymous=false) {
+        $this->display_response_choice_results($this->get_results($rids, $anonymous), $rids, $sort);
     }
 
     /**
@@ -155,23 +137,32 @@ class single extends base {
      * @param bool|int $userid
      * @return array
      */
-    public function get_bulk_sql($surveyid, $responseid = false, $userid = false) {
+    public function get_bulk_sql($surveyid, $responseid = false, $userid = false, $groupid = false) {
         global $DB;
 
         $usernamesql = $DB->sql_cast_char2int('qr.username');
 
         $sql = $this->bulk_sql($surveyid, $responseid, $userid);
+        $params = [];
+        if (($groupid !== false) && ($groupid > 0)) {
+            $groupsql = ' INNER JOIN {groups_members} gm ON gm.groupid = ? AND gm.userid = '.$usernamesql.' ';
+            $gparams = [$groupid];
+        } else {
+            $groupsql = '';
+            $gparams = [];
+        }
         $sql .= "
             AND qr.survey_id = ? AND qr.complete = ?
       LEFT JOIN {questionnaire_response_other} qro ON qro.response_id = qr.id AND qro.choice_id = qrs.choice_id
       LEFT JOIN {user} u ON u.id = $usernamesql
+      $groupsql
         ";
-        $params = [$surveyid, 'y'];
+        $params = array_merge([$surveyid, 'y'], $gparams);
         if ($responseid) {
-            $sql .= " AND qr.id = ?";
+            $sql .= " WHERE qr.id = ?";
             $params[] = $responseid;
         } else if ($userid) {
-            $sql .= " AND qr.username = ?"; // Note: username is the userid.
+            $sql .= " WHERE qr.username = ?"; // Note: username is the userid.
             $params[] = $userid;
         }
 
@@ -187,8 +178,7 @@ class single extends base {
         global $DB;
 
         $userfields = $this->user_fields_sql();
-        $extraselect = '';
-        $extraselect .= 'qrs.choice_id, qro.response, 0 AS rank';
+        $extraselect = 'qrs.choice_id, ' . $DB->sql_order_by_text('qro.response', 1000) . ', 0 AS rank';
         $alias = 'qrs';
 
         return "

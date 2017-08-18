@@ -53,7 +53,7 @@ class boolean extends base {
         }
     }
 
-    protected function get_results($rids=false) {
+    protected function get_results($rids=false, $anonymous=false) {
         global $DB;
 
         $rsql = '';
@@ -72,7 +72,7 @@ class boolean extends base {
         return $DB->get_records_sql($sql, $params);
     }
 
-    public function display_results($rids=false, $sort='') {
+    public function display_results($rids=false, $sort='', $anonymous=false) {
         if (empty($this->stryes)) {
             $this->stryes = get_string('yes');
             $this->strno = get_string('no');
@@ -85,7 +85,7 @@ class boolean extends base {
         }
 
          $this->counts = array($this->stryes => 0, $this->strno => 0);
-        if ($rows = $this->get_results($rids)) {
+        if ($rows = $this->get_results($rids, $anonymous)) {
             foreach ($rows as $row) {
                 $this->choice = $row->choice_id;
                 $count = $row->num;
@@ -109,6 +109,32 @@ class boolean extends base {
      */
     protected function bulk_sql_config() {
         return new bulk_sql_config($this->response_table(), 'qrb', true, false, false);
+    }
+
+    /**
+     * Return sql for getting responses in bulk.
+     * @author Guy Thomas
+     * @author Mike Churchward
+     * @return string
+     */
+    protected function bulk_sql() {
+        global $DB;
+
+        $userfields = $this->user_fields_sql();
+        // Postgres requires all fields to be the same type. Boolean type returns a character value as "choice_id",
+        // while all others are an integer. So put the boolean response in "response" field instead (CONTRIB-6436).
+        // NOTE - the actual use of "boolean" should probably change to not use "choice_id" at all, or use it as
+        // numeric zero and one instead.
+        $extraselect = '0 AS choice_id, ' . $DB->sql_order_by_text('qrb.choice_id', 1000) . ' AS response, 0 AS rank';
+        $alias = 'qrb';
+
+        return "
+            SELECT " . $DB->sql_concat_join("'_'", ['qr.id', "'".$this->question->helpname()."'", $alias.'.id']) . " AS id,
+                   qr.submitted, qr.complete, qr.grade, qr.username, $userfields, qr.id AS rid, $alias.question_id,
+                   $extraselect
+              FROM {questionnaire_response} qr
+              JOIN {".$this->response_table()."} $alias ON $alias.response_id = qr.id
+        ";
     }
 }
 

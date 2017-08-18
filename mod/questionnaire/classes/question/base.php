@@ -47,7 +47,7 @@ define('QUESNUMERIC', 10);
 define('QUESPAGEBREAK', 99);
 define('QUESSECTIONTEXT', 100);
 
-GLOBAL $idcounter, $CFG;
+global $idcounter, $CFG;
 $idcounter = 0;
 
 require_once($CFG->dirroot.'/mod/questionnaire/locallib.php');
@@ -119,7 +119,7 @@ abstract class base {
         global $DB;
         static $qtypes = null;
 
-        if (is_null($qtypes)) {
+        if ($qtypes === null) {
             $qtypes = $DB->get_records('questionnaire_question_type', array(), 'typeid',
                                        'typeid, type, has_choices, response_table');
         }
@@ -236,10 +236,10 @@ abstract class base {
     /**
      * Display results method.
      */
-    public function display_results($rids=false, $sort='') {
+    public function display_results($rids=false, $sort='', $anonymous=false) {
         if (isset ($this->response) && is_object($this->response) &&
             is_subclass_of($this->response, '\\mod_questionnaire\\response\\base')) {
-            return $this->response->display_results($rids, $sort);
+            return $this->response->display_results($rids, $sort, $anonymous);
         } else {
             return false;
         }
@@ -303,7 +303,7 @@ abstract class base {
     public function update($questionrecord = null, $updatechoices = true) {
         global $DB;
 
-        if (is_null($questionrecord)) {
+        if ($questionrecord === null) {
             $questionrecord = new \stdClass();
             $questionrecord->id = $this->id;
             $questionrecord->survey_id = $this->survey_id;
@@ -343,12 +343,12 @@ abstract class base {
         global $DB;
 
         // Default boolean parameter to "true".
-        if (is_null($calcposition)) {
+        if ($calcposition === null) {
             $calcposition = true;
         }
 
         // Create new question.
-        if (is_null($calcposition) || $calcposition) {
+        if ($calcposition) {
             // Set the position to the end.
             $sql = 'SELECT MAX(position) as maxpos '.
                    'FROM {questionnaire_question} '.
@@ -645,7 +645,7 @@ abstract class base {
         $mform->addElement('hidden', 'type_id', $this->type_id);
         $mform->setType('type_id', PARAM_INT);
         $mform->addElement('hidden', 'action', 'question');
-        $mform->setType('action', PARAM_RAW);
+        $mform->setType('action', PARAM_ALPHA);
 
         // Buttons.
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
@@ -702,7 +702,7 @@ abstract class base {
         // Dependence fields.
 
         if ($questionnaire->navigate) {
-            $position = isset($this->position) ? $this->position : count($questionnaire->questions) + 1;
+            $position = ($this->position !== 0) ? $this->position : count($questionnaire->questions) + 1;
             $dependencies = questionnaire_get_dependencies($questionnaire->questions, $position);
             $canchangeparent = true;
             if (count($dependencies) > 1) {

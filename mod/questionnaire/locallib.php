@@ -301,6 +301,7 @@ function questionnaire_load_capabilities($cmid) {
     $cb->view                   = has_capability('mod/questionnaire:view', $context);
     $cb->submit                 = has_capability('mod/questionnaire:submit', $context);
     $cb->viewsingleresponse     = has_capability('mod/questionnaire:viewsingleresponse', $context);
+    $cb->submissionnotification = has_capability('mod/questionnaire:submissionnotification', $context);
     $cb->downloadresponses      = has_capability('mod/questionnaire:downloadresponses', $context);
     $cb->deleteresponses        = has_capability('mod/questionnaire:deleteresponses', $context);
     $cb->manage                 = has_capability('mod/questionnaire:manage', $context);
@@ -598,7 +599,7 @@ function questionnaire_set_events($questionnaire) {
     $event->visible = instance_is_visible('questionnaire', $questionnaire);
     $event->timeduration = ($questionnaire->closedate - $questionnaire->opendate);
 
-    if ($questionnaire->closedate and $questionnaire->opendate and $event->timeduration <= QUESTIONNAIRE_MAX_EVENT_LENGTH) {
+    if ($questionnaire->closedate && $questionnaire->opendate && ($event->timeduration <= QUESTIONNAIRE_MAX_EVENT_LENGTH)) {
         // Single event for the whole questionnaire.
         $event->name = $questionnaire->name;
         calendar_event::create($event);
@@ -670,7 +671,7 @@ function questionnaire_get_incomplete_users($cm, $sid,
     // Now strike all completedusers from allusers.
     $allusers = array_diff($allusers, $completedusers);
     // For paging I use array_slice().
-    if ($startpage !== false AND $pagecount !== false) {
+    if (($startpage !== false) && ($pagecount !== false)) {
         $allusers = array_slice($allusers, $startpage, $pagecount);
     }
     return $allusers;
@@ -700,9 +701,9 @@ function questionnaire_nb_questions_on_page ($questionsinquestionnaire, $questio
             switch ($questionsinquestionnaire[$question->dependquestion]->type_id) {
                 case QUESYESNO:
                     if ($question->dependchoice == 0) {
-                        $questiondependchoice = "'y'";
+                        $questiondependchoice = 'y';
                     } else {
-                        $questiondependchoice = "'n'";
+                        $questiondependchoice = 'n';
                     }
                     $responsetable = 'response_bool';
                     break;
@@ -710,9 +711,10 @@ function questionnaire_nb_questions_on_page ($questionsinquestionnaire, $questio
                     $questiondependchoice = $question->dependchoice;
                     $responsetable = 'resp_single';
             }
-            $sql = 'SELECT * FROM {questionnaire}_'.$responsetable.' WHERE response_id = '.$rid.
-            ' AND question_id = '.$question->dependquestion.' AND choice_id = '.$questiondependchoice;
-            if ($DB->get_record_sql($sql)) {
+            $params = array('response_id' => $rid,
+                            'question_id' => $question->dependquestion,
+                            'choice_id' => $questiondependchoice);
+            if ($DB->record_exists('questionnaire_'.$responsetable, $params)) {
                 $questionstodisplay [] = $question->id;
             }
         } else {

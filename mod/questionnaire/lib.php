@@ -59,7 +59,7 @@ function questionnaire_add_instance($questionnaire) {
     // (defined by the form in mod.html) this function
     // will create a new instance and return the id number
     // of the new instance.
-    global $COURSE, $DB, $CFG;
+    global $DB, $CFG;
     require_once($CFG->dirroot.'/mod/questionnaire/questionnaire.class.php');
     require_once($CFG->dirroot.'/mod/questionnaire/locallib.php');
 
@@ -67,8 +67,9 @@ function questionnaire_add_instance($questionnaire) {
 
     if (empty($questionnaire->sid)) {
         // Create a new survey.
+        $course = get_course($questionnaire->course);
         $cm = new stdClass();
-        $qobject = new questionnaire(0, $questionnaire, $COURSE, $cm);
+        $qobject = new questionnaire(0, $questionnaire, $course, $cm);
 
         if ($questionnaire->create == 'new-0') {
             $sdata = new stdClass();
@@ -83,7 +84,7 @@ function questionnaire_add_instance($questionnaire) {
             $sdata->thank_body = '';
             $sdata->email = '';
             $sdata->feedbacknotes = '';
-            $sdata->owner = $COURSE->id;
+            $sdata->owner = $course->id;
             if (!($sid = $qobject->survey_update($sdata))) {
                 print_error('couldnotcreatenewsurvey', 'questionnaire');
             }
@@ -99,7 +100,7 @@ function questionnaire_add_instance($questionnaire) {
             if ($copyrealm == 'public') {
                 $sid = $copyid;
             } else {
-                $sid = $qobject->sid = $qobject->survey_copy($COURSE->id);
+                $sid = $qobject->sid = $qobject->survey_copy($course->id);
                 // All new questionnaires should be created as "private".
                 // Even if they are *copies* of public or template questionnaires.
                 $DB->set_field('questionnaire_survey', 'realm', 'private', array('id' => $sid));
@@ -473,23 +474,23 @@ function questionnaire_pluginfile($course, $cm, $context, $filearea, $args, $for
     $componentid = (int)array_shift($args);
 
     if ($filearea != 'question') {
-        if (!$DB->get_record('questionnaire_survey', array('id' => $componentid))) {
+        if (!$DB->record_exists('questionnaire_survey', array('id' => $componentid))) {
             return false;
         }
     } else {
-        if (!$DB->get_record('questionnaire_question', array('id' => $componentid))) {
+        if (!$DB->record_exists('questionnaire_question', array('id' => $componentid))) {
             return false;
         }
     }
 
-    if ($DB->get_record('questionnaire', array('id' => $cm->instance))) {
+    if (!$DB->record_exists('questionnaire', array('id' => $cm->instance))) {
         return false;
     }
 
     $fs = get_file_storage();
     $relativepath = implode('/', $args);
     $fullpath = "/$context->id/mod_questionnaire/$filearea/$componentid/$relativepath";
-    if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
+    if (!($file = $fs->get_file_by_hash(sha1($fullpath))) || $file->is_directory()) {
         return false;
     }
 
@@ -548,7 +549,7 @@ function questionnaire_extend_settings_navigation(settings_navigation $settings,
     $keys = $questionnairenode->get_children_key_list();
     $beforekey = null;
     $i = array_search('modedit', $keys);
-    if ($i === false and array_key_exists(0, $keys)) {
+    if (($i === false) && array_key_exists(0, $keys)) {
         $beforekey = $keys[0];
     } else if (array_key_exists($i + 1, $keys)) {
         $beforekey = $keys[$i + 1];
@@ -791,11 +792,6 @@ function questionnaire_get_recent_mod_activity(&$activities, &$index, $timestart
     $viewfullnames   = has_capability('moodle/site:viewfullnames', $context);
     $groupmode       = groups_get_activity_groupmode($cm, $course);
 
-    if (is_null($modinfo->groups)) {
-        // Load all my groups and cache it in modinfo.
-        $modinfo->groups = groups_get_user_groups($course->id);
-    }
-
     $usersgroups = null;
     $aname = format_string($cm->name, true);
     $userattempts = array();
@@ -813,8 +809,8 @@ function questionnaire_get_recent_mod_activity(&$activities, &$index, $timestart
                 continue;
             }
 
-            if ($groupmode == SEPARATEGROUPS and !$accessallgroups) {
-                if (is_null($usersgroups)) {
+            if (($groupmode == SEPARATEGROUPS) && !$accessallgroups) {
+                if ($usersgroups === null) {
                     $usersgroups = groups_get_all_groups($course->id,
                     $attempt->userid, $cm->groupingid);
                     if (is_array($usersgroups)) {
@@ -983,11 +979,11 @@ function questionnaire_print_overview($courses, &$htmlarray) {
     foreach ($questionnaires as $questionnaire) {
 
         // The questionnaire has a deadline.
-        if ($questionnaire->closedate != 0
+        if (($questionnaire->closedate != 0)
                         // And it is before the deadline has been met.
-                        and $questionnaire->closedate >= $now
+                        && ($questionnaire->closedate >= $now)
                         // And the questionnaire is available.
-                        and ($questionnaire->opendate == 0 or $questionnaire->opendate <= $now)) {
+                        && (($questionnaire->opendate == 0) || ($questionnaire->opendate <= $now))) {
             if (!$questionnaire->visible) {
                 $class = ' class="dimmed"';
             } else {

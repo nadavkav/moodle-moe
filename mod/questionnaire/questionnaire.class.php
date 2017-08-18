@@ -252,7 +252,7 @@ class questionnaire {
                 $event = \mod_questionnaire\event\attempt_submitted::create($params);
                 $event->trigger();
 
-                $this->response_send_email($this->rid);
+                $this->submission_notify($this->rid);
                 $this->response_goto_thankyou();
             }
 
@@ -405,8 +405,8 @@ class questionnaire {
     public function user_time_for_new_attempt($userid) {
         global $DB;
 
-        $select = 'qid = '.$this->id.' AND userid = '.$userid;
-        if (!($attempts = $DB->get_records_select('questionnaire_attempts', $select, null, 'timemodified DESC'))) {
+        $params = array('qid' => $this->id, 'userid' => $userid);
+        if (!($attempts = $DB->get_records('questionnaire_attempts', $params, 'timemodified DESC'))) {
             return true;
         }
 
@@ -527,7 +527,7 @@ class questionnaire {
             $owner = true;
         }
         $numresp = $this->count_submissions();
-        if (is_null($usernumresp)) {
+        if ($usernumresp === null) {
             $usernumresp = $questionnaire->count_submissions($USER->id);
         }
 
@@ -543,7 +543,7 @@ class questionnaire {
         $canviewgroups = true;
         $groupmode = groups_get_activity_groupmode($this->cm, $this->course);
         if ($groupmode == 1) {
-            $canviewgroups = groups_has_membership($this->cm, $USER->id);;
+            $canviewgroups = groups_has_membership($this->cm, $USER->id);
         }
 
         $canviewallgroups = has_capability('moodle/site:accessallgroups', $this->context);
@@ -1462,13 +1462,154 @@ class questionnaire {
         return $nam;
     }
 
-    private function response_send_email($rid, $userid=false) {
-        global $CFG, $USER, $DB;
+    /**
+     * Handle all submission notification actions.
+     * @param int $rid The id of the response record.
+     * @return boolean Operation success.
+     *
+     */
+    private function submission_notify($rid) {
+        $success = true;
+
+        $success = $this->response_send_email($rid) && $success;
+
+        if ($this->notifications) {
+            // Handle notification of submissions.
+            $success = $this->send_submission_notifications($rid) && $success;
+        }
+
+        return $success;
+    }
+
+    /**
+     * Send submission notifications to users with "submissionnotification" capability.
+     * @param int $rid The id of the response record.
+     * @return boolean Operation success.
+     *
+     */
+    private function send_submission_notifications($rid) {
+        global $CFG, $USER;
+
+        $success = true;
+        if ($notifyusers = $this->get_notifiable_users($USER->id)) {
+            $info = new stdClass();
+            // Need to handle user differently for anonymous surveys.
+            if ($this->respondenttype != 'anonymous') {
+                $info->userfrom = $USER;
+                $info->username = fullname($info->userfrom, true);
+                $info->profileurl = $CFG->wwwroot.'/user/view.php?id='.$info->userfrom->id.'&course='.$this->course->id;
+                $langstringtext = 'submissionnotificationtextuser';
+                $langstringhtml = 'submissionnotificationhtmluser';
+            } else {
+                $info->userfrom = \core_user::get_noreply_user();
+                $info->username = '';
+                $info->profileurl = '';
+                $langstringtext = 'submissionnotificationtextanon';
+                $langstringhtml = 'submissionnotificationhtmlanon';
+            }
+            $info->name = format_string($this->name);
+            $info->submissionurl = $CFG->wwwroot.'/mod/questionnaire/report.php?action=vresp&sid='.$this->survey->id.
+                    '&rid='.$rid.'&instance='.$this->id;
+
+            $info->postsubject = get_string('submissionnotificationsubject', 'questionnaire');
+            $info->posttext = get_string($langstringtext, 'questionnaire', $info);
+            $info->posthtml = '<p>' . get_string($langstringhtml, 'questionnaire', $info) . '</p>';
+
+            foreach ($notifyusers as $notifyuser) {
+                $info->userto = $notifyuser;
+                $this->send_message($info, 'notification');
+            }
+        }
+
+        return $success;
+    }
+
+    /**
+     * Message someone about something.
+     *
+     * @param object $info The information for the message.
+     * @param string $eventtype
+     * @return void
+     */
+    private function send_message($info, $eventtype) {
+        global $USER;
+
+        $eventdata = new \core\message\message();
+        $eventdata->userfrom         = $info->userfrom;
+        $eventdata->userto           = $info->userto;
+        $eventdata->subject          = $info->postsubject;
+        $eventdata->fullmessage      = $info->posttext;
+        $eventdata->fullmessageformat = FORMAT_PLAIN;
+        $eventdata->fullmessagehtml  = $info->posthtml;
+        $eventdata->smallmessage     = $info->postsubject;
+
+        $eventdata->name            = $eventtype;
+        $eventdata->component       = 'mod_questionnaire';
+        $eventdata->notification    = 1;
+        $eventdata->contexturl      = $info->submissionurl;
+        $eventdata->contexturlname  = $info->name;
+
+        message_send($eventdata);
+    }
+
+    /**
+     * Returns a list of users that should receive notification about given submission.
+     *
+     * @param int $userid The submission to grade
+     * @return array
+     */
+    protected function get_notifiable_users($userid) {
+        // Potential users should be active users only.
+        $potentialusers = get_enrolled_users($this->context, 'mod/questionnaire:submissionnotification',
+            null, 'u.*', null, null, null, true);
+
+        $notifiableusers = [];
+        if (groups_get_activity_groupmode($this->cm) == SEPARATEGROUPS) {
+            if ($groups = groups_get_all_groups($this->course->id, $userid, $this->cm->groupingid)) {
+                foreach ($groups as $group) {
+                    foreach ($potentialusers as $potentialuser) {
+                        if ($potentialuser->id == $userid) {
+                            // Do not send self.
+                            continue;
+                        }
+                        if (groups_is_member($group->id, $potentialuser->id)) {
+                            $notifiableusers[$potentialuser->id] = $potentialuser;
+                        }
+                    }
+                }
+            } else {
+                // User not in group, try to find graders without group.
+                foreach ($potentialusers as $potentialuser) {
+                    if ($potentialuser->id == $userid) {
+                        // Do not send self.
+                        continue;
+                    }
+                    if (!groups_has_membership($this->cm, $potentialuser->id)) {
+                        $notifiableusers[$potentialuser->id] = $potentialuser;
+                    }
+                }
+            }
+        } else {
+            foreach ($potentialusers as $potentialuser) {
+                if ($potentialuser->id == $userid) {
+                    // Do not send self.
+                    continue;
+                }
+                $notifiableusers[$potentialuser->id] = $potentialuser;
+            }
+        }
+        return $notifiableusers;
+    }
+
+    private function response_send_email($rid) {
+        global $CFG, $DB, $USER;
 
         require_once($CFG->libdir.'/phpmailer/class.phpmailer.php');
 
         $name = s($this->name);
-        if ($record = $DB->get_record('questionnaire_survey', array('id' => $this->survey->id))) {
+        if (isset($this->survey) && isset($this->survey->email)) {
+            $email = $this->survey->email;
+        } else if ($record = $DB->get_record('questionnaire_survey', ['id' => $this->survey->id])) {
             $email = $record->email;
         } else {
             $email = '';
@@ -1477,7 +1618,7 @@ class questionnaire {
         if (empty($email)) {
             return(false);
         }
-        $answers = $this->generate_csv($rid, $userid = '', null, 1, $groupid = 0);
+        $answers = $this->generate_csv($rid, '', null, 1, 0);
 
         // Line endings for html and plaintext emails.
         $endhtml = "\r\n<br>";
@@ -1596,7 +1737,10 @@ class questionnaire {
             $col = explode(',', preg_replace("/\s/", '', $col));
         }
         if (is_array($col) && count($col) > 0) {
-            $col = ',' . implode(',', array_map(create_function('$a', 'return "q.$a";'), $col));
+            $callback = function($a) {
+                return 'q.'.$a;
+            };
+            $col = ',' . implode(',', array_map($callback, $col));
         }
 
         // Response_bool (yes/no).
@@ -2398,6 +2542,8 @@ class questionnaire {
 
         $qnum = 0;
 
+        $anonymous = $this->respondenttype == 'anonymous';
+
         foreach ($this->questions as $question) {
             if ($question->type_id == QUESPAGEBREAK) {
                 continue;
@@ -2421,7 +2567,7 @@ class questionnaire {
                 $question->context->id, 'mod_questionnaire', 'question', $question->id), FORMAT_HTML);
             echo html_writer::end_tag('div'); // End qn-question.
 
-            $question->display_results($rids, $sort);
+            $question->display_results($rids, $sort, $anonymous);
             echo html_writer::end_tag('div'); // End qn-content.
 
             echo html_writer::end_tag('div'); // End qn-container.
@@ -2490,7 +2636,7 @@ class questionnaire {
      * @param string $userid
      * @return array
      */
-    protected function get_survey_all_responses($rid = '', $userid = '') {
+    protected function get_survey_all_responses($rid = '', $userid = '', $groupid = false) {
         global $DB;
         $uniquetypes = $this->get_survey_questiontypes(true);
         $allresponsessql = "";
@@ -2503,7 +2649,7 @@ class questionnaire {
                 continue;
             }
             $allresponsessql .= $allresponsessql == '' ? '' : ' UNION ALL ';
-            list ($sql, $params) = $question->response->get_bulk_sql($this->survey->id, $rid, $userid);
+            list ($sql, $params) = $question->response->get_bulk_sql($this->survey->id, $rid, $userid, $groupid);
             $allresponsesparams = array_merge($allresponsesparams, $params);
             $allresponsessql .= $sql;
         }
@@ -2655,7 +2801,7 @@ class questionnaire {
     public function generate_csv($rid='', $userid='', $choicecodes=1, $choicetext=0, $currentgroupid) {
         global $DB;
 
-        ini_set('memory_limit', '1G');
+        raise_memory_limit('1G');
 
         $output = array();
         $stringother = get_string('other', 'questionnaire');
@@ -2694,7 +2840,7 @@ class questionnaire {
         }
 
         // Get all responses for this survey in one go.
-        $allresponsesrs = $this->get_survey_all_responses($rid, $userid);
+        $allresponsesrs = $this->get_survey_all_responses($rid, $userid, $currentgroupid);
 
         // Do we have any questions of type RADIO, DROP, CHECKBOX OR RATE? If so lets get all their choices in one go.
         $choicetypes = $this->choice_types();
@@ -2949,7 +3095,9 @@ class questionnaire {
                         $responsetxt = $content;
                     }
                 } else if (intval($qtype) === QUESYESNO) {
-                    $responsetxt = $responserow->choice_id === 'y' ? "1" : "0";
+                    // At this point, the boolean responses are returned as characters in the "response"
+                    // field instead of "choice_id" for csv exports (CONTRIB-6436).
+                    $responsetxt = $responserow->response === 'y' ? "1" : "0";
                 } else {
                     // Strip potential html tags from modality name.
                     $responsetxt = $responserow->response;
@@ -2969,8 +3117,12 @@ class questionnaire {
 
             $prevresprow = $responserow;
         }
-        // Add final row to output.
-        $output[] = $this->process_csv_row($row, $prevresprow, $currentgroupid, $questionsbyposition, $nbinfocols, $numrespcols);
+
+        if ($prevresprow !== false) {
+            // Add final row to output. May not exist if no response data was ever present.
+            $output[] = $this->process_csv_row($row, $prevresprow, $currentgroupid, $questionsbyposition,
+                $nbinfocols, $numrespcols);
+        }
 
         // Change table headers to incorporate actual question numbers.
         $numcol = 0;
@@ -3125,7 +3277,7 @@ class questionnaire {
             $qid = $question->id;
             $qtype = $question->type_id;
             $required = $question->required;
-            if (($qtype == QUESRADIO || $qtype == QUESDROP || $qtype == QUESRATE) and $required == 'y') {
+            if ((($qtype == QUESRADIO) || ($qtype == QUESDROP) || ($qtype == QUESRATE)) && ($required == 'y')) {
                 if (!isset($qmax[$qid])) {
                     $qmax[$qid] = 0;
                 }
@@ -3146,7 +3298,7 @@ class questionnaire {
                 $qmax[$qid] = $qmax[$qid] * $nbchoices;
                 $maxtotalscore += $qmax[$qid];
             }
-            if ($qtype == QUESYESNO and $required == 'y') {
+            if (($qtype == QUESYESNO) && ($required == 'y')) {
                 $qmax[$qid] = 1;
                 $maxtotalscore += 1;
             }
@@ -3343,11 +3495,20 @@ class questionnaire {
         // Now process scores for more than one section.
 
         // Initialize scores and maxscores to 0.
-        $score = array(); $allscore = array(); $maxscore = array(); $scorepercent = array();
-        $allscorepercent = array(); $oppositescorepercent = array(); $alloppositescorepercent = array();
-        $chartlabels = array(); $chartscore = array();
+        $score = array();
+        $allscore = array();
+        $maxscore = array();
+        $scorepercent = array();
+        $allscorepercent = array();
+        $oppositescorepercent = array();
+        $alloppositescorepercent = array();
+        $chartlabels = array();
+        $chartscore = array();
         for ($i = 1; $i <= $feedbacksections; $i++) {
-            $score[$i] = 0; $allscore[$i] = 0; $maxscore[$i] = 0; $scorepercent[$i] = 0;
+            $score[$i] = 0;
+            $allscore[$i] = 0;
+            $maxscore[$i] = 0;
+            $scorepercent[$i] = 0;
         }
 
         for ($section = 1; $section <= $feedbacksections; $section++) {
