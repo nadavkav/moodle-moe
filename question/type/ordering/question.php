@@ -62,6 +62,8 @@ class qtype_ordering_question extends question_graded_automatically {
     const GRADING_LONGEST_ORDERED_SUBSET = 5;
     /** @var int Only longest ordered and contignous subset is graded */
     const GRADING_LONGEST_CONTIGUOUS_SUBSET = 6;
+    /** @var int Items are graded relative to their position in the correct answer */
+    const GRADING_RELATIVE_TO_CORRECT = 7;
 
     // Fields from "qtype_ordering_options" table.
     /** @var string */
@@ -217,7 +219,27 @@ class qtype_ordering_question extends question_graded_automatically {
      * @return string a plain text summary of that response, that could be used in reports.
      */
     public function summarise_response(array $response) {
-        return '';
+        $name = $this->get_response_fieldname();
+        if (array_key_exists($name, $response)) {
+            $items = explode(',', $response[$name]);
+        } else {
+            $items = array(); // shouldn't happen !!
+        }
+        $answerids = array();
+        foreach ($this->answers as $answer) {
+            $answerids[$answer->md5key] = $answer->id;
+        }
+        foreach ($items as $i => $item) {
+            if (array_key_exists($item, $answerids)) {
+                $item = $this->answers[$answerids[$item]];
+                $item = $this->html_to_text($item->answer, $item->answerformat);
+                $item = shorten_text($item, 10, true); // force truncate at 10 chars
+                $items[$i] = $item;
+            } else {
+                $items[$i] = ''; // shouldn't happen !!
+            }
+        }
+        return implode('; ', array_filter($items));
     }
 
     /**
@@ -308,7 +330,7 @@ class qtype_ordering_question extends question_graded_automatically {
                 $correctresponse = $this->correctresponse;
                 $currentresponse = $this->currentresponse;
                 foreach ($correctresponse as $position => $answerid) {
-                    if (isset($currentresponse[$position])) {
+                    if (array_key_exists($position, $currentresponse)) {
                         if ($currentresponse[$position] == $answerid) {
                             $countcorrect++;
                         }
@@ -322,12 +344,11 @@ class qtype_ordering_question extends question_graded_automatically {
 
             case self::GRADING_RELATIVE_NEXT_EXCLUDE_LAST:
             case self::GRADING_RELATIVE_NEXT_INCLUDE_LAST:
-                $currentresponse = $this->get_next_answerids($this->currentresponse,
-                        ($gradingtype == self::GRADING_RELATIVE_NEXT_INCLUDE_LAST));
-                $correctresponse = $this->get_next_answerids($this->correctresponse,
-                        ($gradingtype == self::GRADING_RELATIVE_NEXT_INCLUDE_LAST));
+                $lastitem = ($gradingtype == self::GRADING_RELATIVE_NEXT_INCLUDE_LAST);
+                $currentresponse = $this->get_next_answerids($this->currentresponse, $lastitem);
+                $correctresponse = $this->get_next_answerids($this->correctresponse, $lastitem);
                 foreach ($correctresponse as $thisanswerid => $nextanswerid) {
-                    if (isset($currentresponse[$thisanswerid])) {
+                    if (array_key_exists($thisanswerid, $currentresponse)) {
                         if ($currentresponse[$thisanswerid] == $nextanswerid) {
                             $countcorrect++;
                         }
@@ -338,12 +359,11 @@ class qtype_ordering_question extends question_graded_automatically {
 
             case self::GRADING_RELATIVE_ONE_PREVIOUS_AND_NEXT:
             case self::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT:
-                $currentresponse = $this->get_previous_and_next_answerids($this->currentresponse,
-                        ($gradingtype == self::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT));
-                $correctresponse = $this->get_previous_and_next_answerids($this->correctresponse,
-                        ($gradingtype == self::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT));
+                $all = ($gradingtype == self::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT);
+                $currentresponse = $this->get_previous_and_next_answerids($this->currentresponse, $all);
+                $correctresponse = $this->get_previous_and_next_answerids($this->correctresponse, $all);
                 foreach ($correctresponse as $thisanswerid => $answerids) {
-                    if (isset($currentresponse[$thisanswerid])) {
+                    if (array_key_exists($thisanswerid, $currentresponse)) {
                         $prev = $currentresponse[$thisanswerid]->prev;
                         $prev = array_intersect($prev, $answerids->prev);
                         $countcorrect += count($prev);
@@ -358,9 +378,26 @@ class qtype_ordering_question extends question_graded_automatically {
 
             case self::GRADING_LONGEST_ORDERED_SUBSET:
             case self::GRADING_LONGEST_CONTIGUOUS_SUBSET:
-                $subset = $this->get_ordered_subset($gradingtype == self::GRADING_LONGEST_CONTIGUOUS_SUBSET);
+                $contiguous = ($gradingtype == self::GRADING_LONGEST_CONTIGUOUS_SUBSET);
+                $subset = $this->get_ordered_subset($contiguous);
                 $countcorrect = count($subset);
                 $countanswers = count($this->currentresponse);
+                break;
+
+            case self::GRADING_RELATIVE_TO_CORRECT:
+                $correctresponse = $this->correctresponse;
+                $currentresponse = $this->currentresponse;
+                $count = (count($correctresponse) - 1);
+                foreach ($correctresponse as $position => $answerid) {
+                    if (in_array($answerid, $currentresponse)) {
+                        $currentposition = array_search($answerid, $currentresponse);
+                        $currentscore = ($count - abs($position - $currentposition));
+                        if ($currentscore > 0) {
+                            $countcorrect += $currentscore;
+                        }
+                    }
+                    $countanswers += $count;
+                }
                 break;
         }
         if ($countanswers == 0) {
@@ -372,7 +409,7 @@ class qtype_ordering_question extends question_graded_automatically {
     }
 
     /**
-     * Checks whether the users is allow to be served a particular file.
+     * Checks whether the user has permission to access a particular file.
      *
      * @param question_attempt $qa the question attempt being displayed.
      * @param question_display_options $options the options that control display of the question.
@@ -389,7 +426,7 @@ class qtype_ordering_question extends question_graded_automatically {
                 return array_key_exists($answerid, $this->answers);
             }
             if (in_array($filearea, $this->qtype->feedbackfields)) {
-                return $this->check_combined_feedback_file_access($qa, $options, $filearea);
+                return $this->check_combined_feedback_file_access($qa, $options, $filearea, $args);
             }
             if ($filearea == 'hint') {
                 return $this->check_hint_file_access($qa, $options, $args);
@@ -398,11 +435,42 @@ class qtype_ordering_question extends question_graded_automatically {
         return parent::check_file_access($qa, $options, $component, $filearea, $args, $forcedownload);
     }
 
-    /*
-     * ------------------
-     * Custom methods
-     * ------------------
+    ///////////////////////////////////////////////////////
+    // methods from "question_graded_automatically" class
+    // see "question/type/questionbase.php"
+    ///////////////////////////////////////////////////////
+
+    /**
+     * Check a request for access to a file belonging to a combined feedback field.
+     *
+     * Fix a bug in Moodle 2.9 & 3.0, in which this method does not declare $args,
+     * so trying to use $args[0] always fails and images in feedback are not shown.
+     *
+     * @param question_attempt $qa the question attempt being displayed.
+     * @param question_display_options $options the options that control display of the question.
+     * @param string $filearea the name of the file area.
+     * @param array $args the remaining bits of the file path.
+     * @return bool whether access to the file should be allowed.
      */
+    protected function check_combined_feedback_file_access($qa, $options, $filearea, $args = null) {
+        $state = $qa->get_state();
+        if (! $state->is_finished()) {
+            $response = $qa->get_last_qt_data();
+            if (! $this->is_gradable_response($response)) {
+                return false;
+            }
+            list($fraction, $state) = $this->grade_response($response);
+        }
+        if ($state->get_feedback_class().'feedback' == $filearea) {
+            return ($this->id == reset($args));
+        } else {
+            return false;
+        }
+    }
+
+    ///////////////////////////////////////////////////////
+    // Custom methods
+    ///////////////////////////////////////////////////////
 
     /**
      * Returns response mform field name
@@ -421,7 +489,7 @@ class qtype_ordering_question extends question_graded_automatically {
      */
     public function update_current_response($response) {
         $name = $this->get_response_fieldname();
-        if (isset($response[$name])) {
+        if (array_key_exists($name, $response)) {
             $ids = explode(',', $response[$name]);
             foreach ($ids as $i => $id) {
                 foreach ($this->answers as $answer) {
@@ -451,6 +519,7 @@ class qtype_ordering_question extends question_graded_automatically {
                     'selecttype' => self::SELECT_ALL,
                     'selectcount' => 0,
                     'gradingtype' => self::GRADING_ABSOLUTE_POSITION,
+                    'showgradingdetails' => 1,
                     'correctfeedback' => '',
                     'correctfeedbackformat' => FORMAT_MOODLE,
                     'incorrectfeedback' => '',
@@ -742,6 +811,7 @@ class qtype_ordering_question extends question_graded_automatically {
         $types = array(
             self::GRADING_ALL_OR_NOTHING                 => get_string('allornothing',               $plugin),
             self::GRADING_ABSOLUTE_POSITION              => get_string('absoluteposition',           $plugin),
+            self::GRADING_RELATIVE_TO_CORRECT            => get_string('relativetocorrect',          $plugin),
             self::GRADING_RELATIVE_NEXT_EXCLUDE_LAST     => get_string('relativenextexcludelast',    $plugin),
             self::GRADING_RELATIVE_NEXT_INCLUDE_LAST     => get_string('relativenextincludelast',    $plugin),
             self::GRADING_RELATIVE_ONE_PREVIOUS_AND_NEXT => get_string('relativeonepreviousandnext', $plugin),

@@ -88,8 +88,9 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
 
         $result = '';
 
-        // Don't allow items to be dragged and dropped in readonly mode.
-        if (!($options->readonly || $options->correctness)) {
+        if ($options->readonly) {
+            // Items cannot be dragged in readonly mode.
+        } else {
             $script = "\n";
             $script .= "//<![CDATA[\n";
             $script .= "if (window.$) {\n";
@@ -140,22 +141,36 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
                 }
 
                 // Set the CSS class and correctness img for this response.
-                if ($options->correctness) {
-                    $score = $this->get_ordering_item_score($question, $position, $answerid);
-                    list($score, $maxscore, $fraction, $percent, $class, $img) = $score;
-                } else {
-                    $class = 'sortableitem';
-                    $img = '';
+                switch ($options->correctness) {
+
+                    case question_display_options::HIDDEN: // =0
+                    case question_display_options::EDITABLE: // =2
+                        $class = 'sortableitem';
+                        $img = '';
+                        break;
+
+                    case question_display_options::VISIBLE: // =1
+                        $score = $this->get_ordering_item_score($question, $position, $answerid);
+                        list($score, $maxscore, $fraction, $percent, $class, $img) = $score;
+                        break;
+
+                    default: // Shouldn't happen !!
+                        $class = '';
+                        $img = '';
+                        break;
                 }
-                $class = "$class $layoutclass";
+                $class = trim("$class $layoutclass");
+
+                // Format the answer text.
+                $answer = $question->answers[$answerid];
+                $answertext = $question->format_text($answer->answer, $answer->answerformat,
+                                                     $qa, 'question', 'answer', $answerid);
 
                 // The original "id" revealed the correct order of the answers
                 // because $answer->fraction holds the correct order number.
-                $answer = $question->answers[$answerid];
-                $answer->answer = $question->format_text($answer->answer, $answer->answerformat, $qa, 'question', 'answer',
-                        $answerid);
+                // Therefore we use the $answer's md5key for the "id".
                 $params = array('class' => $class, 'id' => $answer->md5key);
-                $result .= html_writer::tag('li', $img.$answer->answer, $params);
+                $result .= html_writer::tag('li', $img.$answertext, $params);
             }
         }
 
@@ -190,13 +205,22 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
         $gradedetails = '';
         $scoredetails = '';
 
-        // If required, add explanation of grade calculation.
+        // Decide if we should show grade explanation for "partial" or "wrong" states.
+        // This should detect "^graded(partial|wrong)$" and possibly others.
         if ($step = $qa->get_last_step()) {
-            $state = $step->get_state();
-            if ($state == 'gradedpartial' || $state == 'gradedwrong') {
+            $show = preg_match('/(partial|wrong)$/', $step->get_state());
+        } else {
+            $show = false;
+        }
 
-                $plugin = 'qtype_ordering';
-                $question = $qa->get_question();
+        // If required, add explanation of grade calculation.
+        if ($show) {
+
+            $plugin = 'qtype_ordering';
+            $question = $qa->get_question();
+
+            // show grading details if they are required
+            if ($question->options->showgrading) {
 
                 // Fetch grading type.
                 $gradingtype = $question->options->gradingtype;
@@ -260,7 +284,7 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
     }
 
     /**
-     * Gereate an automatic description of the correct response to this question.
+     * Generate an automatic description of the correct response to this question.
      * Not all question types can do this. If it is not possible, this method
      * should just return an empty string.
      *
@@ -298,7 +322,9 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
             $correctresponse = $question->correctresponse;
             foreach ($correctresponse as $position => $answerid) {
                 $answer = $question->answers[$answerid];
-                $output .= html_writer::tag('li', $answer->answer, array('class' => $layoutclass));
+                $answertext = $question->format_text($answer->answer, $answer->answerformat,
+                                                     $qa, 'question', 'answer', $answerid);
+                $output .= html_writer::tag('li', $answertext, array('class' => $layoutclass));
             }
             $output .= html_writer::end_tag('ol');
         }
@@ -320,31 +346,31 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
 
             case qtype_ordering_question::GRADING_ALL_OR_NOTHING:
             case qtype_ordering_question::GRADING_ABSOLUTE_POSITION:
+            case qtype_ordering_question::GRADING_RELATIVE_TO_CORRECT:
                 $this->correctinfo = $question->correctresponse;
                 $this->currentinfo = $question->currentresponse;
                 break;
 
             case qtype_ordering_question::GRADING_RELATIVE_NEXT_EXCLUDE_LAST:
             case qtype_ordering_question::GRADING_RELATIVE_NEXT_INCLUDE_LAST:
-                $this->correctinfo = $question->get_next_answerids($question->correctresponse,
-                        $gradingtype == qtype_ordering_question::GRADING_RELATIVE_NEXT_INCLUDE_LAST);
-                $this->currentinfo = $question->get_next_answerids($question->currentresponse,
-                        $gradingtype == qtype_ordering_question::GRADING_RELATIVE_NEXT_INCLUDE_LAST);
+                $lastitem = ($gradingtype == qtype_ordering_question::GRADING_RELATIVE_NEXT_INCLUDE_LAST);
+                $this->correctinfo = $question->get_next_answerids($question->correctresponse, $lastitem);
+                $this->currentinfo = $question->get_next_answerids($question->currentresponse, $lastitem);
                 break;
 
             case qtype_ordering_question::GRADING_RELATIVE_ONE_PREVIOUS_AND_NEXT:
             case qtype_ordering_question::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT:
-                $this->correctinfo = $question->get_previous_and_next_answerids($question->correctresponse,
-                        $gradingtype == qtype_ordering_question::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT);
-                $this->currentinfo = $question->get_previous_and_next_answerids($question->currentresponse,
-                        $gradingtype == qtype_ordering_question::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT);
+                $all = ($gradingtype == qtype_ordering_question::GRADING_RELATIVE_ALL_PREVIOUS_AND_NEXT);
+                $this->correctinfo = $question->get_previous_and_next_answerids($question->correctresponse, $all);
+                $this->currentinfo = $question->get_previous_and_next_answerids($question->currentresponse, $all);
                 break;
 
             case qtype_ordering_question::GRADING_LONGEST_ORDERED_SUBSET:
             case qtype_ordering_question::GRADING_LONGEST_CONTIGUOUS_SUBSET:
                 $this->correctinfo = $question->correctresponse;
                 $this->currentinfo = $question->currentresponse;
-                $subset = $question->get_ordered_subset($gradingtype == qtype_ordering_question::GRADING_LONGEST_CONTIGUOUS_SUBSET);
+                $contiguous = ($gradingtype == qtype_ordering_question::GRADING_LONGEST_CONTIGUOUS_SUBSET);
+                $subset = $question->get_ordered_subset($contiguous);
                 foreach ($this->currentinfo as $position => $answerid) {
                     if (array_search($position, $subset) === false) {
                         $this->currentinfo[$position] = 0;
@@ -432,6 +458,18 @@ class qtype_ordering_renderer extends qtype_with_combined_feedback_renderer {
                             $score = $currentinfo[$position];
                         }
                         $maxscore = 1;
+                    }
+                    break;
+
+                case qtype_ordering_question::GRADING_RELATIVE_TO_CORRECT:
+                    if (isset($correctinfo[$position])) {
+                        $maxscore = (count($correctinfo) - 1);
+                        $answerid = $currentinfo[$position];
+                        $correctposition = array_search($answerid, $correctinfo);
+                        $score = ($maxscore - abs($correctposition - $position));
+                        if ($score < 0) {
+                            $score = 0;
+                        }
                     }
                     break;
             }

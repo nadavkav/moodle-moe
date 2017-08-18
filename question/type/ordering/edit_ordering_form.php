@@ -107,6 +107,15 @@ class qtype_ordering_edit_form extends question_edit_form {
         $mform->addHelpButton($name, $name, $plugin);
         $mform->setDefault($name, $this->get_default_value($name, qtype_ordering_question::GRADING_ABSOLUTE_POSITION));
 
+        // Field for showgrading.
+        $name = 'showgrading';
+        $label = get_string($name, $plugin);
+        $options = array(0 => get_string('hide'),
+                         1 => get_string('show'));
+        $mform->addElement('select', $name, $label, $options);
+        $mform->addHelpButton($name, $name, $plugin);
+        $mform->setDefault($name, $this->get_default_value($name, 1));
+
         $elements = array();
         $options = array();
 
@@ -132,11 +141,15 @@ class qtype_ordering_edit_form extends question_edit_form {
         // Adjust HTML editor and removal buttons.
         $this->adjust_html_editors($mform, $name, $repeats);
 
-        // Adding feedback fields.
-        $this->add_combined_feedback_fields(false);
+        // Adding feedback fields (=Combined feedback).
+        if (method_exists($this, 'add_combined_feedback_fields')) {
+            $this->add_combined_feedback_fields(false);
+        }
 
-        // Adding interactive settings.
-        $this->add_interactive_settings(false, false);
+        // Adding interactive settings (=Multiple tries).
+        if (method_exists($this, 'add_interactive_settings')) {
+            $this->add_interactive_settings(false, false);
+        }
     }
 
     /**
@@ -273,11 +286,17 @@ class qtype_ordering_edit_form extends question_edit_form {
     public function data_preprocessing($question) {
 
         $question = parent::data_preprocessing($question);
-        $question = $this->data_preprocessing_answers($question, true);
+        if (method_exists($this, 'data_preprocessing_answers')) {
+            $question = $this->data_preprocessing_answers($question, true);
+        }
 
         // Preprocess feedback.
-        $question = $this->data_preprocessing_combined_feedback($question);
-        $question = $this->data_preprocessing_hints($question, false, false);
+        if (method_exists($this, 'data_preprocessing_combined_feedback')) {
+            $question = $this->data_preprocessing_combined_feedback($question);
+        }
+        if (method_exists($this, 'data_preprocessing_hints')) {
+            $question = $this->data_preprocessing_hints($question, false, false);
+        }
 
         // Preprocess answers and fractions.
         $question->answer     = array();
@@ -319,8 +338,9 @@ class qtype_ordering_edit_form extends question_edit_form {
         $names = array(
             'layouttype'  => qtype_ordering_question::LAYOUT_VERTICAL,
             'selecttype'  => qtype_ordering_question::SELECT_ALL,
-            'selectcount' => 0, // 0 means all.
-            'gradingtype' => qtype_ordering_question::GRADING_ABSOLUTE_POSITION
+            'selectcount' => 0, // 0 means ALL.
+            'gradingtype' => qtype_ordering_question::GRADING_ABSOLUTE_POSITION,
+            'showgrading' => 1  // 1 means SHOW.
         );
         foreach ($names as $name => $default) {
             if (isset($question->options->$name)) {
@@ -363,7 +383,7 @@ class qtype_ordering_edit_form extends question_edit_form {
 
         // If adding a new ordering question, update defaults.
         if (empty($errors) && empty($data['id'])) {
-            $fields = array('layouttype', 'selecttype', 'selectcount', 'gradingtype');
+            $fields = array('layouttype', 'selecttype', 'selectcount', 'gradingtype', 'showgrading');
             foreach ($fields as $field) {
                 if (array_key_exists($field, $data)) {
                     $this->set_default_value($field, $data[$field]);
