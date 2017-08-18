@@ -14,6 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Plays the game bookquiz.
+ *
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Plays the game bookquiz.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $bookquiz
+ * @param int $chapterid
+ * @param stdClass $context
+ */
 function game_bookquiz_continue( $id, $game, $attempt, $bookquiz, $chapterid, $context) {
     if ($attempt != false and $bookquiz != false) {
         return game_bookquiz_play( $id, $game, $attempt, $bookquiz, $chapterid, $context);
@@ -35,6 +54,16 @@ function game_bookquiz_continue( $id, $game, $attempt, $bookquiz, $chapterid, $c
     return game_bookquiz_play( $id, $game, $attempt, $bookquiz, 0, $context);
 }
 
+/**
+ * Plays the game bookquiz.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $bookquiz
+ * @param int $chapterid
+ * @param stdClass $context
+ */
 function game_bookquiz_play( $id, $game, $attempt, $bookquiz, $chapterid, $context) {
     global $DB, $OUTPUT, $cm;
 
@@ -170,33 +199,33 @@ function game_bookquiz_play( $id, $game, $attempt, $bookquiz, $chapterid, $conte
         }
     }
 
-?>
-<table border="0" cellspacing="0" width="100%" valign="top" cellpadding="2">
+    ?>
+    <table border="0" cellspacing="0" width="100%" valign="top" cellpadding="2">
 
-<!-- subchapter title and upper navigation row //-->
-<tr>
-    <td width="<?php echo  10;?>" valign="bottom">
-    </td>
-    <td valign="top">
-        <table border="0" cellspacing="0" width="100%" valign="top" cellpadding="0">
-        <tr>
-            <td align="right"><?php echo $chnavigation ?></td>
-        </tr>
-        </table>
-    </td>
-</tr>
+    <!-- subchapter title and upper navigation row //-->
+    <tr>
+        <td width="<?php echo  10;?>" valign="bottom">
+        </td>
+        <td valign="top">
+            <table border="0" cellspacing="0" width="100%" valign="top" cellpadding="0">
+            <tr>
+                <td align="right"><?php echo $chnavigation ?></td>
+            </tr>
+            </table>
+        </td>
+    </tr>
 
-<!-- toc and chapter row //-->
-<tr>
-    <td width="<?php echo $tocwidth ?>" valign="top" align="left">
-        <?php
-        echo $OUTPUT->box_start('generalbox');
-        echo $toc;
-        echo $OUTPUT->box_end();
-        ?>
-    </td>
-    <td valign="top" align="left">
-<?php
+    <!-- toc and chapter row //-->
+    <tr>
+        <td width="<?php echo $tocwidth ?>" valign="top" align="left">
+            <?php
+            echo $OUTPUT->box_start('generalbox');
+            echo $toc;
+            echo $OUTPUT->box_end();
+            ?>
+        </td>
+        <td valign="top" align="left">
+    <?php
     echo $OUTPUT->box_start('generalbox');
     $content = '';
     if (!$book->customtitles) {
@@ -225,12 +254,12 @@ function game_bookquiz_play( $id, $game, $attempt, $bookquiz, $chapterid, $conte
     echo $OUTPUT->box_end();
     // Lower navigation.
     echo '<p align="right">'.$chnavigation.'</p>';
-?>
-    </td>
-</tr>
-</table>
+    ?>
+        </td>
+    </tr>
+    </table>
 
-<?php
+    <?php
     if ($showquestions) {
         if ($game->param3 != 0) {
             game_bookquiz_showquestions( $id, $questionid, $chapter->id, $nextid, $scoreattempt, $game, $context);
@@ -238,6 +267,12 @@ function game_bookquiz_play( $id, $game, $attempt, $bookquiz, $chapterid, $conte
     }
 }
 
+/**
+ * Computes the last chapter.
+ *
+ * @param stdClass $game
+ * @param stdClass $bookquiz
+ */
 function game_bookquiz_play_computelastchapter( $game, &$bookquiz) {
     global $DB;
 
@@ -260,6 +295,17 @@ function game_bookquiz_play_computelastchapter( $game, &$bookquiz) {
     }
 }
 
+/**
+ * Shows questions.
+ *
+ * @param int $id
+ * @param int $questionid
+ * @param int $chapterid
+ * @param int $nextchapterid
+ * @param int $scoreattempt
+ * @param stdClass $game
+ * @param stdClass $context
+ */
 function game_bookquiz_showquestions( $id, $questionid, $chapterid, $nextchapterid, $scoreattempt, $game, $context) {
     $onlyshow  = false;
     $showsolution = false;
@@ -304,6 +350,13 @@ function game_bookquiz_showquestions( $id, $questionid, $chapterid, $nextchapter
     echo "</form>\n";
 }
 
+/**
+ * Selects random one question from the input list.
+ *
+ * @param array $questions
+ *
+ * @return the position of the random question.
+ */
 function game_bookquiz_selectrandomquestion( $questions) {
     global $DB;
 
@@ -331,6 +384,15 @@ function game_bookquiz_selectrandomquestion( $questions) {
     }
 }
 
+/**
+ * Check if the answers are correct.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $bookquiz
+ * @param stdClass $context
+ */
 function game_bookquiz_check_questions( $id, $game, $attempt, $bookquiz, $context) {
     global $USER, $DB;
 

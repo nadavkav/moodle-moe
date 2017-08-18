@@ -15,13 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file plays the game millionaire
- * 
- * @author  bdaloukas
- * @version $Id: play.php,v 1.31 2012/07/25 11:16:05 bdaloukas Exp $
- * @package game
- **/
+ * This file plays the game millionaire.
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Plays the millionaire
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $millionaire
+ * @param stdClass $context
+ */
 function game_millionaire_continue( $id, $game, $attempt, $millionaire, $context) {
     // User must select quiz or question as a source module.
     if (($game->quizid == 0) and ($game->questioncategoryid == 0)) {
@@ -54,6 +65,15 @@ function game_millionaire_continue( $id, $game, $attempt, $millionaire, $context
     game_millionaire_play( $id, $game, $attempt, $newrec, $context);
 }
 
+/**
+ * Plays the millionaire
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $millionaire
+ * @param stdClass $context
+ */
 function game_millionaire_play( $id, $game, $attempt, $millionaire, $context) {
     global $DB;
 
@@ -94,6 +114,17 @@ function game_millionaire_play( $id, $game, $attempt, $millionaire, $context) {
     }
 }
 
+/**
+ * Shows the grid
+ *
+ * @param stdClass $game
+ * @param stdClass $millionaire
+ * @param int $id
+ * @param stdClass $query
+ * @param array $aanswer
+ * @param stdClass $info
+ * @param stdClass $context
+ */
 function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, $info, $context) {
     global $CFG, $OUTPUT;
 
@@ -135,8 +166,8 @@ function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, 
         $gif = "5050";
         $disabled = "";
     }
-    echo '<input type="image" '.$disabled.' name="Help5050" id="Help5050" Title="50 50" src="'.
-        $OUTPUT->pix_url($dirgif.$gif, 'mod_game').'" alt="" border="0">&nbsp;';
+    $src = game_pix_url($dirgif.$gif, 'mod_game');
+    echo '<input type="image" '.$disabled.' name="Help5050" id="Help5050" Title="50 50" src="'.$src.'" alt="" border="0">&nbsp;';
 
     if ($state & 2) {
         $gif = "telephonex";
@@ -148,7 +179,7 @@ function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, 
 
     echo '<input type="image" name="HelpTelephone" '.$disabled.
         ' id="HelpTelephone" Title="'.get_string( 'millionaire_telephone', 'game').
-        '" src="'.$OUTPUT->pix_url($dirgif.$gif, 'mod_game').'" alt="" border="0">&nbsp;';
+        '" src="'.game_pix_url($dirgif.$gif, 'mod_game').'" alt="" border="0">&nbsp;';
 
     if ($state & 4) {
         $gif = "peoplex";
@@ -159,11 +190,11 @@ function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, 
     }
     echo '<input type="image" name="HelpPeople" '.$disabled.' id="HelpPeople" Title="'.
         get_string( 'millionaire_helppeople', 'game').'" src="'.
-        $OUTPUT->pix_url($dirgif.$gif, 'mod_game').'" alt="" border="0">&nbsp;';
+        game_pix_url($dirgif.$gif, 'mod_game').'" alt="" border="0">&nbsp;';
 
     echo '<input type="image" name="Quit" id="Quit" Title="'.
         get_string( 'millionaire_quit', 'game').'" src="'.
-        $OUTPUT->pix_url($dirgif.'x', 'mod_game').'" alt="" border="0">&nbsp;';
+        game_pix_url($dirgif.'x', 'mod_game').'" alt="" border="0">&nbsp;';
     echo "\r\n";
     echo "</td>\r\n";
 
@@ -235,7 +266,10 @@ function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, 
     echo "<tr $background><td colspan=10>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>\r\n";
 
     $bfirst = true;
-    $letters = get_string( 'lettersall', 'game');
+    $letters = get_string( 'millionaire_lettersall', 'game');
+    if (($letters == '') or ($letters == '-')) {
+        $letters = get_string( 'lettersall', 'game');
+    }
     for ($i = 1; $i <= count( $aanswer); $i++) {
         $name = "btAnswer".$i;
         $s = game_substr( $letters, $i - 1, 1);
@@ -280,6 +314,15 @@ function game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, 
     echo "</form>\r\n";
 }
 
+/**
+ * Show next question
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $millionaire
+ * @param stdClass $context
+ */
 function game_millionaire_shownextquestion( $id, $game, $attempt, $millionaire, $context) {
     game_millionaire_selectquestion( $aanswer, $game, $attempt, $millionaire, $query, $context);
 
@@ -294,7 +337,16 @@ function game_millionaire_shownextquestion( $id, $game, $attempt, $millionaire, 
     }
 }
 
-// Updates tables: games_millionaire, game_attempts, game_questions.
+/**
+ * Updates tables: games_millionaire, game_attempts, game_questions.
+ *
+ * @param array $aanswer
+ * @param stdClass $game
+ * @param stdClasss $attempt
+ * @param stdClass $millionaire
+ * @param stdClass $query
+ * @param stdClass $context
+ */
 function game_millionaire_selectquestion( &$aanswer, $game, $attempt, &$millionaire, &$query, $context) {
     global $DB, $USER;
 
@@ -420,6 +472,16 @@ function game_millionaire_selectquestion( &$aanswer, $game, $attempt, &$milliona
     game_update_queries( $game, $attempt, $query, $score, '');
 }
 
+/**
+ * Select serial question
+ *
+ * @param stdClass $game
+ * @param string $table
+ * @param string $select
+ * @param string $idfields
+ * @param int $level
+ * @param string $order
+ */
 function game_millionaire_select_serial_question( $game, $table, $select, $idfields = "id", $level, $order) {
     global $DB, $USER;
 
@@ -450,6 +512,15 @@ function game_millionaire_select_serial_question( $game, $table, $select, $idfie
     return $questions[ $pos];
 }
 
+/**
+ * Load questions for millionaire
+ *
+ * @param stdClass $game
+ * @param stdClass $millionaire
+ * @param string $query
+ * @param array $aanswer
+ * @param stdClass $context
+ */
 function game_millionaire_loadquestions( $game, $millionaire, &$query, &$aanswer, $context) {
     global $DB;
 
@@ -465,7 +536,12 @@ function game_millionaire_loadquestions( $game, $millionaire, &$query, &$aanswer
     }
 }
 
-// Flag 1:5050, 2:telephone 4:people.
+/**
+ * Set state. Flag 1 is 5050, 2 is telephone 4 is people.
+ *
+ * @param stdClass $millionaire
+ * @param string $mask
+ */
 function game_millionaire_setstate( &$millionaire, $mask) {
     global $DB;
 
@@ -479,6 +555,15 @@ function game_millionaire_setstate( &$millionaire, $mask) {
     }
 }
 
+/**
+ * One help 50-50
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param stdClass $millionaire
+ * @param string $query
+ * @param stdClass $context
+ */
 function game_millionaire_onhelp5050( $game, $id,  &$millionaire, $query, $context) {
     game_millionaire_loadquestions( $game, $millionaire, $query, $aanswer, $context);
 
@@ -507,6 +592,15 @@ function game_millionaire_onhelp5050( $game, $id,  &$millionaire, $query, $conte
     game_millionaire_showgrid(  $game, $millionaire, $id, $query, $aanswer, '', $context);
 }
 
+/**
+ * One help telephone
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param stdClass $millionaire
+ * @param stdClass $query
+ * @param stdClass $context
+ */
 function game_millionaire_onhelptelephone(  $game, $id,  &$millionaire, $query, $context) {
     game_millionaire_loadquestions( $game, $millionaire, $query, $aanswer, $context);
 
@@ -541,6 +635,15 @@ function game_millionaire_onhelptelephone(  $game, $id,  &$millionaire, $query, 
     game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, $info, $context);
 }
 
+/**
+ * One help people
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param stdClass $millionaire
+ * @param stdClass $query
+ * @param stdClass $context
+ */
 function game_millionaire_onhelppeople( $game, $id,  &$millionaire, $query, $context) {
     game_millionaire_loadquestions( $game, $millionaire, $query, $aanswer, $context);
 
@@ -581,6 +684,17 @@ function game_millionaire_onhelppeople( $game, $id,  &$millionaire, $query, $con
     game_millionaire_showgrid( $game, $millionaire, $id, $query, $aanswer, game_substr( $info, 4), $context);
 }
 
+/**
+ * Millionaire on answer
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $millionaire
+ * @param stdClass $query
+ * @param string $answer
+ * @param stdClass $context
+ */
 function game_millionaire_onanswer( $id, $game, $attempt, &$millionaire, $query, $answer, $context) {
     global $DB;
 
@@ -628,6 +742,14 @@ function game_millionaire_onanswer( $id, $game, $attempt, &$millionaire, $query,
     }
 }
 
+/**
+ * Millionaire on quit
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $query
+ */
 function game_millionaire_onquit( $id, $game, $attempt, $query) {
     global $CFG, $DB;
 

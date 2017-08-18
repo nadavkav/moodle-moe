@@ -14,8 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This file plays the game Hidden Picture.
 
+/**
+ * This file plays the game Hidden Picture.
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Plays the game "Hidden picture"
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $hiddenpicture
+ * @param stdClass $context
+ */
 function game_hiddenpicture_continue( $id, $game, $attempt, $hiddenpicture, $context) {
     global $DB, $USER;
 
@@ -95,7 +113,13 @@ function game_hiddenpicture_continue( $id, $game, $attempt, $hiddenpicture, $con
     game_hiddenpicture_play( $id, $game, $attempt, $newrec, false, $context);
 }
 
-// Create the game_hiddenpicture record.
+
+/**
+ * Create the game_hiddenpicture record.
+ *
+ * @param stdClass $game
+ * @param stdClass $attempt
+ */
 function game_hiddenpicture_selectglossaryentry( $game, $attempt) {
     global $CFG, $DB, $USER;
 
@@ -206,6 +230,16 @@ function game_hiddenpicture_selectglossaryentry( $game, $attempt) {
     return $newrec;
 }
 
+/**
+ * Plays the game "Hidden picture"
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $hiddenpicture
+ * @param boolean $showsolution
+ * @param stdClass $context
+ */
 function game_hiddenpicture_play( $id, $game, $attempt, $hiddenpicture, $showsolution, $context) {
     if ($game->toptext != '') {
         echo $game->toptext.'<br>';
@@ -239,6 +273,12 @@ function game_hiddenpicture_play( $id, $game, $attempt, $hiddenpicture, $showsol
     }
 }
 
+/**
+ * "Hidden picture" compute score
+ *
+ * @param stdClass $game
+ * @param stdClass $hiddenpicture
+ */
 function game_hidden_picture_computescore( $game, $hiddenpicture) {
     $correct = $hiddenpicture->correct;
     if ($hiddenpicture->found) {
@@ -255,6 +295,17 @@ function game_hidden_picture_computescore( $game, $hiddenpicture) {
     return $percent;
 }
 
+/**
+ * Show hidden picture
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $hiddenpicture
+ * @param boolean $showsolution
+ * @param int $offsetquestions
+ * @param int $correctquestions
+ */
 function game_hiddenpicture_showhiddenpicture( $id, $game, $attempt, $hiddenpicture, $showsolution,
             $offsetquestions, $correctquestions) {
     global $DB;
@@ -283,6 +334,13 @@ function game_hiddenpicture_showhiddenpicture( $id, $game, $attempt, $hiddenpict
     game_showpicture( $id, $game, $attempt, $query, $cells, $foundcells, true);
 }
 
+/**
+ * hidden picture. show question glossary
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param stdClass $query
+ */
 function game_hiddenpicture_showquestion_glossary( $game, $id, $query) {
     global $CFG, $DB;
 
@@ -314,6 +372,16 @@ function game_hiddenpicture_showquestion_glossary( $game, $id, $query) {
     echo "</form><br>\n";
 }
 
+/**
+ * Check main question
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $hiddenpicture
+ * @param boolean $finishattempt
+ * @param stdClass $context
+ */
 function game_hiddenpicture_check_mainquestion( $id, $game, &$attempt, &$hiddenpicture, $finishattempt, $context) {
     global $CFG, $DB;
 
@@ -379,6 +447,17 @@ function game_hiddenpicture_check_mainquestion( $id, $game, &$attempt, &$hiddenp
     return false;
 }
 
+/**
+ * Show picture
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $query
+ * @param object $cells
+ * @param int $foundcells
+ * @param boolean $usemap
+ */
 function game_showpicture( $id, $game, $attempt, $query, $cells, $foundcells, $usemap) {
     global $CFG;
 

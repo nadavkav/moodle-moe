@@ -16,10 +16,10 @@
 
 /**
  * This page prints a particular attempt of game
- * 
- * @author  bdaloukas
- * @version $Id: attempt.php,v 1.22 2012/07/25 23:07:43 bdaloukas Exp $
- * @package game
+ *
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 require_once( "../../config.php");
 require_once( "lib.php");
@@ -39,6 +39,14 @@ $action  = optional_param('action', "", PARAM_ALPHANUM);  // Is the param action
 game_show_header( $id, $game, $course, $context);
 game_do_attempt( $id, $game, $action, $course, $context);
 
+/**
+ * Do the required checks and print header.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $course
+ * @param stdClass $context
+ */
 function game_show_header( &$id, &$game, &$course, &$context) {
     global $DB, $USER, $PAGE, $OUTPUT;
 
@@ -114,6 +122,15 @@ function game_show_header( &$id, &$game, &$course, &$context) {
     echo $OUTPUT->header();
 }
 
+/**
+ * Do one attempt.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param string $action
+ * @param stdClass $course
+ * @param stdClass $context
+ */
 function game_do_attempt( $id, $game, $action, $course, $context) {
     global $OUTPUT;
 
@@ -186,6 +203,15 @@ function game_do_attempt( $id, $game, $action, $course, $context) {
     echo $OUTPUT->footer();
 }
 
+/**
+ * Creates one game.
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param int $forcenew
+ * @param stdClass $course
+ * @param stdClass $context
+ */
 function game_create( $game, $id, $forcenew, $course, $context) {
     global $USER, $CFG, $DB;
 
@@ -225,6 +251,11 @@ function game_create( $game, $id, $forcenew, $course, $context) {
     }
 }
 
+/**
+ * Unpacks the cross.
+ *
+ * @param string $g
+ */
 function game_cross_unpackpuzzle( $g) {
     $ret = "";
     $len = game_strlen( $g);

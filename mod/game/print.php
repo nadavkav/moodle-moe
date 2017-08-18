@@ -16,11 +16,11 @@
 
 /**
  * This page export the game to html
- * 
- * @author  bdaloukas
- * @version $Id: print.php,v 1.7 2012/07/25 11:16:04 bdaloukas Exp $
- * @package game
- **/
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require_once("../../config.php");
 require_once("lib.php");
 require_once("locallib.php");
@@ -37,6 +37,13 @@ require_capability('mod/game:view', $context);
 
 game_print( $game, $id, $context);
 
+/**
+ * Print
+ *
+ * @param stdClass $game
+ * @param boolean $update
+ * @param stdClass $context
+ */
 function game_print( $game, $update, $context) {
     if ( $game->gamekind == 'cross') {
         game_print_cross( $game, $update, $context);
@@ -45,6 +52,13 @@ function game_print( $game, $update, $context) {
     }
 }
 
+/**
+ * Prints a cross.
+ *
+ * @param stdClass $game
+   @param boolean $update
+ * @param stdClass $context
+ */
 function game_print_cross( $game, $update, $context) {
     require( "cross/play.php");
 
@@ -71,6 +85,13 @@ function game_print_cross( $game, $update, $context) {
         $showstudentguess, $context);
 }
 
+/**
+ * Prints a cryptex.
+ *
+ * @param stdClass $game
+   @param boolean $update
+ * @param stdClass $context
+ */
 function game_print_cryptex( $game, $update, $context) {
     global $DB;
 

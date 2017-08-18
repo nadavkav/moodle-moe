@@ -14,8 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// This files plays the game "Snakes and Ladders".
+/**
+ * This files plays the game "Snakes and Ladders".
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Plays the game "Snakes and Ladders".
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $snakes
+ * @param stdClass $context
+ */
 function game_snakes_continue( $id, $game, $attempt, $snakes, $context) {
     if ($attempt != false and $snakes != false) {
         return game_snakes_play( $id, $game, $attempt, $snakes, $context);
@@ -43,13 +59,22 @@ function game_snakes_continue( $id, $game, $attempt, $snakes, $context) {
     return game_snakes_play( $id, $game, $attempt, $newrec, $context);
 }
 
+/**
+ * Plays the game "Snakes and Ladders".
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $snakes
+ * @param stdClass $context
+ */
 function game_snakes_play( $id, $game, $attempt, $snakes, $context) {
     global $CFG, $DB, $OUTPUT;
 
     $board = game_snakes_get_board( $game);
     $showboard = false;
 
-    if ($snakes->position > $board->cols * $board->rows && $snakes->queryid <> 0) {
+    if ($snakes->position > $board->usedcols * $board->usedrows && $snakes->queryid <> 0) {
         $finish = true;
 
         if (! $cm = $DB->get_record('course_modules', array( 'id' => $id))) {
@@ -95,25 +120,26 @@ function game_snakes_play( $id, $game, $attempt, $snakes, $context) {
     -->
     </script>
 
-	<table>
-	<tr>
-		<td>
+    <table>
+    <tr>
+        <td>
 
 <div id="board" STYLE="position:relative; left:0px;top:0px; 
     width:<?php p($board->width); ?>px; height:<?php p($board->height); ?>px;">
 <img src="<?php echo $board->imagesrc; ?>"></img>
 </div>
 
-<?php
+    <?php
     if ($finish == false) {
         game_snakes_showdice( $snakes, $board);
     }
-?>
-		</td>
-	</tr>
-	</table>
-<?php
+    ?>
 
+    </td>
+    </tr>
+    </table>
+
+    <?php
     if ($game->bottomtext != '') {
         echo '<br>'.$game->bottomtext;
     }
@@ -123,6 +149,12 @@ function game_snakes_play( $id, $game, $attempt, $snakes, $context) {
     }
 }
 
+/**
+ * Show dice
+ *
+ * @param stdClass $snakes
+ * @param boolean $board
+ */
 function game_snakes_showdice( $snakes, $board) {
     $pos = game_snakes_computeplayerposition( $snakes, $board);
 ?>
@@ -136,17 +168,23 @@ height="<?php echo $pos->height; ?>"/>
 <div ID="dice" STYLE="position:relative; 
 left:<?php p( $board->width + round($board->width / 3)); ?>px;
 top:<?php p( -2 * round($board->height / 3));?>px; ">
-	<img src="snakes/1/dice<?php p($snakes->dice);?>.png" alt="<?php print_string('snakes_dice', 'game', $snakes->dice) ?>" />
-	</div>	
+    <img src="snakes/1/dice<?php p($snakes->dice);?>.png" alt="<?php print_string('snakes_dice', 'game', $snakes->dice) ?>" />
+    </div>
 <?php
 }
 
+/**
+ * Computes player's position.
+ *
+ * @param stdClass $snakes
+ * @param stdClass $board
+ */
 function game_snakes_computeplayerposition( $snakes, $board) {
-    $x = ($snakes->position - 1) % $board->cols;
-    $y = floor( ($snakes->position - 1) / $board->cols);
+    $x = ($snakes->position - 1) % $board->usedcols;
+    $y = floor( ($snakes->position - 1) / $board->usedcols);
 
-    $cellwidth = ($board->width - $board->headerx - $board->footerx) / $board->cols;
-    $cellheight = ($board->height - $board->headery - $board->footery) / $board->rows;
+    $cellwidth = ($board->width - $board->headerx - $board->footerx) / $board->usedcols;
+    $cellheight = ($board->height - $board->headery - $board->footery) / $board->usedrows;
 
     $pos = new stdClass();
     $pos->width = 22;
@@ -158,7 +196,7 @@ function game_snakes_computeplayerposition( $snakes, $board) {
     switch( $board->direction) {
         case 1:
             if (($y % 2) == 1) {
-                $x = $board->cols - $x - 1;
+                $x = $board->usedcols - $x - 1;
             }
             $pos->x = $board->headerx + $x * $cellwidth + ($cellwidth - $pos->width) / 2 + $pos->ofsx;
             $pos->y = $board->footery + $y * $cellheight + ($cellheight - $pos->height) / 2 + $pos->ofsy;
@@ -170,6 +208,13 @@ function game_snakes_computeplayerposition( $snakes, $board) {
     return $pos;
 }
 
+/**
+ * Computes next question.
+ *
+ * @param stdClass $game
+ * @param stdClass $snakes
+ * @param stdClass $query
+ */
 function game_snakes_computenextquestion( $game, &$snakes, &$query) {
     global $DB, $USER;
 
@@ -201,6 +246,7 @@ function game_snakes_computenextquestion( $game, &$snakes, &$query) {
     if (($query->glossaryentryid == 0) and ($query->questionid == 0)) {
         return false;
     }
+    $query->gamekind = $game->gamekind;
     $query->attemptid = $snakes->id;
     $query->gameid = $game->id;
     $query->userid = $USER->id;
@@ -227,14 +273,32 @@ function game_snakes_computenextquestion( $game, &$snakes, &$query) {
     return true;
 }
 
+/**
+ * Shows the question.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $snakes
+ * @param stdClass $query
+ * @param stdClass $context
+ */
 function game_snakes_showquestion( $id, $game, $snakes, $query, $context) {
-    if ($query->sourcemodule == 'glossary') {
+    if ($game->sourcemodule == 'glossary') {
         game_snakes_showquestion_glossary( $id, $snakes, $query, $game);
     } else {
         game_snakes_showquestion_question( $game, $id, $snakes, $query, $context);
     }
 }
 
+/**
+ * Shows the question.
+ *
+ * @param stdClass $game
+ * @param int $id
+ * @param stdClass $snakes
+ * @param stdClass $query
+ * @param stdClass $context
+ */
 function game_snakes_showquestion_question( $game, $id, $snakes, $query, $context) {
     global $CFG;
 
@@ -261,6 +325,14 @@ function game_snakes_showquestion_question( $game, $id, $snakes, $query, $contex
     echo "</form>\n";
 }
 
+/**
+ * Show a glossary question.
+ *
+ * @param int $id
+ * @param stdClass $snakes
+ * @param stdClass $query
+ * @param stdClass $game
+ */
 function game_snakes_showquestion_glossary( $id, $snakes, $query, $game) {
     global $CFG, $DB;
 
@@ -281,7 +353,9 @@ function game_snakes_showquestion_glossary( $id, $snakes, $query, $game) {
     // Add a hidden field with glossaryentryid.
     echo '<input type="hidden" name="glossaryentryid" value="'.$query->glossaryentryid."\" />\n";
 
-    $cmglossary = get_coursemodule_from_instance('glossary', $game->glossaryid, $game->course);
+    $sql = "SELECT id,course FROM {$CFG->prefix}glossary WHERE id={$game->glossaryid}";
+    $glossary = $DB->get_record_sql( $sql);
+    $cmglossary = get_coursemodule_from_instance('glossary', $game->glossaryid, $glossary->course);
     $contextglossary = game_get_context_module_instance( $cmglossary->id);
     $s = game_filterglossary(str_replace( '\"', '"', $entry->definition), $query->glossaryentryid,
         $contextglossary->id, $game->course);
@@ -293,6 +367,15 @@ function game_snakes_showquestion_glossary( $id, $snakes, $query, $game) {
     echo "</form>\n";
 }
 
+/**
+ * Checks if answer is correct.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $snakes
+ * @param stdClass $context
+ */
 function game_snakes_check_questions( $id, $game, $attempt, $snakes, $context) {
     global $CFG, $DB;
 
@@ -329,6 +412,15 @@ function game_snakes_check_questions( $id, $game, $attempt, $snakes, $context) {
     game_snakes_position( $id, $game, $attempt, $snakes, $correct, $query, $context);
 }
 
+/**
+ * Checks if the glossary answer is correct.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $snakes
+ * @param stdClass $context
+ */
 function game_snakes_check_glossary( $id, $game, $attempt, $snakes, $context) {
     global $CFG, $DB;
 
@@ -361,6 +453,17 @@ function game_snakes_check_glossary( $id, $game, $attempt, $snakes, $context) {
     game_snakes_position( $id, $game, $attempt, $snakes, $correct, $query, $context);
 }
 
+/**
+ * Computes the position.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $snakes
+ * @param boolean $correct
+ * @param stdClasss $query
+ * @param stdClass $context
+ */
 function game_snakes_position( $id, $game, $attempt, $snakes, $correct, $query, $context) {
     global $DB;
 
@@ -388,8 +491,8 @@ function game_snakes_position( $id, $game, $attempt, $snakes, $correct, $query, 
     }
 
     $board = $DB->get_record_select( 'game_snakes_database', "id=$snakes->snakesdatabaseid");
-    $gradeattempt = $snakes->position / ($board->cols * $board->rows);
-    $finished = ( $snakes->position > $board->cols * $board->rows ? 1 : 0);
+    $gradeattempt = $snakes->position / ($board->usedcols * $board->usedrows);
+    $finished = ( $snakes->position > $board->usedcols * $board->usedrows ? 1 : 0);
 
     game_updateattempts( $game, $attempt, $gradeattempt, $finished);
 
@@ -398,7 +501,12 @@ function game_snakes_position( $id, $game, $attempt, $snakes, $correct, $query, 
     game_snakes_play( $id, $game, $attempt, $snakes, $context);
 }
 
-// In lander go forward.
+/**
+ * In lander go forward.
+ *
+ * @param int $position
+ * @param string $data
+ */
 function game_snakes_foundlander( $position, $data) {
     preg_match( "/L$position-([0-9]*)/", $data, $matches);
 
@@ -409,7 +517,12 @@ function game_snakes_foundlander( $position, $data) {
     return 0;
 }
 
-// In snake go backward.
+/**
+ * In snake go backward.
+ *
+ * @param int $position
+ * @param string $data
+ */
 function game_snakes_foundsnake( $position, $data) {
     preg_match( "/S([0-9]*)-$position,/", $data.',', $matches);
 
@@ -420,6 +533,12 @@ function game_snakes_foundsnake( $position, $data) {
     return 0;
 }
 
+/**
+ * Removes attempt data.
+ *
+ * @param int $questionusageid
+ * @param int $questionid
+ */
 function game_snakes_remove_attemptdata ($questionusageid, $questionid) {
     global $DB;
 

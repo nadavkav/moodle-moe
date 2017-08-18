@@ -14,8 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Plays the game "Sudoku".
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
 require_once( "../../lib/questionlib.php");
 
+/**
+ * Plays the game Sudoku
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param boolean $endofgame
+ * @param stdClass $context
+ */
 function game_sudoku_continue( $id, $game, $attempt, $sudoku, $endofgame, $context) {
     global $CFG, $DB, $USER;
 
@@ -106,6 +126,17 @@ function game_sudoku_continue( $id, $game, $attempt, $sudoku, $endofgame, $conte
     game_sudoku_play( $id, $game, $attempt, $newrec, false, false, $context);
 }
 
+/**
+ * Plays the game Sudoku
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param boolean $onlyshow
+ * @param boolean $showsolution
+ * @param stdClass $context
+ */
 function game_sudoku_play( $id, $game, $attempt, $sudoku, $onlyshow, $showsolution, $context) {
     $offsetquestions = game_sudoku_compute_offsetquestions( $game->sourcemodule, $attempt, $numbers, $correctquestions);
 
@@ -132,7 +163,14 @@ function game_sudoku_play( $id, $game, $attempt, $sudoku, $onlyshow, $showsoluti
     }
 }
 
-// Returns a map with an offset and id of each question.
+/**
+ * Returns a map with an offset and id of each question.
+ *
+ * @param string $sourcemodule
+ * @param stdClass $attempt
+ * @param int $numbers
+ * @param int $correctquestions
+ */
 function game_sudoku_compute_offsetquestions( $sourcemodule, $attempt, &$numbers, &$correctquestions) {
     global $CFG, $DB;
 
@@ -169,6 +207,9 @@ function game_sudoku_compute_offsetquestions( $sourcemodule, $attempt, &$numbers
     return $offsetquestions;
 }
 
+/**
+ * Select a sudoku randomly
+ */
 function getrandomsudoku() {
     global $DB;
 
@@ -193,6 +234,11 @@ function getrandomsudoku() {
     return false;
 }
 
+/**
+ * Get closed
+ *
+ * @param string $data
+ */
 function game_sudoku_getclosed( $data) {
     $a = array();
 
@@ -207,6 +253,19 @@ function game_sudoku_getclosed( $data) {
     return $a;
 }
 
+/**
+ * Shows the sudoku
+ *
+ * @param string $data
+ * @param string $guess
+ * @param boolean $bshowlegend
+ * @param boolean $bshowsolution
+ * @param int $offsetquestions
+ * @param int $correctquestions
+ * @param int $id
+ * @param stdClass $attempt
+ * @param stdClass $game
+ */
 function game_sudoku_showsudoku( $data, $guess, $bshowlegend, $bshowsolution, $offsetquestions,
     $correctquestions, $id, $attempt, $game) {
     global $CFG, $DB;
@@ -271,20 +330,19 @@ function game_sudoku_showsudoku( $data, $guess, $bshowlegend, $bshowsolution, $o
     $href = $CFG->wwwroot.'/mod/game/attempt.php?action=sudokucheckn&id='.$id;
 
 ?>
-	<script language="javascript">
-			function OnCheck( pos)
-			{
-				s = window.prompt( "<?php echo get_string ( 'sudoku_guessnumber', 'game') ?>", "");
-				
-				if (s < "1")
-					return;
-				if (s > "9")
-					return;
+    <script language="javascript">
+        function OnCheck( pos) {
+            s = window.prompt( "<?php echo get_string ( 'sudoku_guessnumber', 'game') ?>", "");
 
-                window.location.href = "<?php echo $href; ?>&pos=" + pos + "&num=" + s;
-			}
-		</script>
-	<?php	
+            if (s < "1")
+                return;
+            if (s > "9")
+                return;
+
+            window.location.href = "<?php echo $href; ?>&pos=" + pos + "&num=" + s;
+        }
+    </script>
+    <?php
 
     // Here are the congratulations.
     if ($attempt->timefinish) {
@@ -310,6 +368,11 @@ function game_sudoku_showsudoku( $data, $guess, $bshowlegend, $bshowsolution, $o
     return $count;
 }
 
+/**
+ * Get question list
+ *
+ * @param int $offsetquestions
+ */
 function game_sudoku_getquestionlist( $offsetquestions) {
     $questionlist = '';
     foreach ($offsetquestions as $q) {
@@ -326,6 +389,14 @@ function game_sudoku_getquestionlist( $offsetquestions) {
     return $questionlist;
 }
 
+/**
+ * Get glossary entries
+ *
+ * @param stdClass $game
+ * @param int $offsetentries
+ * @param string $entrylist
+ * @param int $numbers
+ */
 function game_sudoku_getglossaryentries( $game, $offsetentries, &$entrylist, $numbers) {
     global $DB;
 
@@ -343,6 +414,20 @@ function game_sudoku_getglossaryentries( $game, $offsetentries, &$entrylist, $nu
     return $entries;
 }
 
+/**
+ * Plays the game hangman
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param int $offsetquestions
+ * @param string $numbers
+ * @param int $correctquestions
+ * @param boolean $onlyshow
+ * @param boolean $showsolution
+ * @param stdClass $context
+ */
 function game_sudoku_showquestions_quiz( $id, $game, $attempt, $sudoku, $offsetquestions, $numbers,
      $correctquestions, $onlyshow, $showsolution, $context) {
     global $CFG;
@@ -412,7 +497,19 @@ function game_sudoku_showquestions_quiz( $id, $game, $attempt, $sudoku, $offsetq
     }
 }
 
-// Show the sudoku and glossaryentries.
+/**
+ * Show the sudoku and glossaryentries.
+ *
+ * @param int $id
+ * @param string $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param int $offsetentries
+ * @param int $numbers
+ * @param int $correctentries
+ * @param boolean $onlyshow
+ * @param boolean $showsolution
+ */
 function game_sudoku_showquestions_glossary( $id, $game, $attempt, $sudoku, $offsetentries, $numbers,
  $correctentries, $onlyshow, $showsolution) {
     global $CFG;
@@ -487,6 +584,14 @@ function game_sudoku_showquestions_glossary( $id, $game, $attempt, $sudoku, $off
     echo "</form>\n";
 }
 
+/**
+ * Show question onfinish
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ */
 function game_sudoku_showquestion_onfinish( $id, $game, $attempt, $sudoku) {
     if (!set_field( 'game_attempts', 'finish', 1, 'id', $attempt->id)) {
         print_error( "game_sudoku_showquestion_onfinish: Can't update game_attempts id=$attempt->id");
@@ -499,12 +604,25 @@ function game_sudoku_showquestion_onfinish( $id, $game, $attempt, $sudoku) {
     echo "<a href=\"{$CFG->wwwroot}?id=$id\">".get_string( 'finish', 'game').'</a> ';
 }
 
+/**
+ * Check answers
+ */
 function game_sudoku_checkanswers() {
     $responses = data_submitted();
 
     $actions = question_extract_responses($questions, $responses, $event);
 }
 
+/**
+ * Checks questions
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param boolean $finishattempt
+ * @param stdClass $course
+ */
 function game_sudoku_check_questions( $id, $game, $attempt, $sudoku, $finishattempt, $course) {
     global $DB;
 
@@ -544,6 +662,16 @@ function game_sudoku_check_questions( $id, $game, $attempt, $sudoku, $finishatte
     game_sudoku_check_last( $id, $game, $attempt, $sudoku, $finishattempt, $course);
 }
 
+/**
+ * Check glossary entries
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param boolean $finishattempt
+ * @param string $course
+ */
 function game_sudoku_check_glossaryentries( $id, $game, $attempt, $sudoku, $finishattempt, $course) {
     global $DB;
 
@@ -590,7 +718,16 @@ function game_sudoku_check_glossaryentries( $id, $game, $attempt, $sudoku, $fini
     return true;
 }
 
-// This is the last function after submiting the answers.
+/**
+ * This is the last function after submiting the answers.
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param boolean $finishattempt
+ * @param stdClass $course
+ */
 function game_sudoku_check_last( $id, $game, $attempt, $sudoku, $finishattempt, $course) {
     global $CFG, $DB;
 
@@ -605,6 +742,17 @@ function game_sudoku_check_last( $id, $game, $attempt, $sudoku, $finishattempt, 
     game_updateattempts( $game, $attempt, $grade, $finishattempt);
 }
 
+/**
+ * Check number
+ *
+ * @param int $id
+ * @param stdClass $game
+ * @param stdClass $attempt
+ * @param stdClass $sudoku
+ * @param int $pos
+ * @param int $num
+ * @param stdClass $context
+ */
 function game_sudoku_check_number( $id, $game, $attempt, $sudoku, $pos, $num, $context) {
     global $DB;
 

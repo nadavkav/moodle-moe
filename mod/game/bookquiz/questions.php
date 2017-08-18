@@ -17,12 +17,13 @@
 /**
  * The script supports book
  *
- * @version $Id: questions.php,v 1.6 2012/07/25 11:16:05 bdaloukas Exp $
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
- * @package game
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-require_once("../../../config.php");
+defined('MOODLE_INTERNAL') || die();
+
 require_once( "../headergame.php");
 require_once("../locallib.php");
 
@@ -123,6 +124,14 @@ if (($recs = $DB->get_records( 'book_chapters', array('bookid' => $game->bookid)
 
 echo $OUTPUT->footer($course);
 
+/**
+ * Save infos to database.
+ *
+ * @param int $gameid
+ * @param int $bookid
+ * @param array $ids
+ * @param stdClass $form
+ */
 function game_bookquiz_save( $gameid, $bookid, $ids, $form) {
     global $DB;
 

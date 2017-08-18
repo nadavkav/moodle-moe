@@ -16,14 +16,17 @@
 
 /**
  * This page shows the answers of the current game
- * 
- * @author  bdaloukas
- * @version $Id: showanswers.php,v 1.7 2012/07/25 22:46:42 bdaloukas Exp $
- * @package game
- **/
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 require_once("../../config.php");
 require_once( "headergame.php");
+require_once( "check.php");
+
+require_login();
 
 if (!has_capability('mod/game:viewreports', $context)) {
     print_error( get_string( 'only_teachers', 'game'));
@@ -50,9 +53,18 @@ echo '<br><br>';
 
 $existsbook = ($DB->get_record( 'modules', array( 'name' => 'book'), 'id,id'));
 game_showanswers( $game, $existsbook, $context);
+$s = game_check_common_problems( $context, $game);
+if ($s != '') {
+    echo '<hr>'.$s;
+}
 
 echo $OUTPUT->footer();
 
+/**
+ * Compute repetitions
+ *
+ * @param stdClass $game
+ */
 function game_compute_repetitions($game) {
     global $DB, $USER;
 
@@ -67,6 +79,11 @@ function game_compute_repetitions($game) {
     }
 }
 
+/**
+ * Show users
+ *
+ * @param stdClass $game
+ */
 function game_showusers($game) {
     global $CFG, $USER;
 
@@ -127,6 +144,13 @@ function game_showusers($game) {
     echo $output . '</select>' . "\n";
 }
 
+/**
+ * Show answers
+ *
+ * @param stdClass $game
+ * @param boolean $existsbook
+ * @param stdClass $context
+ */
 function game_showanswers( $game, $existsbook, $context) {
     if ($game->gamekind == 'bookquiz' and $existsbook) {
         game_showanswers_bookquiz( $game, $context);
@@ -146,6 +170,11 @@ function game_showanswers( $game, $existsbook, $context) {
     }
 }
 
+/**
+ * append select to SQL
+ *
+ * @param stdClass $game
+ */
 function game_showanswers_appendselect( $game) {
     switch ($game->gamekind) {
         case 'hangman':
@@ -163,6 +192,12 @@ function game_showanswers_appendselect( $game) {
     return '';
 }
 
+/**
+ * Show answers question
+ *
+ * @param stdClass $game
+ * @param stdClass $context
+ */
 function game_showanswers_question( $game, $context) {
     global $DB;
 
@@ -171,7 +206,9 @@ function game_showanswers_question( $game, $context) {
 
         if ($game->subcategories) {
             $cats = question_categorylist( $game->questioncategoryid);
-            if (strpos( $cats, ',') > 0) {
+            if (is_array( $cats)) {
+                $select = ' category in ('.implode( ',', $cats).')';
+            } else if (strpos( $cats, ',') > 0) {
                 $select = ' category in ('.$cats.')';
             }
         }
@@ -190,11 +227,30 @@ function game_showanswers_question( $game, $context) {
     $select .= ' AND hidden = 0 ';
     $select .= game_showanswers_appendselect( $game);
 
-    $showcategories = ($game->gamekind == 'bookquiz');
+    $gamekind = $game->gamekind;
+    $showcategories = ($gamekind == 'bookquiz');
     $order = ($showcategories ? 'category,questiontext' : 'questiontext');
-    game_showanswers_question_select( $game, '{question} q', $select, '*', $order, $showcategories, $game->course, $context);
+    $table = '{question} q';
+    if ($gamekind == 'millionaire') {
+        if (game_get_moodle_version() < '02.06') {
+            $table .= ',{question_multichoice} qmo';
+            $select .= " AND q.qtype='multichoice' AND qmo.single=1 AND qmo.question=q.id";
+        } else {
+            $table .= ',{qtype_multichoice_options} qmo';
+            $select .= " AND q.qtype='multichoice' AND qmo.single=1 AND qmo.questionid=q.id";
+        }
+    } else if ( ($gamekind == 'hangman') or ($gamekind == 'cryptex') or ($gamekind == 'cross')) {
+        $select .= " AND q.qtype = 'shortanswer'";
+    }
+    game_showanswers_question_select( $game, $table, $select, 'q.*', $order, $showcategories, $game->course, $context);
 }
 
+/**
+ * Show answers quiz
+ *
+ * @param stdClass $game
+ * @param stdClass $context
+ */
 function game_showanswers_quiz( $game, $context) {
     global $CFG;
 
@@ -213,6 +269,18 @@ function game_showanswers_quiz( $game, $context) {
     game_showanswers_question_select( $game, $table, $select, 'q.*', 'category,questiontext', false, $game->course, $context);
 }
 
+/**
+ * Create the select for SQL
+ *
+ * @param stdClass $game
+ * @param string $table
+ * @param string $select
+ * @param string $fields
+ * @param string $order
+ * @param boolean $showcategoryname
+ * @param int $courseid
+ * @param stdClass $context
+ */
 function game_showanswers_question_select( $game, $table, $select, $fields, $order, $showcategoryname, $courseid, $context) {
     global $CFG, $DB, $OUTPUT;
 
@@ -282,7 +350,7 @@ function game_showanswers_question_select( $game, $table, $select, $fields, $ord
         echo '<td>';
         echo "<a title=\"Edit\" ".
             "href=\"{$CFG->wwwroot}/question/question.php?inpopup=1&amp;id=$question->id&courseid=$courseid\" target=\"_blank\">";
-        echo "<img src=\"".$OUTPUT->pix_url('t/edit')."\" alt=\"Edit\" /></a> ";
+        echo "<img src=\"".game_pix_url('t/edit')."\" alt=\"Edit\" /></a> ";
 
         echo game_filterquestion(str_replace( array( "\'", '\"'), array( "'", '"'),
             $question->questiontext), $question->id, $context->id, $game->course);
@@ -352,6 +420,11 @@ function game_showanswers_question_select( $game, $table, $select, $fields, $ord
     echo "</table><br>\r\n\r\n";
 }
 
+/**
+ * Show answers glossary
+ *
+ * @param stdClass $game
+ */
 function game_showanswers_glossary( $game) {
     global $CFG, $DB;
 
@@ -361,6 +434,10 @@ function game_showanswers_glossary( $game) {
         $select .= " AND gec.entryid = ge.id ".
             " AND gec.categoryid = {$game->glossarycategoryid}";
         $table .= ",{glossary_entries_categories} gec";
+    }
+    if ($game->glossaryonlyapproved) {
+        // Only approved glossary entries will be used.
+        $select .= ' AND (ge.approved=1 OR teacherentry=1)';
     }
     $sql = "SELECT ge.id,definition,concept FROM $table WHERE $select ORDER BY definition";
     if (($questions = $DB->get_records_sql( $sql)) === false) {
@@ -426,6 +503,12 @@ function game_showanswers_glossary( $game) {
     echo "</table><br>\r\n\r\n";
 }
 
+/**
+ * Show answers bookquiz
+ *
+ * @param stdClass $game
+ * @param stdClass $context
+ */
 function game_showanswers_bookquiz( $game, $context) {
     global $CFG;
 

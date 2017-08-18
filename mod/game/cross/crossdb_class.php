@@ -17,14 +17,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class is a cross that can load and save to a table
- * 
- * @author  bdaloukas
- * @version $Id: crossdb_class.php,v 1.17 2012/07/25 11:16:05 bdaloukas Exp $
- * @package game
- **/
+ * CrossDB class
+ *
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * This class is a cross that can load and save to a table
+ *
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ **/
 class CrossDB extends Cross {
+    /**
+     * Save cross.
+     *
+     * @param stdClass $game
+     * @param array $crossm
+     * @param array $crossd
+     * @param int $id
+     */
     public function savecross( $game, &$crossm, $crossd, $id) {
         global $DB, $USER;
 
@@ -55,6 +72,11 @@ class CrossDB extends Cross {
         return true;
     }
 
+    /**
+     * Delete records.
+     *
+     * @param int $id
+     */
     public function delete_records( $id) {
         global $DB;
 
@@ -67,6 +89,23 @@ class CrossDB extends Cross {
     }
 
 
+    /**
+     * Load cross.
+     *
+     * @param string $g
+     * @param boolean $done
+     * @param string $html
+     * @param stdClass $game
+     * @param stdClass $attempt
+     * @param stdClass $crossrec
+     * @param boolean $onlyshow
+     * @param boolean $showsolution
+     * @param boolean $finishattempt
+     * @param boolean $showhtmlsolutions
+     * @param string $language
+     * @param boolean $showstudentguess
+     * @param stdClass $context
+     */
     public function loadcross( $g, &$done, &$html, $game, $attempt, $crossrec, $onlyshow, $showsolution,
     &$finishattempt, $showhtmlsolutions, &$language, $showstudentguess, $context) {
         global $DB;
@@ -81,8 +120,8 @@ class CrossDB extends Cross {
         $loadfromdb = ( $g == "");
 
         $this->mmincol = $this->mminrow = 0;
-        $this->mmaxcol = $crossrec->cols;
-        $this->mmaxrow = $crossrec->rows;
+        $this->mmaxcol = $crossrec->usedcols;
+        $this->mmaxrow = $crossrec->usedrows;
 
         if ($g == "") {
             $g = str_repeat( ' ', $this->mmaxcol * $this->mmaxrow);
@@ -130,6 +169,19 @@ class CrossDB extends Cross {
         return $info;
     }
 
+    /**
+     * Compute check.
+     *
+     * @param int $correctletters
+     * @param int $wrongletters
+     * @param string $restletters
+     * @param stdClass $game
+     * @param stdClass $attempt
+     * @param boolean $done
+     * @param boolean $onlyshow
+     * @param boolean $showsolution
+     * @param boolean $finishattempt
+     */
     public function game_cross_computecheck( $correctletters,  $wrongletters, $restletters, $game,
         $attempt, &$done, $onlyshow, $showsolution, $finishattempt) {
 
@@ -186,7 +238,20 @@ class CrossDB extends Cross {
         return $ret;
     }
 
-    // Rec is a record of cross_questions.
+    /**
+     * Update cross questions.
+     *
+     * @param stdClass $rec  (is a record of cross_questions).
+     * @param string $g
+     * @param int $pos
+     * @param int $correctletters
+     * @param int $wrongletters
+     * @param int $restletters
+     * @param stdClass $game
+     * @param stdClass $attempt
+     * @param stdClass $crossrec
+     * @param boolean $loadfromdb
+     */
     public function updatecrossquestions( &$rec, &$g, &$pos, &$correctletters, &$wrongletters,
         &$restletters, $game, $attempt, $crossrec, $loadfromdb) {
 

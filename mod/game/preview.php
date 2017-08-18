@@ -16,13 +16,15 @@
 
 /**
  * This page prints a particular attempt of game
- * 
- * @author  bdaloukas
- * @version $Id: preview.php,v 1.10 2012/07/25 11:16:04 bdaloukas Exp $
- * @package game
- **/
-
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require_once("../../config.php");
+
+require_login();
+
 require_once("lib.php");
 require_once("locallib.php");
 

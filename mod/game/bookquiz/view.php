@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * View a bookquiz.
+ *
+ * @package mod_game
+ * @copyright 2007 Vasilis Daloukas
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require_once('../../config.php');
 require_once('lib.php');
 
@@ -39,7 +47,7 @@ if (!$book = $DB->get_record('book', array( 'id' => $cm->instance))) {
 
 require_course_login($course, true, $cm);
 
-$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+$context = game_get_context_module_instance( $cm->id);
 
 // Read chapters.
 $select = $allowedit ? "bookid = $book->id" : "bookid = $book->id AND hidden = 0";

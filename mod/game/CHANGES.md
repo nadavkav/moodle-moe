@@ -1,3 +1,65 @@
+Changes in version 2017-08-11 (2017081103)
+- New: High score
+
+Changes in version 2017-08-08 (2017080601)
+- New: check params of crossword/cryptex
+
+Changes in version 2017-07-19 (2017071902)
+- Fix: Completion support
+
+Changes in version 2017-07-18 (2017071801)
+- New: icon.png and icon.svg
+
+Changes in version 2017-07-16 (2017071601)
+- Fix: Cloning a game
+
+Changes in version 2017-07-06 (2017070606)
+- New: Global glossaries
+
+Changes in version 2017-07-05 (2017070502)
+- Fix: Problems on backup/restore
+
+Changes in version 2017-07-03 (2017070301)
+- New: Auto check for common problem (mod_form.php and view.php for teachers)
+
+Changes in version 2017-06-30 (2017063002)
+- in mod_form.php shows the correct numbers of correspondings questions/glossaryentries
+- in showanswrs.php shows the correspondings questions/glossaryentries
+
+Changes in version 2017-06-27 (20170627)
+- Fix conversation of columns (cols,rows) from string to int
+
+Changes in version 2017-06-20 (20170620)
+- Fix conversation of columns (cols,rows) from string to int
+
+Changes in version 2017-06-19 (20170619)
+- Change field name game_snakes_database.cols => usedcols
+- Change field name game_snakes_database.rows => usedrows
+
+Changes in version 2017-06-10 (20170610)
+- Fix phpdocs problems
+
+Changes in version 2017-06-09 (20170609)
+- Fix Moodle 3.4 compatibility problems
+- Fix stylings problems
+
+Changes in version 2016-08-19 (20160819)
+- New string (millionaire_lettersall) that will be used to Deutsch language
+
+Changes in version 2016-06-26 (20160626)
+- Change type of game_cross.createscore to double
+
+Changes in version 2016-06-14 (20160614)
+- Fix Moodle 31 compatibility
+
+Changes in version 2016-09-17 (20160917)
+----------------------------------------
+- Fix Moodle 3.1 compatibility problems
+
+Changes in version 2016-04-26 (20160426)
+----------------------------------------
+- Fix Use get_types or get_shortcuts depended on version of Moodle
+
 Changes in version 2016-03-03 (20160302)
 ------------------------------------------------------------------
 - New: Max compute time in crossword and cryptex

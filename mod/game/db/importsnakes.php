@@ -14,8 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Imports the snakes database.
+ *
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
 game_importsnakes();
 
+
+/**
+ * Imports the snakes database.
+ */
 function game_importsnakes() {
     global $DB;
 
@@ -25,8 +39,8 @@ function game_importsnakes() {
 
     $newrec = new stdClass();
     $newrec->name = '8x8 - 4 Snakes - 4 Ladders';
-    $newrec->cols = 8;
-    $newrec->rows = 8;
+    $newrec->usedcols = 8;
+    $newrec->usedrows = 8;
     $newrec->fileboard = 'fidaki.jpg';
     $newrec->direction = 1;
     $newrec->headerx = 4;
@@ -40,8 +54,8 @@ function game_importsnakes() {
 
     $newrec = new stdClass();
     $newrec->name = '6x6 - 3 Snakes - 3 Ladders';
-    $newrec->cols = 6;
-    $newrec->rows = 6;
+    $newrec->usedcols = 6;
+    $newrec->usedrows = 6;
     $newrec->fileboard = 'fidaki2.jpg';
     $newrec->direction = 1;
     $newrec->headerx = 8;
@@ -54,6 +68,11 @@ function game_importsnakes() {
     game_importsnakes_do( $newrec);
 }
 
+/**
+ * Insert one board to database
+ *
+ * @param stdClass $newrec
+ */
 function game_importsnakes_do( $newrec) {
     global $DB;
 

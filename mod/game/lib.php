@@ -17,11 +17,11 @@
 /**
  * Library of functions and constants for module game
  *
- * @author 
- * @version $Id: lib.php,v 1.36 2012/07/25 11:16:03 bdaloukas Exp $
- * @package game
- **/
-
+ * @package    mod_game
+ * @copyright  2007 Vasilis Daloukas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+defined('MOODLE_INTERNAL') || die();
 
 // Define CONSTANTS.
 
@@ -53,15 +53,12 @@ define('GAME_REVIEW_SOLUTIONS',  16 * 0x1041);      // Show solutions.
 define('GAME_REVIEW_GENERALFEEDBACK', 32 * 0x1041); // Show general feedback.
 
 /**
- * Given an object containing all the necessary data, 
- * (defined by the form in mod.html) this function 
- * will create a new instance and return the id number 
- * of the new instance.
+ * Given an object containing all the necessary data, will create a new instance and return the id number of the new instance.
  *
- * @param object $instance An object from the form in mod.html
+ * @param object $game An object from the form in mod.html
+ *
  * @return int The id of the newly inserted game record
  **/
-
 function game_add_instance($game) {
     global $DB;
 
@@ -81,11 +78,9 @@ function game_add_instance($game) {
 }
 
 /**
- * Given an object containing all the necessary data, 
- * (defined by the form in mod.html) this function 
- * will update an existing instance with new data.
+ * Given an object containing all the necessary data, this function will update an existing instance with new data.
  *
- * @param object $instance An object from the form in mod.html
+ * @param object $game An object from the form in mod.html
  * @return boolean Success/Fail
  **/
 function game_update_instance($game) {
@@ -138,6 +133,11 @@ function game_update_instance($game) {
     return true;
 }
 
+/**
+ * Updates some fields before writing to database.
+ *
+ * @param stdClass $game
+ */
 function game_before_add_or_update(&$game) {
     if (isset( $game->questioncategoryid)) {
         $pos = strpos( $game->questioncategoryid, ',');
@@ -179,11 +179,9 @@ function game_before_add_or_update(&$game) {
 }
 
 /**
- * Given an ID of an instance of this module, 
- * this function will permanently delete the instance 
- * and any data that depends on it. 
+ * Given an ID of an instance of this module, this function will permanently delete the instance and any data that depends on it.
  *
- * @param int $id Id of the module instance
+ * @param int $gameid Id of the module instance
  * @return boolean Success/Failure
  **/
 function game_delete_instance($gameid) {
@@ -238,9 +236,13 @@ function game_delete_instance($gameid) {
 }
 
 /**
- * Return a small object with summary information about what a 
- * user has done with a given particular instance of this module
- * Used for user activity reports.
+ * Return a small object with summary information about what a user has done
+ *
+ * @param stdClass $course
+ * @param stdClass $user
+ * @param string $mod
+ * @param stdClass $game
+ *
  * $return->time = the time they did it
  * $return->info = a short text description
  **/
@@ -262,9 +264,13 @@ function game_user_outline($course, $user, $mod, $game) {
 }
 
 /**
- * Print a detailed representation of what a user has done with 
- * a given particular instance of this module, for user activity reports.
- **/
+ * Print a detailed representation of what a user has done with a given particular game,(user activity reports).
+
+ * @param stdClass $course
+ * @param stdClass $user
+ * @param string $mod
+ * @param stdClass $game
+ */
 function game_user_complete($course, $user, $mod, $game) {
     global $DB;
 
@@ -289,24 +295,26 @@ function game_user_complete($course, $user, $mod, $game) {
 }
 
 /**
- * Given a course and a time, this module should find recent activity 
- * that has occurred in game activities and print it out. 
- * Return true if there was output, or false is there was none. 
+ * Given a course and a time, this module should find recent activity that has occurred in game activities and print it out.
  *
  * @uses $CFG
  * @return boolean
  * @todo Finish documenting this function
- **/
+ *
+ * @param stdClass $course
+ * @param int $isteacher
+ * @param int $timestart
+ *
+ * @return True if anything was printed, otherwise false.
+ */
 function game_print_recent_activity($course, $isteacher, $timestart) {
     global $CFG;
 
-    return false;  // True if anything was printed, otherwise false.
+    return false;
 }
 
 /**
  * Function to be run periodically according to the moodle cron
- * This function searches for things that need to be done, such 
- * as sending out mail, toggling flags etc ... 
  *
  * @uses $CFG
  * @return boolean
@@ -319,9 +327,8 @@ function game_cron() {
 }
 
 /**
- * Must return an array of grades for a given instance of this module, 
- * indexed by user.  It also returns a maximum allowed grade.
- * 
+ * Must return an array of grades for a given instance of this module, indexed by user.
+ *
  * Example:
  *    $return->grades = array of grades;
  *    $return->maxgrade = maximum allowed grade;
@@ -351,7 +358,7 @@ function game_grades($gameid) {
 /**
  * Return grade for given user or all users.
  *
- * @param int $gameid id of game
+ * @param stdClass $game
  * @param int $userid optional user id, 0 means all users
  * @return array array of grades, false if none
  */
@@ -373,10 +380,7 @@ function game_get_user_grades($game, $userid=0) {
 }
 
 /**
- * Must return an array of user records (all data) who are participants
- * for a given instance of game. Must include every user involved
- * in the instance, independient of his role (student, teacher, admin...)
- * See other modules as example.
+ * Must return an array of user records (all data) who are participants for a given instance of game.
  *
  * @param int $gameid ID of an instance of this module
  * @return mixed boolean/array of students
@@ -386,12 +390,10 @@ function game_get_participants($gameid) {
 }
 
 /**
- * This function returns if a scale is being used by one game
- * it it has support for grading and scales. Commented code should be
- * modified if necessary. See forum, glossary or journal modules
- * as reference.
+ * This function returns if a scale is being used by one game it it has support for grading and scales.
  *
  * @param int $gameid ID of an instance of this module
+ * @param int $scaleid
  * @return mixed
  * @todo Finish documenting this function
  **/
@@ -406,6 +408,7 @@ function game_scale_used ($gameid, $scaleid) {
  *
  * @param object $game null means all games
  * @param int $userid specific user only, 0 mean all
+ * @param boolean $nullifnone
  */
 function game_update_grades($game=null, $userid=0, $nullifnone=true) {
     global $CFG;
@@ -453,7 +456,7 @@ function game_update_grades($game=null, $userid=0, $nullifnone=true) {
  * Create grade item for given game
  *
  * @param object $game object with extra cmidnumber
- * @param mixed optional array/object of grade(s); 'reset' means reset grades in gradebook
+ * @param stdClass $grades
  * @return int 0 if ok, error code otherwise
  */
 function game_grade_item_update($game, $grades=null) {
@@ -511,6 +514,14 @@ function game_grade_item_delete( $game) {
 
 /**
  * Returns all game graded users since a given time for specified game
+ *
+ * @param stdClass $activities
+ * @param int $index
+ * @param int $timestart
+ * @param int $courseid
+ * @param int $cmid
+ * @param int $userid
+ * @param int $groupid
  */
 function game_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
     global $DB, $COURSE, $USER;
@@ -539,16 +550,11 @@ function game_get_recent_mod_activity(&$activities, &$index, $timestart, $course
         $groupjoin   = "";
     }
 
-    if (!$attempts = $DB->get_records_sql("SELECT qa.*, qa.gameid, q.grade, u.lastname,".
-            " u.firstname, firstnamephonetic, u.lastnamephonetic, u.middlename, u.alternatename,".
-            " u.lastnamephonetic, u.picture
-                                        FROM {game_attempts} qa
-                                             JOIN {game} q ON q.id = qa.gameid
-                                             JOIN {user} u ON u.id = qa.userid
-                                             $groupjoin
-                                       WHERE qa.timefinish > $timestart AND q.id = $cm->instance
-                                             $userselect $groupselect
-                                    ORDER BY qa.timefinish ASC")) {
+    $sql = "SELECT qa.*, qa.gameid, q.grade, u.lastname,u.firstname,u.picture ".
+    "FROM {game_attempts} qa JOIN {game} q ON q.id = qa.gameid JOIN {user} u ON u.id = qa.userid $groupjoin ".
+    "WHERE qa.timefinish > $timestart AND q.id = $cm->instance $userselect $groupselect ".
+    "ORDER BY qa.timefinish ASC";
+    if (!$attempts = $DB->get_records_sql( $sql)) {
          return;
     }
 
@@ -603,10 +609,6 @@ function game_get_recent_mod_activity(&$activities, &$index, $timestart, $course
         $tmpactivity->user->fullname = fullname($attempt, $viewfullnames);
         $tmpactivity->user->firstname = $attempt->firstname;
         $tmpactivity->user->lastname = $attempt->lastname;
-        $tmpactivity->user->alternatename = $attempt->alternatename;
-        $tmpactivity->user->middlename = $attempt->middlename;
-        $tmpactivity->user->firstnamephonetic = $attempt->firstnamephonetic;
-        $tmpactivity->user->lastnamephonetic = $attempt->lastnamephonetic;
         $tmpactivity->user->picture  = $attempt->picture;
         $tmpactivity->user->imagealt  = $attempt->imagealt;
         $tmpactivity->user->email  = $attempt->email;
@@ -615,6 +617,14 @@ function game_get_recent_mod_activity(&$activities, &$index, $timestart, $course
     }
 }
 
+/**
+ * Prints recent activity.
+ *
+ * @param stdClass $activity
+ * @param int $courseid
+ * @param stdClass $detail
+ * @param array $modnames
+ */
 function game_print_recent_mod_activity($activity, $courseid, $detail, $modnames) {
     global $CFG, $OUTPUT;
 
@@ -652,9 +662,10 @@ function game_print_recent_mod_activity($activity, $courseid, $detail, $modnames
 
 /**
  * Removes all grades from gradebook
+ *
  * @param int $courseid
- * @param string optional type
- */
+ * @param string $type
+ **/
 function game_reset_gradebook($courseid, $type='') {
     global $DB;
 
@@ -670,7 +681,10 @@ function game_reset_gradebook($courseid, $type='') {
 }
 
 /**
+ * What supports.
+ *
  * @uses FEATURE_GRADE_HAS_GRADE
+ * @param string $feature
  * @return bool True if quiz supports feature
  */
 function game_supports($feature) {
@@ -689,8 +703,6 @@ function game_supports($feature) {
             return true;
         case FEATURE_COMPLETION_HAS_RULES:
             return true;
-        case FEATURE_GRADE_HAS_GRADE:
-            return true;
         case FEATURE_GRADE_OUTCOMES:
             return true;
         case FEATURE_RATE:
@@ -704,8 +716,8 @@ function game_supports($feature) {
 }
 
 /**
- * @global object
- * @global stdClass
+ * get extra capabilities
+ *
  * @return array all other caps used in module
  */
 function game_get_extra_capabilities() {
@@ -722,11 +734,7 @@ function game_get_extra_capabilities() {
 
 /**
  * Return a textual summary of the number of attemtps that have been made at a particular game,
- * returns '' if no attemtps have been made yet, unless $returnzero is passed as true.
  *
- * @global stdClass
- * @global object
- * @global object
  * @param object $game the game object. Only $game->id is used at the moment.
  * @param object $cm the cm object. Only $cm->course, $cm->groupmode and $cm->groupingid fields are used at the moment.
  * @param boolean $returnzero if false (default), when no attempts have been made '' is returned instead of 'Attempts: 0'.
@@ -765,15 +773,33 @@ function game_num_attempt_summary($game, $cm, $returnzero = false, $currentgroup
     return '';
 }
 
+/**
+ * Converts score of game to grade.
+ *
+ * @param stdClass $game
+ * @param float $score
+ *
+ * @return float  the score
+ */
 function game_format_score($game, $score) {
     return format_float($game->grade * $score / 100, $game->decimalpoints);
 }
 
+/**
+ * Converts grade to score.
+ *
+ * @param stdClass $game
+ * @param float $grade
+ *
+ * @return foat score
+ */
 function game_format_grade($game, $grade) {
     return format_float($grade, $game->decimalpoints);
 }
 
 /**
+ * get grading options
+ *
  * @return the options for calculating the quiz grade from the individual attempt grades.
  */
 function game_get_grading_options() {
@@ -791,7 +817,7 @@ function game_get_grading_options() {
  * context when this is called
  *
  * @param settings_navigation $settings
- * @param navigation_node $quiznode
+ * @param navigation_node $gamenode
  * @return void
  */
 function game_extend_settings_navigation($settings, $gamenode) {
@@ -837,18 +863,14 @@ function game_extend_settings_navigation($settings, $gamenode) {
                     null, null, new pix_icon('i/item', ''));
                 break;
             case 'hangman':
-                $url = new moodle_url('', null);
-                $exportnode = $gamenode->add( get_string('export', 'game'), $url, navigation_node::TYPE_SETTING,
-                    null, null, new pix_icon('i/report', ''));
-
                 $url = new moodle_url('/mod/game/export.php', array( 'id' => $PAGE->cm->id,
                     'courseid' => $courseid, 'target' => 'html'));
-                $exportnode->add( get_string('export_to_html', 'game'), $url, navigation_node::TYPE_SETTING,
+                $gamenode->add( get_string('export_to_html', 'game'), $url, navigation_node::TYPE_SETTING,
                     null, null, new pix_icon('i/item', ''));
 
                 $url = new moodle_url('/mod/game/export.php', array( 'id' => $PAGE->cm->id,
                     'courseid' => $courseid, 'target' => 'javame'));
-                $exportnode->add( get_string('export_to_javame', 'game'), $url, navigation_node::TYPE_SETTING,
+                $gamenode->add( get_string('export_to_javame', 'game'), $url, navigation_node::TYPE_SETTING,
                     null, null, new pix_icon('i/item', ''));
                 break;
             case 'snakes':
@@ -861,156 +883,276 @@ function game_extend_settings_navigation($settings, $gamenode) {
                 break;
         }
     }
+
+    $gamenode->make_active();
 }
 
-/**
- * Returns an array of game type objects to construct
- * menu list when adding new game 
- *
- */
-function game_get_shortcuts($defaultitem) {
-    global $DB,$CFG;
+/* Returns an array of game type objects to construct menu list when adding new game  */
+require($CFG->dirroot.'/version.php');
+if ($branch >= '31') {
+    define('USE_GET_SHORTCUTS', '1');
+}
 
-    $config = get_config('game');
+if (!defined('USE_GET_SHORTCUTS')) {
+    /**
+     * Shows kind of games
+     */
+    function game_get_types() {
+        global $DB;
 
-    $types = array();
+        $config = get_config('game');
 
-    $hide = ( isset( $config->hidehangman) ? ($config->hidehangman != 0) : false);
+        $types = array();
 
-    if ($hide == false) {
         $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=hangman";
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->title = get_string('game_hangman', 'game');
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
+        $type->modclass = MOD_CLASS_ACTIVITY;
+        $type->type = "game_group_start";
+        $type->typestr = '--'.get_string( 'modulenameplural', 'game');
+        $types[] = $type;
+
+        $hide = ( isset( $config->hidehangman) ? ($config->hidehangman != 0) : false);
+
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=hangman";
+            $type->typestr = get_string('game_hangman', 'game');
+            $types[] = $type;
         }
-        $types[] = $type;
-    }
 
-    if (isset( $config->hidecross)) {
-        $hide = ($config->hidecross != 0);
-    } else {
-        $hide = false;
-    }
-
-    if ($hide == false) {
-        $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=cross";
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->title = get_string('game_cross', 'game');
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
+        if (isset( $config->hidecross)) {
+            $hide = ($config->hidecross != 0);
+        } else {
+            $hide = false;
         }
-        $types[] = $type;
-    }
 
-    if (isset( $config->hidecryptex)) {
-        $hide = ($config->hidecryptex != 0);
-    } else {
-        $hide = false;
-    }
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=cross";
+            $type->typestr = get_string('game_cross', 'game');
+            $types[] = $type;
+        }
 
-    if ($hide == false) {
-        $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=cryptex";
-        $type->title = get_string('game_cryptex', 'game');
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
+        if (isset( $config->hidecryptex)) {
+            $hide = ($config->hidecryptex != 0);
+        } else {
+            $hide = false;
+        }
+
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=cryptex";
+            $type->typestr = get_string('game_cryptex', 'game');
+            $types[] = $type;
+        }
+
+        $hide = (isset( $config->hidemillionaire) ? ($config->hidemillionaire != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=millionaire";
+            $type->typestr = get_string('game_millionaire', 'game');
+            $types[] = $type;
+        }
+
+        $hide = (isset( $config->hidesudoku) ? ($config->hidesudoku != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=sudoku";
+            $type->typestr = get_string('game_sudoku', 'game');
+            $types[] = $type;
+        }
+
+        $hide = (isset( $config->hidesnakes) ? ($config->hidesnakes != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=snakes";
+            $type->typestr = get_string('game_snakes', 'game');
+            $types[] = $type;
+        }
+
+        $hide = (isset( $config->hidehiddenpicture) ? ($config->hidehiddenpicture != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->modclass = MOD_CLASS_ACTIVITY;
+            $type->type = "game&amp;type=hiddenpicture";
+            $type->typestr = get_string('game_hiddenpicture', 'game');
+            $types[] = $type;
+        }
+
+        $hide = (isset( $config->hidebookquiz) ? ($config->hidebookquiz != 0) : false);
+        if ($hide == false) {
+            if ($DB->get_record( 'modules', array( 'name' => 'book'), 'id,id')) {
+                $type = new stdClass;
+                $type->modclass = MOD_CLASS_ACTIVITY;
+                $type->type = "game&amp;type=bookquiz";
+                $type->typestr = get_string('game_bookquiz', 'game');
+                $types[] = $type;
             }
-        $types[] = $type;
-    }
+        }
 
-    $hide = (isset( $config->hidemillionaire) ? ($config->hidemillionaire != 0) : false);
-    if ($hide == false) {
         $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=millionaire";
-        $type->title = get_string('game_millionaire', 'game');
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
-            }
+        $type->modclass = MOD_CLASS_ACTIVITY;
+        $type->type = "game_group_end";
+        $type->typestr = '--';
         $types[] = $type;
-    }
 
-    $hide = (isset( $config->hidesudoku) ? ($config->hidesudoku != 0) : false);
-    if ($hide == false) {
-        $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=sudoku";
-        $type->title = get_string('game_sudoku', 'game');
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
-            }
-        $types[] = $type;
+        return $types;
     }
+}
 
-    $hide = (isset( $config->hidesnakes) ? ($config->hidesnakes != 0) : false);
-    if ($hide == false) {
-        $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=snakes";
-        $type->title = get_string('game_snakes', 'game');
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
-            }
-        $types[] = $type;
-    }
-
-    $hide = (isset( $config->hidehiddenpicture) ? ($config->hidehiddenpicture != 0) : false);
-    if ($hide == false) {
-        $type = new stdClass;
-        $type->archetype = MOD_CLASS_ACTIVITY;
-        $type->type = "game&type=hiddenpicture";
-        $type->title = get_string('game_hiddenpicture', 'game');
-        $type->name = preg_replace('/.*type=/', '', $type->type);
-        $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
-        if (empty($type->help) && !empty($type->name) &&
-            get_string_manager()->string_exists('help' . $type->name, 'game')) {
-                $type->help = get_string('help' . $type->name, 'game');
-            }
-        $types[] = $type;
-    }
-
-    $hide = (isset( $config->hidebookquiz) ? ($config->hidebookquiz != 0) : false);
-    if ($hide == false) {
-        if ($DB->get_record( 'modules', array( 'name' => 'book'), 'id,id')) {
+if (defined('USE_GET_SHORTCUTS')) {
+    /**
+     * Returns an array of game type objects to construct menu list when adding new game
+     *
+     * @param stdClass $defaultitem
+     */
+    function game_get_shortcuts($defaultitem) {
+        global $DB, $CFG;
+        $config = get_config('game');
+        $types = array();
+        $hide = ( isset( $config->hidehangman) ? ($config->hidehangman != 0) : false);
+        if ($hide == false) {
             $type = new stdClass;
             $type->archetype = MOD_CLASS_ACTIVITY;
-            $type->type = "game&type=bookquiz";
-            $type->title = get_string('game_bookquiz', 'game');
+            $type->type = "game&type=hangman";
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_hangman', 'game');
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        if (isset( $config->hidecross)) {
+            $hide = ($config->hidecross != 0);
+        } else {
+            $hide = false;
+        }
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=cross";
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_cross', 'game');
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        if (isset( $config->hidecryptex)) {
+            $hide = ($config->hidecryptex != 0);
+        } else {
+            $hide = false;
+        }
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=cryptex";
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_cryptex', 'game');
             $type->name = preg_replace('/.*type=/', '', $type->type);
             $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
             if (empty($type->help) && !empty($type->name) &&
                 get_string_manager()->string_exists('help' . $type->name, 'game')) {
                     $type->help = get_string('help' . $type->name, 'game');
-                }
+            }
             $types[] = $type;
         }
+        $hide = (isset( $config->hidemillionaire) ? ($config->hidemillionaire != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=millionaire";
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_millionaire', 'game');
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        $hide = (isset( $config->hidesudoku) ? ($config->hidesudoku != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=sudoku";
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_sudoku', 'game');
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        $hide = (isset( $config->hidesnakes) ? ($config->hidesnakes != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=snakes";
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_snakes', 'game');
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        $hide = (isset( $config->hidehiddenpicture) ? ($config->hidehiddenpicture != 0) : false);
+        if ($hide == false) {
+            $type = new stdClass;
+            $type->archetype = MOD_CLASS_ACTIVITY;
+            $type->type = "game&type=hiddenpicture";
+            $type->title = get_string('pluginname', 'game').' - '.get_string('game_hiddenpicture', 'game');
+            $type->name = preg_replace('/.*type=/', '', $type->type);
+            $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+            if (empty($type->help) && !empty($type->name) &&
+                get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                    $type->help = get_string('help' . $type->name, 'game');
+            }
+            $types[] = $type;
+        }
+        $hide = (isset( $config->hidebookquiz) ? ($config->hidebookquiz != 0) : false);
+        if ($hide == false) {
+            if ($DB->get_record( 'modules', array( 'name' => 'book'), 'id,id')) {
+                $type = new stdClass;
+                $type->archetype = MOD_CLASS_ACTIVITY;
+                $type->type = "game&type=bookquiz";
+                $type->title = get_string('pluginname', 'game').' - '.get_string('game_bookquiz', 'game');
+                $type->name = preg_replace('/.*type=/', '', $type->type);
+                $type->link = new moodle_url($defaultitem->link, array('type' => $type->name));
+                if (empty($type->help) && !empty($type->name) &&
+                    get_string_manager()->string_exists('help' . $type->name, 'game')) {
+                        $type->help = get_string('help' . $type->name, 'game');
+                }
+                $types[] = $type;
+            }
+        }
+        return $types;
     }
-
-    return $types;
 }
 
+/**
+ * Serves the game attachents.
+ *
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param stdClass $context
+ * @param string $filearea
+ * @param array $args
+ * @param boolean $forcedownload
+ *
+ * @return boolean false if not exists file
+ */
 function mod_game_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload) {
     global $CFG, $DB;
 
@@ -1072,8 +1214,8 @@ function mod_game_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
 }
 
 /**
- * Implementation of the function for printing the form elements that control
- * whether the course reset functionality affects the Game.
+ * Add reset buttons to form.
+ *
  * @param object $mform form passed by reference
  */
 function game_reset_course_form_definition(&$mform) {
@@ -1084,6 +1226,9 @@ function game_reset_course_form_definition(&$mform) {
 
 /**
  * Course reset form defaults.
+ *
+ * @param stdClass $course
+ *
  * @return array
  */
 function game_reset_course_form_defaults($course) {
@@ -1091,11 +1236,10 @@ function game_reset_course_form_defaults($course) {
 }
 
 /**
- * Actual implementation of the reset course functionality, delete all the
- * Game responses for course $data->courseid.
+ * Actual implementation of the reset course functionality, delete all the Game responses for course $data->courseid.
  *
- * @global object
- * @param $data the data submitted from the reset course.
+ * @param stdClass $data the data submitted from the reset course.
+ *
  * @return array status array
  */
 function game_reset_userdata($data) {
@@ -1196,19 +1340,17 @@ function game_reset_userdata($data) {
 }
 
 /**
- * Obtains the automatic completion state for this module based on any conditions
- * in game settings.
+ * Obtains the automatic completion state for this module based on any conditions in game settings.
  *
  * @param object $course Course
  * @param object $cm Course-module
  * @param int $userid User ID
  * @param bool $type Type of comparison (or/and; can be used as return value if no conditions)
+ *
  * @return bool True if completed, false if not, $type if conditions not set.
  */
 function game_get_completion_state($course, $cm, $userid, $type) {
     global $CFG, $DB;
-
-    require_once($CFG->dirroot . '/mod/game/locallib.php');
 
     if (($cm->completion == 0) or ($cm->completion == 1)) {
         // Completion option is not enabled so just return $type.
@@ -1224,9 +1366,20 @@ function game_get_completion_state($course, $cm, $userid, $type) {
         print_error('invalidcoursemodule');
     }
 
-    $grade = $DB->get_record_select('game_grades', "userid=$userid AND gameid = $cm->instance", null, 'id,score');
+    // Check for passing grade.
+    if ($game->completionpass) {
+        require_once($CFG->libdir . '/gradelib.php');
+        $item = grade_item::fetch(array('courseid' => $course->id, 'itemtype' => 'mod',
+                'itemmodule' => 'game', 'iteminstance' => $cm->instance, 'outcomeid' => null));
+        if ($item) {
+            $grades = grade_grade::fetch_users_grades($item, array($userid), false);
+            if (!empty($grades[$userid])) {
+                return $grades[$userid]->is_passed($item);
+            }
+        }
+    }
 
-    return $grade && $grade->score > 0;
+    return false;
 }
 
 /**
@@ -1234,7 +1387,6 @@ function game_get_completion_state($course, $cm, $userid, $type) {
  *
  * This is used to find out if scale used anywhere
  *
- * @global object
  * @param int $scaleid
  * @return boolean True if the scale is used by any Game
  */
@@ -1248,6 +1400,14 @@ function game_scale_used_anywhere($scaleid) {
     }
 }
 
+/**
+ * Returns the context instance of a Module. Is the same for all version of Moodle.
+ *
+ * This is used to find out if scale used anywhere
+ *
+ * @param int $moduleid
+ * @return stdClass context
+ */
 function game_get_context_module_instance( $moduleid) {
     if (class_exists( 'context_module')) {
         return context_module::instance( $moduleid);
@@ -1256,10 +1416,72 @@ function game_get_context_module_instance( $moduleid) {
     return get_context_instance( CONTEXT_MODULE, $moduleid);
 }
 
+/**
+ * Returns the context instance of a course. Is the same for all version of Moodle.
+ *
+ * This is used to find out if scale used anywhere
+ *
+ * @param int $courseid
+ *
+ * @return stdClass context
+ */
 function game_get_context_course_instance( $courseid) {
     if (class_exists( 'context_course')) {
         return context_course::instance( $courseid);
     }
 
     return get_context_instance( CONTEXT_COURSE, $courseid);
+}
+
+/**
+ * Returns the url of a pix file. Is the same for all versions of Moodle.
+ *
+ * @param string $filename
+ * @param string $module
+ *
+ * @return stdClass url
+ */
+function game_pix_url( $filename, $module='') {
+    global $OUTPUT;
+
+    if (game_get_moodle_version() >= '03.03') {
+        return $OUTPUT->image_url($filename, $module);
+    } else {
+        return $OUTPUT->pix_url($filename, $module);
+    }
+}
+
+/**
+ * Callback which returns human-readable strings describing the active completion custom rules for the module instance.
+ *
+ * @param cm_info|stdClass $cm object with fields ->completion and ->customdata['customcompletionrules']
+ * @return array $descriptions the array of descriptions for the custom rules.
+ */
+function mod_game_get_completion_active_rule_descriptions($cm) {
+    // Values will be present in cm_info, and we assume these are up to date.
+    if (empty($cm->customdata['customcompletionrules'])
+        || $cm->completion != COMPLETION_TRACKING_AUTOMATIC) {
+        return [];
+    }
+
+    $descriptions = [];
+    foreach ($cm->customdata['customcompletionrules'] as $key => $val) {
+        switch ($key) {
+            case 'completionattemptsexhausted':
+                if (empty($val)) {
+                    continue;
+                }
+                $descriptions[] = get_string('completionattemptsexhausteddesc', 'quiz');
+                break;
+            case 'completionpass':
+                if (empty($val)) {
+                    continue;
+                }
+                $descriptions[] = get_string('completionpassdesc', 'quiz', format_time($val));
+                break;
+            default:
+                break;
+        }
+    }
+    return $descriptions;
 }
