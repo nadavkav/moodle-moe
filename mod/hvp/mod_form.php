@@ -28,13 +28,14 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
 class mod_hvp_mod_form extends moodleform_mod {
 
     public function definition() {
-        global $CFG, $DB, $OUTPUT, $COURSE;
+        global $CFG, $DB, $OUTPUT, $COURSE, $PAGE;
 
         $mform =& $this->_form;
 
         // Name.
         $mform->addElement('text', 'name', get_string('name'));
         $mform->setType('name', PARAM_TEXT);
+        $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
         // Intro.
@@ -44,6 +45,11 @@ class mod_hvp_mod_form extends moodleform_mod {
         else {
             $this->add_intro_editor(false, get_string('intro', 'hvp'));
         }
+
+        // Max grade
+        $mform->addElement('text', 'maximumgrade', get_string('maximumgrade', 'hvp'));
+        $mform->setType('maximumgrade', PARAM_INT);
+        $mform->setDefault('maximumgrade', 10);
 
         // Action.
         $h5paction = array();
@@ -57,7 +63,14 @@ class mod_hvp_mod_form extends moodleform_mod {
             array('maxbytes' => $COURSE->maxbytes, 'accepted_types' => '*'));
 
         // Editor placeholder.
-        $mform->addElement('static', 'h5peditor', get_string('editor', 'hvp'), '<div class="h5p-editor">' . get_string('javascriptloading', 'hvp') .  '</div>');
+        if ($CFG->theme == 'boost' || in_array('boost', $PAGE->theme->parents)) {
+          $h5peditor = array();
+          $h5peditor[] = $mform->createElement('html', '<div class="h5p-editor">' . get_string('javascriptloading', 'hvp') .  '</div>');
+          $mform->addGroup($h5peditor, 'h5peditorgroup', get_string('editor', 'hvp'));
+        }
+        else {
+          $mform->addElement('static', 'h5peditor', get_string('editor', 'hvp'), '<div class="h5p-editor">' . get_string('javascriptloading', 'hvp') .  '</div>');
+        }
 
         // Hidden fields.
         $mform->addElement('hidden', 'h5plibrary', '');
@@ -65,22 +78,30 @@ class mod_hvp_mod_form extends moodleform_mod {
         $mform->addElement('hidden', 'h5pparams', '');
         $mform->setType('h5pparams', PARAM_RAW);
 
-        // Display options group.
-        $mform->addElement('header', 'displayoptions', get_string('displayoptions', 'hvp'));
+        $core = \mod_hvp\framework::instance();
+        $displayOptions = $core->getDisplayOptionsForEdit();
+        if (isset($displayOptions[\H5PCore::DISPLAY_OPTION_FRAME])) {
+          // Display options group.
+          $mform->addElement('header', 'displayoptions', get_string('displayoptions', 'hvp'));
 
-        $mform->addElement('checkbox', 'frame', get_string('enableframe', 'hvp'));
-        $mform->setType('frame', PARAM_BOOL);
-        $mform->setDefault('frame', true);
+          $mform->addElement('checkbox', \H5PCore::DISPLAY_OPTION_FRAME, get_string('enableframe', 'hvp'));
+          $mform->setType(\H5PCore::DISPLAY_OPTION_FRAME, PARAM_BOOL);
+          $mform->setDefault(\H5PCore::DISPLAY_OPTION_FRAME, true);
 
-        $mform->addElement('checkbox', 'download', get_string('enabledownload', 'hvp'));
-        $mform->setType('download', PARAM_BOOL);
-        $mform->setDefault('download', true);
-        $mform->disabledIf('download', 'frame');
+          if (isset($displayOptions[\H5PCore::DISPLAY_OPTION_DOWNLOAD])) {
+            $mform->addElement('checkbox', \H5PCore::DISPLAY_OPTION_DOWNLOAD, get_string('enabledownload', 'hvp'));
+            $mform->setType(\H5PCore::DISPLAY_OPTION_DOWNLOAD, PARAM_BOOL);
+            $mform->setDefault(\H5PCore::DISPLAY_OPTION_DOWNLOAD, $displayOptions[\H5PCore::DISPLAY_OPTION_DOWNLOAD]);
+            $mform->disabledIf(\H5PCore::DISPLAY_OPTION_DOWNLOAD, 'frame');
+          }
 
-        $mform->addElement('checkbox', 'copyright', get_string('enablecopyright', 'hvp'));
-        $mform->setType('copyright', PARAM_BOOL);
-        $mform->setDefault('copyright', true);
-        $mform->disabledIf('copyright', 'frame');
+          if (isset($displayOptions[\H5PCore::DISPLAY_OPTION_COPYRIGHT])) {
+            $mform->addElement('checkbox', \H5PCore::DISPLAY_OPTION_COPYRIGHT, get_string('enablecopyright', 'hvp'));
+            $mform->setType(\H5PCore::DISPLAY_OPTION_COPYRIGHT, PARAM_BOOL);
+            $mform->setDefault(\H5PCore::DISPLAY_OPTION_COPYRIGHT, $displayOptions[\H5PCore::DISPLAY_OPTION_COPYRIGHT]);
+            $mform->disabledIf(\H5PCore::DISPLAY_OPTION_COPYRIGHT, 'frame');
+          }
+        }
 
         $this->standard_coursemodule_elements();
 
@@ -89,14 +110,31 @@ class mod_hvp_mod_form extends moodleform_mod {
 
     public function data_preprocessing(&$defaultvalues) {
         global $DB;
+        $core = \mod_hvp\framework::instance();
 
         $content = null;
         if (!empty($defaultvalues['id'])) {
             // Load Content
-            $core = \mod_hvp\framework::instance();
             $content = $core->loadContent($defaultvalues['id']);
             if ($content === null) {
                 print_error('invalidhvp');
+            }
+        }
+
+        // Set default maxgrade
+        if (isset($content) && isset($content['id'])
+            && isset($defaultvalues) && isset($defaultvalues['course'])) {
+
+            // Get the gradeitem and set maxgrade
+            $gradeitem = grade_item::fetch(array(
+                'itemtype' => 'mod',
+                'itemmodule' => 'hvp',
+                'iteminstance' => $content['id'],
+                'courseid' => $defaultvalues['course']
+            ));
+
+            if (isset($gradeitem) && isset($gradeitem->grademax)) {
+                $defaultvalues['maximumgrade'] = $gradeitem->grademax;
             }
         }
 
@@ -107,21 +145,21 @@ class mod_hvp_mod_form extends moodleform_mod {
 
         // Individual display options are not stored, must be extracted from disable.
         if (isset($defaultvalues['disable'])) {
-            // Extract disable options.
-            \mod_hvp\framework::instance();
-            foreach (\H5PCore::$disable as $bit => $option) {
-                if ($defaultvalues['disable'] & $bit) {
-                    // Disable.
-                    $defaultvalues[$option] = 0;
-                } else {
-                    // Enable.
-                    $defaultvalues[$option] = 1;
-                }
+            $h5pcore = \mod_hvp\framework::instance('core');
+            $displayoptions = $h5pcore->getDisplayOptionsForEdit($defaultvalues['disable']);
+            if (isset ($displayoptions[\H5PCore::DISPLAY_OPTION_FRAME])) {
+              $defaultvalues[\H5PCore::DISPLAY_OPTION_FRAME] = $displayoptions[\H5PCore::DISPLAY_OPTION_FRAME];
+            }
+            if (isset($displayoptions[\H5PCore::DISPLAY_OPTION_DOWNLOAD])) {
+              $defaultvalues[\H5PCore::DISPLAY_OPTION_DOWNLOAD] = $displayoptions[\H5PCore::DISPLAY_OPTION_DOWNLOAD];
+            }
+            if (isset($displayoptions[\H5PCore::DISPLAY_OPTION_COPYRIGHT])) {
+              $defaultvalues[\H5PCore::DISPLAY_OPTION_COPYRIGHT] = $displayoptions[\H5PCore::DISPLAY_OPTION_COPYRIGHT];
             }
         }
 
         // Determine default action
-        if ($content === null && $DB->get_field_sql("SELECT id FROM {hvp_libraries} WHERE runnable = 1", null, IGNORE_MULTIPLE) === false) {
+        if (!get_config('mod_hvp', 'hub_is_enabled') && $content === null && $DB->get_field_sql("SELECT id FROM {hvp_libraries} WHERE runnable = 1", null, IGNORE_MULTIPLE) === false) {
           $defaultvalues['h5paction'] = 'upload';
         }
 
@@ -152,6 +190,11 @@ class mod_hvp_mod_form extends moodleform_mod {
         global $CFG;
 
         $errors = parent::validation($data, $files);
+
+        // Validate max grade as a non-negative numeric value
+        if (!is_numeric($data['maximumgrade']) || $data['maximumgrade'] < 0) {
+            $errors['maximumgrade'] = get_string('maximumgradeerror', 'hvp');
+        }
 
         if ($data['h5paction'] === 'upload') {
             // Validate uploaded H5P file

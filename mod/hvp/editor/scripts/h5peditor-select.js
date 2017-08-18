@@ -14,6 +14,15 @@ H5PEditor.widgets.select = H5PEditor.Select = (function (E) {
     this.field = field;
     this.value = params;
     this.setValue = setValue;
+
+    // Setup event dispatching on change
+    this.changes = [];
+    this.triggerListeners = function (value) {
+      // Run callbacks
+      for (var i = 0; i < this.changes.length; i++) {
+        this.changes[i](value);
+      }
+    }
   }
 
   /**
@@ -34,6 +43,7 @@ H5PEditor.widgets.select = H5PEditor.Select = (function (E) {
       if (val !== false) {
         that.value = val;
         that.setValue(that.field, val);
+        that.triggerListeners(val);
       }
     });
   };
@@ -47,18 +57,29 @@ H5PEditor.widgets.select = H5PEditor.Select = (function (E) {
     if (this.field.optional === true || this.field.default === undefined) {
       var options = E.createOption('-', '-');
     }
-    for (var i = 0; i < this.field.options.length; i++) {
-      var option = this.field.options[i];
-      options += E.createOption(option.value, option.label, option.value === this.value);
-    }
+    options += C.createOptionsHtml(this.field.options, this.value);
 
     var select = '<select>' + options + '</select>';
-    var label = E.createLabel(this.field);
-    var description = E.createDescription(this.field.description);
 
-    return E.createItem(this.field.type, label + description + select);
+    return E.createFieldMarkup(this.field, select);
   };
 
+  /**
+   * Generate HTML for select options.
+   *
+   * @param {Array} options
+   * @param {string} selected value
+   * @return {string}
+   */
+  C.createOptionsHtml = function (options, selected) {
+    var html = '';
+
+    for (var i = 0; i < options.length; i++) {
+      html += E.createOption(options[i].value, options[i].label, options[i].value === selected);
+    }
+
+    return html;
+  };
 
   /**
    * Validate this field.
@@ -86,7 +107,6 @@ H5PEditor.widgets.select = H5PEditor.Select = (function (E) {
 
     return value;
   };
-
 
   /**
    * Remove widget from DOM.

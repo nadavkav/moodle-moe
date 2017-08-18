@@ -85,7 +85,9 @@ class H5PDefaultStorage implements \H5PFileStorage {
    */
   public function cloneContent($id, $newId) {
     $path = $this->path . '/content/';
-    self::copyFileTree($path . $id, $path . $newId);
+    if (file_exists($path . $id)) {
+      self::copyFileTree($path . $id, $path . $newId);
+    }
   }
 
   /**
@@ -283,7 +285,7 @@ class H5PDefaultStorage implements \H5PFileStorage {
    * @return string
    */
   public function getContent($file_path) {
-    return file_get_contents($this->path . $file_path);
+    return file_get_contents($file_path);
   }
 
   /**
@@ -297,7 +299,7 @@ class H5PDefaultStorage implements \H5PFileStorage {
     // Prepare directory
     if (empty($contentId)) {
       // Should be in editor tmp folder
-      $path = ($this->alteditorpath !== NULL ? $this->alteditorpath : $path . '/editor');
+      $path = $this->getEditorPath();
     }
     else {
       // Should be in content folder
@@ -316,6 +318,8 @@ class H5PDefaultStorage implements \H5PFileStorage {
     else {
       copy($_FILES['file']['tmp_name'], $path);
     }
+
+    return $file;
   }
 
   /**
@@ -329,7 +333,7 @@ class H5PDefaultStorage implements \H5PFileStorage {
   public function cloneContentFile($file, $fromId, $toId) {
     // Determine source path
     if ($fromId === 'editor') {
-      $sourcepath = ($this->alteditorpath !== NULL ? $this->alteditorpath : "{$this->path}/editor");
+      $sourcepath = $this->getEditorPath();
     }
     else {
       $sourcepath = "{$this->path}/content/{$fromId}";
@@ -352,6 +356,49 @@ class H5PDefaultStorage implements \H5PFileStorage {
     }
 
     copy($sourcepath, $targetpath);
+  }
+
+  /**
+   * Copy a content from one directory to another. Defaults to cloning
+   * content from the current temporary upload folder to the editor path.
+   *
+   * @param string $source path to source directory
+   * @param string $contentId Id of content
+   *
+   * @return object Object containing h5p json and content json data
+   */
+  public function moveContentDirectory($source, $contentId = NULL) {
+    if ($source === NULL) {
+      return NULL;
+    }
+
+    if ($contentId === NULL || $contentId == 0) {
+      $target = $this->getEditorPath();
+    }
+    else {
+      // Use content folder
+      $target = "{$this->path}/content/{$contentId}";
+    }
+
+    $contentSource = $source . DIRECTORY_SEPARATOR . 'content';
+    $contentFiles = array_diff(scandir($contentSource), array('.','..', 'content.json'));
+    foreach ($contentFiles as $file) {
+      if (is_dir("{$contentSource}/{$file}")) {
+        self::copyFileTree("{$contentSource}/{$file}", "{$target}/{$file}");
+      }
+      else {
+        copy("{$contentSource}/{$file}", "{$target}/{$file}");
+      }
+    }
+
+    // Successfully loaded content json of file into editor
+    $h5pJson = $this->getContent($source . DIRECTORY_SEPARATOR . 'h5p.json');
+    $contentJson = $this->getContent($contentSource . DIRECTORY_SEPARATOR . 'content.json');
+
+    return (object) array(
+      'h5pJson' => $h5pJson,
+      'contentJson' => $contentJson
+    );
   }
 
   /**
@@ -383,6 +430,16 @@ class H5PDefaultStorage implements \H5PFileStorage {
   }
 
   /**
+   * Check if server setup has write permission to
+   * the required folders
+   *
+   * @return bool True if site can write to the H5P files folder
+   */
+  public function hasWriteAccess() {
+    return self::dirReady($this->path);
+  }
+
+  /**
    * Recursive function for copying directories.
    *
    * @param string $source
@@ -399,6 +456,8 @@ class H5PDefaultStorage implements \H5PFileStorage {
       throw new \Exception('unabletocopy');
     }
 
+    $ignoredFiles = self::getIgnoredFiles("{$source}/.h5pignore");
+
     $dir = opendir($source);
     if ($dir === FALSE) {
       trigger_error('Unable to open directory ' . $source, E_USER_WARNING);
@@ -406,7 +465,7 @@ class H5PDefaultStorage implements \H5PFileStorage {
     }
 
     while (false !== ($file = readdir($dir))) {
-      if (($file != '.') && ($file != '..') && $file != '.git' && $file != '.gitignore') {
+      if (($file != '.') && ($file != '..') && $file != '.git' && $file != '.gitignore' && !in_array($file, $ignoredFiles)) {
         if (is_dir("{$source}/{$file}")) {
           self::copyFileTree("{$source}/{$file}", "{$destination}/{$file}");
         }
@@ -416,6 +475,25 @@ class H5PDefaultStorage implements \H5PFileStorage {
       }
     }
     closedir($dir);
+  }
+
+  /**
+   * Retrieve array of file names from file.
+   *
+   * @param string $file
+   * @return array Array with files that should be ignored
+   */
+  private static function getIgnoredFiles($file) {
+    if (file_exists($file) === FALSE) {
+      return array();
+    }
+
+    $contents = file_get_contents($file);
+    if ($contents === FALSE) {
+      return array();
+    }
+
+    return preg_split('/\s+/', $contents);
   }
 
   /**
@@ -446,5 +524,14 @@ class H5PDefaultStorage implements \H5PFileStorage {
     }
 
     return TRUE;
+  }
+
+  /**
+   * Easy helper function for retrieving the editor path
+   *
+   * @return string Path to editor files
+   */
+  private function getEditorPath() {
+    return ($this->alteditorpath !== NULL ? $this->alteditorpath : "{$this->path}/editor");
   }
 }

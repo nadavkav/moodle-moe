@@ -41,6 +41,8 @@ function hvp_get_core_settings() {
     $basepath = $CFG->httpswwwroot . '/';
     $ajaxpath = "{$basepath}mod/hvp/ajax.php?contextId={$coursecontext->id}&token=";
 
+    $core = \mod_hvp\framework::instance('core');
+
     $settings = array(
         'baseUrl' => $basepath,
         'url' => "{$basepath}pluginfile.php/{$coursecontext->id}/mod_hvp",
@@ -50,42 +52,14 @@ function hvp_get_core_settings() {
             'setFinished' => $ajaxpath . \H5PCore::createToken('result') . '&action=set_finished',
             'contentUserData' => $ajaxpath . \H5PCore::createToken('contentuserdata') . '&action=contents_user_data&content_id=:contentId&data_type=:dataType&sub_content_id=:subContentId',
         ),
-        'tokens' => array(
-          'result' => \H5PCore::createToken('result'),
-          'contentUserData' => \H5PCore::createToken('contentuserdata')
-        ),
         'saveFreq' => get_config('mod_hvp', 'enable_save_content_state') ? get_config('mod_hvp', 'content_state_frequency') : false,
         'siteUrl' => $CFG->wwwroot,
-        'l10n' => array(
-            'H5P' => array(
-                'fullscreen' => get_string('fullscreen', 'hvp'),
-                'disableFullscreen' => get_string('disablefullscreen', 'hvp'),
-                'download' => get_string('download', 'hvp'),
-                'copyrights' => get_string('copyright', 'hvp'),
-                'copyrightInformation' => get_string('copyright', 'hvp'),
-                'close' => get_string('close', 'hvp'),
-                'title' => get_string('title', 'hvp'),
-                'author' => get_string('author', 'hvp'),
-                'year' => get_string('year', 'hvp'),
-                'source' => get_string('source', 'hvp'),
-                'license' => get_string('license', 'hvp'),
-                'thumbnail' => get_string('thumbnail', 'hvp'),
-                'noCopyrights' => get_string('nocopyright', 'hvp'),
-                'downloadDescription' => get_string('downloadtitle', 'hvp'),
-                'copyrightsDescription' => get_string('copyrighttitle', 'hvp'),
-                'h5pDescription' => get_string('h5ptitle', 'hvp'),
-                'contentChanged' => get_string('contentchanged', 'hvp'),
-                'startingOver' => get_string('startingover', 'hvp'),
-                'confirmDialogHeader' => get_string('confirmdialogheader', 'hvp'),
-                'confirmDialogBody' => get_string('confirmdialogbody', 'hvp'),
-                'cancelLabel' => get_string('cancellabel', 'hvp'),
-                'confirmLabel' => get_string('confirmlabel', 'hvp')
-            )
-        ),
+        'l10n' => array('H5P' => $core->getLocalization()),
         'user' => array(
             'name' => $USER->firstname . ' ' . $USER->lastname,
             'mail' => $USER->email
-        )
+        ),
+        'hubIsEnabled' => get_config('mod_hvp', 'hub_is_enabled') ? TRUE : FALSE
     );
 
     return $settings;
@@ -135,7 +109,7 @@ function hvp_get_core_assets() {
  * @param int $id Content being edited. null for creating new content
  */
 function hvp_add_editor_assets($id = null) {
-    global $PAGE, $CFG, $COURSE;
+    global $PAGE, $CFG, $COURSE, $DB;
     $settings = \hvp_get_core_assets();
 
     // Use jQuery and styles from core.
@@ -192,7 +166,8 @@ function hvp_add_editor_assets($id = null) {
       'ajaxPath' => "{$url}ajax.php?contextId={$context->id}&token={$editorajaxtoken}&action=",
       'libraryUrl' => $url . 'editor/',
       'copyrightSemantics' => $contentvalidator->getCopyrightSemantics(),
-      'assets' => $assets
+      'assets' => $assets,
+      'apiVersion' => H5PCore::$coreApi
     );
 
     if ($id !== null) {
@@ -382,4 +357,48 @@ function hvp_get_library_upgrade_info($name, $major, $minor) {
     }
 
     return $library;
+}
+
+/**
+ * Check permissions to view given user's results
+ *
+ * @param int $userid Id of the user the results belong to
+ * @param context $context Current context, usually course context
+ *
+ * @return bool True if current user has permission to view given user results
+ */
+function hvp_has_view_results_permission($userid, $context) {
+  global $USER;
+
+  // Check if user can view all results
+  if (has_capability('mod/hvp:viewallresults', $context)) {
+    return true;
+  }
+
+  // Check if viewing own results, and have permission for it
+  return $userid === (int)$USER->id ?
+    has_capability('mod/hvp:viewresults', $context) : false;
+}
+
+/**
+ * Require view results capability for this page
+ *
+ * @param int $userid User id who owns results
+ * @param context $context Current context
+ * @param int $redirectcontentid Redirect to this content id if not allowed
+ *  to view own results
+ */
+function hvp_require_view_results_permission($userid, $context, $redirectcontentid=NULL) {
+  global $USER;
+
+  if (!hvp_has_view_results_permission($userid, $context)) {
+    if ($userid === (int)$USER->id && isset($redirectcontentid)) {
+      // Not allowed to view own results, redirect
+      redirect(new moodle_url('/mod/hvp/view.php', array('id' => $redirectcontentid)));
+    }
+    else {
+      // Other user's results, require capability to view all results
+      require_capability('mod/hvp:viewallresults', $context);
+    }
+  }
 }

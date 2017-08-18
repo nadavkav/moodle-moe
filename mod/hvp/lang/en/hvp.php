@@ -21,7 +21,7 @@ In addition to being an authoring tool for rich content, H5P enables you to impo
 
 User interactions and scores are tracked using xAPI and are available through the Moodle Gradebook.
 
-You add interactive H5P content by uploading a .h5p file. You can create and download .h5p files on h5p.org';
+You add interactive H5P content by creating content using the built-in authoring tool or uploading H5P files found on other H5P enabled sites.';
 $string['modulename_link'] = 'https://h5p.org/moodle-more-help';
 $string['modulenameplural'] = 'Interactive Content';
 $string['pluginadministration'] = 'H5P';
@@ -57,28 +57,34 @@ $string['cancellabel'] = 'Cancel';
 $string['confirmlabel'] = 'Confirm';
 $string['noh5ps'] = 'There\'s no interactive content available for this course.';
 
-// Update message email for admin
-$string['messageprovider:updates'] = 'Notification of available H5P updates';
-$string['updatesavailabletitle'] = 'New H5P updates are available';
-$string['updatesavailablemsgpt1'] = 'There are updates available for the H5P content types you\'ve installed on your Moodle site.';
-$string['updatesavailablemsgpt2'] = 'Head over to the page linked to below for further instructions.';
-$string['updatesavailablemsgpt3'] = 'The latest update was released on: {$a}';
-$string['updatesavailablemsgpt4'] = 'Your are running a version from: {$a}';
-
 $string['lookforupdates'] = 'Look for H5P updates';
+$string['updatelibraries'] = 'Update All Libraries';
 $string['removetmpfiles'] = 'Remove old H5P temporary files';
 $string['removeoldlogentries'] = 'Remove old H5P log entries';
 
 // Admin settings.
+$string['displayoptionnevershow'] = 'Never show';
+$string['displayoptionalwaysshow'] = 'Always show';
+$string['displayoptionpermissions'] = 'Show only if user has permissions to export H5P';
+$string['displayoptionauthoron'] = 'Controlled by author, default is on';
+$string['displayoptionauthoroff'] = 'Controlled by author, default is off';
 $string['displayoptions'] = 'Display Options';
 $string['enableframe'] = 'Display action bar and frame';
 $string['enabledownload'] = 'Download button';
 $string['enableembed'] = 'Embed button';
 $string['enablecopyright'] = 'Copyright button';
 $string['enableabout'] = 'About H5P button';
+$string['hubsettingsheader'] = 'Content Types';
+$string['enablehublabel'] = 'Use H5P Hub';
+$string['disablehubdescription'] = "It's strongly encouraged to keep this option enabled. The H5P Hub provides an easy interface for getting new content types and keeping existing content types up to date. In the future, it will also make it easier to share and reuse content. If this option is disabled you'll have to install and update content types through file upload forms.";
+$string['empty'] = 'Empty';
+$string['reveal'] = 'Reveal';
+$string['hide'] = 'Hide';
+$string['sitekey'] = 'Site Key';
+$string['sitekeydescription'] = 'The site key is a secret that uniquely identifies this site with the Hub.';
 
-$string['externalcommunication'] = 'External communication';
-$string['externalcommunication_help'] = 'Aid in the development of H5P by contributing anonymous usage data. Disabling this option will prevent your site from fetching the newest H5P updates. You can read more about <a {$a}>which data is collected</a> on h5p.org.';
+$string['sendusagestatistics'] = 'Contribute usage statistics';
+$string['sendusagestatistics_help'] = 'Usage statistics numbers will automatically be reported to help the developers better understand how H5P is used and to determine potential areas of improvement.';
 $string['enablesavecontentstate'] = 'Save content state';
 $string['enablesavecontentstate_help'] = 'Automatically save the current state of interactive content for each user. This means that the user may pick up where he left off.';
 $string['contentstatefrequency'] = 'Save content state frequency';
@@ -87,20 +93,19 @@ $string['enabledlrscontenttypes'] = 'Enable LRS dependent content types';
 $string['enabledlrscontenttypes_help'] = 'Makes it possible to use content types that rely upon a Learning Record Store to function properly, like the Questionnaire content type.';
 
 // Admin menu.
+$string['contenttypecacheheader'] = 'Content Type Cache';
 $string['settings'] = 'H5P Settings';
 $string['libraries'] = 'H5P Libraries';
 
-// Update libraries section.
-$string['updatelibraries'] = 'Update All Libraries';
-$string['updatesavailable'] = 'There are updates available for your H5P content types.';
-$string['whyupdatepart1'] = 'You can read about why it\'s important to update and the benefits from doing so on the <a {$a}>Why Update H5P</a> page.';
-$string['whyupdatepart2'] = 'The page also list the different changelogs, where you can read about the new features introduced and the issues that have been fixed.';
-$string['currentversion'] = 'You are running';
-$string['availableversion'] = 'Available update';
-$string['usebuttonbelow'] = 'You can use the button below to automatically download and update all of your content types.';
-$string['downloadandupdate'] = 'Download & Update';
-$string['missingh5purl'] = 'Missing URL for H5P file';
-$string['unabletodownloadh5p'] = 'Unable to download H5P file';
+// Content type cache section
+$string['ctcacheconnectionfailed'] = "Couldn't communicate with the H5P Hub. Please try again later.";
+$string['ctcachenolibraries'] = 'No content types were received from the H5P Hub. Please try again later.';
+$string['ctcachesuccess'] = 'Library cache was successfully updated!';
+$string['ctcachelastupdatelabel'] = 'Last update';
+$string['ctcachebuttonlabel'] = 'Update content type cache';
+$string['ctcacheneverupdated'] = 'Never';
+$string['ctcachetaskname'] = 'Update content type cache';
+$string['ctcachedescription'] = 'Making sure the content type cache is up to date will ensure that you can view, download and use the latest libraries. This is different from updating the libraries themselves.';
 
 // Upload libraries section.
 $string['uploadlibraries'] = 'Upload Libraries';
@@ -114,6 +119,12 @@ $string['upload'] = 'Upload';
 $string['installedlibraries'] = 'Installed Libraries';
 $string['invalidtoken'] = 'Invalid security token.';
 $string['missingparameters'] = 'Missing parameters';
+$string['nocontenttype'] = 'No content type was specified.';
+$string['invalidcontenttype'] = 'The chosen content type is invalid.';
+$string['installdenied'] = 'You do not have permission to install content types. Contact the administrator of your site.';
+$string['downloadfailed'] = 'Downloading the requested library failed.';
+$string['validationfailed'] = 'The requested H5P was not valid';
+$string['validatingh5pfailed'] = 'Validating h5p package failed.';
 
 // H5P library list headers on admin page.
 $string['librarylisttitle'] = 'Title';
@@ -161,6 +172,10 @@ $string['nextpage'] = 'Next page';
 $string['previouspage'] = 'Previous page';
 $string['search'] = 'Search';
 $string['empty'] = 'No results available';
+$string['viewreportlabel'] = 'Report';
+$string['dataviewreportlabel'] = 'View Answers';
+$string['invalidxapiresult'] = 'No xAPI results were found for the given content and user id combination';
+$string['reportnotsupported'] = 'Not supported';
 
 // Editor
 $string['javascriptloading'] = 'Waiting for JavaScript...';
@@ -175,6 +190,9 @@ $string['noparameters'] = 'No parameters';
 $string['invalidparameters'] = 'Invalid Parameters';
 $string['missingcontentuserdata'] = 'Error: Could not find content user data';
 
+$string['maximumgrade'] = 'Maximum grade';
+$string['maximumgradeerror'] = 'Please enter a valid positive integer as the max points available for this activity';
+
 // Capabilities
 $string['hvp:addinstance'] = 'Add a new H5P Activity';
 $string['hvp:restrictlibraries'] = 'Restrict a H5P library';
@@ -182,11 +200,12 @@ $string['hvp:updatelibraries'] = 'Update the version of an H5P library';
 $string['hvp:userestrictedlibraries'] = 'Use restricted H5P libraries';
 $string['hvp:savecontentuserdata'] = 'Save H5P content user data';
 $string['hvp:saveresults'] = 'Save result for H5P content';
-$string['hvp:viewresults'] = 'View result for H5P content';
+$string['hvp:viewresults'] = 'View result for own questions in course';
+$string['hvp:viewallresults'] = 'View result for all users in course';
 $string['hvp:getcachedassets'] = 'Get cached H5P content assets';
 $string['hvp:getcontent'] = 'Get/view content of H5P file in course';
 $string['hvp:getexport'] = 'Get export file from H5P in course';
-$string['hvp:updatesavailable'] = 'Get notification when H5P updates are available';
+$string['hvp:installrecommendedh5plibraries'] = 'Install recommended H5P libraries';
 
 // Capabilities error messages
 $string['nopermissiontoupgrade'] = 'You do not have permission to upgrade libraries.';
@@ -229,7 +248,49 @@ $string['invalidfile'] = 'File "{$a->%filename}" not allowed. Only files with th
 $string['invalidmultiselectoption'] = 'Invalid selected option in multi-select.';
 $string['invalidselectoption'] = 'Invalid selected option in select.';
 $string['invalidsemanticstype'] = 'H5P internal error: unknown content type "{$a->@type}" in semantics. Removing content!';
-$string['invalidsemantics'] = 'Library used in content is not a valid library according to semantics';
+$string['unabletocreatedir'] = 'Unable to create directory.';
+$string['unabletogetfieldtype'] = 'Unable to get field type.';
+$string['filetypenotallowed'] = 'File type isn\'t allowed.';
+$string['invalidfieldtype'] = 'Invalid field type.';
+$string['invalidimageformat'] = 'Invalid image file format. Use jpg, png or gif.';
+$string['filenotimage'] = 'File is not an image.';
+$string['invalidaudioformat'] = 'Invalid audio file format. Use mp3 or wav.';
+$string['invalidvideoformat'] = 'Invalid video file format. Use mp4 or webm.';
+$string['couldnotsave'] = 'Could not save file.';
+$string['couldnotcopy'] = 'Could not copy file.';
+
+// Welcome messages
+$string['welcomeheader'] = 'Welcome to the world of H5P!';
+$string['welcomegettingstarted'] = 'To get started with H5P and Moodle take a look at our <a {$a->moodle_tutorial}>tutorial</a> and check out the <a {$a->example_content}>example content</a> at H5P.org for inspiration.';
+$string['welcomecommunity'] = 'We hope you will enjoy H5P and get engaged in our growing community through our <a {$a->forums}>forums</a> and chat room <a {$a->gitter}>H5P at Gitter</a>';
+$string['welcomecontactus'] = 'If you have any feedback, don\'t hesitate to <a {$a}>contact us</a>. We take feedback very seriously and are dedicated to making H5P better every day!';
+$string['missingmbstring'] = 'The mbstring PHP extension is not loaded. H5P need this to function properly';
+$string['wrongversion'] = 'The version of the H5P library {$a->%machineName} used in this content is not valid. Content contains {$a->%contentLibrary}, but it should be {$a->%semanticsLibrary}.';
+$string['invalidlibrary'] = 'The H5P library {$a->%library} used in the content is not valid';
+
+// Setup errors
+$string['oldphpversion'] = 'Your PHP version is outdated. H5P requires version 5.2 to function properly. Version 5.6 or later is recommended.';
+$string['maxuploadsizetoosmall'] = 'Your PHP max upload size is quite small. With your current setup, you may not upload files larger than {$a->%number} MB. This might be a problem when trying to upload H5Ps, images and videos. Please consider to increase it to more than 5MB.';
+$string['maxpostsizetoosmall'] = 'Your PHP max post size is quite small. With your current setup, you may not upload files larger than {$a->%number} MB. This might be a problem when trying to upload H5Ps, images and videos. Please consider to increase it to more than 5MB';
+$string['sslnotenabled'] = 'Your server does not have SSL enabled. SSL should be enabled to ensure a secure connection with the H5P hub.';
+$string['hubcommunicationdisabled'] = 'H5P hub communication has been disabled because one or more H5P requirements failed.';
+$string['reviseserversetupandretry'] = 'When you have revised your server setup you may re-enable H5P hub communication in H5P Settings.';
+$string['disablehubconfirmationmsg'] = 'Do you still want to enable the hub ?';
+$string['nowriteaccess'] = 'A problem with the server write access was detected. Please make sure that your server can write to your data folder.';
+$string['uploadsizelargerthanpostsize'] = 'Your PHP max upload size is bigger than your max post size. This is known to cause issues in some installations.';
+$string['sitecouldnotberegistered'] = 'Site could not be registered with the hub. Please contact your site administrator.';
+$string['hubisdisableduploadlibraries'] = 'The H5P Hub has been disabled until this problem can be resolved. You may still upload libraries through the "H5P Libraries" page.';
+$string['successfullyregisteredwithhub'] = 'Your site was successfully registered with the H5P Hub.';
+$string['sitekeyregistered'] = 'You have been provided a unique key that identifies you with the Hub when receiving new updates. The key is available for viewing in the "H5P Settings" page.';
+
+// Ajax messages
+$string['hubisdisabled'] = 'The hub is disabled. You can re-enable it in the H5P settings.';
+$string['invalidh5ppost'] = 'Could not get posted H5P.';
+$string['filenotfoundonserver'] = 'File not found on server. Check file upload settings.';
+$string['failedtodownloadh5p'] = 'Failed to download the requested H5P.';
+$string['postmessagerequired'] = 'A post message is required to access the given endpoint';
+
+// Licensing
 $string['copyrightinfo'] = 'Copyright information';
 $string['years'] = 'Year(s)';
 $string['undisclosed'] = 'Undisclosed';
@@ -244,19 +305,25 @@ $string['pd'] = 'Public Domain';
 $string['pddl'] = 'Public Domain Dedication and Licence';
 $string['pdm'] = 'Public Domain Mark';
 $string['copyrightstring'] = 'Copyright';
-$string['unabletocreatedir'] = 'Unable to create directory.';
-$string['unabletogetfieldtype'] = 'Unable to get field type.';
-$string['filetypenotallowed'] = 'File type isn\'t allowed.';
-$string['invalidfieldtype'] = 'Invalid field type.';
-$string['invalidimageformat'] = 'Invalid image file format. Use jpg, png or gif.';
-$string['filenotimage'] = 'File is not an image.';
-$string['invalidaudioformat'] = 'Invalid audio file format. Use mp3 or wav.';
-$string['invalidvideoformat'] = 'Invalid video file format. Use mp4 or webm.';
-$string['couldnotsave'] = 'Could not save file.';
-$string['couldnotcopy'] = 'Could not copy file.';
-
-// Welcome messages
-$string['welcomeheader'] = 'Welcome to the world of H5P!';
-$string['welcomegettingstarted'] = 'To get started with H5P and Moodle take a look at our <a {$a->moodle_tutorial}>tutorial</a> and check out the <a {$a->example_content}>example content</a> at H5P.org for inspiration.<br>The most popuplar content types have been installed for your convenience!';
-$string['welcomecommunity'] = 'We hope you will enjoy H5P and get engaged in our growing community through our <a {$a->forums}>forums</a> and chat room <a {$a->gitter}>H5P at Gitter</a>';
-$string['welcomecontactus'] = 'If you have any feedback, don\'t hesitate to <a {$a}>contact us</a>. We take feedback very seriously and are dedicated to making H5P better every day!';
+$string['by'] = 'by';
+$string['showmore'] = 'Show more';
+$string['showless'] = 'Show less';
+$string['sublevel'] = 'Sublevel';
+$string['noversionattribution'] = 'Attribution';
+$string['noversionattributionsa'] = 'Attribution-ShareAlike';
+$string['noversionattributionnd'] = 'Attribution-NoDerivs';
+$string['noversionattributionnc'] = 'Attribution-NonCommercial';
+$string['noversionattributionncsa'] = 'Attribution-NonCommercial-ShareAlike';
+$string['noversionattributionncnd'] = 'Attribution-NonCommercial-NoDerivs';
+$string['licenseCC40'] = '4.0 International';
+$string['licenseCC30'] = '3.0 Unported';
+$string['licenseCC25'] = '2.5 Generic';
+$string['licenseCC20'] = '2.0 Generic';
+$string['licenseCC10'] = '1.0 Generic';
+$string['licenseGPL'] = 'General Public License';
+$string['licenseV3'] = 'Version 3';
+$string['licenseV2'] = 'Version 2';
+$string['licenseV1'] = 'Version 1';
+$string['licenseCC010'] = 'CC0 1.0 Universal (CC0 1.0) Public Domain Dedication';
+$string['licenseCC010U'] = 'CC0 1.0 Universal';
+$string['licenseversion'] = 'License Version';
