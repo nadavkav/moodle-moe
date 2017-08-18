@@ -3,8 +3,7 @@
 /**
  * Controller for student view
  *
- * @package    mod
- * @subpackage scheduler
+ * @package    mod_scheduler
  * @copyright  2015 Henning Bostelmann and others (see README.txt)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -13,13 +12,18 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/mod/scheduler/mailtemplatelib.php');
 
-$returnurl = new moodle_url('/mod/scheduler/view.php', array('id' => $cm->id));
+$returnurlparas =  array('id' => $cm->id);
+if ($scheduler->is_group_scheduling_enabled()) {
+    $returnurlparas['appointgroup'] = $appointgroup;
+}
+$returnurl = new moodle_url('/mod/scheduler/view.php', $returnurlparas);
 
 /************************************************ Book a slot  ************************************************/
 
 if ($action == 'bookslot') {
 
     require_sesskey();
+    require_capability('mod/scheduler:appoint', $context);
 
     // Get the request parameters.
     $slotid = required_param('slotid', PARAM_INT);
@@ -34,10 +38,20 @@ if ($action == 'bookslot') {
 
     $requiredcapacity = 1;
     $userstobook = array($USER->id);
-    if ($appointgroup) {
-        $groupmembers = $scheduler->get_possible_attendees(array($appointgroup));
+    if ($appointgroup > 0) {
+        if (!$scheduler->is_group_scheduling_enabled()) {
+            throw new moodle_exception('error');
+        }
+        $groupmembers = $scheduler->get_available_students($appointgroup);
         $requiredcapacity = count($groupmembers);
         $userstobook = array_keys($groupmembers);
+    } else if ($appointgroup == 0) {
+        if (!$scheduler->is_individual_scheduling_enabled()) {
+            throw new moodle_exception('error');
+        }
+    } else {
+        // Group scheduling enabled but no group selected.
+        throw new moodle_exception('error');
     }
 
     $errormessage = '';
@@ -45,8 +59,7 @@ if ($action == 'bookslot') {
     $bookinglimit = $scheduler->count_bookable_appointments($USER->id, false);
     if ($bookinglimit == 0) {
         $errormessage = get_string('selectedtoomany', 'scheduler', $bookinglimit);
-    }
-    if (!$errormessage) {
+    } else {
         // Validate our user ids.
         $existingstudents = array();
         foreach ($slot->get_appointments() as $app) {
@@ -87,8 +100,8 @@ if ($action == 'bookslot') {
         if ($scheduler->allownotifications) {
             $student = $DB->get_record('user', array('id' => $appointment->studentid));
             $teacher = $DB->get_record('user', array('id' => $slot->teacherid));
-            $vars = scheduler_get_mail_variables($scheduler, $slot, $teacher, $student, $course, $teacher);
-            scheduler_send_email_from_template($teacher, $student, $course, 'newappointment', 'applied', $vars, 'scheduler');
+            scheduler_messenger::send_slot_notification($slot, 'bookingnotification', 'applied',
+                                                        $student, $teacher, $teacher, $student, $course);
         }
     }
     $slot->save();
@@ -101,6 +114,7 @@ if ($action == 'bookslot') {
 if ($action == 'cancelbooking') {
 
     require_sesskey();
+    require_capability('mod/scheduler:appoint', $context);
 
     // Get the request parameters.
     $slotid = required_param('slotid', PARAM_INT);
@@ -113,11 +127,9 @@ if ($action == 'cancelbooking') {
         throw new moodle_exception('nopermissions');
     }
 
-    require_capability('mod/scheduler:appoint', $context);
-
     $userstocancel = array($USER->id);
     if ($appointgroup) {
-        $userstocancel = array_keys($scheduler->get_possible_attendees(array($appointgroup)));
+        $userstocancel = array_keys($scheduler->get_available_students($appointgroup));
     }
 
     foreach ($userstocancel as $userid) {
@@ -128,9 +140,8 @@ if ($action == 'cancelbooking') {
             if ($scheduler->allownotifications) {
                 $student = $DB->get_record('user', array('id' => $USER->id));
                 $teacher = $DB->get_record('user', array('id' => $slot->teacherid));
-                $vars = scheduler_get_mail_variables($scheduler, $slot, $teacher, $student, $course, $teacher);
-                scheduler_send_email_from_template($teacher, $student, $COURSE,
-                                                   'cancelledbystudent', 'cancelled', $vars, 'scheduler');
+                scheduler_messenger::send_slot_notification($slot, 'bookingnotification', 'cancelled',
+                                                            $student, $teacher, $teacher, $student, $COURSE);
             }
             \mod_scheduler\event\booking_removed::create_from_slot($slot)->trigger();
         }

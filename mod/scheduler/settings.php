@@ -3,8 +3,7 @@
 /**
  * Global configuration settings for the scheduler module.
  *
- * @package    mod
- * @subpackage scheduler
+ * @package    mod_scheduler
  * @copyright  2011 Henning Bostelmann and others (see README.txt)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,6 +27,11 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('mod_scheduler/groupscheduling',
                      get_string('groupscheduling', 'scheduler'),
                      get_string('groupscheduling_desc', 'scheduler'),
+                     1));
+
+    $settings->add(new admin_setting_configcheckbox('mod_scheduler/mixindivgroup',
+                     get_string('mixindivgroup', 'scheduler'),
+                     get_string('mixindivgroup_desc', 'scheduler'),
                      1));
 
     $settings->add(new admin_setting_configtext('mod_scheduler/maxstudentlistsize',
