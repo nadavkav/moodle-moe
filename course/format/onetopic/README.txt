@@ -1,7 +1,7 @@
 COURSE FORMATS Onetopic
 ============================
 
-Package tested in: moodle 2.9+
+Package tested in: moodle 3.1+
 
 QUICK INSTALL
 ==============
@@ -15,6 +15,21 @@ Information in: http://aprendeenlinea.udea.edu.co/lms/investigacion/course/view.
 
 IN VERSION
 =============
+2016071401:
+Fixed: Error code: sectionnotexist
+Apply Moodle coding style
+
+2016071400:
+Compatibility with moodle 3.1
+Fixed: Issue in current section navigation
+
+2016020501:
+Added functionality: Summary topic as template
+
+2016020500:
+Compatibility with moodle 3.0
+Added section edit menu
+
 2015051700:
 Compatibility with moodle 2.9
 

@@ -1,20 +1,31 @@
+/**Styles included in topics course format*/
+/*
 .course-content ul.topics {margin:0;}
-.course-content ul.topics li.section {list-style: none;margin:5px 0 0 0;padding:0;}
+.course-content ul.topics li.section {list-style: none;margin:0 0 5px 0;padding:0;}
 .course-content ul.topics li.section .content {margin:0 40px;}
-.course-content ul.topics li.section .left {width:40px;float:left;text-align:center;}
-.course-content ul.topics li.section .right {width:40px;float:right;text-align:center;}
-.jumpmenu {text-align:center;}
-.course-content div.single-section .tabtree .tabrow0 li {line-height: 28px; display: inline-block; }
+.course-content ul.topics li.section .left,
+.course-content ul.topics li.section .right {width:40px;padding: 0 6px;}
+.course-content ul.topics li.section .right img.icon { padding: 0 0 4px 0;}
+.course-content ul.topics li.section .left {padding-top:22px;text-align: right;}
+.jsenabled .course-content ul.topics li.section .left,
+.jsenabled .course-content ul.topics li.section .right {width:auto;}
+.course-content ul.topics li.section .left .section-handle img.icon { padding:0; vertical-align: baseline; }
+.course-content ul.topics li.section .section_action_menu .textmenu,
+.course-content ul.topics li.section .section_action_menu .menu-action-text { white-space: nowrap; }
+*/
+
+.format-onetopic .jumpmenu {text-align:center;}
+.format-onetopic .course-content div.single-section .tabtree .tabrow0 li {line-height: 28px; display: inline-block; }
 /*.course-content div.single-section .tabtree .tabrow0 li {line-height: 26px; }*/
-.course-content div.single-section .tabtree .tabrow0 li.here .empty { bottom: 3px; display: block; height: 1px; left: 0; right: 0;  }
-.course-content div.single-section .tabtree { margin-bottom: 0px; }
+.format-onetopic .course-content div.single-section .tabtree .tabrow0 li.here .empty { bottom: 3px; display: block; height: 1px; left: 0; right: 0;  }
+.format-onetopic .course-content div.single-section .tabtree { margin-bottom: 0px; }
 
 .format-onetopic .tab_content { white-space: nowrap; }
-.format-onetopic .tab_content.marker { font-style: italic; }
+.format-onetopic .tab_content.marker { font-weight: bold; }
 
 .format-onetopic .utilities-separator { clear: both; margin-top: 15px; }
 
-.format-onetopic ul.nav-tabs li a .tab_content.dimmed { color: #999; opactity: 0.5; }
+.format-onetopic ul.nav-tabs li a .tab_content.dimmed { color: #999; opacity: 0.5; }
 
 .format-onetopic .subtopic-increase-sections { margin-right: 10px; }
 
@@ -23,3 +34,6 @@
 .format-onetopic .onetopic .nav-tabs > li > a { padding: 0; }
 
 .format-onetopic .onetopic .tab_content { padding: 8px 12px; }
+.format-onetopic .onetopic_hideicons .activityicon { display: none; }
+.format-onetopic .availability_info_box { display: inline; }
+.format-onetopic .summary img.activityicon { margin-right: 3px; vertical-align: text-bottom; }
