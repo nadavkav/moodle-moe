@@ -20,6 +20,7 @@
  *
  * @package   report_myfeedback
  * @author    Jessica Gramp <j.gramp@ucl.ac.uk>
+ * @author    Delvon Forrester <delvon@esparanza.co.uk>
  * @credits   Based on original work report_mygrades by David Bezemer <david.bezemer@uplearning.nl> which in turn is based on 
  * 			  block_myfeedback by Karen Holland, Mei Jin, Jiajia Chen. Also uses SQL originating from Richard Havinga 
  * 			  <richard.havinga@ulcc.ac.uk>. The code for using an external database is taken from Juan leyva's
@@ -31,8 +32,8 @@
  *            http://bit.ly/IoEAssessmentCareersProject
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$plugin->version = 2016011900;
+$plugin->version = 2017060600;
 $plugin->component = 'report_myfeedback';
-$plugin->requires = 2014111000;
-$plugin->release = '2.7 (Build: 2016011900)';
+$plugin->requires = 2013111810;
+$plugin->release = '2.8.12 (Build: 2017060600)';
 $plugin->maturity = MATURITY_STABLE;
