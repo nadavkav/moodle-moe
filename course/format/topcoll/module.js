@@ -43,7 +43,7 @@ M.format_topcoll.courseid = 0;
 M.format_topcoll.togglePersistence = 1; // Toggle persistence - 1 = on, 0 = off.
 M.format_topcoll.ourYUI = false;
 M.format_topcoll.numSections = 0;
-M.format_topcoll.ie8 = false;
+M.format_topcoll.userIsEditing = false;
 
 // Namespace constants:....
 M.format_topcoll.TOGGLE_6 = 1;
@@ -63,7 +63,7 @@ M.format_topcoll.TOGGLE_1 = 32;
  * @param {Integer} theDefaultTogglePersistence Persistence all open (1) or all closed (0) when thetogglestate is null.
  */
 M.format_topcoll.init = function(Y, theCourseId, theToggleState, theNumSections, theTogglePersistence,
-    theDefaultTogglePersistence) {
+    theDefaultTogglePersistence, theUserIsEditing) {
     "use strict";
     // Init.
     this.ourYUI = Y;
@@ -71,10 +71,8 @@ M.format_topcoll.init = function(Y, theCourseId, theToggleState, theNumSections,
     this.togglestate = theToggleState;
     this.numSections = parseInt(theNumSections);
     this.togglePersistence = theTogglePersistence;
+    this.userIsEditing = theUserIsEditing;
 
-    // IE8 - humm!
-    var bodyNode = Y.one(document.body);
-    M.format_topcoll.ie8 = bodyNode.hasClass('ie8');
     if ((this.togglestate !== null) && (this.togglePersistence == 1)) { // Toggle persistence - 1 = on, 0 = off.
         if (this.is_old_preference(this.togglestate) === true) {
             // Old preference, so convert to new.
@@ -105,11 +103,14 @@ M.format_topcoll.init = function(Y, theCourseId, theToggleState, theNumSections,
         }
     }
 
-    /* Info on http://yuilibrary.com/yui/docs/event/delegation.html
-       Delegated event handler for the toggles.
-       Inspiration thanks to Ben Kelada.
-       Code help thanks to the guru Andrew Nicols. */
-    Y.delegate('click', this.toggleClick, Y.config.doc, 'ul.ctopics .toggle', this);
+    // For some reason Y.delegate does not work on iPhones / iPad's on M3.1 with 'spans' instead of 'a' tags.
+    for (var togi = 1; togi <= this.numSections; togi++) {
+        // Cope with hidden / not shown toggles.
+        var toggle = Y.one("ul.ctopics #toggle-" + togi);
+        if (toggle) {
+            toggle.on('click', this.toggleClick, this);
+        }
+    }
 
     // Event handlers for all opened / closed.
     var allopen = Y.one("#toggles-all-opened");
@@ -123,6 +124,12 @@ M.format_topcoll.init = function(Y, theCourseId, theToggleState, theNumSections,
 };
 
 M.format_topcoll.toggleClick = function(e) {
+    if (this.userIsEditing) {
+        var parentClasses = e.target.get('parentNode').getAttribute('class');
+        if ((parentClasses.indexOf('quickediticon') > -1) || (parentClasses.indexOf('inplaceeditable') > -1)) {
+            return;
+        }
+    }
     var toggleIndex = parseInt(e.currentTarget.get('id').replace("toggle-", ""));
     e.preventDefault();
     this.toggle_topic(e.currentTarget, toggleIndex);
@@ -168,12 +175,6 @@ M.format_topcoll.toggle_topic = function(targetNode, toggleNum) {
         target.addClass('toggle_closed').removeClass('toggle_open').setAttribute('aria-pressed', 'false');
         targetNode.next('.toggledsection').removeClass('sectionopen');
         state = false;
-    }
-    // IE 8 Hack/workaround to force IE8 to repaint everything.
-    if (M.format_topcoll.ie8) {
-        M.format_topcoll.ourYUI.all(".toggle span.the_toggle").addClass('ie8_hackclass_donotuseincss')
-            .removeClass('ie8_hackclass_donotuseincss');
-        console.log('IE8 repaint.');
     }
 
     this.set_toggle_state(toggleNum, state);
