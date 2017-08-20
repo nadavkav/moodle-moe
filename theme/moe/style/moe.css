@@ -906,7 +906,7 @@ body.format-moetopcoll .course-content ul.ctopics #toggle-1 {
 }
 
 .ctopics .section.main .content .section {
-	width: 55%;
+	width: 52%;
 }
 
 .dir-rtl .ctopics .section.main .content .summary {
@@ -4023,7 +4023,7 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 
 body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0) .summary>div.no-overflow {
 	padding: 0 2em 0 2em;
-	word-break: break-all;
+	word-break: break-word;
 }
 body.format-topcoll .course-content ul.ctopics li.section .right{
 	display: none;
@@ -5207,7 +5207,7 @@ div#intro.generalbox{
 	max-width: 90%;
 }
 li.section div.summary {
-	padding: 1em;
+	padding: 3%;
 }
 
 #page-course-view-topics.format-topics .sectionname{
