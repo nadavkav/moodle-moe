@@ -101,6 +101,16 @@
 	height: 80px;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .format-moetabs .sectionzerobtn {
 	padding: 25px 2px 25px 2px;
 	border: 1px;
@@ -112,7 +122,7 @@
 	text-align: center;
 	left: 185px;
 	position: absolute;
-	top: 456px;
+	top: 447px;
 	box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 }
 
@@ -196,7 +206,6 @@
 .format-moetabs #gridshadebox_content.absolute {
     position: absolute;
     width: 70%;
-	top: 20%;
 	left: 6%; 
     z-index: 1;
 }
