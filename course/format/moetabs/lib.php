@@ -642,11 +642,11 @@ class format_moetabs extends format_base {
                 }
             }
             /* test if there is three lables in all section and add it if need */
-            $renderer = $PAGE->get_renderer('format_moetopcoll');
+            $renderer = $PAGE->get_renderer('format_moetabs');
             $modinfo = get_fast_modinfo($this->courseid);
             $course = $this->get_course();
             $i=1;
-            if (($maxsection!=null && $oldcourse['format'] == 'moetopcoll') || $maxsection == $numsections){
+            if (($maxsection!=null && $oldcourse['format'] == 'moetabs') || $maxsection == $numsections){
                 $i=$maxsection+1;
             }
             for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum++) {
@@ -655,7 +655,7 @@ class format_moetabs extends format_base {
                     get_string('moetabspagesectiontwo', 'format_moetabs'),
                     get_string('moetabspagesectionthree', 'format_moetabs')
                 );
-                $countmoetopcolllabel = 0;
+                $countmoetabslabel = 0;
                 $section = $modinfo->get_section_info($sectionnum);
                 $completioninfo = new completion_info($course);
                 if ($section != null && isset($modinfo->sections[$section->section])) {
@@ -665,7 +665,7 @@ class format_moetabs extends format_base {
                             $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
                             foreach ($labels as $key => $label) {
                                 if(strpos($modulehtml, 'moetopcalllabel')){
-                                    ++$countmoetopcolllabel;
+                                    ++$countmoetabslabel;
                                 }
                                 if (strpos($modulehtml, $label)) {
                                     unset($labels[$key]);
@@ -674,7 +674,7 @@ class format_moetabs extends format_base {
                         }
                     }
                 }
-                if (($countmoetopcolllabel < 3) && (!empty($labels)) && ($section != null)) {
+                if (($countmoetabslabel < 3) && (!empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
                     foreach ($labels as $key => $label) {
                         $cm = null;
@@ -724,7 +724,7 @@ class format_moetabs extends format_base {
             ($resetallcolour) ||
             ($resetalltogglealignment) ||
             ($resetalltoggleiconset)) {
-                $this->reset_moetopcoll_setting(0, $resetalldisplayinstructions, $resetalllayout, $resetallcolour,
+                $this->reset_moetabs_setting(0, $resetalldisplayinstructions, $resetalllayout, $resetallcolour,
                     $resetalltogglealignment, $resetalltoggleiconset);
                 $changes = true;
             } else if (($resetdisplayinstructions) ||
@@ -732,7 +732,7 @@ class format_moetabs extends format_base {
                 ($resetcolour) ||
                 ($resettogglealignment) ||
                 ($resettoggleiconset)) {
-                    $this->reset_moetopcoll_setting($this->courseid, $resetdisplayinstructions, $resetlayout, $resetcolour,
+                    $this->reset_moetabs_setting($this->courseid, $resetdisplayinstructions, $resetlayout, $resetcolour,
                         $resettogglealignment, $resettoggleiconset);
                     $changes = true;
                 }
