@@ -19,9 +19,13 @@
 
 $string['zerosectionbtn'] = 'ארגז כלים, חומרי רקע ועזר עבור המורה';
 
-$string['moetabspagesectionone'] = '<h1 class="multilang" lang="he">מרחב 1</h1><h1 class="multilang" lang="en">Section 1</h1>';
+/* $string['moetabspagesectionone'] = '<h1 class="multilang" lang="he">מרחב 1</h1><h1 class="multilang" lang="en">Section 1</h1>';
 $string['moetabspagesectiontwo'] = '<h1 class="multilang" lang="he">מרחב 2</h1><h1 class="multilang" lang="en">Section 2</h1>';
-$string['moetabspagesectionthree'] = '<h1 class="multilang" lang="he">מרחב 3</h1><h1 class="multilang" lang="en">Section 3</h1>';
+$string['moetabspagesectionthree'] = '<h1 class="multilang" lang="he">מרחב 3</h1><h1 class="multilang" lang="en">Section 3</h1>'; */
+
+ $string['moetabspagesectionone'] = '<h1 class="multilang" lang="he">מרחב 1</h1>';
+ $string['moetabspagesectiontwo'] = '<h1 class="multilang" lang="he">מרחב 2</h1>';
+ $string['moetabspagesectionthree'] = '<h1 class="multilang" lang="he">מרחב 3</h1>';
 
 $string['display_summary'] = 'move out of grid';
 $string['display_summary_alt'] = 'Move this section out of the grid';
