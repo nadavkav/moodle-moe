@@ -92,6 +92,11 @@
 	font-size: 17px;
 }
 
+.format-moetabs .nav-collapse-tabs li {
+	list-style-type: none;
+}
+
+
 /* section zero */
 .format-moetabs .title {
 	color: #7a5b9a; 
