@@ -130,7 +130,7 @@
 	width: 40px;
 	height: 40px;
 	background-color: #a1c0b1;
-	position: absolute;
+	position: inherit;
     left: 20px;
 	top: 20px;
 }
