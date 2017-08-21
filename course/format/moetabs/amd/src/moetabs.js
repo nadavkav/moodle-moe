@@ -16,21 +16,28 @@ define(['jquery'], function($) {
        		
     	Moetabs.prototype.init = function() {
     		
-
-    		$( window ).resize(function() {
+            // founction to place the button acording to the windows size 
+    		var btnresponsive = function() {
     			
                 var btnsize = $('.format-moetabs .sectionzerotext').width() - 
     			( $('.format-moetabs .sectionzeroimg').width() +  
-    					 ( parseInt($(".format-moetabs .sectionzeroimg").css("margin-left").replace("px","")) * 2 ) );
+    					 ( parseInt($(".format-moetabs .sectionzeroimg").css("margin-left").replace("px","")) ) );
                 var minbtnsize = 610;
  			    if ( btnsize < minbtnsize ) {
     				$( '.format-moetabs .sectionzerobtn' ).css("position", "unset");
     				$('.format-moetabs .littlesquare').hide();
+    				$('.format-moetabs .sectionzerotext' ).css("margin-top", "10px");
+    				$('.format-moetabs .sectionzerotext' ).css("display", "inline-block");
+    				$( '.format-moetabs .sectionzerobtn' ).css("margin-bottom", "25px");
+    				$( '.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft').show();
     				var containersize = $('.format-moetabs .sectionzerotext').width();
     				$( '.format-moetabs .sectionzerobtn' ).css("width", containersize); 
     			} else {
     				$( '.format-moetabs .sectionzerobtn' ).css("position", "absolute"); 
     				$('.format-moetabs .littlesquare').show();
+    				$('.format-moetabs .sectionzerotext' ).css("margin-top", "0px");
+       				$('.format-moetabs .sectionzerotext' ).css("display", "block");
+       				$( '.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft').hide();
     				if ( window.fullScreen ) {
           			  $( '.format-moetabs .sectionzerobtn' ).css("width", "766px");
       				} else {
@@ -38,6 +45,13 @@ define(['jquery'], function($) {
       				}
     				
     			} 
+    		};
+    		
+    		 //  defind the button size at firs load for mobile mevice
+    		$( document ).ready( btnresponsive );
+
+    		$( window ).resize(function() {
+    			btnresponsive();
     		});
     		
     		if(this.ruler.width() >= $('.format-moetabs .course-content .single-section').width()){
