@@ -15,7 +15,7 @@ define(['jquery'], function($) {
         this.ruler = $('.format-moetabs ul.nav.nav-tabs');
        		
     	Moetabs.prototype.init = function() {
-    		
+    			
             // founction to place the button acording to the windows size 
     		var btnresponsive = function() {
     			
@@ -50,6 +50,7 @@ define(['jquery'], function($) {
     		 //  defind the button size at firs load for mobile mevice
     		$( document ).ready( btnresponsive );
 
+    		 //  defind the button size for pc responsive
     		$( window ).resize(function() {
     			btnresponsive();
     		});
