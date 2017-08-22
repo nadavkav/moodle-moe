@@ -405,7 +405,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                     }
 
 
-                    //Init move section list***************************************************************************
+                    // Init move section list
                     if ($can_move) {
                         if ($section > 0) { // Move section
                             $baseurl = course_get_url($course, $displaysection);
@@ -414,22 +414,6 @@ class format_moetabs_renderer extends format_section_renderer_base {
                             $url = clone($baseurl);
 
                             $url->param('move', $section - $displaysection);
-
-                            //ToDo: For new feature: subtabs. It is not implemented yet
-                            /*
-                            $strsubtopictoright = get_string('subtopictoright', 'format_moetabs');
-                            $url = new moodle_url('/course/view.php', array('id' => $course->id, 'subtopicmove' => 'right', 'subtopic' => $section));
-                            $icon = $this->output->pix_icon('t/right', $strsubtopictoright);
-                            $subtopic_move = html_writer::link($url, $icon.get_accesshide($strsubtopictoright), array('class' => 'subtopic-increase-sections'));
-
-
-                            if ($displaysection != $section) {
-                                $move_list_html .= html_writer::tag('li', $subtopic_move . html_writer::link($url, $sectionname));
-                               }
-                            else {
-                                $move_list_html .= html_writer::tag('li', $subtopic_move . $sectionname);
-                            }
-                            */
 
                             //Define class from sublevels in order to move a margen in the left. Not apply if it is the first element (condition !empty($move_list_html)) because the first element can't be a sublevel
                             $li_class = '';
@@ -445,7 +429,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
                             }
                         }
                     }
-                    //End move section list***************************************************************************
+                    //End move section list
                 }
             }
 
