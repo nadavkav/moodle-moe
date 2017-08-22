@@ -22,7 +22,7 @@
  * @copyright 2014 redPIthemes
  *
  */
- 
+
 $hide_breadrumb_setting = theme_lambda_get_setting('hide_breadcrumb');
 $hide_breadrumb = ((!isloggedin() or isguestuser()) and $hide_breadrumb_setting);
 $left = (!right_to_left());
@@ -44,18 +44,10 @@ echo $OUTPUT->doctype() ?>
 <?php echo $OUTPUT->standard_top_of_body_html(); ?>
 
 <div id="wrapper">
-<?php require_once(dirname(__FILE__).'/includes/header.php'); ?>
 
 <div id="page" class="container-fluid">
 
-    <header id="page-header" class="clearfix">
-    	<?php if (!($hide_breadrumb)) { ?>
-        <div id="page-navbar" class="clearfix">
-            <div class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></div>
-            <nav class="breadcrumb-button"><?php echo $OUTPUT->page_heading_button(); ?></nav>
-        </div>
-        <?php } ?>
-    </header>
+  
 
     <div id="page-content" class="row-fluid">
         <section id="region-main" class="span9<?php if ($left) { echo ' pull-left'; } ?><?php if ($standardlayout) { echo ' pull-right'; } ?>">
@@ -65,29 +57,13 @@ echo $OUTPUT->doctype() ?>
             echo $OUTPUT->course_content_footer();
             ?>
         </section>
-        <?php
-        $classextra1 = '';
-		$classextra2 = '';
-		if (!$standardlayout) {
-            $classextra1 = ' pull-right';
-        }
-        if ($left or (!$left and $standardlayout)) {
-            $classextra2 = ' desktop-first-column';
-        }
-        if ( $PAGE->context->get_level_name() == get_string('activitymodule') || (isset($showbacktocourse) && in_array($PAGE->bodyid,$showbacktocourse)) ) {
-            echo "<a id='backtocourse_top' class='btn span3' href='$CFG->wwwroot/course/view.php?id=$COURSE->id'>".get_string('backtocourse','theme_moe')."</a>";
-        }
-        echo $OUTPUT->blocks('side-pre', 'span3'.$classextra1.$classextra2);
-        ?>
+
     </div>
 
     <a href="#top" class="back-to-top"><i class="fa fa-chevron-circle-up fa-3x"></i><p><?php print_string('backtotop', 'theme_moe'); ?></p></a>
 
 </div>
 
-	<footer id="page-footer" class="container-fluid">
-		<?php require_once(dirname(__FILE__).'/includes/footer.php'); ?>
-	</footer>
 
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
 
@@ -120,7 +96,7 @@ jQuery(document).ready(function() {
             jQuery('.back-to-top').fadeOut(duration);
         }
     });
-    
+
     jQuery('.back-to-top').click(function(event) {
         event.preventDefault();
         jQuery('html, body').animate({scrollTop: 0}, duration);

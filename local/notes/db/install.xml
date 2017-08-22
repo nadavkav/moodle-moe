@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/notes/db" VERSION="20160302" COMMENT="notes database tables."
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+      <TABLE NAME="notes" COMMENT="note main table.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="namespace" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="the father table"/>
+        <FIELD NAME="namespace_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="the id int the father table"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+      <TABLE NAME="notes_versions" COMMENT="note content table.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="content" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="content of nots at the save point"/>
+        <FIELD NAME="created_time" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="creat time"/>
+        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="false" NAME="toshow" LENGTH="1"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="notes_fk_id" TYPE="foreign" FIELDS="parent" REFTABLE="notes" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="notes_annotations" COMMENT="Holds the inline comments for the commenting system called Annotations.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="who created the annotation"/>
+        <FIELD NAME="noteid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="used to get all all annotations on a note"/>
+        <FIELD NAME="parent" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="created" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The created date"/>
+        <FIELD NAME="quote" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="text" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="updated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The updated date"/>
+        <FIELD NAME="resolved" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="parent_fk_id" TYPE="foreign" FIELDS="parent" REFTABLE="notes" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+        <KEY NAME="notes_annotations_fk_userid" FIELDS="userid" TYPE="foreign" REFTABLE="user" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="notes_annotations_permiss" PREVIOUS="notes_annotations" COMMENT="permissions for each annotation">
+        <FIELDS>
+            <FIELD SEQUENCE="true" TYPE="int" LENGTH="10" NOTNULL="true" NAME="id"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotationid"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="read_prem"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="update_prem"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="delete_prem"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="admin_prem"/>
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
+            <KEY NAME="notes_annotations_fk_id" TYPE="foreign" FIELDS="annotationid" REFTABLE="notes_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="notes_annotations_ranges" PREVIOUS="notes_annotations_permiss" COMMENT="ranges for the annaotaions remarks">
+        <FIELDS>
+            <FIELD SEQUENCE="true" TYPE="int" LENGTH="10" NOTNULL="true" NAME="id"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="false" NAME="annotationid"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="0" NAME="startoffset"/>
+            <FIELD SEQUENCE="false" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="0" NAME="endoffset"/>
+            <FIELD SEQUENCE="false" TYPE="text" NOTNULL="true" NAME="start"/>
+            <FIELD SEQUENCE="false" TYPE="text" NOTNULL="true" NAME="end"/>
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" FIELDS="id" TYPE="primary"/>
+            <KEY NAME="notes_annotations_fk_id" TYPE="foreign" FIELDS="annotationid" REFTABLE="notes_annotations" REFFIELDS="id" ONDELETE="cascade" ONUPDATE="cascade"/>
+        </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

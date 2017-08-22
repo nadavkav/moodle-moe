@@ -1,0 +1,36 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<section id="questionconnect" class="row-fluid">
+    <heading class="span12">
+        <h2 id="{{contentid}}" data-cmid="{{cmid}}">{{contentname}}</h2>
+    </heading>
+    <section id="questionlist" class="span6">
+        <ul>
+        {{#question}}
+            <li class="question" id="{{id}}"><input type="checkbox" value="{{id}}" {{#additionalcontentid}}checked="checked"{{/additionalcontentid}}/>
+                {{name}}<a target="_blank"href="/question/preview.php?id={{id}}&cmid={{cmid}}&behaviour=immediatefeedback&correctness=1&marks=2&markdp=2&feedback=1&generalfeedback=1&rightanswer=1&history">{{#pix}}t/preview{{/pix}}</a>
+            </li>
+        {{/question}}
+        </ul>
+    </section>
+    <section id="question_preview" class="span6">
+        {{{test}}}
+    </section>
+    <nav class="span12">
+        <button id="aprroved">{{#str}} approved , moeworksheets{{/ str }}</button>
+    </nav>
+</section>

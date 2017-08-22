@@ -1,0 +1,4 @@
+#page-mod-moeworksheets-report #manualgradingform {width: 100%;}
+#page-mod-moeworksheets-report #manualgradingform.mform br {clear: none;}
+#page-mod-moeworksheets-report #manualgradingform.mform .clearfix:after {clear: none;}
+#page-mod-moeworksheets-report #manualgradingform .que {margin-bottom: 0.7em;}

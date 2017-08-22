@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_moeworksheets-randomquestion",
+    "builds": {
+        "moodle-mod_moeworksheets-randomquestion": {
+            "jsfiles": [
+                "randomquestion.js"
+            ]
+        }
+    }
+}

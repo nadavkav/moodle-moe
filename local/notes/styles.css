@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#note .felement{
+    margin-left: 0;
+    text-align: right;
+    padding-top: 1px;
+}
+
+#note_warp{
+    display: none;
+    background-color: #f3e7d4;
+    position: relative;
+    top: 25px;
+	resize: both;
+    overflow: auto;
+}
+#note_warp .felement {
+    margin-right:92px;
+}

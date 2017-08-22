@@ -1,0 +1,12 @@
+{
+    "name": "moodle-mod_moeworksheets-toolboxes",
+    "builds": {
+        "moodle-mod_moeworksheets-toolboxes": {
+            "jsfiles": [
+                "toolbox.js",
+                "resource.js",
+                "section.js"
+            ]
+        }
+    }
+}

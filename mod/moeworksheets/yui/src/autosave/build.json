@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_moeworksheets-autosave",
+    "builds": {
+        "moodle-mod_moeworksheets-autosave": {
+            "jsfiles": [
+                "autosave.js"
+            ]
+        }
+    }
+}
