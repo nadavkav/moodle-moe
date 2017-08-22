@@ -311,6 +311,10 @@
     padding: 0px;
 }
 
+.format-moetabs #section-0 .summary {
+	padding-right: 0px;
+}
+
 .format-moetabs li:not(#section-0) .summary {
     padding: 0px;
 	height:200px;
