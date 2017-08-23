@@ -53,7 +53,10 @@
             {{#frame}}
                 <script>
                     function resizeIframe(obj) {
-                        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+                        var objectheight = obj.contentWindow.document.body.scrollHeight;
+                        obj.style.height = objectheight + 'px';
+                        $('#addtional_content').css('height',objectheight * 1.06+'px');
+                        $('#quizsbs_question').css('height',objectheight * 1.06+'px');
                     }
                 </script>
                 <iframe src="{{frame}}" id="app" onload="resizeIframe(this)"></iframe>
