@@ -5807,6 +5807,15 @@ a#choosetheme {
     margin-left: 25px;
 }
 
+.yui3-button {	
+	background-color: #23716e;
+}
+
+.yui3-button:hover {
+
+	background-color: rgba(35,113,110, .7);
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
