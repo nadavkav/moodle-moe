@@ -20,8 +20,11 @@
 
 define(['jquery'], function($){
 	var Navigation = function(){
-		this.scrollWidth = ($('.qnbutton').size()) * ($('.qnbutton').width()+6);
+		this.buttonSize = $('.qnbutton').width()+2+3.9;
+		this.scrollWidth = ($('.qnbutton').size()) * this.buttonSize;
 		$('.allbuttons').width(this.scrollWidth);
+		this.currentButton = parseInt($('.qnbutton.thispage').data('quizsbs-page'))+1;
+		this.maxButtonInScroller = Math.floor(this.scrollWidth/this.buttonSize) - 1;
 	};
 	
 	Navigation.prototype.pix2int = function(pix) {
@@ -29,21 +32,9 @@ define(['jquery'], function($){
 	};
 	
 	Navigation.prototype.init = function() {
-	    var scrollWidth = $('.qnbutton').size() * ($('.qnbutton').width()+6);
-		var initialoffset = (parseInt($('.qnbutton.thispage').first().attr('id').replace('quizsbsnavbutton', '')) -1) *
-								$('.qnbutton').width();
-		var count = 0;
-		var passedthis = false;
-		$('.qnbutton').each(function(){
-			if($(this).hasClass('thispage')) {
-				passedthis = true;
-			}
-			if(passedthis) {
-				count++;
-			}
-		});
-		if(count < 10) {
-			initialoffset -= (10-count)*$('.qnbutton').width();
+		var initialoffset = 0;
+		if(this.currentButton >= this.maxButtonInScroller) {
+			initialoffset = this.buttonSize * (this.currentButton - Math.round((this.maxButtonInScroller/2)));
 			if(initialoffset < 0) {
 				initialoffset = 0;
 			}
@@ -54,8 +45,8 @@ define(['jquery'], function($){
 		}
 		this.checkPosition();
 		$('.fa-caret-left').click(function(){
-			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -scrollWidth) {
-				$('.allbuttons').css('right', -scrollWidth + $('#scrollbar').width()*23/24);
+			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -self.scrollWidth) {
+				$('.allbuttons').css('right', -self.scrollWidth + $('#scrollbar').width()*23/24);
 			} else {	
 				$('.allbuttons').css('right', '-=324');
 			}
@@ -82,29 +73,41 @@ define(['jquery'], function($){
 			$( '.mod_quizsbs-prev-nav-show' ).hide();
 		}
 		$('.mod_quizsbs-next-nav-show').val($('.mod_quizsbs-next-nav').val());
-		
-		//fix iframe size
-		$( document ).ready(function() {
-			if ($('#app').length > 0){
-			var x  = $('#app')[0].scrollWidth;
-			x = x * 1.3;
-		    $('#addtional_content').css('height', x+'px');
-		    $('#questionbox').css('height', x+'px');
-			}
-		});
-		
+				
 		//adjust question side to the content side
-		self = this;
+		
+		var self = this;
 		$( document ).ready(function() {
-		if (self.pix2int($('.wraper').css("height")) > self.pix2int($('#questionbox').css("height"))) {
-			$('#questionbox').css("height",self.pix2int($('.wraper').css("height")));
-		}
-		if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
-			$('.ddarea').css('width',
+			//fix iframe size
+			var questionbixhight;
+			if ($('#app').length > 0){
+				var x  = $('#app')[0].offsetHeight;
+				if (x < 600 ) {
+					x = 600;
+					$('#app').height(x);
+				}
+				var xwithpadding = x * 1.1;
+			    $('#addtional_content').css('height', xwithpadding+'px');
+			    $('#addtional_content .wraper').css('height', '97%');
+			    $('#quizsbs_question').css('height', xwithpadding+'px');
+			    if (self.pix2int($('.wraper').css("height")) > self.pix2int($('#questionbox').css("height"))) {
+					questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
+					$('#questionbox').
+					css("height",questionbixhight - questionbixhight*0.03 - self.pix2int($('#subjectheader').css("height"))-14);
+				}
+			} else {
+				questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
+				$('#questionbox').
+				css("height",self.pix2int($('#addtional_content').css('height')) 
+						- self.pix2int($('#subjectheader').css("height"))-14);
+			}
+			
+			if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
+				$('.ddarea').css('width',
 					this.pix2int($('.dropbackground').css("width")));
-			$('.droparea').css("width",
+				$('.droparea').css("width",
 					this.pix2int($('.dropbackground').css("width")));
-		}
+			}
 		});
 		
 	};

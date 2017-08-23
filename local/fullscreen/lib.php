@@ -39,7 +39,8 @@ if (CLI_SCRIPT || AJAX_SCRIPT
         || $PAGE->pagelayout === 'embedded'
         || $PAGE->pagelayout === 'popup'
         || $PAGE->pagelayout === 'redirect'
-        || $PAGE->pagelayout === 'frametop') {
+        || $PAGE->pagelayout === 'frametop'
+        || $PAGE->pagelayout === 'quizsbs-attempt') {
     return;
 }
 $fullscreen = get_user_preferences('fullscreenmode', false);

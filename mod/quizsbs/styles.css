@@ -31,7 +31,9 @@
     padding: 0px;   
 }
 
-
+#page-mod-quizsbs-attempt .que .formulation{
+	padding: 8px;
+}
 #quizsbs #navigation .othernav {
     margin-left:auto; 
 }
@@ -1187,8 +1189,15 @@ table.quizsbsreviewsummary td.cell {
 .path-mod-quizsbs #questions {
     display: flex;
 }
+
+#questions #quizsbs_question,
+#questions #addtional_content {
+	min-height: 600px;
+}
+
 #questions #quizsbs_question{
     flex: 6;
+	padding-left: 0px;
 }
 #questions #addtional_content{
     flex: 11;
@@ -1197,8 +1206,10 @@ table.quizsbsreviewsummary td.cell {
     padding: 1em;
 }
 .path-mod-quizsbs #questions #addtional_content .wraper{
-    padding: 2em;
-    overflow-x: auto; 
+    padding: 1%;
+    overflow-x: auto;
+	overflow-y: hidden; 
+	height: 97%;
 }
 .path-mod-quizsbs #questionbox{
     margin: 0px;
@@ -1338,7 +1349,7 @@ table.quizsbsreviewsummary td.cell {
     width: 98%;
 }
 .pagelayout-quizsbs-attempt #wrapper #page{
-    padding: 10px 0 0 0;
+    padding: 0px;
     margin: 0;
     width: 100%;
 }
@@ -1416,6 +1427,10 @@ color: #676566;
 }
 .path-mod-quizsbs #questionbox {
     min-height:403px;
+}
+
+.path-mod-quizsbs .formulation .ablock .prompt {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Ajustments for mobile devices */
