@@ -45,7 +45,7 @@ define(['jquery'], function($){
 		}
 		this.checkPosition();
 		$('.fa-caret-left').click(function(){
-			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -this.scrollWidth) {
+			if(parseInt($('.allbuttons').css('right').replace('px', '')) -324 < -self.scrollWidth) {
 				$('.allbuttons').css('right', -this.scrollWidth + $('#scrollbar').width()*23/24);
 			} else {	
 				$('.allbuttons').css('right', '-=324');
@@ -77,31 +77,7 @@ define(['jquery'], function($){
 		//adjust question side to the content side
 		
 		var self = this;
-		$( document ).ready(function() {
-			//fix iframe size
-			var questionbixhight;
-			if ($('#app').length > 0){
-				var x  = $('#app')[0].offsetHeight;
-				if (x < 600 ) {
-					x = 600;
-					$('#app').height(x);
-				}
-				var xwithpadding = x * 1.1;
-			    $('#addtional_content').css('height', xwithpadding+'px');
-			    $('#addtional_content .wraper').css('height', '97%');
-			    $('#quizsbs_question').css('height', xwithpadding+'px');
-			    if (self.pix2int($('.wraper').css("height")) > self.pix2int($('#questionbox').css("height"))) {
-					questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
-					$('#questionbox').
-					css("height",questionbixhight - questionbixhight*0.03 - self.pix2int($('#subjectheader').css("height"))-14);
-				}
-			} else {
-				questionbixhight = self.pix2int($('#quizsbs_question').css('height'));
-				$('#questionbox').
-				css("height",self.pix2int($('#addtional_content').css('height')) 
-						- self.pix2int($('#subjectheader').css("height"))-14);
-			}
-			
+		$( document ).ready(function() {		
 			if ($('.droparea').css('width') != $('.dropbackground').css('width')) {
 				$('.ddarea').css('width',
 					this.pix2int($('.dropbackground').css("width")));

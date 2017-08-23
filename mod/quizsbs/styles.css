@@ -1214,7 +1214,7 @@ table.quizsbsreviewsummary td.cell {
 .path-mod-quizsbs #questionbox{
     margin: 0px;
     margin-top: 7px;
-    height: 31em;
+    height: 95.5%;
     overflow-y: auto;
 }
 .path-mod-quizsbs .que, .path-mod-quizsbs .que .content {
