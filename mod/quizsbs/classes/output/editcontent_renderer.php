@@ -68,11 +68,11 @@ class editcontent_renderer extends \plugin_renderer_base {
         $questioncontentcss = new question_content();
         $questioncontentjavascript = new question_content();
         $questioncontentapp = new question_content();
-        $additaionalcontent = new \stdClass();
-        $additaionalcontent->id = $additaional->get_id();
-        $additaionalcontent->additionalcontentname = $additaional->get_name();
-        $additaionalcontent->contenttype = $additaional->get_type();
-        $additaionalcontent->createdate = $additaional->get_createdate();
+        $forminitialdata = new \stdClass();
+        $forminitialdata->id = $additaional->get_id();
+        $forminitialdata->additionalcontentname = $additaional->get_name();
+        $forminitialdata->contenttype = $additaional->get_type();
+        $forminitialdata->createdate = $additaional->get_createdate();
         $htmleditoroption = array(
             'subdirs' => file_area_contains_subdirs($context, 'mod_quizsbs', 'content', null),
             'maxbytes' => 0,
@@ -90,50 +90,44 @@ class editcontent_renderer extends \plugin_renderer_base {
             'mainfile'       => true,
             'accepted_types' => '*',
         );
-        if (! is_null($additaional->get_id())) {
+        if (!empty($additaional->get_id())) {
             $questioncontents = $DB->get_records('quizsbs_question_content', array(
                 'additionalcontentid' => $additaional->get_id()
             ));
             foreach ($questioncontents as $questioncontent) {
                 switch ($questioncontent->type) {
                     case question_content::HTML_CONTENT:
-                        $additaionalcontent->html = $questioncontent->content;
-                        $additaionalcontent->htmlformat = FORMAT_HTML;
+                        $forminitialdata->html = $questioncontent->content;
+                        $forminitialdata->htmlformat = FORMAT_HTML;
                         $htmleditoroption['subdirs'] = file_area_contains_subdirs($context, 'mod_quizsbs', 'content', $questioncontent->id);
-                        $additaionalcontent = file_prepare_standard_editor($additaionalcontent, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontent->id);
+                        $forminitialdata = file_prepare_standard_editor($forminitialdata, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontent->id);
                         $questioncontenthtml->set_id($questioncontent->id);
                         break;
                     case question_content::CSS_CONTENT:
-                        $additaionalcontent->csseditor = $questioncontent->content;
+                        $forminitialdata->csseditor = $questioncontent->content;
                         $questioncontentcss->set_id($questioncontent->id);
                         break;
                     case question_content::APP_CONTENT:
                         $draftitemid = file_get_submitted_draft_itemid('app');
                         file_prepare_draft_area($draftitemid, $context->id, 'mod_quizsbs', 'app', $additaional->get_id(), $appoption);
                         $questioncontentapp->set_id($questioncontent->id);
-                        $additaionalcontent->app = $draftitemid;
+                        $forminitialdata->app = $draftitemid;
                     case question_content::JAVASCRIPT_CONTENT:
                     default:
-                        $additaionalcontent->javascripteditor = $questioncontent->content;
+                        $forminitialdata->javascripteditor = $questioncontent->content;
                         $questioncontentjavascript->set_id($questioncontent->id);
                     break;
                 }
             }
-            $contentloadform = new content_load($pageurl, array(
-                'structure' => $structure,
-                'additional' => $additaional,
-                'htmleditoroption' => $htmleditoroption,
-                'appoption' => $appoption,
-            ));
-            $contentloadform->set_data($additaionalcontent);
         }
-        if(!isset($contentloadform) || !($contentloadform instanceof content_load)) {
-            $contentloadform = new content_load($pageurl, array(
+        $contentloadform = new content_load($pageurl, array(
                 'structure' => $structure,
                 'additional' => $additaional,
                 'htmleditoroption' => $htmleditoroption,
                 'appoption' => $appoption,
             ));
+        if(!empty($additaional->get_id())){
+            $contentloadform->set_data($forminitialdata);
         }
         if ($contentloadform->is_cancelled()){
             redirect(new \moodle_url('/mod/quizsbs/additionalcontentlist.php', array(
@@ -196,9 +190,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                         )));
                         $questioncontenthtml->load_from_db();
                         $questioncontenthtml->set_type(question_content::HTML_CONTENT);
+                        $questioncontenthtml->set_content($contentdata->html_editor['text']);
+                        $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
+                        $questioncontenthtml->add_entry();
                         $contentdata = file_postupdate_standard_editor($contentdata, 'html', $htmleditoroption, $context, 'mod_quizsbs', 'content', $questioncontenthtml->get_id());
                         $questioncontenthtml->set_content($contentdata->html);
-                        $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontenthtml->add_entry();
                         break;
                 }
@@ -211,7 +207,7 @@ class editcontent_renderer extends \plugin_renderer_base {
             } else {
                 $modid = $DB->get_field('modules', 'id', array("name" => "quizsbs"));
                 $cmid = $DB->get_field('course_modules', 'id', array('module' => $modid, 'instance' => $additionalcontent->get_quizsbsid()));
-                $this->page->requires->js_call_amd('mod_quizsbs/contentpreview', 'init', array($cmid, $CFG->wwwroot, $additaionalcontent->id, $USER->sesskey));
+                $this->page->requires->js_call_amd('mod_quizsbs/contentpreview', 'init', array($cmid, $CFG->wwwroot, $forminitialdata->id, $USER->sesskey));
                 return \html_writer::div($contentloadform->render(), 'contentloadformforpopup');
             }
         }

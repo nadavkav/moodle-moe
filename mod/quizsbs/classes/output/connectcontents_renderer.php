@@ -51,7 +51,8 @@ class connectcontents_renderer extends \plugin_renderer_base {
                         'subjectid' => $page,
                         'quizsbsid' => $quizsbsobj->get_quizsbsid(),
                     ));
-                    $oldadditionalcontent = new additional_content($oldadditionalcontent->id);
+                    $oldid = isset($oldadditionalcontent->id) ? $oldadditionalcontent->id : null;
+                    $oldadditionalcontent = new additional_content($oldid);
                     $oldadditionalcontent->set_subjectid(null);
                     $oldadditionalcontent->add_entry();
                     $additionalcontent->set_subjectid($page);
