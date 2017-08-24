@@ -25,6 +25,7 @@ require_once("../../config.php");
 require_once("locallib.php");
 
 $id = required_param('id', PARAM_INT);
+$isembeded = optional_param('isembedded', false, PARAM_BOOL);  //  Support for lib/editor/atto/plugins/hvp
 
 $url = new \moodle_url('/mod/hvp/view.php', array('id' => $id));
 $PAGE->set_url($url);
@@ -47,6 +48,9 @@ if ($content === null) {
     print_error('invalidhvp');
 }
 
+if ($isembeded) {
+    $PAGE->set_pagelayout('embedded');
+}
 // Log view
 new \mod_hvp\event(
         'content', NULL,
