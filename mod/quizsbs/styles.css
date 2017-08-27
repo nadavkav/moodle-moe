@@ -1342,6 +1342,9 @@ table.quizsbsreviewsummary td.cell {
     margin: 0;
     width: 100%;
 }
+.formulation .ddarea .dropzones .dropzone,#questionbox #responseform .content .formulation .ddarea .dragitems .dragitemgroup1, .drags.notreadonly{
+    position: relative !important ;
+}
 @media print {
 
     #page-mod-quizsbs-attempt header.navbar,
