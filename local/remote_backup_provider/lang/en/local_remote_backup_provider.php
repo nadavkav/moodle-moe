@@ -29,3 +29,19 @@ $string['wstoken_desc'] = 'Add the web service token from the remote site.';
 $string['remote_backup_provider:access'] = 'Access';
 $string['selfsignssl_label'] = 'allow self sign certification';
 $string['selfsignssl_desc'] = 'If in the remote site the ssl is self sign';
+
+$string['remoteusername_label'] = 'Remote Username';
+$string['remoteusername_desc'] = 'Username used to backup the original courses on the remote system.';
+$string['listofsubs'] = 'list of remote servers';
+$string['subscribermanager'] = 'subscribers management';
+
+$string['subscriber_name'] = 'Subscriber name';
+$string['base_url'] = 'Subscriber url';
+$string['remote_user'] = 'user name in remote sys';
+$string['remote_token'] = 'token for remote user';
+$string['remove_remote'] = 'remove subscriber';
+$string['confirm'] = "are you sure you want to unsubscribe the remote server?";
+$string['yes'] = 'Yes';
+$string['no'] = 'No';
+$string['cronjub'] = "Send fails update to remote servers";
+$string['cronjub_desc'] = "in case the remote server not respond with OK we want to send him the update again";

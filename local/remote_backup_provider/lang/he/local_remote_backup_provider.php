@@ -29,3 +29,19 @@ $string['wstoken_desc'] = 'Add the web service token from the remote site.';
 $string['remote_backup_provider:access'] = 'Access';
 $string['selfsignssl_label'] = 'הרשמה תעודות חתומות עצמית';
 $string['selfsignssl_desc'] = 'האם האתר המרוחק משתמש בתעודה חתומה עצמית';
+
+$string['remoteusername_label'] = ' שם משתמש מרוחק';
+$string['remoteusername_desc'] = 'שם המשתמש אשר בצע את הגיבויים לקורסים המקוריים במערכת מוודל המרוחקת.';
+$string['listofsubs'] = 'רשימת שרתים מנויים';
+$string['subscribermanager'] = 'ניהול שרתים רשומים';
+
+$string['subscriber_name'] = 'שם השרת המרוחק';
+$string['base_url'] = 'כתובת השרת המרוחק';
+$string['remote_user'] = 'שם משתמש לגישה לשרת המרוחק';
+$string['remote_token'] = 'אסימון אבטחה לשרת המרוחק';
+$string['remove_remote'] = 'הסר שרת';
+$string['confirm'] = "האם אתה בטוח שברצונך להסיר את המנוי?";
+$string['yes'] = 'כן';
+$string['no'] = 'לא';
+$string['cronjub'] = "שליחת עידכונים לשרתים מרוחקים";
+$string['cronjub_desc'] = "כאשר שרת מרוחק לא עונה תשובה חיובית שהוא עידכן את טבלת הקורסים שלו נשלח את העידכון שוב";

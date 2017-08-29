@@ -34,7 +34,7 @@ class block_import_remote_course extends block_base {
     }
 
     function get_content() {
-        global $COURSE, $CFG;
+        global $COURSE, $CFG, $DB;
 
         if ($this->content !== null) {
             return $this->content;
@@ -65,19 +65,23 @@ class block_import_remote_course extends block_base {
 //        if (!empty($this->config->text)) {
 //            $courselist = explode(',',$this->config->text);
 //        }
-        $remotecourselist = get_config('block_import_remote_course', 'remotecourselist');
+        $remotecourselist = array();
+        $tags = core_tag_tag::get_item_tags_array('core', 'course', $COURSE->id);
+        foreach ($tags as $tag) {
+            $select = $DB->sql_compare_text('course_tag') . " = '" . $tag ."'";
+            $remotecourselist = array_merge($remotecourselist,$DB->get_records_select('import_remote_course_list', $select));
+        }
         if (empty($remotecourselist)) {
             $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
             return $this->content;
-        } else {
-            $courselist = explode(',', $remotecourselist);
         }
 
         $form = '<form id="restoreremotecourse" action="'.
             $CFG->wwwroot.'/blocks/import_remote_course/import_remote_course.php" type="get">';
         $form .= get_string('choosecourse').' <select id="choosecourse" name="remotecourseid">';
-        foreach ($courselist as $course) {
-            list($courseid, $coursename) = explode('=', $course);
+        foreach ($remotecourselist as $course) {
+            $courseid   = $course->course_id;
+            $coursename = $course->course_name;
             $form .= "<option value='$courseid'>$coursename</option>";
         }
         $form .= '</select>';
@@ -106,7 +110,7 @@ class block_import_remote_course extends block_base {
 
         // If we have more then one (probably the "news forum") module in the course,
         // Display a warrening, and prevent restore.
-       
+
         if(!($this->content instanceof  stdClass)) {
             $this->content = new stdClass();
         }

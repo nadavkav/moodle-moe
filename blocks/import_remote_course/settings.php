@@ -22,23 +22,28 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
+defined('MOODLE_INTERNAL') || die();
+include_once($CFG->dirroot.'/blocks/import_remote_course/lib.php');
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('configheader',
         get_string('config_header', 'block_import_remote_course'),
         get_string('config_desc', 'block_import_remote_course')));
 
-    $settings->add(new admin_setting_configtext('block_import_remote_course/remoteusername',
-        get_string('remoteusername_label', 'block_import_remote_course'),
-        get_string('remoteusername_desc', 'block_import_remote_course'),
-        ''));
+    $adminsetting = new admin_setting_configtext('block_import_remote_course/localusername',
+        get_string('localusername_label', 'block_import_remote_course'),
+        get_string('localusername_desc', 'block_import_remote_course'),
+        '');
+    $adminsetting->set_updatedcallback('uniq_name_for_subscribtion');
+    $settings->add($adminsetting);
 
-    $settings->add(new admin_setting_configtextarea('block_import_remote_course/remotecourselist',
-        get_string('remotecourselist_label', 'block_import_remote_course'),
-        get_string('remotecourselist_desc', 'block_import_remote_course'),
-        ''));
-    
+    $adminsetting = new admin_setting_configtext('block_import_remote_course/wstoken',
+        get_string('wstoken', 'block_import_remote_course'),
+        get_string('wstoken_desc', 'block_import_remote_course'), '');
+    $adminsetting->plugin = 'block_import_remote_course';
+    $adminsetting->set_updatedcallback('uniq_name_for_subscribtion');
+    $settings->add($adminsetting);
+
     $settings->add(new admin_setting_configtext('block_import_remote_course/testenv',
         get_string('testenv_label', 'block_import_remote_course'),
         get_string('testenv_desc', 'block_import_remote_course'),

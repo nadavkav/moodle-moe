@@ -39,10 +39,12 @@ $string['noavailablecourses'] = 'No available courses, please add some...';
 $string['restoreinprogress'] = 'Restore in progress...';
 
 // Global system settings
+$string['wstoken'] = 'Web service token';
+$string['wstoken_desc'] = 'Add the web service token for the remote server to connect.';
 $string['config_header'] = 'Import remote course';
 $string['config_desc'] = 'Settings for importing a remote course into this system.';
-$string['remoteusername_label'] = 'Username';
-$string['remoteusername_desc'] = 'Username used to backup the original courses on the remote system.';
+$string['localusername_label'] = 'Local Username';
+$string['localusername_desc'] = 'Local Username to get updates from the remote system.';
 $string['remotecourselist_label'] = 'Remote course list';
 $string['remotecourselist_desc'] = 'Fixed list of remote courses (each course in a seperate line, Format: "CourseID=Course title,"';
 $string['restore'] = 'Impoert template';

@@ -72,7 +72,7 @@ if ($CFG->debug) {
 }
 
 // Get import_remote_course system-level config settings.
-$remoteusername = get_config('block_import_remote_course', 'remoteusername');
+$remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
 if (empty($remoteusername)) {
     print_error('missingremoteusername', 'block_import_remote_course', $returnurl);
 }
@@ -82,12 +82,12 @@ $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
     '&wsfunction=local_remote_backup_provider_get_manual_course_backup_by_id&moodlewsrestformat=json';
 $options = [];
 if ($skipcertverify){
-    $options['curl_verify_ssl_host'] = false;
-    $options['curl_verify_ssl_peer'] = false;
+    $options['curlopt_ssl_verifypeer'] = false;
+    $options['curlopt_ssl_verifyhost'] = false;
 }
 $params = array('id' => $remote, 'username' => $remoteusername);
 //print_r($params);
-$curl = new curl;
+$curl = new curl();
 // todo: Use HTTPS?
 $resp = json_decode($curl->post($url, $params, $options));
 

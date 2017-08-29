@@ -14,14 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package    local_remote_backup_provider
+ * @package    block_import_remote_course
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->component = 'local_remote_backup_provider';
-$plugin->cron      = 300;
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = 'Alpha for 2.8+';
-$plugin->requires  = 2014111000;
-$plugin->version   = 2017080100;
+$functions = array(
+
+    'block_import_remote_course_update' => array(
+        'classname' => 'block_import_remote_course_external',
+        'methodname' => 'update',
+        'classpath' => 'blocks/import_remote_course/externallib.php',
+        'description' => 'get updates from the server.',
+        'type' => 'write',
+  //      'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
+);
+
+// $services = array(
+//     'import_remote_course' => array(
+//         'functions' => array(
+//             'block_import_remote_course_update',
+//         ),
+//         'requiredcapability' => '',
+//         'restrictedusers' =>0,
+//         'enabled'=>1,
+//     ),
+// );
