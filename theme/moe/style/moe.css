@@ -4028,6 +4028,9 @@ body.format-topcoll.dir-rtl .course-content ul.ctopics li.section:not(#section-0
 body.format-topcoll .course-content ul.ctopics li.section .right{
 	display: none;
 }
+body.format-topcoll.editing .course-content ul.ctopics li.section .right{
+    display: block;
+}
 body.format-topcoll .course-content ul.ctopics li.section .left{
 	position: relative;
 }
