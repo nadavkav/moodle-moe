@@ -13,63 +13,52 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    local_remote_backup_provider
- * @copyright  2015 Lafayette College ITS
+ * @copyright  2017 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $functions = array(
     'local_remote_backup_provider_find_courses' => array(
-         'classname' => 'local_remote_backup_provider_external',
+         'classname' => 'local_remote_backup_provider\externallib',
          'methodname' => 'find_courses',
-         'classpath' => 'local/remote_backup_provider/externallib.php',
+         'classpath' => 'local/remote_backup_provider/classes/externallib.php',
          'description' => 'Find courses matching a given string.',
          'type' => 'read',
          'capabilities' => 'moodle/course:viewhiddencourses',
     ),
     'local_remote_backup_provider_get_course_backup_by_id' => array(
-         'classname' => 'local_remote_backup_provider_external',
+         'classname' => 'local_remote_backup_provider\externallib',
          'methodname' => 'get_course_backup_by_id',
-         'classpath' => 'local/remote_backup_provider/externallib.php',
+         'classpath' => 'local/remote_backup_provider/classes/externallib.php',
          'description' => 'Generate a course backup file and return a link.',
          'type' => 'read',
          'capabilities' => 'moodle/backup:backupcourse',
     ),
     'local_remote_backup_provider_get_manual_course_backup_by_id' => array(
-         'classname' => 'local_remote_backup_provider_external',
+         'classname' => 'local_remote_backup_provider\externallib',
          'methodname' => 'get_manual_course_backup_by_id',
-         'classpath' => 'local/remote_backup_provider/externallib.php',
+         'classpath' => 'local/remote_backup_provider/classes/externallib.php',
          'description' => 'Get latest ready-made user course backup file and return a link.',
          'type' => 'read',
          'capabilities' => 'moodle/backup:backupcourse',
     ),
     'local_remote_backup_provider_subscribe' => array(
-        'classname' => 'local_remote_backup_provider_external',
+        'classname' => 'local_remote_backup_provider\externallib',
         'methodname' => 'subscribe',
-        'classpath' => 'local/remote_backup_provider/externallib.php',
+        'classpath' => 'local/remote_backup_provider/classes/externallib.php',
         'description' => 'subscribe to the server.',
         'type' => 'write',
-        //'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
     ),
     'local_remote_backup_provider_unsubscribe' => array(
-        'classname' => 'local_remote_backup_provider_external',
+        'classname' => 'local_remote_backup_provider\externallib',
         'methodname' => 'unsubscribe',
-        'classpath' => 'local/remote_backup_provider/externallib.php',
+        'classpath' => 'local/remote_backup_provider/classes/externallib.php',
         'description' => 'unsubscribe to the server.',
         'type' => 'write',
-        //'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
     ),
 );
-
-// $services = array(
-//     'remote_backup_provider' => array(
-//         'functions' => array(
-//             'local_remote_backup_provider_subscribe',
-//             'local_remote_backup_provider_unsubscribe'
-//         ),
-//         'requiredcapability' => '',
-//         'restrictedusers' =>0,
-//         'enabled'=>1,
-//     ),
-// );

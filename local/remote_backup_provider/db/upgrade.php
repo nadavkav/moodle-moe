@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_local_remote_backup_provider_upgrade($oldversion) {
-    global $DB,$CFG;
+    global $DB, $CFG;
 
     $dbman = $DB->get_manager();
 
@@ -58,6 +58,20 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
 
         // Savepoint reached.
         upgrade_plugin_savepoint(true, 2017073103, 'local', 'remote_backup_provider');
+    }
+
+    if ($oldversion < 2017083003) {
+
+        $table = new xmldb_table('remote_backup_provider_fails');
+        $field = new xmldb_field('solve', XMLDB_TYPE_INTEGER, '4', true, true, false, '1');
+        if ($dbman->table_exists($table) && $dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+        $field = new xmldb_field('url', XMLDB_TYPE_TEXT, '', true, true);
+        $dbman->change_field_type($table, $field);
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2017083003, 'local', 'remote_backup_provider');
     }
 
     return true;

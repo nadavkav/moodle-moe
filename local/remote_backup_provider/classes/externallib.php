@@ -1,6 +1,4 @@
 <?php
-use mod_questionnaire\response\boolean;
-use local_remote_backup_provider\publisher;
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,20 +13,25 @@ use local_remote_backup_provider\publisher;
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    local_remote_backup_provider
- * @copyright  2015 Lafayette College ITS
+ * @copyright  2017 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once($CFG->dirroot . '/lib/externallib.php');
-require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
+namespace local_remote_backup_provider;
 
-class local_remote_backup_provider_external extends external_api {
+use mod_questionnaire\response\boolean;
+use local_remote_backup_provider\publisher;
+
+defined('MOODLE_INTERNAL') || die();
+
+class externallib extends \external_api {
     public static function find_courses_parameters() {
-        return new external_function_parameters(
+        return new \external_function_parameters(
             array(
-                'search' => new external_value(PARAM_CLEAN, 'search'),
+                'search' => new \external_value(PARAM_CLEAN, 'search'),
             )
         );
     }
@@ -64,23 +67,23 @@ class local_remote_backup_provider_external extends external_api {
     }
 
     public static function find_courses_returns() {
-        return new external_multiple_structure(
-            new external_single_structure(
+        return new \external_multiple_structure(
+            new \external_single_structure(
                 array(
-                    'id'        => new external_value(PARAM_INT, 'id of course'),
-                    'idnumber'  => new external_value(PARAM_RAW, 'idnumber of course'),
-                    'shortname' => new external_value(PARAM_RAW, 'short name of course'),
-                    'fullname'  => new external_value(PARAM_RAW, 'long name of course'),
+                    'id'        => new \external_value(PARAM_INT, 'id of course'),
+                    'idnumber'  => new \external_value(PARAM_RAW, 'idnumber of course'),
+                    'shortname' => new \external_value(PARAM_RAW, 'short name of course'),
+                    'fullname'  => new \external_value(PARAM_RAW, 'long name of course'),
                 )
             )
         );
     }
 
     public static function get_course_backup_by_id_parameters() {
-        return new external_function_parameters(
+        return new \external_function_parameters(
             array(
-                'id' => new external_value(PARAM_INT, 'id'),
-                'username' => new external_value(PARAM_USERNAME, 'username'),
+                'id' => new \external_value(PARAM_INT, 'id'),
+                'username' => new \external_value(PARAM_USERNAME, 'username'),
             )
         );
     }
@@ -97,7 +100,7 @@ class local_remote_backup_provider_external extends external_api {
         $userid = $DB->get_field('user', 'id', array('username' => $username));
 
         // Instantiate controller.
-        $bc = new backup_controller(
+        $bc = new \backup_controller(
             \backup::TYPE_1COURSE, $id, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_GENERAL, $userid);
 
         // Run the backup.
@@ -141,18 +144,18 @@ class local_remote_backup_provider_external extends external_api {
     }
 
     public static function get_course_backup_by_id_returns() {
-        return new external_single_structure(
+        return new \external_single_structure(
             array(
-                'url' => new external_value(PARAM_RAW, 'url of the backup file'),
+                'url' => new \external_value(PARAM_RAW, 'url of the backup file'),
             )
         );
     }
 
     public static function get_manual_course_backup_by_id_parameters() {
-        return new external_function_parameters(
+        return new \external_function_parameters(
             array(
-                'id' => new external_value(PARAM_INT, 'id'),
-                'username' => new external_value(PARAM_USERNAME, 'username'),
+                'id' => new \external_value(PARAM_INT, 'id'),
+                'username' => new \external_value(PARAM_USERNAME, 'username'),
             )
         );
     }
@@ -167,14 +170,9 @@ class local_remote_backup_provider_external extends external_api {
 
         // Extract the userid from the username.
         $userid = $DB->get_field('user', 'id', array('username' => $username));
-
-        //$context = context_user::instance($userid);
         $context = context_course::instance($id);
-
         $fs = get_file_storage();
-        // todo: Maybe use automated backups?
         $backupfiles = $fs->get_area_files($context->id, 'backup', 'automated', false, 'timecreated');
-        //$backupfiles = $fs->get_area_files($context->id, 'user', 'backup', false, 'timecreated');
         $files = array_reverse($backupfiles);
 
         // Populate a list with full details of backup files.
@@ -208,7 +206,6 @@ class local_remote_backup_provider_external extends external_api {
             $storedfile = $fs->create_file_from_storedfile($filerecord, $file);
 
             // Make the link.
-            //$filepath = $storedfile->get_filepath() . $storedfile->get_filename();
             $fileurl = moodle_url::make_webservice_pluginfile_url(
                 $storedfile->get_contextid(),
                 $storedfile->get_component(),
@@ -224,14 +221,14 @@ class local_remote_backup_provider_external extends external_api {
     }
 
     public static function get_manual_course_backup_by_id_returns() {
-        return new external_single_structure(
+        return new \external_single_structure(
             array(
-                'url' => new external_value(PARAM_RAW, 'url of the backup file'),
+                'url' => new \external_value(PARAM_RAW, 'url of the backup file'),
             )
         );
     }
 
-    //pub sub function
+    // Pub/Sub functions.
 
     /**
      * Returns description of subscribe method parameters
@@ -239,14 +236,14 @@ class local_remote_backup_provider_external extends external_api {
      */
     public static function subscribe_parameters() {
 
-        return new external_function_parameters(
-            array('name' => new external_value(PARAM_TEXT, 'name of subscriber'),
-                  'url'  => new external_value(PARAM_URL),
-                  'user' => new external_value(PARAM_ALPHANUMEXT),
-                  'token'=> new external_value(PARAM_ALPHANUMEXT),
-                  'username' => new external_value(PARAM_RAW)
+        return new \external_function_parameters(
+            array('name' => new \external_value(PARAM_TEXT, 'name of subscriber'),
+                  'url'  => new \external_value(PARAM_URL),
+                  'user' => new \external_value(PARAM_ALPHANUMEXT),
+                  'token' => new \external_value(PARAM_ALPHANUMEXT),
+                  'username' => new \external_value(PARAM_RAW)
             )
-            );
+        );
     }
 
     /**
@@ -259,11 +256,13 @@ class local_remote_backup_provider_external extends external_api {
             array('name' => $name,
                   'url'  => $url,
                   'user' => $user,
-                  'token'=> $token,
-                  'username' =>$usename
+                  'token' => $token,
+                  'username' => $usename
             ));
-        if (publisher::subscribe($name, $url, $user, $token)){
-            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname as course_name from {course} as CO inner join {course_categories} as CA on CA.id = CO.category where CA.idnumber<>''";
+        if (publisher::subscribe($name, $url, $user, $token)) {
+            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname
+                as course_name from {course} CO inner join {course_categories} CA on
+                CA.id = CO.category where CA.idnumber<>''";
             return  $DB->get_records_sql($sql);
         }
         return null;
@@ -274,12 +273,12 @@ class local_remote_backup_provider_external extends external_api {
      * @return external_description
      */
     public static function subscribe_returns() {
-        return new external_multiple_structure(
-            new external_single_structure(
+        return new \external_multiple_structure(
+            new \external_single_structure(
                 array(
-                    'course_id'          => new external_value(PARAM_INT, 'id of course'),
-                    'course_tag'         => new external_value(PARAM_RAW, 'idnumber of course'),
-                    'course_name' => new external_value(PARAM_RAW, 'short name of course'),
+                    'course_id'   => new \external_value(PARAM_INT, 'id of course'),
+                    'course_tag'  => new \external_value(PARAM_RAW, 'idnumber of course'),
+                    'course_name' => new \external_value(PARAM_RAW, 'short name of course'),
                     )
                 )
             );
@@ -291,9 +290,9 @@ class local_remote_backup_provider_external extends external_api {
      */
     public static function unsubscribe_parameters() {
 
-        return new external_function_parameters(
-            array('name' => new external_value(PARAM_ALPHAEXT, 'name of subscriber'),
-                  'url'  => new external_value(PARAM_URL)
+        return new \external_function_parameters(
+            array('name' => new \external_value(PARAM_ALPHAEXT, 'name of subscriber'),
+                  'url'  => new \external_value(PARAM_URL)
             )
             );
     }
@@ -309,7 +308,7 @@ class local_remote_backup_provider_external extends external_api {
             'url' => $url,
         ));
 
-        if (publisher::unsubscribe(publisher::get_id($name))){
+        if (publisher::unsubscribe(publisher::get_id($name))) {
             return  true;
         }
         return false;
@@ -320,6 +319,6 @@ class local_remote_backup_provider_external extends external_api {
      * @return external_description
      */
     public static function unsubscribe_returns() {
-        return new external_function_parameters( array (new external_value(PARAM_BOOL)));
+        return new \external_function_parameters( array (new \external_value(PARAM_BOOL)));
     }
 }

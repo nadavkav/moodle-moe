@@ -1,6 +1,4 @@
 <?php
-use local_remote_backup_provider\subscribers_renderer;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,13 +13,11 @@ use local_remote_backup_provider\subscribers_renderer;
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-/**
- * @package    local_remote_backup_provider
- * @copyright  2017 Sysbind
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
+use local_remote_backup_provider\output\subscribers_renderer;
+
 require_once(dirname(__FILE__) . '/../../config.php');
-require_once ('./classes/output/subscribers_renderer.php');
+
 $unsubscribe = optional_param('unsubscribe', null, PARAM_INT);
 $unsubscribeconf = optional_param('unsubscribeconf', null, PARAM_INT);
 
@@ -37,7 +33,7 @@ $PAGE->set_heading(get_string('subscribermanager', 'local_remote_backup_provider
 echo $OUTPUT->header();
 $out = new subscribers_renderer($PAGE, null);
 
-if (isset($unsubscribe)){
+if (isset($unsubscribe)) {
     echo $out->unsubscribe($unsubscribe, $unsubscribeconf);
 } else {
     echo $out->subs_list();

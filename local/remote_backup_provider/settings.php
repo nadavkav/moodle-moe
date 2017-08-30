@@ -18,6 +18,7 @@
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_remote_backup_provider', get_string('pluginname', 'local_remote_backup_provider'));
@@ -42,7 +43,7 @@ if ($hassiteconfig) {
         get_string('selfsignssl_label', 'local_remote_backup_provider'),
         get_string('selfsignssl_desc', 'local_remote_backup_provider'), true));
 
-    $ADMIN->add('localplugins',new admin_externalpage('local_remote_backup_provider/listsubs',
+    $ADMIN->add('localplugins', new admin_externalpage('local_remote_backup_provider/listsubs',
                                           get_string('listofsubs', 'local_remote_backup_provider'),
                                           new moodle_url('/local/remote_backup_provider/subscribermanager.php')));
 

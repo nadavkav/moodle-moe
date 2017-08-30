@@ -13,15 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    local_remote_backup_provider
- * @copyright  2015 Lafayette College ITS
+ * @copyright  2017 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once("$CFG->libdir/formslib.php");
+namespace local_remote_backup_provider\form;
 
-class local_remote_backup_provider_search_form extends moodleform {
+defined('MOODLE_INTERNAL') || die();
+
+class search extends \moodleform {
     public function definition() {
         global $CFG;
 

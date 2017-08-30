@@ -13,43 +13,55 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-namespace local_remote_backup_provider;
+
+namespace local_remote_backup_provider\output;
+
 defined('MOODLE_INTERNAL') || die();
+
 /**
- * @package    local_remote_backup_provider
- * @copyright  2017 Sysbind
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @package local_remote_backup_provider
+ * @copyright 2017 Sysbind
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class subscribers_renderer extends \plugin_renderer_base {
 
-        public function subs_list (){
-            global $DB;
-            $subs = $DB->get_records('remote_backup_provider_subsc');
+    public function subs_list() {
+        global $DB;
+        $subs = $DB->get_records('remote_backup_provider_subsc');
 
-            foreach ($subs as $sub){
-                $sub->remove_remote = new \moodle_url('/local/remote_backup_provider/subscribermanager.php', array('unsubscribe' => $sub->id));
-            }
-
-            $data = array('subscribers' => array_values($subs));
-            return $this->render_from_template('local_remote_backup_provider/subslist', $data);
+        foreach ($subs as $sub) {
+            $sub->remove_remote = new \moodle_url('/local/remote_backup_provider/subscribermanager.php', array(
+                'unsubscribe' => $sub->id
+            ));
         }
 
-        public function unsubscribe ($id, $confirm){
-            global $DB;
-            $data = array();
-            if (isset($confirm)){
-                publisher::unsubscribe($id);
-                redirect(new \moodle_url('/local/remote_backup_provider/subscribermanager.php'));
-            }
-            foreach ($DB->get_record('remote_backup_provider_subsc', array('id' => $id)) as $reckey => $recval){
-                $data[$reckey] = $recval;
-            }
-            $data['nourl']  = new \moodle_url('/local/remote_backup_provider/subscribermanager.php');
-            $data['nourl']  = $data['nourl']->out();
-            $data['yesurl'] = new \moodle_url('/local/remote_backup_provider/subscribermanager.php', array('unsubscribe' => $id, 'unsubscribeconf'=> 1));
-            $data['yesurl'] = $data['yesurl']->out(false);
-            return $this->render_from_template('local_remote_backup_provider/unsubscribe', $data);
-        }
+        $data = array(
+            'subscribers' => array_values($subs)
+        );
+        return $this->render_from_template('local_remote_backup_provider/subslist', $data);
+    }
 
+    public function unsubscribe($id, $confirm) {
+        global $DB;
+        $data = array();
+        if (isset($confirm)) {
+            publisher::unsubscribe($id);
+            redirect(new \moodle_url('/local/remote_backup_provider/subscribermanager.php'));
+        }
+        foreach ($DB->get_record('remote_backup_provider_subsc', array(
+            'id' => $id
+        )) as $reckey => $recval) {
+            $data[$reckey] = $recval;
+        }
+        $data['nourl'] = new \moodle_url('/local/remote_backup_provider/subscribermanager.php');
+        $data['nourl'] = $data['nourl']->out();
+        $data['yesurl'] = new \moodle_url('/local/remote_backup_provider/subscribermanager.php', array(
+            'unsubscribe' => $id,
+            'unsubscribeconf' => 1
+        ));
+        $data['yesurl'] = $data['yesurl']->out(false);
+        return $this->render_from_template('local_remote_backup_provider/unsubscribe', $data);
+    }
 }
 

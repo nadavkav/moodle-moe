@@ -13,15 +13,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    local_remote_backup_provider
- * @copyright  2015 Lafayette College ITS
+ * @copyright  2017 Sysbind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_remote_backup_provider';
 $plugin->cron      = 300;
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = 'Alpha for 2.8+';
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '1.00.01';
 $plugin->requires  = 2014111000;
-$plugin->version   = 2017080100;
+$plugin->version   = 2017083003;

@@ -19,11 +19,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_remote_backup_provider\externallib;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 
-require_once($CFG->dirroot . '/local/remote_backup_provider/externallib.php');
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
 
 class local_remote_backup_provider_testcase extends externallib_advanced_testcase {
@@ -49,7 +50,7 @@ class local_remote_backup_provider_testcase extends externallib_advanced_testcas
         $c1 = $this->getDataGenerator()->create_course($course1);
         $c2 = $this->getDataGenerator()->create_course($course2);
 
-        $results = local_remote_backup_provider_external::find_courses('test');
+        $results = externallib::find_courses('test');
         $this->assertEquals(2, count($results));
     }
 
@@ -72,7 +73,7 @@ class local_remote_backup_provider_testcase extends externallib_advanced_testcas
         $course1->shortname = 'CF101';
         $c1 = $this->getDataGenerator()->create_course($course1);
 
-        $result = local_remote_backup_provider_external::get_course_backup_by_id($c1->id, $user->username);
+        $result = externallib::get_course_backup_by_id($c1->id, $user->username);
         $this->assertNotEmpty($result);
     }
 }

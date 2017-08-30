@@ -16,6 +16,7 @@
 namespace local_remote_backup_provider;
 
 defined('MOODLE_INTERNAL') || die();
+
 class publisher {
 
     /**
@@ -25,14 +26,14 @@ class publisher {
      * @param $url - prefix of remote server.
      * @return int - the id of the subscriber or false if none found or -1 if both parameters ar null.
      */
-    public static function  get_id ($name = null, $url = null){
+    public static function  get_id ($name = null, $url = null) {
         global $DB;
         $table  = 'remote_backup_provider_subsc';
         $return = 'id';
 
-        if ($name == null && $url == null){
+        if ($name == null && $url == null) {
             return -1;
-        } else if ($name != null){
+        } else if ($name != null) {
             $sql = "select id from {remote_backup_provider_subsc} where " . $DB->sql_compare_text('name') . "=$name";
             return $DB->get_field_sql($sql);
         } else {
@@ -42,18 +43,18 @@ class publisher {
     }
 
     /**
-    * Subscribe remote server.
-    *
-    * @param $name - name of remote server.
-    * @param $url - prefix of remote server.
-    *
-    * @return bool|int true or new id or false if subscriber already exist
-    */
-    public static function  subscribe ($name, $url, $user, $token){
+     * Subscribe remote server.
+     *
+     * @param $name - name of remote server.
+     * @param $url - prefix of remote server.
+     *
+     * @return bool|int true or new id or false if subscriber already exist
+     */
+    public static function  subscribe ($name, $url, $user, $token) {
         global $DB;
 
         if ($id = self::get_id(null, $url)) {
-            $DB->delete_records('remote_backup_provider_subsc', array( 'id' =>$id));
+            $DB->delete_records('remote_backup_provider_subsc', array( 'id' => $id));
         }
 
         $data = array('subscriber_name' => $name,
@@ -70,7 +71,7 @@ class publisher {
      * @param $id - id of subscriber (can get the id from get_id function)
      * @return bool true or false
      */
-    public static function  unsubscribe ($id){
+    public static function  unsubscribe ($id) {
         global $DB;
         return $DB->delete_records('remote_backup_provider_subsc', array('id' => $id));
     }
@@ -80,7 +81,7 @@ class publisher {
      *
      * @return array An array of Objects indexed by id column.
      */
-    public static function  get_all_subscribers (){
+    public static function  get_all_subscribers () {
         global $DB;
         return $DB->get_records('remote_backup_provider_subsc');
     }

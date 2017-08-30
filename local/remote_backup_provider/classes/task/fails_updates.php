@@ -16,9 +16,12 @@
 namespace local_remote_backup_provider\task;
 
 use core\task\scheduled_task;
+use \curl;
 
 defined('MOODLE_INTERNAL') || die();
 
+global  $CFG;
+require_once($CFG->libdir . '/filelib.php');
 /**
  * @package    local_remote_backup_provider
  * @copyright  2015 Lafayette College ITS
@@ -39,15 +42,13 @@ class fails_updates extends scheduled_task {
 
     /**
      * send nottification to all fails subscribers
-     *
-     * @return \moodle_url
      */
     public function execute() {
         global $DB;
         $fails = $DB->get_records('remote_backup_provider_fails');
+        $curl = new \curl();
         foreach ($fails as $fail) {
-            $curl = new curl();
-            $resp = json_decode($curl->post($fail->url, $fail->local_params, $fail->options));
+            $resp = json_decode($curl->post($fail->url, unserialize($fail->local_params), unserialize($fail->options)));
             if (isset($resp['result']) && $resp['result'] == true) {
                 $DB->delete_records('remote_backup_provider_fails', array('id' => $fail->id));
             }

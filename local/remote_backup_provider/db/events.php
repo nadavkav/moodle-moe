@@ -19,36 +19,38 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $observers = array(
 
     array(
         'eventname'   => 'core\event\course_created',
-        'callback'    => 'local_remote_backup_provider_observer::send_update',
+        'callback'    => 'local_remote_backup_provider\observer::send_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
 
     array(
         'eventname'   => 'core\event\course_deleted',
-        'callback'    => 'local_remote_backup_provider_observer::send_update',
+        'callback'    => 'local_remote_backup_provider\observer::send_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
     array(
         'eventname'   => 'core\event\course_updated',
-        'callback'    => 'local_remote_backup_provider_observer::send_update',
+        'callback'    => 'local_remote_backup_provider\observer::send_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
     array(
         'eventname'   => 'core\event\course_category_updated',
-        'callback'    => 'local_remote_backup_provider_observer::send_cat_update',
+        'callback'    => 'local_remote_backup_provider\observer::send_cat_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
     array(
         'eventname'   => 'core\event\course_category_deleted',
-        'callback'    => 'local_remote_backup_provider_observer::send_cat_update',
+        'callback'    => 'local_remote_backup_provider\observer::send_cat_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     )
