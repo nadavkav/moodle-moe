@@ -48,9 +48,14 @@ class fails_updates extends scheduled_task {
         $fails = $DB->get_records('remote_backup_provider_fails');
         $curl = new \curl();
         foreach ($fails as $fail) {
-            $resp = json_decode($curl->post($fail->url, unserialize($fail->local_params), unserialize($fail->options)));
+            $url = explode('/', $fail->url);
+            mtrace("Try to update ". $url[2]);
+            $resp = json_decode($curl->post($fail->url, unserialize($fail->local_params), unserialize($fail->options)), true);
             if (isset($resp['result']) && $resp['result'] == true) {
+                mtrace("Succes to update ". $url[2]);
                 $DB->delete_records('remote_backup_provider_fails', array('id' => $fail->id));
+            } else {
+                mtrace("faild to update ". $url[2]);
             }
         }
     }
