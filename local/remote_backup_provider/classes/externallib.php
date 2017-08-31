@@ -110,7 +110,7 @@ class externallib extends \external_api {
 
         if (isset($result['backup_destination']) && $result['backup_destination']) {
             $file = $result['backup_destination'];
-            $context = context_course::instance($id);
+            $context = \context_course::instance($id);
             $fs = get_file_storage();
             $timestamp = time();
 
@@ -170,7 +170,7 @@ class externallib extends \external_api {
 
         // Extract the userid from the username.
         $userid = $DB->get_field('user', 'id', array('username' => $username));
-        $context = context_course::instance($id);
+        $context = \context_course::instance($id);
         $fs = get_file_storage();
         $backupfiles = $fs->get_area_files($context->id, 'backup', 'automated', false, 'timecreated');
         $files = array_reverse($backupfiles);
@@ -189,7 +189,7 @@ class externallib extends \external_api {
 
         if (isset($latestbackup[0]) && $latestbackup[0]) {
             $file = $latestbackup[0];
-            $context = context_course::instance($id);
+            $context = \context_course::instance($id);
             $fs = get_file_storage();
             $timestamp = time();
 
