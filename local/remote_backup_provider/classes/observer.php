@@ -149,12 +149,12 @@ class observer {
 
                 $url = $remotesite . $prefixurl . $token . $postfixurl;
 
-                $curl = new curl();
+                $curl = new \curl();
                 $resp = json_decode($curl->post($url, $localparams, $options));
 
                 if (! isset($resp->result) || $resp->result != true) {
-                    $dataobject = new stdClass();
-                    $dataobject->url = serialize($url);
+                    $dataobject = new \stdClass();
+                    $dataobject->url = $url;
                     $dataobject->local_params = serialize($localparams);
                     $dataobject->options = serialize($options);
                     $DB->insert_record('remote_backup_provider_fails', $dataobject);

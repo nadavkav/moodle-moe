@@ -129,7 +129,7 @@ class externallib extends \external_api {
 
             // Make the link.
             $filepath = $storedfile->get_filepath() . $storedfile->get_filename();
-            $fileurl = moodle_url::make_webservice_pluginfile_url(
+            $fileurl = \moodle_url::make_webservice_pluginfile_url(
                 $storedfile->get_contextid(),
                 $storedfile->get_component(),
                 $storedfile->get_filearea(),
@@ -206,7 +206,7 @@ class externallib extends \external_api {
             $storedfile = $fs->create_file_from_storedfile($filerecord, $file);
 
             // Make the link.
-            $fileurl = moodle_url::make_webservice_pluginfile_url(
+            $fileurl = \moodle_url::make_webservice_pluginfile_url(
                 $storedfile->get_contextid(),
                 $storedfile->get_component(),
                 $storedfile->get_filearea(),
