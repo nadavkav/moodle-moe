@@ -16,6 +16,8 @@
 
 namespace local_remote_backup_provider\output;
 
+use local_remote_backup_provider\publisher;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
