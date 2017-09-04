@@ -713,10 +713,6 @@ body.pagelayout-embedded {
 	background-size: cover;
 }
 
-.dir-rtl .accesshide {
-	left: 0;
-}
-
 .dir-rtl .navbar #search {
 	margin-left: 0px;
 }
@@ -5808,6 +5804,10 @@ a#choosetheme {
 
 .dir-ltr #gridiconcontainer, .dir-ltr #gridshadebox{
     margin-left: 25px;
+}
+
+.path-mod-quiz .que{
+	max-width: none;
 }
 
 @media screen and (max-width: 480px) {
