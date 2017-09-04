@@ -16,9 +16,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'quiz', language 'he', branch 'MOODLE_31_STABLE'
+ * Strings for component 'quizsbs', language 'he', branch 'MOODLE_31_STABLE'
  *
- * @package   quiz
+ * @package   quizsbs
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -58,7 +58,7 @@ $string['addquestion'] = 'הוספת שאלה';
 $string['addquestionfrombankatend'] = 'הוספת שאלה ממאגר השאלות בסוף';
 $string['addquestionfrombanktopage'] = 'הוספה ממאגר השאלות לעמוד  {$a}';
 $string['addquestions'] = 'הוספת שאלות';
-$string['addquestionstoquiz'] = 'הוספת שאלות לבוחן הנוכחי';
+$string['addquestionstoquizsbs'] = 'הוספת שאלות לבוחן הנוכחי';
 $string['addrandom'] = 'הוספת {$a} שאלות אקראיות';
 $string['addrandom1'] = 'הוספה >>';
 $string['addrandom2'] = 'שאלות אקראיות';
@@ -66,10 +66,10 @@ $string['addrandomfromcategory'] = 'הוספת שאלות אקראיות מהק�
 $string['addrandomquestion'] = 'הוספת שאלות אקראיות (מקטגוריה)';
 $string['addrandomquestionatend'] = 'הוספת שאלה אקראית בסוף';
 $string['addrandomquestiontopage'] = 'הוספת שאלה אקראית לעמוד  {$a}';
-$string['addrandomquestiontoquiz'] = 'הוספת שאלות אקראיות לבוחן {$a}';
-$string['addselectedquestionstoquiz'] = 'הוספת השאלות הנבחרות לבוחן';
-$string['addselectedtoquiz'] = 'הוספת הנבחרות לבוחן';
-$string['addtoquiz'] = 'הוספה לבוחן';
+$string['addrandomquestiontoquizsbs'] = 'הוספת שאלות אקראיות לבוחן {$a}';
+$string['addselectedquestionstoquizsbs'] = 'הוספת השאלות הנבחרות לבוחן';
+$string['addselectedtoquizsbs'] = 'הוספת הנבחרות לבוחן';
+$string['addtoquizsbs'] = 'הוספה לבוחן';
 $string['affectedstudents'] = '{$a} הושפעו';
 $string['aftereachquestion'] = 'לאחר הוספת כל שאלה ';
 $string['afternquestions'] = 'לאחר הוספת {$}a שאלות ';
@@ -105,7 +105,7 @@ $string['attemptfirst'] = 'ניסיון מענה ראשון';
 $string['attemptincomplete'] = 'ניסיון מענה זה (ע"י {$a}) עדיין לא הושלם.';
 $string['attemptlast'] = 'נסיון מענה אחרון';
 $string['attemptnumber'] = 'נסיון מענה';
-$string['attemptquiznow'] = 'התחלת ניסיון מענה';
+$string['attemptquizsbsnow'] = 'התחלת ניסיון מענה';
 $string['attempts'] = 'נסיונות מענה';
 $string['attemptsallowed'] = 'מספר נסיונות מותרים';
 $string['attemptsdeleted'] = 'נסיונות הבוחן הוסרו';
@@ -123,8 +123,8 @@ $string['autosaveperiod_desc'] = 'התגובות של הסטודנטים נית�
 $string['back'] = 'חזרה לתצוגה המקדימה של השאלה.';
 $string['backtocourse'] = 'בחזרה לקורס';
 $string['backtoquestionlist'] = 'חזרה לרשימת השאלות';
-$string['backtoquiz'] = 'חזרה לעריכת הבוחן';
-$string['basicideasofquiz'] = 'עצות ליצירת בוחן';
+$string['backtoquizsbs'] = 'חזרה לעריכת הבוחן';
+$string['basicideasofquizsbs'] = 'עצות ליצירת בוחן';
 $string['bestgrade'] = 'הציון הטוב ביותר';
 $string['bothattempts'] = 'הצגת התלמידים שניסו לענות על הבוחן בנוסף לתלמידים שלא ניסו';
 $string['browsersecurity'] = 'אבטחת דפדפן';
@@ -226,7 +226,7 @@ $string['connectionok'] = 'חיבור רשת נתונים שוחזרה. ניתן
 $string['connectcontentsandsubject'] = 'חיבור שאלות ונושא לתוכן';
 $string['contentlistdesc'] = 'בחרו תוכן מרשימת התכנים.';
 $string['containercategorycreated'] = 'קטגוריה זו נוצרה כדי לאחסן את כל הקטגוריות המקוריות שהועברו לרמת האתר בשל הסיבות המפורטות להלן.';
-$string['continueattemptquiz'] = 'המשך נסיון המענה האחרון שלך';
+$string['continueattemptquizsbs'] = 'המשך נסיון המענה האחרון שלך';
 $string['continuepreview'] = 'המשך בצפיה המוקדמת האחרונה';
 $string['copyingfrom'] = 'יוצר העתק של השאלה \'{$a}\'';
 $string['copyingquestion'] = 'מעתיק שאלה';
@@ -283,7 +283,7 @@ $string['disabled'] = 'אינו-זמין';
 $string['displayoptions'] = 'אפשרויות תצוגה';
 $string['donotuseautosave'] = 'לא לבצע שמירה אוטומטית';
 $string['download'] = 'יש להקליק להורדת קובץ הקטגוריות שיוצא';
-$string['downloadextra'] = '(הקובץ נשמר גם בקבצי הקורס תחת הספרייה  /backupdata/quiz )';
+$string['downloadextra'] = '(הקובץ נשמר גם בקבצי הקורס תחת הספרייה  /backupdata/quizsbs )';
 $string['dragtoafter'] = 'לאחר {$a}';
 $string['dragtostart'] = 'אל ההתחלה';
 $string['duplicateresponse'] = 'ההגשה לא התקבלה מאחר שבמועד מוקדם יותר נתת תגובה זהה.';
@@ -297,52 +297,52 @@ $string['editcategories'] = 'עריכת קטגוריות';
 $string['editcategory'] = 'עריכת קטגוריה';
 $string['editcatquestions'] = 'עריכת שאלות בקטגוריות';
 $string['editingquestion'] = 'עריכת שאלה';
-$string['editingquiz'] = 'עריכת השאלות בבוחן';
-$string['editingquiz_help'] = 'בעת יצירת בוחן, הרעיונות העיקריים החשובים הם:
+$string['editingquizsbs'] = 'עריכת השאלות בבוחן';
+$string['editingquizsbs_help'] = 'בעת יצירת בוחן, הרעיונות העיקריים החשובים הם:
 
 * בוחן שיכיל שאלות על דף אחד או יותר.
 
 * בנק השאלות שמאחסן עותקים של כל השאלות, רצוי שיהיה מאורגן לפי קטגוריות.
 
 * שאלות אקראיות - כל תלמיד מקבל שאלות שונות בכל פעם שהוא מנסה לפתור את הבוחן .';
-$string['editingquizx'] = 'עריכת השאלות בבוחן {$a}';
+$string['editingquizsbsx'] = 'עריכת השאלות בבוחן {$a}';
 $string['editmaxmark'] = 'עריכת ניקוד מירבי';
 $string['editoverride'] = 'ניהול הגדרות־מותאמות';
 $string['editqcats'] = 'עריכת קטגוריות של שאלות';
 $string['editcontent'] = 'הוספת תוכן';
 $string['editquestion'] = 'עריכת שאלה';
 $string['editquestions'] = 'עריכת שאלות';
-$string['editquiz'] = 'עריכת השאלות בבוחן';
-$string['editquizquestions'] = 'עריכת שאלות הבוחן';
+$string['editquizsbs'] = 'עריכת השאלות בבוחן';
+$string['editquizsbsquestions'] = 'עריכת שאלות הבוחן';
 $string['editsubject'] = 'הוספת נושא';
 $string['emailconfirmbody'] = '{$a->username}, היקר,
 תודה על ששלחת את התשובות ל:
-\'{$a->quizname}\'
+\'{$a->quizsbsname}\'
 בקורס \'{$a->coursename}\'
 ב: {$a->submissiontime}
 
 הודעה זו מאשרת כי קיבלנו את התשובות בהצלחה.
-ניתן לגשת לבוחן כאן  {$a->quizurl}.';
-$string['emailconfirmsmall'] = 'תודה לך על הגשת התשובות לבוחן \'{$a->quizname}\'';
-$string['emailconfirmsubject'] = 'אישור שליחת הבוחן: {$a->quizname}';
+ניתן לגשת לבוחן כאן  {$a->quizsbsurl}.';
+$string['emailconfirmsmall'] = 'תודה לך על הגשת התשובות לבוחן \'{$a->quizsbsname}\'';
+$string['emailconfirmsubject'] = 'אישור שליחת הבוחן: {$a->quizsbsname}';
 $string['emailnotifybody'] = '{$a->username} היקר,
 
-{$a->studentname} סיים את {$a->quizname} ב: {$a->quizurl} בקורס {$a->coursename}
+{$a->studentname} סיים את {$a->quizsbsname} ב: {$a->quizsbsurl} בקורס {$a->coursename}
 
-ניתן להתבונן שוב בנסיון המענה כאן {$a->quizreviewurl}.';
+ניתן להתבונן שוב בנסיון המענה כאן {$a->quizsbsreviewurl}.';
 $string['emailnotifysmall'] = '{$a->studentname} השלים את הבוחן
-{$a->quizname}.
-ראו See {$a->quizreviewurl}';
+{$a->quizsbsname}.
+ראו See {$a->quizsbsreviewurl}';
 $string['emailnotifysubject'] = 'סטודנט {$a->studentname} סיים את הבוחן
-{$a->quizname}';
+{$a->quizsbsname}';
 $string['emailoverduebody'] = '{$a->studentname}  היקר,
 
-התחלת את נסיון המענה \'{$a->quizname}\' בקורס  \'{$a->coursename}\', אך לא הגשת את התשובות עדיין.
+התחלת את נסיון המענה \'{$a->quizsbsname}\' בקורס  \'{$a->coursename}\', אך לא הגשת את התשובות עדיין.
 היה עליך להגיש עד {$a->attemptduedate}.
 אם עדיין תרצה להגיש את התשובות של הבוחן, אנא גש ל {$a->attemptsummaryurl} והקליק על כפתור "הגש". עליך לעשות זאת לפני {$a->attemptgraceend} אחרת נסיון המענה שלך לא ייחשב בציון.';
-$string['emailoverduesmall'] = 'לא הגשת את נסיון המענה בבוחן  {$a->quizname}. אנא גש ל- {$a->attemptsummaryurl}  לפני
+$string['emailoverduesmall'] = 'לא הגשת את נסיון המענה בבוחן  {$a->quizsbsname}. אנא גש ל- {$a->attemptsummaryurl}  לפני
 {$a->attemptgraceend} אם תרצה עדיין להגיש.';
-$string['emailoverduesubject'] = 'איחור בנסיון מענה על בוחן "{$a->quizname}"';
+$string['emailoverduesubject'] = 'איחור בנסיון מענה על בוחן "{$a->quizsbsname}"';
 $string['empty'] = 'ריק';
 $string['enabled'] = 'מאופשר';
 $string['endtest'] = 'סיום הבוחן...';
@@ -363,10 +363,10 @@ $string['eventoverridecreated'] = 'עקיפת הבוחן נוצרה';
 $string['eventoverridedeleted'] = 'עקיפת הבוחן נמחקה';
 $string['eventoverrideupdated'] = 'עקיפת הבוחן עודכנה';
 $string['eventquestionmanuallygraded'] = 'ניתן ציום ידני עבור השאלה';
-$string['eventquizattemptabandoned'] = 'ניסיון המענה על הבוחן הופסק';
-$string['eventquizattemptstarted'] = 'ניסיון המענה על הבוחן החל';
-$string['eventquizattemptsubmitted'] = 'ניסיון המענה על הבוחן הוגש';
-$string['eventquizattempttimelimitexceeded'] = 'ניסיון הבוחן חרג ממגבלת הזמן';
+$string['eventquizsbsattemptabandoned'] = 'ניסיון המענה על הבוחן הופסק';
+$string['eventquizsbsattemptstarted'] = 'ניסיון המענה על הבוחן החל';
+$string['eventquizsbsattemptsubmitted'] = 'ניסיון המענה על הבוחן הוגש';
+$string['eventquizsbsattempttimelimitexceeded'] = 'ניסיון הבוחן חרג ממגבלת הזמן';
 $string['eventreportviewed'] = 'דוח הבוחן נצפה';
 $string['everynquestions'] = 'כל {$a} שאלות';
 $string['everyquestion'] = 'כל שאלה';
@@ -453,7 +453,7 @@ $string['grademethod_help'] = '<p align="center"><b>שיטת מתן הציוני
 </p>
 </ul>';
 $string['gradesdeleted'] = 'ציוני הבוחן הוסרו';
-$string['gradesofar'] = '{$a->method}: {$a->mygrade} / {$a->quizgrade}.';
+$string['gradesofar'] = '{$a->method}: {$a->mygrade} / {$a->quizsbsgrade}.';
 $string['gradingdetails'] = 'קיבלת: {$a->raw} מתוך {$a->max} נקודות להגשה זו.';
 $string['gradingdetailsadjustment'] = 'עם קנסות קודמים התוצאה היא <strong>{$a->cur} / {$a->max}</strong>.';
 $string['gradingdetailspenalty'] = 'הגשה זו תיקנס ב-{$a}';
@@ -493,7 +493,7 @@ $string['invalidattemptid'] = 'לא קיים ID לנסיון מענה זה';
 $string['invalidcategory'] = 'מספר הזיהוי של הקטגוריה אינו תקף';
 $string['invalidoverrideid'] = 'קוד זיהוי הגדרות־מותאמות שגוי';
 $string['invalidquestionid'] = 'ID השאלה שגויה';
-$string['invalidquizid'] = 'ID הבוחן שגוי';
+$string['invalidquizsbsid'] = 'ID הבוחן שגוי';
 $string['invalidsource'] = 'המקור לא מתקבל כתקף.';
 $string['invalidsourcetype'] = 'סוג מקור שגוי.';
 $string['invalidstateid'] = 'מצב ID שגוי';
@@ -513,7 +513,7 @@ $string['literal'] = 'מילולי';
 $string['loadingquestionsfailed'] = 'טעינת השאלות לא צלחה: {$a}';
 $string['makecopy'] = 'שמירה כשאלה חדשה';
 $string['managetypes'] = 'ניהול סוגי שאלות ושרתים';
-$string['manualgradequestion'] = 'מתן ציון ידני לשאלה  {$a->question} בבוחן {$a->quiz} על-ידי משתמש {$a->user}';
+$string['manualgradequestion'] = 'מתן ציון ידני לשאלה  {$a->question} בבוחן {$a->quizsbs} על-ידי משתמש {$a->user}';
 $string['manualgrading'] = 'מתן ציון';
 $string['mark'] = 'הגש';
 $string['markall'] = 'הגשת העמוד';
@@ -595,7 +595,7 @@ $string['nopossibledatasets'] = 'אין מערכי נתונים אפשריים';
 $string['noquestionintext'] = 'טקסט השאלה אינו מכיל שאלות משובצות.';
 $string['noquestions'] = 'בשלב זה, יש להוסיף שאלות לבוחן על מנת שאפשר יהיה להציג אותו בפני התלמידים';
 $string['noquestionsfound'] = 'לא נמצאו שאלות';
-$string['noquestionsinquiz'] = 'לא קיימות שאלות בבוחן זה.';
+$string['noquestionsinquizsbs'] = 'לא קיימות שאלות בבוחן זה.';
 $string['noquestionsnotinuse'] = 'השאלה האקראית לא בשימוש , מפני שהקטגוריה שלה ריקה.';
 $string['noquestionsonpage'] = 'עמוד ריק';
 $string['noresponse'] = 'אין תגובה.';
@@ -632,8 +632,8 @@ $string['orderandpaging_help'] = 'לצד כל שאלה מופיעים מספרי
 כדי להוסיף רווחים לאחר שאלות מסוימות, סמנו את תיבות הסימון שלצד השאלות ואז הקישו על כפתור " הוסיפו דפים חדשים לאחר שבחרתם שאלות " .
 
 כדי לסדר את השאלות על פני מספר עמודים, הקישו על כפתור " סידור דפים מחדש" ובחרו את מספר השאלות הרצוי בכל עמוד.';
-$string['orderingquiz'] = 'סדר ועימוד';
-$string['orderingquizx'] = 'סדר ועימוד: {$a}';
+$string['orderingquizsbs'] = 'סדר ועימוד';
+$string['orderingquizsbsx'] = 'סדר ועימוד: {$a}';
 $string['outcomesadvanced'] = 'מדדי-הערכה הם הגדרות מתקדמות';
 $string['outof'] = '{$a->grade} מתוך מקסימום של {$a->maxgrade}';
 $string['outofpercent'] = '{$a->grade}  מתוך הציון המירבי  {$a->maxgrade}({$a->percent}%)';
@@ -671,17 +671,17 @@ $string['override'] = 'התאמת הגדרות';
 $string['overridedeletegroupsure'] = 'האם למחוק את ההגדרות המותאמות לקבוצה {$a}?';
 $string['overridedeleteusersure'] = 'האם למחוק את ההגדרות המותאמות למשתמש {$a}?';
 $string['overridegroup'] = 'התאמת הגדרות לקבוצה';
-$string['overridegroupeventname'] = '{$a->quiz} - {$a->group}';
+$string['overridegroupeventname'] = '{$a->quizsbs} - {$a->group}';
 $string['overrides'] = 'הגדרות־מותאמות';
 $string['overrideuser'] = 'הגדרות־מותאמות למשתמש';
-$string['overrideusereventname'] = '{$a->quiz} - הגדרות־מותאמות';
-$string['page-mod-quiz-attempt'] = 'עמוד בוחן נסיון המענה';
-$string['page-mod-quiz-edit'] = 'עריכת עמוד הבוחן';
-$string['page-mod-quiz-report'] = 'עמוד כלשהו בדוח הבוחן';
-$string['page-mod-quiz-review'] = 'סקירת עמוד נסיון מענה הבוחן';
-$string['page-mod-quiz-summary'] = 'עמוד סיכום נסיונות מענה הבוחן';
-$string['page-mod-quiz-view'] = 'עמוד מידע הבוחן';
-$string['page-mod-quiz-x'] = 'עמוד רכיב בוחן כלשהו';
+$string['overrideusereventname'] = '{$a->quizsbs} - הגדרות־מותאמות';
+$string['page-mod-quizsbs-attempt'] = 'עמוד בוחן נסיון המענה';
+$string['page-mod-quizsbs-edit'] = 'עריכת עמוד הבוחן';
+$string['page-mod-quizsbs-report'] = 'עמוד כלשהו בדוח הבוחן';
+$string['page-mod-quizsbs-review'] = 'סקירת עמוד נסיון מענה הבוחן';
+$string['page-mod-quizsbs-summary'] = 'עמוד סיכום נסיונות מענה הבוחן';
+$string['page-mod-quizsbs-view'] = 'עמוד מידע הבוחן';
+$string['page-mod-quizsbs-x'] = 'עמוד רכיב בוחן כלשהו';
 $string['pagesize'] = 'גודל העמוד';
 $string['parent'] = 'אב';
 $string['parentcategory'] = 'קטגוריית אב';
@@ -706,8 +706,8 @@ $string['popupnotice'] = 'הסטודנטים יראו את בוחן זה בחל�
 $string['preprocesserror'] = 'שגיאה התרחשה במהלך טרום תהליך העיבוד!';
 $string['preview'] = 'תצוגה מקדימה';
 $string['previewquestion'] = 'תצוגה מקדימה של השאלה';
-$string['previewquiz'] = 'תצוגה מקדימה של {$a}';
-$string['previewquiznow'] = 'צפיה מוקדמת בבוחן';
+$string['previewquizsbs'] = 'תצוגה מקדימה של {$a}';
+$string['previewquizsbsnow'] = 'צפיה מוקדמת בבוחן';
 $string['prevquestiongroup'] = 'לקבוצת שאלות קודמת';
 $string['previous'] = 'מצב קודם';
 $string['publish'] = 'פרסם';
@@ -727,7 +727,7 @@ $string['questiondependencyfree'] = 'אין הגבלה על שאלה זו';
 $string['questiondependencyremove'] = 'לא ניתן לענות על השאלה {$a->thisq} עד שהשאלה הקודמת {$a->previousq}  תושלם • הקלק לשינוי';
 $string['questiondependsonprevious'] = 'לא ניתן  לענות על שאלה זו עד שלא הסתיים המענה על השאלה הקודם.';
 $string['questionlist'] = 'רשימת שאלות';
-$string['questioninuse'] = 'השאלה \'{$a->questionname}\' נמצאת כרגע בשימוש ב: <br />{$a->quiznames}<br />השאלה לא תימחק מבחנים אלה, אלא רק מרשימת הקטגוריות.';
+$string['questioninuse'] = 'השאלה \'{$a->questionname}\' נמצאת כרגע בשימוש ב: <br />{$a->quizsbsnames}<br />השאלה לא תימחק מבחנים אלה, אלא רק מרשימת הקטגוריות.';
 $string['questionmissing'] = 'שאלה עבור מושב זה חסרה';
 $string['questionname'] = 'שם השאלה';
 $string['questionnonav'] = '<span class="accesshide">שאלה </span>{$a->number}<span class="accesshide"> {$a->attributes}</span>';
@@ -737,7 +737,7 @@ $string['questionorder'] = 'סדר השאלה';
 $string['questionposition'] = 'מיקום חדש בסדר של שאלה {$a}';
 $string['questions'] = 'שאלות';
 $string['questionsinclhidden'] = 'שאלות (כולל מוסתרות)';
-$string['questionsinthisquiz'] = 'שאלות בבוחן זה';
+$string['questionsinthisquizsbs'] = 'שאלות בבוחן זה';
 $string['questionsperpage'] = 'שאלות בכל דף';
 $string['questionsperpageselected'] = 'שאלות לכל עמוד הוגדר כאן כך שהעימוד תוכן כרגע.
 כתוצאה מכך שליטת העימוד לא תאופשר. תוכל לשנות זאת כאן {$a}.
@@ -747,43 +747,43 @@ $string['questiontext'] = 'תוכן השאלה';
 $string['questiontextisempty'] = '[שאלה ללא תוכן]';
 $string['questiontype'] = 'שאלה מסוג {$a}';
 $string['questiontypesetupoptions'] = 'אפשרויות הגדרת התצורה של סוגי השאלות:';
-$string['quiz:addinstance'] = 'הוספת בוחן חדש';
-$string['quiz:attempt'] = 'נסה לענות על הבחנים';
-$string['quizavailable'] = 'בוחן זה זמין עד: {$a}';
-$string['quizclose'] = 'סיום הבוחן';
-$string['quizclosed'] = 'בוחן זה מסתיים ב-{$a}';
-$string['quizcloses'] = 'סיום הבוחן';
-$string['quizcloseson'] = 'בוחן  זה יסגר ב  {$a}';
-$string['quiz:deleteattempts'] = 'מחיקת ניסיונות המענה על הבחנים';
-$string['quiz:emailconfirmsubmission'] = 'קבלת אישור בדואר אלקטרוני כאשר הבוחן נשלח לבדיקה';
-$string['quiz:emailnotifysubmission'] = 'קבלת הודעה בדואר אלקטרוני על נסיון מענה לבוחן';
-$string['quiz:emailwarnoverdue'] = 'קבלת הודעת דוא"ל כאשר חלף זמן נסיון המענה  ויש להגישו.';
-$string['quiz:grade'] = 'בדוק ותן ציון לבחנים באופן ידני';
-$string['quiz:ignoretimelimits'] = 'מתעלם מהגבלת הזמן שיש לבחנים';
-$string['quizisclosed'] = 'בוחן זה נסגר';
-$string['quizisclosedwillopen'] = 'הבוחן סגור (יפתח ב  {$a})';
-$string['quizisopen'] = 'הבוחן זמין למענה';
-$string['quizisopenwillclose'] = 'הבוחן נפתח (נסגר ב {$a})';
-$string['quiz:manage'] = 'ניהול בחנים';
-$string['quiz:manageoverrides'] = 'ניהול הגדרות בוחן מותאמות';
-$string['quiznavigation'] = 'ניווט בוחן';
-$string['quizopen'] = 'תחילת הבוחן';
-$string['quizopenclose'] = 'פתיחה וסיום תאריכים';
-$string['quizopenclose_help'] = 'הסטודנטים יכולים להתחיל את נסיונות המענה שלהם לאחר פתיחת תאריך זמינות הבוחן ועליהם לסיים את נסיונות המענה לפני תאריך (זמן) סגירת הבוחן.';
-$string['quizopened'] = 'הבוחן פתוח.';
-$string['quizopenedon'] = 'הבוחן יפתח ב-{$a}';
-$string['quizopens'] = 'תחילת הבוחן';
-$string['quizopenwillclose'] = 'הבוחן פתוח. הוא יסגר ב-{$a} ב-';
-$string['quizordernotrandom'] = 'לא עורבב סדר השאלות בבוחן';
-$string['quizorderrandom'] = '* סדר השאלות בבוחן עורבב';
-$string['quiz:preview'] = 'תצוגה מקדימה לבחנים';
-$string['quiz:regrade'] = 'תן ציון מחודש לנסיונות הבוחן';
-$string['quiz:reviewmyattempts'] = 'סקירת הניסיונות שלך';
-$string['quizsettings'] = 'הגדרות הבוחן';
-$string['quiztimer'] = 'שעון עצר הבוחן';
-$string['quiz:view'] = 'ראה את המידע הנתון על הבוחן';
-$string['quiz:viewreports'] = 'ראה את דוחות הבוחן';
-$string['quizwillopen'] = 'הבוחן יפתח ב-{$a}';
+$string['quizsbs:addinstance'] = 'הוספת בוחן חדש';
+$string['quizsbs:attempt'] = 'נסה לענות על הבחנים';
+$string['quizsbsavailable'] = 'בוחן זה זמין עד: {$a}';
+$string['quizsbsclose'] = 'סיום הבוחן';
+$string['quizsbsclosed'] = 'בוחן זה מסתיים ב-{$a}';
+$string['quizsbscloses'] = 'סיום הבוחן';
+$string['quizsbscloseson'] = 'בוחן  זה יסגר ב  {$a}';
+$string['quizsbs:deleteattempts'] = 'מחיקת ניסיונות המענה על הבחנים';
+$string['quizsbs:emailconfirmsubmission'] = 'קבלת אישור בדואר אלקטרוני כאשר הבוחן נשלח לבדיקה';
+$string['quizsbs:emailnotifysubmission'] = 'קבלת הודעה בדואר אלקטרוני על נסיון מענה לבוחן';
+$string['quizsbs:emailwarnoverdue'] = 'קבלת הודעת דוא"ל כאשר חלף זמן נסיון המענה  ויש להגישו.';
+$string['quizsbs:grade'] = 'בדוק ותן ציון לבחנים באופן ידני';
+$string['quizsbs:ignoretimelimits'] = 'מתעלם מהגבלת הזמן שיש לבחנים';
+$string['quizsbsisclosed'] = 'בוחן זה נסגר';
+$string['quizsbsisclosedwillopen'] = 'הבוחן סגור (יפתח ב  {$a})';
+$string['quizsbsisopen'] = 'הבוחן זמין למענה';
+$string['quizsbsisopenwillclose'] = 'הבוחן נפתח (נסגר ב {$a})';
+$string['quizsbs:manage'] = 'ניהול בחנים';
+$string['quizsbs:manageoverrides'] = 'ניהול הגדרות בוחן מותאמות';
+$string['quizsbsnavigation'] = 'ניווט בוחן';
+$string['quizsbsopen'] = 'תחילת הבוחן';
+$string['quizsbsopenclose'] = 'פתיחה וסיום תאריכים';
+$string['quizsbsopenclose_help'] = 'הסטודנטים יכולים להתחיל את נסיונות המענה שלהם לאחר פתיחת תאריך זמינות הבוחן ועליהם לסיים את נסיונות המענה לפני תאריך (זמן) סגירת הבוחן.';
+$string['quizsbsopened'] = 'הבוחן פתוח.';
+$string['quizsbsopenedon'] = 'הבוחן יפתח ב-{$a}';
+$string['quizsbsopens'] = 'תחילת הבוחן';
+$string['quizsbsopenwillclose'] = 'הבוחן פתוח. הוא יסגר ב-{$a} ב-';
+$string['quizsbsordernotrandom'] = 'לא עורבב סדר השאלות בבוחן';
+$string['quizsbsorderrandom'] = '* סדר השאלות בבוחן עורבב';
+$string['quizsbs:preview'] = 'תצוגה מקדימה לבחנים';
+$string['quizsbs:regrade'] = 'תן ציון מחודש לנסיונות הבוחן';
+$string['quizsbs:reviewmyattempts'] = 'סקירת הניסיונות שלך';
+$string['quizsbssettings'] = 'הגדרות הבוחן';
+$string['quizsbstimer'] = 'שעון עצר הבוחן';
+$string['quizsbs:view'] = 'ראה את המידע הנתון על הבוחן';
+$string['quizsbs:viewreports'] = 'ראה את דוחות הבוחן';
+$string['quizsbswillopen'] = 'הבוחן יפתח ב-{$a}';
 $string['random'] = 'שאלה אקראית (מקטגוריה)';
 $string['randomcreate'] = 'יצירת שאלות אקראיות';
 $string['randomfromcategory'] = 'שאלה־אקראית מקטגוריה:';
@@ -793,7 +793,7 @@ $string['randomnumber'] = 'מספר שאלות אקראיות';
 $string['randomquestionusinganewcategory'] = 'שאלה־אקראית מקטגוריה חדשה';
 $string['randomwithsubcat'] = 'שאלות מקטגוריה זו ומקטגוריות המשנה.';
 $string['readytosend'] = 'הבוחן שלך עומד להישלח לבדיקה וקבלת ציון. האם להמשיך?';
-$string['reattemptquiz'] = 'התחלת ניסיון מענה חדש של הבוחן';
+$string['reattemptquizsbs'] = 'התחלת ניסיון מענה חדש של הבוחן';
 $string['recentlyaddedquestion'] = 'שאלה שנוספה לאחרונה!';
 $string['recurse'] = 'הצגת שאלות גם מתת-קטגוריות';
 $string['redoesofthisquestion'] = 'נסיונות מענה אחרים לשאלות כאן: {$a}';
@@ -804,10 +804,10 @@ $string['regradecount'] = 'שונו {$a->changed} מתוך {$a->attempt} ציו�
 $string['regradedisplayexplanation'] = 'ניסיונות מענה שמשתנים במהלך הבדיקה מחדש, מוצגים כקישורים לחלון העיון בשאלה.';
 $string['regradenotallowed'] = 'אין לך היתר לתת ציון לבוחן זה';
 $string['regradingquestion'] = 'בודק מחדש את "{$a}".';
-$string['regradingquiz'] = 'בודק מחדש את בוחן "{$a}"';
+$string['regradingquizsbs'] = 'בודק מחדש את בוחן "{$a}"';
 $string['remove'] = 'הסרת';
 $string['removeallgroupoverrides'] = 'מחיקת כל התאמות המיוחדות עבור הקבוצות';
-$string['removeallquizattempts'] = 'הסרת כל נסיונות הבוחן';
+$string['removeallquizsbsattempts'] = 'הסרת כל נסיונות הבוחן';
 $string['removealluseroverrides'] = 'מחיקת כל התאמות המיוחדות עבור סטודנטים';
 $string['removeemptypage'] = 'סלק דפים ריקים';
 $string['removepagebreak'] = 'הסרת מעבר עמוד';
@@ -891,7 +891,7 @@ $string['reviewimmediately'] = 'מיידית לאחר גמר הניסיון לפ
 $string['reviewnever'] = 'לעולם אל תאפשר לעיין בתשובות.';
 $string['reviewofattempt'] = 'עיון בתשובות שניתנו בניסיון מענה $a';
 $string['reviewofpreview'] = 'סקירת תצוגה־מקדימה';
-$string['reviewofquestion'] = 'סקירת השאלה {$a->question} בבוחן {$a->quiz}  על-ידי משתמש {$a->user}';
+$string['reviewofquestion'] = 'סקירת השאלה {$a->question} בבוחן {$a->quizsbs}  על-ידי משתמש {$a->user}';
 $string['reviewopen'] = 'מאוחר יותר, כאשר הבוחן עדיין פתוח';
 $string['reviewoptions'] = 'הרשה לסטודנטים לעיין בתשובות';
 $string['reviewoptionsheading'] = 'אפשרויות לתצוגת משוב';
@@ -923,7 +923,7 @@ $string['savegrades'] = 'שמירת הציונים';
 $string['savemyanswers'] = 'שמירת תשובותי';
 $string['savenosubmit'] = 'שמירה מבלי להגיש';
 $string['saveoverrideandstay'] = 'שמירה והזנה של הגדרה־מותאמת חדשה';
-$string['savequiz'] = 'שמירת הבוחן כולו';
+$string['savequizsbs'] = 'שמירת הבוחן כולו';
 $string['saving'] = 'שמירה';
 $string['savingnewgradeforquestion'] = 'שמירת ציון חדש עבור שאלה {$a}.';
 $string['savingnewmaximumgrade'] = 'שמירת ציון מירבי חדש';
@@ -995,7 +995,7 @@ $string['sortquestionsbyx'] = 'מיין שאלות על-ידי: {$a}';
 $string['sortsubmit'] = 'מיין שאלות';
 $string['sorttypealpha'] = 'מיין לפי סוג, שם';
 $string['specificapathnotonquestion'] = 'נתיב הקובץ המצויין כאן לא נמצא בשאלה המצויינת';
-$string['specificquestionnotonquiz'] = 'השאלה המצויינת כאן איננה נמצאת בבוחן המצויין';
+$string['specificquestionnotonquizsbs'] = 'השאלה המצויינת כאן איננה נמצאת בבוחן המצויין';
 $string['startagain'] = 'התחל שוב';
 $string['startattempt'] = 'תחילת נסיון המענה';
 $string['startedon'] = 'התחיל ב:';
@@ -1015,10 +1015,10 @@ $string['subjectsuccessfulsave'] = 'נושא נשמר בהצלחה';
 $string['submitallandfinish'] = 'הגשה סופית וסיום ניסיון המענה (בוחן)';
 $string['subneterror'] = 'סליחה, בוחן זה נחסם כך שניתן לגשת אליו רק ממקומות מסויימים. נכון לעכשיו, המחשב שלך הוא לא אחד ממקומות אלה, ולכן אינך יכול לנסות ולפתור את הבוחן.';
 $string['subnetnotice'] = 'בוחן זה ננעל כך שהגישה אליו מותרת רק ממיקומים מסויימים. המחשב שלך לא נמצא בתת-רשת מורשה. כמורה, מותר לך לחזות בתצוגה המקדימה בכל מקרה.';
-$string['subplugintype_quiz'] = 'דוח';
-$string['subplugintype_quizaccess'] = 'תפקיד גישה';
-$string['subplugintype_quizaccess_plural'] = 'תפקידי גישה';
-$string['subplugintype_quiz_plural'] = 'דוחות';
+$string['subplugintype_quizsbs'] = 'דוח';
+$string['subplugintype_quizsbsaccess'] = 'תפקיד גישה';
+$string['subplugintype_quizsbsaccess_plural'] = 'תפקידי גישה';
+$string['subplugintype_quizsbs_plural'] = 'דוחות';
 $string['substitutedby'] = 'יוחלף על ידי';
 $string['pagesuccessfulsave'] = 'הדף נשמר בהצלחה';
 $string['summaryofattempt'] = 'סיכום הנסיון';
@@ -1058,9 +1058,9 @@ $string['updatingfinalgrades'] = 'מעדכן את הציונים הסופיים'
 $string['updatingthegradebook'] = 'מעדכן את גליון הציונים';
 $string['upgradesure'] = '<div style="color: red;">מודול הבוחן יבצע שינוי מקיף בטבלאות הבוחן, ושידרוג זה עדיין לא נבחן ונבדק במידה מספקת. לפני שאתה ממשיך, מומלץ מאוד לגבות את טבלאות בסיס הנתונים שלך.
 .</div>';
-$string['upgradingquizattempts'] = 'משדרג את נסיונות מענה הבוחן : בוחן
+$string['upgradingquizsbsattempts'] = 'משדרג את נסיונות מענה הבוחן : בוחן
 {$a->done}/{$a->outof} (Quiz id {$a->info})';
-$string['upgradingveryoldquizattempts'] = 'משדרג את נסיונות המענה הישנים של הבוחן:
+$string['upgradingveryoldquizsbsattempts'] = 'משדרג את נסיונות המענה הישנים של הבוחן:
 {$a->done}/{$a->outof}';
 $string['url'] = 'כתובת URL';
 $string['usedcategorymoved'] = 'קטגוריה זו נשתמרה בצורתה הנוכחית והועברה לרמת האתר זאת מפני שהיא קטגוריה מפורסמת וקורסים אחרים עדיין משתמשים בה.';
