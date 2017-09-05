@@ -342,7 +342,7 @@ class mod_quizsbs_renderer extends plugin_renderer_base {
         $data->restartpreview = $panel->render_end_bits($this);
         $data->page = $page;
         $data->nextpage = $nextpage;
-        $data->courseid = ($attemptobj->is_own_preview()) ? $attemptobj->get_courseid() : '';
+        $data->courseid = $attemptobj->get_courseid();
         $this->page->requires->js_init_call('M.mod_quizsbs.nav.init', null, false,
                 quizsbs_get_js_module());
         return $this->render_from_template('mod_quizsbs/navigation_panel', $data);;
