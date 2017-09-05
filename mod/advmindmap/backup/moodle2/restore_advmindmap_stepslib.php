@@ -34,9 +34,7 @@ class restore_advmindmap_activity_structure_step extends restore_activity_struct
  
         $paths[] = new restore_path_element('advmindmap', '/activity/advmindmap');
         
-        if ($userinfo) {
-            $paths[] = new restore_path_element('advmindmap_instance', '/activity/advmindmap/instances/advmindmap_instance');
-        }
+        $paths[] = new restore_path_element('advmindmap_instance', '/activity/advmindmap/instances/instance');
         
         // Return the paths wrapped into standard activity structure
         return $this->prepare_activity_structure($paths);
