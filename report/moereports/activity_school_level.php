@@ -16,7 +16,7 @@
 require_once('../../config.php');
 require_once($CFG->dirroot . '/lib/dataformatlib.php');
 ini_set("memory_limit", "-1");
-global $DB, $PAGE, $OUTPUT;
+global $DB, $PAGE, $OUTPUT, $SESSION;
 $region = optional_param('region', '', PARAM_TEXT);
 $dataformat = optional_param('dataformat', null, PARAM_ALPHA);
 
@@ -35,8 +35,9 @@ $PAGE->set_pagelayout('standard');
 $data = new stdClass();
 $data->results = array();
 
-if ((is_siteadmin()|| has_capability('report/moereport:viewall', $context)) &&  $dataformat == null){ //admin view
-    if(empty($region)){
+// Admin view.
+if ((is_siteadmin() || has_capability('report/moereport:viewall', $context)) && $dataformat == null) {
+    if (empty($region)) {
         $regions = new \stdClass();
         $regions->name = array();
         $regionsnames = $DB->get_records_sql('select region from {moereports_reports} group by region');
@@ -45,22 +46,24 @@ if ((is_siteadmin()|| has_capability('report/moereport:viewall', $context)) &&  
         }
         $selectregion = $OUTPUT->render_from_template('report_moereports/regionslist', $regions);
     } else {
-        $_SESSION['regionselected'] = $region;
+        $SESSION->regionselected = $region;
         $sql = 'select * from mdl_moereports_acactivityschool where region=:region';
-        $data->results = $DB->get_records_sql($sql, array('region' => "$region"));
+        $data->results = $DB->get_records_sql($sql, array(
+            'region' => "$region"
+        ));
         $data->results = array_values($data->results);
         foreach ($data->results as $rec) {
             unset($rec->id);
         }
     }
-} elseif ($dataformat == null){ //user view
+} else if ($dataformat == null) { // user view
     $cond = 'where symbol in (';
     $scollsymbols = explode(',', $USER->profile['Yeshuyot']);
     foreach ($scollsymbols as $scollsymbol) {
-        if (!next($scollsymbols)){
-            $cond = "$cond"  . "$scollsymbol";
+        if (! next($scollsymbols)) {
+            $cond = "$cond" . "$scollsymbol";
         } else {
-            $cond = "$cond"  . "$scollsymbol" . ",";
+            $cond = "$cond" . "$scollsymbol" . ",";
         }
     }
     $cond = "$cond" . ")";
@@ -69,10 +72,12 @@ if ((is_siteadmin()|| has_capability('report/moereport:viewall', $context)) &&  
     foreach ($data->results as $rec) {
         unset($rec->id);
     }
-} else { //admin download
-    $region = $_SESSION['regionselected'];
+} else { // admin download
+    $region = $SESSION->regionselected;
     $sql = 'select * from mdl_moereports_acactivityschool where region=:region';
-    $data->results = $DB->get_records_sql($sql, array('region' => "$region"));
+    $data->results = $DB->get_records_sql($sql, array(
+        'region' => "$region"
+    ));
     $data->results = array_values($data->results);
     foreach ($data->results as $rec) {
         unset($rec->id);
@@ -90,18 +95,17 @@ if ($dataformat != null) {
         'makbila9' => get_string('makbila9', 'report_moereports'),
         'percents9' => get_string('percents9', 'report_moereports'),
         'makbila10' => get_string('makbila10', 'report_moereports'),
-        'percents10' => get_string('percents10', 'report_moereports'),
+        'percents10' => get_string('percents10', 'report_moereports')
     );
-    download_as_dataformat('activity_in_region' . date('c') , $dataformat, $columns, $data->results);
+    download_as_dataformat('activity_in_region' . date('c'), $dataformat, $columns, $data->results);
 }
-
 
 $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/scool_level', $data);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_activity_school_level', 'report_moereports'));
-if (isset($selectregion)){
+if (isset($selectregion)) {
     echo $selectregion;
 } else {
     echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/activity_school_level.php', 'dataformat', array());
