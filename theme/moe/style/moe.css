@@ -5811,6 +5811,11 @@ a#choosetheme {
 	max-width: none;
 }
 
+#page-mod-quizsbs-attempt .que.oumultiresponse .answer div.r0, #page-mod-quizsbs-attempt .que.oumultiresponse .answer
+div.r1 {
+	text-indent: 0;
+}
+
 @media screen and (max-width: 480px) {
     #page-mod-oublog-editpost .editor_atto_toolbar {
         margin-right: 0em;
