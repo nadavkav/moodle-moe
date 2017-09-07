@@ -48,9 +48,9 @@ if (is_siteadmin() || has_capability('report/moereport:viewall', $context)) {
     $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
     foreach ($useryeshuyot as $yeshut) {
         $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-        if ($region !=false && !array_search($region, $regions)) {
+        if ($region != false && !array_search($region, $regions)) {
             array_push($regions, $region);
-            if ($yeshut == end($useryeshuyot)){
+            if ($yeshut == end($useryeshuyot)) {
                 $cond = "$cond"  ."'$region'";
             } else {
                 $cond = "$cond"  . "'$region'". ",";

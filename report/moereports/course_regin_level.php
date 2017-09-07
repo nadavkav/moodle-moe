@@ -36,8 +36,10 @@ $data->results = array();
 
 // set the user permition:
 $regions = array();
-$courses = $DB->get_records('course', array('enablecompletion' => '1'));
-if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+$courses = $DB->get_records('course', array(
+    'enablecompletion' => '1'
+));
+if (is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) {
     $data->results = $DB->get_records_sql('select * from mdl_moereports_courseregin');
     $data->results = array_values($data->results);
     foreach ($data->results as $rec) {
@@ -47,16 +49,17 @@ if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
     $cond = 'where region in (';
     $useryeshuyot = explode(',', $USER->profile['Yeshuyot']);
     foreach ($useryeshuyot as $yeshut) {
-        $region = $DB->get_field('moereports_reports', 'region', array("symbol" => $yeshut));
-        if ($region !=false && !array_search($region, $regions)) {
+        $region = $DB->get_field('moereports_reports', 'region', array(
+            "symbol" => $yeshut
+        ));
+        if ($region != false && ! array_search($region, $regions)) {
             array_push($regions, $region);
-            if ($yeshut == end($useryeshuyot)){
-                $cond = "$cond"  ."'$region'";
+            if ($yeshut == end($useryeshuyot)) {
+                $cond = "$cond" . "'$region'";
             } else {
-                $cond = "$cond"  . "'$region'". ",";
+                $cond = "$cond" . "'$region'" . ",";
             }
         }
-
     }
     $cond = "$cond" . ")";
     $data->results = $DB->get_records_sql("select * from mdl_moereports_courseregin " . "$cond");
@@ -65,8 +68,6 @@ if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
         unset($rec->id);
     }
 }
-
-
 
 if ($dataformat != null) {
     $columns = array(
@@ -77,9 +78,9 @@ if ($dataformat != null) {
         'makbila9' => get_string('makbila9', 'report_moereports'),
         'percents9' => get_string('percents9', 'report_moereports'),
         'makbila10' => get_string('makbila10', 'report_moereports'),
-        'percents10' => get_string('percents10', 'report_moereports'),
+        'percents10' => get_string('percents10', 'report_moereports')
     );
-    download_as_dataformat('activity_in_region' . date('c') , $dataformat, $columns, $data->results);
+    download_as_dataformat('activity_in_region' . date('c'), $dataformat, $columns, $data->results);
 }
 $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);

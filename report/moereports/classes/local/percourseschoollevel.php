@@ -107,7 +107,7 @@ class percourseschoollevel extends moereport{
                             if ($den == 0) {
                                 $onerecord->eighthgradetotal = get_string('noinformation', 'report_moereports');
                             } else {
-                                $onerecord->eighthgradetotal = round(($gradevalue / $den * 100) ,2) . "%";
+                                $onerecord->eighthgradetotal = round(($gradevalue / $den * 100) , 2) . "%";
                             }
                             break;
                         case 9:

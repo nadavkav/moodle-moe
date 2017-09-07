@@ -16,9 +16,8 @@
 require_once('../../config.php');
 require_once($CFG->dirroot . '/lib/dataformatlib.php');
 ini_set("memory_limit", "-1");
-
-global $DB, $PAGE, $OUTPUT;
-
+global $DB, $PAGE, $OUTPUT, $SESSION;
+$region = optional_param('region', '', PARAM_TEXT);
 $dataformat = optional_param('dataformat', null, PARAM_ALPHA);
 $url = new moodle_url('/report/moereports/course_scoole_level.php');
 $PAGE->set_url($url);
@@ -34,28 +33,51 @@ $PAGE->set_title(get_string('per_course_scool_level', 'report_moereports'));
 $PAGE->set_heading(get_string('per_course_scool_level', 'report_moereports'));
 $PAGE->set_pagelayout('standard');
 
-
 $data = new stdClass();
 $data->results = array();
 
-if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
-    $data->results = $DB->get_records_sql('select * from mdl_moereports_courseschool');
-    $data->results = array_values($data->results);
-    foreach ($data->results as $rec) {
-        unset($rec->id);
+if (is_siteadmin() || has_capability('report/moereport:viewall', $usercontext) && $dataformat == null) {
+    if (empty($region)) {
+        $regions = new \stdClass();
+        $regions->name = array();
+        $regionsnames = $DB->get_records_sql('select region from {moereports_reports} group by region');
+        foreach ($regionsnames as $name) {
+            $regions->name[] = $name->region;
+        }
+        $selectregion = $OUTPUT->render_from_template('report_moereports/course_school_list', $regions);
+    } else {
+        $SESSION->regionselected = $region;
+        $sql = 'select * from mdl_moereports_courseschool where region=:region';
+        $data->results = $DB->get_records_sql($sql, array(
+            'region' => "$region"
+        ));
+        $data->results = array_values($data->results);
+        foreach ($data->results as $rec) {
+            unset($rec->id);
+        }
     }
-} else {
+} else if ($dataformat == null) {
     $cond = 'where  scollsymbol in (';
     $scollsymbols = explode(',', $USER->profile['Yeshuyot']);
     foreach ($scollsymbols as $scollsymbol) {
-        if (!next($scollsymbols)){
-            $cond = "$cond"  . "$scollsymbol";
+        if (! next($scollsymbols)) {
+            $cond = "$cond" . "$scollsymbol";
         } else {
-            $cond = "$cond"  . "$scollsymbol" . ",";
+            $cond = "$cond" . "$scollsymbol" . ",";
         }
     }
     $cond = "$cond" . ")";
     $data->results = $DB->get_records_sql("select * from mdl_moereports_courseschool " . "$cond");
+    $data->results = array_values($data->results);
+    foreach ($data->results as $rec) {
+        unset($rec->id);
+    }
+} else { // admin download
+    $region = $SESSION->regionselected;
+    $sql = 'select * from mdl_moereports_courseschool where region=:region';
+    $data->results = $DB->get_records_sql($sql, array(
+        'region' => "$region"
+    ));
     $data->results = array_values($data->results);
     foreach ($data->results as $rec) {
         unset($rec->id);
@@ -73,19 +95,24 @@ if ($dataformat != null) {
         'makbila9' => get_string('makbila9', 'report_moereports'),
         'percents9' => get_string('percents9', 'report_moereports'),
         'makbila10' => get_string('makbila10', 'report_moereports'),
-        'percents10' => get_string('percents10', 'report_moereports'),
+        'percents10' => get_string('percents10', 'report_moereports')
     );
-    download_as_dataformat('activity_in_region' . date('c') , $dataformat, $columns, $data->results);
+    download_as_dataformat('activity_in_region' . date('c'), $dataformat, $columns, $data->results);
 }
 
 $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/course_scool_level', $data);
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_course_scool_level', 'report_moereports'));
-echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_scoole_level.php', 'dataformat', array());
+if (isset($selectregion)) {
+    echo $selectregion;
+} else {
+    echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_scoole_level.php', 'dataformat', array());
+    echo $resulttable;
+}
 
 $PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
+$PAGE->requires->js_call_amd('report_moereports/ecxelexport', 'init');
 
-echo "$resulttable";
 echo $OUTPUT->footer();
 
