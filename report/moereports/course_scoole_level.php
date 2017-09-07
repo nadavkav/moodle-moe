@@ -18,7 +18,7 @@ require_once($CFG->dirroot . '/lib/dataformatlib.php');
 ini_set("memory_limit", "-1");
 
 global $DB, $PAGE, $OUTPUT;
-
+$region = optional_param('region', '', PARAM_TEXT);
 $dataformat = optional_param('dataformat', null, PARAM_ALPHA);
 $url = new moodle_url('/report/moereports/course_scoole_level.php');
 $PAGE->set_url($url);
@@ -38,13 +38,25 @@ $PAGE->set_pagelayout('standard');
 $data = new stdClass();
 $data->results = array();
 
-if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
-    $data->results = $DB->get_records_sql('select * from mdl_moereports_courseschool');
-    $data->results = array_values($data->results);
-    foreach ($data->results as $rec) {
-        unset($rec->id);
-    }
-} else {
+if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext) &&  $dataformat == null) {
+        if(empty($region)){
+            $regions = new \stdClass();
+            $regions->name = array();
+            $regionsnames = $DB->get_records_sql('select region from {moereports_reports} group by region');
+            foreach ($regionsnames as $name) {
+                $regions->name[] = $name->region;
+            }
+            $selectregion = $OUTPUT->render_from_template('report_moereports/course_school_list', $regions);
+        } else {
+            $_SESSION['regionselected'] = $region;
+            $sql = 'select * from mdl_moereports_courseschool where region=:region';
+            $data->results = $DB->get_records_sql($sql, array('region' => "$region"));
+            $data->results = array_values($data->results);
+            foreach ($data->results as $rec) {
+                unset($rec->id);
+            }
+        }
+ }elseif  ($dataformat == null){
     $cond = 'where  scollsymbol in (';
     $scollsymbols = explode(',', $USER->profile['Yeshuyot']);
     foreach ($scollsymbols as $scollsymbol) {
@@ -60,7 +72,15 @@ if (is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
     foreach ($data->results as $rec) {
         unset($rec->id);
     }
-}
+    } else { //admin download
+        $region = $_SESSION['regionselected'];
+        $sql = 'select * from mdl_moereports_courseschool where region=:region';
+        $data->results = $DB->get_records_sql($sql, array('region' => "$region"));
+        $data->results = array_values($data->results);
+        foreach ($data->results as $rec) {
+            unset($rec->id);
+        }
+    }
 
 if ($dataformat != null) {
     $columns = array(
@@ -82,10 +102,15 @@ $renderer = $PAGE->get_renderer('core');
 $resulttable = $OUTPUT->render_from_template('report_moereports/course_scool_level', $data);
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('per_course_scool_level', 'report_moereports'));
-echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_scoole_level.php', 'dataformat', array());
+if (isset($selectregion)){
+    echo $selectregion;
+} else {
+    echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_scoole_level.php', 'dataformat', array());
+    echo $resulttable;
+}
 
 $PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
+$PAGE->requires->js_call_amd('report_moereports/ecxelexport', 'init');
 
-echo "$resulttable";
 echo $OUTPUT->footer();
 
