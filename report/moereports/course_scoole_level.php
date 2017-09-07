@@ -36,7 +36,7 @@ $PAGE->set_pagelayout('standard');
 $data = new stdClass();
 $data->results = array();
 
-if (is_siteadmin() || has_capability('report/moereport:viewall', $usercontext) && $dataformat == null) {
+if ((is_siteadmin() || has_capability('report/moereport:viewall', $usercontext)) && $dataformat == null) {
     if (empty($region)) {
         $regions = new \stdClass();
         $regions->name = array();
