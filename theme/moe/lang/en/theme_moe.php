@@ -244,3 +244,5 @@ $string['region-hidden-dock'] = 'Hidden from users';
 $string['nextsection'] = '';
 $string['previoussection'] = '';
 $string['backtotop'] = '';
+$string['extra_indo'] = 'Extra info in course head';
+$string['extra_indo_desc'] = 'Show Course full name, short name, teacher name and link to their send message page.';

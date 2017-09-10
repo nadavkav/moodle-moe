@@ -61,6 +61,22 @@ echo $OUTPUT->doctype() ?>
         <section id="region-main" class="span9<?php if ($left) { echo ' pull-left'; } ?><?php if ($standardlayout) { echo ' pull-right'; } ?>">
             <?php
             echo $OUTPUT->course_content_header();
+            if(( $PAGE->course->id != 1) && ($PAGE->url->get_path(false) == '/course/view.php') && (get_config('theme_moe' , 'extra_indo') == 1)) {
+            	global $COURSE, $DB;
+            	echo "<br>";
+            	echo "<h2> $COURSE->fullname </h2>";
+            	echo "<h3> $COURSE->shortname </h3>";
+            	$role = $DB->get_record('role', array('shortname' => 'editingteacher'));
+            	$context = context_course::instance($COURSE->id);
+            	$teachers = get_role_users($role->id, $context);
+            	foreach ($teachers as $teach) {
+            		$teach = $DB->get_record('user', array('id' => $teach->id));
+            		$href = new moodle_url('/user/profile.php', array('id' => $teach->id));
+            		echo "<a href=$href> $teach->firstname $teach->lastname </a>";
+            		
+            	}
+            	
+            }           
             echo $OUTPUT->main_content();
             echo $OUTPUT->course_content_footer();
             ?>

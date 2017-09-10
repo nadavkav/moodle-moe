@@ -242,3 +242,5 @@ $string['region-hidden-dock'] = 'מוסתר מהמשתמשים';
 $string['nextsection'] = '';
 $string['previoussection'] = '';
 $string['backtotop'] = '';
+$string['extra_indo'] = 'מידע נוסף בראש הקורס';
+$string['extra_indo_desc'] = 'הצג את שם הקורס המלא, שם הקורס הקצר, שם המורה וקישור אל דף יצירת הקשר עם המורה.';

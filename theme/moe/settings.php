@@ -33,6 +33,15 @@ $ADMIN->add('themes', new admin_category('theme_moe', 'Theme-moe'));
     // "settings general" settingpage
     $temp = new admin_settingpage('theme_moe_general',  get_string('settings_general', 'theme_moe'));
 
+    // Logo resolution.
+    $name = 'theme_moe/extra_indo';
+    $title = get_string('extra_indo', 'theme_moe');
+    $description = get_string('extra_indo_desc', 'theme_moe');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $temp->add($setting);
+    
+    
     // Logo file setting.
     $name = 'theme_moe/logo';
     $title = get_string('logo', 'theme_moe');
