@@ -1,11 +1,12 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
 //
-// You can redistribute it and/or modify
+// Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// It is distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
@@ -16,7 +17,6 @@
 /**
  * Strings for component 'format_moetabs', language 'en'
  */
-
 $string['zerosectionbtn'] = 'ארגז כלים, חומרי רקע ועזר עבור המורה';
 
 $string['moetabspagesectionone'] = '<h1><span class="multilang" lang="he">מרחב 1</span><span class="multilang" lang="en">Section 1</span></h1>';
@@ -28,7 +28,7 @@ $string['display_summary_alt'] = 'Move this section out of the grid';
 $string['editimage'] = 'Change image';
 $string['editimage_alt'] = 'Set or change image';
 $string['formatgrid'] = 'Grid format'; // Name to display for format.
-$string['general_information'] = 'General Information';  // No longer used kept for legacy versions.
+$string['general_information'] = 'General Information'; // No longer used kept for legacy versions.
 $string['hidden_topic'] = 'This section has been hidden';
 $string['hide_summary'] = 'move section into grid';
 $string['hide_summary_alt'] = 'Move this section into the grid';
@@ -36,7 +36,7 @@ $string['namegrid'] = 'Grid view';
 $string['title'] = 'Section title';
 $string['topic'] = 'Section';
 $string['topic0'] = 'General';
-$string['topicoutline'] = 'Section';  // No longer used kept for legacy versions.
+$string['topicoutline'] = 'Section'; // No longer used kept for legacy versions.
 
 // Moodle 2.0 Enhancement - Moodle Tracker MDL-15252, MDL-21693 & MDL-22056 - http://docs.moodle.org/en/Development:Languages.
 $string['sectionname'] = 'Section';
@@ -167,4 +167,3 @@ $string['resetallfitpopup_help'] = 'Resets the \'Fit section popup to the window
 $string['grid:changeimagecontainersize'] = 'Change or reset the image container size';
 $string['grid:changeimageresizemethod'] = 'Change or reset the image resize method';
 $string['grid:changeimagecontainerstyle'] = 'Change or reset the image container style';
-
