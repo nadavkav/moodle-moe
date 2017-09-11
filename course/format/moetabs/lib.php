@@ -1,11 +1,12 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
 //
-// You can redistribute it and/or modify
+// Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// It is distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
@@ -16,15 +17,14 @@
 /**
  * This file contains main class for the course format moetabs
  *
- * @since     2.0
- * @package   format_moetabs
+ * @since 2.0
+ * @package format_moetabs
  * @copyright 2012 David Herney Bernal - cirano
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot. '/course/format/lib.php');
-require_once($CFG->dirroot.'/course/modlib.php');
+require_once($CFG->dirroot . '/course/format/lib.php');
+require_once($CFG->dirroot . '/course/modlib.php');
 
 /**
  * Main class for the moetabs course format
@@ -32,9 +32,8 @@ require_once($CFG->dirroot.'/course/modlib.php');
  * @since 2.0
  * @package contribution
  * @copyright 2012 David Herney Bernal - cirano
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class format_moetabs extends format_base {
 
     /**
@@ -51,14 +50,16 @@ class format_moetabs extends format_base {
      *
      * Use section name is specified by user. Otherwise use default ("Topic #")
      *
-     * @param int|stdClass $section Section object from database or just field section.section
+     * @param int|stdClass $section
+     *            Section object from database or just field section.section
      * @return string Display name that the course format prefers, e.g. "Topic 2"
      */
     public function get_section_name($section) {
         $section = $this->get_section($section);
-        if ((string)$section->name !== '') {
-            return format_string($section->name, true,
-                    array('context' => context_course::instance($this->courseid)));
+        if ((string) $section->name !== '') {
+            return format_string($section->name, true, array(
+                'context' => context_course::instance($this->courseid)
+            ));
         } else {
             return get_string('sectionname', 'format_moetabs') . ' ' . $section->section;
         }
@@ -67,16 +68,20 @@ class format_moetabs extends format_base {
     /**
      * The URL to use for the specified course (with section)
      *
-     * @param int|stdClass $section Section object from database or just field course_sections.section
-     *     if omitted the course view page is returned
-     * @param array $options options for view URL. At the moment core uses:
-     *     'navigation' (bool) if true and section has no separate page, the function returns null
-     *     'sr' (int) used by multipage formats to specify to which section to return
+     * @param int|stdClass $section
+     *            Section object from database or just field course_sections.section
+     *            if omitted the course view page is returned
+     * @param array $options
+     *            options for view URL. At the moment core uses:
+     *            'navigation' (bool) if true and section has no separate page, the function returns null
+     *            'sr' (int) used by multipage formats to specify to which section to return
      * @return null|moodle_url
      */
     public function get_view_url($section, $options = array()) {
         $course = $this->get_course();
-        $url = new moodle_url('/course/view.php', array('id' => $course->id));
+        $url = new moodle_url('/course/view.php', array(
+            'id' => $course->id
+        ));
 
         $sr = null;
         if (array_key_exists('sr', $options)) {
@@ -106,14 +111,18 @@ class format_moetabs extends format_base {
     /**
      * Creates missing course section(s) and rebuilds course cache
      *
-     * @param int|stdClass $courseorid course id or course object
-     * @param int|array $sections list of relative section numbers to create
+     * @param int|stdClass $courseorid
+     *            course id or course object
+     * @param int|array $sections
+     *            list of relative section numbers to create
      * @return bool if there were any sections created
      */
     public function course_create_sections_if_missing($courseorid, $sections) {
-        global $DB,$CFG;
-        if (!is_array($sections)) {
-            $sections = array($sections);
+        global $DB, $CFG;
+        if (! is_array($sections)) {
+            $sections = array(
+                $sections
+            );
         }
         $existing = array_keys(get_fast_modinfo($courseorid)->get_section_info_all());
         if (is_object($courseorid)) {
@@ -122,44 +131,56 @@ class format_moetabs extends format_base {
         }
         $coursechanged = false;
         foreach ($sections as $sectionnum) {
-            if (!in_array($sectionnum, $existing)) {
+            if (! in_array($sectionnum, $existing)) {
                 $cw = new stdClass();
-                $cw->course   = $courseorid;
-                $cw->section  = $sectionnum;
-                $cw->summary  = '';
+                $cw->course = $courseorid;
+                $cw->section = $sectionnum;
+                $cw->summary = '';
                 $cw->summaryformat = FORMAT_HTML;
                 $cw->sequence = '';
                 $id = $DB->insert_record("course_sections", $cw);
-                $section = $DB->get_record('course_sections', array('id' => $id));
+                $section = $DB->get_record('course_sections', array(
+                    'id' => $id
+                ));
                 $coursechanged = true;
                 rebuild_course_cache($courseorid, true);
-                $labels = array(get_string('moetabspagesectionone', 'format_moetabs'), get_string('moetabspagesectiontwo', 'format_moetabs'), get_string('moetabspagesectionthree', 'format_moetabs'));
-                if($cw->section != 0 && !empty($labels)){
-                    foreach ($labels as $key => $label){
-                        list($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
+                $labels = array(
+                    get_string('moetabspagesectionone', 'format_moetabs'),
+                    get_string('moetabspagesectiontwo', 'format_moetabs'),
+                    get_string('moetabspagesectionthree', 'format_moetabs')
+                );
+                if ($cw->section != 0 && ! empty($labels)) {
+                    foreach ($labels as $key => $label) {
+                        list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
                         $cm = null;
                         $data = new stdClass();
-                        $data->section          = $cw->section;  // The section number itself - relative!!! (section column in course_sections)
-                        $data->visible          = 1;
-                        $data->course           = $course->id;
-                        $data->module           = $module->id;
-                        $data->modulename       = $module->name;
-                        $data->groupmode        = $course->groupmode;
-                        $data->groupingid       = $course->defaultgroupingid;
-                        $data->id               = '';
-                        $data->instance         = '';
-                        $data->coursemodule     = '';
-                        $data->add              = 'label';
-                        $data->return           = 0; //must be false if this is an add, go back to course view on cancel
-                        $data->sr               = 0;
+                        // The section number itself - relative!!! (section column in course_sections).
+                        $data->section = $cw->section;
+                        $data->visible = 1;
+                        $data->course = $course->id;
+                        $data->module = $module->id;
+                        $data->modulename = $module->name;
+                        $data->groupmode = $course->groupmode;
+                        $data->groupingid = $course->defaultgroupingid;
+                        $data->id = '';
+                        $data->instance = '';
+                        $data->coursemodule = '';
+                        $data->add = 'label';
+                        // Must be false if this is an add, go back to course view on cancel.
+                        $data->return = 0;
+                        $data->sr = 0;
                         if (plugin_supports('mod', $data->modulename, FEATURE_MOD_INTRO, true)) {
-                            $draftid_editor = file_get_submitted_draft_itemid('introeditor');
-                            $currentintro = file_prepare_draft_area(
-                                $draftid_editor, $context->id,
-                                'mod_'.$data->modulename,
-                                'intro', 0, array('subdirs'=>true),
-                                $label );
-                            $data->introeditor = array('text'=>$currentintro, 'format'=>1, 'itemid'=>$draftid_editor);
+                            $draftideditor = file_get_submitted_draft_itemid('introeditor');
+                            $currentintro = file_prepare_draft_area($draftideditor, $context->id,
+                                'mod_' . $data->modulename, 'intro', 0,
+                                array(
+                                    'subdirs' => true
+                                ), $label);
+                            $data->introeditor = array(
+                                'text' => $currentintro,
+                                'format' => 1,
+                                'itemid' => $draftideditor
+                            );
                         }
                         $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
                         if (file_exists($modmoodleform)) {
@@ -167,7 +188,7 @@ class format_moetabs extends format_base {
                         } else {
                             print_error('noformdesc');
                         }
-                        $mformclassname = 'mod_'.$module->name.'_mod_form';
+                        $mformclassname = 'mod_' . $module->name . '_mod_form';
                         $mform = new $mformclassname($data, $cw->section, $cm, $course);
                         $mform->set_data($data);
                         $fromform = add_moduleinfo($data, $course, $mform);
@@ -178,7 +199,6 @@ class format_moetabs extends format_base {
         if ($coursechanged) {
             rebuild_course_cache($courseorid, true);
         }
-
 
         return $coursechanged;
     }
@@ -194,14 +214,14 @@ class format_moetabs extends format_base {
     public function supports_ajax() {
         global $course, $USER;
 
-        if (!isset($USER->moetabs_da)) {
+        if (! isset($USER->moetabs_da)) {
             $USER->moetabs_da = array();
         }
 
-        $disable_ajax = isset($USER->moetabs_da[$course->id]) ? $USER->moetabs_da[$course->id] : false;
+        $disableajax = isset($USER->moetabs_da[$course->id]) ? $USER->moetabs_da[$course->id] : false;
 
         $ajaxsupport = new stdClass();
-        $ajaxsupport->capable = !$disable_ajax;
+        $ajaxsupport->capable = ! $disableajax;
         return $ajaxsupport;
     }
 
@@ -209,26 +229,27 @@ class format_moetabs extends format_base {
      * Loads all of the course sections into the navigation
      *
      * @param global_navigation $navigation
-     * @param navigation_node $node The course node within the navigation
+     * @param navigation_node $node
+     *            The course node within the navigation
      */
     public function extend_course_navigation($navigation, navigation_node $node) {
         global $PAGE;
-        // if section is specified in course/view.php, make sure it is expanded in navigation
+        // If section is specified in course/view.php, make sure it is expanded in navigation.
         if ($navigation->includesectionnum === false) {
             $selectedsection = optional_param('section', null, PARAM_INT);
-            if ($selectedsection !== null && (!defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0') &&
-                    $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+            if ($selectedsection !== null && (! defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0') &&
+                $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
                 $navigation->includesectionnum = $selectedsection;
             }
         }
 
-        // check if there are callbacks to extend course navigation
+        // Check if there are callbacks to extend course navigation.
         parent::extend_course_navigation($navigation, $node);
 
         // We want to remove the general section if it is empty.
         $modinfo = get_fast_modinfo($this->get_course());
         $sections = $modinfo->get_sections();
-        if (!isset($sections[0])) {
+        if (! isset($sections[0])) {
             // The general section is empty to find the navigation node for it we need to get its ID.
             $section = $modinfo->get_section_info(0);
             $generalsection = $node->get($section->id, navigation_node::TYPE_SECTION);
@@ -246,7 +267,7 @@ class format_moetabs extends format_base {
      *
      * @return array This will be passed in ajax respose
      */
-    function ajax_section_move() {
+    public function ajax_section_move() {
         global $PAGE;
         $titles = array();
         $course = $this->get_course();
@@ -257,14 +278,17 @@ class format_moetabs extends format_base {
                 $titles[$number] = $renderer->section_title($section, $course);
             }
         }
-        return array('sectiontitles' => $titles, 'action' => 'move');
+        return array(
+            'sectiontitles' => $titles,
+            'action' => 'move'
+        );
     }
 
     /**
      * Returns the list of blocks to be automatically added for the newly created course
      *
      * @return array of default blocks, must contain two keys BLOCK_POS_LEFT and BLOCK_POS_RIGHT
-     *     each of values is an array of block names (for left and right side columns)
+     *         each of values is an array of block names (for left and right side columns)
      */
     public function get_default_blocks() {
         return array(
@@ -304,24 +328,26 @@ class format_moetabs extends format_base {
                 'coursedisplay' => array(
                     'default' => $courseconfig->coursedisplay,
                     'type' => PARAM_INT
-                ),
+                )
             );
         }
-        if ($foreditform && !isset($courseformatoptions['coursedisplay']['label'])) {
+        if ($foreditform && ! isset($courseformatoptions['coursedisplay']['label'])) {
             $courseconfig = get_config('moodlecourse');
             $max = $courseconfig->maxsections;
-            if (!isset($max) || !is_numeric($max)) {
+            if (! isset($max) || ! is_numeric($max)) {
                 $max = 52;
             }
             $sectionmenu = array();
-            for ($i = 0; $i <= $max; $i++) {
+            for ($i = 0; $i <= $max; $i ++) {
                 $sectionmenu[$i] = "$i";
             }
             $courseformatoptionsedit = array(
                 'numsections' => array(
                     'label' => new lang_string('numberweeks'),
                     'element_type' => 'select',
-                    'element_attributes' => array($sectionmenu),
+                    'element_attributes' => array(
+                        $sectionmenu
+                    )
                 ),
                 'hiddensections' => array(
                     'label' => new lang_string('hiddensections'),
@@ -333,7 +359,7 @@ class format_moetabs extends format_base {
                             0 => new lang_string('hiddensectionscollapsed'),
                             1 => new lang_string('hiddensectionsinvisible')
                         )
-                    ),
+                    )
                 ),
                 'hidetabsbar' => array(
                     'label' => get_string('hidetabsbar', 'format_moetabs'),
@@ -345,7 +371,7 @@ class format_moetabs extends format_base {
                             0 => new lang_string('no'),
                             1 => new lang_string('yes')
                         )
-                    ),
+                    )
                 ),
                 'coursedisplay' => array(
                     'label' => new lang_string('coursedisplay', 'format_moetabs'),
@@ -357,7 +383,7 @@ class format_moetabs extends format_base {
                         )
                     ),
                     'help' => 'coursedisplay',
-                    'help_component' => 'format_moetabs',
+                    'help_component' => 'format_moetabs'
                 )
             );
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
@@ -370,8 +396,10 @@ class format_moetabs extends format_base {
      *
      * This function is called from {@link course_edit_form::definition_after_data()}.
      *
-     * @param MoodleQuickForm $mform form the elements are added to.
-     * @param bool $forsection 'true' if this is a section edit form, 'false' if this is course edit form.
+     * @param MoodleQuickForm $mform
+     *            form the elements are added to.
+     * @param bool $forsection
+     *            'true' if this is a section edit form, 'false' if this is course edit form.
      * @return array array of references to the added form elements.
      */
     public function create_edit_form_elements(&$mform, $forsection = false) {
@@ -380,15 +408,15 @@ class format_moetabs extends format_base {
         // Increase the number of sections combo box values if the user has increased the number of sections
         // using the icon on the course page beyond course 'maxsections' or course 'maxsections' has been
         // reduced below the number of sections already set for the course on the site administration course
-        // defaults page.  This is so that the number of sections is not reduced leaving unintended orphaned
+        // defaults page. This is so that the number of sections is not reduced leaving unintended orphaned
         // activities / resources.
-        if (!$forsection) {
+        if (! $forsection) {
             $maxsections = get_config('moodlecourse', 'maxsections');
             $numsections = $mform->getElementValue('numsections');
             $numsections = $numsections[0];
             if ($numsections > $maxsections) {
                 $element = $mform->getElement('numsections');
-                for ($i = $maxsections+1; $i <= $numsections; $i++) {
+                for ($i = $maxsections + 1; $i <= $numsections; $i ++) {
                     $element->addOption("$i", $i);
                 }
             }
@@ -396,164 +424,28 @@ class format_moetabs extends format_base {
         return $elements;
     }
 
-
-
-//     /**
-//      * Updates format options for a course
-//      *
-//      * In case if course format was changed to 'moetabs', we try to copy special options from the previous format.
-//      * If previous course format did not have the options, we populate it with the
-//      * current number of sections and default options
-//      *
-//      * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
-//      * @param stdClass $oldcourse if this function is called from {@link update_course()}
-//      *     this object contains information about the course before update
-//      * @return bool whether there were any changes to the options values
-//      */
-//     public function update_course_format_options($data, $oldcourse = null) {
-//         global $DB;
-//         $data = (array)$data;
-//         if ($oldcourse !== null) {
-//             $oldcourse = (array)$oldcourse;
-//             $options = $this->course_format_options();
-//             foreach ($options as $key => $unused) {
-//                 if (!array_key_exists($key, $data)) {
-//                     if (array_key_exists($key, $oldcourse)) {
-//                         $data[$key] = $oldcourse[$key];
-//                     } else if ($key === 'numsections') {
-//                         // If previous format does not have the field 'numsections'
-//                         // and $data['numsections'] is not set,
-//                         // we fill it with the maximum section number from the DB
-//                         $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections}
-//                             WHERE course = ?', array($this->courseid));
-//                         if ($maxsection) {
-//                             // If there are no sections, or just default 0-section, 'numsections' will be set to default
-//                             $data['numsections'] = $maxsection;
-//                         }
-//                     } else if ($key === 'hidetabsbar') {
-//                         // If previous format does not have the field 'hidetabsbar'
-//                         // and $data['hidetabsbar'] is not set,
-//                         // we fill it with the default option
-//                         $data['hidetabsbar'] = 0;
-//                     }
-//                 }
-//             }
-//         }
-//         $changed = $this->update_format_options($data);
-//         if ($changed && array_key_exists('numsections', $data)) {
-//             // If the numsections was decreased, try to completely delete the orphaned sections (unless they are not empty).
-//             $numsections = (int)$data['numsections'];
-//             $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections}
-//                         WHERE course = ?', array($this->courseid));
-//             for ($sectionnum = $maxsection; $sectionnum > $numsections; $sectionnum--) {
-//                 if (!$this->delete_section($sectionnum, false)) {
-//                     break;
-//                 }
-//             }
-//         }
-//         return $changed;
-//     }
-
-//     public function section_format_options($foreditform = false) {
-//         static $sectionformatoptions = false;
-
-//         if ($sectionformatoptions === false) {
-//             $sectionformatoptions = array(
-//                 'level' => array(
-//                     'default' => 0,
-//                     'type' => PARAM_INT
-//                 ),
-//                 'firsttabtext' => array(
-//                     'default' => 0,
-//                     'type' => PARAM_TEXT
-//                 ),
-//                 'fontcolor' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW
-//                 ),
-//                 'bgcolor' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW
-//                 ),
-//                 'cssstyles' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW
-//                 )
-//             );
-//         }
-
-//         if ($foreditform) {
-//             $sectionformatoptionsedit = array(
-//                 'level' => array(
-//                     'default' => 0,
-//                     'type' => PARAM_INT,
-//                     'label' => get_string('level', 'format_moetabs'),
-//                     'element_type' => 'select',
-//                     'element_attributes' => array(
-//                         array(
-//                             0 => get_string('asprincipal', 'format_moetabs'),
-//                             1 => get_string('aschild', 'format_moetabs')
-//                         )
-//                     ),
-//                     'help' => 'level',
-//                     'help_component' => 'format_moetabs',
-//                 ),
-//                 'firsttabtext' => array(
-//                     'default' => get_string('index', 'format_moetabs'),
-//                     'type' => PARAM_TEXT,
-//                     'label' => get_string('firsttabtext', 'format_moetabs'),
-//                     'help' => 'firsttabtext',
-//                     'help_component' => 'format_moetabs',
-//                 ),
-//                 'fontcolor' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW,
-//                     'label' => get_string('fontcolor', 'format_moetabs'),
-//                     'help' => 'fontcolor',
-//                     'help_component' => 'format_moetabs',
-//                 ),
-//                 'bgcolor' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW,
-//                     'label' => get_string('bgcolor', 'format_moetabs'),
-//                     'help' => 'bgcolor',
-//                     'help_component' => 'format_moetabs',
-//                 ),
-//                 'cssstyles' => array(
-//                     'default' => '',
-//                     'type' => PARAM_RAW,
-//                     'label' => get_string('cssstyles', 'format_moetabs'),
-//                     'help' => 'cssstyles',
-//                     'help_component' => 'format_moetabs',
-//                 )
-//             );
-
-//             $sectionformatoptions = $sectionformatoptionsedit; //array_merge_recursive($sectionformatoptions, $sectionformatoptionsedit);
-//         }
-//         return $sectionformatoptions;
-//     }
-
-
     /**
      * Updates format options for a course
      *
      * In case if course format was changed to 'Collapsed Topics', we try to copy options
      * 'coursedisplay', 'numsections' and 'hiddensections' from the previous format.
      * If previous course format did not have 'numsections' option, we populate it with the
-     * current number of sections.  The layout and colour defaults will come from 'course_format_options'.
+     * current number of sections. The layout and colour defaults will come from 'course_format_options'.
      *
-     * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
-     * @param stdClass $oldcourse if this function is called from {@link update_course()}
-     *     this object contains information about the course before update
+     * @param stdClass|array $data
+     *            return value from {@link moodleform::get_data()} or array with data
+     * @param stdClass $oldcourse
+     *            if this function is called from {@link update_course()}
+     *            this object contains information about the course before update
      * @return bool whether there were any changes to the options values
      */
     public function update_course_format_options($data, $oldcourse = null) {
-        global $DB,$PAGE,$CFG; // MDL-37976.
+        global $DB, $PAGE, $CFG; // MDL-37976.
 
         /*
          * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
-         *        This has to be done here so that the reset occurs after we have done updates such that the
-         *        reset itself is not seen as an update.
+         * This has to be done here so that the reset occurs after we have done updates such that the
+         * reset itself is not seen as an update.
          */
         $resetdisplayinstructions = false;
         $resetlayout = false;
@@ -611,15 +503,18 @@ class format_moetabs extends format_base {
             $oldcourse = (array) $oldcourse;
             $options = $this->course_format_options();
             foreach ($options as $key => $unused) {
-                if (!array_key_exists($key, $data)) {
+                if (! array_key_exists($key, $data)) {
                     if (array_key_exists($key, $oldcourse)) {
                         $data[$key] = $oldcourse[$key];
                     } else if ($key === 'numsections') {
-                        /* If previous format does not have the field 'numsections'
+                        /*
+                         * If previous format does not have the field 'numsections'
                          * and $data['numsections'] is not set,
-                         * we fill it with the maximum section number from the DB */
-                        $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections} WHERE course = ?',
-                            array($this->courseid));
+                         * we fill it with the maximum section number from the DB
+                         */
+                        $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections} WHERE course = ?', array(
+                            $this->courseid
+                        ));
                         if ($maxsection) {
                             // If there are no sections, or just default 0-section, 'numsections' will be set to default.
                             $data['numsections'] = $maxsection;
@@ -633,11 +528,12 @@ class format_moetabs extends format_base {
 
         if ($changes && array_key_exists('numsections', $data)) {
             // If the numsections was decreased, try to completely delete the orphaned sections (unless they are not empty).
-            $numsections = (int)$data['numsections'];
-            $maxsection = $DB->get_field_sql(
-                'SELECT max(section) from {course_sections} WHERE course = ?', array($this->courseid));
-            for ($sectionnum = $maxsection; $sectionnum > $numsections; $sectionnum--) {
-                if (!$this->delete_section($sectionnum, false)) {
+            $numsections = (int) $data['numsections'];
+            $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections} WHERE course = ?', array(
+                $this->courseid
+            ));
+            for ($sectionnum = $maxsection; $sectionnum > $numsections; $sectionnum --) {
+                if (! $this->delete_section($sectionnum, false)) {
                     break;
                 }
             }
@@ -645,11 +541,11 @@ class format_moetabs extends format_base {
             $renderer = $PAGE->get_renderer('format_moetabs');
             $modinfo = get_fast_modinfo($this->courseid);
             $course = $this->get_course();
-            $i=1;
-            if (($maxsection!=null && $oldcourse['format'] == 'moetabs') || $maxsection == $numsections){
-                $i=$maxsection+1;
+            $i = 1;
+            if (($maxsection != null && $oldcourse['format'] == 'moetabs') || $maxsection == $numsections) {
+                $i = $maxsection + 1;
             }
-            for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum++) {
+            for ($sectionnum = $i; $sectionnum <= $numsections; $sectionnum ++) {
                 $labels = array(
                     get_string('moetabspagesectionone', 'format_moetabs'),
                     get_string('moetabspagesectiontwo', 'format_moetabs'),
@@ -664,8 +560,8 @@ class format_moetabs extends format_base {
                         if ($mod->modname == 'label') {
                             $modulehtml = $renderer->course_section_cm_list_item($course, $completioninfo, $mod, null, array());
                             foreach ($labels as $key => $label) {
-                                if(strpos($modulehtml, 'moetopcalllabel')){
-                                    ++$countmoetabslabel;
+                                if (strpos($modulehtml, 'moetopcalllabel')) {
+                                    ++ $countmoetabslabel;
                                 }
                                 if (strpos($modulehtml, $label)) {
                                     unset($labels[$key]);
@@ -674,12 +570,13 @@ class format_moetabs extends format_base {
                         }
                     }
                 }
-                if (($countmoetabslabel < 3) && (!empty($labels)) && ($section != null)) {
+                if (($countmoetabslabel < 3) && (! empty($labels)) && ($section != null)) {
                     list ($module, $context, $sec) = can_add_moduleinfo($course, 'label', $section->section);
                     foreach ($labels as $key => $label) {
                         $cm = null;
                         $data = new stdClass();
-                        $data->section = $section->section; // The section number itself - relative!!! (section column in course_sections)
+                        // The section number itself - relative!!! (section column in course_sections).
+                        $data->section = $section->section;
                         $data->visible = 1;
                         $data->course = $course->id;
                         $data->module = $module->id;
@@ -690,22 +587,24 @@ class format_moetabs extends format_base {
                         $data->instance = '';
                         $data->coursemodule = '';
                         $data->add = 'label';
-                        $data->return = 0; // must be false if this is an add, go back to course view on cancel
+                        // Must be false if this is an add, go back to course view on cancel.
+                        $data->return = 0;
                         $data->sr = 0;
                         if (plugin_supports('mod', $data->modulename, FEATURE_MOD_INTRO, true)) {
-                            $draftid_editor = file_get_submitted_draft_itemid('introeditor');
-                            $currentintro = file_prepare_draft_area($draftid_editor, $context->id, 'mod_' . $data->modulename, 'intro', 0, array(
-                                'subdirs' => true
-                            ), $label);
+                            $draftideditor = file_get_submitted_draft_itemid('introeditor');
+                            $currentintro = file_prepare_draft_area($draftideditor, $context->id, 'mod_' . $data->modulename,
+                                'intro', 0, array(
+                                    'subdirs' => true
+                                ), $label);
                             $data->introeditor = array(
                                 'text' => $currentintro,
                                 'format' => 1,
-                                'itemid' => $draftid_editor
+                                'itemid' => $draftideditor
                             );
                         }
                         $modmoodleform = "$CFG->dirroot/mod/$module->name/mod_form.php";
                         if (file_exists($modmoodleform)) {
-                            require_once ($modmoodleform);
+                            require_once($modmoodleform);
                         } else {
                             print_error('noformdesc');
                         }
@@ -719,28 +618,20 @@ class format_moetabs extends format_base {
         }
 
         // Now we can do the reset.
-        if (($resetalldisplayinstructions) ||
-            ($resetalllayout) ||
-            ($resetallcolour) ||
-            ($resetalltogglealignment) ||
-            ($resetalltoggleiconset)) {
-                $this->reset_moetabs_setting(0, $resetalldisplayinstructions, $resetalllayout, $resetallcolour,
-                    $resetalltogglealignment, $resetalltoggleiconset);
-                $changes = true;
-            } else if (($resetdisplayinstructions) ||
-                ($resetlayout) ||
-                ($resetcolour) ||
-                ($resettogglealignment) ||
-                ($resettoggleiconset)) {
-                    $this->reset_moetabs_setting($this->courseid, $resetdisplayinstructions, $resetlayout, $resetcolour,
-                        $resettogglealignment, $resettoggleiconset);
-                    $changes = true;
-                }
+        if (($resetalldisplayinstructions) || ($resetalllayout) ||
+            ($resetallcolour) || ($resetalltogglealignment) || ($resetalltoggleiconset)) {
+            $this->reset_moetabs_setting(0, $resetalldisplayinstructions, $resetalllayout, $resetallcolour,
+                $resetalltogglealignment, $resetalltoggleiconset);
+            $changes = true;
+        } else if (($resetdisplayinstructions) || ($resetlayout) ||
+            ($resetcolour) || ($resettogglealignment) || ($resettoggleiconset)) {
+            $this->reset_moetabs_setting($this->courseid, $resetdisplayinstructions,
+                $resetlayout, $resetcolour, $resettogglealignment, $resettoggleiconset);
+            $changes = true;
+        }
 
-                return $changes;
+        return $changes;
     }
-
-
 
     /**
      * Whether this format allows to delete sections
@@ -754,4 +645,3 @@ class format_moetabs extends format_base {
         return true;
     }
 }
-
