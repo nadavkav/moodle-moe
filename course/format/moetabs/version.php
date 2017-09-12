@@ -27,4 +27,4 @@ $plugin->version = 2017080600; // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires = 2015050500; // Requires this Moodle version.
 $plugin->component = 'format_moetabs';
 $plugin->maturity = MATURITY_RC;
-$plugin->release = 'la madera';
+$plugin->release = '1.0.0';
