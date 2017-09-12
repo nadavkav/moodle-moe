@@ -39,7 +39,8 @@ class peractivityschoollevel extends moereport{
 
         $results = array();
         $courses = $DB->get_records('course', array(
-            'enablecompletion' => '1'
+            'enablecompletion' => '1',
+            'visible' => '1',
         ));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         foreach ($semels as $semelkey => $semelvalue) {
@@ -102,7 +103,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->ninthgradetotal = "אין מידע";
+                                    $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereport');
                                 } else {
                                     $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -112,7 +113,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->tenthgradetotal = "אין מידע";
+                                    $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereport');
                                 } else {
                                     $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -122,7 +123,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->eleventhgradetotal = "אין מידע";
+                                    $onerecord->eleventhgradetotal = get_string('notrelevant', 'report_moereport');
                                 } else {
                                     $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -132,7 +133,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->twelfthgradetotal = "אין מידע";
+                                    $onerecord->twelfthgradetotal = get_string('notrelevant', 'report_moereport');
                                 } else {
                                     $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
