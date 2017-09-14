@@ -1,4 +1,6 @@
-
+.moetabs ul.topics:nth-last-child(2) {
+	border: 2px solid #a08eb8;
+}
 .course-content ul.topics {
     margin:0;
 }
@@ -103,7 +105,7 @@
 }
 
 .format-moetabs .nav-tabs {
-	height: 80px;
+	height: 58px;
 }
 
 .noselect {
