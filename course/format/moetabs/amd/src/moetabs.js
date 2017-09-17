@@ -29,7 +29,6 @@ define(['jquery'], function($) {
     				$('.format-moetabs .sectionzerotext' ).css("margin-top", "10px");
     				$('.format-moetabs .sectionzerotext' ).css("display", "inline-block");
     				$( '.format-moetabs .sectionzerobtn' ).css("margin-bottom", "25px");
-    				$( '.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft').show();
     				var containersize = $('.format-moetabs .sectionzerotext').width();
     				$( '.format-moetabs .sectionzerobtn' ).css("width", containersize); 
     			} else {
@@ -37,7 +36,6 @@ define(['jquery'], function($) {
     				$('.format-moetabs .littlesquare').show();
     				$('.format-moetabs .sectionzerotext' ).css("margin-top", "0px");
        				$('.format-moetabs .sectionzerotext' ).css("display", "block");
-       				$( '.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft').hide();
     				if ( window.fullScreen ) {
           			  $( '.format-moetabs .sectionzerobtn' ).css("width", "766px");
       				} else {
