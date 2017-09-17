@@ -282,6 +282,11 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo $this->end_section_list();
 
         // create section zero botton to show its activities
+        global $COURSE;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        if ( !has_capability('moodle/role:student', $context) || !has_capability('moodle/role:guest', $context) ) {
+
         echo html_writer::start_tag('div', array(
             'class' => 'sectionzerobtn noselect'
         ));
@@ -295,6 +300,8 @@ class format_moetabs_renderer extends format_section_renderer_base {
         ));
         echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
+
+        }
 
         // load jqurey function (for button click events)
         $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
