@@ -285,7 +285,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
         global $COURSE;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
-        if ( !has_capability('moodle/role:student', $context) || !has_capability('moodle/role:guest', $context) ) {
+        if ( has_capability('moodle/course:viewhiddencourses', $context) ) {
 
         echo html_writer::start_tag('div', array(
             'class' => 'sectionzerobtn noselect'
