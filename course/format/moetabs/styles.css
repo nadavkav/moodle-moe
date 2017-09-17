@@ -333,6 +333,9 @@
 	
 }
 
+html[dir="rtl"] .label .mod-indent {
+    float: right;
+}
 
 
 
