@@ -333,9 +333,15 @@
 	
 }
 
-html[dir="rtl"] .label .mod-indent {
+html[dir="rtl"] .format-moetabs .label .mod-indent {
     float: right;
 }
+
+.format-moetabs .course-content ul li.section.hidden .sectionname>span, .format-moetabs .course-content ul li.section.hidden .content>div, .format-moetabs .course-content ul li.section.hidden .activity .activityinstance {
+    opacity: unset;
+}
+
+
 
 
 
