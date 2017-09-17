@@ -60,6 +60,9 @@
 
 .format-moetabs .tab_content.marker {
 	font-style: italic;
+	background-color: #572f71;
+	font-weight: bold;
+	
  }
 
 .format-moetabs .utilities-separator {
