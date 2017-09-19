@@ -16,15 +16,25 @@ define(['jquery'], function($) {
        		
     	Moetabs.prototype.init = function(tabpos) {
     		
+
     		var tabposGLOBAL = tabpos+1;
+    		    		
+    		$( ".format-moetabs .dragscroll li" ).each(function() {
+    			
+    			$(this).css("margin-right", "0px");
+    		});
     		
     		$(".format-moetabs #tabmoveright").on("click", function() {
     			
+    			var  aviablescrolltoleft=  $('.fa').width(); 
+    			if ( $('.dragscroll').scrollLeft() > aviablescrolltoleft) {
     			tabposGLOBAL--;
-    			
+    			}
+    					
     			if (tabposGLOBAL < 2 ) { // check the limit of the right side (its start from child two )
     				tabposGLOBAL = 2;
     			}
+    			
     			
     			// hold the width size of the tab button for the scrolling value 
     			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
@@ -41,16 +51,16 @@ define(['jquery'], function($) {
     			if (tabposGLOBAL > maxelements ) { // check the limit from the left side 
     				tabposGLOBAL = maxelements;
     			}
-    			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
     			
+    			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
     			
     			$(".format-moetabs .nav-tabs").animate({
     				scrollLeft: '-='+scrolingvalue+'px' }, 50);
+
     			var  aviablescrolltoleft=  $('.fa').width(); 
     			if ( $('.dragscroll').scrollLeft() > aviablescrolltoleft ) {
     				tabposGLOBAL++;
     			}
-    			
     		});
     			
             // founction to place the button acording to the windows size 
