@@ -282,9 +282,6 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo $this->end_section_list();
 
         // create section zero botton to show its activities
-        global $COURSE;
-        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-
         if ( has_capability('moodle/course:viewhiddencourses', $context) ) {
 
         echo html_writer::start_tag('div', array(
@@ -647,7 +644,9 @@ class format_moetabs_renderer extends format_section_renderer_base {
             }
 
             print_collapsible_region_end();
-            $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
+            // send the current tab position to js
+            $tabpos = optional_param('section', 0, PARAM_INT);
+            $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init', array($tabpos));
         }
     }
 
