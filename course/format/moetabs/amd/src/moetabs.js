@@ -18,7 +18,7 @@ define(['jquery'], function($) {
     		
 
     		var tabposGLOBAL = tabpos+1;
-    		    		
+    		    		    		
     		$( ".format-moetabs .dragscroll li" ).each(function() {
     			
     			$(this).css("margin-right", "0px");
@@ -27,7 +27,7 @@ define(['jquery'], function($) {
     		$(".format-moetabs #tabmoveright").on("click", function() {
     			
     			var  aviablescrolltoleft=  $('.fa').width(); 
-    			if ( $('.dragscroll').scrollLeft() > aviablescrolltoleft) {
+    			if ( $('.format-moetabs .dragscroll').scrollLeft() > aviablescrolltoleft) {
     			tabposGLOBAL--;
     			}
     					
@@ -45,20 +45,22 @@ define(['jquery'], function($) {
     		});
     		
     		$(".format-moetabs #tabmoveleft").on("click", function() {
-    			
-    			var maxelements = $(".dragscroll").children().length;
+    	   		
+
+    				
+    			var maxelements = $(".format-moetabs .dragscroll").children().length;
     			
     			if (tabposGLOBAL > maxelements ) { // check the limit from the left side 
     				tabposGLOBAL = maxelements;
     			}
     			
+    			if ( $('.format-moetabs .dragscroll').scrollLeft() > 0 ) {
+    				
     			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
     			
     			$(".format-moetabs .nav-tabs").animate({
     				scrollLeft: '-='+scrolingvalue+'px' }, 50);
 
-    			var  aviablescrolltoleft=  $('.fa').width(); 
-    			if ( $('.dragscroll').scrollLeft() > aviablescrolltoleft ) {
     				tabposGLOBAL++;
     			}
     		});
