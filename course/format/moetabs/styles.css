@@ -182,10 +182,10 @@
 .format-moetabs #tabmoveright, .format-moetabs #tabmoveleft {
     font-size: 4em;
     width: 45px;
-    height: 60px;
+    height: 58px;
     cursor: pointer;
     display: none;
-    background-color: #eeebf2;
+    background-color: #7e5999;
     color: #572f71;
 }
 
@@ -347,11 +347,17 @@ html[dir="rtl"] .format-moetabs .label .mod-indent {
 .tabsrightarrow {
 	background-image: url("/course/format/moetabs/pix/right-arrow.svg");
     background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: center;
+	margin-top: 6px; 
 }
 
 .tabsleftarrow {
 	background-image: url("/course/format/moetabs/pix/left-arrow.svg");
     background-repeat: no-repeat;
+    background-size: 25px 25px;
+	background-position: center; 
+	margin-top: 6px; 
 }
 
 .format-moetabs .summary a .edit {
@@ -360,6 +366,14 @@ html[dir="rtl"] .format-moetabs .label .mod-indent {
     top: -183px;
 }
 
+@media screen and ( width: 1440px) {
+
+	.format-moetabs .sectionzerobtn {
+		left: 107px;
+		font-size: 25px;
+    }
+
+}
 
 
 
