@@ -344,6 +344,22 @@ html[dir="rtl"] .format-moetabs .label .mod-indent {
     opacity: unset;
 }
 
+.tabsrightarrow {
+	background-image: url("/course/format/moetabs/pix/right-arrow.svg");
+    background-repeat: no-repeat;
+}
+
+.tabsleftarrow {
+	background-image: url("/course/format/moetabs/pix/left-arrow.svg");
+    background-repeat: no-repeat;
+}
+
+.format-moetabs .summary a .edit {
+    margin-top: 21px;
+    position: relative;
+    top: -183px;
+}
+
 
 
 

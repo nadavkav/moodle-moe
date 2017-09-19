@@ -14,7 +14,27 @@ define(['jquery'], function($) {
     	
         this.ruler = $('.format-moetabs ul.nav.nav-tabs');
        		
-    	Moetabs.prototype.init = function() {
+    	Moetabs.prototype.init = function(tabpos) {
+    		
+    		// hold the width size of the tab button for the scrolling value 
+    		//var singletabesize = $('.forma  t-moetabs .dragscroll li:nth-child(2)').width();
+    		tabposGLOBAL = tabpos+1;
+
+    		$(".format-moetabs #tabmoveright").on("click", function() {
+    			tabposGLOBAL--;
+    			var scrolingvalue =  $('".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")"').width();
+    			console.log(scrolingvalue);
+    			$(".format-moetabs .nav-tabs").animate({
+    				scrollLeft: '+='+scrolingvalue+'px' }, 50);
+    		});
+    		
+    		$(".format-moetabs #tabmoveleft").on("click", function() {
+    			tabposGLOBAL++;
+    			var scrolingvalue =  $('".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")"').width();
+    			console.log(scrolingvalue);
+    			$(".format-moetabs .nav-tabs").animate({
+    				scrollLeft: '-='+scrolingvalue+'px' }, 50);
+    		});
     			
             // founction to place the button acording to the windows size 
     		var btnresponsive = function() {
