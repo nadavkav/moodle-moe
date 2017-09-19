@@ -6,17 +6,17 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
     protected function render_custom_menu(custom_menu $menu)
     {
         global $CFG;
-        
+
         $hasdisplaymycourses = theme_moe_get_setting('mycourses_dropdown');
-        
+
         if (isloggedin() && ! isguestuser() && $hasdisplaymycourses) {
-            
+
             $branchlabel = get_string('mycourses');
             $branchurl = new moodle_url('#');
             $branchtitle = $branchlabel;
             $branchsort = 10000;
             $branch = $menu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
-            
+
             if ($mycourses = enrol_get_my_courses(NULL, 'visible DESC, fullname ASC')) {
                 foreach ($mycourses as $mycourse) {
                     $branch->add($mycourse->shortname, new moodle_url('/course/view.php', array(
@@ -35,21 +35,21 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
     public function footer()
     {
         global $CFG, $DB, $USER;
-        
+
         $output = $this->container_end_all(true);
-        
+
         $footer = $this->opencontainers->pop('header/footer');
-        
+
         if (debugging() and $DB and $DB->is_transaction_started()) {}
-        
+
         $footer = str_replace($this->unique_end_html_token, $this->page->requires->get_end_code(), $footer);
-        
+
         $this->page->set_state(moodle_page::STATE_DONE);
-        
+
         if (! empty($this->page->theme->settings->persistentedit) && property_exists($USER, 'editing') && $USER->editing && ! $this->really_editing) {
             $USER->editing = false;
         }
-        
+
         return $output . $footer;
     }
 
@@ -118,11 +118,12 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
     /**
      * Renders tabtree
      *
-     * @param tabtree $tabtree            
+     * @param tabtree $tabtree
      * @return string
      */
     protected function render_tabtree(tabtree $tabtree)
     {
+        global $OUTPUT, $COURSE, $CFG;
         $data = new stdClass();
         if (empty($tabtree->subtree)) {
             return '';
@@ -136,10 +137,14 @@ class theme_moe_core_renderer extends theme_bootstrapbase_core_renderer
         }
         $data->firstrow = $firstrow;
         $data->secondrow = $secondrow;
-        
-        return $this->render_from_template('format_onetopic/tabtree', $data);
+        $path = $CFG->dirroot . '/theme/moe/templates/'. 'format_' . $COURSE->format . '/tabtree.mustache';
+        if ( file_exists($path) ) {
+            return $this->render_from_template('format_' . $COURSE->format . '/tabtree', $data);
+        } else {
+            return $this->render_from_template('format_onetopic/tabtree', $data);
+        }
     }
-    
+
     /**
      * Outputs a box.
      *
@@ -163,7 +168,7 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
         $previousarrow = '<i class="fa fa-chevron-circle-left"></i>';
         $nextarrow = '<i class="fa fa-chevron-circle-right"></i>';
         $canviewhidden = has_capability('moodle/course:viewhiddensections', context_course::instance($course->id)) or ! $course->hiddensections;
-        
+
         $links = array(
             'previous' => '',
             'next' => ''
@@ -199,7 +204,7 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
             }
             $back --;
         }
-        
+
         $forward = $sectionno + 1;
         while ($forward <= $course->numsections and empty($links['next'])) {
             if ($canviewhidden || $sections[$forward]->uservisible) {
@@ -231,22 +236,22 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
             }
             $forward ++;
         }
-        
+
         return $links;
     }
 
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection)
     {
         global $PAGE;
-        
+
         $modinfo = get_fast_modinfo($course);
         $course = course_get_format($course)->get_course();
-        
+
         if (! ($sectioninfo = $modinfo->get_section_info($displaysection))) {
             print_error('unknowncoursesection', 'error', null, $course->fullname);
             return;
         }
-        
+
         if (! $sectioninfo->uservisible) {
             if (! $course->hiddensections) {
                 echo $this->start_section_list();
@@ -255,7 +260,7 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
             }
             return;
         }
-        
+
         echo $this->course_activity_clipboard($course, $displaysection);
         $thissection = $modinfo->get_section_info(0);
         if ($thissection->summary or ! empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
@@ -266,19 +271,19 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
             echo $this->section_footer();
             echo $this->end_section_list();
         }
-        
+
         echo html_writer::start_tag('div', array(
             'class' => 'single-section'
         ));
-        
+
         $thissection = $modinfo->get_section_info($displaysection);
-        
+
         $sectionnavlinks = $this->get_nav_links($course, $modinfo->get_section_info_all(), $displaysection);
         $sectiontitle = '';
         $sectiontitle .= html_writer::start_tag('div', array(
             'class' => 'section-navigation header headingblock'
         ));
-        
+
         $titleattr = 'mdl-align title';
         if (! $thissection->visible) {
             $titleattr .= ' dimmed_text';
@@ -288,32 +293,32 @@ class theme_moe_format_topics_renderer extends format_topics_renderer
         ));
         $sectiontitle .= html_writer::end_tag('div');
         echo $sectiontitle;
-        
+
         echo $this->start_section_list();
-        
+
         echo $this->section_header($thissection, $course, true, $displaysection);
-        
+
         $completioninfo = new completion_info($course);
         echo $completioninfo->display_help_icon();
-        
+
         echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
         echo $this->courserenderer->course_section_add_cm_control($course, $displaysection, $displaysection);
         echo $this->section_footer();
         echo $this->end_section_list();
-        
+
         $sectionbottomnav = '';
         $sectionbottomnav .= html_writer::start_tag('nav', array(
             'id' => 'section_footer'
         ));
         $sectionbottomnav .= $sectionnavlinks['previous'];
         $sectionbottomnav .= $sectionnavlinks['next'];
-        
+
         $sectionbottomnav .= html_writer::empty_tag('br', array(
             'style' => 'clear:both'
         ));
         $sectionbottomnav .= html_writer::end_tag('nav');
         echo $sectionbottomnav;
-        
+
         echo html_writer::end_tag('div');
     }
 }
