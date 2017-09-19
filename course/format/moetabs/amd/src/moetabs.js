@@ -16,24 +16,41 @@ define(['jquery'], function($) {
        		
     	Moetabs.prototype.init = function(tabpos) {
     		
-    		// hold the width size of the tab button for the scrolling value 
-    		//var singletabesize = $('.forma  t-moetabs .dragscroll li:nth-child(2)').width();
-    		tabposGLOBAL = tabpos+1;
-
+    		var tabposGLOBAL = tabpos+1;
+    		
     		$(".format-moetabs #tabmoveright").on("click", function() {
+    			
     			tabposGLOBAL--;
-    			var scrolingvalue =  $('".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")"').width();
-    			console.log(scrolingvalue);
+    			
+    			if (tabposGLOBAL < 2 ) { // check the limit of the right side (its start from child two )
+    				tabposGLOBAL = 2;
+    			}
+    			
+    			// hold the width size of the tab button for the scrolling value 
+    			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
+ 
     			$(".format-moetabs .nav-tabs").animate({
     				scrollLeft: '+='+scrolingvalue+'px' }, 50);
+    			
     		});
     		
     		$(".format-moetabs #tabmoveleft").on("click", function() {
-    			tabposGLOBAL++;
-    			var scrolingvalue =  $('".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")"').width();
-    			console.log(scrolingvalue);
+    			
+    			var maxelements = $(".dragscroll").children().length;
+    			
+    			if (tabposGLOBAL > maxelements ) { // check the limit from the left side 
+    				tabposGLOBAL = maxelements;
+    			}
+    			var scrolingvalue =  $(".format-moetabs .dragscroll li:nth-child("+ tabposGLOBAL +")").width();
+    			
+    			
     			$(".format-moetabs .nav-tabs").animate({
     				scrollLeft: '-='+scrolingvalue+'px' }, 50);
+    			var  aviablescrolltoleft=  $('.fa').width(); 
+    			if ( $('.dragscroll').scrollLeft() > aviablescrolltoleft ) {
+    				tabposGLOBAL++;
+    			}
+    			
     		});
     			
             // founction to place the button acording to the windows size 
@@ -42,7 +59,7 @@ define(['jquery'], function($) {
                 var btnsize = $('.format-moetabs .sectionzerotext').width() - 
     			( $('.format-moetabs .sectionzeroimg').width() +  
     					 ( parseInt($(".format-moetabs .sectionzeroimg").css("margin-left").replace("px","")) ) );
-                var minbtnsize = 610;
+                var minbtnsize = 510;
  			    if ( btnsize < minbtnsize ) {
     				$( '.format-moetabs .sectionzerobtn' ).css("position", "unset");
     				$('.format-moetabs .littlesquare').hide();
