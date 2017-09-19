@@ -300,8 +300,10 @@ class format_moetabs_renderer extends format_section_renderer_base {
 
         }
 
+        // send the current tab position to js
+        $tabpos = optional_param('section', 0, PARAM_INT);
         // load jqurey function (for button click events)
-        $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
+        $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init', array($tabpos));
 
         // create section 0 hidden activities list area
         echo html_writer::start_tag('div', array(
@@ -644,9 +646,8 @@ class format_moetabs_renderer extends format_section_renderer_base {
             }
 
             print_collapsible_region_end();
-            // send the current tab position to js
-            $tabpos = optional_param('section', 0, PARAM_INT);
-            $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init', array($tabpos));
+
+            $PAGE->requires->js_call_amd('format_moetabs/moetabs', 'init');
         }
     }
 
