@@ -80,16 +80,20 @@ if ($dataformat != null) {
         'makbila10' => get_string('makbila10', 'report_moereports'),
         'percents10' => get_string('percents10', 'report_moereports')
     );
-    download_as_dataformat('activity_in_region' . date('c'), $dataformat, $columns, $data->results);
+    $rs = $data->results;
+    download_as_dataformat('activity_in_region' . date('c'), $dataformat, $columns, $rs);
 }
-$renderer = $PAGE->get_renderer('core');
-$resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('per_course_regin_level', 'report_moereports'));
-echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_regin_level.php', 'dataformat', array());
+if (!isset($rs)){
+	$renderer = $PAGE->get_renderer('core');
+	$resulttable = $OUTPUT->render_from_template('report_moereports/course_regin_level', $data);
+	echo $OUTPUT->header();
+	echo $OUTPUT->heading(get_string('per_course_regin_level', 'report_moereports'));
+	echo $OUTPUT->download_dataformat_selector(get_string('excelexp', 'report_moereports'), '/report/moereports/course_regin_level.php', 'dataformat', array());
+	
+	echo "$resulttable";
+	$PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
+	
+	echo $OUTPUT->footer();
+}
 
-echo "$resulttable";
-$PAGE->requires->js_call_amd('report_moereports/persistent_headers', 'init');
-
-echo $OUTPUT->footer();
 
