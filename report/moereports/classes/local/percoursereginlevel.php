@@ -39,7 +39,10 @@ class percoursereginlevel extends moereport{
 
         $results = array();
         $regions = array();
-        $courses = $DB->get_records('course', array('enablecompletion' => '1'));
+        $courses = $DB->get_records('course', array(
+            'enablecompletion' => '1',
+            'visible' => '1',
+        ));
             $regionsobj = $DB->get_records_sql('select * from mdl_moereports_reports group by region');
         foreach ($regionsobj as $obj) {
                 array_push($regions, $obj->region);
@@ -119,7 +122,7 @@ class percoursereginlevel extends moereport{
                                                               in (select symbol from mdl_moereports_reports where region = ?)",
                                                               array($gradekey, $reginkey));
                             if ($den == 0) {
-                                 $onerecord->eighthgradetotal = "אין מידע";
+                                 $onerecord->eighthgradetotal = get_string('notrelevant', 'report_moereport');
                             } else {
                                  $onerecord->eighthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
@@ -131,7 +134,7 @@ class percoursereginlevel extends moereport{
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                                             array($gradekey, $reginkey));
                             if ($den == 0) {
-                                $onerecord->ninthgradetotal = "אין מידע";
+                                $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereport');
                             } else {
                                 $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
@@ -143,7 +146,7 @@ class percoursereginlevel extends moereport{
                                                             in (select symbol from mdl_moereports_reports where region = ?)",
                                 array($gradekey, $reginkey));
                             if ($den == 0) {
-                                $onerecord->tenthgradetotal = "אין מידע";
+                                $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereport');
                             } else {
                                 $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }

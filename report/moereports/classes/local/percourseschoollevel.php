@@ -35,7 +35,10 @@ class percourseschoollevel extends moereport{
         global $DB;
 
         $results = array();
-        $courses = $DB->get_records('course', array('enablecompletion' => '1'));
+        $courses = $DB->get_records('course', array(
+            'enablecompletion' => '1',
+            'visible' => '1',
+        ));
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         // Set 0 to all cat in all schools
         foreach ($semels as $semelkey => $semelvalue) {
@@ -105,7 +108,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0) {
-                                $onerecord->eighthgradetotal = get_string('noinformation', 'report_moereports');
+                                $onerecord->eighthgradetotal = get_string('notrelevant', 'report_moereports');
                             } else {
                                 $onerecord->eighthgradetotal = round(($gradevalue / $den * 100) , 2) . "%";
                             }
@@ -115,7 +118,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0) {
-                                $onerecord->ninthgradetotal = get_string('noinformation', 'report_moereports');
+                                $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereports');
                             } else {
                                 $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
@@ -125,7 +128,7 @@ class percourseschoollevel extends moereport{
                             $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                 array('class' => $gradekey, 'symbol' => $scoolkey));
                             if ($den == 0) {
-                                $onerecord->tenthgradetotal = get_string('noinformation', 'report_moereports');
+                                $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereports');
                             } else {
                                 $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                             }
