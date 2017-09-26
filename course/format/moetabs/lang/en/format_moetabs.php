@@ -70,7 +70,7 @@ $string['cssstyles'] = 'CSS properties';
 $string['cssstyles_help'] = 'Used to change CSS properties of the tab. Use a standard value to the attribute <em>style</em> in a html tag. Example: <br /><strong>font-weight: bold; font-size: 16px;</strong>';
 $string['firsttabtext'] = 'Text of the first tab in sublevel';
 $string['firsttabtext_help'] = 'If this tab has sublevels, this will be the text of the first tab';
-
+$string['addimagetosectionzero'] = 'Add an image to section 0 area';
 $string['coursedisplay'] = 'Visualization mode of section 0';
 $string['coursedisplay_help'] = 'This define as display the section 0: as a first tab or as section before the tabs bar.';
 $string['coursedisplay_single'] = 'As tab';
@@ -88,6 +88,7 @@ $string['utilities'] = 'Tabs edition utilities';
 $string['display_summary'] = 'move out of grid';
 $string['display_summary_alt'] = 'Move this section out of the grid';
 $string['editimage'] = 'Change image';
+$string['editimage_help'] = 'Change image';
 $string['editimage_alt'] = 'Set or change image';
 $string['formatgrid'] = 'Grid format'; // Name to display for format.
 $string['general_information'] = 'General Information'; // No longer used kept for legacy versions.

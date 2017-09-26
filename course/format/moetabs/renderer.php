@@ -206,7 +206,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
      *            The section number in the course which is being displayed
      */
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
-        global $PAGE, $OUTPUT;
+        global $PAGE, $OUTPUT, $CFG;
         ;
 
         $realcoursedisplay = $course->realcoursedisplay;
@@ -273,6 +273,40 @@ class format_moetabs_renderer extends format_section_renderer_base {
         echo $sectionname;
         echo html_writer::end_tag('h1');
 
+        // create the defulte image
+        //echo get_string('zerosectionbtn', 'format_moetabs');
+
+        //   /pluginfile.php/CONTEXTID/format_yourformatname/headingimage/0/filename.png
+
+        $file = $DB->get_record('files', array('component' => 'format_moetabs'));
+        $filename = $file->filename;
+        $filearea = $file->filearea;
+        $filepath = $CFG->wwwroot. "/pluginfile.php/" .$context->id. "/format_moetabs/" ."$filearea". "/0/". $filename;
+        //$filepath = $CFG->wwwroot. "/pluginfile.php/" .$context->id. "/format_moetabs/" ."headingimage/0/tringle.png";
+
+        echo html_writer::start_tag('div',array(
+        ));
+        echo html_writer::tag('img', '', array(
+            'class' => 'sectionzeroimg',
+            'src' => $filepath,
+            'height' => '50px',
+            'width' => '50px'
+        ));
+        echo html_writer::end_tag('div');
+
+          if (array_key_exists('headingimage', $courseformatoptions)) {
+            // For backward-compartibility
+
+        } else {
+
+        echo html_writer::start_tag('div',array(
+        ));
+        echo html_writer::tag('img', '', array(
+            'class' => 'sectionzeroimg',
+            'src' => $this->output->pix_url('sectionzeroimg', 'format_moetabs')
+        ));
+        echo html_writer::end_tag('div');
+        }
         // create section zero area
         echo $this->start_section_list();
         $thissection = $sections[0];

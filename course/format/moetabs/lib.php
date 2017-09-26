@@ -297,6 +297,8 @@ class format_moetabs extends format_base {
         );
     }
 
+
+
     /**
      * Definitions of the additional options that this course format uses for course
      *
@@ -384,6 +386,18 @@ class format_moetabs extends format_base {
                     ),
                     'help' => 'coursedisplay',
                     'help_component' => 'format_moetabs'
+                ),
+                'headingimage' => array(
+                    'label' => new lang_string('addimagetosectionzero', 'format_moetabs'),
+                    'element_type' => 'filemanager',
+                    'help' => 'editimage',
+                    'element_attributes' => array(null,
+                        array(
+                            'subdirs' => 0,
+                            'maxfiles' => 1,
+                            'accepted_types' => array('.jpg', '.gif', '.png')
+                        )),
+                    'help_component' => 'format_moetabs',
                 )
             );
             $courseformatoptions = array_merge_recursive($courseformatoptions, $courseformatoptionsedit);
@@ -442,6 +456,9 @@ class format_moetabs extends format_base {
     public function update_course_format_options($data, $oldcourse = null) {
         global $DB, $PAGE, $CFG; // MDL-37976.
 
+        $context = context_course::instance($this->courseid);
+        $saved = file_save_draft_area_files($data->headingimage, $context->id, 'format_moetabs',
+            'headingimage', 0, array('subdirs' => 0, 'maxfiles' => 1));
         /*
          * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
          * This has to be done here so that the reset occurs after we have done updates such that the
@@ -633,6 +650,7 @@ class format_moetabs extends format_base {
         return $changes;
     }
 
+
     /**
      * Whether this format allows to delete sections
      *
@@ -644,4 +662,38 @@ class format_moetabs extends format_base {
     public function can_delete_section($section) {
         return true;
     }
+}
+
+function format_moetabs_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
+    global $DB;
+
+    if ($context->contextlevel != CONTEXT_COURSE) {
+        return false;
+    }
+
+    require_login();
+    if ($filearea != 'headingimage') {
+        return false;
+    }
+
+    $itemid = (int)array_shift($args);
+    if ($itemid != 0) {
+        return false;
+    }
+
+    $fs = get_file_storage();
+    $filename = array_pop($args);
+
+    if (empty($args)) {
+        $filepath = '/';
+    } else {
+        $filepath = '/'.implode('/', $args).'/';
+    }
+
+    $file = $fs->get_file($context->id, 'format_moetabs', $filearea, $itemid, $filepath, $filename);
+    if (!$file) {
+        return false;
+    }
+
+    send_stored_file($file, 0, 0, $forcedownload, $options);
 }
