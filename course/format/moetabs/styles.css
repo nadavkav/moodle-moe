@@ -321,17 +321,13 @@
 }
 
 .format-moetabs li:not(#section-0) .summary {
-    padding: 0px;
-	height:200px;
-	background-image: url("/course/format/moetabs/pix/tringle.png");
-	background-repeat: no-repeat;
-	background-position:right;
+    padding: 2%;
+	min-height: 150px;
 	background-color: #e4deea;
 }
 
 .format-moetabs li:not(#section-0) .summary p {
-	margin-right: 12%;
-	margin-top: 2%;
+
 }
 
 html[dir="rtl"] .format-moetabs .label .mod-indent {
