@@ -122,33 +122,30 @@
 }
 
 .format-moetabs .sectionzerobtn {
-	padding: 25px 2px 25px 2px;
+	padding: 20px 20px 20px 20px;
 	border: 1px;
 	border-style: solid;
 	border-color: #b2d0c0;
 	font-size: 30px;
 	background-color: #e0f6df;
-	width: 766px;
 	text-align: center;
-	left: 185px;
-	position: absolute;
-	top: 447px;
+	margin-top: 2%;
 	box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
+	overflow: hidden;
 }
 
 .format-moetabs .littlesquare {
 	width: 40px;
 	height: 40px;
 	background-color: #a1c0b1;
-	position: inherit;
-    left: 20px;
-	top: 20px;
+    float: left;
+	margin: 5px 20px 5px 20px;
 }
 
 .format-moetabs .littlesquare img {
 	width: 20px;
     height: 20px;
-	padding-top: 10px;
+	margin-bottom: 4px;
 }
 
 .format-moetabs .content { 
@@ -354,21 +351,14 @@ html[dir="rtl"] .format-moetabs .label .mod-indent {
 	margin-top: 6px; 
 }
 
-.format-moetabs .summary a .edit {
-    margin-top: 21px;
-    position: relative;
-    top: -183px;
-}
 
-@media screen and ( width: 1440px) {
+@media screen and (max-width: 1280px) {
 
-	.format-moetabs .sectionzerobtn {
-		left: 107px;
-		font-size: 25px;
+    .format-moetabs .sectionzerobtn {
+       font-size: 25px;
+       margin-bottom: 0px;
     }
 
 }
-
-
 
 

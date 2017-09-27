@@ -36,6 +36,9 @@ require_once($CFG->dirroot . '/course/modlib.php');
  */
 class format_moetabs extends format_base {
 
+    public function __construct($format = 'moetabs', $courseid){
+        parent::__construct('moetabs', $courseid);
+    }
     /**
      * Returns true if this course format uses sections
      *
@@ -330,7 +333,11 @@ class format_moetabs extends format_base {
                 'coursedisplay' => array(
                     'default' => $courseconfig->coursedisplay,
                     'type' => PARAM_INT
-                )
+                ),
+                'headingimage' => array(
+                    'default' => $courseconfig->coursedisplay,
+                    'type' => PARAM_INT
+                ),
             );
         }
         if ($foreditform && ! isset($courseformatoptions['coursedisplay']['label'])) {
@@ -458,7 +465,7 @@ class format_moetabs extends format_base {
 
         $context = context_course::instance($this->courseid);
         $saved = file_save_draft_area_files($data->headingimage, $context->id, 'format_moetabs',
-            'headingimage', 0, array('subdirs' => 0, 'maxfiles' => 1));
+            'headingimage', $data->headingimage, array('subdirs' => 0, 'maxfiles' => 1));
         /*
          * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
          * This has to be done here so that the reset occurs after we have done updates such that the
@@ -677,7 +684,7 @@ function format_moetabs_pluginfile($course, $cm, $context, $filearea, $args, $fo
     }
 
     $itemid = (int)array_shift($args);
-    if ($itemid != 0) {
+    if ($itemid == 0) {
         return false;
     }
 
