@@ -18,5 +18,6 @@ $string['pluginname'] = 'קישורים שימושיים למרצים בקורס
 $string['links_for_moetopcoll'] = 'קישורים שימושיים';
 $string['userguid'] = 'מדריכים למשתמש';
 $string['viewtemp'] = 'צפייה בתבניות';
+$string['actoryanit'] = 'משימות אורייניות מתוקשבות';
 $string['technicalsup'] = 'תמיכה פדגוגית וטכנית';
 $string['links_for_moetopcoll:canseelinks'] = 'הרשאת צפיה בקישורים שימושיים למרצים';

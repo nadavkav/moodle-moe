@@ -27,6 +27,10 @@
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
 }
 
+.block_moe_links_actoryanit{
+    background-image:  url([[pix:block_links_for_moetopcoll|avodot]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
+}
+
 .block_moe_links_main_block .block_moe_links_inlinetext {
     position: relative;
     right: 5px;
