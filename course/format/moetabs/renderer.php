@@ -233,10 +233,10 @@ class format_moetabs_renderer extends format_section_renderer_base {
             $thissection = $sections[0];
             if ((($thissection->visible && $thissection->available) || $canviewhidden) && ($thissection->summary || $thissection->sequence || $PAGE->user_is_editing())) {
                 echo $this->start_section_list();
+
                 echo $this->section_header($thissection, $course, true);
                 echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
                 echo $this->courserenderer->course_section_add_cm_control($course, 0, $displaysection);
-
                 echo $this->section_footer();
                 echo $this->end_section_list();
             }
@@ -276,37 +276,41 @@ class format_moetabs_renderer extends format_section_renderer_base {
         // create the defulte image
         //echo get_string('zerosectionbtn', 'format_moetabs');
 
-        //   /pluginfile.php/CONTEXTID/format_yourformatname/headingimage/0/filename.png
+        $courseformat = new format_moetabs('moetabs', $course->id);
+        $options = $courseformat->get_format_options();
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'format_moetabs', 'headingimage', $options['headingimage']);
+        $name = "";
 
-        $file = $DB->get_record('files', array('component' => 'format_moetabs'));
-        $filename = $file->filename;
-        $filearea = $file->filearea;
-        $filepath = $CFG->wwwroot. "/pluginfile.php/" .$context->id. "/format_moetabs/" ."$filearea". "/0/". $filename;
-        //$filepath = $CFG->wwwroot. "/pluginfile.php/" .$context->id. "/format_moetabs/" ."headingimage/0/tringle.png";
+        foreach ($files as $file) {
+            if ($file->is_valid_image()) {
+                $name = $file->get_filename();
+            }
+        }
+
+        $filepath = $CFG->wwwroot. "/pluginfile.php/" . $context->id . "/format_moetabs/" ."headingimage/" . $options['headingimage'] . "/" . $name;
 
         echo html_writer::start_tag('div',array(
         ));
-        echo html_writer::tag('img', '', array(
-            'class' => 'sectionzeroimg',
-            'src' => $filepath,
-            'height' => '50px',
-            'width' => '50px'
-        ));
-        echo html_writer::end_tag('div');
 
-          if (array_key_exists('headingimage', $courseformatoptions)) {
-            // For backward-compartibility
+        if ( $file->is_valid_image() ) {
+
+            echo html_writer::tag('img', '', array(
+                'class' => 'sectionzeroimg',
+                'src' => $filepath,
+            ));
 
         } else {
 
-        echo html_writer::start_tag('div',array(
-        ));
-        echo html_writer::tag('img', '', array(
-            'class' => 'sectionzeroimg',
-            'src' => $this->output->pix_url('sectionzeroimg', 'format_moetabs')
-        ));
-        echo html_writer::end_tag('div');
+             echo html_writer::tag('img', '', array(
+                'class' => 'sectionzeroimg',
+                'src' => $this->output->pix_url('sectionzeroimg', 'format_moetabs')
+            ));
+
         }
+
+        echo html_writer::end_tag('div');
+
         // create section zero area
         echo $this->start_section_list();
         $thissection = $sections[0];
@@ -314,25 +318,6 @@ class format_moetabs_renderer extends format_section_renderer_base {
         // add section zero edite control button
         echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
         echo $this->end_section_list();
-
-        // create section zero botton to show its activities
-        if ( has_capability('moodle/course:viewhiddencourses', $context) ) {
-
-        echo html_writer::start_tag('div', array(
-            'class' => 'sectionzerobtn noselect'
-        ));
-        echo get_string('zerosectionbtn', 'format_moetabs');
-        echo html_writer::start_tag('div', array(
-            'class' => 'littlesquare'
-        ));
-        echo html_writer::tag('img', '', array(
-            'class' => 'double-left-arrows',
-            'src' => $this->output->pix_url('double-left-chevron', 'format_moetabs')
-        ));
-        echo html_writer::end_tag('div');
-        echo html_writer::end_tag('div');
-
-        }
 
         // send the current tab position to js
         $tabpos = optional_param('section', 0, PARAM_INT);
@@ -743,6 +728,26 @@ class format_moetabs_renderer extends format_section_renderer_base {
             'class' => 'summary'
         ));
         $o .= $this->format_summary_text($section);
+
+        // create section zero botton to show its activities
+        $context = context_course::instance($course->id);
+        if ( has_capability('moodle/course:viewhiddencourses', $context) && $section->section === 0) {
+
+            $o .=  html_writer::start_tag('div', array(
+                'class' => 'sectionzerobtn noselect'
+            ));
+            $o .=  get_string('zerosectionbtn', 'format_moetabs');
+            $o .=  html_writer::start_tag('div', array(
+                'class' => 'littlesquare'
+            ));
+            $o .=  html_writer::tag('img', '', array(
+                'class' => 'double-left-arrows',
+                'src' => $this->output->pix_url('double-left-chevron', 'format_moetabs')
+            ));
+            $o .=  html_writer::end_tag('div');
+            $o .=  html_writer::end_tag('div');
+
+        }
 
         $context = context_course::instance($course->id);
         if ($PAGE->user_is_editing() && has_capability('moodle/course:update', $context)) {
