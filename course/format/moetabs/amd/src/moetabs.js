@@ -65,51 +65,6 @@ define(['jquery'], function($) {
     			}
     		});
     			
-/*    		    var btnsize = $('.format-moetabs #section-0 p').width();
-    		    var zeroimgwidth = $('.format-moetabs .sectionzeroimg').width();
-    		    $( '.format-moetabs .sectionzerobtn' ).css("margin-right", zeroimgwidth+"px" );*/
-/*            // founction to place the button acording to the windows size 
-    		var btnresponsive = function() {
-    			
-    			var btnsize = $('.format-moetabs #section-0 p').width();
-                var btnheight = $('.format-moetabs #section-0').height()*2;
-                var zeroimgwidth = $('.format-moetabs .sectionzeroimg').width();
-                var zeroimgwidthwithmargin = $('.format-moetabs .sectionzeroimg').width() +  
-				 ( parseInt($(".format-moetabs .sectionzeroimg").css("margin-left").replace("px","")) );
-           
-                $( '.format-moetabs .sectionzerobtn' ).css("top", btnheight+"px");
-                
-                var minbtnsize = 530; 
-                
- 			    if (  btnsize < minbtnsize ) {
-
- 	        		$( '.format-moetabs .sectionzerobtn' ).css("left", zeroimgwidth+"px");
-    				$( '.format-moetabs .sectionzerobtn' ).css("position", "unset");
-    				$('.format-moetabs .littlesquare').hide();
-    				$('.format-moetabs .sectionzerotext' ).css("display", "inline-block");
-    				$( '.format-moetabs .sectionzerobtn' ).css("width", "100%" );
-    			} else {
-
- 	        		$( '.format-moetabs .sectionzerobtn' ).css("left", zeroimgwidthwithmargin+"px");
-    				$( '.format-moetabs .sectionzerobtn' ).css("position", "absolute"); 
-    				$('.format-moetabs .littlesquare').show();
-       				$('.format-moetabs .sectionzerotext' ).css("display", "block");
-       				$( '.format-moetabs .sectionzerobtn' ).css("width", btnsize );
-    				
-    			} 
-    		};
-    		
-    		// show the button positin ofther calc for cleaner view
-    		$( '.format-moetabs .sectionzerobtn' ).css("opacity", "unset");
-    		
-    		 //  defind the button size at firs load for mobile mevice
-    		$( document ).ready( btnresponsive );
-
-    		 //  defind the button size for pc responsive
-    		$( window ).resize(function() {
-    			btnresponsive();
-    		});*/
-    		
     		if(this.ruler.width() >= $('.format-moetabs .course-content .single-section').width()){
     			var error;
     			error = 'need arrow';
