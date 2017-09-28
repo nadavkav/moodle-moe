@@ -14,6 +14,7 @@
     font-size: 14px;
     display: inline-table;
     width: auto;
+	max-width: 50px;
 }
 .block_moe_links_Madrich{
     background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
@@ -39,12 +40,12 @@
 }
 @media screen and (max-width:1400px) and (orientation:landscape){
     .block_moe_links_button {
-        font-size: 1.1em;
+        font-size: 0.9em;
     }
 }
 
 @media screen and (max-width:1150px) and (orientation:landscape){
     .block_moe_links_button {
-        font-size: 0.9em;
+        font-size: 0.6em;
     }
 }
