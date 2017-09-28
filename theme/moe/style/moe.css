@@ -8,7 +8,9 @@ body ,body#page-login-index{
     background-color: #dbeede;
 }
 
-
+#manchim {
+	font-size: 18px;
+}
 
 #page-enrol-index #fitem_id_submitbutton input[type="submit"] {
 	background-image: url([[pix:theme|Rishum]]);
