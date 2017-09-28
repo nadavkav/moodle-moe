@@ -65,17 +65,19 @@ echo $OUTPUT->doctype() ?>
             	global $COURSE, $DB;
             	echo "<br>";
             	echo "<h2> $COURSE->fullname </h2>";
-            	echo "<h3> $COURSE->shortname </h3>";
+            	echo "<div id='manchim'>";
+            	echo  get_string('manchim', 'theme_moe');
             	$role = $DB->get_record('role', array('shortname' => 'editingteacher'));
             	$context = context_course::instance($COURSE->id);
             	$teachers = get_role_users($role->id, $context);
             	foreach ($teachers as $teach) {
             		$teach = $DB->get_record('user', array('id' => $teach->id));
             		$href = new moodle_url('/user/profile.php', array('id' => $teach->id));
-            		echo "<a href=$href> $teach->firstname $teach->lastname </a>";
+            		echo " <a href=$href>$teach->firstname $teach->lastname</a>";
             		
             	}
-            	
+            	echo "</div>";
+            	echo "<p> $COURSE->shortname </p>";          	
             }           
             echo $OUTPUT->main_content();
             echo $OUTPUT->course_content_footer();
