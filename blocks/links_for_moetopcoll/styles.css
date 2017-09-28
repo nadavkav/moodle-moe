@@ -11,25 +11,28 @@
     text-align: right;
     border: 1px solid #89b2ab;
     min-width: 80%;
-    font-size: 14px;
     display: inline-table;
     width: auto;
 	max-width: 50px;
 }
 .block_moe_links_Madrich{
     background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
+	font-size: 14px;
     
 }
 .block_moe_links_eye{
     background-image:  url([[pix:block_links_for_moetopcoll|Eye]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
+	font-size: 14px;
 }
 
 .block_moe_links_tmicha{
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
+	font-size: 14px;
 }
 
 .block_moe_links_actoryanit{
     background-image:  url([[pix:block_links_for_moetopcoll|avodot]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
+	font-size: 12px;
 }
 
 .block_moe_links_main_block .block_moe_links_inlinetext {
@@ -38,14 +41,4 @@
     top: 5px;
     padding-left: 33px;
 }
-@media screen and (max-width:1400px) and (orientation:landscape){
-    .block_moe_links_button {
-        font-size: 0.9em;
-    }
-}
 
-@media screen and (max-width:1150px) and (orientation:landscape){
-    .block_moe_links_button {
-        font-size: 0.6em;
-    }
-}
