@@ -8,7 +8,15 @@ body ,body#page-login-index{
     background-color: #dbeede;
 }
 
-
+/* fix for moe_ticket206*/
+#page-mod-dataform-embed .mform .fitem .felement,
+#page-mod-dataform-embed .mform.entriesform .fitem .felement,
+#page-mod-dataform-embed .mform .entriesform .fitem .feditor,
+#page-mod-dataform-view .mform.entriesform .fitem .felement,
+#page-mod-dataform-view .mform.entriesform .fitem .feditor {
+  margin-left: unset;
+  width: unset;
+}
 
 #page-enrol-index #fitem_id_submitbutton input[type="submit"] {
 	background-image: url([[pix:theme|Rishum]]);
