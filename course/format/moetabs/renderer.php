@@ -206,7 +206,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
      *            The section number in the course which is being displayed
      */
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
-        global $PAGE, $OUTPUT, $CFG;
+        global $PAGE, $OUTPUT;
         ;
 
         $realcoursedisplay = $course->realcoursedisplay;
@@ -272,44 +272,6 @@ class format_moetabs_renderer extends format_section_renderer_base {
         ));
         echo $sectionname;
         echo html_writer::end_tag('h1');
-
-        // create the defulte image
-        //echo get_string('zerosectionbtn', 'format_moetabs');
-
-        $courseformat = new format_moetabs('moetabs', $course->id);
-        $options = $courseformat->get_format_options();
-        $fs = get_file_storage();
-        $files = $fs->get_area_files($context->id, 'format_moetabs', 'headingimage', $options['headingimage']);
-        $name = "";
-
-        foreach ($files as $file) {
-            if ($file->is_valid_image()) {
-                $name = $file->get_filename();
-            }
-        }
-
-        $filepath = $CFG->wwwroot. "/pluginfile.php/" . $context->id . "/format_moetabs/" ."headingimage/" . $options['headingimage'] . "/" . $name;
-
-        echo html_writer::start_tag('div',array(
-        ));
-
-        if ( $file->is_valid_image() ) {
-
-            echo html_writer::tag('img', '', array(
-                'class' => 'sectionzeroimg',
-                'src' => $filepath,
-            ));
-
-        } else {
-
-             echo html_writer::tag('img', '', array(
-                'class' => 'sectionzeroimg',
-                'src' => $this->output->pix_url('sectionzeroimg', 'format_moetabs')
-            ));
-
-        }
-
-        echo html_writer::end_tag('div');
 
         // create section zero area
         echo $this->start_section_list();
@@ -685,7 +647,7 @@ class format_moetabs_renderer extends format_section_renderer_base {
      * @return string HTML to output.
      */
     protected function section_header($section, $course, $onsectionpage, $sectionreturn = null) {
-        global $PAGE;
+        global $PAGE, $CFG;
 
         $o = '';
         $currenttext = '';
@@ -706,6 +668,46 @@ class format_moetabs_renderer extends format_section_renderer_base {
             'role' => 'region',
             'aria-label' => get_section_name($course, $section)
         ));
+
+        // create the defulte image
+        if ( $section->section === 0) {
+        $context = context_course::instance($course->id);
+        $courseformat = new format_moetabs('moetabs', $course->id);
+        $options = $courseformat->get_format_options();
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'format_moetabs', 'headingimage', $options['headingimage']);
+        $name = "";
+
+        foreach ($files as $file) {
+            if ($file->is_valid_image()) {
+                $name = $file->get_filename();
+            }
+        }
+
+        $filepath = $CFG->wwwroot. "/pluginfile.php/" . $context->id . "/format_moetabs/" ."headingimage/" . $options['headingimage'] . "/" . $name;
+
+        $o .= html_writer::start_tag('div',array(
+        ));
+
+        if ( $name !== "") {
+
+            $o .= html_writer::tag('img', '', array(
+                'class' => 'sectionzeroimg',
+                'src' => $filepath,
+            ));
+
+        } else {
+
+            $o .= html_writer::tag('img', '', array(
+                'class' => 'sectionzeroimg',
+                'src' => $this->output->pix_url('sectionzeroimg', 'format_moetabs')
+            ));
+
+        }
+
+        $o .= html_writer::end_tag('div');
+
+        }
 
         $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
         $o .= html_writer::tag('div', $leftcontent, array(
@@ -736,7 +738,13 @@ class format_moetabs_renderer extends format_section_renderer_base {
             $o .=  html_writer::start_tag('div', array(
                 'class' => 'sectionzerobtn noselect'
             ));
+/*             $o .=  html_writer::start_tag('div', array(
+                'class' => 'sectionzerobtntxt noselect'
+            )); */
             $o .=  get_string('zerosectionbtn', 'format_moetabs');
+
+/*             $o .=  html_writer::end_tag('div'); */
+
             $o .=  html_writer::start_tag('div', array(
                 'class' => 'littlesquare'
             ));

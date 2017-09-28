@@ -129,7 +129,7 @@
 	font-size: 30px;
 	background-color: #e0f6df;
 	text-align: center;
-	margin-top: 2%;
+	margin-top: 6%;
 	box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
 	overflow: hidden;
 }
@@ -155,10 +155,6 @@
 .sectionzeroimg { 
     float: right; margin-left: 25px; 
 }
-
-.format-moetabs .sectionzerotext {  font-size: 17px; }
-
-
 
 .format-moetabs #section-0 {
 	list-style: none;
@@ -352,13 +348,68 @@ html[dir="rtl"] .format-moetabs .label .mod-indent {
 }
 
 
-@media screen and (max-width: 1280px) {
-
+@media screen 
+  and (max-width: 479px) {
+  	
     .format-moetabs .sectionzerobtn {
-       font-size: 25px;
-       margin-bottom: 0px;
+       font-size: 9px;
+       line-height: 4.2;
+       font-weight: bold;
+       padding: 10px 5% 10px 0px;
+    	
+    }
+    
+     .format-moetabs .sectionzeroimg {
+        float: none;
+        max-width: 270px;
+     }
+     
+    .format-moetabs .littlesquare img {
+       width: 15px;
+       height: 15px;
+       margin-bottom: 4px;
+    }
+    
+    .format-moetabs .littlesquare {
+       width: 30px;
+       height: 30px;
     }
 
 }
+
+
+@media screen 
+  and (min-width: 480px) 
+  and (max-width: 1279px) {    
+    .format-moetabs .sectionzerobtn {
+        padding-left: 0px;
+        padding-right: 2%;
+        line-height: 1.9;
+        font-size: 22px;
+        line-height: 2.6;
+        font-size: 16px;
+    	margin-top: 2%;
+    }
+}
+
+@media screen 
+  and (min-width: 1280px) 
+  and (max-width: 1440px) {
+  	
+    .format-moetabs .sectionzerobtn {
+        padding-left: 0px;
+        padding-right: 0.5%;
+        line-height: 1.9;
+        font-size: 22px;
+    	margin-top: 4%;
+    }
+}
+
+
+
+
+
+
+
 
 
