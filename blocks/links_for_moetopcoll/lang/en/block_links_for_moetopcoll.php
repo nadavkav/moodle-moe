@@ -18,5 +18,6 @@ $string['pluginname'] = 'links for moetopcoll';
 $string['links_for_moetopcoll'] = 'links for moetopcoll';
 $string['userguid'] = 'user guid';
 $string['viewtemp'] = 'view templates';
+$string['actoryanit'] = 'משימות אורייניות מתוקשבות';
 $string['technicalsup'] = 'technichal suporrt and Pedagogical';
 $string['links_for_moetopcoll:canseelinks'] = 'הרשאת צפיה בקישורים שימושיים למרצים';
