@@ -14,25 +14,21 @@
     display: inline-table;
     width: auto;
 	max-width: 50px;
+	font-size: 14px;
 }
 .block_moe_links_Madrich{
     background-image:  url([[pix:block_links_for_moetopcoll|Madrich]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
-	font-size: 14px;
-    
 }
 .block_moe_links_eye{
     background-image:  url([[pix:block_links_for_moetopcoll|Eye]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
-	font-size: 14px;
 }
 
 .block_moe_links_tmicha{
     background-image:  url([[pix:block_links_for_moetopcoll|Tmicha]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
-	font-size: 14px;
 }
 
 .block_moe_links_actoryanit{
     background-image:  url([[pix:block_links_for_moetopcoll|avodot]]),url([[pix:block_links_for_moetopcoll|Kaftor_orada]]);
-	font-size: 13px;
 }
 
 .block_moe_links_main_block .block_moe_links_inlinetext {
