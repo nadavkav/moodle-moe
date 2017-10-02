@@ -42,13 +42,13 @@ class backup_format_moetabs_plugin extends backup_format_plugin {
         $plugin->add_child($pluginwrapper);
 
         $context = context_course::instance($COURSE->id);
-        //$pluginwrapper->annotate_files('format_moetabs', 'headingimage', null, $context->id);
-        // Set source to populate the data.
-        $pluginwrapper->set_source_table('files', array(
-            'contextid' => $context->id));
+        $pluginwrapper->annotate_files('format_moetabs', 'headingimage', null, $context->id);
 
         // Don't need to annotate ids nor files.
         return $plugin;
     }
 
 }
+
+
+
