@@ -71,10 +71,15 @@ echo $OUTPUT->doctype() ?>
             	$context = context_course::instance($COURSE->id);
             	$teachers = get_role_users($role->id, $context);
             	foreach ($teachers as $teach) {
-            		$teach = $DB->get_record('user', array('id' => $teach->id));
-            		$href = new moodle_url('/user/profile.php', array('id' => $teach->id));
-            		echo " <a href=$href>$teach->firstname $teach->lastname</a>";
-            		
+            		if ($teach === end($teachers)) {
+            			$teach = $DB->get_record('user', array('id' => $teach->id));
+            			$href = new moodle_url('/user/view.php', array('id' => $teach->id, 'course' => $COURSE->id));
+            			echo " <a href=$href>$teach->firstname $teach->lastname</a>";
+            		} else {
+            			$teach = $DB->get_record('user', array('id' => $teach->id));
+            			$href = new moodle_url('/user/view.php', array('id' => $teach->id,'course' => $COURSE->id));
+            			echo " <a href=$href>$teach->firstname $teach->lastname</a>,";
+            		}   		
             	}
             	echo "</div>";
             	echo "<p> $COURSE->shortname </p>";          	
