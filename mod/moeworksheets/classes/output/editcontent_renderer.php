@@ -143,18 +143,18 @@ class editcontent_renderer extends \plugin_renderer_base {
             }
             $additionalcontent->set_moeworksheetsid($structure->get_moeworksheetsid());
             $additionalcontent->add_entry();
-            $contentdata->app = file_get_submitted_draft_itemid('html_editor');
-            file_save_draft_area_files($contentdata->app, $context->id, 'mod_moeworksheets', 'app', $additionalcontent->get_id(), $appoption);
-            $fs = get_file_storage();
-            $files = $fs->get_area_files($context->id, 'mod_quizsbs', 'app', $additionalcontent->get_id(),
-                'sortorder DESC, id ASC', false);
-            $file = reset($files);
-            unset($files);
-            if ($file) {
-                $filename = $file->get_filename();
-                $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_quizsbs/app/' .
-                    $file->get_itemid() . $file->get_filepath() . $filename);
-            }           
+//             $contentdata->app = file_get_submitted_draft_itemid('html_editor');
+//             file_save_draft_area_files(file_get_submitted_draft_itemid('html_editor'), $context->id, 'mod_moeworksheets', 'html', $additionalcontent->get_id(), $appoption);
+//             $fs = get_file_storage();
+//             $files = $fs->get_area_files($context->id, 'mod_moeworksheets', 'html', $additionalcontent->get_id(),
+//                 'sortorder DESC, id ASC', false);
+//             $file = reset($files);
+//             unset($files);
+//             if ($file) {
+//                 $filename = $file->get_filename();
+//                 $url = \moodle_url::make_file_url('/pluginfile.php', '/' .$file->get_contextid() . '/mod_moeworksheets/html/' .
+//                     $file->get_itemid() . $file->get_filepath() . $filename);
+//             }           
             if ($additionalcontent->get_id()) {
                         $questioncontenthtml->set_id($DB->get_field('moeworksheets_questionconten', 'id', array(
                         'additionalcontentid' => $additionalcontent->get_id(),
@@ -162,9 +162,11 @@ class editcontent_renderer extends \plugin_renderer_base {
                         )));
                         $questioncontenthtml->load_from_db();
                         $questioncontenthtml->set_type(question_content::HTML_CONTENT);
+                        $questioncontenthtml->set_content($contentdata->html_editor['text']);
+                        $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
+                        $questioncontenthtml->add_entry();
                         $contentdata = file_postupdate_standard_editor($contentdata, 'html', $htmleditoroption, $context, 'mod_moeworksheets', 'content', $questioncontenthtml->get_id());
                         $questioncontenthtml->set_content($contentdata->html);
-                        $questioncontenthtml->set_additionalcontentid($additionalcontent->get_id());
                         $questioncontenthtml->add_entry();
 
             }
