@@ -23,122 +23,110 @@ $string['moetabspagesectionone'] = '<h1><span class="multilang" lang="he">מרח
 $string['moetabspagesectiontwo'] = '<h1><span class="multilang" lang="he">מרחב 2</span><span class="multilang" lang="en">Section 2</span></h1>';
 $string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">מרחב 3</span><span class="multilang" lang="en">Section 3</span></h1>';
 
-$string['currentsection'] = 'This topic';
-$string['sectionname'] = 'Topic';
-$string['pluginname'] = 'Moetabs format';
-$string['page-course-view-topics'] = 'Any course main page in onetopic format';
-$string['page-course-view-topics-x'] = 'Any course page in onetopic format';
-$string['hidefromothers'] = 'Hide topic';
-$string['showfromothers'] = 'Show topic';
-$string['hidetabsbar'] = 'Hide tabs bar';
-$string['hidetabsbar_help'] = 'Hide tabs bar in the course page. The navigation is with the sections navbar.';
-
-$string['movesectionto'] = 'Move current topic';
-$string['movesectionto_help'] = 'Move current topic to left/right of selected topic';
-
-$string['utilities'] = 'Tabs edition utilities';
-$string['disableajax'] = 'Asynchronous edit actions';
-$string['disable'] = 'Disable';
-$string['enable'] = 'Enable';
-$string['disableajax_help'] = 'Use this action in order to move resources between topic tabs. It only disables the asynchronous actions in current session, it is not permanently.';
-
-$string['subtopictoright'] = 'Move to right as subtopic';
-
-$string['duplicatesection'] = 'Duplicate current topic';
-$string['duplicatesection_help'] = 'Used to duplicate the resources of current topic in a new topic';
-$string['duplicate'] = 'Duplicate';
-$string['duplicating'] = 'Duplicating';
-$string['creating_section'] = 'Creating new topic';
-$string['rebuild_course_cache'] = 'Rebuild course cache';
-$string['duplicate_confirm'] = 'Are you sure you want to duplicate the current topic? The task can take a while depending on the amount of resources.';
-$string['cantcreatesection'] = 'Error creating a new topic';
-$string['progress_counter'] = 'Duplicating activities ({$a->current}/{$a->size})';
-$string['progress_full'] = 'Duplicating topic';
-$string['error_nosectioninfo'] = 'The indicated topic have not information';
-
-$string['level'] = 'Level';
-$string['index'] = 'Index';
-$string['asprincipal'] = 'Normal, as a first level tab';
-$string['asbrother'] = 'Same level that the previous tab';
-$string['aschild'] = 'Child of previous tab';
-$string['level_help'] = 'Change the tab level.';
-$string['fontcolor'] = 'Font color';
-$string['fontcolor_help'] = 'Used to change the tab font color. The value can be a color in a CSS valid representation, for example: <ul><li>Hexadecimal: #ffffff</li><li>RGB: rgb(0,255,0)</li><li>Name: green</li></ul>';
-$string['bgcolor'] = 'Background color';
-$string['bgcolor_help'] = 'Used to change the tab background color. The value can be a color in a CSS valid representation, for example: <ul><li>Hexadecimal: #ffffff</li><li>RGB: rgb(0,255,0)</li><li>Name: green</li></ul>';
-$string['cssstyles'] = 'CSS properties';
-$string['cssstyles_help'] = 'Used to change CSS properties of the tab. Use a standard value to the attribute <em>style</em> in a html tag. Example: <br /><strong>font-weight: bold; font-size: 16px;</strong>';
-$string['firsttabtext'] = 'Text of the first tab in sublevel';
-$string['firsttabtext_help'] = 'If this tab has sublevels, this will be the text of the first tab';
-
-$string['coursedisplay'] = 'Visualization mode of section 0';
-$string['coursedisplay_help'] = 'This define as display the section 0: as a first tab or as section before the tabs bar.';
-$string['coursedisplay_single'] = 'As tab';
-$string['coursedisplay_multi'] = 'Before the tabs';
-
-$string['templatetopic'] = 'Use topic summary as template';
-$string['templatetopic_help'] = 'This option is used in order to use the summary topic as a template. If it is used as template, you can include the resources in the content, not only as tradicional moodle\'s lists. <br />In order to include a resource, write the resource name between double brackets, for example: [[News forum]]. This functionality is similar to activity name filter, however, it is different because the user can chose if included the resource icon and decide than activities are be included.';
-$string['templetetopic_not'] = 'No, display as default';
-$string['templetetopic_single'] = 'Yes, use the summary as template';
-$string['templetetopic_list'] = 'Yes, use the summary as template, list the resources that are not referenced';
-$string['templatetopic_icons'] = 'Show icon in resource links in summary';
-$string['templatetopic_icons_help'] = 'This option defines if the icons are displayed in the summary when it is a template.';
-
-$string['utilities'] = 'Tabs edition utilities';
-$string['display_summary'] = 'move out of grid';
-$string['display_summary_alt'] = 'Move this section out of the grid';
-$string['editimage'] = 'Change image';
-$string['editimage_alt'] = 'Set or change image';
-$string['formatgrid'] = 'Grid format'; // Name to display for format.
-$string['general_information'] = 'General Information'; // No longer used kept for legacy versions.
-$string['hidden_topic'] = 'This section has been hidden';
-$string['hide_summary'] = 'move section into grid';
-$string['hide_summary_alt'] = 'Move this section into the grid';
-$string['namegrid'] = 'Grid view';
-$string['title'] = 'Section title';
-$string['topic'] = 'Section';
-$string['topic0'] = 'General';
-$string['topicoutline'] = 'Section'; // No longer used kept for legacy versions.
+$string['currentsection'] = 'הנושא הנוכחי';
+$string['sectionname'] = 'נושא';
+$string['pluginname'] = 'לשוניות משרד החינוך';
+$string['page-course-view-topics'] = 'כל דף ראשי קורס בפורמט לשוניות';
+$string['page-course-view-topics-x'] = 'כל דף קורס בפורמט  לשוניות';
+$string['hidefromothers'] = 'הסתרת לשונית';
+$string['showfromothers'] = 'הצגת לשונית';
+$string['hidetabsbar'] = 'הסתר סרגל הלשוניות';
+$string['hidetabsbar_help'] = 'הסתר סרגל הלשוניות בדף הקורס. הניווט הוא עם סרגל המרחבים.';
+$string['movesectionto'] = 'העבר את הנושא הנוכחי';
+$string['movesectionto_help'] = 'העבר את הנושא הנוכחי לשמאל / ימין של הנושא שנבחר';
+$string['utilities'] = 'עזרים לעריכת לשונית';
+$string['disableajax'] = 'פעולות עריכה אסינכרוני';
+$string['disable'] = 'השבת';
+$string['enable'] = 'אפשר';
+$string['disableajax_help'] = 'השתמש בפעולה זו כדי להעביר משאבים בין כרטיסיות נושא. זה רק משבית את פעולות אסינכרוני בהפעלה הנוכחית, זה לא לצמיתות.';
+$string['subtopictoright'] = 'הזז לימין כתת נושא';
+$string['duplicatesection'] = 'שכפל נושא נוחכי';
+$string['duplicatesection_help'] = 'משמש לשכפול המשאבים של הנושא הנוכחי בנושא חדש';
+$string['duplicate'] = 'שכפל';
+$string['duplicating'] = 'משכפל';
+$string['creating_section'] = 'יצירת נושא חדש';
+$string['rebuild_course_cache'] = 'בנה מחדש את המטמון של הקורס';
+$string['duplicate_confirm'] = 'האם אתה בטוח שברצונך לשכפל את הנושא הנוכחי? המשימה עשויה להימשך זמן מה בהתאם לכמות המשאבים.';
+$string['cantcreatesection'] = 'שגיאה ביצירת נושא חדש';
+$string['progress_counter'] = 'משכפל פעילויות ({$a->current}/{$a->size})';
+$string['progress_full'] = 'משכפל נושאים';
+$string['error_nosectioninfo'] = 'לנושא המצויין אין מידע';
+$string['level'] = 'רמה';
+$string['index'] = 'אינדקס';
+$string['asprincipal'] = 'רגיל, ככרטיסייה ברמה הראשונה';
+$string['asbrother'] = 'באותה רמה בכרטיסייה הקודמת';
+$string['aschild'] = 'הילד של הכרטיסייה הקודמת';
+$string['level_help'] = 'שנה את רמת הכרטיסייה.';
+$string['fontcolor'] = 'צבע גופן';
+$string['fontcolor_help'] = 'משמש לשינוי צבע הגופן של הכרטיסייה. הערך יכול להיות צבע ייצוג בתקן CSS, למשל: <ul><li>Hexadecimal: #ffffff</li><li>RGB: rgb(0,255,0)</li><li>Name: green</li></ul>';
+$string['bgcolor'] = 'צבע רקע';
+$string['bgcolor_help'] = 'משמש לשינוי צבע הרקע של הכרטיסייה. הערך יכול להיות צבע ייצוג בתקן CSS, למשל: <ul><li>Hexadecimal: #ffffff</li><li>RGB: rgb(0,255,0)</li><li>Name: green</li></ul>';
+$string['cssstyles'] = 'תכונות ה CSS';
+$string['cssstyles_help'] = 'משמש לשינוי מאפייני CSS של הכרטיסייה. השתמש בערך סטנדרטי לתכונה <em>style</em> בתג html. דוגמא: <br /><strong>font-weight: bold; font-size: 16px;</strong>';
+$string['firsttabtext'] = 'טקסט של הכרטיסייה הראשונה ברמת המשנה';
+$string['firsttabtext_help'] = 'אם לשונית זו יש רמות משנה, זה יהיה הטקסט של הכרטיסייה הראשונה';
+$string['coursedisplay'] = 'תצוגה של מרחב 0';
+$string['coursedisplay_help'] = 'מגדיר איך יוצג המרחב 0: כלשונית ראשונה או כמו מרחב לפני סרגל הלשוניות.';
+$string['coursedisplay_single'] = 'כלשונית';
+$string['coursedisplay_multi'] = 'לפני סרגל הלשוניות';
+$string['templatetopic'] = 'השתמש סיכום נושא כתבנית';
+$string['templatetopic_help'] = 'אפשרות זו משמשת כדי להשתמש בנושא סיכום כתבנית. אם הוא משמש כתבנית, אתה יכול לכלול את המשאבים בתוכן, לא רק כמו רשימות moodle tradicional. <br /> כדי לכלול משאב, רשום את שם המשאב בין סוגריים כפולים, לדוגמה: [[פורום חדשות]]. פונקציונליות זו דומה למסנן שם פעילות, עם זאת, זה שונה כי המשתמש יכול לבחור אם כלל את סמל המשאבים ולהחליט מאשר פעילויות ייכללו.';
+$string['templetetopic_not'] = 'לא, הצג כברירת מחדל';
+$string['templetetopic_single'] = 'כן, השתמש בתבנית סיכום כתבנית';
+$string['templetetopic_list'] = 'כן, השתמש בתמצית כתבנית, ציין את המשאבים שאינם מוזכרים';
+$string['templatetopic_icons'] = 'הצג סמל בקישורי משאבים בסיכום';
+$string['templatetopic_icons_help'] = 'אפשרות זו מגדירה אם הסמלים מוצגים בסיכום כאשר היא תבנית.';
+$string['utilities'] = 'כלים לעריכת לשונית';
+$string['display_summary'] = 'העברת מחוץ לרשת';
+$string['display_summary_alt'] = 'העבר מרחב זה מתוך הרשת';
+$string['editimage'] = 'שנה תמונה';
+$string['editimage_alt'] = 'הגדר או שנה תמונה';
+$string['formatgrid'] = 'רשת format'; // Name to display for format.
+$string['general_information'] = 'מידע כללי'; // No longer used kept for legacy versions.
+$string['hidden_topic'] = 'מרחב זה הוסתר';
+$string['hide_summary'] = 'להעביר מרחב לתוך הרשת';
+$string['hide_summary_alt'] = 'העבר מרחב זה לרשת';
+$string['namegrid'] = 'תצוגת רשת';
+$string['title'] = 'כותרת המרחב';
+$string['topic'] = 'מרחב';
+$string['topic0'] = 'כללי';
+$string['topicoutline'] = 'מרחב'; // No longer used kept for legacy versions.
 
 // Moodle 2.0 Enhancement - Moodle Tracker MDL-15252, MDL-21693 & MDL-22056 - http://docs.moodle.org/en/Development:Languages.
-$string['sectionname'] = 'Section';
-$string['pluginname'] = 'Moetabs format';
-$string['section0name'] = 'General';
+$string['section0name'] = 'כללי';
 
 // WAI-ARIA - http://www.w3.org/TR/wai-aria/roles.
-$string['gridimagecontainer'] = 'Grid images';
-$string['closeshadebox'] = 'Close shade box';
-$string['previoussection'] = 'Previous section';
-$string['nextsection'] = 'Next section';
-$string['shadeboxcontent'] = 'Shade box content';
+$string['gridimagecontainer'] = 'תמונות רשת';
+$string['closeshadebox'] = 'סגור את תיבת הצל';
+$string['previoussection'] = 'המרחב הקודם';
+$string['nextsection'] = 'המרחב הבא';
+$string['shadeboxcontent'] = 'תוכן תיבת צל';
 
 // MDL-26105.
-$string['page-course-view-grid'] = 'Any course main page in the grid format';
-$string['page-course-view-grid-x'] = 'Any course page in the grid format';
+$string['page-course-view-grid'] = 'כל דף ראשי קורס בפורמט הרשת';
+$string['page-course-view-grid-x'] = 'כל דף קורס בפורמט הרשת';
 
 // Moodle 2.3 Enhancement.
-$string['hidefromothers'] = 'Hide section'; // No longer used kept for legacy versions.
-$string['showfromothers'] = 'Show section'; // No longer used kept for legacy versions.
-$string['currentsection'] = 'This section'; // No longer used kept for legacy versions.
-$string['markedthissection'] = 'This section is highlighted as the current section';
-$string['markthissection'] = 'Highlight this section as the current section';
+$string['markedthissection'] = 'מרחב זה מודגש כמרחב הנוכחי';
+$string['markthissection'] = 'הדגש מרחב זה כמרחב הנוכחי';
 // Moodle 3.0 Enhancement.
-$string['editsection'] = 'Edit section';
-$string['deletesection'] = 'Delete section';
+$string['editsection'] = 'ערוך מרחב';
+$string['deletesection'] = 'מחק מרחב';
 
 // Moodle 2.4 Course format refactoring - MDL-35218.
-$string['numbersections'] = 'Number of sections';
+$string['numbersections'] = 'מספר מרחבים';
 
 // Exception messages.
-$string['imagecannotbeused'] = 'Image cannot be used, must be a PNG, JPG or GIF and the GD PHP extension must be installed.';
-$string['cannotfinduploadedimage'] = 'Cannot find the uploaded original image.  Please report error details and the information contained in the php.log file to developer.  Refresh the page and upload a fresh copy of the image.';
-$string['cannotconvertuploadedimagetodisplayedimage'] = 'Cannot convert uploaded image to displayed image.  Please report error details and the information contained in the php.log file to developer.';
-$string['cannotgetimagesforcourse'] = 'Cannot get images for course.  Please report error details to developer.';
+$string['imagecannotbeused'] = 'לא ניתן להשתמש בתמונה, חייב להיות PNG, JPG או GIF ואת תוסף PHP GD חייב להיות מותקן.';
+$string['cannotfinduploadedimage'] = 'לא ניתן למצוא את התמונה המקורית שהועלה. אנא דווח על פרטי השגיאה והמידע הכלול בקובץ php.log למפתח. רענן את הדף והעלה עותק חדש של התמונה.';
+$string['cannotconvertuploadedimagetodisplayedimage'] = 'לא ניתן להמיר תמונה שהועלתה לתמונה המוצגת. אנא דווח על פרטי השגיאה והמידע הכלול בקובץ php.log למפתח.';
+$string['cannotgetimagesforcourse'] = 'לא ניתן לקבל תמונות כמובן. אנא דווח על פרטי השגיאה למפתח.';
+$string['addimagetosectionzero'] = 'הוספת תמונה לחלק הראשי';
 
 // CONTRIB-4099 Image container size change improvement.
-$string['off'] = 'Off';
-$string['on'] = 'On';
-$string['scale'] = 'Scale';
+$string['off'] = 'כבה';
+$string['on'] = 'הדלק';
+$string['scale'] = 'קְנֵה מִדָה';
 $string['crop'] = 'Crop';
 $string['imagefile'] = 'Upload an image';
 $string['imagefile_help'] = 'Upload an image of type PNG, JPG or GIF.';
