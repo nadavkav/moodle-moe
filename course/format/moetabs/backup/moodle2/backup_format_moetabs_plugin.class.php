@@ -30,19 +30,19 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Provides the information to backup grid course format
  */
-class backup_format_moetabs_plugin extends backup_format_plugin {
+class backup_format_moetabs_plugin extends backup_local_plugin {
 
     /**
      * Returns the format information to attach to course element
      */
     protected function define_course_plugin_structure() {
         global $COURSE;
-        $plugin = $this->get_plugin_element(null, '/course/format', 'moetabs');
-        $pluginwrapper = new backup_nested_element($this->get_recommended_name(), null, array('headerimage'));
+        $plugin = $this->get_plugin_element();
+        $pluginwrapper = new backup_nested_element($this->get_recommended_name());
         $plugin->add_child($pluginwrapper);
 
         $context = context_course::instance($COURSE->id);
-        $pluginwrapper->annotate_files('format_moetabs', 'headingimage', null, $context->id);
+        $pluginwrapper->annotate_files('format_moetabs', 'headingimage', null);
 
         // Don't need to annotate ids nor files.
         return $plugin;
