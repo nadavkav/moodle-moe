@@ -74,7 +74,7 @@ class restore_format_moetabs_plugin extends restore_local_plugin {
 
     }
 
-    protected function after_execute_structure() {
+    protected function after_restore_course() {
         $this->add_related_files('format_moetabs', 'headingimage', null);
     }
 
