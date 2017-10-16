@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Grid Information
+ * moetabs Information
  *
  * @package    course/format
  * @subpackage Moetabs
@@ -26,13 +26,13 @@
  *
  */
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot . '/course/format/grid/lib.php');
+require_once($CFG->dirroot . '/course/format/moetabs/lib.php');
 
 /**
  * Restore plugin class that provides the necessary information
- * needed to restore one grid format course.
+ * needed to restore one moetabs format course.
  */
-class restore_format_grid_plugin extends restore_format_plugin {
+class restore_format_moetabs_plugin extends restore_local_plugin {
 
     /**
      * Returns the paths to be handled by the plugin at course level.
@@ -44,7 +44,7 @@ class restore_format_grid_plugin extends restore_format_plugin {
         // Add own format stuff.
         $elename = 'moetabs'; // This defines the postfix of 'process_*' below.
         /*
-         * This is defines the nested tag within 'plugin_format_grid_course' to allow '/course/plugin_format_grid_course' in
+         * This is defines the nested tag within 'plugin_format_moetabs_course' to allow '/course/plugin_format_moetabs_course' in
          * the path therefore as a path structure representing the levels in section.xml in the backup file.
          */
         $elepath = $this->get_pathfor('/');
@@ -54,16 +54,16 @@ class restore_format_grid_plugin extends restore_format_plugin {
     }
 
     /**
-     * Process the 'plugin_format_grid_course' element within the 'course' element in the 'course.xml' file in the '/course'
+     * Process the 'plugin_format_moetabs_course' element within the 'course' element in the 'course.xml' file in the '/course'
      * folder of the zipped backup 'mbz' file.
      */
-    public function process_grid($data) {
+    public function process_moetabs($data) {
         global $DB;
 
         $data = (object) $data;
 
         /* We only process this information if the course we are restoring to
-          has 'grid' format (target format can change depending of restore options). */
+          has 'moetabs' format (target format can change depending of restore options). */
         $format = $DB->get_field('course', 'format', array('id' => $this->task->get_courseid()));
         if ($format != 'moetabs') {
             return;
@@ -71,18 +71,11 @@ class restore_format_grid_plugin extends restore_format_plugin {
 
         $data->courseid = $this->task->get_courseid();
 
-        if (!$DB->insert_record('format_grid_summary', $data)) {
-            throw new moodle_exception('invalidrecordid', 'format_grid', '',
-            'Could not set summary status. Grid format database is not ready. An admin must visit the notifications section.');
-        }
 
-        if (!($course = $DB->get_record('course', array('id' => $data->courseid)))) {
-            print_error('invalidcourseid', 'error');
-        } // From /course/view.php.
-        // No need to annotate anything here.
     }
 
     protected function after_execute_structure() {
+        $this->add_related_files('format_moetabs', 'headingimage', null);
     }
 
     /**
@@ -92,70 +85,37 @@ class restore_format_grid_plugin extends restore_format_plugin {
 
         $paths = array();
 
-        // Add own format stuff.
-        $elename = 'gridsection'; // This defines the postfix of 'process_*' below.
-        /* This is defines the nested tag within 'plugin_format_grid_section' to allow '/section/plugin_format_grid_section' in
-         * the path therefore as a path structure representing the levels in section.xml in the backup file.
-         */
-        $elepath = $this->get_pathfor('/');
-        $paths[] = new restore_path_element($elename, $elepath);
+
 
         return $paths; // And we return the interesting paths.
     }
 
     /**
-     * Process the 'plugin_format_grid_section' element within the 'section' element in the 'section.xml' file in the
+     * Process the 'plugin_format_moetabs_section' element within the 'section' element in the 'section.xml' file in the
      * '/sections/section_sectionid' folder of the zipped backup 'mbz' file.
      * Discovered that the files are contained in the course repository with the new section number, so we just need to alter to
      * the new value if any. * This was undertaken by performing a restore and using the url
      * 'http://localhost/moodle23/pluginfile.php/94/course/section/162/mc_fs.png' where I had an image called 'mc_fs.png' in
      * section 1 which was id 129 but now 162 as the debug code told me.  '94' is just the context id.  The url was originally
      * created in '_make_block_icon_topics' of lib.php of the format.
-     * Still need courseid in the 'format_grid_icon' table as it is used in discovering what records to remove when deleting a
-     * course, see lib.php 'format_grid_delete_course'.
+     * Still need courseid in the 'format_moetabs_icon' table as it is used in discovering what records to remove when deleting a
+     * course, see lib.php 'format_moetabs_delete_course'.
      */
-    public function process_gridsection($data) {
+    public function process_motabssection($data) {
         global $DB;
 
         $data = (object) $data;
 
         /* We only process this information if the course we are restoring to
-           has 'grid' format (target format can change depending of restore options). */
+           has 'moetabs' format (target format can change depending of restore options). */
         $format = $DB->get_field('course', 'format', array('id' => $this->task->get_courseid()));
-        if ($format != 'grid') {
+        if ($format != 'moetabs') {
             return;
         }
 
         $data->courseid = $this->task->get_courseid();
         $data->sectionid = $this->task->get_sectionid();
 
-        if (!empty($data->imagepath)) {
-            $data->image = $data->imagepath;
-            unset($data->imagepath);
-        } else if (empty($data->image)) {
-            $data->image = null;
-        }
-
-        if (!$DB->record_exists('format_grid_icon', array('courseid' => $data->courseid, 'sectionid' => $data->sectionid))) {
-            if (!$DB->insert_record('format_grid_icon', $data, true)) {
-                throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                'Could not insert icon. Grid format table format_grid_icon is not ready.'.
-                '  An administrator must visit the notifications section.');
-            }
-        } else {
-            $old = $DB->get_record('format_grid_icon', array('courseid' => $data->courseid, 'sectionid' => $data->sectionid));
-            /* Always update missing icons during restore / import, noting merge into existing course currently doesn't restore
-               the grid icons. */
-            if (is_null($old->image)) {
-                // Update the record to use this icon as we are restoring or importing and no icon exists already.
-                $data->id = $old->id;
-                if (!$DB->update_record('format_grid_icon', $data)) {
-                    throw new moodle_exception('invalidrecordid', 'format_grid', '',
-                    'Could not update icon. Grid format table format_grid_icon is not ready.'.
-                    '  An administrator must visit the notifications section.');
-                }
-            }
-        }
 
         // No need to annotate anything here.
     }
