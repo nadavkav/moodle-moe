@@ -71,7 +71,6 @@ class subscriber {
     public static function unsubscrib (){
         $name = $DB->get_field('course', 'fullname', array('id' => 1));
         $url = $CFG->wwwroot;
-
         //TO_DO add the web server actions
 
     }
@@ -92,12 +91,22 @@ class subscriber {
                 break;
             case 'u':
                 $id = $DB->get_field($table, 'id', array('course_id' => $course_id,));
-                $dataobject = new stdClass();
-                $dataobject->id          = $id;
-                $dataobject->course_id   = $course_id;
-                $dataobject->course_tag  = $course_tag;
-                $dataobject->course_name = $course_name;
-                $DB->update_record($table, $dataobject);
+                if ($id) {
+                	//update existing course
+                	$dataobject = new stdClass();
+                	$dataobject->id          = $id;
+                	$dataobject->course_id   = $course_id;
+                	$dataobject->course_tag  = $course_tag;
+                	$dataobject->course_name = $course_name;
+                	$DB->update_record($table, $dataobject); 
+                } else {
+                	//creating new course in case of moving course to cat with tag
+                	$dataobject = new stdClass();
+                	$dataobject->course_id   = $course_id;
+                	$dataobject->course_tag  = $course_tag;
+                	$dataobject->course_name = $course_name;
+                	$DB->insert_record($table, $dataobject);
+                }
                 break;
             case 'cu':
                 //course tag remove - delete course
