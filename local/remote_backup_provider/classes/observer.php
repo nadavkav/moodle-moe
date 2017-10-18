@@ -65,14 +65,20 @@ class observer {
                 'id' => $localcourse->id
             ));
             if ($tag == false) {
-                return;
+            	$params = array(
+            			'type' => 'd',
+            			'course_id' => $localevent['objectid'],
+            			'course_tag' => 'stab',
+            			'course_name' => 'stab'
+            	);
+            } else {
+	            $params = array(
+	                'type' => $type,
+	                'course_id' => $localcourse->id,
+	                'course_tag' => $tag,
+	                'course_name' => $localcourse->fullname
+	            );
             }
-            $params = array(
-                'type' => $type,
-                'course_id' => $localcourse->id,
-                'course_tag' => $tag,
-                'course_name' => $localcourse->fullname
-            );
         }
 
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;

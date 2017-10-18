@@ -87,7 +87,9 @@ class subscriber {
                 $DB->insert_record($table, $dataobject);
                 break;
             case 'd':
-                $DB->delete_records($table, array('course_id' => $course_id));
+            	if ($DB->get_field($table, 'id', array('course_id' => $course_id,))) {
+                	$DB->delete_records($table, array('course_id' => $course_id));
+            	}
                 break;
             case 'u':
                 $id = $DB->get_field($table, 'id', array('course_id' => $course_id,));
