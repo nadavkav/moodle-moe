@@ -464,8 +464,10 @@ class format_moetabs extends format_base {
         global $DB, $PAGE, $CFG; // MDL-37976.
 
         $context = context_course::instance($this->courseid);
+        if (isset($data->headingimage)){
         $saved = file_save_draft_area_files($data->headingimage, $context->id, 'format_moetabs',
             'headingimage', $data->headingimage, array('subdirs' => 0, 'maxfiles' => 1));
+        }
         /*
          * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
          * This has to be done here so that the reset occurs after we have done updates such that the
