@@ -25,7 +25,7 @@ $string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">מר
 
 $string['currentsection'] = 'הנושא הנוכחי';
 $string['sectionname'] = 'נושא';
-$string['pluginname'] = 'לשוניות משרד החינוך';
+$string['pluginname'] = 'לשוניות MOE';
 $string['page-course-view-topics'] = 'כל דף ראשי קורס בפורמט לשוניות';
 $string['page-course-view-topics-x'] = 'כל דף קורס בפורמט  לשוניות';
 $string['hidefromothers'] = 'הסתרת לשונית';

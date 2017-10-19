@@ -25,7 +25,7 @@ $string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">מר
 
 $string['currentsection'] = 'This topic';
 $string['sectionname'] = 'Topic';
-$string['pluginname'] = 'Moetabs format';
+$string['pluginname'] = 'Moe tabs';
 $string['page-course-view-topics'] = 'Any course main page in onetopic format';
 $string['page-course-view-topics-x'] = 'Any course page in onetopic format';
 $string['hidefromothers'] = 'Hide topic';
@@ -103,7 +103,6 @@ $string['topicoutline'] = 'Section'; // No longer used kept for legacy versions.
 
 // Moodle 2.0 Enhancement - Moodle Tracker MDL-15252, MDL-21693 & MDL-22056 - http://docs.moodle.org/en/Development:Languages.
 $string['sectionname'] = 'Section';
-$string['pluginname'] = 'Moetabs format';
 $string['section0name'] = 'General';
 
 // WAI-ARIA - http://www.w3.org/TR/wai-aria/roles.

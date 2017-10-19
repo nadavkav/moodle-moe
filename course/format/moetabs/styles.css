@@ -209,9 +209,10 @@
 }
 
 .format-moetabs #gridshadebox_content.absolute {
-    position: absolute;
+    position: fixed;
     width: 70%;
-	left: 6%; 
+    left: 16%;
+    top: 44%;
     z-index: 1;
 }
 
