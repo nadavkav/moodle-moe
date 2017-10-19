@@ -56,11 +56,13 @@ if (!$options['file'] || $options['h'] || $options['help']) {
 
 $file = fopen($options['file'], 'r');
 if (! $file) {
-	cli_error('can not open file or file not exist!\n exiting...',0);
+	cli_error("can not open file or file not exist!\n exiting...",0);
 }
 global $DB;
+$total = count(file($options['file'], FILE_SKIP_EMPTY_LINES));
 $success = 0;
 $fails = 0;
+$outpresenteg = 0;
 while (($line = fgetcsv($file)) !== FALSE) {
 	if ($line[3] == '' || $line[4] == '' || $line[5] == '' || $line[0] == 'SUG_ZEHUT'){
 		$fails++;
@@ -69,14 +71,14 @@ while (($line = fgetcsv($file)) !== FALSE) {
 	$username = $line[0] . $line[1];
 	$user = $DB->get_record('user', array('username' => $username));
 	if (!$user) {
-		cli_write("user $usrname not found. skipping../n");
+		cli_writeln("user $username not found. skipping..");
 		$fails++;
 		continue;
 	}
 	$sql = "select * from {user_info_data} where userid = :userid AND fieldid in (14,17,20)";		
 	$userextrafilds = $DB->get_records_sql($sql, array('userid' => $user->id));
 	if (!$userextrafilds) {
-		cli_write("user $usrname not have extra fields. skipping../n");
+		cli_writeln("user $username not have extra fields. skipping..");
 		$fails++;
 		continue;
 	}
@@ -93,11 +95,17 @@ while (($line = fgetcsv($file)) !== FALSE) {
 			break;			
 		}
 		$DB->update_record('user_info_data', $fild);
-		$success++;
+	}
+	$success++;
+	$presentege = round((($success + $fails)/$total) * 100);
+	if ($presentege != $outpresenteg){
+		cli_writeln("$presentege % finished");
+		$outpresenteg = $presentege;
 	}
 }
 fclose($file);
-cli_write('update complete successfully');
-cli_write(--$fails . " users skips");
-cli_write($success ." users complete successfully");
+cli_writeln('update complete successfully');
+cli_writeln(--$total .' users in CSV');
+cli_writeln(--$fails . " users skipped");
+cli_writeln($success ." users complete successfully");
 exit(0);
