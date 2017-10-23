@@ -89,7 +89,8 @@ class report_moereports_external extends external_api {
                 }
             }
             if (! $return->message) {
-                if (!empty($record->id)) {
+                $symbol = $DB->get_field('moereports_reports', 'symbol', array('symbol' => $record->symbol));
+                if ($symbol) {
                     $rec = $DB->get_record('moereports_reports', array('symbol' => $record->symbol));
                 }
                 if ($rec) {
