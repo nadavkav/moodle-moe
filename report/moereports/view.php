@@ -38,7 +38,7 @@ echo $OUTPUT->heading(get_string('reports', 'report_moereports'));
 echo '<div id="reportstable"></div><button id="savereporttable">'.get_string("save", "report_moereports")."</button>";
 global $DB;
 
-$schools = $DB->get_records_sql('SELECT * FROM {moereports_reports}');
+$schools = $DB->get_records_sql('SELECT * FROM {moereports_reports} order by symbol');
 $report = [];
 
 foreach ($schools as $key => $school) {
