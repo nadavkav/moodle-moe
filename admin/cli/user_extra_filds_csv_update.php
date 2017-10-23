@@ -63,6 +63,9 @@ $total = count(file($options['file'], FILE_SKIP_EMPTY_LINES));
 $success = 0;
 $fails = 0;
 $outpresenteg = 0;
+$sql = "select id,shortname from {user_info_field} where shortname in ('StudentMosad', 'StudentKita', 'StudentMakbila' )";
+$filds_info = $DB->get_records_sql($sql);
+
 while (($line = fgetcsv($file)) !== FALSE) {
 	if ($line[3] == '' || $line[4] == '' || $line[5] == '' || $line[0] == 'SUG_ZEHUT'){
 		$fails++;
@@ -75,26 +78,24 @@ while (($line = fgetcsv($file)) !== FALSE) {
 		$fails++;
 		continue;
 	}
-	$sql = "select * from {user_info_data} where userid = :userid AND fieldid in (14,17,20)";		
+	$sql = "select * from {user_info_data} where userid = :userid AND fieldid in (select id from {user_info_field} where shortname in ('StudentMosad', 'StudentKita', 'StudentMakbila'  ))";		
 	$userextrafilds = $DB->get_records_sql($sql, array('userid' => $user->id));
 	if (!$userextrafilds) {
-		cli_writeln("user $username not have extra fields. skipping..");
-		$fails++;
-		continue;
-	}
-	foreach ($userextrafilds as $fild) {
-		switch ($fild->fieldid) {
-			case 14:
-				$fild->data = $line[3];
-			break;
-			case 17:
-				$fild->data = $line[4];
-			break;
-			case 20:
-				$fild->data = $line[5];
-			break;			
+		cli_writeln("user $username not have extra fields. creating ones for him..");
+		foreach ($filds_info as $fild) {
+			$dataobject = new stdClass();
+			$dataobject->userid     = $user->id;
+			$dataobject->fieldid 	= $fild->id;
+			$dataobject->data 		= $line[mapper($fild->id)];
+			$dataobject->dataformat = 0;
+			$DB->insert_record('user_info_data', $dataobject);
 		}
-		$DB->update_record('user_info_data', $fild);
+		
+	} else {
+		foreach ($userextrafilds as $fild) {
+			$fild->data = $line[mapper($fild->fieldid)];
+			$DB->update_record('user_info_data', $fild);
+			}
 	}
 	$success++;
 	$presentege = round((($success + $fails)/$total) * 100);
@@ -109,3 +110,18 @@ cli_writeln(--$total .' users in CSV');
 cli_writeln(--$fails . " users skipped");
 cli_writeln($success ." users complete successfully");
 exit(0);
+
+function mapper ($fieldid) {
+	global $filds_info;
+	switch ($filds_info[$fieldid]->shortname){
+	case 'StudentMosad':
+		return 3;
+	case 'StudentKita':
+		return 4;
+	case 'StudentMakbila':
+		return 5;
+	}
+	return false;	
+}
+
+
