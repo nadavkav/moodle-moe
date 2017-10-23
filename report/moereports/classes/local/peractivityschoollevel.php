@@ -38,10 +38,9 @@ class peractivityschoollevel extends moereport{
         global $DB;
 
         $results = array();
-        $courses = $DB->get_records('course', array(
-            'enablecompletion' => '1',
-            'visible' => '1',
-        ));
+        $courses = $DB->get_records_sql('select c.* from {course} c inner join {course_categories} cc on c.category=cc.id where
+            c.enablecompletion=1 and c.visible=1 and cc.visible=1');
+
         $semels = $DB->get_records('moereports_reports', array(), '', 'symbol');
         foreach ($semels as $semelkey => $semelvalue) {
             foreach ($courses as $course) {
