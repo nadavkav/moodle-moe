@@ -89,26 +89,20 @@ class report_moereports_external extends external_api {
                 }
             }
             if (! $return->message) {
-
                 if (!empty($record->id)) {
-                    $rec = $DB->get_record('moereports_reports', array('id' => $record->id));
+                    $rec = $DB->get_record('moereports_reports', array('symbol' => $record->symbol));
                 }
-
                 if ($rec) {
                     $rec->symbol = $record->symbol;
                     $rec->name = $record->name;
                     $rec->region = $record->region;
-
                     $DB->update_record('moereports_reports', $rec);
-
                     $return->existed ++;
                     continue;
                 }
-
                 $school = new stdClass();
                 $school->symbol = $record->symbol;
                 $school->region = $record->region;
-                $school->id = $record->id;
                 $school->name = $record->name;
 
                 $DB->insert_record('moereports_reports', $school);
