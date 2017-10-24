@@ -34,7 +34,10 @@ body ,body#page-login-index{
 	transition: all 1000000s ease;	
 }
 
-
+/* ticket 436*/
+.que.numerical .answer {
+	direction: ltr;
+}
 
 .dir-ltr .loginbox .loginform .form-input
 {   margin: 0 auto;
