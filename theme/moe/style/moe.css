@@ -35,8 +35,8 @@ body ,body#page-login-index{
 }
 
 /* ticket 436*/
-.que.numerical .answer,
-.que.numerical .rightanswer{
+.que.numerical>.answer,
+.que.numerical>.rightanswer{
 	direction: ltr;
 }
 
