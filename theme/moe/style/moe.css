@@ -26,6 +26,7 @@ body ,body#page-login-index{
     margin-top: 1.5em;
 	font-size: 20px;
     font-weight: bold;
+	color: #80599B;
 }
 
 #page-enrol-index #fitem_id_submitbutton input[type="submit"] {
