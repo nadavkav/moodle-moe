@@ -528,7 +528,14 @@ class format_moetabs_renderer extends format_section_renderer_base {
                 // Show completion help icon.
                 $completioninfo = new completion_info($course);
                 echo $completioninfo->display_help_icon();
+                $modinfo = get_fast_modinfo($course);
+                $completioninfo = new completion_info($course);
 
+                // ------------- create forum for section 1 ---------------
+                if ( $displaysection == 1 ) {
+                    create_forum( $course->id, "news");
+                }
+                
                 echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
                 echo $this->courserenderer->course_section_add_cm_control($course, $displaysection, $displaysection);
                 echo $this->section_footer();

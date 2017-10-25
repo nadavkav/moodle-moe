@@ -706,3 +706,59 @@ function format_moetabs_pluginfile($course, $cm, $context, $filearea, $args, $fo
 
     send_stored_file($file, 0, 0, $forcedownload, $options);
 }
+
+/**
+ * @global object
+ * @global object
+ * @param int $courseid
+ * @param string $type
+ */
+function create_forum($courseid, $type) {
+    // How to set up special 1-per-course forums
+    global $CFG, $DB, $OUTPUT, $USER;
+
+    if ($forums = $DB->get_records_select("forum", "course = ? AND type = ?", array($courseid, $type), "id ASC")) {
+        // There should always only be ONE, but with the right combination of
+        // errors there might be more.  In this case, just return the oldest one (lowest ID).
+        foreach ($forums as $forum) {
+            return $forum;   // ie the first one
+        }
+    }
+
+    // Doesn't exist, so create one now.
+    $forum = new stdClass();
+    $forum->course = $courseid;
+    $forum->type = "$type";
+    if (!empty($USER->htmleditor)) {
+        $forum->introformat = $USER->htmleditor;
+    }
+
+    $forum->name  = get_string("namenews", "forum");
+    $forum->intro = get_string("intronews", "forum");
+    $forum->forcesubscribe = 1;//FORUM_FORCESUBSCRIBE;
+    $forum->assessed = 0;
+    if ($courseid == SITEID) {
+         $forum->name  = get_string("sitenews");
+         $forum->forcesubscribe = 0;
+     }
+
+    $forum->timemodified = time();
+    $forum->id = $DB->insert_record("forum", $forum);
+
+    if (! $module = $DB->get_record("modules", array("name" => "forum"))) {
+        echo $OUTPUT->notification("Could not find forum module!!");
+        return false;
+    }
+    $mod = new stdClass();
+    $mod->course = $courseid;
+    $mod->module = $module->id;
+    $mod->instance = $forum->id;
+    $mod->section = 1;
+    include_once("$CFG->dirroot/course/lib.php");
+    if (! $mod->coursemodule = add_course_module($mod) ) {
+        echo $OUTPUT->notification("Could not add a new course module to the course '" . $courseid . "'");
+        return false;
+    }
+    $sectionid = course_add_cm_to_section($courseid, $mod->coursemodule, 1);
+    return $DB->get_record("forum", array("id" => "$forum->id"));
+}

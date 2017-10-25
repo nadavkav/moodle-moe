@@ -13,7 +13,7 @@ class theme_moe_core_course_renderer extends core_course_renderer {
      * @return void
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
-        global $USER,$OUTPUT;
+        global $USER,$OUTPUT, $COURSE;
 
         $output = '';
         $modinfo = get_fast_modinfo($course);
@@ -44,6 +44,11 @@ class theme_moe_core_course_renderer extends core_course_renderer {
                 if ($section->__get('section') == 0 && $mod->modname == 'forum'){
                     $mod->set_icon_url($OUTPUT->pix_url('icons/forum','theme_moe'));
                 }
+
+                if ($section->__get('section') == 1 && $mod->modname == 'forum' && $COURSE->format == 'moetabs'){
+                    $mod->set_icon_url($OUTPUT->pix_url('icons/forum','theme_moe'));
+                }
+
                 if ($modulehtml = $this->course_section_cm_list_item($course,
                     $completioninfo, $mod, $sectionreturn, $displayoptions)) {
                         $moduleshtml[$modnumber] = $modulehtml;
