@@ -60,3 +60,6 @@ $string['students'] = 'תלמידים';
 $string['numofusers'] = 'מספר יוזרים סה"כ:';
 $string['cron_name'] = 'יצירת הדאטא עבור דוחות משרד החינוך';
 
+$string['moereportsenable'] = 'פעיל';
+$string['moereportsenablehelper'] = 'הפעלת דוחות לאתר הנוכחי';
+

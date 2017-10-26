@@ -46,7 +46,9 @@ class report_data_generate extends \core\task\scheduled_task {
      */
     public function execute() {
         global $DB;
-
+        if (!get_config('report_moereports','moereportsenable')) {
+        	return ;
+        }
         // course_regin_level:
         $results = new \percoursereginlevel();
         $data = new \stdClass();

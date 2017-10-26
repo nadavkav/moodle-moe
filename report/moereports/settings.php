@@ -26,6 +26,23 @@ defined('MOODLE_INTERNAL') || die;
 
     $settings = new admin_settingpage('viewpermission', get_string('moeviewpermission', 'report_moereports'));
 
+    $settings->add( new admin_setting_configcheckbox(
+    		
+    		// This is the reference you will use to your configuration
+    		'report_moereports/moereportsenable',
+    		
+    		// This is the friendly title for the config, which will be displayed
+    		get_string('moereportsenable', 'report_moereports'),
+    		
+    		// This is helper text for this config field
+    		get_string('moereportsenablehelper', 'report_moereports'),
+    		
+    		// This is the default value
+    		0
+    		
+    		) );
+    
+    
     // Add a setting field to the settings for this page
     $settings->add( new admin_setting_configtext(
 
@@ -64,3 +81,8 @@ defined('MOODLE_INTERNAL') || die;
         PARAM_TEXT
 
         ) );
+    
+    
+
+    
+    

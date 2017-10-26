@@ -37,8 +37,8 @@ function report_moereports_myprofile_navigation(core_user\output\myprofile\tree 
         // No peeking at somebody else's sessions!
         return;
     }
-
-    if ($USER->profile['IsStudent'] == 'No' || is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext)) {
+	
+    if (get_config('report_moereports','moereportsenable') && ($USER->profile['IsStudent'] == 'No' || is_siteadmin()|| has_capability('report/moereport:viewall', $usercontext))) {
         $schoollevelaccess = $DB->get_field('config', 'value', array('name' => 'schools_level_access'));
         $reginlevelaccess = $DB->get_field('config', 'value', array('name' => 'regin_level_access'));
 
