@@ -30,7 +30,8 @@ $string['add'] = 'add';
 $string['notrelevant'] = 'Not relevant';
 $string['save'] = 'save';
 $string['class'] = 'class';
-$string['studentsnumber'] = 'number of student';
+$string['studentsnumber'] = 'number of students';
+$string['teacersnumber'] = "number of teachers";
 $string['classesinfo'] = 'classes info';
 $string['school_task'] = 'Scope performing school in each of the tasks';
 $string['cors'] = 'field of knowledge';
@@ -63,7 +64,9 @@ $string['teachingstuff'] = 'teaching stuff';
 $string['students'] = 'students';
 $string['numofusers'] = 'number of users:';
 $string['cron_name'] = 'Data generation for MOE reports';
+$string['filter'] = 'filter';
 
 $string['moereportsenable'] = 'enable';
 $string['moereportsenablehelper'] = 'Enable reports i n instance';
+$string['usersinfobydate'] = 'users deatails by date';
 

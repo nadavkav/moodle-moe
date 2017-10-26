@@ -6,7 +6,12 @@ body#page-report-moereports-view section[role="main-content"] nav a { margin: 14
 }
 
 
-.resultTable {	
+#users_report_by_date .resultTable {	
+    text-align: center;
+	width: 50%;	
+}
+
+.resultTable {  
     text-align: center;
 }
 

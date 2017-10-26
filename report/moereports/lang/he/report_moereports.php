@@ -27,6 +27,7 @@ $string['changessuccessfulsave'] = 'הנתונים נשמרו בהצלחה';
 $string['add'] = 'תוספת';
 $string['class'] = 'שכבה';
 $string['studentsnumber'] = "מס' תלמידים";
+$string['teacersnumber'] = "מס' מורים";
 $string['notrelevant'] = 'לא רלוונטי';
 $string['per_activity_school_level'] = 'היקף ביצוע בבית ספר בכל אחת מהמשימות';
 $string['per_course_scool_level'] = 'היקף ביצוע בבית ספר בכל אחד מתחומי הדעת';
@@ -59,7 +60,8 @@ $string['teachingstuff'] = 'עובדי הוראה';
 $string['students'] = 'תלמידים';
 $string['numofusers'] = 'מספר יוזרים סה"כ:';
 $string['cron_name'] = 'יצירת הדאטא עבור דוחות משרד החינוך';
-
+$string['filter'] = 'סינון';
 $string['moereportsenable'] = 'פעיל';
 $string['moereportsenablehelper'] = 'הפעלת דוחות לאתר הנוכחי';
+$string['usersinfobydate'] = 'פרטי משתמשים ע"פ תאריך';
 
