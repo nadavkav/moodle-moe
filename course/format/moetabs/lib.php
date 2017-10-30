@@ -733,7 +733,7 @@ function create_forum($courseid, $type) {
         $forum->introformat = $USER->htmleditor;
     }
 
-    $forum->name  = get_string("namenews", "forum");
+    $forum->name  = get_string("namenews", "format_moetabs");
     $forum->intro = get_string("intronews", "forum");
     $forum->forcesubscribe = 1;//FORUM_FORCESUBSCRIBE;
     $forum->assessed = 0;

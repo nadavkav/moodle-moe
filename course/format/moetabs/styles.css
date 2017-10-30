@@ -50,7 +50,7 @@
 .format-moetabs .nav-tabs>li.active .tab_content { 
 	border-bottom: 0px;
 	background-color: rgb(122, 91, 154);
-	color: black; 
+	color: white; 
 	background: rgba(122, 91, 154, 0.5);
 }
 
@@ -211,9 +211,9 @@
 .format-moetabs #gridshadebox_content.absolute {
     position: fixed;
     width: 70%;
-    left: 16%;
-    top: 44%;
-    z-index: 1;
+    left: 12%;
+    top: 30%;
+    z-index: 11;
 }
 
 .format-moetabs #gridshadebox_content.fit_to_window {

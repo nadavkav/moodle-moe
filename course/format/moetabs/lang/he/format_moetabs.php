@@ -19,10 +19,11 @@
  */
 $string['zerosectionbtn'] = 'ארגז כלים, חומרי רקע ועזר עבור המורה';
 
-$string['moetabspagesectionone'] = '<h1><span class="multilang" lang="he">מרחב 1</span><span class="multilang" lang="en">Section 1</span></h1>';
-$string['moetabspagesectiontwo'] = '<h1><span class="multilang" lang="he">מרחב 2</span><span class="multilang" lang="en">Section 2</span></h1>';
-$string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">מרחב 3</span><span class="multilang" lang="en">Section 3</span></h1>';
+$string['moetabspagesectionone'] = '<h1><span class="multilang" lang="he">כותרת 1</span><span class="multilang" lang="en">Section 1</span></h1>';
+$string['moetabspagesectiontwo'] = '<h1><span class="multilang" lang="he">כותרת 2</span><span class="multilang" lang="en">Section 2</span></h1>';
+$string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">כותרת 3</span><span class="multilang" lang="en">Section 3</span></h1>';
 
+$string['namenews'] = 'לוח מודעות';
 $string['currentsection'] = 'הנושא הנוכחי';
 $string['sectionname'] = 'נושא';
 $string['pluginname'] = 'לשוניות MOE';
@@ -110,8 +111,8 @@ $string['page-course-view-grid-x'] = 'כל דף קורס בפורמט הרשת';
 $string['markedthissection'] = 'מרחב זה מודגש כמרחב הנוכחי';
 $string['markthissection'] = 'הדגש מרחב זה כמרחב הנוכחי';
 // Moodle 3.0 Enhancement.
-$string['editsection'] = 'ערוך מרחב';
-$string['deletesection'] = 'מחק מרחב';
+$string['editsection'] = 'עריכת יחידת הוראה';
+$string['deletesection'] = 'מחיקת יחידת הוראה';
 
 // Moodle 2.4 Course format refactoring - MDL-35218.
 $string['numbersections'] = 'מספר מרחבים';
@@ -121,7 +122,7 @@ $string['imagecannotbeused'] = 'לא ניתן להשתמש בתמונה, חיי�
 $string['cannotfinduploadedimage'] = 'לא ניתן למצוא את התמונה המקורית שהועלה. אנא דווח על פרטי השגיאה והמידע הכלול בקובץ php.log למפתח. רענן את הדף והעלה עותק חדש של התמונה.';
 $string['cannotconvertuploadedimagetodisplayedimage'] = 'לא ניתן להמיר תמונה שהועלתה לתמונה המוצגת. אנא דווח על פרטי השגיאה והמידע הכלול בקובץ php.log למפתח.';
 $string['cannotgetimagesforcourse'] = 'לא ניתן לקבל תמונות כמובן. אנא דווח על פרטי השגיאה למפתח.';
-$string['addimagetosectionzero'] = 'הוספת תמונה לחלק הראשי';
+$string['addimagetosectionzero'] = 'הוספת תמונה לאזור הראשי';
 
 // CONTRIB-4099 Image container size change improvement.
 $string['off'] = 'כבה';
