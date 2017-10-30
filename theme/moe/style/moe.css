@@ -8,6 +8,11 @@ body ,body#page-login-index{
     background-color: #dbeede;
 }
 
+/*ticket443*/
+.forumng-iframe#page-mod-forumng-editpost .filemanager-container {
+    min-height: 100px;
+}
+
 #manchim {
 	font-size: 18px;
 }
