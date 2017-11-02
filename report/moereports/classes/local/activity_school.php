@@ -36,7 +36,8 @@ class activity_school {
         global $DB;
         ini_set('memory_limit', '8192M');
         $schools = array();
-        $allcourses = $DB->get_records('course', array('enablecompletion' => '1'));
+        $allcourses = $DB->get_records_sql('select c.* from {course} c inner join {course_categories} cc on c.category=cc.id where
+            c.enablecompletion=1 and c.visible=1 and cc.visible=1');
         $regions = $DB->get_records_sql('select region from {moereports_reports} group by region');
         foreach ($regions as $name) {
                 $region = new region($name->region);
