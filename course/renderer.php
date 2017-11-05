@@ -1863,7 +1863,7 @@ class core_course_renderer extends plugin_renderer_base {
                 }
                 else if (!empty($searchcriteria['search'])) {
                     $content .= $this->heading(get_string('nocoursesfound', '', $searchcriteria['search']));
-                } 
+                }
                 else {
                     $content .= $this->heading(get_string('novalidcourses'));
                 }

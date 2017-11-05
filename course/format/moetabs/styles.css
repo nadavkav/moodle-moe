@@ -1,0 +1,420 @@
+.moetabs ul.topics:nth-last-child(2) {
+	border: 2px solid #a08eb8;
+}
+.course-content ul.topics {
+    margin:0;
+}
+
+.course-content ul.topics li.section {
+	list-style: none;
+	margin:5px 0 0 0;
+	padding:0;
+}
+
+.course-content ul.topics li.section .content {
+    margin:0 40px;
+}
+
+.course-content ul.topics li.section .left {
+	width:40px;
+	float:left;
+	text-align:center;
+}
+
+.course-content ul.topics li.section .right {
+	width:40px;
+	float:right;
+	text-align:center;
+}
+
+.jumpmenu {
+	text-align:center;
+}
+
+.course-content div.single-section .tabtree .tabrow0 li {
+	line-height: 28px; display: inline-block; 
+}
+
+.course-content div.single-section .tabtree .tabrow0 li.here .empty { 
+	bottom: 3px;
+	display: block;
+    height: 1px;
+	left: 0; 
+	right: 0;  
+}
+
+.course-content div.single-section .tabtree { 
+	margin-bottom: 0px; 
+}
+
+.format-moetabs .nav-tabs>li.active .tab_content { 
+	border-bottom: 0px;
+	background-color: rgb(122, 91, 154);
+	color: black; 
+	background: rgba(122, 91, 154, 0.5);
+}
+
+.format-moetabs .tab_content { 
+	white-space: nowrap; 
+}
+
+.format-moetabs .tab_content.marker {
+	font-style: italic;
+	background-color: #572f71;
+	font-weight: bold;
+	color: white;
+	
+ }
+
+.format-moetabs .utilities-separator {
+ 	clear: both; margin-top: 15px;
+}
+
+.format-moetabs ul.nav-tabs li a .tab_content.dimmed { 
+	color: #999; opactity: 0.5; 
+}
+
+.format-moetabs .subtopic-increase-sections { 
+	margin-right: 10px; 
+}
+
+.format-moetabs li.sublevel { 
+	padding-left: 20px;
+}
+
+.format-moetabs .nav-tabs > li > a {
+	padding: 0; 
+}
+
+.format-moetabs .nav-tabs > li > div { 
+	padding: 0; 
+}
+
+.format-moetabs .tab_content { 
+	padding: 20px 20px 20px 20px;
+	background-color: #eeebf2;
+    color: black; 
+    text-align: center;
+	font-size: 17px;
+}
+
+.format-moetabs .nav-collapse-tabs li {
+	list-style-type: none;
+}
+
+
+/* section zero */
+.format-moetabs .title {
+	color: #7a5b9a; 
+}
+
+.format-moetabs .nav-tabs {
+	height: 58px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.format-moetabs .sectionzerobtn {
+	padding: 15px 20px 15px 20px;
+	border: 1px;
+	border-style: solid;
+	border-color: #b2d0c0;
+	font-size: 30px;
+	background-color: #e0f6df;
+	text-align: center;
+	margin-top: 5%;
+	box-shadow: 0px 20px 20px -19px rgba(0, 0, 0, 0.7);
+	overflow: hidden;
+}
+
+.format-moetabs .littlesquare {
+	width: 40px;
+	height: 40px;
+	background-color: #a1c0b1;
+    float: left;
+	margin: 5px 20px 5px 20px;
+}
+
+.format-moetabs .littlesquare img {
+	width: 20px;
+    height: 20px;
+	margin-bottom: 4px;
+}
+
+.format-moetabs .content { 
+	border: 1px;
+}
+
+.sectionzeroimg { 
+    float: right; 
+    margin-left: 25px; 
+    max-height: 17em;
+}
+
+.format-moetabs #section-0 {
+	list-style: none;
+}
+
+.format-moetabs .nav-tabs {
+      margin-right: 0px;
+}
+
+.format-moetabs #tabmoveright i, .format-moetabs #tabmoveleft i {
+    display: inline-block;
+    line-height: 60px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+}
+
+.format-moetabs #tabmoveright, .format-moetabs #tabmoveleft {
+    font-size: 4em;
+    width: 45px;
+    height: 58px;
+    cursor: pointer;
+    display: none;
+    background-color: #7e5999;
+    color: #572f71;
+}
+
+.format-moetabs div#gridshadebox_overlay {
+	display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    /* for IE */
+    filter: alpha(opacity=70);
+    /* CSS3 standard */
+    opacity: 0.7;
+    z-index: 1;
+    cursor: url('[[pix:format_moetabs|fa-times-circle-o-f]]'), auto;
+}
+.format-moetabs #gridshadebox_content {
+    border-color: #fcf3e6;
+    min-height: 200px; 
+    border: solid 2px #6d4979;
+}
+.format-moetabs body.jsenabled #gridshadebox_content.hide_content {
+    display: none;
+}
+
+.format-moetabs #gridshadebox_content.absolute {
+    position: fixed;
+    width: 70%;
+    left: 12%;
+    top: 30%;
+    z-index: 11;
+}
+
+.format-moetabs #gridshadebox_content.fit_to_window {
+    position: fixed;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+    z-index: 1;
+}
+
+.format-moetabs #gridshadebox_content.fit_to_window ul.gtopics {
+    margin: 0;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 100%;
+}
+
+.format-moetabs #gridshadebox_content.fit_to_window ul.gtopics h3.sectionname {
+    margin-top: 0;
+}
+
+.format-moetabs #gridshadebox_content .activity {
+    list-style: none;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 4px;
+    padding-top: 2px;
+}
+
+.format-moetabs #gridshadebox_content ul li.grid_section {
+    list-style: none;
+}
+
+.format-moetabs #gridshadebox_content ul li ul li, #gridshadebox_content ul li ol li {
+    border-bottom: none;
+    padding-bottom: 4px;
+    padding-top: 2px;
+}
+
+.format-moetabs #gridshadebox_content ul li ul li {
+    list-style: disc outside none;
+}
+
+.format-moetabs #gridshadebox_content ul li ol li {
+    list-style: decimal outside none;
+} 
+ 
+.format-moetabs #gridshadebox_close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-up-f]]'), auto;
+    z-index: 2;
+}
+
+.format-moetabs .gridshadebox_arrow {
+    position: absolute;
+    cursor: inherit;
+    height: 55px;
+    width: 55px;
+    top: 75px;
+    opacity: 0.35;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+.format-moetabs .gridshadebox_area:hover .gridshadebox_arrow {
+    opacity: 0.9;
+}
+
+.format-moetabs .gridshadebox_area  {
+    position: absolute;
+    top: 0;
+    width: 55px;
+    height: 100%;
+}
+
+.format-moetabs .gridshadebox_left_area {
+    left: -55px;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-left-f]]'), auto;
+}
+
+.format-moetabs .gridshadebox_right_area {
+    right: -55px;
+    cursor: url('[[pix:format_moetabs|fa-hand-o-right-f]]'), auto;
+}
+
+
+.format-moetabs h1 {
+    color: #572f71;
+    font-size: 24px;
+    margin: 0px;
+    padding: 0px;
+	font-family: unset;
+}
+
+.format-moetabs #section-0 .summary {
+	padding-right: 0px;
+}
+
+.format-moetabs li:not(#section-0) .summary {
+    padding: 2%;
+	min-height: 150px;
+	background-color: #e4deea;
+}
+
+.format-moetabs li:not(#section-0) .summary p {
+
+}
+
+html[dir="rtl"] .format-moetabs .label .mod-indent {
+    float: right;
+}
+
+.format-moetabs .course-content ul li.section.hidden .sectionname>span, .format-moetabs .course-content ul li.section.hidden .content>div, .format-moetabs .course-content ul li.section.hidden .activity .activityinstance {
+    opacity: unset;
+}
+
+.tabsrightarrow {
+	background-image: url("/course/format/moetabs/pix/right-arrow.svg");
+    background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: center;
+	margin-top: 6px; 
+}
+
+.tabsleftarrow {
+	background-image: url("/course/format/moetabs/pix/left-arrow.svg");
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+	background-position: center; 
+	margin-top: 6px; 
+}
+
+
+@media screen 
+  and (max-width: 576px) {
+  	
+    .format-moetabs .sectionzerobtn {
+       font-size: 9px;
+       line-height: 4.2;
+       font-weight: bold;
+       padding: 10px 5% 10px 0px;
+    	
+    }
+    
+     .format-moetabs .sectionzeroimg {
+        float: none;
+        max-width: 270px;
+     }
+     
+    .format-moetabs .littlesquare img {
+       width: 15px;
+       height: 15px;
+       margin-bottom: 4px;
+    }
+    
+    .format-moetabs .littlesquare {
+       width: 30px;
+       height: 30px;
+    }
+
+}
+
+
+@media screen 
+  and (min-width: 577px) 
+  and (max-width: 1279px) {    
+    .format-moetabs .sectionzerobtn {
+        padding-left: 0px;
+        padding-right: 2%;
+        line-height: 1.9;
+        font-size: 22px;
+        line-height: 2.6;
+        font-size: 16px;
+    	margin-top: 2%;
+    }
+}
+
+@media screen 
+  and (min-width: 1280px) 
+  and (max-width: 1440px) {
+  	
+    .format-moetabs .sectionzerobtn {
+        padding-left: 0px;
+        padding-right: 0.5%;
+        line-height: 1.9;
+        font-size: 21px;
+    	margin-top: 4%;
+    }
+}
+
+
+
+
+
+
+
+
+

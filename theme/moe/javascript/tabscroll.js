@@ -17,13 +17,22 @@ $(function () {
 		//order the tabs
 		$('.nav-tabs').first().children('li').each(function (index) {
 			
+			maxwidth = $(window).width() - ($('#tabmoveright').width() * 2)*1.5;
 			$(this).css('position', 'absolute');
 			$(this).css('right', right);
 			$(this).css('top', 0);
 			$(this).css('width', $(this).outerWidth());
 			$(this).css('display', 'block');
-			
-			right = right + 3 + $(this).outerWidth();
+			if($(this).outerWidth() > maxwidth) {
+				$(this).find('.tab_content').css('white-space', 'normal');
+				
+			}
+			$(this).css('max-width', maxwidth);
+			if ($(this).outerWidth() == 0){
+				right = right + 3 + 12;
+			} else {
+				right = right + 3 + $(this).outerWidth();
+			}
 		});
 		if(right > $(".nav-tabs").first().width()){
 			$('#tabmoveleft').css('display','block');
