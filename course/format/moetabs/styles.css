@@ -311,6 +311,7 @@
     font-size: 24px;
     margin: 0px;
     padding: 0px;
+	font-family: unset;
 }
 
 .format-moetabs #section-0 .summary {
