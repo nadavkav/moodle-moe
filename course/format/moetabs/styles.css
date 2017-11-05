@@ -50,6 +50,7 @@
 .format-moetabs .nav-tabs>li.active .tab_content { 
 	border-bottom: 0px;
 	background-color: rgb(122, 91, 154);
+	color: black; 
 	background: rgba(122, 91, 154, 0.5);
 }
 
