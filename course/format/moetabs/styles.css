@@ -52,6 +52,7 @@
 	background-color: rgb(122, 91, 154);
 	color: white; 
 	background: rgba(122, 91, 154, 0.5);
+	font-weight: unset;
 }
 
 .format-moetabs .tab_content { 
