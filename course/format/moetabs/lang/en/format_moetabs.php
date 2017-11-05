@@ -22,6 +22,7 @@ $string['zerosectionbtn'] = 'ארגז כלים, חומרי רקע ועזר עב�
 $string['moetabspagesectionone'] = '<h1><span class="multilang" lang="he">מרחב 1</span><span class="multilang" lang="en">Section 1</span></h1>';
 $string['moetabspagesectiontwo'] = '<h1><span class="multilang" lang="he">מרחב 2</span><span class="multilang" lang="en">Section 2</span></h1>';
 $string['moetabspagesectionthree'] = '<h1><span class="multilang" lang="he">מרחב 3</span><span class="multilang" lang="en">Section 3</span></h1>';
+$string['namenews'] = 'לוח מודעות';
 
 $string['currentsection'] = 'This topic';
 $string['sectionname'] = 'Topic';
