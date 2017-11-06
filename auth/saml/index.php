@@ -49,6 +49,9 @@ define('SAML_INTERNAL', 1);
             }
 
             if($saml_param->dosinglelogout) {
+                if(!empty($saml_param->logouturl)){
+                    $urltogo = $saml_param->logouturl;
+                }
                 $as->logout($urltogo);
                 assert("FALSE"); // The previous line issues a redirect
             } else {
@@ -164,7 +167,7 @@ define('SAML_INTERNAL', 1);
 
         // Check if user exist
         $user_exists = $DB->get_record("user", array("username" => $username));
-        
+
         if (function_exists('saml_hook_user_exists')) {
             $user_exists = $user_exists && saml_hook_user_exists($username, $saml_attributes, $user_exists);
         }
@@ -190,7 +193,7 @@ define('SAML_INTERNAL', 1);
             $err['login'] = "<p>" . $authorize_error . "</p>";
 	    auth_saml_error($err, '?logout', $pluginconfig->samllogfile);
         }
-        
+
         // Just passes time as a password. User will never log in directly to moodle with this password anyway or so we hope?
         $user = authenticate_user_login($username, time());
         if ($user === false) {

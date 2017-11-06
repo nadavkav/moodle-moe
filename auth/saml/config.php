@@ -67,6 +67,14 @@
             $saml_param->dosinglelogout = false;
         }
     }
+    if (!isset ($saml_param->logouturl)) {
+        if(isset ($config->logouturl)) {
+            $saml_param->logouturl = $config->logouturl;
+        }
+        else {
+            $saml_param->logouturl = '';
+        }
+    }
     if (!isset ($config->username)) {
         $config->username = 'eduPersonPrincipalName';
     }
@@ -103,17 +111,17 @@
     if (!isset ($config->ignoreinactivecourses)) {
         $config->ignoreinactivecourses = true;
     }
-    if (!isset ($config->externalcoursemappingdsn)) { 
-        $config->externalcoursemappingdsn = ''; 
+    if (!isset ($config->externalcoursemappingdsn)) {
+        $config->externalcoursemappingdsn = '';
     }
-    if (!isset ($config->externalrolemappingdsn)) { 
-        $config->externalrolemappingdsn = ''; 
+    if (!isset ($config->externalrolemappingdsn)) {
+        $config->externalrolemappingdsn = '';
     }
-    if (!isset ($config->externalcoursemappingsql)) { 
-        $config->externalcoursemappingsql = ''; 
+    if (!isset ($config->externalcoursemappingsql)) {
+        $config->externalcoursemappingsql = '';
     }
-    if (!isset ($config->externalrolemappingsql)) { 
-        $config->externalrolemappingsql = ''; 
+    if (!isset ($config->externalrolemappingsql)) {
+        $config->externalrolemappingsql = '';
     }
     if (!isset($config->allowstudent)) {
         $config->allowstudent = false;
@@ -193,6 +201,13 @@ if (isset($err) && !empty($err)) {
         <input name="dosinglelogout" type="checkbox" <?php if($saml_param->dosinglelogout) echo 'checked="CHECKED"'; ?> />
     </td>
     <td><?php print_string("auth_saml_dosinglelogout_description", "auth_saml"); ?></td>
+</tr>
+
+<tr valign="top">
+    <td class="right"><?php print_string("auth_saml_logouturl", "auth_saml"); ?>:</td>
+    <td>
+        <input name="logouturl" type="text" value="<?php echo $saml_param->logouturl?>"/>
+    </td>
 </tr>
 
 <tr valign="top">
@@ -349,7 +364,7 @@ $(document).ready(function() {
 
 <div id="coursemapping">
 
-<?php 
+<?php
 
 if(isset($err['course_mapping_db']) && in_array("error_creating_course_mapping", $err['course_mapping_db'])) {
     echo '<span class="error">';
@@ -408,29 +423,29 @@ else {
                <input name="externalcoursemappingdsn" type="text" size="55" value="<?php echo $config->externalcoursemappingdsn; ?>" />
             </td>
         </tr>
-        <tr class="required">    
+        <tr class="required">
             <td class="right" valign="top"><?php print_string("auth_saml_course_mapping_sql", "auth_saml"); ?>:</td>
             <td>
-               <textarea name="externalcoursemappingsql" type="text" size="55" rows="3" cols="55"><?php echo $config->externalcoursemappingsql; ?></textarea>            
+               <textarea name="externalcoursemappingsql" type="text" size="55" rows="3" cols="55"><?php echo $config->externalcoursemappingsql; ?></textarea>
             </td>
         </tr>
         <tr valign="top">
             <td colspan="2"></td>
         </tr>
-        <tr class="required">    
+        <tr class="required">
             <td class="right"><?php print_string("auth_saml_role_mapping_dsn", "auth_saml"); ?>:</td>
             <td>
                <input name="externalrolemappingdsn" type="text" size="55" value="<?php echo $config->externalrolemappingdsn; ?>" />
             </td>
         </tr>
-        <tr class="required">    
+        <tr class="required">
             <td class="right" valign="top"><?php print_string("auth_saml_role_mapping_sql", "auth_saml"); ?>:</td>
             <td>
                <textarea name="externalrolemappingsql" type="text" size="55" rows="3" cols="55"><?php echo htmlspecialchars($config->externalrolemappingsql); ?></textarea>
             </td>
         </tr>
     </table>
-    <p>DSN and SQL examples:</p> 
+    <p>DSN and SQL examples:</p>
 <?php
     echo "<p>" . htmlspecialchars(get_string("auth_saml_mapping_dsn_examples", "auth_saml")) . "</p>";
     echo "<p>" . htmlspecialchars(get_string("auth_saml_mapping_sql_examples", "auth_saml")) . "</p>";
