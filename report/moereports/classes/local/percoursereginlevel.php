@@ -58,6 +58,7 @@ class percoursereginlevel extends moereport{
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             $activities = $completion->get_activities();
+            $completionusers = array();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
@@ -71,7 +72,7 @@ class percoursereginlevel extends moereport{
                     continue;
                 }
                 foreach ($activities as $activity) {
-                    if (array_key_exists($activity->id, $user->progress)) {
+                    if (array_key_exists($activity->id, $user->progress) && !array_search($user->id, $completionusers)) {
                         $thisprogress = $user->progress[$activity->id];
                         $state = $thisprogress->completionstate;
                     } else {
@@ -81,7 +82,8 @@ class percoursereginlevel extends moereport{
                     switch($state) {
                         case COMPLETION_COMPLETE :
                         case COMPLETION_COMPLETE_PASS :
-                                $results[$regin][$course->category][$makbila]++;
+                            $completionusers[] = $user->id;
+                            $results[$regin][$course->category][$makbila]++;
                             break;
                         case COMPLETION_INCOMPLETE :
                         case COMPLETION_COMPLETE_FAIL :
