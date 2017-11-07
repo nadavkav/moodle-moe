@@ -52,6 +52,7 @@ class percourseschoollevel extends moereport{
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             $activities = $completion->get_activities();
+            $completionusers = array();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 if ((isset($localuserinfo->profile['IsStudent']) && $localuserinfo->profile['IsStudent'] == "No") ||
@@ -61,7 +62,7 @@ class percourseschoollevel extends moereport{
                 $semel = $localuserinfo->profile['StudentMosad'];
                 $makbila = $localuserinfo->profile['StudentKita'];
                 foreach ($activities as $activity) {
-                    if (array_key_exists($activity->id, $user->progress)) {
+                    if (array_key_exists($activity->id, $user->progress) && !array_search($user->id, $completionusers)) {
                         $thisprogress = $user->progress[$activity->id];
                         $state = $thisprogress->completionstate;
                     } else {
@@ -72,6 +73,7 @@ class percourseschoollevel extends moereport{
                         case COMPLETION_COMPLETE :
                         case COMPLETION_COMPLETE_PASS :
                             if (! empty($semel) && ! empty($makbila)) {
+                                $completionusers[] = $user->id;
                                 $results[$semel][$course->category][$makbila] ++;
                             }
                             break;
