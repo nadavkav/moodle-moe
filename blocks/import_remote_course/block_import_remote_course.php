@@ -1,6 +1,4 @@
 <?php
-use local_remote_backup_provider\form\restoreremotecourse;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -77,6 +75,7 @@ class block_import_remote_course extends block_base {
             $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
             return $this->content;
         }
+
         $form = '<form id="restoreremotecourse" action="'.
             $CFG->wwwroot.'/blocks/import_remote_course/import_remote_course.php" type="get">';
         $form .= get_string('choosecourse').' <select id="choosecourse" name="remotecourseid">';
