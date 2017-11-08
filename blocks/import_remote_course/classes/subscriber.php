@@ -1,4 +1,6 @@
 <?php
+use tool_log\plugininfo\logstore;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -75,7 +77,8 @@ class subscriber {
 
     }
 
-    public static function update($type, $course_id, $course_tag, $course_name) {
+    public static function update($type, $course_id, $course_tag = null, $course_name = null,
+    		$link_to_remote_act = null, $cm = null, $mod = null, $name = null) {
         global $DB;
         $table = 'import_remote_course_list';
         switch ($type) {
@@ -137,6 +140,22 @@ class subscriber {
                     }
                 }
                 break;
+            case 'n':
+            	$sql = "UPDATE {import_remote_course_notifications} 
+                        SET no_of_notification = no_of_notification + 1 
+                        where tamplate_id=:tamplate_id";
+                $DB->execute($sql, array('tamplate_id' => course_id));
+            	break;
+            case 'na':           	
+            	$dataobject = new stdClass();
+            	$dataobject->tamplate_id        = $course_id;
+            	$dataobject->link_to_remote_act = $link_to_remote_act;
+            	$dataobject->cm       		    = $cm;
+            	$dataobject->mod                = $mod;
+            	$dataobject->name 		        = $name;
+            	$dataobject->Time_added 	    = now();
+            	$DB->insert_record('import_remote_course_act_data', $dataobject);
+            	break;
             default:
                 return array('result' => false);
         }

@@ -15,17 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
- *
  * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @copyright  2017 SysBind
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_import_remote_course\form;
+require_once $CFG->libdir. '/formslib.php';
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017100604;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
-//$plugin->cron = 300;
+class restoreremotecourse extends \moodleform {
+    public function definition() {
+        global $CFG;
+
+        $mform = $this->_form;
+        $mform->
+        $mform->addElement('text', 'restoreremotecourse', get_string('restoreremotecourse'));
+        $mform->setType('restoreremotecourse', PARAM_NOTAGS);
+        $mform->addRule('restoreremotecourse', '', 'minlength', 4);
+        $mform->addElement('hidden', 'id', $this->_customdata['id']);
+        $mform->setType('id', PARAM_INT);
+        $this->add_action_buttons(false, get_string('restoreremotecourse'));
+    }
+}

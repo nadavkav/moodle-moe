@@ -14,18 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Version details
- *
- * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace block_import_remote_course;
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017100604;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
-//$plugin->cron = 300;
+/**
+ * Event observer.
+ *
+ * @package block_import_remote_course
+ * @copyright 2017 SysBind LTD
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class observer {
+
+    /**
+     * Event observer.
+     * if the user is teacher and above sign him up to notification system 
+     */
+    public static function enrol_user_check(\core\event\base $event) {
+        global $DB;
+		
+    }
+    
+}

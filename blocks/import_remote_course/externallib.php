@@ -30,11 +30,15 @@ class block_import_remote_course_external extends external_api {
      */
     public static function update_parameters() {
         return new external_function_parameters(array(
-            'type'       => new external_value(PARAM_ALPHANUMEXT),
-            'course_id'  => new external_value(PARAM_INT),
-            'course_tag' => new external_value(PARAM_TEXT),
-            'course_name'=> new external_value(PARAM_TEXT),
-            'username' => new external_value(PARAM_RAW)
+        	'username'			=> new external_value(PARAM_RAW),
+            'type'    		    => new external_value(PARAM_ALPHANUMEXT),
+            'course_id'  		=> new external_value(PARAM_INT),
+        	'course_tag'	    => new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
+        	'course_name'	    => new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
+        	'link_to_remote_act'=> new external_value(PARAM_URL, '',VALUE_OPTIONAL),
+        	'cm'  				=> new external_value(PARAM_INT,'',VALUE_OPTIONAL),
+        	'mod'				=> new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
+        	'name'				=> new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
         ));
     }
 
@@ -43,16 +47,20 @@ class block_import_remote_course_external extends external_api {
      *
      * @return boolean.
      */
-    public static function update($type, $course_id, $course_tag, $course_name, $username) {
+    public static function update($username, $type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name) {
 
         $subscribedata = self::validate_parameters(self::update_parameters(), array(
             'type'        => $type,
             'course_id'   => $course_id,
             'course_tag'  => $course_tag,
             'course_name' => $course_name,
-            'username' => $username
+            'username' 	  => $username,
+        	'link_to_remote_act' => $link_to_remote_act,
+        	'cm' 	      => $cm,
+        	'mod' 		  => $mod,
+        	'name'		  => $name
             ));
-        return subscriber::update($type, $course_id, $course_tag, $course_name);
+        return subscriber::update($type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name);
     }
 
     /**

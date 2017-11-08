@@ -158,5 +158,21 @@ $DB->update_record('course', $course);
 $rc->destroy();
 unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
+//subscribe the teachers in course to notification system
+$context = context_course::instance($destcourseid);
+$teachers = get_role_users(4, $context);
+foreach ($teachers as $teacher) {
+	$dataobject = new stdClass();
+	$dataobject->course_id 					   = $destcourseid;
+	$dataobject->teacher_id 				   = $teacher;
+	$dataobject->tamplate_id 				   = $remote;
+	$dataobject->no_of_notification            = 0;
+	$dataobject->time_last_notification        = now();
+	$dataobject->time_last_reset_notifications = now();
+	$dataobject->time_last_reset_act 		   = now();
+	$DB->insert_record('import_remote_course_notifications', $dataobject);
+}
+
+
 // Finished? ... show updated course.
 redirect($returnurl);
