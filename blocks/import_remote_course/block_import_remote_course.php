@@ -34,7 +34,7 @@ class block_import_remote_course extends block_base {
     }
 
     function get_content() {
-        global $COURSE, $CFG, $DB;
+        global $COURSE, $CFG, $DB, $USER;
 
         if ($this->content !== null) {
             return $this->content;
@@ -60,68 +60,75 @@ class block_import_remote_course extends block_base {
             return $this->content;
         }
 
-        // Get course list from system settings.
-        // todo: use system-level block settings
-//        if (!empty($this->config->text)) {
-//            $courselist = explode(',',$this->config->text);
-//        }
-        $remotecourselist = array();
-        $tags = core_tag_tag::get_item_tags_array('core', 'course', $COURSE->id);
-        foreach ($tags as $tag) {
-            $select = $DB->sql_compare_text('course_tag') . " = '" . $tag ."'";
-            $remotecourselist = array_merge($remotecourselist,$DB->get_records_select('import_remote_course_list', $select));
-        }
-        if (empty($remotecourselist)) {
-            $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
-            return $this->content;
-        }
-
-        $form = '<form id="restoreremotecourse" action="'.
-            $CFG->wwwroot.'/blocks/import_remote_course/import_remote_course.php" type="get">';
-        $form .= get_string('choosecourse').' <select id="choosecourse" name="remotecourseid">';
-        foreach ($remotecourselist as $course) {
-            $courseid   = $course->course_id;
-            $coursename = $course->course_name;
-            $form .= "<option value='$courseid'>$coursename</option>";
-        }
-        $form .= '</select>';
-        $form .= '<input type="hidden" name="destcourseid" value="'.$COURSE->id.'">';
-        $form .= '<input type="hidden" name="sessionid" value="'.session_id().'">';
-        //$form .= '<input type="submit" value="'.get_string("restore").'" onsubmit="Y(\'div.inprogress\').removeClass(\'hide\')">';
-        if(count(get_fast_modinfo($COURSE->id)->cms) <= 1){
-            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
-                'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
-        } else {
-            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
-                'onclick="Y.one(\'form#restoreremotecourse\').append(\''."<br>" . get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
-        }
-        $form .= '</form>';
-        $form .= '<a id="importsite" target="_blank" href="' . get_config('block_import_remote_course', 'testenv') . '" class="btn">' . get_string('trytemplates', 'block_import_remote_course') . '</a>';
-
-        $form .= html_writer::start_div('inprogress hide');
-            $form .= html_writer::start_div('notice');
-            $form .= get_string('restoreinprogress', 'block_import_remote_course');
-            $form .= html_writer::end_div();
-            $form .= html_writer::start_div('notice');
-            $form .= html_writer::img($CFG->wwwroot.'/blocks/import_remote_course/pix/download.gif',
-                get_string('restoreinprogress', 'block_import_remote_course'));
-            $form .= html_writer::end_div();
-        $form .= html_writer::end_div();
-
-        // If we have more then one (probably the "news forum") module in the course,
-        // Display a warrening, and prevent restore.
-
-        if(!($this->content instanceof  stdClass)) {
-            $this->content = new stdClass();
-        }
-        if(isset($this->content->text)){
-            $this->content->text .= $form;
-        } else {
-            $this->content->text = $form;
-        }
-
-        return $this->content;
+		$notifications = $DB->get_records('import_remote_course_notific', array('course_id' => $COURSE->id, 'teacher_id' => $USER->id));
+		if (!$notifications) {
+	        $remotecourselist = array();
+	        $tags = core_tag_tag::get_item_tags_array('core', 'course', $COURSE->id);
+	        foreach ($tags as $tag) {
+	            $select = $DB->sql_compare_text('course_tag') . " = '" . $tag ."'";
+	            $remotecourselist = array_merge($remotecourselist,$DB->get_records_select('import_remote_course_list', $select));
+	        }
+	        if (empty($remotecourselist)) {
+	            $this->content->text = get_string('noavailablecourses', 'block_import_remote_course');
+	            return $this->content;
+	        }
+	
+	        $form = '<form id="restoreremotecourse" action="'.
+	            $CFG->wwwroot.'/blocks/import_remote_course/import_remote_course.php" type="get">';
+	        $form .= get_string('choosecourse').' <select id="choosecourse" name="remotecourseid">';
+	        foreach ($remotecourselist as $course) {
+	            $courseid   = $course->course_id;
+	            $coursename = $course->course_name;
+	            $form .= "<option value='$courseid'>$coursename</option>";
+	        }
+	        $form .= '</select>';
+	        $form .= '<input type="hidden" name="destcourseid" value="'.$COURSE->id.'">';
+	        $form .= '<input type="hidden" name="sessionid" value="'.session_id().'">';
+	        //$form .= '<input type="submit" value="'.get_string("restore").'" onsubmit="Y(\'div.inprogress\').removeClass(\'hide\')">';
+	        if(count(get_fast_modinfo($COURSE->id)->cms) <= 1){
+	            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
+	                'onclick="Y.one(\'div.inprogress\').removeClass(\'hide\');document.forms[\'restoreremotecourse\'].submit();">';
+	        } else {
+	            $form .= '<input id="restorebutton" type="button" value="'.get_string("restore", 'block_import_remote_course').'" ' .
+	                'onclick="Y.one(\'form#restoreremotecourse\').append(\''."<br>" . get_string('courseisnotempty', 'block_import_remote_course') . '\');Y.one(\'input#restorebutton\').remove();">';
+	        }
+	        $form .= '</form>';
+	        $form .= '<a id="importsite" target="_blank" href="' . get_config('block_import_remote_course', 'testenv') . '" class="btn">' . get_string('trytemplates', 'block_import_remote_course') . '</a>';
+	
+	        $form .= html_writer::start_div('inprogress hide');
+	            $form .= html_writer::start_div('notice');
+	            $form .= get_string('restoreinprogress', 'block_import_remote_course');
+	            $form .= html_writer::end_div();
+	            $form .= html_writer::start_div('notice');
+	            $form .= html_writer::img($CFG->wwwroot.'/blocks/import_remote_course/pix/download.gif',
+	                get_string('restoreinprogress', 'block_import_remote_course'));
+	            $form .= html_writer::end_div();
+	        $form .= html_writer::end_div();
+	
+	        // If we have more then one (probably the "news forum") module in the course,
+	        // Display a warrening, and prevent restore.
+	
+	        if(!($this->content instanceof  stdClass)) {
+	            $this->content = new stdClass();
+	        }
+	        if(isset($this->content->text)){
+	            $this->content->text .= $form;
+	        } else {
+	            $this->content->text = $form;
+	        }
+	
+	        return $this->content;
+    } else {
+    	global $PAGE;
+    	$renderer = $PAGE->get_renderer('core');
+    	$context = new stdClass();
+    	$this->content = new stdClass();
+    	$this->content->text = $renderer->render_from_template('block_import_remote_course/notificationsystem', $context);
+    	return $this->content;
     }
+    
+    }
+    
 
     // Block is available only on course pages.
     public function applicable_formats() {

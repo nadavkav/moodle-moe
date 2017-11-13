@@ -176,7 +176,7 @@ class observer {
     	global $DB, $CFG;
     	$instance = new observer();
     	$localevent = $event->get_data();
-    	if (! $instance->check_if_parent_have_idnumber($localevent['courseid'])) {
+    	if (! $instance->parent_have_idnumber($localevent['courseid'])) {
     		return ;
     	}
     	
@@ -225,14 +225,13 @@ class observer {
     
     /**
      * Event notification_observer.
-     * send update to all subscribers about the course cate change
+     * send update to all subscribers about post in the chenge log
      */
     public static function send_notification(\core\event\base $event) {
     	global $DB, $CFG;
-    	
     	$instance = new observer();
     	$localevent = $event->get_data();
-    	if (! $instance->check_if_parent_have_idnumber($localevent['courseid'])) {
+    	if (! $instance->parent_have_idnumber($localevent['courseid']) || ! $instance->is_news_forum($localevent['other']['forumid'])) {
     		return ;
     	}
     	
@@ -249,8 +248,8 @@ class observer {
     	
     	
     	$params = array(
-    			'type' => 'n',
-    			'course_id' 		 => $localevent['courseid'],
+    			'type' 		=> 'n',
+    			'course_id' => $localevent['courseid'],
     	);
     	
     	foreach ($pub->get_all_subscribers() as $sub) {
@@ -299,7 +298,7 @@ class observer {
      *
      * @return string|bool the tag, false otherwise .
      */
-    protected  function check_if_parent_have_idnumber($courseid) {
+    protected  function parent_have_idnumber($courseid) {
     	global $DB;
     	
     	$sql = 'select CA.idnumber from {course} C inner join
@@ -307,5 +306,16 @@ class observer {
     	return $DB->get_field_sql($sql, array(
     			'id' => $courseid
     	));
+    }
+    
+    /**
+     * check if the forum is news forum.
+     *
+     * @return boolean 
+     */
+    protected  function is_news_forum($formid) {
+    	global $DB;  	
+    	return $DB->get_field('forum', 'type', ['id' => $formid]) == 'news' ? true : false;
+    	
     }
 }

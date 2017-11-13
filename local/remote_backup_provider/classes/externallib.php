@@ -24,7 +24,9 @@ namespace local_remote_backup_provider;
 
 use mod_questionnaire\response\boolean;
 use local_remote_backup_provider\publisher;
-
+require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
+require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
+//require_once ($CFG->dirroot . '/backup/controller/backup_controller.class.php');
 defined('MOODLE_INTERNAL') || die();
 
 class externallib extends \external_api {
@@ -321,4 +323,72 @@ class externallib extends \external_api {
     public static function unsubscribe_returns() {
         return new \external_function_parameters( array (new \external_value(PARAM_BOOL)));
     }
+	public static function get_activity_backup_by_id_parameters() {
+		return new \external_function_parameters ( array (
+				'id' => new \external_value ( PARAM_INT, 'id' ),
+				'username' => new \external_value ( PARAM_USERNAME, 'username' ) 
+		) );
+	}
+	public static function get_activity_backup_by_id($id, $username) {
+		global $CFG, $DB;
+		
+		// Validate parameters passed from web service.
+		$params = self::validate_parameters ( self::get_activity_backup_by_id_parameters (), array (
+				'id' => $id,
+				'username' => $username 
+		) );
+		
+		// Extract the userid from the username.
+		$userid = $DB->get_field ( 'user', 'id', array (
+				'username' => $username 
+		) );
+		
+		// Instantiate controller.
+		$bc = new \backup_controller( \backup::TYPE_1ACTIVITY, $id, \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userid );
+		
+		// Run the backup.
+		$bc->set_status ( \backup::STATUS_AWAITING );
+		$bc->execute_plan ();
+		$result = $bc->get_results ();
+		
+		if (isset ( $result ['backup_destination'] ) && $result ['backup_destination']) {
+			$file = $result ['backup_destination'];
+			$context = \context_module::instance ( $id );
+			$fs = get_file_storage ();
+			$timestamp = time ();
+			
+			$filerecord = array (
+					'contextid' => $context->id,
+					'component' => 'local_remote_backup_provider',
+					'filearea' => 'backup',
+					'itemid' => $timestamp,
+					'filepath' => '/',
+					'filename' => 'foo.mbz',
+					'timecreated' => $timestamp,
+					'timemodified' => $timestamp 
+			);
+			$storedfile = $fs->create_file_from_storedfile ( $filerecord, $file );
+			$file->delete ();
+			
+			// Make the link.
+			$filepath = $storedfile->get_filepath () . $storedfile->get_filename ();
+			$fileurl = \moodle_url::make_webservice_pluginfile_url (
+					$storedfile->get_contextid (),
+					$storedfile->get_component (),
+					$storedfile->get_filearea (),
+					$storedfile->get_itemid (),
+					$storedfile->get_filepath (),
+					$storedfile->get_filename () );
+			return array (
+					'url' => $fileurl->out ( true ) 
+			);
+		} else {
+			return false;
+		}
+	}
+	public static function get_activity_backup_by_id_returns() {
+		return new \external_single_structure ( array (
+				'url' => new \external_value ( PARAM_RAW, 'url of the backup file' ) 
+		) );
+	}
 }

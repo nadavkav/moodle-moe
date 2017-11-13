@@ -61,4 +61,11 @@ $functions = array(
         'description' => 'unsubscribe to the server.',
         'type' => 'write',
     ),
+	'local_remote_backup_provider_get_activity_backup_by_id' => array(
+			'classname' => 'local_remote_backup_provider\externallib',
+			'methodname' => 'get_activity_backup_by_id',
+			'classpath' => 'local/remote_backup_provider/classes/externallib.php',
+			'description' => 'get a single activity backup.',
+			'type' => 'write',
+	),
 );
