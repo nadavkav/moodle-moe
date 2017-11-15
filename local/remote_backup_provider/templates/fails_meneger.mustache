@@ -1,0 +1,54 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+<section id="fails_meneger">
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <table border="1" id="fails_meneger_table">
+    <thead>
+      <tr>
+    <th>{{# str }} id, local_remote_backup_provider {{/ str }}</th>
+    <th>{{# str }} name, local_remote_backup_provider {{/ str }}</th>
+    <th>{{# str }} type, local_remote_backup_provider {{/ str }}</th>
+    <th>{{# str }} timecreate, local_remote_backup_provider {{/ str }}</th>
+    <th>{{# str }} last_time_try, local_remote_backup_provider {{/ str }}</th>
+    <th></th>
+        </tr>
+    </thead>
+    <tbody>
+{{#allfails}}
+    <tr>
+        <td>{{id}}</td>       
+        <td>{{name}}</td>  
+        <td>{{type}}</td>      
+        <td>{{timecreate}}</td> 
+        <td>{{last_time_try}}</td>
+        <td id="resend_button"><button type="button" class="btn btn-primary resand" id={{id}}>{{# str }} resend, local_remote_backup_provider {{/ str }}</button></td>                                    
+    </tr>
+{{/allfails}}
+</tbody>
+</table>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#fails_meneger_table').dataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Hebrew.json"
+        }
+    } );
+} );
+</script>
+    
+</section>

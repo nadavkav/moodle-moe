@@ -68,4 +68,14 @@ $functions = array(
 			'description' => 'get a single activity backup.',
 			'type' => 'write',
 	),
+	'local_remote_backup_provider_retry_send_notification' => array(
+			'classname'   => 'local_remote_backup_provider\externallib',
+			'methodname'  => 'retry_send_notification',
+			'classpath'   => 'local/remote_backup_provider/classes/externallib.php',
+			'description' => 'retry to sand a single notification again.',
+			'type' 		  => 'write',
+			'ajax'        => true,
+			'capabilities' => 'moodle/site:config',
+			
+	),
 );

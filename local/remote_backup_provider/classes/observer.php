@@ -99,11 +99,8 @@ class observer {
             $resp = json_decode($curl->post($url, $localparams, $options));
 
             if (! isset($resp->result) || $resp->result != true) {
-                $dataobject = new \stdClass();
-                $dataobject->url = $url;
-                $dataobject->local_params = serialize($localparams);
-                $dataobject->options = serialize($options);
-                $DB->insert_record('remote_backup_provider_fails', $dataobject);
+            	$fail = new fail(null, $url, $localparams, $options, 'send_update');
+            	$fail->save();
             }
         }
     }
@@ -159,11 +156,8 @@ class observer {
                 $resp = json_decode($curl->post($url, $localparams, $options));
 
                 if (! isset($resp->result) || $resp->result != true) {
-                    $dataobject = new \stdClass();
-                    $dataobject->url = $url;
-                    $dataobject->local_params = serialize($localparams);
-                    $dataobject->options = serialize($options);
-                    $DB->insert_record('remote_backup_provider_fails', $dataobject);
+                	$fail = new fail(null, $url, $localparams, $options, 'send_cat_update');
+                	$fail->save();
                 }
             }
         }
@@ -214,11 +208,8 @@ class observer {
     		$resp = json_decode($curl->post($url, $localparams, $options));
     		
     		if (! isset($resp->result) || $resp->result != true) {
-    			$dataobject = new \stdClass();
-    			$dataobject->url = $url;
-    			$dataobject->local_params = serialize($localparams);
-    			$dataobject->options = serialize($options);
-    			$DB->insert_record('remote_backup_provider_fails', $dataobject);
+    			$fail = new fail(null, $url, $localparams, $options, 'send_mod_notification');
+    			$fail->save();
     		}
     	}	
     }
@@ -265,11 +256,8 @@ class observer {
     		$resp = json_decode($curl->post($url, $localparams, $options));
     		
     		if (! isset($resp->result) || $resp->result != true) {
-    			$dataobject = new \stdClass();
-    			$dataobject->url = $url;
-    			$dataobject->local_params = serialize($localparams);
-    			$dataobject->options = serialize($options);
-    			$DB->insert_record('remote_backup_provider_fails', $dataobject);
+    			$fail = new fail(null, $url, $localparams, $options, 'send_notification');
+    			$fail->save();
     		}
     	}	
     	

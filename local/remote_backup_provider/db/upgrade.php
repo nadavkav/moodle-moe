@@ -73,6 +73,33 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         // Savepoint reached.
         upgrade_plugin_savepoint(true, 2017083003, 'local', 'remote_backup_provider');
     }
-
+	
+    if ($oldversion < 2017111500) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('remote_backup_provider_fails');
+    	$field = new xmldb_field('timecreate', XMLDB_TYPE_INTEGER, '10', null, true, null, null, null);
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	$field = new xmldb_field('last_time_try', XMLDB_TYPE_INTEGER, '10', null, true, null, null, null);
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	upgrade_plugin_savepoint(true, 2017111500, 'block', 'import_remote_course');
+    	
+    }
+    
+    if ($oldversion < 2017111502) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('remote_backup_provider_fails');
+    	$field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, true, null, null, null);
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	upgrade_plugin_savepoint(true, 2017111502, 'block', 'import_remote_course');
+    	
+    }
     return true;
 }

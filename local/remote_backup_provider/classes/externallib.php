@@ -265,7 +265,7 @@ class externallib extends \external_api {
             $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname
                 as course_name from {course} CO inner join {course_categories} CA on
                 CA.id = CO.category where CA.idnumber<>''";
-            return  $DB->get_records_sql($sql);
+            $templates = $DB->get_records_sql($sql);
         }
         return null;
     }
@@ -390,5 +390,25 @@ class externallib extends \external_api {
 		return new \external_single_structure ( array (
 				'url' => new \external_value ( PARAM_RAW, 'url of the backup file' ) 
 		) );
+	}
+	
+	
+	public static function retry_send_notification_parameters() {
+		return new \external_function_parameters ( array (
+				'id' => new \external_value ( PARAM_INT, 'fail id' ),
+		) );
+	}
+	
+	public static function retry_send_notification($failid) {
+		
+		$params =  self::validate_parameters ( self::retry_send_notification_parameters (), array (
+				'id' => $failid,
+		) );
+		$fail = new fail($params['id']);
+		return $fail->send();
+	}
+	
+	public static function retry_send_notification_returns() {
+		return new \external_function_parameters(array( 'result' =>  (new \external_value(PARAM_BOOL))));
 	}
 }
