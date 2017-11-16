@@ -33,7 +33,44 @@ class observer {
      */
     public static function enrol_user_check(\core\event\base $event) {
         global $DB;
-		
+        $localdata = $event->get_data();
+        if ( !$tamplate = is_tag_course($localdata['courseid'])) {
+        	return ;
+        }
+		$subinstance = new \subscriber();
+		$subinstance->sign_user($localdata['relateduserid'], $localdata['courseid'], $tamplate->course_id);
+		return ;
     }
     
+    
+    /**
+     * Event observer.
+     * if the user is teacher and above sign him up to notification system
+     */
+    public static function enrol_user_remove(\core\event\base $event) {
+    	global $DB;
+    	$localdata = $event->get_data();
+    	$context = context_course::instance($destcourseid);
+    	$teachers = get_role_users(4, $context);
+    	$tamplate = is_tag_course($localdata['courseid']);
+    	
+    	if ( !$tamplate  || !in_array($localdata['relateduserid'], $teachers)) {
+    		return ;
+    	}
+    	$subinstance = new \subscriber();
+    	$subinstance->un_sign_user($localdata['relateduserid'], $localdata['courseid'], $tamplate->course_id);
+    	return ;
+    	
+    }
+    
+    /**
+     * chek if a given course is.
+     *
+     * @param int $courseid -  course id.
+     * @return mixed std table row | false if none found;
+     */
+    public function is_tag_course(int $courseid) {
+    	global $DB;
+    	return $DB->get_record('import_remote_course_templat', ['course_id' => $courseid]);
+    }
 }

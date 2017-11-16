@@ -163,6 +163,37 @@ class subscriber {
 
     }
     /**
+     * sign user to notification on course.
+     *
+     * @param int $user -  user id.
+     * @param int $course -  course id
+     * @return bool true | false
+     */
+    public function sign_user($user, $course, $template_id){
+    	global $DB;    	
+    	$dataobject = new stdClass();
+    	$dataobject->course_id 					   = $course;
+    	$dataobject->teacher_id 				   = $user;
+    	$dataobject->tamplate_id 				   = $template_id;
+    	$dataobject->no_of_notification            = 0;
+    	$dataobject->time_last_notification        = now();
+    	$dataobject->time_last_reset_notifications = now();
+    	$dataobject->time_last_reset_act 		   = now();
+    	$DB->insert_record('import_remote_course_notific', $dataobject);  	
+    }
+    
+    /**
+     * sign user to notification on course.
+     *
+     * @param int $user -  user id.
+     * @param int $course -  course id
+     * @return bool true | false
+     */
+    public function un_sign_user($user, $course){
+    	global $DB;
+    	$DB->delete_records('import_remote_course_notific', ['teacher_id' => $user, 'course_id' => $course]);
+    }
+    /**
      * reset notification on change log count for specific user in a course.
      *
      * @param int $user -  user id.
