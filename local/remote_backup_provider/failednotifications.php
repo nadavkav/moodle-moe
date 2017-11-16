@@ -22,7 +22,9 @@ require_login();
 require_capability('moodle/site:config', $context);
 global $PAGE;
 $PAGE->set_context($context);
-$PAGE->set_url('/local/remote_backup_provider/failednotifications.php');
+$PAGE->set_url(new moodle_url('/local/remote_backup_provider/failednotifications.php'));
+navigation_node::override_active_url(new moodle_url('/local/remote_backup_provider/failednotifications.php'), true);
+
 $PAGE->set_pagelayout('standard');
 
 $PAGE->set_title(get_string('failednotifications', 'local_remote_backup_provider'));

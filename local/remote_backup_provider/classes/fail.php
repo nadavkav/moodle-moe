@@ -168,6 +168,7 @@ class fail {
 			return true;
 		} else {
 			\error_log(\mtrace('faild to update' . $this->url));
+			\error_log(\print_r($resp,true));
 			$this->save();
 			return false;
 		}

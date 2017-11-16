@@ -33,12 +33,12 @@ class block_import_remote_course_external extends external_api {
         	'username'			=> new external_value(PARAM_RAW),
             'type'    		    => new external_value(PARAM_ALPHANUMEXT),
             'course_id'  		=> new external_value(PARAM_INT),
-        	'course_tag'	    => new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
-        	'course_name'	    => new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
-        	'link_to_remote_act'=> new external_value(PARAM_URL, '',VALUE_OPTIONAL),
-        	'cm'  				=> new external_value(PARAM_INT,'',VALUE_OPTIONAL),
-        	'mod'				=> new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
-        	'name'				=> new external_value(PARAM_TEXT, '',VALUE_OPTIONAL),
+        	'course_tag'	    => new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
+        	'course_name'	    => new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
+        	'link_to_remote_act'=> new external_value(PARAM_URL, '',VALUE_DEFAULT, null),
+        	'cm'  				=> new external_value(PARAM_INT,'',VALUE_DEFAULT, null),
+        	'mod'				=> new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
+        	'name'				=> new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
         ));
     }
 
@@ -47,7 +47,7 @@ class block_import_remote_course_external extends external_api {
      *
      * @return boolean.
      */
-    public static function update($username, $type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name) {
+    public static function update($username, $type, $course_id, $course_tag = null, $course_name = null, $link_to_remote_act = null, $cm = null, $mod = null, $name = null) {
 
         $subscribedata = self::validate_parameters(self::update_parameters(), array(
             'type'        => $type,
