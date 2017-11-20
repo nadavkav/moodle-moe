@@ -51,3 +51,10 @@ $string['restore'] = 'Impoert template';
 $string['trytemplates'] = 'Try/view templates';
 $string['testenv_label'] = 'Test Env';
 $string['testenv_desc'] = 'Test enviroment for see and test courses before import';
+
+$string['select'] = 'Select';
+$string['type'] = 'Type';
+$string['name'] = 'Name';
+$string['privewurl'] = 'Preview';
+$string['timecreate'] = 'Add Time';
+$string['import'] = 'Import selected';

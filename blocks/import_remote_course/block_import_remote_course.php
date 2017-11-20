@@ -119,11 +119,19 @@ class block_import_remote_course extends block_base {
 	
 	        return $this->content;
     } else {
-    	global $PAGE;
+    	global $PAGE, $DB, $COURSE, $USER;   	
     	$renderer = $PAGE->get_renderer('core');
     	$context = new stdClass();
+    	$lasttimeactreset = $DB->get_field('import_remote_course_notific', 'time_last_reset_act', ['course_id' => $COURSE->id, 'teacher_id' => $USER->id]);
+    	$mods = $DB->get_record_select('import_remote_course_actdata', "time_added >= $lasttimeactreset");
+    	if ($mods) {
+	    	foreach ($mods as $mod) {
+	    		$mod->url = get_config('local_remote_backup_provider', 'remotesite') . '/' . $mod->type . '/view.php?id=' . $mod->cm;
+	    	}
+    	}
+    	$context->mods = $mods;
     	$this->content = new stdClass();
-    	$this->content->text = $renderer->render_from_template('block_import_remote_course/notificationsystem', $context);
+    	$this->content->text = $renderer->render_from_template('block_import_remote_course/modlist', $context);
     	return $this->content;
     }
     

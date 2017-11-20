@@ -162,6 +162,7 @@ class subscriber {
         return array('result' => true);
 
     }
+    
     /**
      * sign user to notification on course.
      *
@@ -193,6 +194,7 @@ class subscriber {
     	global $DB;
     	$DB->delete_records('import_remote_course_notific', ['teacher_id' => $user, 'course_id' => $course]);
     }
+    
     /**
      * reset notification on change log count for specific user in a course.
      *
@@ -229,9 +231,9 @@ class subscriber {
     }
 	
     /**
-     * get a single activity from remote server and restore it to the selevted course 
+     * get a single activity from remote server and restore it to the  course 
      *
-     * @param int $cm - remote cm id.
+     * @param int $cm - remote mod cm id.
      * @param int $course -  local course id
      * @return bool true|false
      */

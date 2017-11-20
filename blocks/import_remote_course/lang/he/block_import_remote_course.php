@@ -51,3 +51,10 @@ $string['restore'] = 'יבוא תבנית';
 $string['trytemplates'] = 'התנסות/ צפייה בתבניות';
 $string['testenv_label'] = 'סביבת התנסות';
 $string['testenv_desc'] = 'סביבת התנסות לצפייה ובדיקות של הקרוסים לפני יבוא';
+
+$string['select'] = 'בחר';
+$string['type'] = 'סוג פעילות';
+$string['name'] = 'שם הפעילות';
+$string['privewurl'] = 'צפיה מקדימה';
+$string['timecreate'] = 'תאריך הוספה';
+$string['import'] = 'ייבא את הנבחרים';

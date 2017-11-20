@@ -26,11 +26,7 @@
 
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
-
-$destcourseid = optional_param('destcourseid', 0, PARAM_INT);
-$remote = optional_param('remotecourseid', 0, PARAM_INT);
-$sessiontoken = optional_param('sessionid', false, PARAM_ALPHANUM);
-
+$destcourseid = POST['destcourse'];
 //todo: use $COURSE?
 $course = $DB->get_record('course', array('id' => $destcourseid), '*', MUST_EXIST);
 
