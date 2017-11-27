@@ -60,7 +60,7 @@ class block_import_remote_course extends block_base {
             return $this->content;
         }
 
-		$notifications = $DB->get_records('import_remote_course_notific', array('course_id' => $COURSE->id, 'teacher_id' => $USER->id));
+		$notifications = $DB->get_record('import_remote_course_notific', array('course_id' => $COURSE->id, 'teacher_id' => $USER->id));
 		if (!$notifications) {
 	        $remotecourselist = array();
 	        $tags = core_tag_tag::get_item_tags_array('core', 'course', $COURSE->id);
@@ -119,19 +119,40 @@ class block_import_remote_course extends block_base {
 	
 	        return $this->content;
     } else {
-    	global $PAGE, $DB, $COURSE, $USER;   	
+    	global $PAGE, $DB, $COURSE, $USER, $PAGE;   	
     	$renderer = $PAGE->get_renderer('core');
     	$context = new stdClass();
+    	$notification_helper = new \block_import_remote_course\notification_helper($notifications->id);
+    	
+    	$context->tamplatename = get_string('blockeheader','block_import_remote_course', $notification_helper->get_template_info()->course_name);
+    	$context->newitems = get_string('newact','block_import_remote_course',$notification_helper->get_new_act_number());
+    	$context->updatesstr = get_string('updateact','block_import_remote_course',$notifications->no_of_notification);
+    	$context->updatesurl = $notification_helper->get_template_info()->change_log_link;
+    	$context->tetstenvurl = get_config('block_import_remote_course', 'testenv');
+    	
+    	$blockview = $renderer->render_from_template('block_import_remote_course/block_notification_view', $context);
+    	
+    	
+    	$context = new stdClass();
     	$lasttimeactreset = $DB->get_field('import_remote_course_notific', 'time_last_reset_act', ['course_id' => $COURSE->id, 'teacher_id' => $USER->id]);
-    	$mods = $DB->get_record_select('import_remote_course_actdata', "time_added >= $lasttimeactreset");
+    	$mods = $DB->get_records_select('import_remote_course_actdata', "time_added >= $lasttimeactreset");
     	if ($mods) {
+    		$modnames = get_module_types_names();
+    		$modules = get_module_metadata($COURSE, $modnames, 0);
 	    	foreach ($mods as $mod) {
-	    		$mod->url = get_config('local_remote_backup_provider', 'remotesite') . '/' . $mod->type . '/view.php?id=' . $mod->cm;
+	    		$mod->url 		 = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->mod . '/view.php?id=' . $mod->cm;
+	    		$mod->time_added = date('d-m-Y H:i:s', $mod->time_added);
+	    		$localmod = $modules["$mod->mod"];
+	    		$mod->iconsrc = $localmod->icon;
+	    		$mod->type = $localmod->title;
+	    		
 	    	}
     	}
-    	$context->mods = $mods;
+    	$context->mods = array_values($mods);
     	$this->content = new stdClass();
-    	$this->content->text = $renderer->render_from_template('block_import_remote_course/modlist', $context);
+    	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
+    	$this->content->text = $blockview . $modlist;
+    	$PAGE->requires->js_call_amd('block_import_remote_course/import_helper', 'init');
     	return $this->content;
     }
     

@@ -262,10 +262,12 @@ class externallib extends \external_api {
                   'username' => $usename
             ));
         if (publisher::subscribe($name, $url, $user, $token)) {
-            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname
-                as course_name from {course} CO inner join {course_categories} CA on
-                CA.id = CO.category where CA.idnumber<>''";
-            $templates = $DB->get_records_sql($sql);
+            $sql = "select CO.id as course_id, CA.idnumber as course_tag, CO.fullname as course_name,
+                    CF.id as change_log_link from {course} CO 
+                    inner join {course_categories} CA on CA.id = CO.category 
+                    join {course} as CF on CF.idnumber = CO.id 
+                    where CA.idnumber<>''";
+            return $DB->get_records_sql($sql);
         }
         return null;
     }
@@ -281,6 +283,7 @@ class externallib extends \external_api {
                     'course_id'   => new \external_value(PARAM_INT, 'id of course'),
                     'course_tag'  => new \external_value(PARAM_RAW, 'idnumber of course'),
                     'course_name' => new \external_value(PARAM_RAW, 'short name of course'),
+                	'change_log_link' => new \external_value(PARAM_RAW, 'change log forum'),
                     )
                 )
             );
