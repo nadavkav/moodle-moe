@@ -42,6 +42,17 @@ $mform = new \block_import_remote_course\form\clone_form();
  	$original_course_tamplate = $DB->get_record('import_remote_course_templat', ['course_id' => $originalcourse]);
  	
  	if (! $original_course_tamplate) {
+ 		$tags = \core_tag_tag::get_item_tags_array('core', 'course', $originalcourse, 1);
+ 		foreach ($tags as $tag) {
+ 			$select = $DB->sql_compare_text('course_tag') . ' = "' . $DB->sql_compare_text($tag);
+ 			$original_course_tamplate = $DB->get_record_select('import_remote_course_templat', $select);
+ 			if ($original_course_tamplate){
+ 				break;
+ 			}
+ 		}
+ 	}
+ 	
+ 	if (! $original_course_tamplate) {
  		throw new \Exception(get_string('coursenotfound','block_import_remote_course'));
  	}
  		
