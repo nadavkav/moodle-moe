@@ -35,3 +35,19 @@
     min-width: 50%;
 	padding-left: 40px;
 }
+
+.block_import_remote_course .footer {
+	    margin-top: 10px;
+}
+
+.block_import_remote_course #fitem_id_submitbutton {
+	padding: unset !important;
+    margin: unset !important;
+    background-color: unset !important;
+}
+
+.block_import_remote_course .felement{
+    margin-right: 85px;	
+}
+
+

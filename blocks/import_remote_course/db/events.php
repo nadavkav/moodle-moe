@@ -13,18 +13,19 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version details
- *
- * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @package    local_remote_backup_provider
+ * @copyright  2017 SysBind LTD
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017112801;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
+$observers = array(
+		array(
+				'eventname'   => 'core\event\course_deleted',
+				'callback'    => 'block_import_remote_course\observer::course_delete',
+				'internal'  => false, // This means that we get events only after transaction commit.
+				'priority'  => 1000,
+		),
+);

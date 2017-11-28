@@ -50,4 +50,10 @@ $string['remotecourselist_desc'] = 'Fixed list of remote courses (each course in
 $string['restore'] = 'Impoert template';
 $string['trytemplates'] = 'Try/view templates';
 $string['testenv_label'] = 'Test Env';
-$string['testenv_desc'] = 'Test enviroment for see and test courses before import';
+$string['testenv_desc'] = 'Test environment for see and test courses before import';
+$string['import_remote_course:clon'] = 'can clone current course';
+$string['clone'] = 'clone the course';
+$string['cat'] = 'select cat to clone to';
+
+$string['successclone'] = 'the course successfully clone!';
+$string['coursenotfound'] = 'the course don\'t have template related to. cloning abort';

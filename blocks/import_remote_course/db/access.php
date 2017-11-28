@@ -57,4 +57,13 @@ $capabilities = array(
             'user' => CAP_ALLOW
         ),
     ),
+	// clone a course.
+	'block/import_remote_course:clon' => array(
+			'riskbitmask' => RISK_SPAM | RISK_XSS,
+			'captype' => 'write',
+			'contextlevel' => CONTEXT_COURSE,
+			'archetypes' => array(
+					'editingteacher' => CAP_ALLOW
+			),
+	),
 );

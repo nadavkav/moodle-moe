@@ -47,6 +47,14 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         // Savepoint reached.
         upgrade_plugin_savepoint(true, 2017073100, 'block', 'import_remote_course');
     }
-
+    if ($oldversion < 2017112700) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('import_remote_course_templat');
+    	if (!$dbman->table_exists($table)) {
+    		$dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/blocks/import_remote_course/db/install.xml', 'import_remote_course_templat');
+    	}
+    	upgrade_plugin_savepoint(true, 2017112700, 'block', 'import_remote_course');
+    }
     return true;
 }

@@ -142,7 +142,18 @@ class subscriber {
         }
         return array('result' => true);
 
+    }  
+    
+    /**
+     * remove a course from the course - template table.
+     *
+     * @param int $courseid -  course id.
+     * @return bool true.
+     * @throws dml_exception A DML specific exception is thrown for any errors.
+     * */
+    public function delete_course(int $courseid) {
+    	global $DB;
+    	return $DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
     }
-
 
 }

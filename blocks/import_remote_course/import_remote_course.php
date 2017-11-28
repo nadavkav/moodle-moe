@@ -158,5 +158,13 @@ $DB->update_record('course', $course);
 $rc->destroy();
 unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
+//log course - template
+$template_id = $DB->get_field('import_remote_course_list', 'id', ['course_id' => $remote]);
+$dataobject = new stdClass();
+$dataobject->course_id = $destcourseid;
+$dataobject->tamplate_id = $template_id;
+$dataobject->user_id = $USER->id;
+$dataobject->time_added = time();
+$DB->insert_record('import_remote_course_templat', $dataobject);
 // Finished? ... show updated course.
 redirect($returnurl);

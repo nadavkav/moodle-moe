@@ -1,4 +1,6 @@
 <?php
+use block_import_remote_course\form\clone_form;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -107,7 +109,12 @@ class block_import_remote_course extends block_base {
                 get_string('restoreinprogress', 'block_import_remote_course'));
             $form .= html_writer::end_div();
         $form .= html_writer::end_div();
-
+        $context = context_course::instance($COURSE->id);
+        if (has_capability('block/import_remote_course:clon', $context)){
+        	$importform = new clone_form($CFG->wwwroot . '/blocks/import_remote_course/clone.php');
+        	$importform->set_data(['course' => $COURSE->id]);
+        	$this->content->footer = $importform->render();
+        }
         // If we have more then one (probably the "news forum") module in the course,
         // Display a warrening, and prevent restore.
 
