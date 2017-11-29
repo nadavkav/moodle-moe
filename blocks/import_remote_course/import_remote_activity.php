@@ -24,6 +24,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
+//***********************not ready*******************
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 $destcourseid = POST['destcourse'];

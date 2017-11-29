@@ -120,3 +120,25 @@ float: left;
 #modlist #close {
     width: 115px;
 }
+
+#section{
+    margin:0 auto;
+    background:#E5E5E5;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-250px;
+    margin-top:-250px;
+    border-radius: 12px;
+	display: inline-block;
+	padding: 20px;
+	padding-top: 5px;
+}
+
+#section h4 {
+	border-bottom:3px solid #eceeef;
+}
+
+#section li {
+	list-style-type: none;
+}

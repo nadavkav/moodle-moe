@@ -74,3 +74,4 @@ $string['newactheader'] = 'New activities';
 $string['cancel'] = 'Cancel';
 $string['resetact'] = 'Reset notifications';
 $string['press'] = 'press for preview';
+$string['chosesection'] = 'select section';

@@ -156,10 +156,25 @@ class block_import_remote_course extends block_base {
 	    		
 	    	}
     	}
+    	//generate sections.
+    	$format = course_get_format($COURSE);
+    	$sections = $format->get_sections();
+    	foreach ($sections as $section) {
+    		$section->id = $section->id;
+    		$section->name = $format->get_section_name($section);
+    	}
+    	//sections selectore
+    	$context = new stdClass();
+    	$context->sections = array_values($sections);
+    	$sections = $renderer->render_from_template('block_import_remote_course/sections', $context);
+    	//mods display
+    	$context = new stdClass();
     	$context->mods = array_values($mods);
     	$this->content = new stdClass();
     	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
-    	$this->content->text = $blockview . $modlist;
+    	
+    	
+    	$this->content->text = $blockview . $sections . $modlist;
     	$PAGE->requires->js_call_amd('block_import_remote_course/import_helper', 'init');
     	return $this->content;
     }

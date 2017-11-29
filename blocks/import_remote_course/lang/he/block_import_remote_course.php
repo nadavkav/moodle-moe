@@ -72,3 +72,4 @@ $string['newactheader'] = 'רכיבים חדשים';
 $string['cancel'] = 'ביטול';
 $string['resetact'] = 'אפס התראות';
 $string['press'] = 'לחץ לצפיה מקדימה';
+$string['chosesection'] = 'בחירת יחידה';

@@ -23,7 +23,7 @@ define(['jquery', 'jqueryui'],function($, jqui) {
 	var approv_request_helper = function() {};
 
 	approv_request_helper.prototype.init = function(){
-		$('#modlist').draggable({ scroll: true });
+		$('#modlist, #section').draggable({ scroll: true });
 		
 		$( "#newitems, .close, #close" ).click(function() {
 			$( "#modlist" ).toggle();
