@@ -22,10 +22,22 @@
 defined('MOODLE_INTERNAL') || die();
 
 $observers = array(
-		array(
-				'eventname'   => 'core\event\course_deleted',
-				'callback'    => 'block_import_remote_course\observer::course_delete',
-				'internal'  => false, // This means that we get events only after transaction commit.
-				'priority'  => 1000,
-		),
+	array(
+			'eventname'   => 'core\event\course_deleted',
+			'callback'    => 'block_import_remote_course\observer::course_delete',
+			'internal'  => false, // This means that we get events only after transaction commit.
+			'priority'  => 1000,
+	),
+    array(
+        'eventname'   => 'core\event\user_enrolment_created',
+        'callback'    => 'block_import_remote_course\observer::enrol_user_check',
+        'internal'  => false, // This means that we get events only after transaction commit.
+        'priority'  => 1000,
+    ),
+	array(
+			'eventname'   => 'core\event\user_enrolment_deleted',
+			'callback'    => 'block_import_remote_course\observer::enrol_user_remove',
+			'internal'  => false, // This means that we get events only after transaction commit.
+			'priority'  => 1000,
+	),
 );

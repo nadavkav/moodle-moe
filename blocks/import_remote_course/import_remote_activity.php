@@ -26,11 +26,7 @@
 
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
-
-$destcourseid = optional_param('destcourseid', 0, PARAM_INT);
-$remote = optional_param('remotecourseid', 0, PARAM_INT);
-$sessiontoken = optional_param('sessionid', false, PARAM_ALPHANUM);
-
+$destcourseid = POST['destcourse'];
 //todo: use $COURSE?
 $course = $DB->get_record('course', array('id' => $destcourseid), '*', MUST_EXIST);
 
@@ -161,24 +157,18 @@ unset($rc); // File logging is a mess, we can only try to rely on gc to close ha
 //subscribe the teachers in course to notification system
 $context = context_course::instance($destcourseid);
 $teachers = get_role_users(4, $context);
-$template_id = $DB->get_field('import_remote_course_list', 'id', ['course_id' => $remote]);
 foreach ($teachers as $teacher) {
 	$dataobject = new stdClass();
 	$dataobject->course_id 					   = $destcourseid;
 	$dataobject->teacher_id 				   = $teacher;
-	$dataobject->tamplate_id 				   = $template_id;
+	$dataobject->tamplate_id 				   = $remote;
 	$dataobject->no_of_notification            = 0;
 	$dataobject->time_last_notification        = now();
 	$dataobject->time_last_reset_notifications = now();
 	$dataobject->time_last_reset_act 		   = now();
 	$DB->insert_record('import_remote_course_notific', $dataobject);
 }
-//log course - template
-$dataobject = new stdClass();
-$dataobject->course_id = $destcourseid;
-$dataobject->tamplate_id = $template_id;
-$dataobject->user_id = $USER->id;
-$dataobject->time_added = now();
-$DB->insert_record('import_remote_course_templat', $dataobject);
+
+
 // Finished? ... show updated course.
 redirect($returnurl);

@@ -57,3 +57,20 @@ $string['cat'] = 'select cat to clone to';
 
 $string['successclone'] = 'the course successfully clone!';
 $string['coursenotfound'] = 'the course don\'t have template related to. cloning abort';
+$string['testenv_desc'] = 'Test enviroment for see and test courses before import';
+
+$string['select'] = 'Select';
+$string['type'] = 'Type';
+$string['name'] = 'Name';
+$string['privewurl'] = 'Preview';
+$string['timecreate'] = 'Add Time';
+$string['import'] = 'Import selected';
+
+$string['blockeheader'] = 'updates for template {$a}';
+$string['newact'] = 'There are {$a} new activities';
+$string['updateact'] = 'There are {$a}  activities updates';
+$string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונים לגבי תבנית הקורס שלך.';
+$string['newactheader'] = 'New activities';
+$string['cancel'] = 'Cancel';
+$string['resetact'] = 'Reset notifications';
+$string['press'] = 'press for preview';

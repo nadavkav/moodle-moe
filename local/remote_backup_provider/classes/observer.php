@@ -99,11 +99,8 @@ class observer {
             $resp = json_decode($curl->post($url, $localparams, $options));
 
             if (! isset($resp->result) || $resp->result != true) {
-                $dataobject = new \stdClass();
-                $dataobject->url = $url;
-                $dataobject->local_params = serialize($localparams);
-                $dataobject->options = serialize($options);
-                $DB->insert_record('remote_backup_provider_fails', $dataobject);
+            	$fail = new fail(null, $url, $localparams, $options, 'send_update');
+            	$fail->save();
             }
         }
     }
@@ -159,13 +156,154 @@ class observer {
                 $resp = json_decode($curl->post($url, $localparams, $options));
 
                 if (! isset($resp->result) || $resp->result != true) {
-                    $dataobject = new \stdClass();
-                    $dataobject->url = $url;
-                    $dataobject->local_params = serialize($localparams);
-                    $dataobject->options = serialize($options);
-                    $DB->insert_record('remote_backup_provider_fails', $dataobject);
+                	$fail = new fail(null, $url, $localparams, $options, 'send_cat_update');
+                	$fail->save();
                 }
             }
         }
+    }
+    /**
+     * Event notification_observer.
+     * send update to all subscribers about the course cate change
+     */
+    public static function send_mod_notification(\core\event\base $event) {
+    	global $DB, $CFG;
+    	$instance = new observer();
+    	$localevent = $event->get_data();
+    	if (! $instance->parent_have_idnumber($localevent['courseid'])) {
+    		return ;
+    	}
+    	
+    	$pub = new publisher();
+    	$prefixurl = $instance->get_prefixurl();
+    	$suffixurl = $instance->get_suffixurl();
+    	$options = array();
+    	
+    	$skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+    	if ($skipcertverify) {
+    		$options['curlopt_ssl_verifypeer'] = false;
+    		$options['curlopt_ssl_verifyhost'] = false;
+    	}
+    	
+    	
+    	$params = array(
+    			'type' => 'na',
+    			'course_id' 		 => $localevent['courseid'],
+    			'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
+    			'cm' 				 => $localevent['objectid'],
+    			'mod' 				 => $localevent['other']['modulename'],
+    			'name' 				 => $localevent['other']['name'],
+    	);
+    	
+    	foreach ($pub->get_all_subscribers() as $sub) {
+    		// Subscriber info.
+    		$token = $sub->remote_token;
+    		$remotesite = $sub->base_url;
+    		$localparams = $params;
+    		$localparams['username'] = $sub->remote_user;
+    		
+    		$url = $remotesite . $prefixurl . $token . $postfixurl;
+    		
+    		$curl = new \curl();
+    		$resp = json_decode($curl->post($url, $localparams, $options));
+    		
+    		if (! isset($resp->result) || $resp->result != true) {
+    			$fail = new fail(null, $url, $localparams, $options, 'send_mod_notification');
+    			$fail->save();
+    		}
+    	}	
+    }
+    
+    /**
+     * Event notification_observer.
+     * send update to all subscribers about post in the chenge log
+     */
+    public static function send_notification(\core\event\base $event) {
+    	global $DB, $CFG;
+    	$instance = new observer();
+    	$localevent = $event->get_data();
+    	if (! $instance->parent_have_idnumber($localevent['courseid']) || ! $instance->is_news_forum($localevent['other']['forumid'])) {
+    		return ;
+    	}
+    	
+    	$pub = new publisher();
+    	$prefixurl = $instance->get_prefixurl();
+    	$suffixurl = $instance->get_suffixurl();
+    	$options = array();
+    	
+    	$skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+    	if ($skipcertverify) {
+    		$options['curlopt_ssl_verifypeer'] = false;
+    		$options['curlopt_ssl_verifyhost'] = false;
+    	}
+    	
+    	
+    	$params = array(
+    			'type' 		=> 'n',
+    			'course_id' => $localevent['courseid'],
+    	);
+    	
+    	foreach ($pub->get_all_subscribers() as $sub) {
+    		// Subscriber info.
+    		$token = $sub->remote_token;
+    		$remotesite = $sub->base_url;
+    		$localparams = $params;
+    		$localparams['username'] = $sub->remote_user;
+    		
+    		$url = $remotesite . $prefixurl . $token . $postfixurl;
+    		
+    		$curl = new \curl();
+    		$resp = json_decode($curl->post($url, $localparams, $options));
+    		
+    		if (! isset($resp->result) || $resp->result != true) {
+    			$fail = new fail(null, $url, $localparams, $options, 'send_notification');
+    			$fail->save();
+    		}
+    	}	
+    	
+    }
+    
+    /**
+     * get prefix url for the web service.
+     *
+     * @return String start of web service url.
+     */
+    protected  function  get_prefixurl () {
+    	return '/webservice/rest/server.php?wstoken=';
+    }
+    
+    /**
+     * get suffix url for the web service.
+     *
+     * @return String end of web service url.
+     */
+    protected  function  get_suffixurl () {
+    	return '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
+    }
+    
+    /**
+     * check if parent have idnumber to know if we need to notify the subscribers.
+     *
+     * @return string|bool the tag, false otherwise .
+     */
+    protected  function parent_have_idnumber($courseid) {
+    	global $DB;
+    	
+    	$sql = 'select CA.idnumber from {course} C inner join
+                    {course_categories} CA on C.category = CA.id where C.id=:id';
+    	return $DB->get_field_sql($sql, array(
+    			'id' => $courseid
+    	));
+    }
+    
+    /**
+     * check if the forum is news forum.
+     *
+     * @return boolean 
+     */
+    protected  function is_news_forum($formid) {
+    	global $DB;  	
+    	return $DB->get_field('forum', 'type', ['id' => $formid]) == 'news' ? true : false;
+    	
     }
 }

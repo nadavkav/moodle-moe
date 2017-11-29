@@ -47,6 +47,7 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         // Savepoint reached.
         upgrade_plugin_savepoint(true, 2017073100, 'block', 'import_remote_course');
     }
+    
     if ($oldversion < 2017112700) {
     	$dbman = $DB->get_manager();
     	
@@ -55,6 +56,44 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
     		$dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/blocks/import_remote_course/db/install.xml', 'import_remote_course_templat');
     	}
     	upgrade_plugin_savepoint(true, 2017112700, 'block', 'import_remote_course');
+    }
+    
+    if ($oldversion < 2017112900) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('import_remote_course_list');
+    	$field = new xmldb_field('change_log_link', XMLDB_TYPE_TEXT, '255', null, true, null, null, null);
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	upgrade_plugin_savepoint(true, 2017112900, 'block', 'import_remote_course');
+    	
+    }
+    
+    if ($oldversion < 2017112900) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('import_remote_course_notific');
+    	if (!$dbman->table_exists($table)) {
+    		$dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/blocks/import_remote_course/db/install.xml', 'import_remote_course_notific');
+    	}
+    	$table = new xmldb_table('import_remote_course_actdata');
+    	if (!$dbman->table_exists($table)) {
+    		$dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/blocks/import_remote_course/db/install.xml', 'import_remote_course_actdata');
+    	}  	
+    	upgrade_plugin_savepoint(true, 2017112900, 'block', 'import_remote_course');
+    	
+    }
+    
+    if ($oldversion < 2017112900) {
+    	$dbman = $DB->get_manager();
+    	
+    	$table = new xmldb_table('import_remote_course_templat');
+    	if (!$dbman->table_exists($table)) {
+    		$dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/blocks/import_remote_course/db/install.xml', 'import_remote_course_templat');
+    	}
+    	upgrade_plugin_savepoint(true, 2017112900, 'block', 'import_remote_course');
+    	
     }
     return true;
 }

@@ -56,3 +56,19 @@ $string['clone'] = 'העתק את הקורס';
 $string['cat'] = 'בחר קטגוריה ליצירה של הקורס';
 $string['successclone'] = 'הקורס הועתק בהצלחה!';
 $string['coursenotfound'] = 'אין לקורס המבוקש תבנית המתאימה לו';
+
+$string['select'] = 'בחר';
+$string['type'] = 'סוג פעילות';
+$string['name'] = 'שם הפעילות';
+$string['privewurl'] = 'צפיה מקדימה';
+$string['timecreate'] = 'תאריך הוספה';
+$string['import'] = 'ייבא את הנבחרים';
+
+$string['blockeheader'] = 'עדכוני תוכן בתבנית {$a}';
+$string['newact'] = 'קיימים {$a} רכיבים חדשים';
+$string['updateact'] = 'קיימים {$a}  עדכונים ברכיבים קיימים';
+$string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונים לגבי תבנית הקורס שלך.';
+$string['newactheader'] = 'רכיבים חדשים';
+$string['cancel'] = 'ביטול';
+$string['resetact'] = 'אפס התראות';
+$string['press'] = 'לחץ לצפיה מקדימה';

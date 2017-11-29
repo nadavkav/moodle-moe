@@ -46,5 +46,8 @@ if ($hassiteconfig) {
     $ADMIN->add('localplugins', new admin_externalpage('local_remote_backup_provider/listsubs',
                                           get_string('listofsubs', 'local_remote_backup_provider'),
                                           new moodle_url('/local/remote_backup_provider/subscribermanager.php')));
+    $ADMIN->add('localplugins', new admin_externalpage('local_remote_backup_provider/failednotifications',
+    		get_string('failednotifications', 'local_remote_backup_provider'),
+    		new moodle_url('/local/remote_backup_provider/failednotifications.php')));
 
 }

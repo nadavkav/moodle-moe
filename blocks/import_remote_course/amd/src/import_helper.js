@@ -1,4 +1,3 @@
-<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,16 +14,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
  *
+ * @module     block_import_remote_course/import_helper
  * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2017 Sysbind
  */
+define(['jquery', 'jqueryui'],function($, jqui) {
+	var approv_request_helper = function() {};
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2017112900;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
+	approv_request_helper.prototype.init = function(){
+		$('#modlist').draggable({ scroll: true });
+		
+		$( "#newitems, .close, #close" ).click(function() {
+			$( "#modlist" ).toggle();
+		});	
+		
+		$('[id^=section]').droppable({
+			  accept: "tr",
+		      drop: function( event, ui ) {
+		    	  alert('dfgh');
+		        }
+		});
+				
+	};
+	
+	return new approv_request_helper();
+});
