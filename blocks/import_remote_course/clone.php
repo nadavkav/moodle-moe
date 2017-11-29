@@ -45,7 +45,7 @@ $mform = new \block_import_remote_course\form\clone_form();
  		$tags = \core_tag_tag::get_item_tags_array('core', 'course', $originalcourse, 1);
  		foreach ($tags as $tag) {
  			$select = $DB->sql_compare_text('course_tag') . ' = "' . $DB->sql_compare_text($tag);
- 			$original_course_tamplate = $DB->get_record_select('import_remote_course_templat', $select);
+ 			$original_course_tamplate = $DB->get_record_select('import_remote_course_list', $select);
  			if ($original_course_tamplate){
  				break;
  			}
