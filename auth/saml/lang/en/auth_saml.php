@@ -1,6 +1,6 @@
 <?php
 
-$string['auth_saml_allowstudent'] = 'Allow student to logein';
+$string['auth_saml_allowstudent'] = 'Allow student to login';
 $string['auth_saml_studentredirect'] = 'Redirect not allowd student URL';
 $string['auth_saml_loginusing'] = 'Login here using your username and password';
 
@@ -31,8 +31,8 @@ $string['auth_saml_supportcourses'] = 'SAML support courses';
 $string['auth_saml_supportcourses_description'] = 'Select Internal or External to have Moodle auto enrol users in courses (Use External if your course/role mapping is in an external DB)';
 
 $string['auth_saml_syncusersfrom'] = 'Syncronize users from module';
-$string['auth_saml_syncusersfrom_description'] = 'Syncronize users into Moodle using another module. The users will be created with auth = \'saml\', even though they are actually synchronized by another module. 
-This allows you to create, update and delete users from for example LDAP, but log them in via SAML. Note that the module you wish to sync from must be enabled, and all sync settings should be controlled from that module, not from SAML. 
+$string['auth_saml_syncusersfrom_description'] = 'Syncronize users into Moodle using another module. The users will be created with auth = \'saml\', even though they are actually synchronized by another module.
+This allows you to create, update and delete users from for example LDAP, but log them in via SAML. Note that the module you wish to sync from must be enabled, and all sync settings should be controlled from that module, not from SAML.
 To run the synchronization, add auth/saml/cli/sync_users.php to your CRON.';
 
 $string['auth_saml_courses'] = 'SAML courses mapping';
@@ -60,13 +60,13 @@ $string['auth_saml_not_authorize'] = "{\$a} has no active CAV course. ";
 $string['auth_saml_error_executing'] = "Error executing ";
 
 $string['auth_saml_mapping_dsn_description'] = 'Data Source Name string for connecting to the course/role mapping database.
-(dsn must be an absolute path in case you are using SQLite)'; 
+(dsn must be an absolute path in case you are using SQLite)';
 
-$string['auth_saml_course_mapping_dsn'] = 'Course dsn'; 
-$string['auth_saml_role_mapping_dsn'] = 'Role dsn'; 
+$string['auth_saml_course_mapping_dsn'] = 'Course dsn';
+$string['auth_saml_role_mapping_dsn'] = 'Role dsn';
 
-$string['auth_saml_course_mapping_sql'] = 'Course sql'; 
-$string['auth_saml_role_mapping_sql'] = 'Role sql'; 
+$string['auth_saml_course_mapping_sql'] = 'Course sql';
+$string['auth_saml_role_mapping_sql'] = 'Role sql';
 
 $string['auth_saml_mapping_dsn_examples'] = 'mysql://moodleuser:moodlepass@localhost/saml_course_mapping
 sqlite:/<path-to-db>/mapping.sqlite3
@@ -117,6 +117,7 @@ $string['auth_saml_logfile_description'] = 'Set a filename if you want log the s
 $string['auth_saml_samlhookfile'] = 'Hook file path';
 $string['auth_saml_samlhookfile_description'] = 'Set a path if you want to use a hook file that contain your specific funcions';
 $string['auth_saml_errorbadhook'] = "Incorrect SAML plugin hook file: {\$a}";
+$string['auth_saml_logouturl'] = "Single Logout URL";
 
 $string['pluginname'] = 'SAML Authentication';
 $string['pluginnotenabled'] = 'Plugin not enabled!';
