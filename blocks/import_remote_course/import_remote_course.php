@@ -168,9 +168,9 @@ foreach ($teachers as $teacher) {
 	$dataobject->teacher_id 				   = $teacher;
 	$dataobject->tamplate_id 				   = $template_id;
 	$dataobject->no_of_notification            = 0;
-	$dataobject->time_last_notification        = now();
-	$dataobject->time_last_reset_notifications = now();
-	$dataobject->time_last_reset_act 		   = now();
+	$dataobject->time_last_notification        = time();
+	$dataobject->time_last_reset_notifications = time();
+	$dataobject->time_last_reset_act 		   = time();
 	$DB->insert_record('import_remote_course_notific', $dataobject);
 }
 //log course - template
@@ -178,7 +178,7 @@ $dataobject = new stdClass();
 $dataobject->course_id = $destcourseid;
 $dataobject->tamplate_id = $template_id;
 $dataobject->user_id = $USER->id;
-$dataobject->time_added = now();
+$dataobject->time_added = time();
 $DB->insert_record('import_remote_course_templat', $dataobject);
 // Finished? ... show updated course.
 redirect($returnurl);

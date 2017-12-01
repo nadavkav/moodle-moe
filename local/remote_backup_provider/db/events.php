@@ -60,22 +60,4 @@ $observers = array(
 			'internal'  => false, // This means that we get events only after transaction commit.
 			'priority'  => 1000,
 	),
-	array(
-			'eventname'   => 'mod_forum\event\discussion_created',
-			'callback'    => 'local_remote_backup_provider\observer::send_notification',
-			'internal'  => false, // This means that we get events only after transaction commit.
-			'priority'  => 1000,
-	),
-	array(
-			'eventname'   => 'mod_forum\event\discussion_updated',
-			'callback'    => 'local_remote_backup_provider\observer::send_notification',
-			'internal'  => false, // This means that we get events only after transaction commit.
-			'priority'  => 1000,
-	),
-	array(
-			'eventname'   => 'mod_forum\event\post_created',
-			'callback'    => 'local_remote_backup_provider\observer::send_notification',
-			'internal'  => false, // This means that we get events only after transaction commit.
-			'priority'  => 1000,
-	)
 );

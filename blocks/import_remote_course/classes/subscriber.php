@@ -42,8 +42,8 @@ class subscriber {
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
 
         if ($skipcertverify){
-            $options['curlopt_ssl_verifypeer'] = false;
-            $options['curlopt_ssl_verifyhost'] = false;
+            $options['CURLOPT_SSL_VERIFYPEER'] = false;
+            $options['CURLOPT_SSL_VERIFYHOST'] = false;
         }
         // build the curl.
         $url_to_send = $remotesite . $prefixurl . $token . $postfixurl;
@@ -103,7 +103,7 @@ class subscriber {
                 	$dataobject->course_id   = $course_id;
                 	$dataobject->course_tag  = $course_tag;
                 	$dataobject->course_name = $course_name;
-                	$DB->update_record($table, $dataobject); 
+                	$DB->update_record($table, $dataobject);
                 } else {
                 	//creating new course in case of moving course to cat with tag
                 	$dataobject = new stdClass();
@@ -141,28 +141,41 @@ class subscriber {
                 }
                 break;
             case 'n':
-            	$sql = "UPDATE {import_remote_course_notific} 
-                        SET no_of_notification = no_of_notification + 1 
+            	$sql = "UPDATE {import_remote_course_notific}
+                        SET no_of_notification = no_of_notification + 1
                         where tamplate_id=:tamplate_id";
                 $DB->execute($sql, array('tamplate_id' => course_id));
             	break;
-            case 'na':           	
-            	$dataobject = new stdClass();
-            	$dataobject->tamplate_id        = $course_id;
+            case 'na':
+                $data = [];
+                $templateid = $DB->get_field('import_remote_course_list', 'id', array(
+                    'course_id' => $course_id
+                ));
+                $coursewithtamplayte = $DB->get_records('import_remote_course_templat',array(
+                    'tamplate_id' => $templateid
+                ));
+                $dataobject = new stdClass();
             	$dataobject->link_to_remote_act = $link_to_remote_act;
-            	$dataobject->cm       		    = $cm;
-            	$dataobject->mod                = $mod;
+            	$dataobject->cm       		    = (int)$cm;
+            	$dataobject->module                = $mod;
             	$dataobject->name 		        = $name;
-            	$dataobject->Time_added 	    = now();
-            	$DB->insert_record('import_remote_course_actdata', $dataobject);
+            	$dataobject->time_added 	    = time();
+            	$dataobject->type               = 'new';
+                foreach ($coursewithtamplayte as $course) {
+                    $dataobject->courseid        = (int)$course->course_id;
+                    $data[] = clone $dataobject;
+                }
+                if (!empty($data)) {
+                    $DB->insert_records('import_remote_course_actdata', $data);
+                }
             	break;
             default:
                 return array('result' => false);
         }
         return array('result' => true);
 
-    }  
-    
+    }
+
     /**
      * remove a course from the course - template table.
      *
@@ -174,7 +187,7 @@ class subscriber {
     	global $DB;
     	return $DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
     }
-    
+
     /**
      * sign user to notification on course.
      *
@@ -183,7 +196,7 @@ class subscriber {
      * @return bool true | false
      */
     public function sign_user($user, $course, $template_id){
-    	global $DB;    	
+    	global $DB;
     	$dataobject = new stdClass();
     	$dataobject->course_id 					   = $course;
     	$dataobject->teacher_id 				   = $user;
@@ -192,9 +205,9 @@ class subscriber {
     	$dataobject->time_last_notification        = now();
     	$dataobject->time_last_reset_notifications = now();
     	$dataobject->time_last_reset_act 		   = now();
-    	$DB->insert_record('import_remote_course_notific', $dataobject);  	
+    	$DB->insert_record('import_remote_course_notific', $dataobject);
     }
-    
+
     /**
      * sign user to notification on course.
      *
@@ -206,7 +219,7 @@ class subscriber {
     	global $DB;
     	$DB->delete_records('import_remote_course_notific', ['teacher_id' => $user, 'course_id' => $course]);
     }
-    
+
     /**
      * reset notification on change log count for specific user in a course.
      *
@@ -224,7 +237,7 @@ class subscriber {
     	$dataobject->time_last_reset_notifications = now();
     	return $DB->update_record('import_remote_course_notific', $dataobject);
     }
-    
+
     /**
      * reset notification on new activity's count for specific user in a course.
      *
@@ -241,9 +254,9 @@ class subscriber {
     	$dataobject->time_last_reset_act = now();
     	return $DB->update_record('import_remote_course_notific', $dataobject);
     }
-	
+
     /**
-     * get a single activity from remote server and restore it to the  course 
+     * get a single activity from remote server and restore it to the  course
      *
      * @param int $cm - remote mod cm id.
      * @param int $course -  local course id
@@ -251,16 +264,16 @@ class subscriber {
      */
     public function get_remote_activity ($cm, $course) {
     	$course = $DB->get_record('course', array('id' => $course), '*', MUST_EXIST);
-    	
+
     	if ($CFG->debug) {
     		debugging("(1) Security checks...<br>");
     	}
-    	
+
     	// Security
     	if (!isloggedin()) {
     		require_login($course);
     	}
-    	
+
     	// Check permissions.
     	$context = context_course::instance($course->id);
     	require_capability('local/remote_backup_provider:access', $context);
@@ -272,11 +285,11 @@ class subscriber {
     	if (empty($token) || empty($remotesite)) {
     		print_error('pluginnotconfigured', 'local_remote_backup_provider', $returnurl);
     	}
-    	
+
     	if ($CFG->debug) {
     		debugging("(2) Generate or get last automated remote backup via Web Service...<br>");
     	}
-    	
+
     	// Get import_remote_course system-level config settings.
     	$remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
     	if (empty($remoteusername)) {
@@ -294,7 +307,7 @@ class subscriber {
     	$params = array('id' => $cm, 'username' => $remoteusername);
     	$curl = new curl();
     	$resp = json_decode($curl->post($url, $params, $options));
-    		
+
     	if ($CFG->debug) {
     		debugging("(3) Starting download & redirecting to restore process...<br>");
     	}
@@ -311,28 +324,28 @@ class subscriber {
     			'timemodified' => $timestamp
     	);
     	$downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
-    			
+
     	if ($CFG->debug) {
     		debugging("(4) Start quick restore into (merge) current course...<br>");
     	}
-    	
+
     	// Extract to a temp folder.
     	$filepath = md5(time() . '-' . $context->id . '-'. $user . '-'. random_string(20));
     	$fb = get_file_packer('application/vnd.moodle.backup');
     	$extracttopath = $CFG->tempdir . '/backup/' . $filepath . '/';
     	$extractedbackup = $fb->extract_to_pathname($downloadedbackupfile, $extracttopath);
-    	
+
     	// Prepare for restore
     	$rc = new restore_controller($filepath, $course, \backup::INTERACTIVE_NO,
     			\backup::MODE_IMPORT, $user, \backup::EXISTING_ADDING);
-    	
+
     	if ($rc->execute_precheck()) {
     		$rc->execute_plan();
     	} else {
     		echo get_string('errorwhilerestoringthecourse', 'tool_uploadcourse');
     	}
     	$rc->destroy();
-    	unset($rc); 
+    	unset($rc);
     	return true;
     }
 }
