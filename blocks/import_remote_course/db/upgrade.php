@@ -96,7 +96,7 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
 
     }
 
-    if ($oldversion < 2017120101) {
+    if ($oldversion < 2017120102) {
         $dbman = $DB->get_manager();
         $table = new xmldb_table('import_remote_course_actdata');
         $field = new xmldb_field('tamplate_id', XMLDB_TYPE_INTEGER, '10', null, true, false, 1, null);
@@ -111,7 +111,11 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-        upgrade_block_savepoint(true, 2017120101, import_remote_course);
+        $table = new xmldb_table('import_remote_course_notific');
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+        upgrade_block_savepoint(true, 2017120102, 'import_remote_course');
     }
     return true;
 }
