@@ -1,5 +1,6 @@
 <?php
 use tool_log\plugininfo\logstore;
+use block_import_remote_course\local\notification_helper;
 
 // This file is part of Moodle - http://moodle.org/
 //
@@ -155,18 +156,15 @@ class subscriber {
                     'tamplate_id' => $templateid
                 ));
                 $dataobject = new stdClass();
-            	$dataobject->link_to_remote_act = $link_to_remote_act;
+            	$dataobject->linktoremoteact = $link_to_remote_act;
             	$dataobject->cm       		    = (int)$cm;
             	$dataobject->module                = $mod;
             	$dataobject->name 		        = $name;
-            	$dataobject->time_added 	    = time();
             	$dataobject->type               = 'new';
                 foreach ($coursewithtamplayte as $course) {
                     $dataobject->courseid        = (int)$course->course_id;
-                    $data[] = clone $dataobject;
-                }
-                if (!empty($data)) {
-                    $DB->insert_records('import_remote_course_actdata', $data);
+                    $notification = new notification_helper(0, $dataobject);
+                    $notification->create();
                 }
             	break;
             default:

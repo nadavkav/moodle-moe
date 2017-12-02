@@ -96,7 +96,7 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
 
     }
 
-    if ($oldversion < 2017120102) {
+    if ($oldversion < 2017120201) {
         $dbman = $DB->get_manager();
         $table = new xmldb_table('import_remote_course_actdata');
         $field = new xmldb_field('tamplate_id', XMLDB_TYPE_INTEGER, '10', null, true, false, 1, null);
@@ -107,7 +107,23 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         if ($dbman->field_exists($table, $field)) {
             $dbman->rename_field($table, $field, 'module');
         }
+        $field = new xmldb_field('time_added', XMLDB_TYPE_INTEGER, '10', null, true, false, null, null);
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->rename_field($table, $field, 'timecreated');
+        }
         $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '6', null, true, false, null, null);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('linktoremoteact', XMLDB_TYPE_TEXT, '255', null, false, false, null, null);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, true, false, time(), null);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('usermodified', XMLDB_TYPE_INTEGER, '10', null, true, false, 2, null);
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
@@ -115,7 +131,20 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         if ($dbman->table_exists($table)) {
             $dbman->drop_table($table);
         }
-        upgrade_block_savepoint(true, 2017120102, 'import_remote_course');
+        $table = new xmldb_table('import_remote_course_templat');
+        $field = new xmldb_field('usermodified', XMLDB_TYPE_INTEGER, '10', null, true, false, 2, null);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, true, false, 2, null);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('time_added', XMLDB_TYPE_INTEGER, '10', null, true, false, null, null);
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->rename_field($table, $field, 'timecreated');
+        }
+        upgrade_block_savepoint(true, 2017120201, 'import_remote_course');
     }
     return true;
 }
