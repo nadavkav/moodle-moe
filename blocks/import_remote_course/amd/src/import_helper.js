@@ -20,12 +20,12 @@
  * @copyright  2017 Sysbind
  */
 define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
-	var approv_request_helper = function() {};
+	var Approv_request_helper = function() {};
 
-	approv_request_helper.prototype.init = function(courseid){
+	Approv_request_helper.prototype.init = function(courseid){
 		$('#modlist, #section').draggable({ scroll: true });
 		$('.activityitem').on('dragstart',function(event){
-			event.originalEvent.dataTransfer.setData('text/html', event.target.id)
+			event.originalEvent.dataTransfer.setData('text/html', event.target.id);
 		});
 		$("#newitems").click(function() {
 			$("#newactivitieslist").toggleClass('hidden');
@@ -37,12 +37,10 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 					event.preventDefault();
 					break;
 				case 'drop':
-				default:
 					var data = event.originalEvent.dataTransfer.getData("text/html");
 				    if(!$('#' + data).hasClass('activityitem')){
 				    	break;
 				    }
-				    event.preventDefault();
 					var promises = ajax.call([
 						{methodname: 'block_import_remote_course_activity', args: {
 							'cmid': $('#' + data).data('cmid'),
@@ -52,15 +50,13 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 					]);
 				    promises[0].done(function(response) {
 				       if(response.status== 'success'){
-				    	   Window.Location = '#';
+				    	   location.reload();
 				       }
-				    }).fail(function(ex) {
-				    	console.log(ex);
 				    });
 					break;
 			}
 		});
 	};
 	
-	return new approv_request_helper();
+	return new Approv_request_helper();
 });
