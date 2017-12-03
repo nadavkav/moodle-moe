@@ -167,6 +167,26 @@ class subscriber {
                     $notification->create();
                 }
             	break;
+            case 'ua':
+                $data = [];
+                $templateid = $DB->get_field('import_remote_course_list', 'id', array(
+                    'course_id' => $course_id
+                ));
+                $coursewithtamplayte = $DB->get_records('import_remote_course_templat',array(
+                    'tamplate_id' => $templateid
+                ));
+                $dataobject = new stdClass();
+            	$dataobject->linktoremoteact = $link_to_remote_act;
+            	$dataobject->cm       		    = (int)$cm;
+            	$dataobject->module                = $mod;
+            	$dataobject->name 		        = $name;
+            	$dataobject->type               = 'update';
+                foreach ($coursewithtamplayte as $course) {
+                    $dataobject->courseid        = (int)$course->course_id;
+                    $notification = new notification_helper(0, $dataobject);
+                    $notification->create();
+                }
+                break;
             default:
                 return array('result' => false);
         }

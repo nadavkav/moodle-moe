@@ -19,13 +19,13 @@
     <button id="newitems">{{newitems}}</button>
     <ul id="newactivitieslist" class="activitylist hidden">
     {{#newmods}}
-        <li draggable="true" data-cmid="{{cmid}}" class="activityitem">{{name}}</li>
+        <li draggable="true" data-cmid="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
     {{/newmods}}
     </ul>
     <button id="updateitems">{{updatesstr}}</button>
     <ul id="updatedactivites" class="activitylist hidden">
     {{#updatemods}}
-        <li draggable="true" data-cmid="{{cmid}}">{{name}}</li>
+        <li draggable="true" data-cmid="{{cmid}}">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
     {{/updatemods}}
     </ul>
     <a id="importsite" target="_blank" href="{{tetstenvurl}}" class="btn">{{# str }} trytemplates, block_import_remote_course {{/ str }}</a>

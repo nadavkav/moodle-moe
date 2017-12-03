@@ -1,4 +1,6 @@
 <?php
+use block_import_remote_course\local\course_template;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -158,27 +160,13 @@ $DB->update_record('course', $course);
 $rc->destroy();
 unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
-//subscribe the teachers in course to notification system
-$context = context_course::instance($destcourseid);
-$teachers = get_role_users(4, $context);
 $template_id = $DB->get_field('import_remote_course_list', 'id', ['course_id' => $remote]);
-foreach ($teachers as $teacher) {
-	$dataobject = new stdClass();
-	$dataobject->course_id 					   = $destcourseid;
-	$dataobject->teacher_id 				   = $teacher;
-	$dataobject->tamplate_id 				   = $template_id;
-	$dataobject->no_of_notification            = 0;
-	$dataobject->time_last_notification        = time();
-	$dataobject->time_last_reset_notifications = time();
-	$dataobject->time_last_reset_act 		   = time();
-	$DB->insert_record('import_remote_course_notific', $dataobject);
-}
 //log course - template
 $dataobject = new stdClass();
 $dataobject->course_id = $destcourseid;
 $dataobject->tamplate_id = $template_id;
 $dataobject->user_id = $USER->id;
-$dataobject->time_added = time();
-$DB->insert_record('import_remote_course_templat', $dataobject);
+$coursetemplate = new course_template(0, $dataobject);
+$coursetemplate->create();
 // Finished? ... show updated course.
 redirect($returnurl);

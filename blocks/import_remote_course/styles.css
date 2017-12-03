@@ -67,14 +67,11 @@
   margin: 0px;
 }
 #block_import_remote_notification .activitylist {
-  border: 1px solid #000000;
   list-style-type: none;
   margin: 0 0 1em 0;
   padding: 0;
 }
-#block_import_remote_notification #newactivitieslist li {
-  border-bottom: 1px solid #000000;
-}
+
 #block_import_remote_notification #newactivitieslist li:last {
   border-bottom: none;
 }
@@ -157,4 +154,7 @@ float: left;
 
 #section li {
 	list-style-type: none;
+}
+.block_import_remote_course #id_cat {
+  max-width: 21%;
 }

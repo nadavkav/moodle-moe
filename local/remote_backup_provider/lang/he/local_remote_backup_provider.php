@@ -54,3 +54,4 @@ $string['resend'] = 'שלח כעת';
 $string['type'] = 'סוג';
 $string['failmesege'] = 'שגיאה בשליחת הודעה ראה לוגים של המערכת לפירוט בעיה';
 $string['successmesege'] = '!הודעה נשלחה בהצלחה';
+$string['updatetemplate'] = 'עדכון תבנית';

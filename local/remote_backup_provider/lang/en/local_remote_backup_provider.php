@@ -55,3 +55,4 @@ $string['type'] = 'Type';
 
 $string['failmesege'] = 'failed to send notification please try again later';
 $string['successmesege'] = 'notification sand successfully';
+$string['updatetemplate'] = 'update template';
