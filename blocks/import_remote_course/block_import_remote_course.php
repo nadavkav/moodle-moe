@@ -1,8 +1,4 @@
 <?php
-use block_import_remote_course\form\clone_form;
-use block_import_remote_course\local\notification_helper;
-use block_import_remote_course\local\course_template;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,6 +14,9 @@ use block_import_remote_course\local\course_template;
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+use block_import_remote_course\form\clone_form;
+use block_import_remote_course\local\notification_helper;
+use block_import_remote_course\local\course_template;
 /**
  * Block import_remote_course
  *
@@ -152,6 +151,7 @@ class block_import_remote_course extends block_base {
 	    		$activity->iconsrc = $localmod->icon;
 	    		$activity->type = $localmod->title;
 	    		$activity->name = $mod->get('name');
+	    		$activity->cmid = $mod->get('cm');
                 $newactivities[] = $activity;
 	    	}
     	}
@@ -166,6 +166,7 @@ class block_import_remote_course extends block_base {
 	    		$activity->iconsrc = $localmod->icon;
 	    		$activity->type = $localmod->title;
 	    		$activity->name = $mod->get('name');
+	    		$activity->cmid = $mod->get('cm');
                 $updateactivities[] = $activity;
 	    	}
     	}

@@ -24,7 +24,9 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 
 	approv_request_helper.prototype.init = function(courseid){
 		$('#modlist, #section').draggable({ scroll: true });
-		
+		$('.activityitem').on('dragstart',function(event){
+			event.originalEvent.dataTransfer.setData('text/html', event.target.id)
+		});
 		$("#newitems").click(function() {
 			$("#newactivitieslist").toggleClass('hidden');
 		});	
@@ -36,14 +38,22 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 					break;
 				case 'drop':
 				default:
+					var data = event.originalEvent.dataTransfer.getData("text/html");
+				    if(!$('#' + data).hasClass('activityitem')){
+				    	break;
+				    }
+				    event.preventDefault();
 					var promises = ajax.call([
 						{methodname: 'block_import_remote_course_activity', args: {
-							'cmid': 799,
-							'courseid': courseid
+							'cmid': $('#' + data).data('cmid'),
+							'courseid': courseid,
+							'sectionid' : $(this).attr('id').replace('section-', '')
 						}}
 					]);
 				    promises[0].done(function(response) {
-				       console.log(response);
+				       if(response.status== 'success'){
+				    	   Window.Location = '#';
+				       }
 				    }).fail(function(ex) {
 				    	console.log(ex);
 				    });

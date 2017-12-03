@@ -67,16 +67,18 @@ class block_import_remote_course_external extends external_api {
         return new external_function_parameters(array(
             'cmid' => new external_value(PARAM_INT, 'context id on remote site', true, null, false),
             'courseid' => new external_value(PARAM_INT, 'course id to restore to', true, null, false),
+            'sectionid' => new external_value(PARAM_INT, 'section id number', true, null, false),
         ));
     }
 
-    public static function import_activity($cmid, $courseid) {
+    public static function import_activity($cmid, $courseid, $sectionid) {
         global $CFG, $DB, $USER;
 
         $result = new stdClass();
         $params = self::validate_parameters(self::import_activity_parameters(), array(
             'cmid' => $cmid,
             'courseid' => $courseid,
+            'sectionid' => $sectionid,
         ));
         $context = context_course::instance($params['courseid']);
         self::validate_context($context);
@@ -137,10 +139,15 @@ class block_import_remote_course_external extends external_api {
         }
         $backupinfo = $rc->get_info();
         $rc->destroy();
-        unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
+        unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
+        $newactivity = reset($backupinfo->activities);
+        $cm = end(get_coursemodules_in_course($newactivity->modulename, $destcourseid));
+        $section = $DB->get_record('course_sections', array('course'=>$destcourseid, 'section'=>$sectionid));
+
+        moveto_module($cm, $section, null);
         // log course - template
-        $notification = notification_helper::get_record(['cm' => $params['cmid']]);
+        $notification = notification_helper::get_record(['cm' => $params['cmid'], 'courseid' => $destcourseid]);
         if(!empty($notification) && !empty($notification->get('id'))) {
             $notification->delete();
         }
