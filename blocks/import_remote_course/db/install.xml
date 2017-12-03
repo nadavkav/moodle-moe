@@ -41,7 +41,7 @@
         <FIELD NAME="module" TYPE="text" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="name" TYPE="text" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="text" LENGTH="6" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD SEQUENCE="true" TYPE="text" NOTNULL="false" NAME="linktoremoteact" LENGTH="255"/>
+        <FIELD SEQUENCE="false" TYPE="text" NOTNULL="false" NAME="linktoremoteact" LENGTH="255"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="usermodified" LENGTH="10"/>
