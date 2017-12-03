@@ -94,7 +94,7 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         $dbman = $DB->get_manager();
 
         $table = new xmldb_table('remote_backup_provider_fails');
-        $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, true, null, '', null);
+        $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, true, null, null', null);
         if (! $dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
