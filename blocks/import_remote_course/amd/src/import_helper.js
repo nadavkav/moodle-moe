@@ -19,23 +19,37 @@
  * @package    block_import_remote_course
  * @copyright  2017 Sysbind
  */
-define(['jquery', 'jqueryui'],function($, jqui) {
+define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 	var approv_request_helper = function() {};
 
-	approv_request_helper.prototype.init = function(){
+	approv_request_helper.prototype.init = function(courseid){
 		$('#modlist, #section').draggable({ scroll: true });
 		
-		$( "#newitems, .close, #close" ).click(function() {
-			$( "#modlist" ).toggle();
+		$("#newitems").click(function() {
+			$("#newactivitieslist").toggleClass('hidden');
 		});	
 		
-		$('[id^=section]').droppable({
-			  accept: "tr",
-		      drop: function( event, ui ) {
-		    	  alert('dfgh');
-		        }
+		$('li.section').on('drop dragover',function(event){
+			switch (event.type){
+				case 'dragover':
+					event.preventDefault();
+					break;
+				case 'drop':
+				default:
+					var promises = ajax.call([
+						{methodname: 'block_import_remote_course_activity', args: {
+							'cmid': 799,
+							'courseid': courseid
+						}}
+					]);
+				    promises[0].done(function(response) {
+				       console.log(response);
+				    }).fail(function(ex) {
+				    	console.log(ex);
+				    });
+					break;
+			}
 		});
-				
 	};
 	
 	return new approv_request_helper();

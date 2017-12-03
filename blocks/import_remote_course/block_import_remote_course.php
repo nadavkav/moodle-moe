@@ -142,8 +142,8 @@ class block_import_remote_course extends block_base {
     	$modnames = get_module_types_names();
     	$modules = get_module_metadata($COURSE, $modnames, 0);
     	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('new', $COURSE->id));
+    	$newactivities = [];
     	if ($mods) {
-    		$newactivities = [];
 	    	foreach ($mods as $mod) {
 	    	    $activity = new stdClass();
 	    		$activity->url = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
@@ -151,12 +151,13 @@ class block_import_remote_course extends block_base {
 	    		$localmod = $modules[$mod->get('module')];
 	    		$activity->iconsrc = $localmod->icon;
 	    		$activity->type = $localmod->title;
+	    		$activity->name = $mod->get('name');
                 $newactivities[] = $activity;
 	    	}
     	}
         $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('update', $COURSE->id));
+    	$updateactivities = [];
     	if ($mods) {
-    		$updateactivities = [];
 	    	foreach ($mods as $mod) {
 	    	    $activity = new stdClass();
 	    		$activity->url = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
@@ -164,6 +165,7 @@ class block_import_remote_course extends block_base {
 	    		$localmod = $modules[$mod->get('module')];
 	    		$activity->iconsrc = $localmod->icon;
 	    		$activity->type = $localmod->title;
+	    		$activity->name = $mod->get('name');
                 $updateactivities[] = $activity;
 	    	}
     	}
@@ -184,11 +186,12 @@ class block_import_remote_course extends block_base {
     	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
     	$this->content->text = $renderer->render_from_template('block_import_remote_course/block_notification_view', $context);
 
-    	$PAGE->requires->js_call_amd('block_import_remote_course/import_helper', 'init');
+    	$PAGE->requires->js_call_amd('block_import_remote_course/import_helper', 'init', [
+    	    'courseid' => $COURSE->id,
+    	]);
     	return $this->content;
     }
-
-    }
+}
 
 
     // Block is available only on course pages.

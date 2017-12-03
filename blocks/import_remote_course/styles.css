@@ -24,7 +24,7 @@
 }
 .block_import_remote_course #importsite,
 .block_import_remote_course #newitems,
-.block_import_remote_course #openchengelog,
+.block_import_remote_course #updateitems,
 .block_import_remote_course #importsite {
     background-image:  url([[pix:block_import_remote_course|mouseicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
     background-position: 5% 50%, 0 0;
@@ -35,7 +35,7 @@
     text-align:right;
     display: block;
     border: 1px solid #89b2ab;
-    min-width: 50%;
+    width: 100%;
 	padding-left: 40px;
 }
 
@@ -61,6 +61,22 @@
 .block_import_remote_course #importsite {
 	margin-bottom:10px;
 	width: auto;
+}
+.block_import_remote_course #newitems,
+.block_import_remote_course #updateitems{
+  margin: 0px;
+}
+#block_import_remote_notification .activitylist {
+  border: 1px solid #000000;
+  list-style-type: none;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+#block_import_remote_notification #newactivitieslist li {
+  border-bottom: 1px solid #000000;
+}
+#block_import_remote_notification #newactivitieslist li:last {
+  border-bottom: none;
 }
 #block_import_remote_notification .btn:hover,
 #block_import_remote_notification .button:hover {

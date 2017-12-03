@@ -17,6 +17,16 @@
 <section id="block_import_remote_notification">
     <h4>{{tamplatename}}</h4>
     <button id="newitems">{{newitems}}</button>
-    <a id="openchengelog" target="_blank" href="{{updatesurl}}" class="btn">{{updatesstr}}</a>
+    <ul id="newactivitieslist" class="activitylist hidden">
+    {{#newmods}}
+        <li draggable="true" >{{name}}</li>
+    {{/newmods}}
+    </ul>
+    <button id="updateitems">{{updatesstr}}</button>
+    <ul id="updatedactivites" class="activitylist hidden">
+    {{#updatemods}}
+        <li draggable="true" >{{name}}</li>
+    {{/updatemods}}
+    </ul>
     <a id="importsite" target="_blank" href="{{tetstenvurl}}" class="btn">{{# str }} trytemplates, block_import_remote_course {{/ str }}</a>
 </section>
