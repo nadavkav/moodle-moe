@@ -800,7 +800,7 @@ abstract class persistent {
      * @param int $skip Limitstart.
      * @param int $limit Number of rows to return.
      *
-     * @return \core\persistent[]
+     * @return persistent[]
      */
     public static function get_records($filters = array(), $sort = '', $order = 'ASC', $skip = 0, $limit = 0) {
         global $DB;
@@ -824,7 +824,7 @@ abstract class persistent {
      * Load a single record.
      *
      * @param array $filters Filters to apply.
-     * @return false|\core\persistent
+     * @return false|persistent
      */
     public static function get_record($filters = array()) {
         global $DB;
@@ -842,7 +842,7 @@ abstract class persistent {
      * @param string $fields
      * @param int $limitfrom
      * @param int $limitnum
-     * @return \core\persistent[]
+     * @return persistent[]
      */
     public static function get_records_select($select, $params = null, $sort = '', $fields = '*', $limitfrom = 0, $limitnum = 0) {
         global $DB;

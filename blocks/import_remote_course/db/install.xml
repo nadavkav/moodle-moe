@@ -24,7 +24,7 @@
         <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="usermodified" LENGTH="10"/>
+        <FIELD NAME="usermodified" SEQUENCE="false" TYPE="int" NOTNULL="true"  LENGTH="10"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -44,7 +44,7 @@
         <FIELD SEQUENCE="false" TYPE="text" NOTNULL="false" NAME="linktoremoteact" LENGTH="255"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD SEQUENCE="false" TYPE="int" NOTNULL="true" NAME="usermodified" LENGTH="10"/>
+        <FIELD NAME="usermodified" SEQUENCE="false" TYPE="int" NOTNULL="true" LENGTH="10"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

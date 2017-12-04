@@ -13,17 +13,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+
 /**
- * Block import_remote_course
- *
- * Display a list of courses to be imported from a remote Moodle system
- * Using a local/remote_backup_provider plugin (dependency)
  *
  * @package    block_import_remote_course
- * @copyright  Nadav Kavalerchik <nadavkav@gmail.com>
+ * @copyright  Sysbind <service@sysbind.co.il>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_import_remote_course;
+use block_import_remote_course\local\course_template;
+
 require_once(dirname(__FILE__) . '/../../config.php');
 
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -40,6 +40,7 @@ $mform = new \block_import_remote_course\form\clone_form();
  	
  	//check if the dest course have record in the course - tamplte table
  	$original_course_tamplate = $DB->get_record('import_remote_course_templat', ['course_id' => $originalcourse]);
+ 	$original_course_tamplate = course_template::get_record(['course_id' => $originalcourse]);
  	
  	if (! $original_course_tamplate) {
  		throw new \Exception(get_string('coursenotfound','block_import_remote_course'));
@@ -113,11 +114,14 @@ $mform = new \block_import_remote_course\form\clone_form();
  		$rc->destroy();
  		unset($rc); 	
  		
- 		//insert the new course to the course - template pivot
- 		unset($original_course_tamplate->id);
- 		$original_course_tamplate->course_id = $newcourseid;
- 		$original_course_tamplate->user_id = $USER->id;
- 		$original_course_tamplate->time_added = \time();	
+ 		//insert the new course to the course - template pivo	
+ 		$dataobject = new stdClass();
+ 		$dataobject->course_id = $newcourseid;
+ 		$dataobject->tamplate_id = $original_course_tamplate->get('tamplate_id');
+ 		$dataobject->user_id = $USER->id;
+ 		$coursetemplate = new course_template(0, $dataobject);
+ 		$coursetemplate->create();
+ 		
  		$DB->insert_record('import_remote_course_templat', $original_course_tamplate);
  		 		
  		redirect(new \moodle_url('/course/view.php', ['id' => $originalcourse]), get_string('successclone', 'block_import_remote_course'));

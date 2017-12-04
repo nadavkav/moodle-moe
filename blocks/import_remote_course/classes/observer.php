@@ -58,7 +58,7 @@ class observer {
     public static function enrol_user_check(\core\event\base $event) {
         global $DB;
         $localdata = $event->get_data();
-        if ( !$tamplate = is_tag_course($localdata['courseid'])) {
+        if ( !$tamplate = self::is_tag_course($localdata['courseid'])) {
         	return ;
         }
 		$subinstance = new \subscriber();
@@ -76,7 +76,7 @@ class observer {
     	$localdata = $event->get_data();
     	$context = context_course::instance($destcourseid);
     	$teachers = get_role_users(4, $context);
-    	$tamplate = is_tag_course($localdata['courseid']);
+    	$tamplate = self::is_tag_course($localdata['courseid']);
     	
     	if ( !$tamplate  || !in_array($localdata['relateduserid'], $teachers)) {
     		return ;
