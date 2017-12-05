@@ -29,7 +29,12 @@ $observers = array(
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
-
+	array(
+			'eventname'   => 'core\event\course_restored',
+			'callback'    => 'local_remote_backup_provider\observer::send_update',
+			'internal'  => false, // This means that we get events only after transaction commit.
+			'priority'  => 1000,
+	),
     array(
         'eventname'   => 'core\event\course_deleted',
         'callback'    => 'local_remote_backup_provider\observer::send_update',
