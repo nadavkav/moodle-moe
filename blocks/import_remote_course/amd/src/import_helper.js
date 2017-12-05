@@ -23,7 +23,7 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 	var Approv_request_helper = function() {};
 
 	Approv_request_helper.prototype.init = function(courseid){
-		$('#modlist, #section').draggable({ scroll: true });
+		
 		$('.activityitem').on('dragstart',function(event){
 			event.originalEvent.dataTransfer.setData('text/html', event.target.id);
 		});
@@ -47,7 +47,7 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 				    }
 					var promises = ajax.call([
 						{methodname: 'block_import_remote_course_activity', args: {
-							'cmid': $('#' + data).data('cmid'),
+							'cmid': data,
 							'courseid': courseid,
 							'sectionid' : $(this).attr('id').replace('section-', '')
 						}}
