@@ -31,6 +31,10 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 			$("#newactivitieslist").toggleClass('hidden');
 		});	
 		
+		$("#updateitems").click(function() {
+			$("#updatedactivites").toggleClass('hidden');
+		});	
+		
 		$('li.section').on('drop dragover',function(event){
 			switch (event.type){
 				case 'dragover':

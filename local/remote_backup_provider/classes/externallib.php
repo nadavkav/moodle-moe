@@ -338,53 +338,83 @@ class externallib extends \external_api {
 				'id' => $id,
 				'username' => $username
 		) );
-
-		// Extract the userid from the username.
-		$userid = $DB->get_field ( 'user', 'id', array (
-				'username' => $username
-		) );
-
-		// Instantiate controller.
-		$bc = new \backup_controller( \backup::TYPE_1ACTIVITY, $id, \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userid );
-
-		// Run the backup.
-		$bc->set_status ( \backup::STATUS_AWAITING );
-		$bc->execute_plan ();
-		$result = $bc->get_results ();
-
-		if (isset ( $result ['backup_destination'] ) && $result ['backup_destination']) {
-			$file = $result ['backup_destination'];
-			$context = \context_module::instance ( $id );
-			$fs = get_file_storage ();
-			$timestamp = time ();
-
-			$filerecord = array (
-					'contextid' => $context->id,
-					'component' => 'local_remote_backup_provider',
-					'filearea' => 'backup',
-					'itemid' => $timestamp,
-					'filepath' => '/',
-					'filename' => 'foo.mbz',
-					'timecreated' => $timestamp,
-					'timemodified' => $timestamp
-			);
-			$storedfile = $fs->create_file_from_storedfile ( $filerecord, $file );
-			$file->delete ();
-
-			// Make the link.
-			$filepath = $storedfile->get_filepath () . $storedfile->get_filename ();
-			$fileurl = \moodle_url::make_webservice_pluginfile_url (
-					$storedfile->get_contextid (),
-					$storedfile->get_component (),
-					$storedfile->get_filearea (),
-					$storedfile->get_itemid (),
-					$storedfile->get_filepath (),
-					$storedfile->get_filename () );
+		
+		//check if file exist		
+		$fs = get_file_storage();
+		$context = \context_module::instance ( $id );
+		// Prepare file record object
+		$fileinfo = array(
+				'component' => 'local_remote_backup_provider',     // usually = table name
+				'filearea' => 'activity_backup',     // usually = table name
+				'itemid' => $id,               // usually = ID of row in table
+				'contextid' => $context->id, // ID of context
+				'filepath' => '/',           // any path beginning and ending in /
+				'filename' => $id . '.mbz'); // any filename
+		
+		// Get file
+		$file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
+				$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+		
+		// Read contents
+		if ($file) {
+			$fileurl = \moodle_url::make_webservice_pluginfile_url($fileinfo['contextid'],
+					$fileinfo['component'],
+					$fileinfo['filearea'],
+					$fileinfo['itemid'],
+					$fileinfo['filepath'],
+					$fileinfo['filename']);
 			return array (
 					'url' => $fileurl->out ( true )
 			);
 		} else {
-			return false;
+		    // file doesn't exist - create one
+			// Extract the userid from the username.
+			$userid = $DB->get_field ( 'user', 'id', array (
+					'username' => $username
+			) );
+	
+			// Instantiate controller.
+			$bc = new \backup_controller( \backup::TYPE_1ACTIVITY, $id, \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userid );
+	
+			// Run the backup.
+			$bc->set_status ( \backup::STATUS_AWAITING );
+			$bc->execute_plan ();
+			$result = $bc->get_results ();
+	
+			if (isset ( $result ['backup_destination'] ) && $result ['backup_destination']) {
+				$file = $result ['backup_destination'];
+				$context = \context_module::instance ( $id );
+				$fs = get_file_storage ();
+				$timestamp = time ();
+	
+				$filerecord = array (
+						'contextid' => $context->id,
+						'component' => 'local_remote_backup_provider',
+						'filearea' => 'activity_backup',
+						'itemid' => $id,
+						'filepath' => '/',
+						'filename' => $id . '.mbz',
+						'timecreated' => $timestamp,
+						'timemodified' => $timestamp
+				);
+				$storedfile = $fs->create_file_from_storedfile ( $filerecord, $file );
+				$file->delete ();
+	
+				// Make the link.
+				$filepath = $storedfile->get_filepath () . $storedfile->get_filename ();
+				$fileurl = \moodle_url::make_webservice_pluginfile_url (
+						$storedfile->get_contextid (),
+						$storedfile->get_component (),
+						$storedfile->get_filearea (),
+						$storedfile->get_itemid (),
+						$storedfile->get_filepath (),
+						$storedfile->get_filename () );
+				return array (
+						'url' => $fileurl->out ( true )
+				);
+			} else {
+				return false;
+			}
 		}
 	}
 	public static function get_activity_backup_by_id_returns() {

@@ -4,6 +4,7 @@ namespace local_remote_backup_provider\task;
 use core\task\scheduled_task;
 use local_remote_backup_provider\publisher;
 use local_remote_backup_provider\observer;
+use local_remote_backup_provider\fail;
 
 class update_template extends scheduled_task {
 
@@ -31,6 +32,7 @@ class update_template extends scheduled_task {
     		$options['CURLOPT_SSL_VERIFYHOST'] = false;
     	}
     	foreach ($coursesmodule as $cm) {
+    		self::delete_activity_backup ($cm->id);
     	    $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
     	    $params = array(
     			'type' => 'ua',
@@ -60,6 +62,30 @@ class update_template extends scheduled_task {
     	    unset($curl);
     	    $DB->delete_records('tag_instance', ['id' => $cm->taginstnace]);
     	}
+    }
+    
+    private function delete_activity_backup ($cmid) {
+    	$fs = get_file_storage();
+    	$context = \context_module::instance ( $cmid );
+    	
+    	// Prepare file record object
+    	$fileinfo = array(
+    			'component' => 'local_remote_backup_provider',
+    			'filearea' => 'activity_backup',     // usually = table name
+    			'itemid' => $cmid,               // usually = ID of row in table
+    			'contextid' => $context->id, // ID of context
+    			'filepath' => '/',           // any path beginning and ending in /
+    			'filename' => $cmid . '.mbz'); // any filename
+    	
+    	// Get file
+    	$file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
+    			$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+    	
+    	// Delete it if it exists
+    	if ($file) {
+    		$file->delete();
+    	}
+    	return ;
     }
 }
 

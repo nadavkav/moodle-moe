@@ -82,42 +82,65 @@ class block_import_remote_course_external extends external_api {
         ));
         $context = context_course::instance($params['courseid']);
         self::validate_context($context);
-        // Get local_remote_backup_provider system-level config settings.
-        $destcourseid = $params['courseid'];
-        $token      = get_config('local_remote_backup_provider', 'wstoken');
-        $remotesite = get_config('local_remote_backup_provider', 'remotesite');
-        $remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
-        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
-        if (empty($token) || empty($remotesite)) {
-            $result->status = 'fail';
-            return $result;
-        }
+        
+        //check if activity already exist 
+        
         $fs = get_file_storage();
-        $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
-            '&wsfunction=local_remote_backup_provider_get_activity_backup_by_id&moodlewsrestformat=json';
-        $options = [];
-        if ($skipcertverify){
-            $options['curlopt_ssl_verifypeer'] = false;
-            $options['curlopt_ssl_verifyhost'] = false;
-        }
-        $curlparams = array('id' => $params['cmid'], 'username' => $remoteusername);
-        //print_r($params);
-        $curl = new curl();
-        // todo: Use HTTPS?
-        $resp = json_decode($curl->post($url, $curlparams, $options));
-
-        $timestamp = time();
-        $filerecord = array(
-            'contextid' => $context->id,
-            'component' => 'local_remote_backup_provider',
-            'filearea'  => 'backup',
-            'itemid'    => $timestamp,
-            'filepath'  => '/',
-            'filename'  => 'foo',
-            'timecreated' => $timestamp,
-            'timemodified' => $timestamp
-        );
-        $downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
+        
+        // Prepare file record object
+        $fileinfo = array(
+        		'component' => 'blocks_import_remote_course',     // usually = table name
+        		'filearea'  => 'activity_backup',     // usually = table name
+        		'itemid'    => $cmid,               // usually = ID of row in table
+        		'contextid' => $context->id, // ID of context
+        		'filepath'  => '/',           // any path beginning and ending in /
+        		'filename'  => $cmid . 'mbz'); // any filename
+        
+        // Get file
+        $downloadedbackupfile = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
+        		$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+        
+        // Read contents
+        if (! $downloadedbackupfile) {
+        	// file doesn't exist - do something
+	        // Get local_remote_backup_provider system-level config settings.
+	        $destcourseid = $params['courseid'];
+	        $token      = get_config('local_remote_backup_provider', 'wstoken');
+	        $remotesite = get_config('local_remote_backup_provider', 'remotesite');
+	        $remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
+	        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+	        if (empty($token) || empty($remotesite)) {
+	            $result->status = 'fail';
+	            return $result;
+	        }
+	        $fs = get_file_storage();
+	        $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
+	            '&wsfunction=local_remote_backup_provider_get_activity_backup_by_id&moodlewsrestformat=json';
+	        $options = [];
+	        if ($skipcertverify){
+	            $options['curlopt_ssl_verifypeer'] = false;
+	            $options['curlopt_ssl_verifyhost'] = false;
+	        }
+	        $curlparams = array('id' => $params['cmid'], 'username' => $remoteusername);
+	        //print_r($params);
+	        $curl = new curl();
+	        // todo: Use HTTPS?
+	        $resp = json_decode($curl->post($url, $curlparams, $options));
+	
+	        $timestamp = time();
+	        $filerecord = array(
+	            'contextid'    => $context->id,
+	            'component'    => 'blocks_import_remote_course',
+	            'filearea'     => 'activity_backup',
+	            'itemid'       => $cmid,
+	            'filepath'     => '/',
+	             'filename'    => $cmid . 'mbz',
+	            'timecreated'  => $timestamp,
+	            'timemodified' => $timestamp
+	        );
+	        $downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
+	    }
+        
         $filepath = md5(time() . '-' . $context->id . '-' . $USER->id . '-' . random_string(20));
         $fb = get_file_packer('application/vnd.moodle.backup');
         $extracttopath = $CFG->tempdir . '/backup/' . $filepath . '/';

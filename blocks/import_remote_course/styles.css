@@ -64,7 +64,7 @@
 }
 .block_import_remote_course #newitems,
 .block_import_remote_course #updateitems{
-  margin: 0px;
+  margin-bottom: 7px;
 }
 #block_import_remote_notification .activitylist {
   list-style-type: none;

@@ -151,10 +151,10 @@ class subscriber {
                 ));
                 $dataobject = new stdClass();
             	$dataobject->linktoremoteact = $link_to_remote_act;
-            	$dataobject->cm       		    = (int)$cm;
-            	$dataobject->module                = $mod;
-            	$dataobject->name 		        = $name;
-            	$dataobject->type               = 'new';
+            	$dataobject->cm       		 = (int)$cm;
+            	$dataobject->module          = $mod;
+            	$dataobject->name 		     = $name;
+            	$dataobject->type            = 'new';
                 foreach ($coursewithtamplayte as $course) {
                     $dataobject->courseid        = (int)$course->course_id;
                     $notification = new notification_helper(0, $dataobject);
@@ -169,14 +169,15 @@ class subscriber {
                 $coursewithtamplayte = $DB->get_records('import_remote_course_templat',array(
                     'tamplate_id' => $templateid
                 ));
+                self::delete_activity_backup($cm);
                 $dataobject = new stdClass();
             	$dataobject->linktoremoteact = $link_to_remote_act;
-            	$dataobject->cm       		    = (int)$cm;
-            	$dataobject->module                = $mod;
-            	$dataobject->name 		        = $name;
-            	$dataobject->type               = 'update';
+            	$dataobject->cm       		 = (int)$cm;
+            	$dataobject->module          = $mod;
+            	$dataobject->name 		     = $name;
+            	$dataobject->type            = 'update';
                 foreach ($coursewithtamplayte as $course) {
-                    $dataobject->courseid        = (int)$course->course_id;
+                    $dataobject->courseid  = (int)$course->course_id;
                     $notification = new notification_helper(0, $dataobject);
                     $notification->create();
                 }
@@ -198,6 +199,30 @@ class subscriber {
     public function delete_course(int $courseid) {
     	global $DB;
     	return $DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
+    }
+    
+    private function delete_activity_backup ($cmid) {
+    	$fs = get_file_storage();
+    	$context = \context_module::instance ($cmid);
+    	
+    	// Prepare file record object
+    	$fileinfo = array(
+    			'component' => 'blocks_import_remote_course',
+    			'filearea'  => 'activity_backup',     // usually = table name
+    			'itemid'    => $cmid,               // usually = ID of row in table
+    			'contextid' => $context->id, // ID of context
+    			'filepath'  => '/',           // any path beginning and ending in /
+    			'filename'  => $cmid . '.mbz'); // any filename
+    	
+    	// Get file
+    	$file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
+    			$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+    	
+    	// Delete it if it exists
+    	if ($file) {
+    		$file->delete();
+    	}
+    	return ;
     }
 
 }
