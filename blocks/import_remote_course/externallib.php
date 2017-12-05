@@ -90,7 +90,7 @@ class block_import_remote_course_external extends external_api {
         // Prepare file record object
         $fileinfo = array(
         		'component' => 'blocks_import_remote_course',     // usually = table name
-        		'filearea'  => 'activity_backup',     // usually = table name
+        		'filearea'  => 'backup',     // usually = table name
         		'itemid'    => $cmid,               // usually = ID of row in table
         		'contextid' => $context->id, // ID of context
         		'filepath'  => '/',           // any path beginning and ending in /
@@ -131,7 +131,7 @@ class block_import_remote_course_external extends external_api {
 	        $filerecord = array(
 	            'contextid'    => $context->id,
 	            'component'    => 'blocks_import_remote_course',
-	            'filearea'     => 'activity_backup',
+	            'filearea'     => 'backup',
 	            'itemid'       => $cmid,
 	            'filepath'     => '/',
 	             'filename'    => $cmid . 'mbz',

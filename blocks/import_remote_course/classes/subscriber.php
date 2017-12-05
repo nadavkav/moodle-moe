@@ -208,7 +208,7 @@ class subscriber {
     	// Prepare file record object
     	$fileinfo = array(
     			'component' => 'blocks_import_remote_course',
-    			'filearea'  => 'activity_backup',     // usually = table name
+    			'filearea'  => 'backup',     // usually = table name
     			'itemid'    => $cmid,               // usually = ID of row in table
     			'contextid' => $context->id, // ID of context
     			'filepath'  => '/',           // any path beginning and ending in /

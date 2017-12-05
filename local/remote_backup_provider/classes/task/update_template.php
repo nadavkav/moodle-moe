@@ -71,7 +71,7 @@ class update_template extends scheduled_task {
     	// Prepare file record object
     	$fileinfo = array(
     			'component' => 'local_remote_backup_provider',
-    			'filearea' => 'activity_backup',     // usually = table name
+    			'filearea' => 'backup',     // usually = table name
     			'itemid' => $cmid,               // usually = ID of row in table
     			'contextid' => $context->id, // ID of context
     			'filepath' => '/',           // any path beginning and ending in /
