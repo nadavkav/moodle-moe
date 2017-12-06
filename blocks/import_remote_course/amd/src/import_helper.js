@@ -19,7 +19,7 @@
  * @package    block_import_remote_course
  * @copyright  2017 Sysbind
  */
-define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
+define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],function($, jqui, ajax, str, notification) {
 	var Approv_request_helper = function() {};
 
 	Approv_request_helper.prototype.init = function(courseid){
@@ -60,6 +60,55 @@ define(['jquery', 'jqueryui', 'core/ajax'],function($, jqui, ajax) {
 					break;
 			}
 		});
+		
+		$("#newconfirmyes").click(function() {
+			var promises = ajax.call([
+				{methodname: 'block_import_remote_course_delete_act', args: {
+					'course_id': courseid,
+					'type' : 'new'
+				}}
+			]);
+		    promises[0].done(function(response) {
+		       if(response.result == true){
+		    	   location.reload();
+		       } else {
+		    	   editaPresent = str.get_string('errordelete', 'block_import_remote_course');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         text = localizedEditString;
+		    	    });
+		    	   editaPresent = str.get_string('confirm', 'core');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         confirm = localizedEditString;
+		    	    });
+		    	   notification.alert('', text, confirm);
+		       }
+		    });
+		});	
+		
+		$("#updateconfirmyes").click(function() {
+			var promises = ajax.call([
+				{methodname: 'block_import_remote_course_delete_act', args: {
+					'course_id': courseid,
+					'type' : 'update'
+				}}
+			]);
+		    promises[0].done(function(response) {
+		       if(response.result == true){
+		    	   location.reload();
+		       } else {
+		    	   editaPresent = str.get_string('errordelete', 'block_import_remote_course');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         text = localizedEditString;
+		    	    });
+		    	   editaPresent = str.get_string('confirm', 'core');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         confirm = localizedEditString;
+		    	    });
+		    	   notification.alert('', text, confirm);
+		       }
+		    });
+		});	
+		
 	};
 	
 	return new Approv_request_helper();

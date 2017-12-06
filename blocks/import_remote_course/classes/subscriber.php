@@ -224,5 +224,19 @@ class subscriber {
     	}
     	return ;
     }
+    
+    /**
+     * remove all actdata entry for specific course
+     *
+     * @param int $courseid -  course id.
+     * @param int $type -  type of actdata - new or updates
+     * @return bool true.
+     * @throws dml_exception A DML specific exception is thrown for any errors.
+     * */
+    public static function delete_all_act_course($courseid, $type) {
+    	global $DB;
+    	$sql = "courseid = :courseid AND " . $DB->sql_compare_text('type') . "= :type";
+    	return  $DB->delete_records_select('import_remote_course_actdata',$sql, ['courseid' => $courseid, 'type' => $type]);
+    }
 
 }

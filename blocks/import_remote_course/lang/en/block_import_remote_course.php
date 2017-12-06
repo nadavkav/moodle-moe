@@ -58,6 +58,7 @@ $string['cat'] = 'select cat to clone to';
 $string['successclone'] = 'the course successfully clone!';
 $string['coursenotfound'] = 'the course don\'t have template related to. cloning abort';
 $string['testenv_desc'] = 'Test enviroment for see and test courses before import';
+$string['resetbutton'] = 'Clear list';
 
 $string['select'] = 'Select';
 $string['type'] = 'Type';
@@ -75,3 +76,9 @@ $string['cancel'] = 'Cancel';
 $string['resetact'] = 'Reset notifications';
 $string['press'] = 'press for preview';
 $string['chosesection'] = 'select section';
+
+$string['confirmdelete'] = 'Confirm item delete';
+$string['deletewarning'] = 'are you sure you wont to delete the current item? this action cannot be undo';
+
+
+

@@ -21,12 +21,57 @@
     {{#newmods}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
     {{/newmods}}
+    {{#newmodsbutton}}
+    <li><button id="resetnew" class="reset" data-toggle="modal" data-target="#newact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
+    {{/newmodsbutton}}
     </ul>
     <button id="updateitems">{{updatesstr}}</button>
     <ul id="updatedactivites" class="activitylist hidden">
     {{#updatemods}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
     {{/updatemods}}
+    {{#updatemodsbutton}}
+    <li><button id="resetupdate" class="reset" data-toggle="modal" data-target="#updateact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
+    {{/updatemodsbutton}}
     </ul>
     <a id="importsite" target="_blank" href="{{tetstenvurl}}" class="btn">{{# str }} trytemplates, block_import_remote_course {{/ str }}</a>
 </section>
+
+<!-- Modal -->
+<div id="newact" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{# str }} confirmdelete, block_import_remote_course {{/ str }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{# str }} deletewarning, block_import_remote_course {{/ str }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="newconfirmyes" class="btn btn-default" data-dismiss="modal">{{# str }} yes, core {{/ str }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{# str }} no, core {{/ str }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="updateact" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{# str }} confirmdelete, block_import_remote_course {{/ str }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{# str }} deletewarning, block_import_remote_course {{/ str }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="updateconfirmyes" class="btn btn-default" data-dismiss="modal">{{# str }} yes, core {{/ str }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{# str }} no, core {{/ str }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

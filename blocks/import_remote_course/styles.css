@@ -174,3 +174,14 @@ float: left;
 .block_import_remote_course #id_cat {
   max-width: 45%;
 }
+
+.block_import_remote_course .reset {
+    margin-right: 30%;
+	margin-top: 8px 
+}
+
+@media only screen and (max-width : 1300px) {
+	.block_import_remote_course .reset {
+	    margin-right: 25%;
+	}
+}

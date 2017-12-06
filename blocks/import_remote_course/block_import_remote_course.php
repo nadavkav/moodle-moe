@@ -177,6 +177,9 @@ class block_import_remote_course extends block_base {
     	//mods display
     	$context->newmods = array_values($newactivities);
     	$context->updatemods = array_values($updateactivities);
+    	$context->newmodsbutton = count($newactivities) > 0 ? true : false;
+    	$context->updatemodsbutton = count($updateactivities) > 0 ? true : false;
+    	
     	$this->content = new stdClass();
     	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
     	$this->content->text = $renderer->render_from_template('block_import_remote_course/block_notification_view', $context);

@@ -184,4 +184,35 @@ class block_import_remote_course_external extends external_api {
             'status' => new external_value(PARAM_ALPHA, 'restore status'),
         ));
     }
+    
+    /**
+     * Returns description of subscribe method parameters
+     *
+     * @return external_function_parameters
+     */
+    public static function delete_act_parameters() {
+    	return new external_function_parameters(array(
+    			'type'    		    => new external_value(PARAM_ALPHANUMEXT),
+    			'course_id'  		=> new external_value(PARAM_INT),
+    	));
+    }
+    
+    /**
+     * update to the server
+     *
+     * @return boolean.
+     */
+    public static function delete_act($type, $course_id) {
+    	$params = self::validate_parameters(self::delete_act_parameters(), ['type' => $type,'course_id' => $course_id]);
+    	return ['result' => subscriber::delete_all_act_course($params['course_id'], $params['type'])];
+    }
+    
+    /**
+     * Returns description of subscribe method result value
+     *
+     * @return external_description
+     */
+    public static function delete_act_returns() {
+    	return new external_function_parameters(array( 'result' =>  (new external_value(PARAM_BOOL))));
+    }
 }

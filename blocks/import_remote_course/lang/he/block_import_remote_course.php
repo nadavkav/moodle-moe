@@ -70,6 +70,11 @@ $string['updateact'] = 'קיימים {$a}  עדכונים ברכיבים קיי�
 $string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונים לגבי תבנית הקורס שלך.';
 $string['newactheader'] = 'רכיבים חדשים';
 $string['cancel'] = 'ביטול';
-$string['resetact'] = 'אפס התראות';
+$string['resetbutton'] = 'אפס רשימה';
+
 $string['press'] = 'לחץ לצפיה מקדימה';
 $string['chosesection'] = 'בחירת יחידה';
+
+$string['confirmdelete'] = 'אישור מחיקה';
+$string['deletewarning'] = 'האם אתה בטוח שברצונך למחוק את הפרטים ברשימה? לא ניתן לשחזר הרכיבים לאחר ביצוע הפעולה';
+
