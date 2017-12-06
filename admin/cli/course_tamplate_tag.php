@@ -50,7 +50,9 @@ foreach ($courses as $course) {
 			$dbobj->tamplate_id = $tamplate_id;
 			$dbobj->course_id   = $course->id;
 			$dbobj->user_id     = 2;
-			$dbobj->time_added  = time();
+			$dbobj->timecreated  = time();
+			$dbobj->timemodified  = time();
+			$dbobj->usermodified  = 2;
 			
 			$newid = $DB->insert_record('import_remote_course_templat', $dbobj);
 			cli_writeln("new id in course-template table: $newid");
