@@ -33,7 +33,7 @@ $totalnewadd = 0;
 $totaskip = 0;
 $courses = $DB->get_records('course');
 foreach ($courses as $course) {
-	cli_writeln("check course $course->fullname ");
+	cli_writeln("check course $course->fullname , (id: $course->id)");
 	if ($DB->get_field('import_remote_course_templat', 'id', ['course_id' => $course->id])) {
 		cli_writeln("already exist. skipping");
 		$totaskip++;
