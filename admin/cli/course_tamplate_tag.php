@@ -37,9 +37,10 @@ foreach ($courses as $course) {
 	if ($DB->get_field('import_remote_course_templat', 'id', ['course_id' => $course->id])) {
 		cli_writeln("already exist. skipping");
 		$totaskip++;
+		cli_writeln('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 		continue;
 	}
-	$tags = core_tag_tag::get_item_tags_array('core', 'course', $course->id, 1);
+	$tags = core_tag_tag::get_item_tags_array('core', 'course', $course->id);
 	foreach ($tags as $tag) {
 		$tag_parts = explode('_', $tag);
 		if (count($tag_parts) == 2) {
@@ -48,9 +49,15 @@ foreach ($courses as $course) {
 			$select = $DB->sql_compare_text('course_name') . ' = "' . $DB->sql_compare_text($tag_parts[1]) . '" AND ' . $DB->sql_compare_text('course_tag') . ' = "' . $DB->sql_compare_text($tag_parts[0]) . '"';
 			$tamplate_id = $DB->get_field_select('import_remote_course_list', 'id', $select);
 			if (!$tamplate_id) {
-				cli_writeln("template parent not exist");
-				$totaskip++;
-				continue;
+				cli_writeln("parent not found try 'like' instead");
+				$select = "course_name like '%$tag_parts[1]%' AND course_tag like '%$tag_parts[0]%'";
+				$tamplate_id = $DB->get_field_select('import_remote_course_list', 'id', $select);
+				if (!$tamplate_id) {
+					cli_writeln("template parent not exist");
+					$totaskip++;
+					cli_writeln('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+					continue;
+				}			
 			}
 			$dbobj->tamplate_id = $tamplate_id;
 			$dbobj->course_id   = $course->id;
