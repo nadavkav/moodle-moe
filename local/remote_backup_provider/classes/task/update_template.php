@@ -60,7 +60,7 @@ class update_template extends scheduled_task {
                 }
     	    }
     	    unset($curl);
-    	    $DB->delete_records('tag_instance', ['id' => $cm->taginstnace]);
+    	    $DB->delete_records('tag_instance', ['id' => $cm->taginstance]);
     	}
     }
     
