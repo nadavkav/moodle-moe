@@ -108,12 +108,6 @@ class block_import_remote_course extends block_base {
 	            $form .= html_writer::end_div();
 	        $form .= html_writer::end_div();
 
-			$context = context_course::instance($COURSE->id);
-	        if (has_capability('block/import_remote_course:clon', $context)){
-	        	$importform = new clone_form($CFG->wwwroot . '/blocks/import_remote_course/clone.php');
-	        	$importform->set_data(['course' => $COURSE->id]);
-	        	$this->content->footer = $importform->render();
-	        }
 	        // If we have more then one (probably the "news forum") module in the course,
 	        // Display a warrening, and prevent restore.
 
@@ -190,6 +184,12 @@ class block_import_remote_course extends block_base {
     	$PAGE->requires->js_call_amd('block_import_remote_course/import_helper', 'init', [
     	    'courseid' => $COURSE->id,
     	]);
+    	$context = context_course::instance($COURSE->id);
+    	if (has_capability('block/import_remote_course:clon', $context)){
+    		$importform = new clone_form($CFG->wwwroot . '/blocks/import_remote_course/clone.php');
+    		$importform->set_data(['course' => $COURSE->id]);
+    		$this->content->footer = $importform->render();
+    	}
     	return $this->content;
     }
 }

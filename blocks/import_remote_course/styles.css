@@ -49,13 +49,29 @@
     background-color: unset !important;
 }
 
+.block_import_remote_course .felement.fsubmit {
+	margin-right: 0px !important;
+}
+
 .block_import_remote_course .felement{
-    margin-right: 85px;	
+    margin-right: 85px !important;	
 	width: 100%;
 	cursor: pointer;
 	border-radius: 5px;
 }
 
+.block_import_remote_course .fitemtitle{
+    width: auto !important;
+}
+
+.block_import_remote_course .felement.fselect{
+        display: unset !important;
+	
+}
+block_import_remote_course .felement.select {
+	    margin-right: -5px !important;
+	
+}
 .block_import_remote_course #importsite,
 .block_import_remote_course #openchengelog,
 .block_import_remote_course #importsite {
@@ -156,5 +172,5 @@ float: left;
 	list-style-type: none;
 }
 .block_import_remote_course #id_cat {
-  max-width: 21%;
+  max-width: 45%;
 }

@@ -31,6 +31,9 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 require_login();
 $context = \context_course::instance($_POST['course']);
 require_capability('block/import_remote_course:clon', $context);
+$context = \context_system::instance();
+$PAGE->set_context($context);
+$PAGE->set_url('/');
 
 $mform = new \block_import_remote_course\form\clone_form();
  if ($fromform = $mform->get_data()) {
@@ -115,15 +118,13 @@ $mform = new \block_import_remote_course\form\clone_form();
  		unset($rc); 	
  		
  		//insert the new course to the course - template pivo	
- 		$dataobject = new stdClass();
+ 		$dataobject = new \stdClass();
  		$dataobject->course_id = $newcourseid;
  		$dataobject->tamplate_id = $original_course_tamplate->get('tamplate_id');
  		$dataobject->user_id = $USER->id;
  		$coursetemplate = new course_template(0, $dataobject);
  		$coursetemplate->create();
- 		
- 		$DB->insert_record('import_remote_course_templat', $original_course_tamplate);
- 		 		
+ 		 		 		
  		redirect(new \moodle_url('/course/view.php', ['id' => $originalcourse]), get_string('successclone', 'block_import_remote_course'));
  }
 
