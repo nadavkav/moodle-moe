@@ -46,7 +46,12 @@ foreach ($courses as $course) {
 			cli_writeln("found matching regex, tag: $tag_parts[0]. template: $tag_parts[1]");
 			$dbobj = new stdClass();
 			$select = $DB->sql_compare_text('course_name') . ' = "' . $DB->sql_compare_text($tag_parts[1]) . '" AND ' . $DB->sql_compare_text('course_tag') . ' = "' . $DB->sql_compare_text($tag_parts[0]) . '"';
-			$tamplate_id = $DB->get_field_select('import_remote_course_list', 'id', $select);				
+			$tamplate_id = $DB->get_field_select('import_remote_course_list', 'id', $select);
+			if (!$tamplate_id) {
+				cli_writeln("template parent not exist");
+				$totaskip++;
+				continue;
+			}
 			$dbobj->tamplate_id = $tamplate_id;
 			$dbobj->course_id   = $course->id;
 			$dbobj->user_id     = 2;
