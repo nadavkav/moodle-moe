@@ -54,6 +54,10 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 					break;
 				case 'drop':
 					var data = event.originalEvent.dataTransfer.getData("text/html");
+					if(data.indexOf("meta") > -1) {
+						data = data.replace( /^\D+/g, '');
+						data = data.substring(1);
+					}
 				    if(!$('#' + data).hasClass('activityitem')){
 				    	break;
 				    }
