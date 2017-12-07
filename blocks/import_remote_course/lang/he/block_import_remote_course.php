@@ -77,4 +77,5 @@ $string['chosesection'] = 'בחירת יחידה';
 
 $string['confirmdelete'] = 'אישור מחיקה';
 $string['deletewarning'] = 'האם אתה בטוח שברצונך למחוק את הפרטים ברשימה? לא ניתן לשחזר הרכיבים לאחר ביצוע הפעולה';
+$string['progresalert'] = 'מייבא רכיבים';
 

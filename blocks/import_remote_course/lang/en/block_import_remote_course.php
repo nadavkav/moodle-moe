@@ -79,6 +79,7 @@ $string['chosesection'] = 'select section';
 
 $string['confirmdelete'] = 'Confirm item delete';
 $string['deletewarning'] = 'are you sure you wont to delete the current item? this action cannot be undo';
+$string['progresalert'] = 'Importing activity';
 
 
 

@@ -62,6 +62,8 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 				    if(!$('#' + data).hasClass('activityitem')){
 				    	break;
 				    }
+				    
+				    runprograssbar();
 					var promises = ajax.call([
 						{methodname: 'block_import_remote_course_activity', args: {
 							'cmid': data,
@@ -127,6 +129,19 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 		});	
 		
 	};
+	
+	function runprograssbar() {
+		$('#progres').modal('show');
+		 var current_progress = 0;
+		  var interval = setInterval(function() {
+		      current_progress += 0.5;
+		      $("#dynamic")
+		      .css("width", current_progress + "%")
+		      .attr("aria-valuenow", current_progress);
+		      if (current_progress >= 100)
+		          clearInterval(interval);
+		  }, 10);
+	}
 	
 	return new Approv_request_helper();
 });
