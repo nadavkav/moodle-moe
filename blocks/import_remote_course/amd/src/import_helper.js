@@ -25,8 +25,16 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 	Approv_request_helper.prototype.init = function(courseid){
 		
 		$('.activityitem').on('dragstart',function(event){
+			$("[id^=section]").addClass('highlight');
 			event.originalEvent.dataTransfer.setData('text/html', event.target.id);
 		});
+		
+		$('.activityitem').on('dragend',function(event){
+			$("[id^=section]").removeClass('highlight');
+		});
+		
+
+		
 		$("#newitems").click(function() {
 			$("#newactivitieslist").toggleClass('hidden');
 		});	
@@ -35,10 +43,14 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 			$("#updatedactivites").toggleClass('hidden');
 		});	
 		
-		$('li.section').on('drop dragover',function(event){
+		$('li.section').on('drop dragover dragleave',function(event){
 			switch (event.type){
 				case 'dragover':
 					event.preventDefault();
+					$(event.target).addClass('drop');
+					break;
+				case 'dragleave':
+					$(event.target).removeClass('drop');
 					break;
 				case 'drop':
 					var data = event.originalEvent.dataTransfer.getData("text/html");

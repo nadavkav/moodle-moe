@@ -198,7 +198,9 @@ class subscriber {
      * */
     public function delete_course(int $courseid) {
     	global $DB;
-    	return $DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
+    	$DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
+    	$DB->delete_records('import_remote_course_actdata', ['courseid' => $courseid]);
+    	return true;
     }
     
     private function delete_activity_backup ($cmid) {

@@ -179,6 +179,16 @@ float: left;
     margin-right: 30%;
 	margin-top: 8px 
 }
+.highlight {
+   background-color: #FCF8E3  !important;
+}
+
+.drop {
+	background-color: moccasin  !important;
+}
+img{
+	pointer-events: none;
+}
 
 @media only screen and (max-width : 1300px) {
 	.block_import_remote_course .reset {
