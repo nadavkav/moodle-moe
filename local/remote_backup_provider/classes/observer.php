@@ -284,16 +284,20 @@ class observer {
     /**
      * check if parent have idnumber to know if we need to notify the subscribers.
      *
-     * @return string|bool the tag, false otherwise .
+     * @return bool .
      */
     protected  function parent_have_idnumber($courseid) {
     	global $DB;
 
     	$sql = 'select CA.idnumber from {course} C inner join
                     {course_categories} CA on C.category = CA.id where C.id=:id';
-    	return $DB->get_field_sql($sql, array(
+    	 $res = $DB->get_field_sql($sql, array(
     			'id' => $courseid
     	));
+    	if ($res) {
+    		return true;
+    	}
+    		return false;
     }
 
     /**

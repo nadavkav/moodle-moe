@@ -65,4 +65,10 @@ $observers = array(
 			'internal'  => false, // This means that we get events only after transaction commit.
 			'priority'  => 1000,
 	),
+	array(
+			'eventname'   => 'core\event\course_module_restored',
+			'callback'    => 'local_remote_backup_provider\observer::send_mod_notification',
+			'internal'  => false, // This means that we get events only after transaction commit.
+			'priority'  => 1000,
+	),
 );
