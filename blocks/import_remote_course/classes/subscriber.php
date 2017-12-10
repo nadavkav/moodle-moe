@@ -157,9 +157,6 @@ class subscriber {
             	$dataobject->name 		     = $name;
             	$dataobject->type            = 'new';
                 foreach ($coursewithtamplayte as $course) {
-                	if (notification_helper::get_record(['course_id' => $course->course_id, 'cm' => $cm])) {
-                		continue;
-                	}
                     $dataobject->courseid        = (int)$course->course_id;
                     $notification = new notification_helper(0, $dataobject);
                     $notification->create();
