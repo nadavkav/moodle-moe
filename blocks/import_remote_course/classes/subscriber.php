@@ -148,7 +148,10 @@ class subscriber {
                 ));
                 $coursewithtamplayte = $DB->get_records('import_remote_course_templat',array(
                     'tamplate_id' => $templateid
-                ));
+                ));                
+                if (notification_helper::get_record(['cm' => $cm])) {
+                	return;
+                }
                 $dataobject = new stdClass();
             	$dataobject->linktoremoteact = $link_to_remote_act;
             	$dataobject->cm       		 = (int)$cm;
