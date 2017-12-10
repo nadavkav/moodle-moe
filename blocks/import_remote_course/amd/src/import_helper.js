@@ -47,10 +47,10 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 			switch (event.type){
 				case 'dragover':
 					event.preventDefault();
-					$(event.target).addClass('drop');
+					$(event.target).closest('[id^=section-]').addClass('drop');
 					break;
 				case 'dragleave':
-					$(event.target).removeClass('drop');
+					$(event.target).closest('[id^=section-]').removeClass('drop');
 					break;
 				case 'drop':
 					var data = event.originalEvent.dataTransfer.getData("text/html");
