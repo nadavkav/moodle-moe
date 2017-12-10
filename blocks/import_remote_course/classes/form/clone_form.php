@@ -36,6 +36,7 @@ class clone_form extends \moodleform {
         
         $cats = $DB->get_records('course_categories');
         $attributes = array();
+        $attributes[] = get_string('selectoption', 'block_import_remote_course');
         foreach ($cats as $catid => $catval) {
         	$paths = explode('/', $catval->path);
         	foreach ($paths as $pathkey => $patval) {

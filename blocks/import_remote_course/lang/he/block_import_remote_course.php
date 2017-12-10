@@ -32,6 +32,7 @@ $string['import_remote_course:addinstance'] = 'Add a import_remote_course block'
 $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course block to my moodle';
 $string['import_remote_course:view'] = 'מאפשר צפייה בבלוק';
 $string['pluginname'] = 'תבניות חלופות בהערכה';
+$string['selectoption'] = 'אנא בחר';
 
 // Specific
 $string['courseisnotempty'] = 'לא ניתן לייבא תבנית היות ומרחב הלימוד אינו ריק';
@@ -53,7 +54,7 @@ $string['testenv_label'] = 'סביבת התנסות';
 $string['testenv_desc'] = 'סביבת התנסות לצפייה ובדיקות של הקרוסים לפני יבוא';
 $string['import_remote_course:clon'] = 'יכולת לשכפל קורס נוחכי במערכת התבניות';
 $string['clone'] = 'שכפול מרחב לימוד';
-$string['cat'] = 'בחר קטגוריה ליצירה של הקורס';
+$string['cat'] = 'בחר קטגוריה לשכפול של הקורס';
 $string['successclone'] = 'הקורס הועתק בהצלחה!';
 $string['coursenotfound'] = 'אין לקורס המבוקש תבנית המתאימה לו';
 
