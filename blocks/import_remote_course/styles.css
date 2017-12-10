@@ -25,6 +25,7 @@
 .block_import_remote_course #importsite,
 .block_import_remote_course #newitems,
 .block_import_remote_course #updateitems,
+.block_import_remote_course #deleteitems,
 .block_import_remote_course #importsite {
     background-image:  url([[pix:block_import_remote_course|mouseicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
     background-position: 5% 50%, 0 0;

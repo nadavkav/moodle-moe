@@ -130,6 +130,7 @@ class block_import_remote_course extends block_base {
     	$context->tamplatename = get_string('blockeheader','block_import_remote_course', $coursetemplate->get_template_name());
     	$context->newitems = get_string('newact','block_import_remote_course', notification_helper::count_records_select("type = ? and courseid= ? ", array('new', $COURSE->id)));
     	$context->updatesstr = get_string('updateact','block_import_remote_course', notification_helper::count_records_select("type = ? and courseid= ? ", array('update', $COURSE->id)));
+    	$context->deleteitemsstr = get_string('deleteitems','block_import_remote_course', notification_helper::count_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id)));
     	$context->tetstenvurl = get_config('block_import_remote_course', 'testenv');
 
     	$modnames = get_module_types_names();
@@ -164,21 +165,27 @@ class block_import_remote_course extends block_base {
                 $updateactivities[] = $activity;
 	    	}
     	}
-    	//generate sections.
-    	$format = course_get_format($COURSE);
-    	$sections = $format->get_sections();
-    	foreach ($sections as $section) {
-    		$section->id = $section->id;
-    		$section->name = $format->get_section_name($section);
+    	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id));
+    	$deleteactivities = [];
+    	if ($mods) {
+    		foreach ($mods as $mod) {
+    			$activity = new stdClass();
+    			$localmod = $modules[$mod->get('module')];
+    			$activity->iconsrc = $localmod->icon;
+    			$activity->type = $localmod->title;
+    			$activity->name = $mod->get('name');
+    			$activity->cmid = $mod->get('cm');
+    			$deleteactivities[] = $activity;
+    		}
     	}
-    	//sections selectore
-    	$context->sections = array_values($sections);
-    	$sections = $renderer->render_from_template('block_import_remote_course/sections', $context);
+    	
     	//mods display
     	$context->newmods = array_values($newactivities);
     	$context->updatemods = array_values($updateactivities);
+    	$context->deletedmods = array_values($deleteactivities);
     	$context->newmodsbutton = count($newactivities) > 0 ? true : false;
     	$context->updatemodsbutton = count($updateactivities) > 0 ? true : false;
+    	$context->deletedmodsbutton = count($deleteactivities) > 0 ? true : false;
     	
     	$this->content = new stdClass();
     	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);

@@ -184,17 +184,29 @@ class observer {
     		$options['CURLOPT_SSL_VERIFYPEER'] = false;
     		$options['CURLOPT_SSL_VERIFYHOST'] = false;
     	}
-
-
-    	$params = array(
-    			'type' => 'na',
-    			'course_id' 		 => $localevent['courseid'],
-    			'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
-    			'cm' 				 => $localevent['objectid'],
-    			'mod' 				 => $localevent['other']['modulename'],
-    			'name' 				 => $localevent['other']['name'],
-    	);
-
+    	$type = $event->crud;
+    	switch ($type) {
+    	case "d":
+    		$params = array(
+		    		'type' => 'da',
+		    		'course_id' 		 => $localevent['courseid'],
+		    		'link_to_remote_act' => 'stub',
+		    		'cm' 				 => $localevent['objectid'],
+		    		'mod' 				 => $localevent['other']['modulename'],
+		    		'name' 				 => $localevent['other']['name'],
+    		);
+    	break;	
+    	case "c":	
+	    	$params = array(
+	    			'type' => 'na',
+	    			'course_id' 		 => $localevent['courseid'],
+	    			'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
+	    			'cm' 				 => $localevent['objectid'],
+	    			'mod' 				 => $localevent['other']['modulename'],
+	    			'name' 				 => $localevent['other']['name'],
+	    	);
+    	break;
+    	}
     	foreach ($pub->get_all_subscribers() as $sub) {
     		// Subscriber info.
     		$token = $sub->remote_token;

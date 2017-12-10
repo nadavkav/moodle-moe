@@ -43,6 +43,10 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 			$("#updatedactivites").toggleClass('hidden');
 		});	
 		
+		$("#deleteitems").click(function() {
+			$("#deletectivitieslist").toggleClass('hidden');
+		});	
+		
 		$('li.section').on('drop dragover dragleave',function(event){
 			switch (event.type){
 				case 'dragover':
@@ -128,6 +132,29 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 		    });
 		});	
 		
+		$("#deleteconfirmyes").click(function() {
+			var promises = ajax.call([
+				{methodname: 'block_import_remote_course_delete_act', args: {
+					'course_id': courseid,
+					'type' : 'delete'
+				}}
+			]);
+		    promises[0].done(function(response) {
+		       if(response.result == true){
+		    	   location.reload();
+		       } else {
+		    	   editaPresent = str.get_string('errordelete', 'block_import_remote_course');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         text = localizedEditString;
+		    	    });
+		    	   editaPresent = str.get_string('confirm', 'core');
+		    	   $.when(editaPresent).done(function(localizedEditString) {
+		    	         confirm = localizedEditString;
+		    	    });
+		    	   notification.alert('', text, confirm);
+		       }
+		    });
+		});	
 	};
 	
 	function runprograssbar() {
