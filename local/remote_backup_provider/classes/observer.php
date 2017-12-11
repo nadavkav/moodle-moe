@@ -178,7 +178,7 @@ class observer {
     	//get section name
     	$modinfo = get_fast_modinfo($localevent['courseid']);
     	$mod = $modinfo->get_cm($localevent['contextinstanceid']);
-    	$section = get_section_name($localevent['courseid'], $mod->section);
+    	$section = get_section_name($localevent['courseid'], $mod->sectionnum);
     	
     	
     	$pub = new publisher();
