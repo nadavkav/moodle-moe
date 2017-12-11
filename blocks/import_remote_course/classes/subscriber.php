@@ -171,7 +171,9 @@ class subscriber {
                 $coursewithtamplayte = $DB->get_records('import_remote_course_templat',array(
                     'tamplate_id' => $templateid
                 ));
-                self::delete_activity_backup($cm);
+                if ($DB->get_record('course_modules', array('id' => $cm))) {
+                	self::delete_activity_backup($cm);
+                }
                 $dataobject = new stdClass();
             	$dataobject->linktoremoteact = $link_to_remote_act;
             	$dataobject->cm       		 = (int)$cm;
@@ -188,8 +190,9 @@ class subscriber {
                 break;
             case 'da' :
             	$DB->delete_records('import_remote_course_actdata', ['cm' => $cm]);
-            	self::delete_activity_backup($cm);
-            	$data = [];
+            	if ($DB->get_record('course_modules', array('id' => $cm))) {
+            		self::delete_activity_backup($cm);
+            	}$data = [];
             	$templateid = $DB->get_field('import_remote_course_list', 'id', array(
             			'course_id' => $course_id
             	));

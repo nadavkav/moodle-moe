@@ -32,7 +32,9 @@ class update_template extends scheduled_task {
     		$options['CURLOPT_SSL_VERIFYHOST'] = false;
     	}
     	foreach ($coursesmodule as $cm) {
-    		self::delete_activity_backup ($cm->id);
+    		if ($DB->get_record('course_modules', array('id' => $cm))) {
+    			self::delete_activity_backup ($cm->id);
+    		}
     	    $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
     	    $params = array(
     			'type' => 'ua',
@@ -66,7 +68,7 @@ class update_template extends scheduled_task {
     
     private function delete_activity_backup ($cmid) {
     	$fs = get_file_storage();
-    	$context = \context_module::instance ( $cmid );
+    	$context = \context_module::instance ($cmid);
     	
     	// Prepare file record object
     	$fileinfo = array(
