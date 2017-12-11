@@ -195,6 +195,14 @@ img{
 	pointer-events: none;
 }
 
+#block_import_remote_notification p{
+	font-weight: bolder;
+    text-align: right;
+	font-size: 14px;
+	color: cornflowerblue;
+}
+
+
 @-webkit-keyframes progress-bar-stripes {
     from {
         background-position: 1rem 0
