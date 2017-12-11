@@ -176,7 +176,7 @@ class observer {
     		return ;
     	}
     	//get section name
-    	if ($localevent->crud == 'd') {
+    	if ($localevent['crud'] == 'd') {
     		$section = 'stub';
     	} else {
     		$modinfo = get_fast_modinfo($localevent['courseid']);
