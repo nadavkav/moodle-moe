@@ -19,7 +19,7 @@
     <TABLE NAME="remote_backup_provider_fails" COMMENT="List of subscribers">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="type" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="type" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="url" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="local_params" TYPE="binary" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>

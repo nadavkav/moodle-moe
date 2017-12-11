@@ -224,7 +224,7 @@ class subscriber {
      * @return bool true.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      * */
-    public function delete_course(int $courseid) {
+    public static function delete_course(int $courseid) {
     	global $DB;
     	$DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
     	$DB->delete_records('import_remote_course_actdata', ['courseid' => $courseid]);
