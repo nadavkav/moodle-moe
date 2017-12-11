@@ -37,7 +37,7 @@ class update_template extends scheduled_task {
     		}
     		
     		$modinfo = get_fast_modinfo($cm->course);
-    		$sectionnumber =$DB->get_field('course_sections', 'section', ['id' => $cm->sections]);
+    		$sectionnumber =$DB->get_field('course_sections', 'section', ['id' => $cm->section]);
     		$section = get_section_name($cm->course, $sectionnumber);
     		
     	    $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
