@@ -224,14 +224,14 @@ class subscriber {
      * @return bool true.
      * @throws dml_exception A DML specific exception is thrown for any errors.
      * */
-    public static function delete_course(int $courseid) {
+    public function delete_course(int $courseid) {
     	global $DB;
     	$DB->delete_records('import_remote_course_templat', ['course_id' => $courseid]);
     	$DB->delete_records('import_remote_course_actdata', ['courseid' => $courseid]);
     	return true;
     }
     
-    private function delete_activity_backup ($cmid) {
+    private static function delete_activity_backup ($cmid) {
     	$fs = get_file_storage();
     	$context = \context_module::instance ($cmid);
     	
