@@ -32,7 +32,7 @@ class update_template extends scheduled_task {
     		$options['CURLOPT_SSL_VERIFYHOST'] = false;
     	}
     	foreach ($coursesmodule as $cm) {
-    		if ($DB->get_record('course_modules', array('id' => $cm))) {
+    		if ($DB->get_record('course_modules', array('id' => $cm->id))) {
     			self::delete_activity_backup ($cm->id);
     		}
     	    $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
