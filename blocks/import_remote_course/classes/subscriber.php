@@ -183,7 +183,7 @@ class subscriber {
             	$dataobject->section	     = $section;
             	
                 foreach ($coursewithtamplayte as $course) {
-                	if ($exist = notification_helper::get_record(['courseid' => (int)$course->course_id, 'cm' => (int)$cm]) > 0) {
+                	if ($exist = notification_helper::get_record(['courseid' => (int)$course->course_id, 'cm' => (int)$cm])) {
                 		$notification = new notification_helper($exist->id);
                 		$notification->delete();
                 	}
