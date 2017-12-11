@@ -173,6 +173,8 @@ class block_import_remote_course extends block_base {
 	    		$activity->type = $localmod->title;
 	    		$activity->name = $mod->get('name');
 	    		$activity->cmid = $mod->get('cm');
+	    		$activity->section 	  = $mod->get('section');
+	    		
                 $updateactivities[] = $activity;
 	    	}
     	}
@@ -196,6 +198,7 @@ class block_import_remote_course extends block_base {
     			$activity->type = $localmod->title;
     			$activity->name = $mod->get('name');
     			$activity->cmid = $mod->get('cm');
+    		    $activity->section 	  = $mod->get('section');
     			$deleteactivities[] = $activity;
     		}
     	}
