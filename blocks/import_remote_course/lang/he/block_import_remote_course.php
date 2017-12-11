@@ -67,7 +67,7 @@ $string['import'] = 'ייבא את הנבחרים';
 
 $string['blockeheader'] = 'עדכוני תוכן בתבנית {$a}';
 $string['newact'] = 'נוספו {$a} רכיבים חדשים';
-$string['updateact'] = 'נוספו {$a}  עדכונים ברכיבים נוספו';
+$string['updateact'] = 'נוספו {$a}  עדכונים ברכיבים ';
 $string['deleteitems'] = 'קיימים {$a}  רכיבים אשר נמחקו מהתבנית';
 $string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונים לגבי תבנית הקורס שלך.';
 $string['newactheader'] = 'רכיבים חדשים';
