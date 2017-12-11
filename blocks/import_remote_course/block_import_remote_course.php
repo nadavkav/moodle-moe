@@ -136,7 +136,7 @@ class block_import_remote_course extends block_base {
 
     	$modnames = get_module_types_names();
     	$modules = get_module_metadata($COURSE, $modnames, 0);
-    	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('new', $COURSE->id));
+    	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('new', $COURSE->id), 'section');
     	$newactivities = [];
     	if ($mods) {
 	    	foreach ($mods as $mod) {
@@ -161,7 +161,7 @@ class block_import_remote_course extends block_base {
 		    	$newactivitieslist[$i]['child'][] = $neact;
 		    }
     	}
-        $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('update', $COURSE->id));
+        $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('update', $COURSE->id), 'section');
     	$updateactivities = [];
     	if ($mods) {
 	    	foreach ($mods as $mod) {
