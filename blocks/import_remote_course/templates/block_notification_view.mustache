@@ -19,7 +19,10 @@
     <button id="newitems">{{newitems}}</button>
     <ul id="newactivitieslist" class="activitylist hidden">
     {{#newmods}}
+    <h4>{{sectionname}}</h4>
+        {{#child}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
+        {{/child}}
     {{/newmods}}
     {{#newmodsbutton}}
     <li><button id="resetnew" class="reset" data-toggle="modal" data-target="#newact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
@@ -29,7 +32,10 @@
     <button id="updateitems">{{updatesstr}}</button>
     <ul id="updatedactivites" class="activitylist hidden">
     {{#updatemods}}
+     <h4>{{sectionname}}</h4>
+        {{#child}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
+        {{/child}}
     {{/updatemods}}
     {{#updatemodsbutton}}
     <li><button id="resetupdate" class="reset" data-toggle="modal" data-target="#updateact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>

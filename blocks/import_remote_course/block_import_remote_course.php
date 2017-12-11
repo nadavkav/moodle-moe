@@ -140,16 +140,26 @@ class block_import_remote_course extends block_base {
     	$newactivities = [];
     	if ($mods) {
 	    	foreach ($mods as $mod) {
-	    	    $activity = new stdClass();
-	    		$activity->url = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
+	    	    $activity 			  = new stdClass();
+	    		$activity->url        = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
 	    		$activity->time_added = date('d-m-Y H:i:s', $mod->get('timecreated'));
-	    		$localmod = $modules[$mod->get('module')];
-	    		$activity->iconsrc = $localmod->icon;
-	    		$activity->type = $localmod->title;
-	    		$activity->name = $mod->get('name');
-	    		$activity->cmid = $mod->get('cm');
-                $newactivities[] = $activity;
+	    		$localmod		      = $modules[$mod->get('module')];
+	    		$activity->iconsrc 	  = $localmod->icon;
+	    		$activity->type 	  = $localmod->title;
+	    		$activity->name 	  = $mod->get('name');
+	    		$activity->cmid 	  = $mod->get('cm');
+	    		$activity->section 	  = $mod->get('section');
+                $newactivities[]	  = $activity;
 	    	}
+		    $newactivitieslist = [];
+		    $i = 0;
+		    foreach ($newactivities as $neact) {
+		    	if (isset($newactivitieslist[$i]['sectionname']) && $newactivitieslist[$i]['sectionname'] != $neact->section) {
+		    		$i++;
+		    	}
+		    	$newactivitieslist[$i]['sectionname'] = $neact->section;
+		    	$newactivitieslist[$i]['child'][] = $neact;
+		    }
     	}
         $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('update', $COURSE->id));
     	$updateactivities = [];
@@ -166,6 +176,16 @@ class block_import_remote_course extends block_base {
                 $updateactivities[] = $activity;
 	    	}
     	}
+    	$updateactivitieslist = [];
+    	$i = 0;
+    	foreach ($updateactivities as $upcat) {
+    		if (isset($updateactivitieslist[$i]['sectionname']) && $updateactivitieslist[$i]['sectionname'] != $upcat->section) {
+    			$i++;
+    		}
+    		$updateactivitieslist[$i]['sectionname'] = $upcat->section;
+    		$updateactivitieslist[$i]['child'][] = $upcat;
+    	}
+    	
     	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id));
     	$deleteactivities = [];
     	if ($mods) {
@@ -179,10 +199,20 @@ class block_import_remote_course extends block_base {
     			$deleteactivities[] = $activity;
     		}
     	}
+    	$deletectivitieslist = [];
+    	$i = 0;
+    	foreach ($deleteactivities as $delcat) {
+    		if (isset($deletectivitieslist[$i]['sectionname']) && $deletectivitieslist[$i]['sectionname'] != $delcat->section) {
+    			$i++;
+    		}
+    		$deletectivitieslist[$i]['sectionname'] = $delcat->section;
+    		$deletectivitieslist[$i]['child'][] = $delcat;
+    	}
+    	
     	
     	//mods display
-    	$context->newmods = array_values($newactivities);
-    	$context->updatemods = array_values($updateactivities);
+    	$context->newmods = array_values($newactivitieslist);
+    	$context->updatemods = array_values($updateactivitieslist);
     	$context->deletedmods = array_values($deleteactivities);
     	$context->newmodsbutton = count($newactivities) > 0 ? true : false;
     	$context->updatemodsbutton = count($updateactivities) > 0 ? true : false;

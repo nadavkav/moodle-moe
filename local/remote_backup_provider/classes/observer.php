@@ -168,12 +168,19 @@ class observer {
      */
     public static function send_mod_notification(\core\event\base $event) {
     	global $DB, $CFG;
+   	
     	$instance = new observer();
     	$localevent = $event->get_data();
+    	
     	if (! $instance->parent_have_idnumber($localevent['courseid'])) {
     		return ;
     	}
-
+    	//get section name
+    	$modinfo = get_fast_modinfo($localevent['courseid']);
+    	$mod = $modinfo->get_cm($localevent['contextinstanceid']);
+    	$section = get_section_name($localevent['courseid'], $mod->section);
+    	
+    	
     	$pub = new publisher();
     	$prefixurl = $instance->get_prefixurl();
     	$suffixurl = $instance->get_suffixurl();
@@ -194,6 +201,7 @@ class observer {
 		    		'cm' 				 => $localevent['objectid'],
 		    		'mod' 				 => $localevent['other']['modulename'],
 		    		'name' 				 => $localevent['other']['name'],
+		    		'section'			 => $section
     		);
     	break;	
     	case "c":	
@@ -204,6 +212,7 @@ class observer {
 	    			'cm' 				 => $localevent['objectid'],
 	    			'mod' 				 => $localevent['other']['modulename'],
 	    			'name' 				 => $localevent['other']['name'],
+	    			'section'			 => $section
 	    	);
     	break;
     	}
