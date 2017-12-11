@@ -90,15 +90,15 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017112905, 'local', 'remote_backup_provider');
     }
 
-    if ($oldversion < 2017121100) {
+    if ($oldversion < 2017121101) {
         $dbman = $DB->get_manager();
 
         $table = new xmldb_table('remote_backup_provider_fails');
-        $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, true, null, null, null);
+        $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, false, null, null, null);
         if (! $dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-        upgrade_plugin_savepoint(true, 2017121100, 'local', 'remote_backup_provider');
+        upgrade_plugin_savepoint(true, 2017121101, 'local', 'remote_backup_provider');
     }
     return true;
 }
