@@ -183,13 +183,22 @@ class subscriber {
             	$dataobject->section	     = $section;
             	
                 foreach ($coursewithtamplayte as $course) {
-                	if ($exist = notification_helper::get_record(['courseid' => (int)$course->course_id, 'cm' => (int)$cm])) {
-                		$notification = new notification_helper($exist->get('id'));
+                	$sql = " courseid = :courseid AND cm = :cm AND " . $DB->sql_compare_text('type') . "= :type"; 
+                	if ($existasnew = notification_helper::get_records_select($sql, ['courseid' => (int)$course->course_id, 'cm' => (int)$cm, 'type' => 'new'])) {
+                		$notification = new notification_helper($existasnew->get('id'));
                 		$notification->delete();
+                		$dataobject->type = 'new';
+                		$dataobject->courseid  = (int)$course->course_id;
+                		$notification = new notification_helper(0, $dataobject);
+                		$notification->create();
+                		
+                	} else if( $existasupdate = notification_helper::get_records_select($sql, ['courseid' => (int)$course->course_id, 'cm' => (int)$cm, 'type' => 'update'])){
+                			$notification = new notification_helper($existasupdate->get('id'));
+                			$notification->delete();
+                			$dataobject->courseid  = (int)$course->course_id;
+                			$notification = new notification_helper(0, $dataobject);
+                			$notification->create();
                 	}
-                    $dataobject->courseid  = (int)$course->course_id;
-                    $notification = new notification_helper(0, $dataobject);
-                    $notification->create();
                 }
                 break;
             case 'da' :
