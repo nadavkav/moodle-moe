@@ -185,7 +185,7 @@ class block_import_remote_course extends block_base {
     		$updateactivitieslist[$i]['sectionname'] = $upcat->section;
     		$updateactivitieslist[$i]['child'][] = $upcat;
     	}
-    	
+    	/*
     	$mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id));
     	$deleteactivities = [];
     	if ($mods) {
@@ -208,15 +208,16 @@ class block_import_remote_course extends block_base {
     		$deletectivitieslist[$i]['sectionname'] = $delcat->section;
     		$deletectivitieslist[$i]['child'][] = $delcat;
     	}
-    	
+    	$context->deletedmods = array_values($deleteactivities);
+    	$context->deletedmodsbutton = count($deleteactivities) > 0 ? true : false;
+
+    	*/
     	
     	//mods display
     	$context->newmods = array_values($newactivitieslist);
-    	$context->updatemods = array_values($updateactivitieslist);
-    	$context->deletedmods = array_values($deleteactivities);
+    	$context->updatemods = array_values($updateactivitieslist);   	
     	$context->newmodsbutton = count($newactivities) > 0 ? true : false;
     	$context->updatemodsbutton = count($updateactivities) > 0 ? true : false;
-    	$context->deletedmodsbutton = count($deleteactivities) > 0 ? true : false;
     	
     	$this->content = new stdClass();
     	$modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);

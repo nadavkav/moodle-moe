@@ -42,16 +42,6 @@
     {{/updatemodsbutton}}
     </ul>
     
-    <button id="deleteitems">{{deleteitemsstr}}</button>
-    <ul id="deletectivitieslist" class="activitylist hidden">
-    {{#deletedmods}}
-        <li id="{{cmid}}" class="activityitem">{{{iconsrc}}}{{name}}</li>
-    {{/deletedmods}}
-    {{#deletedmodsbutton}}
-    <li><button id="resetdelete" class="reset" data-toggle="modal" data-target="#deleteact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
-    {{/deletedmodsbutton}}
-    </ul>
-    
     <a id="importsite" target="_blank" href="{{tetstenvurl}}" class="btn">{{# str }} trytemplates, block_import_remote_course {{/ str }}</a>
 </section>
 

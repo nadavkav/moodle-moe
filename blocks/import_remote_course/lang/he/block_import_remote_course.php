@@ -66,8 +66,8 @@ $string['timecreate'] = 'תאריך הוספה';
 $string['import'] = 'ייבא את הנבחרים';
 
 $string['blockeheader'] = 'עדכוני תוכן בתבנית {$a}';
-$string['newact'] = 'קיימים {$a} רכיבים חדשים';
-$string['updateact'] = 'קיימים {$a}  עדכונים ברכיבים קיימים';
+$string['newact'] = 'נוספו {$a} רכיבים חדשים';
+$string['updateact'] = 'נוספו {$a}  עדכונים ברכיבים נוספו';
 $string['deleteitems'] = 'קיימים {$a}  רכיבים אשר נמחקו מהתבנית';
 $string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונים לגבי תבנית הקורס שלך.';
 $string['newactheader'] = 'רכיבים חדשים';
