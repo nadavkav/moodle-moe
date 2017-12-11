@@ -176,9 +176,14 @@ class observer {
     		return ;
     	}
     	//get section name
-    	$modinfo = get_fast_modinfo($localevent['courseid']);
-    	$mod = $modinfo->get_cm($localevent['contextinstanceid']);
-    	$section = get_section_name($localevent['courseid'], $mod->sectionnum);
+    	if ($localevent->crud == 'd') {
+    		$section = 'stub';
+    	} else {
+    		$modinfo = get_fast_modinfo($localevent['courseid']);
+    		$mod = $modinfo->get_cm($localevent['contextinstanceid']);
+    		$section = get_section_name($localevent['courseid'], $mod->sectionnum);
+    	}
+    	
     	
     	
     	$pub = new publisher();

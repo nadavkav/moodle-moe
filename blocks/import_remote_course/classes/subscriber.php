@@ -196,7 +196,8 @@ class subscriber {
             	$DB->delete_records('import_remote_course_actdata', ['cm' => $cm]);
             	if ($DB->get_record('course_modules', array('id' => $cm))) {
             		self::delete_activity_backup($cm);
-            	}$data = [];
+            	}
+            	$data = [];
             	$templateid = $DB->get_field('import_remote_course_list', 'id', array(
             			'course_id' => $course_id
             	));
