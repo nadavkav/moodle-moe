@@ -205,7 +205,7 @@ class observer {
 		    		'link_to_remote_act' => 'stub',
 		    		'cm' 				 => $localevent['objectid'],
 		    		'mod' 				 => $localevent['other']['modulename'],
-		    		'name' 				 => $localevent['other']['name'],
+		    		'name' 				 => 'stub',
 		    		'section'			 => $section
     		);
     	break;	
