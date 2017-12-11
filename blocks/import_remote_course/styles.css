@@ -8,6 +8,9 @@
 .block_import_remote_course .inprogress img {
     width: 64px;
 }
+
+
+
 .block_import_remote_course #restorebutton{
 	background-image:  url([[pix:block_import_remote_course|downloadicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
 	background-position: 5% 50%, 0 0;
@@ -100,6 +103,17 @@ block_import_remote_course .felement.select {
 #block_import_remote_notification h4,
 #block_import_remote_notification p{
 	text-align: center;
+}
+
+.block_import_remote_course h4 {
+    font-size: 1.15em;
+    line-height: 26px;
+    font-weight: normal;
+    padding: 7px 0;
+    text-transform: none;
+    display: inline;
+    color: #80599B;
+    text-align: center;
 }
 
 #modlist{
@@ -199,7 +213,7 @@ img{
 	font-weight: bolder;
     text-align: right;
 	font-size: 14px;
-	color: cornflowerblue;
+	color: royalblue;
 }
 
 
