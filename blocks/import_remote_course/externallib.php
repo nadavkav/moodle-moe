@@ -101,11 +101,11 @@ class block_import_remote_course_external extends external_api {
         $downloadedbackupfile = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
         		$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
         
+        $destcourseid = $params['courseid'];
         // Read contents
         if (! $downloadedbackupfile) {
         	// file doesn't exist - do something
 	        // Get local_remote_backup_provider system-level config settings.
-	        $destcourseid = $params['courseid'];
 	        $token      = get_config('local_remote_backup_provider', 'wstoken');
 	        $remotesite = get_config('local_remote_backup_provider', 'remotesite');
 	        $remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
