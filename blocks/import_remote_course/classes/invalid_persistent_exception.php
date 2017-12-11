@@ -41,7 +41,6 @@ class invalid_persistent_exception extends \moodle_exception {
         foreach ($errors as $key => $message) {
             $debuginfo[] = "$key: $message";
             $forhumans[] = $message;
-            error_log($message);
         }
         
         parent::__construct('invalidpersistenterror', 'core', null,

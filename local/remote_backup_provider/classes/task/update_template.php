@@ -35,6 +35,11 @@ class update_template extends scheduled_task {
     		if ($DB->get_record('course_modules', array('id' => $cm->id))) {
     			self::delete_activity_backup ($cm->id);
     		}
+    		
+    		$modinfo = get_fast_modinfo($cm->course);
+    		$sectionnumber =$DB->get_field('course_sections', 'section', ['id' => $cm->sections]);
+    		$section = get_section_name($cm->course, $sectionnumber);
+    		
     	    $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
     	    $params = array(
     			'type' => 'ua',
@@ -43,6 +48,7 @@ class update_template extends scheduled_task {
     			'cm' 				 => $cm->id,
     			'mod' 				 => $cm->name,
     			'name' 				 => $instance->name,
+    	    	'section'			 => $section
     	    );
     	    foreach ($pub->get_all_subscribers() as $sub) {
                 // Subscriber info.
