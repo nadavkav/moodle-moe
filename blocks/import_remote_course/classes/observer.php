@@ -25,31 +25,29 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2017 SysBind LTD
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class observer {	
-	/**
-	 * Event observer.
-	 * on course delete remve course from course-tamplate table
-	 */
-	public static function course_delete(\core\event\base $event) {
-		global $DB;
-		$localdata = $event->get_data();
-		if ( !$tamplate = self::is_tag_course($localdata['courseid'])) {
-			return ;
-		}
-		$subinstance = new \subscriber();
-		return  $subinstance->delete_course($localdata['courseid']);
-	}
-	
-	/**
-	 * chek if a given course is.
-	 *
-	 * @param int $courseid -  course id.
-	 * @return mixed std table row | false if none found;
-	 */
-	public static function is_tag_course(int $courseid) {
-		global $DB;
-		return $DB->get_record('import_remote_course_templat', ['course_id' => $courseid]);
-	}
-	
-    
+class observer {
+    /**
+     * Event observer.
+     * on course delete remve course from course-tamplate table
+     */
+    public static function course_delete(\core\event\base $event) {
+        global $DB;
+        $localdata = $event->get_data();
+        if ( !$tamplate = self::is_tag_course($localdata['courseid'])) {
+            return;
+        }
+        $subinstance = new \subscriber();
+        return  $subinstance->delete_course($localdata['courseid']);
+    }
+    /**
+     * chek if a given course is.
+     *
+     * @param int $courseid -  course id.
+     * @return mixed std table row | false if none found;
+     */
+    public static function is_tag_course(int $courseid) {
+        global $DB;
+        return $DB->get_record('import_remote_course_templat', ['course_id' => $courseid]);
+    }
+
 }

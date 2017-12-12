@@ -1,6 +1,4 @@
 <?php
-use block_import_remote_course\local\notification_helper;
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -21,6 +19,9 @@ use block_import_remote_course\local\notification_helper;
  * @copyright 2015 Lafayette College ITS
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+use block_import_remote_course\local\notification_helper;
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot . '/lib/externallib.php');
 require_once($CFG->dirroot . '/blocks/import_remote_course/classes/subscriber.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
@@ -33,16 +34,16 @@ class block_import_remote_course_external extends external_api {
      */
     public static function update_parameters() {
         return new external_function_parameters(array(
-        	'username'			=> new external_value(PARAM_RAW),
-            'type'    		    => new external_value(PARAM_ALPHANUMEXT),
-            'course_id'  		=> new external_value(PARAM_INT),
-        	'course_tag'	    => new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
-        	'course_name'	    => new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
-        	'link_to_remote_act'=> new external_value(PARAM_URL, '',VALUE_DEFAULT, null),
-        	'cm'  				=> new external_value(PARAM_INT,'',VALUE_DEFAULT, null),
-        	'mod'				=> new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
-        	'name'				=> new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null),
-        	'section'		    => new external_value(PARAM_TEXT, '',VALUE_DEFAULT, null)
+            'username'           => new external_value(PARAM_RAW),
+            'type'               => new external_value(PARAM_ALPHANUMEXT),
+            'course_id'          => new external_value(PARAM_INT),
+            'course_tag'         => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
+            'course_name'        => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
+            'link_to_remote_act' => new external_value(PARAM_URL, '', VALUE_DEFAULT, null),
+            'cm'                 => new external_value(PARAM_INT, '', VALUE_DEFAULT, null),
+            'mod'                => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
+            'name'               => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
+            'section'            => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null)
         ));
     }
 
@@ -52,7 +53,7 @@ class block_import_remote_course_external extends external_api {
      * @return boolean.
      */
     public static function update($username, $type, $course_id, $course_tag = null, $course_name = null, $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null) {
-    	return subscriber::update($type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name, $section);
+        return subscriber::update($type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name, $section);
     }
 
     /**
@@ -83,65 +84,61 @@ class block_import_remote_course_external extends external_api {
         ));
         $context = context_course::instance($params['courseid']);
         self::validate_context($context);
-        
-        //check if activity already exist 
-        
+
+        // Check if activity already exist.
         $fs = get_file_storage();
-        
+
         // Prepare file record object
         $fileinfo = array(
-        		'component' => 'blocks_import_remote_course',     // usually = table name
-        		'filearea'  => 'backup',     // usually = table name
-        		'itemid'    => $cmid,               // usually = ID of row in table
-        		'contextid' => $context->id, // ID of context
-        		'filepath'  => '/',           // any path beginning and ending in /
-        		'filename'  => $cmid . 'mbz'); // any filename
-        
+                'component' => 'blocks_import_remote_course',
+                'filearea'  => 'backup',
+                'itemid'    => $cmid,
+                'contextid' => $context->id,
+                'filepath'  => '/',
+                'filename'  => $cmid . 'mbz');
+
         // Get file
         $downloadedbackupfile = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
-        		$fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
-        
+                $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+
         $destcourseid = $params['courseid'];
         // Read contents
         if (! $downloadedbackupfile) {
-        	// file doesn't exist - do something
-	        // Get local_remote_backup_provider system-level config settings.
-	        $token      = get_config('local_remote_backup_provider', 'wstoken');
-	        $remotesite = get_config('local_remote_backup_provider', 'remotesite');
-	        $remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
-	        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
-	        if (empty($token) || empty($remotesite)) {
-	            $result->status = 'fail';
-	            return $result;
-	        }
-	        $fs = get_file_storage();
-	        $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
-	            '&wsfunction=local_remote_backup_provider_get_activity_backup_by_id&moodlewsrestformat=json';
-	        $options = [];
-	        if ($skipcertverify){
-	            $options['curlopt_ssl_verifypeer'] = false;
-	            $options['curlopt_ssl_verifyhost'] = false;
-	        }
-	        $curlparams = array('id' => $params['cmid'], 'username' => $remoteusername);
-	        //print_r($params);
-	        $curl = new curl();
-	        // todo: Use HTTPS?
-	        $resp = json_decode($curl->post($url, $curlparams, $options));
-	
-	        $timestamp = time();
-	        $filerecord = array(
-	            'contextid'    => $context->id,
-	            'component'    => 'blocks_import_remote_course',
-	            'filearea'     => 'backup',
-	            'itemid'       => $cmid,
-	            'filepath'     => '/',
-	             'filename'    => $cmid . 'mbz',
-	            'timecreated'  => $timestamp,
-	            'timemodified' => $timestamp
-	        );
-	        $downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
-	    }
-        
+            // file doesn't exist - do something
+            // Get local_remote_backup_provider system-level config settings.
+            $token      = get_config('local_remote_backup_provider', 'wstoken');
+            $remotesite = get_config('local_remote_backup_provider', 'remotesite');
+            $remoteusername = get_config('local_remote_backup_provider', 'remoteusername');
+            $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+            if (empty($token) || empty($remotesite)) {
+                $result->status = 'fail';
+                return $result;
+            }
+            $fs = get_file_storage();
+            $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
+                '&wsfunction=local_remote_backup_provider_get_activity_backup_by_id&moodlewsrestformat=json';
+            $options = [];
+            if ($skipcertverify) {
+                $options['curlopt_ssl_verifypeer'] = false;
+                $options['curlopt_ssl_verifyhost'] = false;
+            }
+            $curlparams = array('id' => $params['cmid'], 'username' => $remoteusername);
+            $curl = new curl();
+            $resp = json_decode($curl->post($url, $curlparams, $options));
+            $timestamp = time();
+            $filerecord = array(
+                'contextid'    => $context->id,
+                'component'    => 'blocks_import_remote_course',
+                'filearea'     => 'backup',
+                'itemid'       => $cmid,
+                'filepath'     => '/',
+                 'filename'    => $cmid . 'mbz',
+                'timecreated'  => $timestamp,
+                'timemodified' => $timestamp
+            );
+            $downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
+        }
+
         $filepath = md5(time() . '-' . $context->id . '-' . $USER->id . '-' . random_string(20));
         $fb = get_file_packer('application/vnd.moodle.backup');
         $extracttopath = $CFG->tempdir . '/backup/' . $filepath . '/';
@@ -156,7 +153,6 @@ class block_import_remote_course_external extends external_api {
         if ($rc->execute_precheck()) {
             // Start restore (import).
             $rc->execute_plan();
-            // echo get_string('courserestored', 'tool_uploadcourse');
         } else {
             $result->status = 'fail';
             return $result;
@@ -167,12 +163,12 @@ class block_import_remote_course_external extends external_api {
         unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
         $newactivity = reset($backupinfo->activities);
         $cm = end(get_coursemodules_in_course($newactivity->modulename, $destcourseid));
-        $section = $DB->get_record('course_sections', array('course'=>$destcourseid, 'section'=>$sectionid));
+        $section = $DB->get_record('course_sections', array('course' => $destcourseid, 'section' => $sectionid));
 
         moveto_module($cm, $section, null);
-        // log course - template
+        // Log course - template.
         $notification = notification_helper::get_record(['cm' => $params['cmid'], 'courseid' => $destcourseid]);
-        if(!empty($notification) && !empty($notification->get('id'))) {
+        if (!empty($notification) && !empty($notification->get('id'))) {
             $notification->delete();
         }
         // Finished? ... show updated course.
@@ -185,35 +181,35 @@ class block_import_remote_course_external extends external_api {
             'status' => new external_value(PARAM_ALPHA, 'restore status'),
         ));
     }
-    
+
     /**
      * Returns description of subscribe method parameters
      *
      * @return external_function_parameters
      */
     public static function delete_act_parameters() {
-    	return new external_function_parameters(array(
-    			'type'    		    => new external_value(PARAM_ALPHANUMEXT),
-    			'course_id'  		=> new external_value(PARAM_INT),
-    	));
+        return new external_function_parameters(array(
+                'type'                => new external_value(PARAM_ALPHANUMEXT),
+                'course_id'          => new external_value(PARAM_INT),
+        ));
     }
-    
+
     /**
      * update to the server
      *
      * @return boolean.
      */
     public static function delete_act($type, $course_id) {
-    	$params = self::validate_parameters(self::delete_act_parameters(), ['type' => $type,'course_id' => $course_id]);
-    	return ['result' => subscriber::delete_all_act_course($params['course_id'], $params['type'])];
+        $params = self::validate_parameters(self::delete_act_parameters(), ['type' => $type,'course_id' => $course_id]);
+        return ['result' => subscriber::delete_all_act_course($params['course_id'], $params['type'])];
     }
-    
+
     /**
      * Returns description of subscribe method result value
      *
      * @return external_description
      */
     public static function delete_act_returns() {
-    	return new external_function_parameters(array( 'result' =>  (new external_value(PARAM_BOOL))));
+        return new external_function_parameters(array( 'result' => (new external_value(PARAM_BOOL))));
     }
 }

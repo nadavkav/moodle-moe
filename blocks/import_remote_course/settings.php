@@ -24,7 +24,7 @@
 
 
 defined('MOODLE_INTERNAL') || die();
-include_once($CFG->dirroot.'/blocks/import_remote_course/lib.php');
+require_once($CFG->dirroot.'/blocks/import_remote_course/lib.php');
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('configheader',
         get_string('config_header', 'block_import_remote_course'),

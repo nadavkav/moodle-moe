@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -34,12 +33,12 @@ $string['import_remote_course:view'] = 'Allow to view this block';
 $string['pluginname'] = 'Import remote courses';
 $string['selectoption'] = 'please select';
 
-// Specific
+// Specific.
 $string['courseisnotempty'] = 'This course is not empty. <br> Please clear the course before importing a new template.';
 $string['noavailablecourses'] = 'No available courses, please add some...';
 $string['restoreinprogress'] = 'Restore in progress...';
 
-// Global system settings
+// Global system settings.
 $string['wstoken'] = 'Web service token';
 $string['wstoken_desc'] = 'Add the web service token for the remote server to connect.';
 $string['config_header'] = 'Import remote course';

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -33,14 +32,14 @@ defined('MOODLE_INTERNAL') || die();
 
 class notification_helper extends persistent{
 
-	const TABLE = 'import_remote_course_actdata';
+    const TABLE = 'import_remote_course_actdata';
 
-	/**
-    * Return the definition of the properties of notification helper.
-    *
-    * @return array
-    */
-	protected static function define_properties() {
+    /**
+     * Return the definition of the properties of notification helper.
+     *
+     * @return array
+     */
+    protected static function define_properties() {
         return array(
             'courseid' => array(
                 'type' => PARAM_INT,
@@ -67,9 +66,9 @@ class notification_helper extends persistent{
                 'null' => NULL_NOT_ALLOWED,
             ),
             'section' => array(
-        			'type' => PARAM_TEXT,
-        			'null' => NULL_ALLOWED,
-        	),
+                'type' => PARAM_TEXT,
+                'null' => NULL_ALLOWED,
+            ),
         );
-	}
+    }
 }

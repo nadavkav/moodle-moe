@@ -25,17 +25,17 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_import_remote_course\local;
-
 use block_import_remote_course\persistent;
+defined('MOODLE_INTERNAL') || die();
 
 class course_template extends persistent {
     const TABLE = 'import_remote_course_templat';
 
     /**
-    * Return the definition of the properties of course template.
-    *
-    * @return array
-    */
+     * Return the definition of the properties of course template.
+     *
+     * @return array
+     */
     protected static function define_properties() {
         return array(
             'tamplate_id' => array(

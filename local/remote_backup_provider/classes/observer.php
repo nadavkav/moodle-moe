@@ -65,19 +65,19 @@ class observer {
                 'id' => $localcourse->id
             ));
             if ($tag == false) {
-            	$params = array(
-            			'type' => 'd',
-            			'course_id' => $localevent['objectid'],
-            			'course_tag' => 'stab',
-            			'course_name' => 'stab'
-            	);
+                $params = array(
+                        'type' => 'd',
+                        'course_id' => $localevent['objectid'],
+                        'course_tag' => 'stab',
+                        'course_name' => 'stab'
+                );
             } else {
-	            $params = array(
-	                'type' => $type,
-	                'course_id' => $localcourse->id,
-	                'course_tag' => $tag,
-	                'course_name' => $localcourse->fullname
-	            );
+                $params = array(
+                    'type' => $type,
+                    'course_id' => $localcourse->id,
+                    'course_tag' => $tag,
+                    'course_name' => $localcourse->fullname
+                );
             }
         }
 
@@ -99,8 +99,8 @@ class observer {
             $resp = json_decode($curl->post($url, $localparams, $options));
 
             if (! isset($resp->result) || $resp->result != true) {
-            	$fail = new fail(null, $url, $localparams, $options, 'send_update');
-            	$fail->save();
+                $fail = new fail(null, $url, $localparams, $options, 'send_update');
+                $fail->save();
             }
         }
     }
@@ -156,8 +156,8 @@ class observer {
                 $resp = json_decode($curl->post($url, $localparams, $options));
 
                 if (! isset($resp->result) || $resp->result != true) {
-                	$fail = new fail(null, $url, $localparams, $options, 'send_cat_update');
-                	$fail->save();
+                    $fail = new fail(null, $url, $localparams, $options, 'send_cat_update');
+                    $fail->save();
                 }
             }
         }
@@ -167,77 +167,75 @@ class observer {
      * send update to all subscribers about the course cate change
      */
     public static function send_mod_notification(\core\event\base $event) {
-    	global $DB, $CFG;
-   	
-    	$instance = new observer();
-    	$localevent = $event->get_data();
-    	
-    	if (! $instance->parent_have_idnumber($localevent['courseid'])) {
-    		return ;
-    	}
-    	//get section name
-    	if ($localevent['crud'] == 'd') {
-    		$section = 'stub';
-    	} else {
-    		$modinfo = get_fast_modinfo($localevent['courseid']);
-    		$mod = $modinfo->get_cm($localevent['contextinstanceid']);
-    		$section = get_section_name($localevent['courseid'], $mod->sectionnum);
-    	}
-    	
-    	
-    	
-    	$pub = new publisher();
-    	$prefixurl = $instance->get_prefixurl();
-    	$suffixurl = $instance->get_suffixurl();
-    	$options = array();
+        global $DB, $CFG;
 
-    	$skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
-    	if ($skipcertverify) {
-    		$options['CURLOPT_SSL_VERIFYPEER'] = false;
-    		$options['CURLOPT_SSL_VERIFYHOST'] = false;
-    	}
-    	$type = $event->crud;
-    	switch ($type) {
-    	case "d":
-    		$params = array(
-		    		'type' => 'da',
-		    		'course_id' 		 => $localevent['courseid'],
-		    		'link_to_remote_act' => 'stub',
-		    		'cm' 				 => $localevent['objectid'],
-		    		'mod' 				 => $localevent['other']['modulename'],
-		    		'name' 				 => 'stub',
-		    		'section'			 => $section
-    		);
-    	break;	
-    	case "c":	
-	    	$params = array(
-	    			'type' => 'na',
-	    			'course_id' 		 => $localevent['courseid'],
-	    			'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
-	    			'cm' 				 => $localevent['objectid'],
-	    			'mod' 				 => $localevent['other']['modulename'],
-	    			'name' 				 => $localevent['other']['name'],
-	    			'section'			 => $section
-	    	);
-    	break;
-    	}
-    	foreach ($pub->get_all_subscribers() as $sub) {
-    		// Subscriber info.
-    		$token = $sub->remote_token;
-    		$remotesite = $sub->base_url;
-    		$localparams = $params;
-    		$localparams['username'] = $sub->remote_user;
+        $instance = new observer();
+        $localevent = $event->get_data();
 
-    		$url = $remotesite . $prefixurl . $token . $suffixurl;
+        if (! $instance->parent_have_idnumber($localevent['courseid'])) {
+            return;
+        }
+        // Get section name
+        if ($localevent['crud'] == 'd') {
+            $section = 'stub';
+        } else {
+            $modinfo = get_fast_modinfo($localevent['courseid']);
+            $mod = $modinfo->get_cm($localevent['contextinstanceid']);
+            $section = get_section_name($localevent['courseid'], $mod->sectionnum);
+        }
 
-    		$curl = new \curl();
-    		$resp = json_decode($curl->post($url, $localparams, $options));
+        $pub = new publisher();
+        $prefixurl = $instance->get_prefixurl();
+        $suffixurl = $instance->get_suffixurl();
+        $options = array();
 
-    		if (! isset($resp->result) || $resp->result != true) {
-    			$fail = new fail(null, $url, $localparams, $options, 'send_mod_notification');
-    			$fail->save();
-    		}
-    	}
+        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+        if ($skipcertverify) {
+            $options['CURLOPT_SSL_VERIFYPEER'] = false;
+            $options['CURLOPT_SSL_VERIFYHOST'] = false;
+        }
+        $type = $event->crud;
+        switch ($type) {
+            case "d":
+                $params = array(
+                        'type' => 'da',
+                        'course_id'          => $localevent['courseid'],
+                        'link_to_remote_act' => 'stub',
+                        'cm'                  => $localevent['objectid'],
+                        'mod'                  => $localevent['other']['modulename'],
+                        'name'                  => 'stub',
+                        'section'             => $section
+                );
+            break;
+            case "c":
+                $params = array(
+                        'type' => 'na',
+                        'course_id'          => $localevent['courseid'],
+                        'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
+                        'cm'                  => $localevent['objectid'],
+                        'mod'                  => $localevent['other']['modulename'],
+                        'name'                  => $localevent['other']['name'],
+                        'section'             => $section
+                );
+            break;
+        }
+        foreach ($pub->get_all_subscribers() as $sub) {
+            // Subscriber info.
+            $token = $sub->remote_token;
+            $remotesite = $sub->base_url;
+            $localparams = $params;
+            $localparams['username'] = $sub->remote_user;
+
+            $url = $remotesite . $prefixurl . $token . $suffixurl;
+
+            $curl = new \curl();
+            $resp = json_decode($curl->post($url, $localparams, $options));
+
+            if (! isset($resp->result) || $resp->result != true) {
+                $fail = new fail(null, $url, $localparams, $options, 'send_mod_notification');
+                $fail->save();
+            }
+        }
     }
 
     /**
@@ -245,47 +243,46 @@ class observer {
      * send update to all subscribers about post in the chenge log
      */
     public static function send_notification(\core\event\base $event) {
-    	global $DB, $CFG;
-    	$instance = new observer();
-    	$localevent = $event->get_data();
-    	if (! $instance->parent_have_idnumber($localevent['courseid']) || ! $instance->is_news_forum($localevent['other']['forumid'])) {
-    		return ;
-    	}
+        global $DB, $CFG;
+        $instance = new observer();
+        $localevent = $event->get_data();
+        if (! $instance->parent_have_idnumber($localevent['courseid']) || ! $instance->is_news_forum($localevent['other']['forumid'])) {
+            return;
+        }
 
-    	$pub = new publisher();
-    	$prefixurl = $instance->get_prefixurl();
-    	$suffixurl = $instance->get_suffixurl();
-    	$options = array();
+        $pub = new publisher();
+        $prefixurl = $instance->get_prefixurl();
+        $suffixurl = $instance->get_suffixurl();
+        $options = array();
 
-    	$skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
-    	if ($skipcertverify) {
-    		$options['curlopt_ssl_verifypeer'] = false;
-    		$options['curlopt_ssl_verifyhost'] = false;
-    	}
+        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+        if ($skipcertverify) {
+            $options['curlopt_ssl_verifypeer'] = false;
+            $options['curlopt_ssl_verifyhost'] = false;
+        }
 
+        $params = array(
+                'type'         => 'n',
+                'course_id' => $localevent['courseid'],
+        );
 
-    	$params = array(
-    			'type' 		=> 'n',
-    			'course_id' => $localevent['courseid'],
-    	);
+        foreach ($pub->get_all_subscribers() as $sub) {
+            // Subscriber info.
+            $token = $sub->remote_token;
+            $remotesite = $sub->base_url;
+            $localparams = $params;
+            $localparams['username'] = $sub->remote_user;
 
-    	foreach ($pub->get_all_subscribers() as $sub) {
-    		// Subscriber info.
-    		$token = $sub->remote_token;
-    		$remotesite = $sub->base_url;
-    		$localparams = $params;
-    		$localparams['username'] = $sub->remote_user;
+            $url = $remotesite . $prefixurl . $token . $postfixurl;
 
-    		$url = $remotesite . $prefixurl . $token . $postfixurl;
+            $curl = new \curl();
+            $resp = json_decode($curl->post($url, $localparams, $options));
 
-    		$curl = new \curl();
-    		$resp = json_decode($curl->post($url, $localparams, $options));
-
-    		if (! isset($resp->result) || $resp->result != true) {
-    			$fail = new fail(null, $url, $localparams, $options, 'send_notification');
-    			$fail->save();
-    		}
-    	}
+            if (! isset($resp->result) || $resp->result != true) {
+                $fail = new fail(null, $url, $localparams, $options, 'send_notification');
+                $fail->save();
+            }
+        }
 
     }
 
@@ -294,8 +291,8 @@ class observer {
      *
      * @return String start of web service url.
      */
-    protected  function  get_prefixurl () {
-    	return '/webservice/rest/server.php?wstoken=';
+    protected function  get_prefixurl () {
+        return '/webservice/rest/server.php?wstoken=';
     }
 
     /**
@@ -303,8 +300,8 @@ class observer {
      *
      * @return String end of web service url.
      */
-    protected  function  get_suffixurl () {
-    	return '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
+    protected function  get_suffixurl () {
+        return '&wsfunction=block_import_remote_course_update&moodlewsrestformat=json';
     }
 
     /**
@@ -312,18 +309,18 @@ class observer {
      *
      * @return bool .
      */
-    protected  function parent_have_idnumber($courseid) {
-    	global $DB;
+    protected function parent_have_idnumber($courseid) {
+        global $DB;
 
-    	$sql = 'select CA.idnumber from {course} C inner join
+        $sql = 'select CA.idnumber from {course} C inner join
                     {course_categories} CA on C.category = CA.id where C.id=:id';
-    	 $res = $DB->get_field_sql($sql, array(
-    			'id' => $courseid
-    	));
-    	if ($res) {
-    		return true;
-    	}
-    		return false;
+         $res = $DB->get_field_sql($sql, array(
+                'id' => $courseid
+         ));
+         if ($res) {
+             return true;
+         }
+            return false;
     }
 
     /**
@@ -331,9 +328,9 @@ class observer {
      *
      * @return boolean
      */
-    protected  function is_news_forum($formid) {
-    	global $DB;
-    	return $DB->get_field('forum', 'type', ['id' => $formid]) == 'news' ? true : false;
+    protected function is_news_forum($formid) {
+        global $DB;
+        return $DB->get_field('forum', 'type', ['id' => $formid]) == 'news' ? true : false;
 
     }
 }

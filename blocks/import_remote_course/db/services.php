@@ -18,6 +18,7 @@
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
 
 $functions = array(
 
@@ -36,23 +37,12 @@ $functions = array(
         'type' => 'write',
         'ajax' => true
     ),
-	'block_import_remote_course_delete_act' => array(
-			'classname' => 'block_import_remote_course_external',
-			'methodname' => 'delete_act',
-			'classpath' => 'blocks/import_remote_course/externallib.php',
-			'description' => 'delete activity from course',
-			'type' => 'write',
-			'ajax' => true
-	),
+    'block_import_remote_course_delete_act' => array(
+            'classname' => 'block_import_remote_course_external',
+            'methodname' => 'delete_act',
+            'classpath' => 'blocks/import_remote_course/externallib.php',
+            'description' => 'delete activity from course',
+            'type' => 'write',
+            'ajax' => true
+    ),
 );
-
-// $services = array(
-//     'import_remote_course' => array(
-//         'functions' => array(
-//             'block_import_remote_course_update',
-//         ),
-//         'requiredcapability' => '',
-//         'restrictedusers' =>0,
-//         'enabled'=>1,
-//     ),
-// );

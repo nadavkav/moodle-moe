@@ -48,13 +48,13 @@ class fails_updates extends scheduled_task {
         global $DB;
         $fails = $DB->get_records('remote_backup_provider_fails');
         foreach ($fails as $fail) {
-        	$fail = new fail($fail->id);
+            $fail = new fail($fail->id);
             $url = explode('/', $fail->get_url());
             mtrace("Try to update ". $url[2]);
             if ($fail->send()) {
-            	mtrace("Succes to update ". $url[2]);
+                mtrace("Succes to update ". $url[2]);
             } else {
-            	mtrace("faild to update ". $url[2]);
+                mtrace("faild to update ". $url[2]);
             }
         }
     }

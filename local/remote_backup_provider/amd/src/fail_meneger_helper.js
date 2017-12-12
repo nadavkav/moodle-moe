@@ -20,31 +20,31 @@
  * @copyright  2017 Sysbind
  */
 define(['jquery', 'core/ajax', 'core/str'],function($, ajax, str) {
-	
-	return{
-		init: function() {
-			$( '.resand' ).each(function () {
-				$(this).click(function () {
-					console.log(this.id) ;
-					var promises = ajax.call([
-				        { methodname: 'local_remote_backup_provider_retry_send_notification', args: { id: this.id } },
-				    ]); 
-				   promises[0].done(function(response) {
-				       $( this ).closest('td').remove();
-				       var successmesege = str.get_string('successmesege', 'local_remote_backup_provider');
-				       $.when(successmesege).done(function(localizedEditString) {
-				    	   alert(localizedEditString);
-				      });
-				   }).fail(function(ex) {
-					   var failmesege = str.get_string('failmesege', 'local_remote_backup_provider');
-					   $.when(failmesege).done(function(localizedEditString) {
-				    	   alert(localizedEditString);
-				      });
-				   });
-				})
-			})
-		}
-	}
-	
-	});
-	
+    
+    return{
+        init: function() {
+            $( '.resand' ).each(function () {
+                $(this).click(function () {
+                    console.log(this.id) ;
+                    var promises = ajax.call([
+                        { methodname: 'local_remote_backup_provider_retry_send_notification', args: { id: this.id } },
+                    ]); 
+                   promises[0].done(function(response) {
+                       $( this ).closest('td').remove();
+                       var successmesege = str.get_string('successmesege', 'local_remote_backup_provider');
+                       $.when(successmesege).done(function(localizedEditString) {
+                           alert(localizedEditString);
+                      });
+                   }).fail(function(ex) {
+                       var failmesege = str.get_string('failmesege', 'local_remote_backup_provider');
+                       $.when(failmesege).done(function(localizedEditString) {
+                           alert(localizedEditString);
+                      });
+                   });
+                })
+            })
+        }
+    }
+    
+    });
+    

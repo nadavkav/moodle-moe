@@ -27,17 +27,17 @@ defined('MOODLE_INTERNAL') || die();
 class fails_meneger_renderer extends \plugin_renderer_base {
 
     public function showall() {
-    	global $DB;
-    	$context = new \stdClass();
-    	$allfails = array_values($DB->get_records('remote_backup_provider_fails'));
-    	foreach ($allfails as &$fail) {
-    		$url = explode('/', $fail->url);
-    		$fail->name = $url[2];
-    		$fail->timecreate = date('d-m-Y H:i:s', $fail->timecreate);
-    		$fail->last_time_try = date('d-m-Y H:i:s', $fail->last_time_try);		
-    	}
-    	$context->allfails = $allfails;
-    	return $this->render_from_template('local_remote_backup_provider/fails_meneger', $context);
+        global $DB;
+        $context = new \stdClass();
+        $allfails = array_values($DB->get_records('remote_backup_provider_fails'));
+        foreach ($allfails as &$fail) {
+            $url = explode('/', $fail->url);
+            $fail->name = $url[2];
+            $fail->timecreate = date('d-m-Y H:i:s', $fail->timecreate);
+            $fail->last_time_try = date('d-m-Y H:i:s', $fail->last_time_try);
+        }
+        $context->allfails = $allfails;
+        return $this->render_from_template('local_remote_backup_provider/fails_meneger', $context);
     }
 }
 
