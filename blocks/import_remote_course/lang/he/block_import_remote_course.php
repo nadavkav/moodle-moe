@@ -32,6 +32,8 @@ $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course bloc
 $string['import_remote_course:view'] = 'מאפשר צפייה בבלוק';
 $string['pluginname'] = 'תבניות חלופות בהערכה';
 $string['selectoption'] = 'אנא בחר';
+$string['selectoptionimport'] = 'בחרו תבנית מהרשימה';
+
 
 // Specific
 $string['courseisnotempty'] = 'לא ניתן לייבא תבנית היות ומרחב הלימוד אינו ריק';

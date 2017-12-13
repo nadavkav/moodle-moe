@@ -8,9 +8,6 @@
 .block_import_remote_course .inprogress img {
     width: 64px;
 }
-
-
-
 .block_import_remote_course #restorebutton{
 	background-image:  url([[pix:block_import_remote_course|downloadicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
 	background-position: 5% 50%, 0 0;
@@ -186,7 +183,8 @@ float: left;
 #section li {
 	list-style-type: none;
 }
-.block_import_remote_course #id_cat {
+.block_import_remote_course #id_cat,
+.block_import_remote_course #choosecourse {
   max-width: 45%;
 }
 

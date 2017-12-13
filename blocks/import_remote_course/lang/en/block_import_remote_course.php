@@ -32,6 +32,7 @@ $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course bloc
 $string['import_remote_course:view'] = 'Allow to view this block';
 $string['pluginname'] = 'Import remote courses';
 $string['selectoption'] = 'please select';
+$string['selectoptionimport'] = 'בחרו תבנית מהרשימה';
 
 // Specific.
 $string['courseisnotempty'] = 'This course is not empty. <br> Please clear the course before importing a new template.';

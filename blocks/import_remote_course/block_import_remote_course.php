@@ -78,8 +78,8 @@ class block_import_remote_course extends block_base {
 
             $form = '<form id="restoreremotecourse" action="'.
                 $CFG->wwwroot.'/blocks/import_remote_course/import_remote_course.php" type="get">';
-            $form .= get_string('choosecourse').' <select id="choosecourse" name="remotecourseid">';
-            $form .= "<option value='' selected disabled>" . get_string('selectoption', 'block_import_remote_course') . "</option>";
+            $form .= ' <select id="choosecourse" name="remotecourseid">';
+            $form .= "<option value='' selected disabled>" . get_string('selectoptionimport', 'block_import_remote_course') . "</option>";
             foreach ($remotecourselist as $course) {
                 $courseid   = $course->course_id;
                 $coursename = $course->course_name;
