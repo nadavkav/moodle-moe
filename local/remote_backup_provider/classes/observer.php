@@ -175,6 +175,13 @@ class observer {
         if (! $instance->parent_have_idnumber($localevent['courseid'])) {
             return;
         }
+
+        if (course_get_format($localevent['courseid'])->get_format() == 'moetopcoll' && $localevent['other']['modulename'] == 'label') {
+            if ($localevent['other']['name'] == 'למידה' || $localevent['other']['name'] == 'תומכי למידה' || $localevent['other']['name'] == 'ארגז כלים') {
+                return;
+            }
+        }
+
         // Get section name
         if ($localevent['crud'] == 'd') {
             $section = 'stub';
