@@ -69,6 +69,10 @@ class notification_helper extends persistent{
                 'type' => PARAM_TEXT,
                 'null' => NULL_ALLOWED,
             ),
+            'sectionsublevel' => array(
+                    'type' => PARAM_TEXT,
+                    'null' => NULL_ALLOWED,
+            ),
         );
     }
 }

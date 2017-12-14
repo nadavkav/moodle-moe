@@ -43,17 +43,18 @@ class block_import_remote_course_external extends external_api {
             'cm'                 => new external_value(PARAM_INT, '', VALUE_DEFAULT, null),
             'mod'                => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
             'name'               => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
-            'section'            => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null)
+            'section'            => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null),
+            'sectionsublevel'    => new external_value(PARAM_TEXT, '', VALUE_DEFAULT, null)
         ));
     }
-
+    
     /**
      * update to the server
      *
      * @return boolean.
      */
-    public static function update($username, $type, $course_id, $course_tag = null, $course_name = null, $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null) {
-        return subscriber::update($type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name, $section);
+    public static function update($username, $type, $course_id, $course_tag = null, $course_name = null, $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null, $sectionsublevel = null) {
+        return subscriber::update($type, $course_id, $course_tag, $course_name, $link_to_remote_act, $cm, $mod, $name, $section, $sectionsublevel);
     }
 
     /**

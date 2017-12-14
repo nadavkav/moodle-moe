@@ -80,7 +80,7 @@ class subscriber {
     }
 
     public static function update($type, $course_id, $course_tag = null, $course_name = null,
-            $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null) {
+            $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null, $sectionsublevel = null) {
         global $DB;
         $table = 'import_remote_course_list';
         switch ($type) {
@@ -99,7 +99,7 @@ class subscriber {
             case 'u':
                 $id = $DB->get_field($table, 'id', array('course_id' => $course_id));
                 if ($id) {
-                    // Update existing course
+                    // Update existing course.
                     $dataobject = new stdClass();
                     $dataobject->id          = $id;
                     $dataobject->course_id   = $course_id;
@@ -107,7 +107,7 @@ class subscriber {
                     $dataobject->course_name = $course_name;
                     $DB->update_record($table, $dataobject);
                 } else {
-                    //creating new course in case of moving course to cat with tag
+                    // Creating new course in case of moving course to cat with tag.
                     $dataobject = new stdClass();
                     $dataobject->course_id   = $course_id;
                     $dataobject->course_tag  = $course_tag;
@@ -157,6 +157,7 @@ class subscriber {
                 $dataobject->name            = $name;
                 $dataobject->type            = 'new';
                 $dataobject->section         = $section;
+                $dataobject->sectionsublevel = $sectionsublevel;
                 foreach ($coursewithtamplayte as $course) {
                     $dataobject->courseid        = (int)$course->course_id;
                     $notification = new notification_helper(0, $dataobject);
@@ -181,6 +182,8 @@ class subscriber {
                 $dataobject->name            = $name;
                 $dataobject->type            = 'update';
                 $dataobject->section         = $section;
+                $dataobject->sectionsublevel = $sectionsublevel;
+
                 foreach ($coursewithtamplayte as $course) {
                     $sql = " courseid = :courseid AND cm = :cm AND " . $DB->sql_compare_text('type') . "= :type";
                     if ($existasnew = notification_helper::get_records_select($sql,
@@ -192,7 +195,7 @@ class subscriber {
                         $dataobject->courseid  = (int)$course->course_id;
                         $notification = new notification_helper(0, $dataobject);
                         $notification->create();
-                    } else if( $existasupdate = notification_helper::get_records_select($sql,
+                    } else if ( $existasupdate = notification_helper::get_records_select($sql,
                             ['courseid' => (int)$course->course_id, 'cm' => (int)$cm, 'type' => 'update'])){
                         $existasupdate = array_pop($existasupdate);
                         $notification = new notification_helper($existasupdate->get('id'));

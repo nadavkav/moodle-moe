@@ -138,91 +138,11 @@ class block_import_remote_course extends block_base {
                     notification_helper::count_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id)));
             $context->tetstenvurl = get_config('block_import_remote_course', 'testenv');
 
-            $modnames = get_module_types_names();
-            $modules = get_module_metadata($COURSE, $modnames, 0);
-            $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('new', $COURSE->id), 'section');
-            $newactivities = [];
-            if ($mods) {
-                foreach ($mods as $mod) {
-                    $activity               = new stdClass();
-                    $activity->url        = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
-                    $activity->time_added = date('d-m-Y H:i:s', $mod->get('timecreated'));
-                    $localmod              = $modules[$mod->get('module')];
-                    $activity->iconsrc       = $localmod->icon;
-                    $activity->type       = $localmod->title;
-                    $activity->name       = $mod->get('name');
-                    $activity->cmid       = $mod->get('cm');
-                    $activity->section       = $mod->get('section');
-                    $newactivities[]      = $activity;
-                }
-                $newactivitieslist = [];
-                $i = 0;
-                foreach ($newactivities as $neact) {
-                    if (isset($newactivitieslist[$i]['sectionname']) && $newactivitieslist[$i]['sectionname'] != $neact->section) {
-                        $i++;
-                    }
-                    $newactivitieslist[$i]['sectionname'] = $neact->section;
-                    $newactivitieslist[$i]['child'][] = $neact;
-                }
-            }
-            $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('update', $COURSE->id), 'section');
-            $updateactivities = [];
-            if ($mods) {
-                foreach ($mods as $mod) {
-                    $activity = new stdClass();
-                    $activity->url = get_config('local_remote_backup_provider', 'remotesite') . '/mod/' . $mod->get('module') . '/view.php?id=' . $mod->get('cm');
-                    $activity->time_added = date('d-m-Y H:i:s', $mod->get('timecreated'));
-                    $localmod = $modules[$mod->get('module')];
-                    $activity->iconsrc = $localmod->icon;
-                    $activity->type = $localmod->title;
-                    $activity->name = $mod->get('name');
-                    $activity->cmid = $mod->get('cm');
-                    $activity->section       = $mod->get('section');
-                    $updateactivities[] = $activity;
-                }
-            }
-            $updateactivitieslist = [];
-            $i = 0;
-            foreach ($updateactivities as $upcat) {
-                if (isset($updateactivitieslist[$i]['sectionname']) && $updateactivitieslist[$i]['sectionname'] != $upcat->section) {
-                    $i++;
-                }
-                $updateactivitieslist[$i]['sectionname'] = $upcat->section;
-                $updateactivitieslist[$i]['child'][] = $upcat;
-            }
-            /*
-            $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id));
-            $deleteactivities = [];
-            if ($mods) {
-                foreach ($mods as $mod) {
-                    $activity = new stdClass();
-                    $localmod = $modules[$mod->get('module')];
-                    $activity->iconsrc = $localmod->icon;
-                    $activity->type = $localmod->title;
-                    $activity->name = $mod->get('name');
-                    $activity->cmid = $mod->get('cm');
-                    $activity->section       = $mod->get('section');
-                    $deleteactivities[] = $activity;
-                }
-            }
-            $deletectivitieslist = [];
-            $i = 0;
-            foreach ($deleteactivities as $delcat) {
-                if (isset($deletectivitieslist[$i]['sectionname']) && $deletectivitieslist[$i]['sectionname'] != $delcat->section) {
-                    $i++;
-                }
-                $deletectivitieslist[$i]['sectionname'] = $delcat->section;
-                $deletectivitieslist[$i]['child'][] = $delcat;
-            }
-            $context->deletedmods = array_values($deleteactivities);
-            $context->deletedmodsbutton = count($deleteactivities) > 0 ? true : false;
-            */
-
             // Mods display.
-            $context->newmods = array_values($newactivitieslist);
-            $context->updatemods = array_values($updateactivitieslist);
-            $context->newmodsbutton = count($newactivities) > 0 ? true : false;
-            $context->updatemodsbutton = count($updateactivities) > 0 ? true : false;
+            $context->newmods = $this->mustacharrybuild('new');
+            $context->updatemods = $this->mustacharrybuild('update');
+            $context->newmodsbutton = count($context->newmods) > 0 ? true : false;
+            $context->updatemodsbutton = count($context->updatemods) > 0 ? true : false;
 
             $this->content = new stdClass();
             $modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
@@ -257,5 +177,68 @@ class block_import_remote_course extends block_base {
     // todo: migrate to site level.
     public function has_config() {
         return true;
+    }
+
+    /**
+     * Build the array for the mustache view.
+     *
+     * @param
+     *      string $type - the type of view
+     * @return array;
+     */
+    private function mustacharrybuild (string $type) {
+        global $DB, $COURSE;
+        $return = array();
+        $modnames = get_module_types_names();
+        $modules = get_module_metadata($COURSE, $modnames, 0);
+
+        $sql = 'SELECT DISTINCT section from {import_remote_course_actdata} where courseid = :courseid AND type = :type';
+        $sections = $DB->get_fieldset_sql($sql, ['courseid' => $COURSE->id, 'type' => $type]);
+
+        foreach ($sections as $section) {
+            $sec       = new stdClass();
+            $sec->sectionname = $section;
+            $mods      = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel IS NULL",
+                    array('new', $COURSE->id, $section), 'section, sectionsublevel');
+            $localmodules   = [];
+            if ($mods) {
+                foreach ($mods as $mod) {
+                    $activity             = new stdClass();
+                    $localmod             = $modules[$mod->get('module')];
+                    $activity->iconsrc    = $localmod->icon;
+                    $activity->type       = $localmod->title;
+                    $activity->name       = $mod->get('name');
+                    $activity->cmid       = $mod->get('cm');
+                    $localmodules[]            = $activity;
+                }
+                $sec->child = $localmodules;
+            }
+            $sec->sub = array();
+            // Sub level.
+            $sql = "SELECT DISTINCT sectionsublevel from {import_remote_course_actdata} where courseid = :courseid AND type = :type AND section=:section AND sectionsublevel<>''";
+            $sectionsublevel = $DB->get_fieldset_sql($sql, ['courseid' => $COURSE->id, 'type' => $type, 'section' => $section]);
+            foreach ($sectionsublevel as $sub) {
+                $sublevel       = new stdClass();
+                $sublevel->name = $sub;
+                $mods           = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=?",
+                        array('new', $COURSE->id, $section, $sub), 'section, sectionsublevel');
+                $localmodules   = [];
+                if ($mods) {
+                    foreach ($mods as $mod) {
+                        $activity             = new stdClass();
+                        $localmod             = $modules[$mod->get('module')];
+                        $activity->iconsrc    = $localmod->icon;
+                        $activity->type       = $localmod->title;
+                        $activity->name       = $mod->get('name');
+                        $activity->cmid       = $mod->get('cm');
+                        $localmodules[]            = $activity;
+                    }
+                    $sublevel->child = $localmodules;
+                }
+                $sec->sub[]= $sublevel;
+            }
+            $return[] = $sec;
+        }
+        return $return;
     }
 }

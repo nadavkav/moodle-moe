@@ -213,8 +213,13 @@ img{
 	font-size: 14px;
 	color: royalblue;
 }
-
-
+#block_import_remote_notification .sectionname {
+	font-size:18px;
+	margin-bottom: 5px;
+}
+#block_import_remote_notification .subsectionname {
+	color: black;
+}
 @-webkit-keyframes progress-bar-stripes {
     from {
         background-position: 1rem 0

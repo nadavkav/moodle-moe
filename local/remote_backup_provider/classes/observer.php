@@ -171,26 +171,40 @@ class observer {
 
         $instance = new observer();
         $localevent = $event->get_data();
-
+        $courseformat = course_get_format($localevent['courseid'])->get_format();
+        $sectionsublevel = null;
         if (! $instance->parent_have_idnumber($localevent['courseid'])) {
             return;
         }
 
-        if (course_get_format($localevent['courseid'])->get_format() == 'moetopcoll' && $localevent['other']['modulename'] == 'label') {
+        if ($courseformat == 'moetopcoll' && $localevent['other']['modulename'] == 'label') {
             if ($localevent['other']['name'] == 'למידה' || $localevent['other']['name'] == 'תומכי למידה' || $localevent['other']['name'] == 'ארגז כלים') {
                 return;
             }
         }
 
-        // Get section name
+        // Get section name.
         if ($localevent['crud'] == 'd') {
             $section = 'stub';
         } else {
             $modinfo = get_fast_modinfo($localevent['courseid']);
             $mod = $modinfo->get_cm($localevent['contextinstanceid']);
             $section = get_section_name($localevent['courseid'], $mod->sectionnum);
+            if ($courseformat == 'moetopcoll' || $courseformat == 'moetabs') {
+                    $sectioninfo = $modinfo->get_section_info($mod->sectionnum);
+                    $sequence = $sectioninfo->sequence;
+                    $sequence = explode(',', $sequence);
+                foreach ($sequence as $step) {
+                    if ($step == $localevent['contextinstanceid']) {
+                        continue;
+                    }
+                    $modparent = $modinfo->get_cm($step);
+                    if ($modparent->modname == 'label' && strpos($modparent->content, 'moetopcalllabel')) {
+                        $sectionsublevel = $modparent->name;
+                    }
+                }
+            }
         }
-
         $pub = new publisher();
         $prefixurl = $instance->get_prefixurl();
         $suffixurl = $instance->get_suffixurl();
@@ -208,10 +222,11 @@ class observer {
                         'type' => 'da',
                         'course_id'          => $localevent['courseid'],
                         'link_to_remote_act' => 'stub',
-                        'cm'                  => $localevent['objectid'],
-                        'mod'                  => $localevent['other']['modulename'],
-                        'name'                  => 'stub',
-                        'section'             => $section
+                        'cm'                 => $localevent['objectid'],
+                        'mod'                => $localevent['other']['modulename'],
+                        'name'               => 'stub',
+                        'section'            => $section,
+                        'sectionsublevel'    => $sectionsublevel
                 );
             break;
             case "c":
@@ -219,10 +234,11 @@ class observer {
                         'type' => 'na',
                         'course_id'          => $localevent['courseid'],
                         'link_to_remote_act' => $CFG->wwwroot . '/mod/' . $localevent['other']['modulename'] . '/view.php?id=' . $localevent['objectid'],
-                        'cm'                  => $localevent['objectid'],
-                        'mod'                  => $localevent['other']['modulename'],
-                        'name'                  => $localevent['other']['name'],
-                        'section'             => $section
+                        'cm'                 => $localevent['objectid'],
+                        'mod'                => $localevent['other']['modulename'],
+                        'name'               => $localevent['other']['name'],
+                        'section'            => $section,
+                        'sectionsublevel'    => $sectionsublevel
                 );
             break;
         }
