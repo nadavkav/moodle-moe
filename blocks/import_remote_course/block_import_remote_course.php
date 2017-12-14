@@ -198,7 +198,7 @@ class block_import_remote_course extends block_base {
         foreach ($sections as $section) {
             $sec       = new stdClass();
             $sec->sectionname = $section;
-            $mods      = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel IS NULL",
+            $mods      = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=''",
                     array('new', $COURSE->id, $section), 'section, sectionsublevel');
             $localmodules   = [];
             if ($mods) {
