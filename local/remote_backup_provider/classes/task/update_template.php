@@ -80,7 +80,8 @@ class update_template extends scheduled_task {
                 'cm'                  => $cm->id,
                 'mod'                  => $cm->name,
                 'name'                  => $instance->name,
-                'section'             => $section
+                'section'             => $section,
+                'sectionsublevel'    => $sectionsublevel
             );
             foreach ($pub->get_all_subscribers() as $sub) {
                 // Subscriber info.
