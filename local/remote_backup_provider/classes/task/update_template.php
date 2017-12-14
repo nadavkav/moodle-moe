@@ -64,7 +64,7 @@ class update_template extends scheduled_task {
                 $sequence = explode(',', $sequence);
                 foreach ($sequence as $step) {
                     if ($step == $cm->id) {
-                        continue;
+                        break;
                     }
                     $modparent = $modinfo->get_cm($step);
                     if ($modparent->modname == 'label' && strpos($modparent->content, 'moetopcalllabel')) {
