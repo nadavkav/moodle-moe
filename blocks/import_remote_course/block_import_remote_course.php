@@ -199,7 +199,7 @@ class block_import_remote_course extends block_base {
             $sec       = new stdClass();
             $sec->sectionname = $section;
             $mods      = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=''",
-                    array('new', $COURSE->id, $section), 'section, sectionsublevel');
+                    array($type, $COURSE->id, $section), 'section, sectionsublevel');
             $localmodules   = [];
             if ($mods) {
                 foreach ($mods as $mod) {
@@ -221,7 +221,7 @@ class block_import_remote_course extends block_base {
                 $sublevel       = new stdClass();
                 $sublevel->name = $sub;
                 $mods           = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=?",
-                        array('new', $COURSE->id, $section, $sub), 'section, sectionsublevel');
+                        array($type, $COURSE->id, $section, $sub), 'section, sectionsublevel');
                 $localmodules   = [];
                 if ($mods) {
                     foreach ($mods as $mod) {
