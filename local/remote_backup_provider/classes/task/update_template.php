@@ -51,11 +51,27 @@ class update_template extends scheduled_task {
             if ($DB->get_record('course_modules', array('id' => $cm->id))) {
                 self::delete_activity_backup ($cm->id);
             }
-
+            $sectionsublevel = null;
             $modinfo = get_fast_modinfo($cm->course);
             $sectionnumber = $DB->get_field('course_sections', 'section', ['id' => $cm->section]);
             $section = get_section_name($cm->course, $sectionnumber);
-
+            $courseformat = course_get_format($cm->course)->get_format();
+            
+            if ($courseformat == 'moetopcoll' || $courseformat == 'moetabs') {
+                $mod = $modinfo->get_cm($cm->id);
+                $sectioninfo = $modinfo->get_section_info($mod->sectionnum);
+                $sequence = $sectioninfo->sequence;
+                $sequence = explode(',', $sequence);
+                foreach ($sequence as $step) {
+                    if ($step == $cm->id) {
+                        continue;
+                    }
+                    $modparent = $modinfo->get_cm($step);
+                    if ($modparent->modname == 'label' && strpos($modparent->content, 'moetopcalllabel')) {
+                        $sectionsublevel = $modparent->name;
+                    }
+                }
+            }
             $instance = $DB->get_record($cm->name, ['id' => $cm->instance]);
             $params = array(
                 'type' => 'ua',
