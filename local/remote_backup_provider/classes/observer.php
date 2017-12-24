@@ -172,7 +172,6 @@ class observer {
         $instance = new observer();
         $localevent = $event->get_data();
         $courseformat = course_get_format($localevent['courseid'])->get_format();
-        $sectionsublevel = null;
         if (! $instance->parent_have_idnumber($localevent['courseid'])) {
             return;
         }
@@ -190,20 +189,6 @@ class observer {
             $modinfo = get_fast_modinfo($localevent['courseid']);
             $mod = $modinfo->get_cm($localevent['contextinstanceid']);
             $section = get_section_name($localevent['courseid'], $mod->sectionnum);
-            if ($courseformat == 'moetopcoll' || $courseformat == 'moetabs') {
-                    $sectioninfo = $modinfo->get_section_info($mod->sectionnum);
-                    $sequence = $sectioninfo->sequence;
-                    $sequence = explode(',', $sequence);
-                foreach ($sequence as $step) {
-                    if ($step == $localevent['contextinstanceid']) {
-                        break;
-                    }
-                    $modparent = $modinfo->get_cm($step);
-                    if ($modparent->modname == 'label' && strpos($modparent->content, 'moetopcalllabel')) {
-                        $sectionsublevel = $modparent->name;
-                    }
-                }
-            }
         }
         $pub = new publisher();
         $prefixurl = $instance->get_prefixurl();
@@ -226,7 +211,6 @@ class observer {
                         'mod'                => $localevent['other']['modulename'],
                         'name'               => 'stub',
                         'section'            => $section,
-                        'sectionsublevel'    => $sectionsublevel
                 );
             break;
             case "c":
@@ -238,7 +222,6 @@ class observer {
                         'mod'                => $localevent['other']['modulename'],
                         'name'               => $localevent['other']['name'],
                         'section'            => $section,
-                        'sectionsublevel'    => $sectionsublevel
                 );
             break;
         }

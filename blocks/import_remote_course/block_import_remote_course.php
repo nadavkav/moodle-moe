@@ -188,57 +188,33 @@ class block_import_remote_course extends block_base {
      */
     private function mustacharrybuild (string $type) {
         global $DB, $COURSE;
-        $return = array();
+        
         $modnames = get_module_types_names();
         $modules = get_module_metadata($COURSE, $modnames, 0);
-
-        $sql = 'SELECT DISTINCT section from {import_remote_course_actdata} where courseid = :courseid AND type = :type';
-        $sections = $DB->get_fieldset_sql($sql, ['courseid' => $COURSE->id, 'type' => $type]);
-
-        foreach ($sections as $section) {
-            $sec       = new stdClass();
-            $sec->sectionname = $section;
-            $mods      = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=''",
-                    array($type, $COURSE->id, $section), 'section, sectionsublevel');
-            $localmodules   = [];
-            if ($mods) {
-                foreach ($mods as $mod) {
-                    $activity             = new stdClass();
-                    $localmod             = $modules[$mod->get('module')];
-                    $activity->iconsrc    = $localmod->icon;
-                    $activity->type       = $localmod->title;
-                    $activity->name       = $mod->get('name');
-                    $activity->cmid       = $mod->get('cm');
-                    $localmodules[]            = $activity;
-                }
-                $sec->child = $localmodules;
+        $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array($type, $COURSE->id), 'section');
+        $newactivities = [];
+        if ($mods) {
+            foreach ($mods as $mod) {
+                $activity          = new stdClass();
+                $localmod          = $modules[$mod->get('module')];
+                $activity->iconsrc = $localmod->icon;
+                $activity->type    = $localmod->title;
+                $activity->name    = $mod->get('name');
+                $activity->cmid    = $mod->get('cm');
+                $activity->section = $mod->get('section');
+                $newactivities[]   = $activity;
             }
-            $sec->sub = array();
-            // Sub level.
-            $sql = "SELECT DISTINCT sectionsublevel from {import_remote_course_actdata} where courseid = :courseid AND type = :type AND section=:section AND sectionsublevel<>''";
-            $sectionsublevel = $DB->get_fieldset_sql($sql, ['courseid' => $COURSE->id, 'type' => $type, 'section' => $section]);
-            foreach ($sectionsublevel as $sub) {
-                $sublevel       = new stdClass();
-                $sublevel->name = $sub;
-                $mods           = notification_helper::get_records_select("type = ? and courseid= ?  AND section= ? AND sectionsublevel=?",
-                        array($type, $COURSE->id, $section, $sub), 'section, sectionsublevel');
-                $localmodules   = [];
-                if ($mods) {
-                    foreach ($mods as $mod) {
-                        $activity             = new stdClass();
-                        $localmod             = $modules[$mod->get('module')];
-                        $activity->iconsrc    = $localmod->icon;
-                        $activity->type       = $localmod->title;
-                        $activity->name       = $mod->get('name');
-                        $activity->cmid       = $mod->get('cm');
-                        $localmodules[]            = $activity;
-                    }
-                    $sublevel->child = $localmodules;
+            $return = [];
+            $i = 0;
+            foreach ($newactivities as $neact) {
+                if (isset($return[$i]['sectionname']) && $return[$i]['sectionname'] != $neact->section) {
+                    $i++;
                 }
-                $sec->sub[]= $sublevel;
+                $return[$i]['sectionname'] = $neact->section;
+                $return[$i]['child'][] = $neact;
             }
-            $return[] = $sec;
         }
+        
         return $return;
     }
 }

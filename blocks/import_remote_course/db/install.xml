@@ -46,7 +46,6 @@
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="usermodified" SEQUENCE="false" TYPE="int" NOTNULL="true" LENGTH="10"/>
         <FIELD NAME="section" SEQUENCE="false" TYPE="text" NOTNULL="false" LENGTH="255"/>
-        <FIELD NAME="sectionsublevel" SEQUENCE="false" TYPE="text" NOTNULL="false" LENGTH="255"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

@@ -23,12 +23,6 @@
         {{#child}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
         {{/child}}
-        {{#sub}}
-	        <p class="subsectionname">{{name}}</p>
-		        {{#child}}
-		            <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
-		        {{/child}}
-        {{/sub}}
     {{/newmods}}
     {{#newmodsbutton}}
     <li><button id="resetnew" class="reset" data-toggle="modal" data-target="#newact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
@@ -42,12 +36,7 @@
         {{#child}}
         <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
         {{/child}}
-        {{#sub}}
-            <p class="subsectionname">{{name}}</p>
-                {{#child}}
-                    <li draggable="true" id="{{cmid}}" class="activityitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{{iconsrc}}}{{name}}</li>
-                {{/child}}
-        {{/sub}}
+        
     {{/updatemods}}
     {{#updatemodsbutton}}
     <li><button id="resetupdate" class="reset" data-toggle="modal" data-target="#updateact">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>

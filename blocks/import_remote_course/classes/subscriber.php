@@ -80,7 +80,7 @@ class subscriber {
     }
 
     public static function update($type, $course_id, $course_tag = null, $course_name = null,
-            $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null, $sectionsublevel = null) {
+            $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null) {
         global $DB;
         $table = 'import_remote_course_list';
         switch ($type) {
@@ -157,7 +157,6 @@ class subscriber {
                 $dataobject->name            = $name;
                 $dataobject->type            = 'new';
                 $dataobject->section         = $section;
-                $dataobject->sectionsublevel = $sectionsublevel;
                 foreach ($coursewithtamplayte as $course) {
                     $dataobject->courseid        = (int)$course->course_id;
                     $notification = new notification_helper(0, $dataobject);
@@ -182,7 +181,6 @@ class subscriber {
                 $dataobject->name            = $name;
                 $dataobject->type            = 'update';
                 $dataobject->section         = $section;
-                $dataobject->sectionsublevel = $sectionsublevel;
 
                 foreach ($coursewithtamplayte as $course) {
                     $sql = " courseid = :courseid AND cm = :cm AND " . $DB->sql_compare_text('type') . "= :type";
