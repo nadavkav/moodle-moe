@@ -164,6 +164,19 @@ $renderer = $PAGE->get_renderer('core', 'backup');
 echo $renderer->backup_files_viewer($treeview_options);
 echo $OUTPUT->container_end();
 
+echo $OUTPUT->heading_with_help(get_string('choosefilefromsectionebackup', 'backup'), 'choosefilefromuserbackup', 'backup');
+echo $OUTPUT->container_start();
+$treeview_options = array();
+global $COURSE;
+$treeview_options['filecontext'] = $context;
+$treeview_options['currentcontext'] = $context;
+$treeview_options['component']   = 'backup';
+$treeview_options['context']     = $context;
+$treeview_options['filearea']    = 'section';
+$renderer = $PAGE->get_renderer('core', 'backup');
+echo $renderer->backup_files_viewer($treeview_options);
+echo $OUTPUT->container_end();
+
 echo $OUTPUT->heading_with_help(get_string('choosefilefromuserbackup', 'backup'), 'choosefilefromuserbackup', 'backup');
 echo $OUTPUT->container_start();
 $treeview_options = array();
