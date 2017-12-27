@@ -76,8 +76,6 @@ $string['backuptypesection'] = 'Section';
 $string['backupversion'] = 'Backup version';
 $string['cannotfindassignablerole'] = 'The {$a} role in the backup file cannot be mapped to any of the roles that you are allowed to assign.';
 $string['choosefilefromcoursebackup'] = 'Course backup area';
-$string['choosefilefromsectionebackup'] = 'Sections backup area';
-
 $string['choosefilefromcoursebackup_help'] = 'Course backups made using default settings are stored here.';
 $string['choosefilefromuserbackup'] = 'User private backup area';
 $string['choosefilefromuserbackup_help'] = 'Backup files with anonymized user information are stored here.';
