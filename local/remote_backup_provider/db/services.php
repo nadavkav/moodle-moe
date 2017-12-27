@@ -68,6 +68,13 @@ $functions = array(
             'description' => 'get a single activity backup.',
             'type' => 'write',
     ),
+    'local_remote_backup_provider_get_section_backup_by_id' => array(
+            'classname' => 'local_remote_backup_provider\externallib',
+            'methodname' => 'get_section_backup_by_id',
+            'classpath' => 'local/remote_backup_provider/classes/externallib.php',
+            'description' => 'get a single section backup.',
+            'type' => 'write',
+    ),
     'local_remote_backup_provider_retry_send_notification' => array(
             'classname'   => 'local_remote_backup_provider\externallib',
             'methodname'  => 'retry_send_notification',

@@ -75,5 +75,5 @@ $observers = array(
             'eventname'   => 'core\event\course_module_deleted',
             'callback'    => 'local_remote_backup_provider\observer::send_mod_notification',
             'priority'  => 1000,
-    ),
+    ), 
 );

@@ -80,27 +80,68 @@ class observer {
                 );
             }
         }
-
+ 
         $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
         if ($skipcertverify) {
             $options['curlopt_ssl_verifypeer'] = false;
             $options['curlopt_ssl_verifyhost'] = false;
         }
-        foreach ($pub->get_all_subscribers() as $sub) {
-            // Subscriber info.
-            $token = $sub->remote_token;
-            $remotesite = $sub->base_url;
-            $localparams = $params;
-            $localparams['username'] = $sub->remote_user;
-
-            $url = $remotesite . $prefixurl . $token . $postfixurl;
-
-            $curl = new \curl();
-            $resp = json_decode($curl->post($url, $localparams, $options));
-
-            if (! isset($resp->result) || $resp->result != true) {
-                $fail = new fail(null, $url, $localparams, $options, 'send_update');
-                $fail->save();
+        
+        //in case of new section moodle don't supply event. we using this event and change it to work like send_mod_notification.
+        $noofsectioninconfig = $DB->get_field('course_format_options', 'value', ['name' => 'numsections', 'courseid' => $localevent['objectid']]);
+        $noofsectioninconfig = $noofsectioninconfig +1;
+        $sections = $DB->get_records('course_sections', ['course' => $localevent['objectid']], 'section');
+        if ($noofsectioninconfig != count($sections) && $event->crud == 'c' ) {
+            $sectionstosand = array_slice($sections, $noofsectioninconfig);
+            foreach ($sectionstosand as $section) {
+                $params = array(
+                        'type' => 'ns',
+                        'course_id'          => $localevent['courseid'],
+                        'link_to_remote_act' => 'stub',
+                        'cm'                 => $section->id,
+                        'mod'                => 'stub',
+                        'name'               => $section->name,
+                        'section'            => 'stub',
+                );
+                
+                foreach ($pub->get_all_subscribers() as $sub) {
+                    // Subscriber info.
+                    $token = $sub->remote_token;
+                    $remotesite = $sub->base_url;
+                    $localparams = $params;
+                    $localparams['username'] = $sub->remote_user;
+                    
+                    $url = $remotesite . $prefixurl . $token . $postfixurl;
+                    
+                    $curl = new \curl();
+                    $resp = json_decode($curl->post($url, $localparams, $options));
+                    
+                    if (! isset($resp->result) || $resp->result != true) {
+                        $fail = new fail(null, $url, $localparams, $options, 'send_section_update');
+                        $fail->save();
+                    }
+                }
+                
+                
+            }    
+        } else {
+        
+            foreach ($pub->get_all_subscribers() as $sub) {
+                // Subscriber info.
+                $token = $sub->remote_token;
+                $remotesite = $sub->base_url;
+                $localparams = $params;
+                $localparams['username'] = $sub->remote_user;
+    
+                $url = $remotesite . $prefixurl . $token . $postfixurl;
+    
+                $curl = new \curl();
+                $resp = json_decode($curl->post($url, $localparams, $options));
+    
+                if (! isset($resp->result) || $resp->result != true) {
+                    $fail = new fail(null, $url, $localparams, $options, 'send_update');
+                    $fail->save();
+                }
             }
         }
     }
@@ -292,6 +333,57 @@ class observer {
 
     }
 
+    /**
+     * Event notification_observer.
+     * send update to all subscribers about new section created
+     */
+    public function send_section_notification (\core\event\base $event) {
+        global $DB, $CFG;
+        
+        $instance = new observer();
+        $localevent = $event->get_data();
+        if (! $instance->parent_have_idnumber($localevent['courseid'])) {
+            return;
+        }
+
+        $pub = new publisher();
+        $prefixurl = $instance->get_prefixurl();
+        $suffixurl = $instance->get_suffixurl();
+        $options = array();
+        
+        $skipcertverify = (get_config('local_remote_backup_provider', 'selfsignssl')) ? true : false;
+        if ($skipcertverify) {
+            $options['CURLOPT_SSL_VERIFYPEER'] = false;
+            $options['CURLOPT_SSL_VERIFYHOST'] = false;
+        }
+        $type = $event->crud;
+        switch ($type) {
+            case "c":
+                $params = array(
+                    //ADD PARAMS
+                );
+                break;
+        }
+        foreach ($pub->get_all_subscribers() as $sub) {
+            // Subscriber info.
+            $token = $sub->remote_token;
+            $remotesite = $sub->base_url;
+            $localparams = $params;
+            $localparams['username'] = $sub->remote_user;
+            
+            $url = $remotesite . $prefixurl . $token . $suffixurl;
+            
+            $curl = new \curl();
+            $resp = json_decode($curl->post($url, $localparams, $options));
+            
+            if (! isset($resp->result) || $resp->result != true) {
+                $fail = new fail(null, $url, $localparams, $options, 'send_mod_notification');
+                $fail->save();
+            }
+        }
+    }
+    
+    
     /**
      * get prefix url for the web service.
      *

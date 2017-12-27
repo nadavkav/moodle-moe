@@ -442,4 +442,117 @@ class externallib extends \external_api {
     public static function retry_send_notification_returns() {
         return new \external_function_parameters(array( 'result' => (new \external_value(PARAM_BOOL))));
     }
+    
+    
+    public static function get_section_backup_by_id_parameters() {
+        return new \external_function_parameters ( array (
+                'id' => new \external_value ( PARAM_INT, 'id' ),
+                'username' => new \external_value ( PARAM_USERNAME, 'username' )
+        ) );
+    }
+    
+    /**
+     * Create section backup and generate URL link for download it.
+     *
+     * @param int $id -  section id as show in course_section table.
+     * @param int $username -  user name with right privilege.
+     * 
+     * @return String url - link to download the backup file
+     */
+    public static function get_section_backup_by_id($id, $username) {
+        global $CFG, $DB;
+        // Validate parameters passed from web service.
+        $params = self::validate_parameters ( self::get_activity_backup_by_id_parameters (), array (
+                'id' => $id,
+                'username' => $username
+        ) );
+        $contextid = $DB->get_field('files', 'contextid', ['itemid' => $id]);
+        
+        if($contextid) {
+            // Check if file exist
+            $fs = get_file_storage();
+            $context = \context::instance_by_id($contextid);
+            // Prepare file record object
+            $fileinfo = array(
+                    'component' => 'local_remote_backup_provider',     // usually = table name
+                    'filearea' => 'backup',     // usually = table name
+                    'itemid' => $id,               // usually = ID of row in table
+                    'contextid' => $context->id, // ID of context
+                    'filepath' => '/section/',           // any path beginning and ending in /
+                    'filename' => $id . '.mbz'); // any filename
+            
+            // Get file
+            $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
+                    $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+            
+            // Read contents
+            if ($file) {
+                $fileurl = \moodle_url::make_webservice_pluginfile_url($fileinfo['contextid'],
+                        $fileinfo['component'],
+                        $fileinfo['filearea'],
+                        $fileinfo['itemid'],
+                        $fileinfo['filepath'],
+                        $fileinfo['filename']);
+                return array (
+                        'url' => $fileurl->out ( true )
+                );
+            }
+        }
+            // file doesn't exist - create one
+            // Extract the userid from the username.
+            $userid = $DB->get_field ( 'user', 'id', array (
+                    'username' => $username
+            ) );
+            
+            // Instantiate controller.
+            $bc = new \backup_controller( \backup::TYPE_1SECTION, $id, \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $userid );
+            
+            // Run the backup.
+            $bc->set_status ( \backup::STATUS_AWAITING );
+            $bc->execute_plan ();
+            $result = $bc->get_results ();
+            
+            if (isset ( $result ['backup_destination'] ) && $result ['backup_destination']) {
+                $file = $result ['backup_destination'];
+                $contextid = $DB->get_field('files', 'contextid', ['itemid' => $id]);
+                $context = \context::instance_by_id($contextid);
+                $fs = get_file_storage ();
+                $timestamp = time ();
+                
+                $filerecord = array (
+                        'contextid' => $context->id,
+                        'component' => 'local_remote_backup_provider',
+                        'filearea' => 'backup',
+                        'itemid' => $id,
+                        'filepath' => '/section/',
+                        'filename' => $id . '.mbz',
+                        'timecreated' => $timestamp,
+                        'timemodified' => $timestamp
+                );
+                $storedfile = $fs->create_file_from_storedfile ( $filerecord, $file );
+                $file->delete ();
+                
+                // Make the link.
+                $filepath = $storedfile->get_filepath () . $storedfile->get_filename ();
+                $fileurl = \moodle_url::make_webservice_pluginfile_url (
+                        $storedfile->get_contextid (),
+                        $storedfile->get_component (),
+                        $storedfile->get_filearea (),
+                        $storedfile->get_itemid (),
+                        $storedfile->get_filepath (),
+                        $storedfile->get_filename () );
+                return array (
+                        'url' => $fileurl->out ( true )
+                );
+            } else {
+                return false;
+            }
+        }
+        
+        public static function get_section_backup_by_id_returns() {
+            return new \external_single_structure ( array (
+                    'url' => new \external_value ( PARAM_RAW, 'url of the backup file' )
+            ) );
+        }  
+    
 }
