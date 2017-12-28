@@ -33,7 +33,14 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 			$("[id^=section]").removeClass('highlight');
 		});
 		
-
+		$('.sectionitem').on('dragstart',function(event){
+			$(".course-content").addClass('drop');
+			event.originalEvent.dataTransfer.setData('text/html', event.target.id);
+		});
+		
+		$('.sectionitem').on('dragend',function(event){
+			$(".course-content").removeClass('drop');
+		});
 		
 		$("#newitems").click(function() {
 			$("#newactivitieslist").toggleClass('hidden');
@@ -43,8 +50,8 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 			$("#updatedactivites").toggleClass('hidden');
 		});	
 		
-		$("#deleteitems").click(function() {
-			$("#deletectivitieslist").toggleClass('hidden');
+		$("#newsection").click(function() {
+			$("#newsectionlist").toggleClass('hidden');
 		});	
 		
 		$('li.section').on('drop dragover dragleave',function(event){
@@ -63,11 +70,12 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 						data = data.replace( /^\D+/g, '');
 						data = data.substring(3);
 					}
-				    if(!$('#' + data).hasClass('activityitem')){
+				    if(!$('#' + data).hasClass('activityitem') && !$('#' + data).hasClass('sectionitem')){
 				    	break;
 				    }
-				    
 				    runprograssbar();
+				    
+				    if($('#' + data).hasClass('activityitem')){
 					var promises = ajax.call([
 						{methodname: 'block_import_remote_course_activity', args: {
 							'cmid': data,
@@ -81,6 +89,22 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 				       }
 				    });
 					break;
+				    }
+				    
+				    if($('#' + data).hasClass('sectionitem')){
+						var promises = ajax.call([
+							{methodname: 'block_import_remote_course_section', args: {
+								'cmid': data,
+								'courseid': courseid,
+							}}
+						]);
+					    promises[0].done(function(response) {
+					       if(response.status== 'success'){
+					    	   location.reload();
+					       }
+					    });
+						break;
+					    }
 			}
 		});
 		
@@ -132,11 +156,11 @@ define(['jquery', 'jqueryui', 'core/ajax', 'core/str', 'core/notification' ],fun
 		    });
 		});	
 		
-		$("#deleteconfirmyes").click(function() {
+		$("#newsectionsconfirmyes").click(function() {
 			var promises = ajax.call([
 				{methodname: 'block_import_remote_course_delete_act', args: {
 					'course_id': courseid,
-					'type' : 'delete'
+					'type' : 'section'
 				}}
 			]);
 		    promises[0].done(function(response) {

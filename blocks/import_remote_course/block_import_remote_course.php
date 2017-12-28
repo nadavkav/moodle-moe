@@ -136,13 +136,17 @@ class block_import_remote_course extends block_base {
                     notification_helper::count_records_select("type = ? and courseid= ? ", array('update', $COURSE->id)));
             $context->deleteitemsstr = get_string('deleteitems', 'block_import_remote_course',
                     notification_helper::count_records_select("type = ? and courseid= ? ", array('delete', $COURSE->id)));
+            $context->sectionitemsstr = get_string('newsection', 'block_import_remote_course',
+                    notification_helper::count_records_select("type = ? and courseid= ? ", array('section', $COURSE->id)));
             $context->tetstenvurl = get_config('block_import_remote_course', 'testenv');
 
             // Mods display.
-            $context->newmods = $this->mustacharrybuild('new');
-            $context->updatemods = $this->mustacharrybuild('update');
-            $context->newmodsbutton = count($context->newmods) > 0 ? true : false;
-            $context->updatemodsbutton = count($context->updatemods) > 0 ? true : false;
+            $context->newmods           = $this->mustacharrybuild('new');
+            $context->updatemods        = $this->mustacharrybuild('update');
+            $context->newsections       = $this->mustacharrybuild('section');
+            $context->newsectionsbutton = count($context->newsections) > 0 ? true : false;
+            $context->newmodsbutton     = count($context->newmods) > 0 ? true : false;
+            $context->updatemodsbutton  = count($context->updatemods) > 0 ? true : false;
 
             $this->content = new stdClass();
             $modlist = $renderer->render_from_template('block_import_remote_course/modlist', $context);
@@ -189,22 +193,29 @@ class block_import_remote_course extends block_base {
     private function mustacharrybuild (string $type) {
         global $DB, $COURSE;
         
-        $modnames = get_module_types_names();
-        $modules = get_module_metadata($COURSE, $modnames, 0);
+        if($type != 'section') {
+            $modnames = get_module_types_names();
+            $modules = get_module_metadata($COURSE, $modnames, 0);
+        }    
         $mods = notification_helper::get_records_select("type = ? and courseid= ? ", array($type, $COURSE->id), 'section');
         $newactivities = [];
+        $return = [];
         if ($mods) {
             foreach ($mods as $mod) {
                 $activity          = new stdClass();
-                $localmod          = $modules[$mod->get('module')];
-                $activity->iconsrc = $localmod->icon;
-                $activity->type    = $localmod->title;
+                if($type == 'section') {
+                    $activity->iconsrc = '';
+                    $activity->type    = '';
+                } else {
+                    $localmod          = $modules[$mod->get('module')];
+                    $activity->iconsrc = $localmod->icon;
+                    $activity->type    = $localmod->title;  
+                }
                 $activity->name    = $mod->get('name');
                 $activity->cmid    = $mod->get('cm');
                 $activity->section = $mod->get('section');
                 $newactivities[]   = $activity;
-            }
-            $return = [];
+            }           
             $i = 0;
             foreach ($newactivities as $neact) {
                 if (isset($return[$i]['sectionname']) && $return[$i]['sectionname'] != $neact->section) {

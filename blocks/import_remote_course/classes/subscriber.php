@@ -79,16 +79,17 @@ class subscriber {
         // TO_DO add the web server actions
     }
 
-    public static function update($type, $course_id, $course_tag = null, $course_name = null,
+    public static function update($type, $course_id, $course_tag = null, $course_name = null, $change_log_link = null,
             $link_to_remote_act = null, $cm = null, $mod = null, $name = null, $section = null) {
         global $DB;
         $table = 'import_remote_course_list';
         switch ($type) {
             case 'c':
                 $dataobject = new stdClass();
-                $dataobject->course_id   = $course_id;
-                $dataobject->course_tag  = $course_tag;
-                $dataobject->course_name = $course_name;
+                $dataobject->course_id       = $course_id;
+                $dataobject->course_tag      = $course_tag;
+                $dataobject->course_name     = $course_name;
+                $dataobject->change_log_link = $change_log_link;
                 $DB->insert_record($table, $dataobject);
                 break;
             case 'd':
@@ -105,6 +106,7 @@ class subscriber {
                     $dataobject->course_id   = $course_id;
                     $dataobject->course_tag  = $course_tag;
                     $dataobject->course_name = $course_name;
+                    $dataobject->change_log_link = $change_log_link;
                     $DB->update_record($table, $dataobject);
                 } else {
                     // Creating new course in case of moving course to cat with tag.
@@ -112,6 +114,7 @@ class subscriber {
                     $dataobject->course_id   = $course_id;
                     $dataobject->course_tag  = $course_tag;
                     $dataobject->course_name = $course_name;
+                    $dataobject->change_log_link = $change_log_link;
                     $DB->insert_record($table, $dataobject);
                 }
                 break;
@@ -127,17 +130,19 @@ class subscriber {
                     // A new tag to existing course
                     if($id) {
                         $dataobject = new stdClass();
-                        $dataobject->id          = $id;
-                        $dataobject->course_id   = $course_id;
-                        $dataobject->course_tag  = $course_tag;
-                        $dataobject->course_name = $course_name;
+                        $dataobject->id              = $id;
+                        $dataobject->course_id       = $course_id;
+                        $dataobject->course_tag      = $course_tag;
+                        $dataobject->course_name     = $course_name;
+                        $dataobject->change_log_link = $change_log_link;
                         $DB->update_record($table, $dataobject);
                     } else {
                         // A new course
                         $dataobject = new stdClass();
-                        $dataobject->course_id   = $course_id;
-                        $dataobject->course_tag  = $course_tag;
-                        $dataobject->course_name = $course_name;
+                        $dataobject->course_id       = $course_id;
+                        $dataobject->course_tag      = $course_tag;
+                        $dataobject->course_name     = $course_name;
+                        $dataobject->change_log_link = $change_log_link;
                         $DB->insert_record($table, $dataobject);
                     }
                 }
@@ -212,6 +217,27 @@ class subscriber {
                 $DB->delete_records('import_remote_course_actdata', ['cm' => $cm]);
                 if ($DB->get_record('course_modules', array('id' => $cm))) {
                     self::delete_activity_backup($cm);
+                }
+                break;
+            case 'ns':
+                $data = [];
+                $templateid = $DB->get_field('import_remote_course_list', 'id', array(
+                        'course_id' => $course_id
+                ));
+                $coursewithtamplayte = $DB->get_records('import_remote_course_templat', array(
+                        'tamplate_id' => $templateid
+                ));
+                $dataobject = new stdClass();
+                $dataobject->linktoremoteact = $link_to_remote_act;
+                $dataobject->cm              = (int)$cm;
+                $dataobject->module          = $mod;
+                $dataobject->name            = $name;
+                $dataobject->type            = 'section';
+                $dataobject->section         = $section;
+                foreach ($coursewithtamplayte as $course) {
+                    $dataobject->courseid        = (int)$course->course_id;
+                    $notification = new notification_helper(0, $dataobject);
+                    $notification->create();
                 }
                 break;
             default:

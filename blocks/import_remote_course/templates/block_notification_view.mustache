@@ -43,6 +43,18 @@
     {{/updatemodsbutton}}
     </ul>
     
+    <button id="newsection">{{sectionitemsstr}}</button>
+    <ul id="newsectionlist" class="sectionlist hidden">
+    {{#newsections}}
+        {{#child}}
+        <li draggable="true" id="{{cmid}}" class="sectionitem">{{# pix }}i/dragdrop, core, movecoursemodule{{/ pix }}{{name}}</li>
+        {{/child}}      
+    {{/newsections}}
+    {{#newsectionsbutton}}
+    <li><button id="resetsection" class="reset" data-toggle="modal" data-target="#newsections">{{#str}} resetbutton, block_import_remote_course {{/str}}</button><li>
+    {{/newsectionsbutton}}
+    </ul>
+    
     <a id="importsite" target="_blank" href="{{tetstenvurl}}" class="btn">{{# str }} trytemplates, block_import_remote_course {{/ str }}</a>
 </section>
 
@@ -83,7 +95,7 @@
   </div>
 </div>
 
-<div id="deleteact" class="modal fade" role="dialog">
+<div id="newsections" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,7 +106,7 @@
         <p>{{# str }} deletewarning, block_import_remote_course {{/ str }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="deleteconfirmyes" class="btn btn-default" data-dismiss="modal">{{# str }} yes, core {{/ str }}</button>
+        <button type="button" id="newsectionsconfirmyes" class="btn btn-default" data-dismiss="modal">{{# str }} yes, core {{/ str }}</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">{{# str }} no, core {{/ str }}</button>
       </div>
     </div>

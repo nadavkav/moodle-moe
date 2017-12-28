@@ -14,6 +14,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_id_unique" TYPE="unique" FIELDS="course_id"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="import_remote_course_templat" COMMENT="list each course the template he belong to">

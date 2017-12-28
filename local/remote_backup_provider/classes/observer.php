@@ -50,7 +50,8 @@ class observer {
                 'type' => $type,
                 'course_id' => $localevent['objectid'],
                 'course_tag' => 'stab',
-                'course_name' => 'stab'
+                'course_name' => 'stab',
+                'change_log_link' => 'stab'
             );
         } else {
             // Course info to update.
@@ -69,14 +70,16 @@ class observer {
                         'type' => 'd',
                         'course_id' => $localevent['objectid'],
                         'course_tag' => 'stab',
-                        'course_name' => 'stab'
+                        'course_name' => 'stab',
+                        'change_log_link' => 'stab'
                 );
             } else {
                 $params = array(
                     'type' => $type,
                     'course_id' => $localcourse->id,
                     'course_tag' => $tag,
-                    'course_name' => $localcourse->fullname
+                    'course_name' => $localcourse->fullname,
+                    'change_log_link' => 'stab'
                 );
             }
         }
@@ -91,16 +94,18 @@ class observer {
         $noofsectioninconfig = $DB->get_field('course_format_options', 'value', ['name' => 'numsections', 'courseid' => $localevent['objectid']]);
         $noofsectioninconfig = $noofsectioninconfig +1;
         $sections = $DB->get_records('course_sections', ['course' => $localevent['objectid']], 'section');
-        if ($noofsectioninconfig != count($sections) && $event->crud == 'c' ) {
+       
+        if (count($sections) > 0 && $noofsectioninconfig != count($sections) && $event->crud == 'c' ) {
             $sectionstosand = array_slice($sections, $noofsectioninconfig);
             foreach ($sectionstosand as $section) {
+                $name = get_section_name($localevent['objectid'], $section->section);
                 $params = array(
                         'type' => 'ns',
                         'course_id'          => $localevent['courseid'],
                         'link_to_remote_act' => 'stub',
                         'cm'                 => $section->id,
                         'mod'                => 'stub',
-                        'name'               => $section->name,
+                        'name'               => $name,
                         'section'            => 'stub',
                 );
                 
@@ -181,7 +186,8 @@ class observer {
                 'type' => $type,
                 'course_id' => $localcourse->id,
                 'course_tag' => $tag,
-                'course_name' => $localcourse->fullname
+                'course_name' => $localcourse->fullname,
+                'change_log_link' => 'stab'
             );
 
             foreach ($pub->get_all_subscribers() as $sub) {

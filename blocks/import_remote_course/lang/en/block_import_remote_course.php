@@ -78,6 +78,7 @@ $string['cancel'] = 'Cancel';
 $string['resetact'] = 'Reset notifications';
 $string['press'] = 'press for preview';
 $string['chosesection'] = 'select section';
+$string['newsection'] = 'There are {$a} new sections';
 
 $string['confirmdelete'] = 'Confirm item delete';
 $string['deletewarning'] = 'are you sure you wont to delete the current item? this action cannot be undo';

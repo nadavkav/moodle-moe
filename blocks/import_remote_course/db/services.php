@@ -37,6 +37,14 @@ $functions = array(
         'type' => 'write',
         'ajax' => true
     ),
+    'block_import_remote_course_section' => array(
+            'classname' => 'block_import_remote_course_external',
+            'methodname' => 'import_section',
+            'classpath' => 'blocks/import_remote_course/externallib.php',
+            'description' => 'import section',
+            'type' => 'write',
+            'ajax' => true
+    ),
     'block_import_remote_course_delete_act' => array(
             'classname' => 'block_import_remote_course_external',
             'methodname' => 'delete_act',

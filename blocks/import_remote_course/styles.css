@@ -24,6 +24,7 @@
 }
 .block_import_remote_course #importsite,
 .block_import_remote_course #newitems,
+.block_import_remote_course #newsection,
 .block_import_remote_course #updateitems,
 .block_import_remote_course #deleteitems,
 .block_import_remote_course #importsite {
@@ -83,7 +84,8 @@ block_import_remote_course .felement.select {
 .block_import_remote_course #updateitems{
   margin-bottom: 7px;
 }
-#block_import_remote_notification .activitylist {
+#block_import_remote_notification .activitylist,
+#block_import_remote_notification .sectionlist {
   list-style-type: none;
   margin: 0 0 1em 0;
   padding: 0;
@@ -185,7 +187,7 @@ float: left;
 }
 .block_import_remote_course #id_cat,
 .block_import_remote_course #choosecourse {
-  max-width: 45%;
+  max-width: 52%;
 }
 
 .block_import_remote_course .reset {

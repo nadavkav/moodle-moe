@@ -173,5 +173,14 @@ function xmldb_block_import_remote_course_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017122400, 'block', 'import_remote_course');
     }
     
+    if ($oldversion < 2017122807) {
+        $dbman = $DB->get_manager();        
+        $table = new xmldb_table('import_remote_course_list');
+        $key = new xmldb_key('course_id_unique', XMLDB_KEY_UNIQUE, array('course_id'));
+        
+        $dbman->add_key($table, $key);       
+        upgrade_plugin_savepoint(true, 2017122807, 'block', 'import_remote_course');
+    }
+    
     return true;
 }

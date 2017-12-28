@@ -31,7 +31,7 @@ $string['import_remote_course:addinstance'] = 'Add a import_remote_course block'
 $string['import_remote_course:myaddinstance'] = 'Add a import_remote_course block to my moodle';
 $string['import_remote_course:view'] = 'מאפשר צפייה בבלוק';
 $string['pluginname'] = 'תבניות חלופות בהערכה';
-$string['selectoption'] = 'אנא בחר';
+$string['selectoption'] = 'אנא בחרו';
 $string['selectoptionimport'] = 'בחרו תבנית מהרשימה';
 
 
@@ -55,11 +55,11 @@ $string['testenv_label'] = 'סביבת התנסות';
 $string['testenv_desc'] = 'סביבת התנסות לצפייה ובדיקות של הקרוסים לפני יבוא';
 $string['import_remote_course:clon'] = 'יכולת לשכפל קורס נוחכי במערכת התבניות';
 $string['clone'] = 'שכפול מרחב לימוד';
-$string['cat'] = 'בחר קטגוריה לשכפול של הקורס';
+$string['cat'] = 'בחרו קטגוריה לשכפול של הקורס';
 $string['successclone'] = 'הקורס הועתק בהצלחה!';
 $string['coursenotfound'] = 'אין לקורס המבוקש תבנית המתאימה לו';
 
-$string['select'] = 'בחר';
+$string['select'] = 'בחרו';
 $string['type'] = 'סוג פעילות';
 $string['name'] = 'שם הפעילות';
 $string['privewurl'] = 'צפיה מקדימה';
@@ -74,6 +74,7 @@ $string['blockefooter'] = 'מורה יקר, בחלק זה תקבל עידכונ�
 $string['newactheader'] = 'רכיבים חדשים';
 $string['cancel'] = 'ביטול';
 $string['resetbutton'] = 'אפס רשימה';
+$string['newsection'] = 'נוספו {$a} יחידות לימוד חדשות';
 
 $string['press'] = 'לחץ לצפיה מקדימה';
 $string['chosesection'] = 'בחירת יחידה';
