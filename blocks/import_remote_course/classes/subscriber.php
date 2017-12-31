@@ -240,6 +240,14 @@ class subscriber {
                     $notification->create();
                 }
                 break;
+            case 'us' :
+                $sql = "update {import_remote_course_actdata} set name = :name where cm = :cm AND type = 'section'";
+                $DB->execute($sql ,['name' => $name, 'cm' => $cm]);
+                break;
+            case 'ds' :
+                $select = "cm = :cm AND " . $DB->sql_compare_text(type) . " = 'section'";
+                $DB->delete_records_select('import_remote_course_actdata',$select , ['cm' => $cm]);
+                break;
             default:
                 return array('result' => false);
         }

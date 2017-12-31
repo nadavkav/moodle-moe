@@ -223,7 +223,7 @@ class observer {
             return;
         }
 
-        if ($courseformat == 'moetopcoll' && $localevent['other']['modulename'] == 'label') {
+        if ($courseformat == 'moetopcoll' && $localevent['other']['modulename'] == 'label' && isset($localevent['other']['name'])) {
             if ($localevent['other']['name'] == 'למידה' || $localevent['other']['name'] == 'תומכי למידה' || $localevent['other']['name'] == 'ארגז כלים') {
                 return;
             }
@@ -343,7 +343,7 @@ class observer {
      * Event notification_observer.
      * send update to all subscribers about new section created
      */
-    public function send_section_notification (\core\event\base $event) {
+    public static function send_section_notification (\core\event\base $event) {
         global $DB, $CFG;
         
         $instance = new observer();
@@ -364,9 +364,27 @@ class observer {
         }
         $type = $event->crud;
         switch ($type) {
-            case "c":
+            case "u":
+                $name = get_section_name($localevent['courseid'], $localevent['objectid']);
                 $params = array(
-                    //ADD PARAMS
+                'type'               => 'us',
+                'course_id'          => $localevent['courseid'],
+                'link_to_remote_act' => 'stub',
+                'cm'                 => $localevent['objectid'],
+                'mod'                => 'stub',
+                'name'               => $name,
+                'section'            => 'stub',
+                );
+                break;
+            case "d":
+                $params = array(
+                'type' => 'ds',
+                'course_id'          => $localevent['courseid'],
+                'link_to_remote_act' => 'stub',
+                'cm'                 => $localevent['objectid'],
+                'mod'                => 'stub',
+                'name'               => 'stub',
+                'section'            => 'stub',
                 );
                 break;
         }
