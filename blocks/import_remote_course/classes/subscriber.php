@@ -241,6 +241,8 @@ class subscriber {
                 }
                 break;
             case 'us' :
+                break;
+                //not working yet.
                 $sql = "update {import_remote_course_actdata} set name = :name where cm = :cm AND type = 'section'";
                 $DB->execute($sql ,['name' => $name, 'cm' => $cm]);
                 break;
