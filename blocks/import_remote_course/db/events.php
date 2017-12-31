@@ -13,17 +13,19 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * @package    local_remote_backup_provider
- * @copyright  2017 Sysbind
+ * @copyright  2017 SysBind LTD
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_remote_backup_provider';
-$plugin->cron      = 300;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.00.01';
-$plugin->requires  = 2014111000;
-$plugin->version   = 2017123100;
+$observers = array(
+    array(
+            'eventname'   => 'core\event\course_deleted',
+            'callback'    => 'block_import_remote_course\observer::course_delete',
+            'internal'  => false, // This means that we get events only after transaction commit.
+            'priority'  => 1000,
+    )
+);

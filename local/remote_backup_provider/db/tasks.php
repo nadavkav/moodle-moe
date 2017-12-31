@@ -32,4 +32,13 @@ $tasks = array(
         'dayofweek' => '*',
         'month' => '*',
     ),
+    array(
+        'classname' => 'local_remote_backup_provider\task\update_template',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '0',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*',
+    ),
 );

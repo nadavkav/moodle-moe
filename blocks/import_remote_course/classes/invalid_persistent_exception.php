@@ -15,16 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Invalid persistent exception.
  *
- * @package    block_import_remote_course
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @package    core
+ * @copyright  2015 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_import_remote_course;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2017122807;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_import_remote_course'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = array('local_remote_backup_provider' => 2015080800);
+/**
+ * Invalid persistent exception class.
+ *
+ * @package    core
+ * @copyright  2015 Frédéric Massart - FMCorz.net
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class invalid_persistent_exception extends \moodle_exception {
+
+    public function __construct(array $errors = array()) {
+        $forhumans = array();
+        $debuginfo = array();
+        foreach ($errors as $key => $message) {
+            $debuginfo[] = "$key: $message";
+            $forhumans[] = $message;
+        }
+        parent::__construct('invalidpersistenterror', 'core', null,
+                implode(', ', $forhumans), implode(' - ', $debuginfo));
+    }
+}

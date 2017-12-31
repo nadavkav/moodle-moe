@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Block import_remote_course
  *
@@ -23,6 +24,7 @@
  * @copyright  Nadav Kavalerchik <nadavkav@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+use block_import_remote_course\local\course_template;
 
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
@@ -30,15 +32,13 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 $destcourseid = optional_param('destcourseid', 0, PARAM_INT);
 $remote = optional_param('remotecourseid', 0, PARAM_INT);
 $sessiontoken = optional_param('sessionid', false, PARAM_ALPHANUM);
-
-//todo: use $COURSE?
 $course = $DB->get_record('course', array('id' => $destcourseid), '*', MUST_EXIST);
 
 if ($CFG->debug) {
     debugging("(1) Security checks...<br>");
 }
 
-// Security
+// Security.
 if (!isloggedin()) {
     require_login($course);
 }
@@ -81,20 +81,13 @@ $fs = get_file_storage();
 $url = $remotesite . '/webservice/rest/server.php?wstoken=' . $token .
     '&wsfunction=local_remote_backup_provider_get_manual_course_backup_by_id&moodlewsrestformat=json';
 $options = [];
-if ($skipcertverify){
+if ($skipcertverify) {
     $options['curlopt_ssl_verifypeer'] = false;
     $options['curlopt_ssl_verifyhost'] = false;
 }
 $params = array('id' => $remote, 'username' => $remoteusername);
-//print_r($params);
 $curl = new curl();
-// todo: Use HTTPS?
 $resp = json_decode($curl->post($url, $params, $options));
-
-//echo "<br>Link to file:<br>";
-//print_object($resp->url);
-//echo $resp->url . '?token=' . $token;
-//die;
 
 if ($CFG->debug) {
     debugging("(3) Starting download & redirecting to restore process...<br>");
@@ -112,20 +105,7 @@ $filerecord = array(
     'timecreated' => $timestamp,
     'timemodified' => $timestamp
 );
-//print_r($filerecord);
-//die;
 $downloadedbackupfile = $fs->create_file_from_url($filerecord, $resp->url . '?token=' . $token, array('skipcertverify' => $skipcertverify), true);
-
-// Used to redirect to a detailed restore process
-//$restoreurl = new moodle_url(
-//    '/backup/restore.php',
-//    array(
-//        'contextid'    => $context->id,
-//        'pathnamehash' => $storedfile->get_pathnamehash(),
-//        'contenthash'  => $storedfile->get_contenthash()
-//    )
-//);
-//redirect($restoreurl);
 
 if ($CFG->debug) {
     debugging("(4) Start quick restore into (merge) current course...<br>");
@@ -147,7 +127,6 @@ if ($rc->get_status() == backup::STATUS_REQUIRE_CONV) {
 if ($rc->execute_precheck()) {
     // Start restore (import).
     $rc->execute_plan();
-    //echo get_string('courserestored', 'tool_uploadcourse');
 } else {
     echo get_string('errorwhilerestoringthecourse', 'tool_uploadcourse');
 }
@@ -158,5 +137,13 @@ $DB->update_record('course', $course);
 $rc->destroy();
 unset($rc); // File logging is a mess, we can only try to rely on gc to close handles.
 
+$templateid = $DB->get_field('import_remote_course_list', 'id', ['course_id' => $remote]);
+// Log course - template
+$dataobject = new stdClass();
+$dataobject->course_id = $destcourseid;
+$dataobject->tamplate_id = $templateid;
+$dataobject->user_id = $USER->id;
+$coursetemplate = new course_template(0, $dataobject);
+$coursetemplate->create();
 // Finished? ... show updated course.
 redirect($returnurl);

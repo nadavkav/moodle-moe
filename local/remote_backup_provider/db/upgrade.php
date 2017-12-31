@@ -27,7 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Upgrade the local_usertours plugins.
  *
- * @param int $oldversion The old version of the local_usertours module
+ * @param int $oldversion
+ *            The old version of the local_usertours module
  * @return bool
  */
 function xmldb_local_remote_backup_provider_upgrade($oldversion) {
@@ -40,7 +41,7 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         $table = new xmldb_table('remote_backup_provider_subsc');
 
         // Conditionally launch add field sortorder.
-        if (!$dbman->table_exists($table)) {
+        if (! $dbman->table_exists($table)) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/local/remote_backup_provider/db/install.xml', 'remote_backup_provider_subsc');
         }
 
@@ -52,7 +53,7 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         $table = new xmldb_table('remote_backup_provider_fails');
 
         // Conditionally launch add field sortorder.
-        if (!$dbman->table_exists($table)) {
+        if (! $dbman->table_exists($table)) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot . '/local/remote_backup_provider/db/install.xml', 'remote_backup_provider_fails');
         }
 
@@ -74,5 +75,30 @@ function xmldb_local_remote_backup_provider_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017083003, 'local', 'remote_backup_provider');
     }
 
+    if ($oldversion < 2017112905) {
+        $dbman = $DB->get_manager();
+
+        $table = new xmldb_table('remote_backup_provider_fails');
+        $field = new xmldb_field('timecreate', XMLDB_TYPE_INTEGER, '10', null, true, null, time(), null);
+        if (! $dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('last_time_try', XMLDB_TYPE_INTEGER, '10', null, true, null, time(), null);
+        if (! $dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2017112905, 'local', 'remote_backup_provider');
+    }
+
+    if ($oldversion < 2017121101) {
+        $dbman = $DB->get_manager();
+
+        $table = new xmldb_table('remote_backup_provider_fails');
+        $field = new xmldb_field('type', XMLDB_TYPE_TEXT, '', null, false, null, null, null);
+        if (! $dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2017121101, 'local', 'remote_backup_provider');
+    }
     return true;
 }

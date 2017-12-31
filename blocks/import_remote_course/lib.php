@@ -13,8 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+defined('MOODLE_INTERNAL') || die();
 
-include_once($CFG->dirroot.'/blocks/import_remote_course/classes/subscriber.php');
-function uniq_name_for_subscribtion(){
+require_once($CFG->dirroot.'/blocks/import_remote_course/classes/subscriber.php');
+function uniq_name_for_subscribtion() {
     subscriber::subscribe();
 }

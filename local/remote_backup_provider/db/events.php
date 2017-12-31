@@ -29,7 +29,12 @@ $observers = array(
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
     ),
-
+    array(
+        'eventname'   => 'core\event\course_restored',
+        'callback'    => 'local_remote_backup_provider\observer::send_update',
+        'internal'  => false, // This means that we get events only after transaction commit.
+        'priority'  => 1000,
+    ),
     array(
         'eventname'   => 'core\event\course_deleted',
         'callback'    => 'local_remote_backup_provider\observer::send_update',
@@ -53,5 +58,34 @@ $observers = array(
         'callback'    => 'local_remote_backup_provider\observer::send_cat_update',
         'internal'  => false, // This means that we get events only after transaction commit.
         'priority'  => 1000,
-    )
+    ),
+    array(
+        'eventname'   => 'core\event\course_module_created',
+        'callback'    => 'local_remote_backup_provider\observer::send_mod_notification',
+        'internal'  => false, // This means that we get events only after transaction commit.
+        'priority'  => 1000,
+    ),
+    array(
+        'eventname'   => 'core\event\course_module_restored',
+        'callback'    => 'local_remote_backup_provider\observer::send_mod_notification',
+        'internal'  => false, // This means that we get events only after transaction commit.
+        'priority'  => 1000,
+    ),
+    array(
+            'eventname'   => 'core\event\course_module_deleted',
+            'callback'    => 'local_remote_backup_provider\observer::send_mod_notification',
+            'priority'  => 1000,
+    ), 
+    array(
+            'eventname'   => 'core\event\course_section_deleted',
+            'callback'    => 'local_remote_backup_provider\observer::send_section_notification',
+            'internal'  => false, // This means that we get events only after transaction commit.
+            'priority'  => 1000,
+    ),
+    array(
+            'eventname'   => 'core\event\course_section_updated',
+            'callback'    => 'local_remote_backup_provider\observer::send_section_notification',
+            'internal'  => false, // This means that we get events only after transaction commit.
+            'priority'  => 1000,
+    ),
 );

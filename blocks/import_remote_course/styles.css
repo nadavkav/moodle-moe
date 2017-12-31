@@ -22,7 +22,12 @@
 	width: 100%;
 	padding-left: 40px;
 }
-.block_import_remote_course #importsite{
+.block_import_remote_course #importsite,
+.block_import_remote_course #newitems,
+.block_import_remote_course #newsection,
+.block_import_remote_course #updateitems,
+.block_import_remote_course #deleteitems,
+.block_import_remote_course #importsite {
     background-image:  url([[pix:block_import_remote_course|mouseicon]]),url([[pix:block_import_remote_course|Kaftor_orada]]);
     background-position: 5% 50%, 0 0;
     background-size: 12%, cover;
@@ -32,6 +37,324 @@
     text-align:right;
     display: block;
     border: 1px solid #89b2ab;
-    min-width: 50%;
+    width: 100%;
 	padding-left: 40px;
+}
+
+.block_import_remote_course .footer {
+	    margin-top: 10px;
+}
+
+.block_import_remote_course #fitem_id_submitbutton {
+	padding: unset !important;
+    margin: unset !important;
+    background-color: unset !important;
+}
+
+.block_import_remote_course .felement.fsubmit {
+	margin-right: 0px !important;
+}
+
+.block_import_remote_course .felement{
+    margin-right: 85px !important;	
+	width: 100%;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.block_import_remote_course .fitemtitle{
+    width: auto !important;
+}
+
+.block_import_remote_course .felement.fselect{
+        display: unset !important;
+	    margin-right: unset !important;   
+}
+block_import_remote_course .felement.select {
+	    margin-right: -5px !important;
+	
+}
+.block_import_remote_course #importsite,
+.block_import_remote_course #openchengelog,
+.block_import_remote_course #importsite {
+	margin-bottom:10px;
+	width: auto;
+}
+.block_import_remote_course #newitems,
+.block_import_remote_course #updateitems{
+  margin-bottom: 7px;
+}
+#block_import_remote_notification .activitylist,
+#block_import_remote_notification .sectionlist {
+  list-style-type: none;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+
+#block_import_remote_notification #newactivitieslist li:last {
+  border-bottom: none;
+}
+#block_import_remote_notification .btn:hover,
+#block_import_remote_notification .button:hover {
+	background-position: 5% 50%, 0 0;
+}
+
+#block_import_remote_notification h4,
+#block_import_remote_notification p{
+	text-align: center;
+}
+
+.block_import_remote_course h4 {
+    font-size: 1.15em;
+    line-height: 26px;
+    font-weight: normal;
+    padding: 7px 0;
+    text-transform: none;
+    display: inline;
+    color: #80599B;
+    text-align: center;
+}
+
+#modlist{
+	width:35%;
+	height:25%;
+	margin:0 auto;
+	background:#E5E5E5;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-250px;
+	margin-top:-250px;
+	text-align: center;	
+	    border-radius: 12px;
+	
+}
+#modlist .table th, 
+#modlist .table td {
+	text-align: center; 
+}
+
+#modlist hr{
+    border-top: 1px solid #8c8b8b;
+}
+#modlist .close{
+float: left;
+    margin-top: 11px;
+    margin-left: 8px;
+    padding: 9px;
+    border-radius: 9px;
+}
+
+#modlisttable {
+	overflow: auto;
+}
+
+#modlist #acctionsbuttons{
+	position: absolute;
+    right: 0;
+    bottom: 9px;
+	width: 100%;
+}
+
+#modlist #resetcount {
+	margin-left: 20%;
+}
+
+#modlist #close {
+    width: 115px;
+}
+
+#section{
+    margin:0 auto;
+    background:#E5E5E5;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-250px;
+    margin-top:-250px;
+    border-radius: 12px;
+	display: inline-block;
+	padding: 20px;
+	padding-top: 5px;
+}
+
+#section h4 {
+	border-bottom:3px solid #eceeef;
+}
+
+#section li {
+	list-style-type: none;
+}
+.block_import_remote_course #id_cat,
+.block_import_remote_course #choosecourse {
+  max-width: 52%;
+}
+
+.block_import_remote_course .reset {
+    margin-right: 30%;
+	margin-top: 8px 
+}
+.highlight {
+   background-color: #FCF8E3  !important;
+}
+
+.drop {
+	background-color: moccasin  !important;
+}
+
+.course-content .current.drop {
+    background-color: moccasin  !important;
+}
+img{
+	pointer-events: none;
+}
+
+#block_import_remote_notification p{
+	font-weight: bolder;
+    text-align: right;
+	font-size: 14px;
+	color: royalblue;
+}
+#block_import_remote_notification .sectionname {
+	font-size:18px;
+	margin-bottom: 5px;
+}
+#block_import_remote_notification .subsectionname {
+	color: black;
+}
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: 1rem 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+
+@-o-keyframes progress-bar-stripes {
+    from {
+        background-position: 1rem 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 1rem 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+
+.progress {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    font-size: .75rem;
+    line-height: 1rem;
+    text-align: center;
+    background-color: #eceeef;
+    border-radius: .25rem
+}
+
+.progress-bar {
+    height: 1rem;
+    color: #fff;
+    background-color: #0275d8
+}
+
+.progress-bar-striped {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    -webkit-background-size: 1rem 1rem;
+    background-size: 1rem 1rem
+}
+
+.progress-bar-animated {
+    -webkit-animation: progress-bar-stripes 1s linear infinite;
+    -o-animation: progress-bar-stripes 1s linear infinite;
+    animation: progress-bar-stripes 1s linear infinite
+}
+
+.loader {
+  margin: 100px auto;
+  font-size: 15px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load5 1.1s infinite ease;
+  animation: load5 1.1s infinite ease;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+@-webkit-keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #f9bf3b, 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.5), -1.8em -1.8em 0 0em rgba(249,191,59, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.7), 1.8em -1.8em 0 0em #f9bf3b, 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.5), 1.8em -1.8em 0 0em rgba(249,191,59, 0.7), 2.5em 0em 0 0em #f9bf3b, 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.5), 2.5em 0em 0 0em rgba(249,191,59, 0.7), 1.75em 1.75em 0 0em #f9bf3b, 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.5), 1.75em 1.75em 0 0em rgba(249,191,59, 0.7), 0em 2.5em 0 0em #f9bf3b, -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.5), 0em 2.5em 0 0em rgba(249,191,59, 0.7), -1.8em 1.8em 0 0em #f9bf3b, -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.5), -1.8em 1.8em 0 0em rgba(249,191,59, 0.7), -2.6em 0em 0 0em #f9bf3b, -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.5), -2.6em 0em 0 0em rgba(249,191,59, 0.7), -1.8em -1.8em 0 0em #f9bf3b;
+  }
+}
+@keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #f9bf3b, 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.5), -1.8em -1.8em 0 0em rgba(249,191,59, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.7), 1.8em -1.8em 0 0em #f9bf3b, 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.5), 1.8em -1.8em 0 0em rgba(249,191,59, 0.7), 2.5em 0em 0 0em #f9bf3b, 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.5), 2.5em 0em 0 0em rgba(249,191,59, 0.7), 1.75em 1.75em 0 0em #f9bf3b, 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.5), 1.75em 1.75em 0 0em rgba(249,191,59, 0.7), 0em 2.5em 0 0em #f9bf3b, -1.8em 1.8em 0 0em rgba(249,191,59, 0.2), -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.5), 0em 2.5em 0 0em rgba(249,191,59, 0.7), -1.8em 1.8em 0 0em #f9bf3b, -2.6em 0em 0 0em rgba(249,191,59, 0.2), -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.5), -1.8em 1.8em 0 0em rgba(249,191,59, 0.7), -2.6em 0em 0 0em #f9bf3b, -1.8em -1.8em 0 0em rgba(249,191,59, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(249,191,59, 0.2), 1.8em -1.8em 0 0em rgba(249,191,59, 0.2), 2.5em 0em 0 0em rgba(249,191,59, 0.2), 1.75em 1.75em 0 0em rgba(249,191,59, 0.2), 0em 2.5em 0 0em rgba(249,191,59, 0.2), -1.8em 1.8em 0 0em rgba(249,191,59, 0.5), -2.6em 0em 0 0em rgba(249,191,59, 0.7), -1.8em -1.8em 0 0em #f9bf3b;
+  }
+}
+
+
+
+@media only screen and (max-width : 1300px) {
+	.block_import_remote_course .reset {
+	    margin-right: 25%;
+	}
 }

@@ -18,6 +18,7 @@
  * @copyright  2015 Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
 
 $functions = array(
 
@@ -27,17 +28,29 @@ $functions = array(
         'classpath' => 'blocks/import_remote_course/externallib.php',
         'description' => 'get updates from the server.',
         'type' => 'write',
-  //      'capabilities' => 'moodle/backup:backupcourse', // need to provide a proper capabiliti
+    ),
+    'block_import_remote_course_activity' => array(
+        'classname' => 'block_import_remote_course_external',
+        'methodname' => 'import_activity',
+        'classpath' => 'blocks/import_remote_course/externallib.php',
+        'description' => 'import_activity',
+        'type' => 'write',
+        'ajax' => true
+    ),
+    'block_import_remote_course_section' => array(
+            'classname' => 'block_import_remote_course_external',
+            'methodname' => 'import_section',
+            'classpath' => 'blocks/import_remote_course/externallib.php',
+            'description' => 'import section',
+            'type' => 'write',
+            'ajax' => true
+    ),
+    'block_import_remote_course_delete_act' => array(
+            'classname' => 'block_import_remote_course_external',
+            'methodname' => 'delete_act',
+            'classpath' => 'blocks/import_remote_course/externallib.php',
+            'description' => 'delete activity from course',
+            'type' => 'write',
+            'ajax' => true
     ),
 );
-
-// $services = array(
-//     'import_remote_course' => array(
-//         'functions' => array(
-//             'block_import_remote_course_update',
-//         ),
-//         'requiredcapability' => '',
-//         'restrictedusers' =>0,
-//         'enabled'=>1,
-//     ),
-// );

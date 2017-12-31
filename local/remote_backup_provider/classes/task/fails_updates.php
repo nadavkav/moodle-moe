@@ -17,6 +17,7 @@ namespace local_remote_backup_provider\task;
 
 use core\task\scheduled_task;
 use \curl;
+use local_remote_backup_provider\fail;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -46,14 +47,12 @@ class fails_updates extends scheduled_task {
     public function execute() {
         global $DB;
         $fails = $DB->get_records('remote_backup_provider_fails');
-        $curl = new \curl();
         foreach ($fails as $fail) {
-            $url = explode('/', $fail->url);
+            $fail = new fail($fail->id);
+            $url = explode('/', $fail->get_url());
             mtrace("Try to update ". $url[2]);
-            $resp = json_decode($curl->post($fail->url, unserialize($fail->local_params), unserialize($fail->options)), true);
-            if (isset($resp['result']) && $resp['result'] == true) {
+            if ($fail->send()) {
                 mtrace("Succes to update ". $url[2]);
-                $DB->delete_records('remote_backup_provider_fails', array('id' => $fail->id));
             } else {
                 mtrace("faild to update ". $url[2]);
             }

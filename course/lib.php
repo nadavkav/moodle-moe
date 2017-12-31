@@ -3696,39 +3696,36 @@ function duplicate_module($course, $cm) {
     }
 
     $rc->execute_plan();
-
+    
+    
     // Now a bit hacky part follows - we try to get the cmid of the newly
     // restored copy of the module.
     $newcmid = null;
     $tasks = $rc->get_plan()->get_tasks();
     foreach ($tasks as $task) {
-        if (is_subclass_of($task, 'restore_activity_task')) {
-            if ($task->get_old_contextid() == $cmcontext->id) {
-                $newcmid = $task->get_moduleid();
-                break;
-            }
-        }
+    	if (is_subclass_of($task, 'restore_activity_task')) {
+    		if ($task->get_old_contextid() == $cmcontext->id) {
+    			$newcmid = $task->get_moduleid();
+    			break;
+    		}
+    	}
     }
-
+    
     // If we know the cmid of the new course module, let us move it
     // right below the original one. otherwise it will stay at the
     // end of the section.
     if ($newcmid) {
-        $info = get_fast_modinfo($course);
-        $newcm = $info->get_cm($newcmid);
-        $section = $DB->get_record('course_sections', array('id' => $cm->section, 'course' => $cm->course));
-        moveto_module($newcm, $section, $cm);
-        moveto_module($cm, $section, $newcm);
-
-        // Update calendar events with the duplicated module.
-        $refresheventsfunction = $newcm->modname . '_refresh_events';
-        if (function_exists($refresheventsfunction)) {
-            call_user_func($refresheventsfunction, $newcm->course);
-        }
-
-        // Trigger course module created event. We can trigger the event only if we know the newcmid.
-        $event = \core\event\course_module_created::create_from_cm($newcm);
-        $event->trigger();
+    	$info = get_fast_modinfo($course);
+    	$newcm = $info->get_cm($newcmid);
+    	$section = $DB->get_record('course_sections', array('id' => $cm->section, 'course' => $cm->course));
+    	moveto_module($newcm, $section, $cm);
+    	moveto_module($cm, $section, $newcm);
+    	
+    	// Update calendar events with the duplicated module.
+    	$refresheventsfunction = $newcm->modname . '_refresh_events';
+    	if (function_exists($refresheventsfunction)) {
+    		call_user_func($refresheventsfunction, $newcm->course);
+    	}
     }
     rebuild_course_cache($cm->course);
 

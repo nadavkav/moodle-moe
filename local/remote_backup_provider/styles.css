@@ -1,9 +1,13 @@
 @CHARSET "UTF-8";
 
 #subslist table {
-	max-width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
+    text-align: center;
+}
+
+#resend_button {
     text-align: center;
 }

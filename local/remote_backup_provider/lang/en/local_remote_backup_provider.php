@@ -45,3 +45,14 @@ $string['yes'] = 'Yes';
 $string['no'] = 'No';
 $string['cronjub'] = "Send fails update to remote servers";
 $string['cronjub_desc'] = "in case the remote server not respond with OK we want to send him the update again";
+$string['failednotifications'] = "fails notification";
+$string['id'] = 'ID';
+$string['name'] = 'Site';
+$string['timecreate'] = 'Time create';
+$string['last_time_try'] = 'Time from last sand try';
+$string['resend'] = 'Re sand the notification';
+$string['type'] = 'Type';
+
+$string['failmesege'] = 'failed to send notification please try again later';
+$string['successmesege'] = 'notification sand successfully';
+$string['updatetemplate'] = 'update template';
