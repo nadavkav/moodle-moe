@@ -205,7 +205,7 @@ float: left;
 .course-content .current.drop {
     background-color: moccasin  !important;
 }
-img{
+.block_import_remote_course img{
 	pointer-events: none;
 }
 
