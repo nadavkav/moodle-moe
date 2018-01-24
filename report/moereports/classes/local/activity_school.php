@@ -113,10 +113,12 @@ class activity_school {
                             } else {
                                 $row->{'count' . $level} = 0;
                             }
-                            if ($value != 0) {
-                                $row->{'counterprcent' . $level} = round($row->{'count' . $level} / $value * 100, 2) . '%';
-                            } else {
+                            if ($value == 0) {
                                 $row->{'counterprcent' . $level} = get_string('noinformation', 'report_moereports');
+                            } elseif($value < $level) {
+                                $row->{'counterprcent' . $level} = get_string('rungtotal', 'report_moereports');
+                            } else {
+                                $row->{'counterprcent' . $level} = round($row->{'count' . $level} / $value * 100, 2) . '%';
                             }
                         }
                         $row = $this->to_std($row);

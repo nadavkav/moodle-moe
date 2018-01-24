@@ -146,6 +146,8 @@ class peractivityreginlevel extends moeReport{
                                         array($gradekey, $reginkey));
                                     if ($den == 0) {
                                         $onerecord->eighthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    } elseif ($den < $gradevalue) {
+                                        $onerecord->eighthgradetotal = get_string('rungtotal', 'report_moereport');
                                     } else {
                                         $onerecord->eighthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                     }
@@ -158,6 +160,8 @@ class peractivityreginlevel extends moeReport{
                                                                 array($gradekey, $reginkey));
                                     if ($den == 0) {
                                         $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    } elseif ($den < $gradevalue) {
+                                        $onerecord->ninthgradetotal = get_string('rungtotal', 'report_moereport');
                                     } else {
                                         $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                     }
@@ -170,6 +174,8 @@ class peractivityreginlevel extends moeReport{
                                                                     array($gradekey, $reginkey));
                                     if ($den == 0) {
                                         $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    } elseif ($den < $gradevalue) {
+                                        $onerecord->tenthgradetotal = get_string('rungtotal', 'report_moereport');
                                     } else {
                                         $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                     }

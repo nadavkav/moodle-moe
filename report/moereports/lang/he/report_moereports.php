@@ -29,6 +29,8 @@ $string['class'] = 'שכבה';
 $string['studentsnumber'] = "מס' תלמידים";
 $string['teacersnumber'] = "מס' מורים";
 $string['notrelevant'] = 'לא רלוונטי';
+$string['rungtotal'] = 'טעות - מספר המסיימים גדול ממספר התלמידים';
+
 $string['per_activity_school_level'] = 'היקף ביצוע בבית ספר בכל אחת מהמשימות';
 $string['per_course_scool_level'] = 'היקף ביצוע בבית ספר בכל אחד מתחומי הדעת';
 $string['per_activity_regin_level'] = 'היקף ביצוע במחוז בכל אחת מהמשימות';
