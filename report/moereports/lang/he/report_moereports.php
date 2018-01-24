@@ -67,3 +67,5 @@ $string['moereportsenable'] = 'פעיל';
 $string['moereportsenablehelper'] = 'הפעלת דוחות לאתר הנוכחי';
 $string['usersinfobydate'] = 'פרטי משתמשים ע"פ תאריך';
 
+$string['readreportmoereports'] = 'שינוי בדף report_moereports.php (מספר תלמידים בשכבה)';
+$string['readreportmoereportsdesc'] = 'משתמש עם מזהה {$a} ערך דף report_moereports.php.';

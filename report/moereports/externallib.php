@@ -198,6 +198,11 @@ class report_moereports_external extends external_api {
             // Add the current group to the groups array.
             $classes[] = $tmp;
         }
+        // Trigger a report viewed event.
+        $context = context_system::instance();
+        global $USER;
+        $event = \report_moereports\event\classes_report_viewed::create(array('context' => $context, 'relateduserid' => $USER->id, 'other' => array('date' => time())));
+        $event->trigger();
         return $classes;
     }
     public static function saveschools_returns() {

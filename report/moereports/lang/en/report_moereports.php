@@ -71,3 +71,5 @@ $string['moereportsenable'] = 'enable';
 $string['moereportsenablehelper'] = 'Enable reports i n instance';
 $string['usersinfobydate'] = 'users deatails by date';
 
+$string['readreportmoereports'] = 'edits made to report_moereports.php (number of students in class) page';
+$string['readreportmoereportsdesc'] = 'The user with id {$a} edit the page report_moereports.php.';
