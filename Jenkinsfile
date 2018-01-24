@@ -1,6 +1,6 @@
 podTemplate(label: 'php-template', cloud: 'kuberneties', containers: [
     containerTemplate(name: 'php', image: 'eu.gcr.io/sysbind-servers-1026/php:7.0-fpm', ttyEnabled: true, alwaysPullImage: true),
-    containerTemplate(name: 'db', image: 'docker.io/mariadb:10.0.31', envVars:[
+    containerTemplate(name: 'db', image: 'eu.gcr.io/sysbind-servers-1026/mariadb:10.0.31', envVars:[
         containerEnvVar(key: 'MYSQL_ROOT_PASSWORD', value: 'password'),
         containerEnvVar(key: 'MYSQL_USER', value: 'mariadb'),
         containerEnvVar(key: 'MYSQL_PASSWORD', value: 'password'),
