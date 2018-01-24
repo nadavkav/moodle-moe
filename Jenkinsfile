@@ -5,7 +5,7 @@ podTemplate(label: 'php-template', cloud: 'kuberneties', containers: [
         containerEnvVar(key: 'MYSQL_USER', value: 'mariadb'),
         containerEnvVar(key: 'MYSQL_PASSWORD', value: 'password'),
         containerEnvVar(key: 'MYSQL_DATABASE', value: 'moodle'),
-      ]),
+      ], ports: [portMapping(name: 'mysql', containerPort: 3306, hostPort: 3306)] ),
   ], 
     volumes: [secretVolume(secretName:'slaves-ssh-key', mountPath:'/home/jenkins/.ssh')]) {
     node('php-template') {     
