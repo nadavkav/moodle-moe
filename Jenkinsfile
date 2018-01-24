@@ -10,7 +10,7 @@ podTemplate(label: 'php-template', cloud: 'kuberneties', containers: [
     volumes: [secretVolume(secretName:'slaves-ssh-key', mountPath:'/home/jenkins/.ssh')]) {
     node('php-template') {     
         stage('Get PHP ready') {
-            git branch: '$BRANCH_NAME', url: 'git@gitlab.sysbind.biz:Developers/moe-alt.git'
+            git branch: '$BRANCH_NAME', url: 'git@gitlab.sysbind.biz:Developers/jenkins-test.git'
             container('php') {
                 sh 'cp config-dist.php config.php'
                 sh 'sed -i -e "s%= \'pgsql\'%= \'mariadb\'%" config.php'
