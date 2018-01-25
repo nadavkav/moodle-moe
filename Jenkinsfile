@@ -13,6 +13,7 @@ podTemplate(label: 'php-template', cloud: 'kuberneties', containers: [
             git branch: '$BRANCH_NAME', url: 'git@gitlab.sysbind.biz:Developers/moe-alt.git'
             container('php') {
                 sh 'cp config-dist.php config.php'
+                sh 'sed -i -e "s%= \'localhost\'%= \'127.0.0.1\'%" config.php'
                 sh 'sed -i -e "s%= \'pgsql\'%= \'mariadb\'%" config.php'
                 sh 'sed -i -e "s%http:/p/example.com/moodle%http://localhost%" -e "s%/home/example/moodledata%/home/jenkins/workspace/$JOB_BASE_NAME/$BRANCH_NAME/target/moodledata%" config.php'
                 sh 'sed -i -e "s%= \'username\'%= \'mariadb\'%" config.php'
