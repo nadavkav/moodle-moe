@@ -33,12 +33,12 @@
             <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>            
             <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
             <FIELD NAME="activityname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="activity name"/>
-            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
-            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
-            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
-            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
-            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
-            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
         </FIELDS>
         <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -52,12 +52,12 @@
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
             <FIELD NAME="region" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>            
             <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
-            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
-            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
-            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
-            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
-            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
-            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
         </FIELDS>
         <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -73,12 +73,12 @@
             <FIELD NAME="scollsymbol" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/> 
             <FIELD NAME="scollname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>         
             <FIELD NAME="course" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
-            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
-            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
-            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
-            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
-            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
-            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+            <FIELD NAME="eighthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="eighthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="ninthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="ninthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="tenthgradesum" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="tenthgradetotal" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
         </FIELDS>
         <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -95,12 +95,12 @@
             <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="region name"/>         
             <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="course name"/>
             <FIELD NAME="activity" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="course name"/>
-            <FIELD NAME="count8" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
-            <FIELD NAME="counterprcent8" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
-            <FIELD NAME="count9" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
-            <FIELD NAME="counterprcent9" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
-            <FIELD NAME="count10" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
-            <FIELD NAME="counterprcent10" TYPE="char" LENGTH="32" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
+            <FIELD NAME="count8" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eighth grade sum"/>
+            <FIELD NAME="counterprcent8" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="eigh thgrade total"/>
+            <FIELD NAME="count9" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade sum"/>
+            <FIELD NAME="counterprcent9" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="ninth grade total"/>
+            <FIELD NAME="count10" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade sum"/>
+            <FIELD NAME="counterprcent10" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="tenth grade total"/>
         </FIELDS>
         <KEYS>
               <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
