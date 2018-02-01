@@ -73,6 +73,102 @@ function xmldb_report_moereports_upgrade($oldversion) {
             $dbman->install_one_table_from_xmldb_file($CFG->dirroot.'/report/moereports/db/install.xml', 'moereports_activityregin');
         }
         upgrade_plugin_savepoint(true, 2017052201, 'report', 'moereports');
+        
     }
+        
+    if ($oldversion < 2018020105) {
+      
+        //change all varchaar to 255
+        
+        //----------------------------- moereports_activityregin --------------------------------------
+        
+        $table = new xmldb_table('moereports_activityregin');
+        
+        $field = new xmldb_field('eighthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('eighthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        //----------------------------- moereports_courseregin --------------------------------------
+        $table = new xmldb_table('moereports_courseregin');
+        
+        $field = new xmldb_field('eighthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('eighthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        //----------------------------- moereports_courseschool --------------------------------------
+        $table = new xmldb_table('moereports_courseschool');
+        
+        
+        $field = new xmldb_field('eighthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('eighthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('ninthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradesum', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('tenthgradetotal', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        //----------------------------- moereports_acactivityschool --------------------------------------
+        $table = new xmldb_table('moereports_acactivityschool');
+        
+        
+        $field = new xmldb_field('count8', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('counterprcent8', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('count9', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('counterprcent9', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('count10', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        $field = new xmldb_field('counterprcent10', XMLDB_TYPE_CHAR, '255', null, null, 0);
+        $dbman->change_field_precision($table, $field);
+        
+        upgrade_plugin_savepoint(true, 2018020105, 'report', 'moereports');
+    }
+       
     return true;
 }
