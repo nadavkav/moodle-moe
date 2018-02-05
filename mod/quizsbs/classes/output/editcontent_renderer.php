@@ -79,7 +79,7 @@ class editcontent_renderer extends \plugin_renderer_base {
             'maxfiles' => 99,
             'changeformat' => 0,
             'context' => $context,
-            'noclean' => 0,
+            'noclean' => 1,
             'trusttext' => 0,
             'enable_filemanagement' => true
         );
