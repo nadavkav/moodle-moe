@@ -34,7 +34,7 @@ function moewiki_add_instance($data, $mform) {
     $context = context_module::instance($cmid);
 
     if ($formdata = $data) {
-        // Set up null values
+        // Set up null values.
         $nullvalues = array('editbegin', 'editend', 'timeout');
         foreach ($nullvalues as $nullvalue) {
             if (empty($formdata->{$nullvalue})) {
@@ -46,22 +46,22 @@ function moewiki_add_instance($data, $mform) {
             unset($formdata->intro);
         }
 
-        // Create record
+        // Create record.
         $moewikiid = $DB->insert_record('moewiki', $formdata);
         $formdata->id = $moewikiid;
 
         moewiki_grade_item_update($formdata);
 
-        // template file save
+        // Template file save.
         $fs = get_file_storage();
         if (isset($mform) && $filename = $mform->get_new_filename('template_file')) {
             $file = $mform->save_stored_file('template_file', $context->id, 'mod_moewiki', 'template', $moewikiid, '/', $filename);
             $DB->set_field('moewiki', 'template', '/'.$file->get_filename(), array('id' => $formdata->id));
         }
 
-        //if there is a text template for all students to be implemented
-        if(isset($data->template_text) && ((!is_array($data->template_text) && $data->template_text != "" ) 
-            || (isset($data->template_text['text']) &&  $data->template_text['text']!= ""))) {
+        // If there is a text template for all students to be implemented.
+        if (isset($data->template_text) && ((!is_array($data->template_text) && $data->template_text != "" )
+            || (isset($data->template_text['text']) &&  $data->template_text['text'] != ""))) {
             $texttemplate = (is_array($data->template_text)) ? $data->template_text['text'] : $data->template_text;
             $cmid = $data->coursemodule;
             $cm = $DB->get_record('course_modules', array("id" => $cmid));
@@ -69,22 +69,22 @@ function moewiki_add_instance($data, $mform) {
             $moewiki = $DB->get_record_select('moewiki', 'id = ?', array($moewikiid));
             $coursecontext = context_course::instance($COURSE->id);
 
-            //Create the user's wiki
+            // Create the user's wiki.
             $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $USER->id);
-            //create the wiki main page
+            // Create the wiki main page.
             $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
-            //put the template text in the user's main page
+            // Put the template text in the user's main page.
             moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
 
-            //find all the course students
+            // Find all the course students.
             $students = get_users_from_role_on_context($DB->get_record('role', array("shortname" => "student")), $coursecontext);
             foreach ($students as $student) {
                 if ($student->userid != $USER->id) {
-                    // Create student's wiki
+                    // Create student's wiki.
                     $subwiki = moewiki_create_subwiki($moewiki, $cmid, $COURSE, $student->userid);
-                    // create the wiki main page
+                    // Create the wiki main page.
                     $pageversion = moewiki_get_current_page($subwiki, '', MOEWIKI_GETPAGE_CREATE);
-                    // put the template text in the students main page
+                    // Put the template text in the students main page.
                     moewiki_save_new_version($COURSE, $cm, $moewiki, $subwiki, '', $texttemplate);
                 }
             }
@@ -104,7 +104,7 @@ function moewiki_update_instance($data, $mform) {
     // Update main record.
     $DB->update_record('moewiki', $data);
 
-    // Set up null values
+    // Set up null values.
     $nullvalues = array('editbegin', 'editend', 'timeout');
     foreach ($nullvalues as $nullvalue) {
         if (empty($data->{$nullvalue})) {
@@ -146,18 +146,19 @@ function moewiki_update_instance($data, $mform) {
         }
     }
 
-    if(!empty($data->template_text)) {
+    if (!empty($data->template_text)) {
         $texttemplate = $data->template_text;
         $subwikis = moewiki_get_subwikis($data->id);
         foreach ($subwikis as $subwiki) {
             $page = $DB->get_record("moewiki_pages", array("title" => "", "subwikiid" => $subwiki->id));
 
-            if($page && $page->currentversionid == $page->firstversionid) {
+            if ($page && $page->currentversionid == $page->firstversionid) {
                 $currentversion = $DB->get_record('moewiki_versions', array("id" => $page->currentversionid));
 
                 $currentversion->xhtml = $texttemplate;
-
-                $DB->update_record("moewiki_versions", $currentversion);
+                if (!empty($currentversion->id)) {
+                    $DB->update_record("moewiki_versions", $currentversion);
+                }
             }
         }
     }
@@ -447,8 +448,7 @@ function moewiki_get_completion_state($course, $cm, $userid, $type) {
         }
     }
     if ($moewiki->completionpages) {
-        $value = $moewiki->completionpages <=
-            $DB->get_field_sql($countsql.
+        $value = $moewiki->completionpages <= $DB->get_field_sql($countsql.
             ' AND (SELECT MIN(id)
                 FROM {moewiki_versions}
                 WHERE pageid = p.id AND deletedat IS NULL) = v.id',
@@ -831,7 +831,7 @@ function moewiki_grade_item_update($moewiki, $grades = null) {
         $params['gradetype'] = GRADE_TYPE_NONE;
     }
 
-    if ($grades  === 'reset') {
+    if ($grades === 'reset') {
         $params['reset'] = true;
         $grades = null;
     }
