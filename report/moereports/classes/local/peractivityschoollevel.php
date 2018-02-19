@@ -102,7 +102,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereports');
                                 } else {
                                     $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -112,7 +112,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereports');
                                 } else {
                                     $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -122,7 +122,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->eleventhgradetotal = get_string('notrelevant', 'report_moereport');
+                                    $onerecord->eleventhgradetotal = get_string('notrelevant', 'report_moereports');
                                 } else {
                                     $onerecord->eleventhgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }
@@ -132,7 +132,7 @@ class peractivityschoollevel extends moereport{
                                 $den = $DB->get_field('moereports_reports_classes', 'studentsnumber',
                                     array('class' => $gradekey, 'symbol' => $scoolkey));
                                 if ($den == 0) {
-                                    $onerecord->twelfthgradetotal = get_string('notrelevant', 'report_moereport');
+                                    $onerecord->twelfthgradetotal = get_string('notrelevant', 'report_moereports');
                                 } else {
                                     $onerecord->twelfthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
                                 }

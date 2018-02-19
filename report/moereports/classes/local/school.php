@@ -141,7 +141,7 @@ class school extends model
     /**
      * (non-PHPdoc)
      *
-     * @see \report_moereport\local\model::add_entry()
+     * @see \report_moereports\local\model::add_entry()
      *
      */
     public function add_entry() {
