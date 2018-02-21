@@ -25,26 +25,28 @@ defined('MOODLE_INTERNAL') || die;
         $CFG->wwwroot.'/report/moereports/users_report.php'));
     $ADMIN->add('report_moereports', new admin_externalpage('users info_by_date', get_string('usersinfobydate', 'report_moereports'),
     		$CFG->wwwroot.'/report/moereports/users_report_by_date.php'));
+    $ADMIN->add('report_moereports', new admin_externalpage('add schools by csv', get_string('addschoolsbycsv', 'report_moereports'),
+        $CFG->wwwroot.'/report/moereports/add_schools_by_csv.php'));
 
     $settings = new admin_settingpage('viewpermission', get_string('moeviewpermission', 'report_moereports'));
 
     $settings->add( new admin_setting_configcheckbox(
-    		
+
     		// This is the reference you will use to your configuration
     		'report_moereports/moereportsenable',
-    		
+
     		// This is the friendly title for the config, which will be displayed
     		get_string('moereportsenable', 'report_moereports'),
-    		
+
     		// This is helper text for this config field
     		get_string('moereportsenablehelper', 'report_moereports'),
-    		
+
     		// This is the default value
     		0
-    		
+
     		) );
-    
-    
+
+
     // Add a setting field to the settings for this page
     $settings->add( new admin_setting_configtext(
 
@@ -83,8 +85,7 @@ defined('MOODLE_INTERNAL') || die;
         PARAM_TEXT
 
         ) );
-    
-    
 
-    
-    
+
+
+

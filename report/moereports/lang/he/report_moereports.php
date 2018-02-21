@@ -69,3 +69,6 @@ $string['usersinfobydate'] = 'פרטי משתמשים ע"פ תאריך';
 
 $string['readreportmoereports'] = 'שינוי בדף report_moereports.php (מספר תלמידים בשכבה)';
 $string['readreportmoereportsdesc'] = 'משתמש עם מזהה {$a} ערך דף report_moereports.php.';
+$string['addschoolsbycsv'] = 'הוספת בתי ספר באמצעות csv';
+$string['Succeeded'] = 'העלאת הנתונים עברה בהצלחה';
+$string['addfile'] ='צור';

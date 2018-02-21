@@ -20,7 +20,9 @@
  */
 namespace report_moereports\form;
 require_once $CFG->libdir. '/formslib.php';
-class user_report_by_date extends \moodleform {
+
+
+class add_school_by_csv extends \moodleform {
 
     /**
      * (non-PHPdoc)
@@ -29,14 +31,11 @@ class user_report_by_date extends \moodleform {
      *
      */
     protected function definition() {
-    	global $DB;
+        global $DB;
         $mform =& $this->_form;
-
-        $mform->addElement('date_time_selector', 'timestart', get_string('from'));
-        $this->add_action_buttons(false, get_string('filter', 'report_moereports'));
-        $mform->disable_form_change_checker();
-
+        $mform->addElement('filepicker', 'userfile', get_string('file'), null,
+            array( 'accepted_types' => '.csv'));
+        $this->add_action_buttons(false, get_string('addfile', 'report_moereports'));
 
     }
 }
-
