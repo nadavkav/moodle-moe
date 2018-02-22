@@ -25,7 +25,7 @@ podTemplate(
 ) {
     node(labelname) {     
         stage('Get PHP ready') {
-            git branch: '${env.BRANCH_NAME}', url: 'git@gitlab.sysbind.biz:Developers/moe-alt.git'
+            git branch: '$BRANCH_NAME', url: 'git@gitlab.sysbind.biz:Developers/moe-alt.git'
             container('php') {
                 sh 'cp config-dist.php config.php'
                 sh 'sed -i -e "s%dbtype    = \'pgsql\'%dbtype    = \'mariadb\'%" config.php'
