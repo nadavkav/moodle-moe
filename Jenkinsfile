@@ -1,4 +1,4 @@
-podTemplate(label: 'php-template-mariadb', cloud: 'kuberneties', containers: [
+podTemplate(label: 'php-template-mariadb', cloud: 'kubernetes', containers: [
     containerTemplate(
         name: 'php',
         image: 'eu.gcr.io/sysbind-servers-1026/php:7.0-fpm',
