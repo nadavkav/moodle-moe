@@ -177,7 +177,7 @@ class enrol_attributes_plugin extends enrol_plugin {
                     $where .= ' (' . $DB->sql_compare_text($data) . ' = ' . $DB->sql_compare_text('?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data),
                                     '?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data),
                                     '?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data), '?') . ' OR ' .
-                                    $DB->sql_compare_text('?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data),
+                                     $DB->sql_like($DB->sql_compare_text($data),
                                     '?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data),
                                     '?') . ' OR ' . $DB->sql_like($DB->sql_compare_text($data), '?') .')';
                     array_push($params,
@@ -185,7 +185,6 @@ class enrol_attributes_plugin extends enrol_plugin {
                         '%;' . $rule->value,
                         $rule->value . ';%',
                         '%;' . $rule->value . ';%',
-                        $rule->value,
                         '%,' . $rule->value,
                         $rule->value . ',%',
                         '%,' . $rule->value . ',%'
