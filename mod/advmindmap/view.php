@@ -525,5 +525,5 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
         }
     }
 }
-echo html_writer::tag('div', '<a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>', array('class' => 'getflash'));
+echo html_writer::tag('div', '<div><b> '.get_string('notvisible','advmindmap').' </b></div> <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>', array('class' => 'getflash'));
 echo $OUTPUT->footer($course);
