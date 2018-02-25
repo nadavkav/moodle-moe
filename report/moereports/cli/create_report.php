@@ -63,7 +63,7 @@ global $DB;
 if (!get_config('report_moereports', 'moereportsenable')) {
     cli_error('the MOE report not active (are you in Tdigital?)', 0);
 }
-ini_set('memory_limit', '8200000000000000000000000000');
+ini_set('memory_limit', '2048M');
 require_once("/$CFG->libdir/completionlib.php");
 switch ($options['report']) {
     case 1:
