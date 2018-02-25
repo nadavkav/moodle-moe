@@ -5,9 +5,10 @@ podTemplate(
     containers: [
         containerTemplate(
             name: 'php',
-            image: 'eu.gcr.io/sysbind-servers-1026/php:7.0-fpm',
+            image: 'eu.gcr.io/sysbind-servers-1026/php:7.0-jenkins',
             ttyEnabled: true,
-            alwaysPullImage: true
+            alwaysPullImage: true,
+            resourceRequestCpu: '1'
         ),
         containerTemplate(
             name: 'mariadb',
@@ -18,7 +19,8 @@ podTemplate(
                 containerEnvVar(key: 'MYSQL_PASSWORD', value: 'password'),
                 containerEnvVar(key: 'MYSQL_DATABASE', value: 'moodle'),
             ],
-            alwaysPullImage: true
+            alwaysPullImage: true,
+            resourceRequestCpu: '500m'
         ),
     ], 
     volumes: [secretVolume(secretName:'slaves-ssh-key', mountPath:'/home/jenkins/.ssh')]
@@ -27,21 +29,28 @@ podTemplate(
         stage('Get PHP ready') {
             git branch: '$BRANCH_NAME', url: 'git@gitlab.sysbind.biz:Developers/moe-alt.git'
             container('php') {
-                sh 'cp config-dist.php config.php'
-                sh 'sed -i -e "s%dbtype    = \'pgsql\'%dbtype    = \'mariadb\'%" config.php'
-                sh 'sed -i -e "s%dbhost    = \'localhost\'%dbhost    = \'127.0.0.1\'%" config.php'                
-                sh 'sed -i -e "s%/home/example/moodledata%/home/jenkins/workspace/${env.JOB_BASE_NAME}/${env.BRANCH_NAME}/target/moodledata%" config.php'
-                sh 'sed -i -e "s%dbuser    = \'username\'%dbuser    = \'mariadb\'%" config.php'
-                sh 'sed -i -e "s%= \'http://example.com/moodle\'%= \'http://sysbind.test\'%" config.php'
-                sh 'mkdir -p /home/jenkins/workspace/$env.JOB_BASE_NAME}/${env.BRANCH_NAME}/target/moodledata/phpunit_${env.BUILD_ID}'
-                sh 'sed -i -e "/require_once/i \\\\\\$CFG->phpunit_dataroot = \'\\/home\\/jenkins\\/workspace\\/${env.JOB_BASE_NAME}\\/${env.BRANCH_NAME}\\/target\\/moodledata\\/phpunit_${env.BUILD_ID}\';" -e "/require_once/i \\\\\\$CFG->phpunit_prefix = \'p_\';" config.php'
-                sh '/usr/bin/composer install'
+                sh "cp config-dist.php config.php"
+                sh "sed -i -e \"s%dbtype    = \'pgsql\'%dbtype    = \'mariadb\'%\" config.php"
+                sh "sed -i -e \"s%dbhost    = \'localhost\'%dbhost    = \'127.0.0.1\'%\" config.php"                
+                sh "sed -i -e \"s%/home/example/moodledata%/home/jenkins/workspace/${env.JOB_BASE_NAME}/${env.BRANCH_NAME}/target/moodledata%\" config.php"
+                sh "sed -i -e \"s%dbuser    = \'username\'%dbuser    = \'mariadb\'%\" config.php"
+                sh "sed -i -e \"s%= \'http://example.com/moodle\'%= \'http://sysbind.test\'%\" config.php"
+                sh "mkdir -p /home/jenkins/workspace/${env.JOB_BASE_NAME}/${env.BRANCH_NAME}/target/moodledata/phpunit_${env.BUILD_ID}"
+                sh "sed -i -e \"/require_once/i \\\\\\" + '$CFG->phpunit_dataroot' + " = \'\\/home\\/jenkins\\/workspace\\/${env.JOB_BASE_NAME}\\/${env.BRANCH_NAME}\\/target\\/moodledata\\/phpunit_${env.BUILD_ID}\';\" -e \"/require_once/i \\\\\\" + '$CFG->phpunit_prefix' + " = \'p_\';\" config.php"               
+                sh "/usr/bin/composer global require squizlabs/php_codesniffer"
+                sh "mkdir /home/jenkins/workspace/moodle-local_codechecker"
+                sh "chown -R 10000:10000 /home/jenkins/workspace/moodle-local_codechecker"
+                dir('/home/jenkins/workspace/moodle-local_codechecker') {
+                    git url:'https://github.com/moodlehq/moodle-local_codechecker.git'
+                }
+                sh "/tmp/vendor/squizlabs/php_codesniffer/bin/phpcs --config-set report_format junit"
+                sh "/usr/bin/composer install"
+                sh "php admin/tool/phpunit/cli/init.php"
             }
-        }    
+        } 
         stage ('Run UnitTest') {
             container('php') {
-                sh 'php admin/tool/phpunit/cli/init.php'
-                sh 'vendor/bin/phpunit --log-junit results/phpunit/phpunit.xml || true'
+                sh "vendor/bin/phpunit --log-junit results/phpunit/phpunit.xml || true"
                 step([$class: 'JUnitResultArchiver', testResults: '**/phpunit/phpunit.xml,**/behatlog/*.xml'])
             }
         }
