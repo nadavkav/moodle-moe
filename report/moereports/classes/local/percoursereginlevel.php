@@ -54,11 +54,14 @@ class percoursereginlevel extends moereport{
                 }
             }
         }
+        $completionusers = array();
         foreach ($courses as $course) {
+            if (empty($completionusers[$course->category])) {
+                $completionusers[$course->category] = array();
+            }
             $completion = new completion_info($course);
             $participances = $completion->get_progress_all();
             $activities = $completion->get_activities();
-            $completionusers = array();
             foreach ($participances as $user) {
                 $localuserinfo = get_complete_user_data('id', $user->id);
                 $semel = isset($localuserinfo->profile['StudentMosad']) ? $localuserinfo->profile['StudentMosad'] : null;
@@ -72,7 +75,7 @@ class percoursereginlevel extends moereport{
                     continue;
                 }
                 foreach ($activities as $activity) {
-                    if (array_key_exists($activity->id, $user->progress) && !array_search($user->id, $completionusers)) {
+                    if (array_key_exists($activity->id, $user->progress) && !array_search($user->id, $completionusers[$course->category])) {
                         $thisprogress = $user->progress[$activity->id];
                         $state = $thisprogress->completionstate;
                     } else {
@@ -82,8 +85,9 @@ class percoursereginlevel extends moereport{
                     switch($state) {
                         case COMPLETION_COMPLETE :
                         case COMPLETION_COMPLETE_PASS :
-                            $completionusers[] = $user->id;
+                            $completionusers[$course->category][] = $user->id;
                             $results[$regin][$course->category][$makbila]++;
+                            continue 3;
                             break;
                         case COMPLETION_INCOMPLETE :
                         case COMPLETION_COMPLETE_FAIL :
@@ -124,7 +128,7 @@ class percoursereginlevel extends moereport{
                                                               array($gradekey, $reginkey));
                             if ($den == 0) {
                                  $onerecord->eighthgradetotal = get_string('notrelevant', 'report_moereports');
-                            } elseif ($den < $gradevalue) {
+                            } else if ($den < $gradevalue) {
                                 $onerecord->eighthgradetotal = get_string('rungtotal', 'report_moereports');
                             } else {
                                  $onerecord->eighthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
@@ -138,7 +142,7 @@ class percoursereginlevel extends moereport{
                                                             array($gradekey, $reginkey));
                             if ($den == 0) {
                                 $onerecord->ninthgradetotal = get_string('notrelevant', 'report_moereports');
-                            } elseif ($den < $gradevalue) {
+                            } else if ($den < $gradevalue) {
                                 $onerecord->ninthgradetotal = get_string('rungtotal', 'report_moereports');
                             } else {
                                 $onerecord->ninthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
@@ -152,7 +156,7 @@ class percoursereginlevel extends moereport{
                                 array($gradekey, $reginkey));
                             if ($den == 0) {
                                 $onerecord->tenthgradetotal = get_string('notrelevant', 'report_moereports');
-                            } elseif ($den < $gradevalue) {
+                            } else if ($den < $gradevalue) {
                                 $onerecord->tenthgradetotal = get_string('rungtotal', 'report_moereports');
                             } else {
                                 $onerecord->tenthgradetotal = round(($gradevalue / $den * 100), 2) . "%";
