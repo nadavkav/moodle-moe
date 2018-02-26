@@ -115,7 +115,7 @@ class activity_school {
                             }
                             if ($value == 0) {
                                 $row->{'counterprcent' . $level} = get_string('noinformation', 'report_moereports');
-                            } elseif($value < $row->{'count' . $level}) {
+                            } else if ($value < $row->{'count' . $level}) {
                                 $row->{'counterprcent' . $level} = get_string('rungtotal', 'report_moereports');
                             } else {
                                 $row->{'counterprcent' . $level} = round($row->{'count' . $level} / $value * 100, 2) . '%';
