@@ -98,7 +98,7 @@ switch ($options['report']) {
         $rep = new \activity_school();
         $results = $rep->display_report();
         $DB->delete_records('moereports_acactivityschool');
-        $DB->insert_records('moereports_acactivityschool', $results);
+        $DB->insert_records('moereports_acactivityschool', $results->results);
         break;
 }
 cli_writeln('finish successfully!');

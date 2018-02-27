@@ -74,7 +74,7 @@ class report_data_generate extends \core\task\scheduled_task {
         $rep = new \activity_school();
         $results = $rep->display_report();
         $DB->delete_records('moereports_acactivityschool');
-        $DB->insert_records('moereports_acactivityschool', $results);
+        $DB->insert_records('moereports_acactivityschool', $results->results);
 
     }
 }
