@@ -90,4 +90,4 @@ $string['removeinstances'] = 'Remove all mindmap instances';
 // event names
 $string['eventmindmapupdated'] = 'A mindmap has been updated.';
 $string['eventmindmapunlocked'] = 'A mindmap has been unlocked.';
-$string['notvisible'] = 'If you do not see the map please click this button to download Flash Player';
+$string['notvisible'] = ' אם אינכם רואים את מפת החשיבה אנא לחצו על כפתור זה, על מנת להוריד נגן פלאש';

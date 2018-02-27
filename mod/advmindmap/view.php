@@ -30,9 +30,9 @@ require_once("lib.php");
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or
 $a = optional_param('a', 0, PARAM_INT);  // newmodule ID
 
-$viewuser = optional_param('viewuser', 0, PARAM_INT);  // view other 
-$viewgroup = optional_param('viewgroup', 0, PARAM_INT);  // view other 
-$viewdummy = optional_param('viewdummy', 0, PARAM_INT);  // view dummy group 
+$viewuser = optional_param('viewuser', 0, PARAM_INT);  // view other
+$viewgroup = optional_param('viewgroup', 0, PARAM_INT);  // view other
+$viewdummy = optional_param('viewdummy', 0, PARAM_INT);  // view dummy group
 $group = optional_param('group', 0, PARAM_INT);  // group id
 
 if ($id) {
@@ -108,7 +108,7 @@ if ($groupmode) {
                 $caneditmindmaps[$agm->id] = $agm;
             }
         }
-        
+
         // if user is not in any group and cannot view other people mind map = they cannot view anything
         if (empty($usergroups) && !has_capability('mod/advmindmap:viewother', $context)) {
             print_error('errornotingroup', 'advmindmap');
@@ -290,7 +290,7 @@ if ($groupmode && $canedit && !has_capability('mod/advmindmap:givecomment', $con
         echo "<span style='font-weight:bold; font-size:2.0em;'>&rarr;<span> <input type='button' value='".get_string('unlockbutton', 'advmindmap')."' onclick='unlockmindmap()' /></p>";
     }
 }
-    
+
 echo $OUTPUT->box_end();
 
 // Construct a unique link for copying
@@ -306,7 +306,7 @@ else if (isset($advmindmap_instance)) {
 <div id="flashcontent"></div>
 <?php if (isset($advmindmap_instance)) { // Display link for copying and help icon ?>
 <div style="width:85%; margin:5px auto; font-size:0.8em;">
-    <?php echo get_string('uniquelink', 'advmindmap'); ?>: <input type="text" id="uniquelink" onclick="selectAll('uniquelink');" style="width:500px;" value="<?php echo $uniquelink; ?>" /> 
+    <?php echo get_string('uniquelink', 'advmindmap'); ?>: <input type="text" id="uniquelink" onclick="selectAll('uniquelink');" style="width:500px;" value="<?php echo $uniquelink; ?>" />
     <?php echo get_string('copylink', 'advmindmap'); ?>
     <div style="float:right;">
     <?php
@@ -324,18 +324,18 @@ else if (isset($advmindmap_instance)) {
         document.getElementById(id).focus();
         document.getElementById(id).select();
     }
-    
+
     function mm_save(str) {
         alert(decodeURI(str));
     }
-    
+
     var so = new SWFObject("./viewer.swf", "viewer", 800, 600, "9", "#FFFFFF");
     <?php if(! $viewuser) { ?>
-    so.addVariable("load_url", "./xml.php?id=<?php echo $advmindmap_instance->id;?>");		
+    so.addVariable("load_url", "./xml.php?id=<?php echo $advmindmap_instance->id;?>");
     <?php } else { ?>
-    so.addVariable("load_url", "./xml.php?id=<?php echo $viewuser;?>");		
-    <?php } ?>			
-    
+    so.addVariable("load_url", "./xml.php?id=<?php echo $viewuser;?>");
+    <?php } ?>
+
     <?php if ($canedit && $advmindmap->editable == '1') {?> // now we check the global setting by teacher instead of the instance
     so.addVariable('save_url', "./save.php?id=<?php echo $advmindmap_instance->id;?>");
     so.addVariable('editable', "true");
@@ -378,7 +378,7 @@ else if (isset($advmindmap_instance)) {
             seconds--;
         }, 1000);
     }
-    
+
     function unlockmindmap() {
         if (confirm('<?php echo get_string('unlockconfirm', 'advmindmap') ?>')) {
             location.href = 'unlock.php?id=<?php echo $id ?>&instanceid=<?php echo $advmindmap_instance->id ?>';
@@ -399,14 +399,14 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
         $strname = get_string("groupname", "advmindmap");
         $strmembers = get_string("groupmembers", "advmindmap");
         $strdate  = get_string("lastupdated", "advmindmap");
-        
+
         $table->head  = array($strname, $strmembers, $strdate);
         $table->align = array("left", "left", "left");
-        
+
         foreach ($allowgroups as $ag) {
             // Only display link and last updated date if a mindmap was init,
             // else only display a name without link
-            
+
             // group member list
             $members = groups_get_members($ag->id);
             if (empty($members)) {
@@ -420,7 +420,7 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                     }
                 }
             }
-            
+
             if (in_array($ag->id, array_keys($advmindmaps))) {
                 if ($advmindmap_instance->id == $advmindmaps[$ag->id]->id) {
                     $link = $ag->name." ".get_string('viewing', 'advmindmap');
@@ -444,7 +444,7 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                 $strdate  = get_string("lastupdated", "advmindmap");
                 $table->head  = array($strgroup, $strdate);
                 $table->align = array("left", "left");
-                
+
                 foreach ($dummymindmaps as $dm) {
                     $link = html_writer::link("view.php?id=".$cm->id."&viewdummy=".$dm->id, $dm->name);
                     $lastupdated = userdate($dm->timemodified?$dm->timemodified:$dm->timecreated);
@@ -470,7 +470,7 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                 echo $OUTPUT->footer();
                 die;
             }
-            
+
             // DIRTY HACK: create a temp course object just to generate this menu
             $hack_course = $course;
             $hack_course->groupmode = VISIBLEGROUPS;
@@ -479,15 +479,15 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                 groups_print_course_menu($hack_course, "view.php?id=$id&viewuser=$viewuser");
                 echo $OUTPUT->box_end();
             }
-            
+
             $strname = get_string("name");
             $strclass = get_string("class", "advmindmap");
             $strclassno = get_string("classno", "advmindmap");
             $strdate  = get_string("lastupdated", "advmindmap");
-            
+
             $table->head  = array ($strname, $strclass, $strclassno, $strdate);
             $table->align = array ("left", "left", "left", "left");
-            
+
             if ($group) {
                 if ($group_members = groups_get_members($group, 'u.id')) {
                     $group_members = array_keys($group_members);
@@ -498,7 +498,7 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                     exit;
                 }
             }
-            
+
             foreach ($students as $studentid) {
                 $user = $DB->get_record("user", array("id"=>$studentid));
                 $params = array($studentid, 'class');
@@ -509,7 +509,7 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
                 if (!$classno = $DB->get_field_sql("SELECT data FROM {user_info_data} WHERE userid = ? AND fieldid = (SELECT id FROM {user_info_field} WHERE shortname = ?)", $params)) {
                     $classno = '---';
                 }
-                
+
                 // Only display link and last updated date if a mindmap was init,
                 // else only display a name without link
                 if (in_array($studentid, array_keys($advmindmaps))) {
@@ -525,5 +525,5 @@ if (has_capability('mod/advmindmap:viewother', $context)) {
         }
     }
 }
-
+echo html_writer::tag('div', '<div><b> '.get_string('notvisible','advmindmap').' </b></div> <a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>', array('class' => 'getflash'));
 echo $OUTPUT->footer($course);
