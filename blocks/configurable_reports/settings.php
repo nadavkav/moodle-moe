@@ -32,6 +32,9 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('block_configurable_reports/sqlsecurity', get_string('sqlsecurity', 'block_configurable_reports'),
         get_string('sqlsecurityinfo', 'block_configurable_reports'), 1));
 
+    $settings->add(new admin_setting_configcheckbox('block_configurable_reports/requireprefix', get_string('requireprefix', 'block_configurable_reports'),
+        get_string('requireprefixinfo', 'block_configurable_reports'), 1));
+
     $settings->add(new admin_setting_configcheckbox('block_configurable_reports/verticalscroll', get_string('verticalscroll', 'block_configurable_reports'),
         get_string('verticalscrollinfo', 'block_configurable_reports'), 0));
 
