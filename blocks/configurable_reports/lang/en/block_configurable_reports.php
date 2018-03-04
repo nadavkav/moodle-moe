@@ -427,6 +427,10 @@ $string['datatables'] = 'Enable DataTables JS library';
 $string['datatablesinfo'] = 'DataTables JS library (Column sort, fixed header, search, paging...)';
 $string['reporttableui'] = 'Report table UI';
 $string['reporttableuiinfo'] = 'Display the report table as: Simple scrollable HTML table, jQuery with column sorting Or DataTables JS library (Column sort, fixed header, search, paging...)';
+$string['requireprefix'] = 'Require tables to use prefix_';
+$string['requireprefixinfo'] = 'Disabling this option will allow tables to start with mdl_ and not prefix_';
+$string['verticalscroll'] = 'Vertical scroll';
+$string['verticalscrollinfo'] = 'Enable Vertical scroll, BUT disable fixed headers';
 
 $string['email_subject'] = 'Subject';
 $string['email_message'] = 'Message';
@@ -486,3 +490,4 @@ $string['sessionlimittime'] = 'Limit between clicks (in minutes)';
 $string['sessionlimittime_help'] = 'The limit between clicks defines if two clicks are part of the same session or not';
 
 $string['excludedeletedusers'] = 'Exclude deleted users (only for SQL reports)';
+$string['customhtml'] = 'Add external JavaScript and CSS libs';

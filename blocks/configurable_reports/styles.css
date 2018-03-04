@@ -95,3 +95,7 @@
      position:relative;
      top:1px;
  }
+
+.FixedHeader_Cloned.fixedHeader.FixedHeader_Header table {
+    width: 100% !important;
+}

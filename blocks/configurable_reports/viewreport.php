@@ -63,6 +63,12 @@ if (!$reportclass->check_permissions($USER->id, $context)) {
     print_error('badpermissions', 'block_configurable_reports');
 }
 
+if (get_config('block_configurable_reports', 'reporttableui') === 'datatables') {
+    $PAGE->requires->css('/blocks/configurable_reports/js/datatables/media/css/jquery.dataTables.css');
+    $PAGE->requires->js('/blocks/configurable_reports/js/datatables/media/js/jquery.dataTables.min.js', true);
+    $PAGE->requires->js('/blocks/configurable_reports/js/datatables/extras/FixedHeader/js/FixedHeader.js', true);
+}
+
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_url('/blocks/configurable_reports/viewreport.php', ['id' => $id]);
