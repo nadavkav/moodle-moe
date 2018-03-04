@@ -44,6 +44,13 @@ class report_sql extends report_base {
             $sql = str_replace('%%FILTER_VAR%%', $filtervar, $sql);
         }
 
+        $courseid = optional_param('courseid', null, PARAM_INT);
+        if (!empty($courseid)) {
+            $sql = str_replace('%%COURSEID%%', $courseid, $sql);
+        } else {
+            $sql = str_replace('%%COURSEID%%', $COURSE->id, $sql);
+        }
+
         $sql = str_replace('%%USERID%%', $USER->id, $sql);
         $sql = str_replace('%%COURSEID%%', $COURSE->id, $sql);
         $sql = str_replace('%%CATEGORYID%%', $COURSE->category, $sql);
