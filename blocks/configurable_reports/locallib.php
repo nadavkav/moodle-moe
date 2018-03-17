@@ -65,23 +65,39 @@ function cr_add_jsdatatables($cssid) {
         'datatables_zerorecords',
     ), 'block_configurable_reports');
 
-    $script = new moodle_url('/blocks/configurable_reports/js/datatables/media/js/jquery.js');
+    /*
+    $script = new moodle_url('/blocks/configurable_reports/js/jquery-latest.js');
     $script = '
         if (typeof jQuery == "undefined") {
             document.write(unescape("%3Cscript type=\"text/javascript\" src=\"'.$script.'\"%3E%3C/script%3E"));
         }
     ';
     echo html_writer::script($script);
-    echo html_writer::script(false, new moodle_url('/blocks/configurable_reports/js/datatables/media/js/jquery.dataTables.min.js'));
-    echo html_writer::script(false, new moodle_url('/blocks/configurable_reports/js/datatables/extras/FixedHeader/js/FixedHeader.js'));
+    */
+
+    $verticalscroll = '';
+    $fixheader = '';
+    // We can either have vertical scroll OR fixed header...
+    if(get_config('block_configurable_reports', 'verticalscroll')) {
+        $verticalscroll = " 'sScrollX': '100%',
+            //'sScrollXInner': '110%',
+            'sScrollY': '500',
+            'bScrollCollapse': true, ";
+        echo html_writer::tag('style', '.dataTables_scroll {overflow: auto;}');
+        if (right_to_left()) {
+            echo html_writer::tag('style', '.dataTables_scroll {overflow: auto;} .dataTables_scrollHeadInner{padding-right:0 !important; padding-left:14px;}');
+        }
+    } else {
+        $fixheader = "new FixedHeader( oTable );";
+    }
 
     $script = "$(document).ready(function() {
         var oTable = $('$cssid').dataTable({
-            'bAutoWidth': false,
-            'sPaginationType': 'full_numbers',
-//                'sScrollX': '100%',
-//                'sScrollXInner': '110%',
-//                'bScrollCollapse': true
+            //'bAutoWidth': true,
+            'aLengthMenu': [ [10, 25, 50, 100, -1], [10, 25, 50, 100, \"All\"] ],
+            'iDisplayLength': 25,
+            //'sPaginationType': 'full_numbers',
+            $verticalscroll
             'oLanguage': {
                 'oAria': {
                     'sSortAscending': M.str.block_configurable_reports.datatables_sortascending,
@@ -105,7 +121,7 @@ function cr_add_jsdatatables($cssid) {
                 'sZeroRecords': M.str.block_configurable_reports.datatables_zerorecords
             }
         });
-        new FixedHeader( oTable );
+        $fixheader
     } );";
     echo html_writer::script($script);
 }
@@ -113,7 +129,7 @@ function cr_add_jsdatatables($cssid) {
 function cr_add_jsordering($cssid) {
     global $DB, $CFG, $OUTPUT;
 
-    $script = new moodle_url('/blocks/configurable_reports/js/datatables/media/js/jquery.js');
+    $script = new moodle_url('/blocks/configurable_reports/js/jquery-latest.js');
     $script = '
         if (typeof jQuery == "undefined") {
             document.write(unescape("%3Cscript type=\"text/javascript\" src=\"'.$script.'\"%3E%3C/script%3E"));

@@ -73,5 +73,16 @@ function xmldb_block_configurable_reports_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2011040115, 'block', 'configurable_reports');
     }
 
+    if ($oldversion < 2016020104) {
+
+        $table = new xmldb_table('block_configurable_reports');
+
+        $field = new xmldb_field('customhtml', XMLDB_TYPE_TEXT, 'long');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2016020104, 'block', 'configurable_reports');
+    }
+
     return true;
 }

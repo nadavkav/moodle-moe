@@ -58,10 +58,30 @@ if ($course->id == SITEID) {
 
 $PAGE->set_url('/blocks/configurable_reports/editreport.php', ['id' => $id, 'comp' => $comp]);
 $PAGE->set_context($context);
-$PAGE->set_pagelayout('incourse');
+if ($comp === 'customsql') {
+    $PAGE->set_pagelayout('report');
+} else {
+    $PAGE->set_pagelayout('incourse');
+}
 
+// CodeMirror main library.
 $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/lib/codemirror.js');
 $PAGE->requires->css('/blocks/configurable_reports/js/codemirror/lib/codemirror.css');
+// Loading extra CodeMirror plugins, on demand.
+$PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/display/fullscreen.js');
+$PAGE->requires->css('/blocks/configurable_reports/js/codemirror/addon/display/fullscreen.css');
+if (get_config('block_configurable_reports', 'sqlautocomplete') === '1') {
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/hint/show-hint.js');
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/hint/sql-hint.js');
+    $PAGE->requires->css('/blocks/configurable_reports/js/codemirror/addon/hint/show-hint.css');
+}
+if (get_config('block_configurable_reports', 'sqlsearchnreplace') === '1') {
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/dialog/dialog.js');
+    $PAGE->requires->css('/blocks/configurable_reports/js/codemirror/addon/dialog/dialog.css');
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/search/search.js');
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/search/searchcursor.js');
+}
+// Initiate CodeMirror.
 $PAGE->requires->js('/blocks/configurable_reports/js/configurable_reports.js');
 
 $hasreportscap = has_capability('block/configurable_reports:managereports', $context);

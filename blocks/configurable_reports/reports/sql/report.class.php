@@ -44,6 +44,13 @@ class report_sql extends report_base {
             $sql = str_replace('%%FILTER_VAR%%', $filtervar, $sql);
         }
 
+        $courseid = optional_param('courseid', null, PARAM_INT);
+        if (!empty($courseid)) {
+            $sql = str_replace('%%COURSEID%%', $courseid, $sql);
+        } else {
+            $sql = str_replace('%%COURSEID%%', $COURSE->id, $sql);
+        }
+
         $sql = str_replace('%%USERID%%', $USER->id, $sql);
         $sql = str_replace('%%COURSEID%%', $COURSE->id, $sql);
         $sql = str_replace('%%CATEGORYID%%', $COURSE->category, $sql);
@@ -123,7 +130,10 @@ class report_sql extends report_base {
                 foreach ($rs as $row) {
                     if (empty($finaltable)) {
                         foreach ($row as $colname => $value) {
-                            $tablehead[] = str_replace('_', ' ', $colname);
+                            // Following line was disabled, as it breaks links in the columns headers.
+                            //$tablehead[] = str_replace('_', ' ', $colname);
+                            // Fix "questionmarks" in links, as it breaks links in the columns headers.
+                            $tablehead[] = str_replace('[[questionmark]]', '?', $colname);
                         }
                     }
                     $arrayrow = array_values((array) $row);

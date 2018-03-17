@@ -50,6 +50,10 @@ class report_edit_form extends moodleform {
         $mform->addElement('htmleditor', 'summary', get_string('summary'));
         $mform->setType('summary', PARAM_RAW);
 
+        $mform->addElement('textarea', 'customhtml', get_string('customhtml', 'block_configurable_reports'),
+            array('rows'=>'15', 'cols'=>'80'));
+        $mform->setType('customhtml', PARAM_RAW);
+
         $typeoptions = cr_get_report_plugins($this->_customdata['courseid']);
 
         $eloptions = array();
