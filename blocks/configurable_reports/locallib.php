@@ -81,7 +81,12 @@ function cr_add_jsdatatables($cssid) {
     if(get_config('block_configurable_reports', 'verticalscroll')) {
         $verticalscroll = " 'sScrollX': '100%',
             //'sScrollXInner': '110%',
+            'sScrollY': '500',
             'bScrollCollapse': true, ";
+        echo html_writer::tag('style', '.dataTables_scroll {overflow: auto;}');
+        if (right_to_left()) {
+            echo html_writer::tag('style', '.dataTables_scroll {overflow: auto;} .dataTables_scrollHeadInner{padding-right:0 !important; padding-left:14px;}');
+        }
     } else {
         $fixheader = "new FixedHeader( oTable );";
     }
