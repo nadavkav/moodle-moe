@@ -94,7 +94,7 @@ foreach ($courses as $course) {
     $data                 = $settings;
     $data['courseid']     = $course;
     $data['gpr_courseid'] = $course;
-    $grade_categorys      = $DB->get_records('grade_categories', ['courseid' => $course]);
+    $grade_categorys      = $DB->get_records('grade_categories', ['courseid' => $course, 'parent' => NULL]);
     cli_writeln("found " .count($grade_categorys)." grades category");
     foreach ($grade_categorys as $grade_category) {
         $data['id'] = $grade_category->id;
