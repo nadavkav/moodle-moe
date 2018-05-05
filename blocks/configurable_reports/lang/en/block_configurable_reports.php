@@ -496,3 +496,5 @@ $string['sessionlimittime_help'] = 'The limit between clicks defines if two clic
 
 $string['excludedeletedusers'] = 'Exclude deleted users (only for SQL reports)';
 $string['customhtml'] = 'Add external JavaScript and CSS libs';
+$string['alias'] = 'Alias';
+$string['alias_help'] = 'Alias, is a unique (all English letters) identifier for this report, so it can be link between reports and not break when deployed to other systems';

@@ -47,6 +47,12 @@ class report_edit_form extends moodleform {
         }
         $mform->addRule('name', null, 'required', null, 'client');
 
+        // Alias is a "unique id" alternative to ID, that should work when distributing reports to other systems.
+        // (used to link internal reports)
+        $mform->addElement('text', 'alias', get_string('alias','block_configurable_reports'),array('maxlength' => 64, 'size' => 30));
+        $mform->addHelpButton('alias','alias', 'block_configurable_reports');
+        $mform->setType('alias', PARAM_ALPHA);
+
         $mform->addElement('htmleditor', 'summary', get_string('summary'));
         $mform->setType('summary', PARAM_RAW);
 
