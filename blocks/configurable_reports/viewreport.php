@@ -22,16 +22,26 @@
  * @date: 2009
  */
 
-require_once("../../config.php");
+require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot."/blocks/configurable_reports/locallib.php");
 
 $id = required_param('id', PARAM_INT);
 $download = optional_param('download', false, PARAM_BOOL);
 $format = optional_param('format', '', PARAM_ALPHA);
 $courseid = optional_param('courseid', null, PARAM_INT);
+$alias = optional_param('alias','',PARAM_ALPHA);
 
-if (!$report = $DB->get_record('block_configurable_reports', ['id' => $id])) {
-    print_error('reportdoesnotexists', 'block_configurable_reports');
+if ($id === 0 && $alias === '') {
+    print_error('Please supply report ID or Alias to run the report');
+}
+
+// Try looking for alias first, before using report ID.
+if (!empty($alias)) {
+    if (!$report = $DB->get_record('block_configurable_reports', array('alias' => $alias))) {
+        print_error('reportdoesnotexists', 'block_configurable_reports');
+    } elseif (!$report = $DB->get_record('block_configurable_reports', array('id' => $id))) {
+        print_error('reportdoesnotexists', 'block_configurable_reports');
+    }
 }
 
 if ($courseid && $report->global) {
