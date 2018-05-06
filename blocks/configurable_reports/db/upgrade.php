@@ -88,7 +88,7 @@ function xmldb_block_configurable_reports_upgrade($oldversion) {
 
         $table = new xmldb_table('block_configurable_reports');
 
-        $field = new xmldb_field('alias', XMLDB_TYPE_CHAR, '64', null, XMLDB_NOTNULL, null, null, null);
+        $field = new xmldb_field('alias', XMLDB_TYPE_CHAR, '64', null, false, null, null, null);
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
