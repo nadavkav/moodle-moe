@@ -157,6 +157,21 @@ if ($delete && confirm_sesskey()) {
     }
 }
 
+// CodeMirror main library.
+$PAGE->requires->js('/blocks/configurable_reports/js/codemirror/lib/codemirror.js');
+$PAGE->requires->css('/blocks/configurable_reports/js/codemirror/lib/codemirror.css');
+// Loading extra CodeMirror plugins, on demand.
+$PAGE->requires->js('/blocks/configurable_reports/js/codemirror/mode/javascript/javascript.js');
+$PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/edit/matchbrackets.js');
+if (get_config('block_configurable_reports', 'sqlsearchnreplace') === '1') {
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/dialog/dialog.js');
+    $PAGE->requires->css('/blocks/configurable_reports/js/codemirror/addon/dialog/dialog.css');
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/search/search.js');
+    $PAGE->requires->js('/blocks/configurable_reports/js/codemirror/addon/search/searchcursor.js');
+}
+// Initiate CodeMirror.
+$PAGE->requires->js('/blocks/configurable_reports/js/configurable_reports.js');
+
 require_once('editreport_form.php');
 
 if (!empty($report)) {
