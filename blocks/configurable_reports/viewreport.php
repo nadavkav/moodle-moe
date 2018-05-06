@@ -25,7 +25,7 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot."/blocks/configurable_reports/locallib.php");
 
-$id = required_param('id', PARAM_INT);
+$id = optional_param('id', 1, PARAM_INT);
 $download = optional_param('download', false, PARAM_BOOL);
 $format = optional_param('format', '', PARAM_ALPHA);
 $courseid = optional_param('courseid', null, PARAM_INT);
