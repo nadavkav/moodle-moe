@@ -39,7 +39,9 @@ if ($id === 0 && $alias === '') {
 if (!empty($alias)) {
     if (!$report = $DB->get_record('block_configurable_reports', array('alias' => $alias))) {
         print_error('reportdoesnotexists', 'block_configurable_reports');
-    } elseif (!$report = $DB->get_record('block_configurable_reports', array('id' => $id))) {
+    }
+} else {
+    if (!$report = $DB->get_record('block_configurable_reports', array('id' => $id))) {
         print_error('reportdoesnotexists', 'block_configurable_reports');
     }
 }
